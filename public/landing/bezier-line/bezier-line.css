@@ -1,0 +1,133 @@
+/* Physics Effects / 2 — SVG bezier line */
+
+.about-bezier {
+	opacity: 1;
+	transform: none;
+	font-family: "Manrope", Helvetica, Arial, sans-serif;
+}
+
+.about-bezier__line {
+	height: 1px;
+	margin: 0.65rem 0 0.1rem;
+	width: 100%;
+	position: relative;
+	flex-shrink: 0;
+}
+
+.about-bezier__line svg {
+	width: 100%;
+	height: 200px;
+	position: absolute;
+	top: -100px;
+	left: 0;
+	overflow: visible;
+	pointer-events: none;
+}
+
+.about-bezier__line path {
+	stroke: #242726;
+	stroke-width: 1.35px;
+	fill: none;
+}
+
+.about-bezier__hit {
+	height: 28px;
+	width: 100%;
+	position: relative;
+	top: -14px;
+	z-index: 1;
+}
+
+.about-bezier__hit:hover {
+	height: 200px;
+	top: -100px;
+}
+
+.about-bezier__body {
+	display: flex;
+	flex-direction: column;
+	gap: 0.75rem;
+	width: 100%;
+}
+
+.about-bezier__description {
+	display: grid;
+	grid-template-columns: minmax(5rem, 6.5rem) minmax(0, 1fr);
+	gap: 0.45rem 0.9rem;
+	align-items: start;
+}
+
+.about-bezier__eyebrow,
+.about-bezier__areas-label {
+	margin: 0;
+	font-size: clamp(0.65rem, 0.9vw, 0.75rem);
+	font-weight: 700;
+	letter-spacing: 0.06em;
+	text-transform: uppercase;
+	color: #1c1f1e;
+	padding-top: 0.2rem;
+}
+
+.about-bezier__copy {
+	margin: 0;
+	font-family: "Source Serif 4", Georgia, "Times New Roman", serif;
+	font-size: clamp(0.75rem, 1.05vw, 0.95rem);
+	font-weight: 400;
+	line-height: 1.35;
+	color: #242726;
+	max-width: 36rem;
+}
+
+.about-bezier__areas {
+	display: grid;
+	grid-template-columns: minmax(5rem, 6.5rem) minmax(0, 1fr);
+	gap: 0.45rem 0.9rem;
+	align-items: start;
+}
+
+.about-bezier__tags {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.35rem;
+}
+
+.about-bezier__tag {
+	margin: 0;
+	border: 1px solid rgba(36, 39, 38, 0.2);
+	text-transform: uppercase;
+	font-size: clamp(0.55rem, 0.75vw, 0.66rem);
+	font-weight: 600;
+	letter-spacing: 0.04em;
+	padding: 0.32rem 0.5rem;
+	color: #242726;
+	line-height: 1;
+}
+
+@media (max-width: 62.5rem) {
+	.about-bezier {
+		margin-top: 1rem;
+	}
+
+	.about-bezier__description,
+	.about-bezier__areas {
+		grid-template-columns: 1fr;
+		gap: 0.4rem;
+	}
+
+	.about-bezier__line svg {
+		height: 160px;
+		top: -80px;
+	}
+
+	.about-bezier__hit:hover {
+		height: 160px;
+		top: -80px;
+	}
+}
+
+@media (pointer: coarse), (prefers-reduced-motion: reduce) {
+	.about-bezier__hit:hover {
+		height: 40px;
+		top: -20px;
+	}
+}

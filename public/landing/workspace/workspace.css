@@ -1,0 +1,911 @@
+/* Projects: a dark studio wall of lit project cards, with Haris working at his desk below.
+   The scene is drawn by workspace.js into .ws__canvas; everything else here is the HTML layer on top. */
+
+.site-panel--works.ws {
+	--ws-ink: #f3efe8;
+	--ws-muted: #9a958c;
+	--ws-warm: #ffb46a;
+	--ws-line: rgb(243 239 232 / 0.14);
+	--ws-bg: #060607;
+
+	position: relative;
+	height: 100vh;
+	height: 100svh;
+	min-height: 640px;
+	overflow: hidden;
+	background: var(--ws-bg);
+	color: var(--ws-ink);
+	font-family: "Manrope", Helvetica, Arial, sans-serif;
+}
+
+.ws__canvas {
+	position: absolute;
+	inset: 0;
+	display: block;
+	width: 100%;
+	height: 100%;
+	outline: none;
+	opacity: 0;
+	transition: opacity 0.9s ease;
+}
+/* the live room fades in over the still on its first frame; if it was ready before the room
+   was reached, it simply appears and the still is never fetched */
+.ws.is-live .ws__canvas {
+	opacity: 1;
+}
+.ws.is-live-now .ws__canvas {
+	opacity: 1;
+	transition: none;
+}
+
+/* still picture of the room, shown while the 3D loads. Absolutely placed, so it never moves layout;
+   only the copy matching the day/night mode is displayed, and only that one is downloaded. */
+.ws__poster {
+	position: absolute;
+	inset: 0;
+	display: none;
+}
+.ws__poster img {
+	display: block;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+.ws.is-day .ws__poster--day,
+.ws.is-night .ws__poster--night {
+	display: block;
+}
+.ws.is-live-now .ws__poster,
+.ws--flat .ws__poster {
+	display: none;
+}
+/* once the canvas has faded in, stop compositing the still underneath it */
+.ws.is-live .ws__poster {
+	visibility: hidden;
+	transition: visibility 0s linear 1s;
+}
+.ws.is-hover .ws__canvas {
+	cursor: pointer;
+}
+
+/* film finish: vignette and fine grain, never interactive */
+.ws__vignette,
+.ws__grain {
+	position: absolute;
+	pointer-events: none;
+}
+.ws__vignette {
+	inset: 0;
+	background: radial-gradient(ellipse 75% 70% at 50% 45%, transparent 55%, rgb(0 0 0 / 0.55) 100%);
+}
+.ws__grain {
+	inset: -50%;
+	opacity: 0.07;
+	mix-blend-mode: overlay;
+	background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+}
+
+/* ---- intro ---- */
+.ws__intro {
+	position: absolute;
+	left: 56px;
+	bottom: 120px;
+	z-index: 3;
+	max-width: 520px;
+	transition: opacity 0.5s ease, transform 0.5s ease;
+}
+.ws__title {
+	margin: 0;
+	font: 800 clamp(40px, 4.2vw, 68px) / 0.92 "Montserrat", "Manrope", sans-serif;
+	letter-spacing: -0.03em;
+	text-transform: uppercase;
+}
+.ws__title span {
+	color: var(--ws-warm);
+}
+.ws__lede {
+	margin: 18px 0 0;
+	max-width: 400px;
+	font-size: 17px;
+	line-height: 1.5;
+	color: var(--ws-muted);
+}
+.ws__hint {
+	position: absolute;
+	left: 56px;
+	bottom: 52px;
+	z-index: 3;
+	margin: 0;
+	font-size: 13px;
+	color: var(--ws-muted);
+	transition: opacity 0.5s ease;
+}
+
+/* ---- arrows ---- */
+.ws__controls {
+	position: absolute;
+	right: 56px;
+	bottom: 46px;
+	z-index: 4;
+	display: flex;
+	align-items: center;
+	gap: 18px;
+	font-size: 13px;
+	font-weight: 600;
+	color: var(--ws-muted);
+}
+.ws__count b {
+	color: var(--ws-ink);
+	font-variant-numeric: tabular-nums;
+}
+.ws__btn {
+	width: 48px;
+	height: 48px;
+	border-radius: 50%;
+	border: 1px solid var(--ws-line);
+	background: rgb(255 255 255 / 0.03);
+	color: var(--ws-ink);
+	display: grid;
+	place-items: center;
+	cursor: pointer;
+	-webkit-backdrop-filter: blur(6px);
+	backdrop-filter: blur(6px);
+	transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.15s ease;
+}
+.ws__btn:hover {
+	background: rgb(255 255 255 / 0.09);
+	border-color: rgb(243 239 232 / 0.3);
+}
+.ws__btn:active {
+	transform: scale(0.96);
+}
+.ws__btn:focus-visible,
+.ws__back:focus-visible,
+.ws__cta:focus-visible {
+	outline: 2px solid var(--ws-warm);
+	outline-offset: 3px;
+}
+.ws__btn svg {
+	width: 18px;
+	height: 18px;
+}
+
+/* ---- opened project ---- */
+.ws__scrim {
+	position: absolute;
+	inset: 0;
+	z-index: 4;
+	pointer-events: none;
+	opacity: 0;
+	transition: opacity 0.6s ease;
+	/* dark behind the panel only; the opened card lands in the clear space to its left */
+	background: linear-gradient(270deg, rgb(6 6 7 / 0.97) 0, rgb(6 6 7 / 0.94) 530px, rgb(6 6 7 / 0.45) 590px, transparent 660px);
+}
+.ws__detail {
+	--ws-panel: rgb(16 15 14 / 0.74);
+	--ws-panel-edge: rgb(243 239 232 / 0.1);
+	--ws-chip: rgb(255 255 255 / 0.06);
+	position: absolute;
+	z-index: 5;
+	right: 64px;
+	top: 50%;
+	width: 470px;
+	max-width: calc(100% - 32px);
+	/* a fixed box: long projects scroll inside it instead of pushing anything */
+	max-height: calc(100% - 128px);
+	overflow-y: auto;
+	overscroll-behavior: contain;
+	scrollbar-width: none;
+	padding: 26px 28px 22px;
+	border-radius: 22px;
+	background: var(--ws-panel);
+	box-shadow: inset 0 0 0 1px var(--ws-panel-edge), 0 40px 90px -30px rgb(0 0 0 / 0.8);
+	transform: translateY(-46%);
+	opacity: 0;
+	visibility: hidden;
+	transition: opacity 0.45s ease, transform 0.55s cubic-bezier(0.16, 1, 0.3, 1), visibility 0s linear 0.45s;
+}
+.ws__detail::-webkit-scrollbar {
+	display: none;
+}
+.ws.is-open .ws__scrim {
+	opacity: 1;
+	/* waits a beat so the card is seen lifting off the wall before the panel side darkens */
+	transition-delay: 0.45s;
+}
+.ws.is-open .ws__detail {
+	opacity: 1;
+	visibility: visible;
+	transform: translateY(-50%);
+	/* the card is still flying in; the file follows it */
+	transition: opacity 0.45s ease 0.6s, transform 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.6s, visibility 0s;
+}
+.ws.is-open .ws__intro,
+.ws.is-open .ws__hint {
+	opacity: 0;
+	pointer-events: none;
+}
+.ws__file-top {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	gap: 16px;
+}
+.ws__tag {
+	margin: 0;
+	color: var(--ws-muted);
+	font-size: 12px;
+	font-weight: 600;
+	letter-spacing: 0.06em;
+	text-transform: uppercase;
+}
+.ws__tag b {
+	color: var(--ws-ink);
+	font-weight: 800;
+	font-variant-numeric: tabular-nums;
+}
+.ws__close {
+	flex: none;
+	width: 36px;
+	height: 36px;
+	display: grid;
+	place-items: center;
+	border: 0;
+	border-radius: 50%;
+	background: none;
+	box-shadow: inset 0 0 0 1px var(--ws-line);
+	color: var(--ws-ink);
+	cursor: pointer;
+	transition: background-color 0.2s ease, transform 0.15s ease;
+}
+.ws__close:hover {
+	background: var(--ws-chip);
+}
+.ws__close:active {
+	transform: scale(0.94);
+}
+.ws__close svg {
+	width: 14px;
+	height: 14px;
+}
+.ws__name {
+	margin: 16px 0 0;
+	font: 800 clamp(30px, 2.6vw, 40px) / 0.98 "Montserrat", "Manrope", sans-serif;
+	letter-spacing: -0.035em;
+	text-transform: uppercase;
+	text-wrap: balance;
+}
+.ws__copy {
+	margin: 14px 0 0;
+	font-size: 15.5px;
+	line-height: 1.6;
+	color: #c9c3b8;
+}
+/* headline result first, the rest of the numbers under it */
+.ws__figs {
+	margin-top: 22px;
+	padding: 18px 18px 16px;
+	border-radius: 14px;
+	background: linear-gradient(135deg, rgb(255 180 106 / 0.14), rgb(255 180 106 / 0.03));
+	box-shadow: inset 0 0 0 1px rgb(255 180 106 / 0.2);
+}
+.ws__figs:empty {
+	display: none;
+}
+.ws__hero {
+	display: flex;
+	align-items: flex-end;
+	gap: 16px;
+}
+.ws__hero b {
+	color: var(--ws-warm);
+	font: 800 46px/0.9 "Montserrat", "Manrope", sans-serif;
+	letter-spacing: -0.04em;
+	white-space: nowrap;
+}
+.ws__hero span {
+	padding-bottom: 4px;
+	color: var(--ws-ink);
+	font-size: 14px;
+	font-weight: 600;
+	line-height: 1.3;
+}
+.ws__more {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 8px 24px;
+	margin-top: 14px;
+}
+.ws__more b {
+	display: block;
+	font: 800 19px/1.1 "Montserrat", "Manrope", sans-serif;
+	letter-spacing: -0.02em;
+}
+.ws__more small {
+	display: block;
+	margin-top: 3px;
+	font-size: 12.5px;
+	color: var(--ws-muted);
+}
+.ws__label {
+	margin: 22px 0 10px;
+	color: var(--ws-muted);
+	font-size: 11px;
+	font-weight: 700;
+	letter-spacing: 0.12em;
+	text-transform: uppercase;
+}
+.ws__stack {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 8px;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+.ws__stack li {
+	height: 34px;
+	padding: 0 12px 0 5px;
+	display: inline-flex;
+	align-items: center;
+	gap: 8px;
+	border-radius: 999px;
+	background: var(--ws-chip);
+	font-size: 13px;
+	font-weight: 600;
+}
+.ws__stack img,
+.ws__stack em {
+	flex: none;
+	width: 24px;
+	height: 24px;
+	padding: 4px;
+	border-radius: 50%;
+	background: #fff;
+	object-fit: contain;
+	box-shadow: 0 0 0 1px rgb(0 0 0 / 0.06);
+}
+.ws__stack em {
+	display: grid;
+	place-items: center;
+	padding: 0;
+	color: #111;
+	font-size: 11px;
+	font-weight: 800;
+	font-style: normal;
+}
+.ws__actions {
+	display: flex;
+	align-items: center;
+	gap: 18px;
+	margin-top: 24px;
+}
+.ws__cta {
+	display: inline-flex;
+	align-items: center;
+	gap: 12px;
+	height: 50px;
+	padding: 0 24px;
+	border-radius: 999px;
+	background: var(--ws-ink);
+	color: #111;
+	font-size: 14px;
+	font-weight: 700;
+	white-space: nowrap;
+	transition: transform 0.15s ease, background-color 0.2s ease;
+}
+.ws__cta:hover {
+	background: #ffffff;
+}
+.ws__cta:active {
+	transform: scale(0.98);
+}
+.ws__back {
+	border: 0;
+	background: none;
+	padding: 6px 0;
+	color: var(--ws-muted);
+	font: 600 14px/1 "Manrope", sans-serif;
+	cursor: pointer;
+	transition: color 0.2s ease;
+}
+.ws__back:hover {
+	color: var(--ws-ink);
+}
+/* the neighbouring projects */
+.ws__pager {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 12px;
+	margin-top: 20px;
+	padding-top: 16px;
+	border-top: 1px solid var(--ws-line);
+}
+.ws__pager-btn {
+	display: grid;
+	grid-template-columns: 38px 1fr;
+	grid-template-rows: auto auto;
+	column-gap: 10px;
+	align-items: center;
+	padding: 0;
+	border: 0;
+	background: none;
+	color: var(--ws-ink);
+	font: 700 13px/1.25 "Manrope", sans-serif;
+	text-align: left;
+	cursor: pointer;
+}
+.ws__pager-btn i {
+	grid-row: 1 / span 2;
+	width: 38px;
+	height: 50px;
+	border-radius: 6px;
+	background-size: cover;
+	background-position: center;
+	box-shadow: 0 0 0 1px var(--ws-line);
+	transition: transform 0.25s ease;
+}
+.ws__pager-btn:hover i {
+	transform: translateY(-2px);
+}
+.ws__pager-btn small {
+	align-self: end;
+	color: var(--ws-muted);
+	font-size: 10.5px;
+	font-weight: 600;
+	letter-spacing: 0.1em;
+	text-transform: uppercase;
+}
+.ws__pager-btn span {
+	align-self: start;
+}
+.ws__pager-btn--next {
+	grid-template-columns: 1fr 38px;
+	text-align: right;
+}
+.ws__pager-btn--next i {
+	grid-column: 2;
+}
+.ws__pager-btn--next small,
+.ws__pager-btn--next span {
+	grid-column: 1;
+	grid-row: auto;
+}
+.ws__pager-btn--next small {
+	grid-row: 1;
+}
+.ws__pager-btn--next span {
+	grid-row: 2;
+}
+.ws__close:focus-visible,
+.ws__pager-btn:focus-visible {
+	outline: 2px solid var(--ws-warm);
+	outline-offset: 3px;
+}
+
+/* ---- accessible list of every project (also the no-WebGL fallback) ---- */
+.ws__list {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	overflow: hidden;
+	clip: rect(0 0 0 0);
+	white-space: nowrap;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+.ws--flat .ws__canvas,
+.ws--flat .ws__controls,
+.ws--flat .ws__hint {
+	display: none;
+}
+.ws--flat {
+	height: auto;
+	min-height: 100svh;
+	padding: 140px 56px 80px;
+}
+.ws--flat .ws__intro {
+	position: static;
+	margin-bottom: 48px;
+}
+.ws--flat .ws__list {
+	position: static;
+	width: auto;
+	height: auto;
+	clip: auto;
+	white-space: normal;
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+	gap: 24px;
+}
+.ws--flat .ws__list button {
+	width: 100%;
+	aspect-ratio: 3 / 4;
+	border: 0;
+	padding: 0;
+	cursor: pointer;
+	background-size: cover;
+	background-position: center;
+	color: #1b1c1d;
+	font: 600 22px/1.2 "Manrope", sans-serif;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	padding-top: 28px;
+	box-shadow: inset 0 140px 90px -60px rgb(247 245 241 / 0.9);
+}
+.ws--flat .ws__list small {
+	margin-top: 6px;
+	font-size: 13px;
+	font-weight: 500;
+	color: #3f4143;
+}
+
+/* ---- site header over the dark room ---- */
+.site-header.site-header--on-dark:not(.site-header--open) .site-header__logo,
+.site-header.site-header--on-dark:not(.site-header--open) .site-header__toggle,
+.site-header.site-header--on-dark:not(.site-header--open) .site-header__actions a {
+	color: #f3efe8;
+}
+.site-header.site-header--on-dark:not(.site-header--open) .site-header__burger::before,
+.site-header.site-header--on-dark:not(.site-header--open) .site-header__burger::after {
+	background-color: #f3efe8;
+}
+
+/* ---- entrance ---- */
+.ws .ws__intro > *,
+.ws .ws__hint,
+.ws .ws__controls {
+	opacity: 0;
+	transform: translateY(18px);
+	transition: opacity 0.9s ease, transform 1.1s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.ws.is-seen .ws__intro > *,
+.ws.is-seen .ws__hint,
+.ws.is-seen .ws__controls {
+	opacity: 1;
+	transform: none;
+}
+.ws.is-seen .ws__intro > :nth-child(1) {
+	transition-delay: 1.2s;
+}
+.ws.is-seen .ws__intro > :nth-child(2) {
+	transition-delay: 1.35s;
+}
+.ws.is-seen .ws__hint,
+.ws.is-seen .ws__controls {
+	transition-delay: 1.6s;
+}
+.ws.is-open .ws__hint {
+	opacity: 0;
+}
+@media (prefers-reduced-motion: reduce) {
+	.ws .ws__intro > *,
+	.ws .ws__hint,
+	.ws .ws__controls,
+	.ws__detail {
+		transition: none !important;
+	}
+}
+
+@media (max-width: 767px) {
+	.ws__intro {
+		left: 16px;
+		right: 16px;
+		top: 84px;
+		bottom: auto;
+	}
+	.ws__title {
+		font-size: 34px;
+	}
+	.ws__lede {
+		margin-top: 10px;
+		font-size: 15px;
+	}
+	.ws__hint {
+		display: none;
+	}
+	.ws__controls {
+		left: 16px;
+		right: 16px;
+		bottom: 24px;
+	}
+	.ws__count {
+		margin-right: auto;
+	}
+	.ws__btn {
+		width: 42px;
+		height: 42px;
+	}
+	/* opened project becomes a bottom sheet */
+	.ws__scrim {
+		background: linear-gradient(0deg, rgb(6 6 7 / 0.98) 0%, rgb(6 6 7 / 0.94) 46%, transparent 62%);
+	}
+	.ws__detail {
+		top: auto;
+		bottom: 0;
+		right: 0;
+		left: 0;
+		width: auto;
+		max-width: none;
+		max-height: 64%;
+		padding: 18px 16px 20px;
+		border-radius: 22px 22px 0 0;
+		transform: translateY(24px);
+	}
+	.ws.is-open .ws__detail {
+		transform: none;
+	}
+	.ws.is-open .ws__controls {
+		opacity: 0;
+		pointer-events: none;
+	}
+	.ws__name {
+		margin-top: 12px;
+		font-size: 26px;
+	}
+	.ws__copy {
+		margin-top: 10px;
+		font-size: 14.5px;
+		line-height: 1.5;
+	}
+	.ws__figs {
+		margin-top: 16px;
+		padding: 14px 14px 12px;
+	}
+	.ws__hero b {
+		font-size: 34px;
+	}
+	/* previous / next become two small arrows beside the close button, always in reach */
+	.ws__file-top {
+		min-height: 36px;
+		padding-right: 96px;
+	}
+	.ws__pager {
+		position: absolute;
+		top: 18px;
+		right: 60px;
+		display: flex;
+		gap: 8px;
+		margin: 0;
+		padding: 0;
+		border: 0;
+	}
+	.ws__pager-btn,
+	.ws__pager-btn--next {
+		width: 36px;
+		height: 36px;
+		display: grid;
+		place-items: center;
+		grid-template-columns: none;
+		border-radius: 50%;
+		box-shadow: inset 0 0 0 1px var(--ws-line);
+		font-size: 0;
+	}
+	.ws__pager-btn i,
+	.ws__pager-btn small,
+	.ws__pager-btn span {
+		display: none;
+	}
+	.ws__pager-btn::before {
+		content: "\2190";
+		font: 600 16px/1 "Manrope", sans-serif;
+	}
+	.ws__pager-btn--next::before {
+		content: "\2192";
+	}
+	.ws__close {
+		position: absolute;
+		top: 18px;
+		right: 16px;
+	}
+	.ws__more b {
+		font-size: 16px;
+	}
+	.ws__label {
+		margin-top: 16px;
+	}
+	.ws__actions {
+		margin-top: 18px;
+	}
+	.ws__cta {
+		height: 46px;
+		padding: 0 20px;
+	}
+	.ws--flat {
+		padding: 100px 16px 60px;
+	}
+}
+
+/* flat fallback is taller than the screen, so the opened project floats over it */
+.ws--flat .ws__detail,
+.ws--flat .ws__scrim {
+	position: fixed;
+}
+
+/* ---- day / night switch and the visitor's local time ---- */
+.ws__corner {
+	position: absolute;
+	top: 84px;
+	right: 56px;
+	z-index: 4;
+	display: grid;
+	justify-items: end;
+	gap: 10px;
+}
+.ws__dn {
+	position: relative;
+	display: grid;
+	grid-template-columns: 96px 96px;
+	height: 44px;
+	padding: 4px;
+	border: 0;
+	border-radius: 999px;
+	background: rgb(255 255 255 / 0.06);
+	box-shadow: inset 0 0 0 1px rgb(243 239 232 / 0.16);
+	-webkit-backdrop-filter: blur(10px);
+	backdrop-filter: blur(10px);
+	font: 700 13px/1 "Manrope", sans-serif;
+	letter-spacing: 0.02em;
+	cursor: pointer;
+	transition: background-color 0.6s ease, box-shadow 0.6s ease;
+}
+.ws__dn:focus-visible {
+	outline: 2px solid var(--ws-warm);
+	outline-offset: 3px;
+}
+.ws__dn-knob {
+	position: absolute;
+	top: 4px;
+	left: 4px;
+	width: 96px;
+	height: 36px;
+	border-radius: 999px;
+	background: #f3efe8;
+	box-shadow: 0 6px 16px -6px rgb(0 0 0 / 0.45);
+	transform: translateX(96px);
+	transition: transform 0.7s cubic-bezier(0.65, 0, 0.35, 1), background-color 0.6s ease;
+}
+.ws__dn-opt {
+	position: relative;
+	z-index: 1;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 8px;
+	color: #9a958c;
+	transition: color 0.5s ease;
+}
+.ws__dn-opt svg {
+	width: 16px;
+	height: 16px;
+	flex: none;
+}
+.ws__dn-opt--night {
+	color: #111;
+}
+.ws__time {
+	margin: 0;
+	display: flex;
+	align-items: baseline;
+	gap: 8px;
+	font-size: 13px;
+	color: var(--ws-muted);
+}
+.ws__time b {
+	color: var(--ws-ink);
+	font-weight: 700;
+	font-variant-numeric: tabular-nums;
+}
+
+/* ---- day: the bright cream studio ---- */
+.ws {
+	transition: background-color 1.6s ease, color 1.2s ease;
+}
+.ws.is-day {
+	--ws-ink: #17191a;
+	--ws-muted: #5f6361;
+	--ws-warm: #b8642a;
+	--ws-line: rgb(23 25 26 / 0.16);
+	--ws-bg: #ece6da;
+}
+.ws.is-day .ws__dn {
+	background: rgb(255 255 255 / 0.62);
+	box-shadow: inset 0 0 0 1px rgb(60 45 30 / 0.14);
+}
+.ws.is-day .ws__dn-knob {
+	background: #17191a;
+	transform: none;
+}
+.ws.is-day .ws__dn-opt--day {
+	color: #f3efe8;
+}
+.ws.is-day .ws__dn-opt--night {
+	color: #5f6361;
+}
+.ws.is-day .ws__vignette {
+	background: radial-gradient(ellipse 80% 75% at 50% 45%, transparent 60%, rgb(120 110 95 / 0.18) 100%);
+}
+.ws.is-day .ws__grain {
+	opacity: 0.05;
+	mix-blend-mode: multiply;
+}
+.ws.is-day .ws__btn {
+	background: rgb(255 255 255 / 0.5);
+}
+.ws.is-day .ws__btn:hover {
+	background: rgb(255 255 255 / 0.8);
+	border-color: rgb(23 25 26 / 0.3);
+}
+.ws.is-day .ws__scrim {
+	background: linear-gradient(270deg, rgb(236 230 218 / 0.97) 0, rgb(236 230 218 / 0.94) 530px, rgb(236 230 218 / 0.45) 590px, transparent 660px);
+}
+.ws.is-day .ws__detail {
+	--ws-panel: rgb(252 250 246 / 0.86);
+	--ws-panel-edge: rgb(60 45 30 / 0.12);
+	--ws-chip: rgb(23 25 26 / 0.06);
+	box-shadow: inset 0 0 0 1px var(--ws-panel-edge), 0 40px 90px -36px rgb(60 45 30 / 0.45);
+}
+.ws.is-day .ws__figs {
+	background: linear-gradient(135deg, rgb(184 100 42 / 0.12), rgb(184 100 42 / 0.03));
+	box-shadow: inset 0 0 0 1px rgb(184 100 42 / 0.22);
+}
+.ws.is-day .ws__copy {
+	color: #3d4042;
+}
+.ws.is-day .ws__cta {
+	background: #17191a;
+	color: #f3efe8;
+}
+.ws.is-day .ws__cta:hover {
+	background: #000;
+}
+.ws.is-day .ws__vignette,
+.ws.is-day .ws__grain,
+.ws .ws__vignette,
+.ws .ws__grain {
+	transition: opacity 1.2s ease;
+}
+@media (prefers-reduced-motion: reduce) {
+	.ws,
+	.ws__dn,
+	.ws__dn-knob,
+	.ws__dn-opt {
+		transition: none;
+	}
+}
+@media (max-width: 767px) {
+	.ws__corner {
+		top: 72px;
+		right: 16px;
+		gap: 6px;
+	}
+	.ws__dn {
+		grid-template-columns: 78px 78px;
+		height: 38px;
+		font-size: 12px;
+	}
+	.ws__dn-knob {
+		width: 78px;
+		height: 30px;
+		transform: translateX(78px);
+	}
+	.ws__time {
+		font-size: 12px;
+	}
+	/* the opened card lands up here, above the bottom sheet */
+	.ws__corner {
+		transition: opacity 0.4s ease;
+	}
+	.ws.is-open .ws__corner {
+		opacity: 0;
+		pointer-events: none;
+	}
+	.ws__intro {
+		top: 150px;
+	}
+	.ws.is-day .ws__scrim {
+		background: linear-gradient(0deg, rgb(236 230 218 / 0.98) 0%, rgb(236 230 218 / 0.94) 46%, transparent 62%);
+	}
+}

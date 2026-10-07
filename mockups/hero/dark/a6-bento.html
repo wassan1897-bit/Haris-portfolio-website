@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Hero A6: Dark Bento</title>
+<link rel="stylesheet" href="_dark.css" />
+<style>
+  /* Whole first screen as one bento: message, face, proof and work in six tiles */
+  .hero { height: 100dvh; min-height: 660px; display: grid; grid-template-rows: auto minmax(0, 1fr); }
+  .grid { display: grid; grid-template-columns: 1.5fr 1fr 0.9fr; grid-template-rows: minmax(0, 1.25fr) minmax(0, 1fr); gap: 14px; padding: 4px var(--pad) 28px; min-height: 0; }
+  .tile { position: relative; border-radius: 22px; background: var(--bg-2); box-shadow: inset 0 0 0 1px var(--line); overflow: hidden; }
+
+  .t-copy { grid-row: 1 / 3; padding: 48px 48px 44px; display: flex; flex-direction: column; justify-content: flex-end; }
+  .t-copy .mono { margin-bottom: auto; }
+  h1 { font-size: clamp(42px, 4.4vw, 68px); line-height: 1; letter-spacing: -0.045em; font-weight: 600; }
+  .sub { margin-top: 22px; font-size: 18px; line-height: 1.55; color: var(--muted); max-width: 480px; }
+  .ctas { margin-top: 32px; display: flex; gap: 12px; }
+
+  .t-photo { grid-row: 1 / 3; grid-column: 2; }
+  .t-photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 20%; }
+
+  .t-proof { padding: 28px; display: flex; flex-direction: column; justify-content: space-between; }
+  .t-proof .row { display: flex; align-items: center; gap: 10px; font-size: 14px; color: var(--muted); }
+  .t-proof .row img { width: 22px; height: 22px; }
+  .t-proof b { font-size: 40px; font-weight: 600; letter-spacing: -0.04em; line-height: 1; }
+  .t-proof p { font-size: 14px; color: var(--muted); margin-top: 8px; }
+  .t-proof .tools { display: grid; grid-template-columns: 1fr 1fr; gap: 22px 26px; align-items: center; }
+  .t-proof .tools img { height: 22px; width: auto; filter: grayscale(1) brightness(0) invert(0.72); }
+
+  .t-case { padding: 0; display: grid; grid-template-rows: minmax(0, 1fr) auto; }
+  .t-case img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 8%; min-height: 0; }
+  .t-case div { padding: 14px 20px 16px; }
+  .t-case h3 { font-size: 15px; font-weight: 600; }
+  .t-case p { font-size: 13px; color: var(--muted); margin-top: 2px; }
+
+  @media (max-width: 767px) {
+    .hero { height: auto; }
+    .grid { grid-template-columns: 1fr 1fr; grid-template-rows: auto; padding: 4px 16px 20px; gap: 10px; }
+    .t-copy { grid-column: 1 / 3; grid-row: auto; padding: 28px 22px; }
+    .t-copy .mono { margin-bottom: 18px; }
+    .t-photo { grid-column: 1 / 3; grid-row: 1; height: 340px; }
+    h1 { font-size: 38px; }
+    .sub { font-size: 16px; }
+    .t-proof { padding: 20px; gap: 18px; }
+    .t-proof b { font-size: 28px; }
+    .t-proof .tools { display: none; }
+    .t-case img { height: 150px; }
+  }
+</style>
+</head>
+<body>
+<section class="hero">
+  <nav>
+    <div class="logo">Haris<span>.</span></div>
+    <div class="links"><a href="#">Work</a><a href="#">How I work</a><a href="#">About</a></div>
+    <a class="btn btn--primary btn--sm" href="#">Start a project</a>
+    <span class="menu">Menu</span>
+  </nav>
+
+  <div class="grid">
+    <div class="tile t-copy">
+      <p class="mono">Muhammad Haris, AI automation consultant</p>
+      <h1>AI systems that run your <span class="accent">back office.</span></h1>
+      <p class="sub">n8n workflows, voice agents, RAG and CRM automations for operations-heavy businesses.</p>
+      <div class="ctas">
+        <a class="btn btn--primary" href="#">Start a project <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
+        <a class="btn btn--ghost" href="#">See the work</a>
+      </div>
+    </div>
+
+    <div class="tile t-photo"><img src="../../../public/landing/assets/img/haris-video-poster.jpg" alt="Muhammad Haris" /></div>
+
+    <div class="tile t-proof">
+      <p class="row"><img src="../../../public/landing/assets/img/tools/upwork.png" alt="" />Top Rated Plus on Upwork</p>
+      <div class="tools">
+        <img src="../../../public/landing/assets/img/tools/n8n.png" alt="n8n" />
+        <img src="../../../public/landing/assets/img/tools/zapier.png" alt="Zapier" />
+        <img src="../../../public/landing/assets/img/tools/retell.png" alt="Retell AI" />
+        <img src="../../../public/landing/assets/img/tools/claude.png" alt="Claude" />
+      </div>
+      <div><b>100%</b><p>Job Success, $30K+ earned</p></div>
+    </div>
+
+    <div class="tile t-case">
+      <img src="../../../public/landing/selected-works/img/email-triage-workflow.jpg" alt="AI email triage case study" />
+      <div><h3>AI email triage</h3><p>222-node n8n workflow</p></div>
+    </div>
+  </div>
+</section>
+</body>
+</html>

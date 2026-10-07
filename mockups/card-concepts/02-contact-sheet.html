@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Contact Sheet</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Manrope:wght@400;500;600;700;800&family=Caveat:wght@600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="./base.css" />
+<style>
+  :root { --ink: #f1ede6; --muted: #8d877e; --edge: #e39a37; --pencil: #d9302a; }
+  body { background: #121211; color: var(--ink); }
+  /* ---------- browse: film strips on a light table ---------- */
+  .top { position: absolute; left: 48px; right: 48px; top: 88px; display: flex; justify-content: space-between; align-items: baseline; }
+  .top h2 { font: 800 30px/1 "Montserrat"; letter-spacing: -0.02em; text-transform: uppercase; }
+  .top p { font-size: 14px; color: var(--muted); }
+  .table { position: absolute; left: 48px; right: 48px; top: 140px; bottom: 36px; border-radius: 6px;
+    background: radial-gradient(ellipse 70% 80% at 50% 45%, #fffefb 0%, #f1efe9 60%, #dedbd3 100%);
+    box-shadow: 0 0 0 10px #1d1d1c, 0 0 80px rgb(255 250 235 / 0.12); }
+  .strip { position: absolute; left: 70px; height: 222px; padding: 26px 22px; display: flex; gap: 14px; background: #0e0e0e; box-shadow: 0 6px 14px rgb(0 0 0 / 0.25); }
+  .strip::before, .strip::after { content: ""; position: absolute; left: 10px; right: 10px; height: 10px;
+    background: repeating-linear-gradient(90deg, transparent 0 9px, #eeebe4 9px 21px, transparent 21px 30px); border-radius: 2px; }
+  .strip::before { top: 8px; } .strip::after { bottom: 8px; }
+  .frame { position: relative; width: 262px; height: 170px; background: #000; }
+  .frame img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(1) contrast(1.12) brightness(0.95); }
+  .frame .no { position: absolute; left: 4px; bottom: -22px; font: 600 10px/1 "IBM Plex Mono"; color: var(--edge); letter-spacing: 0.1em; }
+  .frame .nm { position: absolute; right: 4px; bottom: -22px; font: 600 10px/1 "IBM Plex Mono"; color: var(--edge); letter-spacing: 0.1em; text-transform: uppercase; }
+  .edge { position: absolute; top: -20px; left: 60px; font: 600 10px/1 "IBM Plex Mono"; color: var(--edge); letter-spacing: 0.3em; }
+  .ring { position: absolute; z-index: 5; pointer-events: none; }
+  .loupe { position: absolute; z-index: 8; width: 270px; height: 270px; border-radius: 50%; overflow: hidden;
+    box-shadow: 0 0 0 12px #2a2a29, 0 0 0 14px #4a4a48, 0 30px 50px rgb(0 0 0 / 0.5), inset 0 0 30px rgb(0 0 0 / 0.5); }
+  .loupe img { position: absolute; width: 520px; height: 340px; object-fit: cover; }
+  .loupe::after { content: ""; position: absolute; inset: 0; border-radius: 50%; background: radial-gradient(circle at 32% 28%, rgb(255 255 255 / 0.28), transparent 38%); }
+  .tag { position: absolute; z-index: 9; padding: 10px 14px; background: #121211; color: var(--ink); border-radius: 4px; font-size: 13px; }
+  .tag b { display: block; font: 800 18px/1.1 "Montserrat"; text-transform: uppercase; }
+  .scrawl { position: absolute; z-index: 6; font: 700 26px/1 "Caveat"; color: var(--pencil); transform: rotate(-6deg); }
+  /* ---------- detail: the print drying in the darkroom ---------- */
+  .dark { position: absolute; inset: 0; background: radial-gradient(ellipse 60% 70% at 30% 20%, #4a120d 0%, #220806 45%, #0c0303 100%); }
+  .line { position: absolute; left: -20px; right: -20px; top: 96px; height: 2px; background: linear-gradient(90deg, #4b2b25, #7a4a40 50%, #4b2b25); transform: rotate(-1deg); }
+  .print { position: absolute; background: #f6f2ea; padding: 16px 16px 54px; box-shadow: 0 30px 60px rgb(0 0 0 / 0.6); }
+  .print img { width: 100%; height: 100%; object-fit: cover; }
+  .print .cap { position: absolute; left: 18px; bottom: 18px; font: 700 24px/1 "Caveat"; color: #2a2522; }
+  .pin { position: absolute; top: -18px; width: 16px; height: 46px; border-radius: 3px; background: linear-gradient(90deg, #a77a4f, #d9b083 50%, #9c6f45); box-shadow: 0 4px 6px rgb(0 0 0 / 0.4); }
+  .ghost { filter: blur(5px) brightness(0.5) sepia(0.6) hue-rotate(-20deg); }
+  .note { position: absolute; z-index: 4; font: 700 30px/1 "Caveat"; color: var(--pencil); }
+  .side { position: absolute; left: 800px; top: 190px; width: 560px; color: #f3e6de; }
+  .side .k { font: 600 12px/1 "IBM Plex Mono"; letter-spacing: 0.18em; text-transform: uppercase; color: #e48f6f; }
+  .side h1 { margin-top: 18px; font: 800 60px/0.92 "Montserrat"; letter-spacing: -0.04em; text-transform: uppercase; }
+  .side p { margin-top: 22px; font-size: 17px; line-height: 1.6; color: #d9c7bd; }
+  .side .figs { margin-top: 30px; display: flex; gap: 34px; }
+  .side .figs b { display: block; font: 800 34px/1 "Montserrat"; letter-spacing: -0.03em; }
+  .side .figs span { font-size: 13px; color: #b39c90; }
+  .side .stack { margin-top: 30px; display: flex; flex-wrap: wrap; gap: 8px; }
+  .side .stack span { padding: 8px 12px; border: 1px solid rgb(243 230 222 / 0.25); border-radius: 999px; font-size: 13px; }
+  .side .nav { margin-top: 42px; display: flex; gap: 26px; font: 600 12px/1 "IBM Plex Mono"; letter-spacing: 0.14em; text-transform: uppercase; color: #b39c90; }
+  .side .nav b { color: #f3e6de; }
+  .safelight { position: absolute; right: 60px; top: 30px; width: 70px; height: 34px; border-radius: 8px 8px 4px 4px; background: #c2271c; box-shadow: 0 0 60px 30px rgb(194 39 28 / 0.35); }
+</style>
+</head>
+<body>
+<header class="bar"><b>Haris</b><nav><span>Email</span><span>LinkedIn</span></nav><span class="menu"><i><s></s><s></s></i>Menu</span></header>
+<main id="root"></main>
+<script type="module">
+  import { PROJECTS, REF, VIEW, PICK, pad, platform, cursor, ready } from './data.js'
+  const root = document.getElementById('root')
+  const p = PROJECTS[PICK]
+  if (VIEW === 'browse') {
+    const tilt = [-0.5, 0.4, -0.25]
+    const strips = [0, 1, 2].map((s) => `
+      <div class="strip" style="top:${42 + s * 248}px;left:${86 + [0, 22, 8][s]}px;transform:rotate(${tilt[s]}deg)">
+        <span class="edge">HARIS 400 &nbsp; AUTOMATION FILM</span>
+        ${PROJECTS.slice(s * 4, s * 4 + 4).map((q, j) => {
+          const i = s * 4 + j
+          return `<div class="frame" data-i="${i}"><img src="${REF + q.img}" alt=""><span class="no">&#9656; ${i + 1}A</span><span class="nm">${q.card}</span></div>`
+        }).join('')}
+      </div>`).join('')
+    root.innerHTML = `
+      <div class="top"><h2>Proof sheet</h2><p>Twelve frames, all in production. Hover a frame to look closer, click to print it.</p></div>
+      <div class="table">${strips}</div>`
+    // grease pencil ring around the chosen frame, the loupe over it, and its name
+    const f = document.querySelector(`.frame[data-i="${PICK}"]`).getBoundingClientRect()
+    const ring = document.createElement('div')
+    ring.className = 'ring'
+    Object.assign(ring.style, { left: f.left - 26 + 'px', top: f.top - 24 + 'px' })
+    ring.innerHTML = `<svg width="${f.width + 52}" height="${f.height + 50}"><path d="M${f.width * 0.5} 10 C ${f.width + 40} 4, ${f.width + 56} 40, ${f.width + 44} ${f.height * 0.6} S ${f.width * 0.6} ${f.height + 50}, 40 ${f.height + 38} S 0 40, 38 18 S ${f.width * 0.45} 4, ${f.width * 0.62} 14" fill="none" stroke="#d9302a" stroke-width="5" stroke-linecap="round" opacity="0.9"/></svg>`
+    document.body.appendChild(ring)
+    const L = document.createElement('div')
+    L.className = 'loupe'
+    const lx = f.left + f.width * 0.62, ly = f.top + f.height * 0.18
+    Object.assign(L.style, { left: lx + 'px', top: ly + 'px' })
+    L.innerHTML = `<img src="${REF + p.img}" alt="" style="left:${-(lx - f.left) * 2 + 20}px;top:${-(ly - f.top) * 2 + 10}px">`
+    document.body.appendChild(L)
+    const t = document.createElement('div')
+    t.className = 'tag'
+    Object.assign(t.style, { left: lx + 290 + 'px', top: ly + 170 + 'px' })
+    t.innerHTML = `<b>${p.card}</b>${p.sub}`
+    document.body.appendChild(t)
+    const sc = document.createElement('div')
+    sc.className = 'scrawl'
+    Object.assign(sc.style, { left: f.left + 10 + 'px', top: f.top - 54 + 'px' })
+    sc.textContent = 'this one!'
+    document.body.appendChild(sc)
+    cursor(lx + 150, ly + 150)
+  } else {
+    root.innerHTML = `
+      <div class="dark"></div><span class="safelight"></span><div class="line"></div>
+      <div class="print ghost" style="left:-150px;top:100px;width:240px;height:310px;transform:rotate(3deg)"><img src="${REF + PROJECTS[PICK - 1].img}" alt=""></div>
+      <div class="print" style="left:150px;top:112px;width:540px;height:690px;transform:rotate(-1.6deg)">
+        <span class="pin" style="left:60px"></span><span class="pin" style="right:60px"></span>
+        <img src="${REF + p.img}" alt=""><span class="cap">#${PICK + 1}A ${p.card.toLowerCase()}, ${platform(p)}</span>
+      </div>
+      <span class="note" style="left:540px;top:690px;transform:rotate(-8deg)">${p.figs[0][0]} chats!</span>
+      <div class="side">
+        <span class="k">Frame ${pad(PICK)} of 12 &nbsp;/&nbsp; ${p.tag}</span>
+        <h1>${p.name}</h1>
+        <p>${p.copy}</p>
+        <div class="figs">${p.figs.map((x) => `<div><b>${x[0]}</b><span>${x[1]}</span></div>`).join('')}</div>
+        <div class="stack">${p.stack.map((x) => `<span>${x}</span>`).join('')}</div>
+        <div class="nav"><span>&larr; Frame 01</span><b>Back to the sheet</b><span>Frame 03 &rarr;</span></div>
+      </div>`
+  }
+  ready()
+</script>
+</body>
+</html>

@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Hero sub-line: Space Grotesk, logos in a strip along the bottom</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=Space+Grotesk:wght@400;500;600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../../../public/landing/style.css" />
+<link rel="stylesheet" href="../../../public/landing/hero/hero.css" />
+<style>
+html, body { margin: 0; background: #fff; overflow: hidden; }
+
+.ph-logos { position: absolute; z-index: 4; overflow: hidden; }
+.ph-logos__track { display: flex; align-items: center; gap: var(--logo-gap, 56px); width: max-content; margin: 0; padding: 0; list-style: none; animation: ph-scroll 38s linear infinite; }
+.ph-logos__track li { flex: none; }
+.ph-logos__track img { display: block; height: var(--logo-h, 22px); width: auto; filter: grayscale(1) contrast(1.1); opacity: 0.55; transition: filter .3s, opacity .3s; }
+.ph-logos:hover .ph-logos__track { animation-play-state: paused; }
+.ph-logos__track img:hover { filter: none; opacity: 1; }
+@keyframes ph-scroll { to { transform: translateX(calc(-50% - var(--logo-gap, 56px) / 2)); } }
+@media (prefers-reduced-motion: reduce) { .ph-logos__track { animation: none; } }
+
+
+.ph-sub { font-family: "Space Grotesk", sans-serif; font-size: 15px; font-weight: 500; letter-spacing: 0.14em; gap: 16px; color: #7d827f; }
+.ph-sub p:first-child { color: var(--ph-ink); font-weight: 600; }
+.ph-cta { font-family: "Montserrat", sans-serif; margin-top: 20px; }
+/* marquee in the strip under the photo panel, full width */
+.ph-logos { left: var(--ph-rail); right: 0; bottom: 0; height: 52px; display: flex; align-items: center; border-top: 1px solid var(--ph-line);
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent); mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent); }
+.ph-logos { --logo-h: 20px; --logo-gap: 64px; }
+
+</style>
+</head>
+<body>
+			<section class="site-panel site-panel--hero" id="panel-hero" data-enter="done" aria-label="Introduction">
+				<aside class="ph-rail">
+					<a href="about.html" class="ph-mark" aria-label="Muhammad Haris, home">MH</a>
+					<div class="ph-rail__links" role="navigation" aria-label="Sections">
+						<a href="#panel-hero" data-hero-scroll="#panel-hero">Home</a>
+						<a href="#panel-works" data-hero-scroll="#panel-works">Work</a>
+						<a href="#panel-scaling" data-hero-scroll="#panel-scaling">Contact</a>
+					</div>
+					<button type="button" class="ph-burger" aria-label="Open menu"><i></i><i></i></button>
+				</aside>
+
+				<figure class="ph-panel">
+					<img
+						src="../../../public/landing/assets/img/haris-hero-wall.webp"
+						width="941"
+						height="1672"
+						alt="Muhammad Haris, AI automation engineer, leaning on a concrete wall"
+						fetchpriority="high"
+						decoding="async"
+					/>
+					<span class="ph-shade" aria-hidden="true"></span>
+				</figure>
+
+				<div class="ph-top">
+					<a href="https://github.com/Haris001-bit" target="_blank" rel="noopener noreferrer">GitHub</a>
+					<a class="ph-pill" href="mailto:hello@autoany.io?subject=Project%20brief">Start a project</a>
+				</div>
+				<div class="ph-slide" aria-hidden="true"><span>01</span><i></i></div>
+
+				<div class="ph-titles ph-titles--photo" aria-hidden="true">
+					<p class="ph-title">Automate<span class="ph-the">the</span><br />busywork</p>
+				</div>
+				<div class="ph-titles ph-titles--white">
+					<h1 class="ph-title">Automate<span class="ph-the">the</span><br />busywork</h1>
+				</div>
+
+				<div class="ph-logos" aria-label="Tools Haris builds with"><ul class="ph-logos__track"><li><img src="../../../public/landing/assets/img/tools/n8n.png" alt="n8n" /></li><li><img src="../../../public/landing/assets/img/tools/make.png" alt="Make" /></li><li><img src="../../../public/landing/assets/img/tools/zapier.png" alt="Zapier" /></li><li><img src="../../../public/landing/assets/img/tools/ghl.png" alt="GoHighLevel" /></li><li><img src="../../../public/landing/assets/img/tools/retell.png" alt="Retell AI" /></li><li><img src="../../../public/landing/assets/img/tools/claude.png" alt="Claude" /></li><li><img src="../../../public/landing/assets/img/tools/openai.svg" alt="OpenAI" /></li><li><img src="../../../public/landing/assets/img/tools/airtable.svg" alt="Airtable" /></li><li><img src="../../../public/landing/assets/img/tools/twilio.svg" alt="Twilio" /></li><li><img src="../../../public/landing/assets/img/tools/python.svg" alt="Python" /></li><li><img src="../../../public/landing/assets/img/tools/nodejs.svg" alt="Node.js" /></li><li><img src="../../../public/landing/assets/img/tools/postgresql.svg" alt="PostgreSQL" /></li><li><img src="../../../public/landing/assets/img/tools/nextjs.svg" alt="Next.js" /></li><li><img src="../../../public/landing/assets/img/tools/webflow.svg" alt="Webflow" /></li><li aria-hidden="true"><img src="../../../public/landing/assets/img/tools/n8n.png" alt="" /></li><li aria-hidden="true"><img src="../../../public/landing/assets/img/tools/make.png" alt="" /></li><li aria-hidden="true"><img src="../../../public/landing/assets/img/tools/zapier.png" alt="" /></li><li aria-hidden="true"><img src="../../../public/landing/assets/img/tools/ghl.png" alt="" /></li><li aria-hidden="true"><img src="../../../public/landing/assets/img/tools/retell.png" alt="" /></li><li aria-hidden="true"><img src="../../../public/landing/assets/img/tools/claude.png" alt="" /></li><li aria-hidden="true"><img src="../../../public/landing/assets/img/tools/openai.svg" alt="" /></li><li aria-hidden="true"><img src="../../../public/landing/assets/img/tools/airtable.svg" alt="" /></li><li aria-hidden="true"><img src="../../../public/landing/assets/img/tools/twilio.svg" alt="" /></li><li aria-hidden="true"><img src="../../../public/landing/assets/img/tools/python.svg" alt="" /></li><li aria-hidden="true"><img src="../../../public/landing/assets/img/tools/nodejs.svg" alt="" /></li><li aria-hidden="true"><img src="../../../public/landing/assets/img/tools/postgresql.svg" alt="" /></li><li aria-hidden="true"><img src="../../../public/landing/assets/img/tools/nextjs.svg" alt="" /></li><li aria-hidden="true"><img src="../../../public/landing/assets/img/tools/webflow.svg" alt="" /></li></ul></div>
+
+				<span class="ph-bar ph-bar--top" aria-hidden="true"></span>
+				<span class="ph-bar ph-bar--bottom" aria-hidden="true"></span>
+
+				<div class="ph-sub">
+					<p>Muhammad Haris, AI automation engineer</p>
+					<p>AI systems for operations-heavy businesses</p>
+					<p>6,700+ support conversations automated</p>
+					<p>Clients across the US, UK and Middle East</p>
+					<a class="ph-cta" href="#panel-works" data-hero-scroll="#panel-works">See what I've shipped <i></i></a>
+					<a class="ph-pill ph-pill--mobile" href="mailto:hello@autoany.io?subject=Project%20brief">Start a project</a>
+				</div>
+			</section>
+
+</body>
+</html>

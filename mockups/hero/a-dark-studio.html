@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Hero A: Dark Studio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg: #0d0d0e;
+    --bg-2: #161617;
+    --ink: #f2f0eb;
+    --muted: #a3a09a;
+    --line: rgb(242 240 235 / 0.12);
+    --accent: #ff6a3d;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { background: var(--bg); color: var(--ink); font-family: "Geist", system-ui, sans-serif; }
+  .hero { position: relative; min-height: 100dvh; overflow: hidden; display: grid; grid-template-rows: auto 1fr auto; }
+
+  /* photo: right side, fades into the page */
+  .photo { position: absolute; inset: 0 0 0 auto; width: 56%; }
+  .photo img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 18%; filter: contrast(1.05) saturate(0.9); }
+  .photo::after { content: ""; position: absolute; inset: 0;
+    background: linear-gradient(90deg, var(--bg) 0%, rgb(13 13 14 / 0.75) 18%, rgb(13 13 14 / 0) 46%),
+                linear-gradient(0deg, var(--bg) 0%, rgb(13 13 14 / 0) 28%); }
+
+  nav { position: relative; z-index: 2; height: 72px; display: flex; align-items: center; justify-content: space-between; padding: 0 56px; }
+  .logo { font-weight: 600; font-size: 18px; letter-spacing: -0.02em; }
+  .logo span { color: var(--accent); }
+  .links { display: flex; gap: 36px; font-size: 14px; color: var(--muted); }
+  .links a { color: inherit; text-decoration: none; }
+  .btn { display: inline-flex; align-items: center; gap: 10px; height: 48px; padding: 0 22px; border-radius: 999px; font-size: 15px; font-weight: 500; text-decoration: none; white-space: nowrap; }
+  .btn--primary { background: var(--accent); color: #1a0d07; }
+  .btn--ghost { border: 1px solid var(--line); color: var(--ink); }
+  .btn--sm { height: 40px; padding: 0 18px; font-size: 14px; }
+  .arrow { width: 16px; height: 16px; }
+
+  .copy { position: relative; z-index: 2; align-self: center; padding: 0 56px; max-width: 900px; }
+  .eyebrow { display: inline-flex; align-items: center; gap: 10px; font-family: "Geist Mono", monospace; font-size: 12.5px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin-bottom: 28px; }
+  .eyebrow img { width: 22px; height: 22px; border-radius: 50%; }
+  h1 { font-size: clamp(44px, 5.4vw, 86px); line-height: 0.98; letter-spacing: -0.045em; font-weight: 600; }
+  h1 em { font-style: normal; color: var(--accent); }
+  .sub { margin-top: 28px; font-size: 19px; line-height: 1.55; color: var(--muted); max-width: 520px; }
+  .ctas { margin-top: 40px; display: flex; gap: 12px; }
+
+  /* proof band: the section directly under the hero, peeking in */
+  .proof { position: relative; z-index: 2; border-top: 1px solid var(--line); display: grid; grid-template-columns: 1.35fr 1fr 1fr 1fr 1.7fr; }
+  .stat { padding: 26px 56px 30px; border-right: 1px solid var(--line); }
+  .stat b { display: block; font-size: 30px; font-weight: 600; letter-spacing: -0.03em; }
+  .stat small { display: block; margin-top: 6px; font-size: 13px; color: var(--muted); }
+  .tools { display: flex; align-items: center; justify-content: center; gap: 34px; padding: 0 40px; }
+  .tools img { height: 24px; width: auto; filter: grayscale(1) brightness(0) invert(0.82); }
+
+  @media (max-width: 767px) {
+    nav { padding: 0 16px; height: 64px; }
+    .links { display: none; }
+    .photo { position: relative; width: 100%; height: 52vh; order: -1; }
+    .photo::after { background: linear-gradient(0deg, var(--bg) 0%, rgb(13 13 14 / 0) 55%); }
+    .hero { display: flex; flex-direction: column; }
+    nav { position: absolute; top: 0; left: 0; right: 0; }
+    .copy { padding: 0 16px; margin-top: -64px; }
+    .eyebrow { margin-bottom: 16px; }
+    h1 { font-size: 42px; }
+    .sub { font-size: 16px; margin-top: 18px; }
+    .ctas { margin-top: 26px; flex-wrap: wrap; }
+    .proof { grid-template-columns: 1fr 1fr; margin-top: 36px; }
+    .stat { padding: 18px 16px; border-bottom: 1px solid var(--line); }
+    .stat:nth-child(2n) { border-right: 0; }
+    .tools { display: none; }
+    .stat b { font-size: 22px; }
+    nav .btn--sm { height: 36px; padding: 0 14px; font-size: 13px; }
+  }
+</style>
+</head>
+<body>
+<section class="hero">
+  <div class="photo"><img src="../../public/landing/assets/img/haris-video-poster.jpg" alt="Muhammad Haris" /></div>
+
+  <nav>
+    <div class="logo">Haris<span>.</span></div>
+    <div class="links"><a href="#">Work</a><a href="#">How I work</a><a href="#">About</a></div>
+    <a class="btn btn--primary btn--sm" href="#">Start a project</a>
+  </nav>
+
+  <div class="copy">
+    <p class="eyebrow">Muhammad Haris, AI automation consultant</p>
+    <h1>AI systems that run your <em>back office.</em></h1>
+    <p class="sub">n8n workflows, voice agents, RAG and CRM automations for operations-heavy businesses. Scoped honestly, shipped to production.</p>
+    <div class="ctas">
+      <a class="btn btn--primary" href="#">Start a project
+        <svg class="arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
+      <a class="btn btn--ghost" href="#">See the work</a>
+    </div>
+  </div>
+
+  <div class="proof">
+    <div class="stat"><b>Top Rated Plus</b><small>on Upwork</small></div>
+    <div class="stat"><b>100%</b><small>Job Success</small></div>
+    <div class="stat"><b>$30K+</b><small>earned on Upwork</small></div>
+    <div class="stat"><b>23</b><small>systems shipped</small></div>
+    <div class="tools">
+      <img src="../../public/landing/assets/img/tools/n8n.png" alt="n8n" />
+            <img src="../../public/landing/assets/img/tools/zapier.png" alt="Zapier" />
+      <img src="../../public/landing/assets/img/tools/retell.png" alt="Retell AI" />
+      <img src="../../public/landing/assets/img/tools/claude.png" alt="Claude" />
+    </div>
+  </div>
+</section>
+</body>
+</html>

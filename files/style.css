@@ -1,0 +1,219 @@
+@import url("https://fonts.googleapis.com/css?family=Inter:300,regular,500,600,700,800,900&display=swap");@import url("https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap");* {
+	padding: 0rem;
+	margin: 0rem;
+	border: 0rem;
+}
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+*::before,
+*::after {
+	display: inline-block;
+}
+html,
+body {
+	height: 100%;
+}
+
+body {
+  font-family: "DM Sans", sans-serif;
+}
+img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+h1 {
+  text-transform: uppercase;
+  font-size: 6rem;
+  font-weight: 600;
+  line-height: 1;
+}
+p {
+  text-transform: uppercase;
+  font-size: 0.8125rem;
+  font-weight: 500;
+}
+.preloader,
+.split-overlay,
+.tags-overlay {
+  position: fixed;
+  width: 100vw;
+  height: 100svh;
+}
+.preloader,
+.split-overlay {
+  background-color: #0a0a0a;
+  color: #ffffff;
+}
+.preloader,
+.tags-overlay {
+  z-index: 2;
+}
+.split-overlay {
+  z-index: 1;
+}
+.intro-title {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  text-align: center;
+  width: 100%;
+  transform: translate(-50%, -50%);
+}
+.outro-title {
+  position: absolute;
+  top: 50%;
+  left: calc(50% + 6rem);
+  transform: translate(-50%, -50%);
+}
+.tag {
+  position: absolute;
+  overflow: hidden;
+  width: max-content;
+  color: #5a5a5a;
+}
+.tag-1 {
+  top: 15%;
+  left: 15%;
+}
+.tag-2 {
+  bottom: 15%;
+  left: 25%;
+}
+.tag-3 {
+  bottom: 30%;
+  right: 15%;
+}
+.container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  min-height: 100svh;
+  clip-path: polygon(0 48%, 0 48%, 0 52%, 0 52%);
+}
+.container .hero-img {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background:
+    radial-gradient(ellipse at 50% 40%, #2a2a2a 0%, #0a0a0a 70%),
+    linear-gradient(180deg, #111 0%, #0a0a0a 100%);
+}
+nav,
+footer {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 2;
+  width: 100vw;
+  padding: 2rem;
+  color: #ffffff;
+}
+nav p#logo {
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+.card {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 30%;
+  height: 70%;
+  background-color: #ffffff;
+  transform: translate(-50%, -50%);
+  clip-path: polygon(0% 50%, 100% 50%, 100% 50%, 0% 50%);
+}
+.card h1 {
+  text-align: center;
+  width: 100%;
+  font-size: 3rem;
+}
+.card-bio {
+  position: absolute;
+  left: 1.5rem;
+  right: 1.5rem;
+  bottom: 1.75rem;
+  text-align: center;
+  text-transform: none;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  line-height: 1.5;
+  letter-spacing: 0.01em;
+  color: #222222;
+  opacity: 0;
+  transform: translateY(0.75rem);
+}
+.card .char span {
+  position: relative;
+  display: inline-block;
+  transform: translateY(100%);
+  will-change: transform;
+}
+.intro-title .char,
+.outro-title .char,
+.card .char {
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
+}
+.intro-title .char,
+.outro-title .char {
+  margin-top: 0.75rem;
+}
+.intro-title .char span,
+.outro-title .char span,
+.tag .word {
+  position: relative;
+  display: inline-block;
+  transform: translateY(-100%);
+  will-change: transform;
+}
+.intro-title .first-char {
+  transform-origin: top left;
+}
+
+/* Exact Page Transitions/7 line wipe (move-in) */
+.page-wipe {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  pointer-events: none;
+  background-color: #f1efe7;
+  clip-path: polygon(0% 100%, 100% 100%, 100% 100%, 0% 100%);
+}
+
+@media (max-width: 62.5rem){
+  h1 {
+    font-size: 2.5rem;
+  }
+  .outro-title {
+    left: calc(50% + 3rem);
+  }
+  .card {
+    width: 75%;
+  }
+  .card h1 {
+    font-size: 2.5rem;
+  }
+  .card-bio {
+    font-size: 0.7rem;
+    bottom: 1.25rem;
+    left: 1rem;
+    right: 1rem;
+  }
+  .intro-title .char,
+  .outro-title .char {
+    margin-top: 0.5rem;
+  }
+}

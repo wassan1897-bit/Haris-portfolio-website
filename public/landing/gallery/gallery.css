@@ -1,0 +1,161 @@
+/* Sliders/23 Circular Gallery — scoped to work page */
+
+.gallery-page {
+	background-color: #e3e3db;
+}
+
+.gallery-page nav a {
+	color: #242726;
+}
+
+.gallery-page .gallery-root a,
+.gallery-page .gallery-root p,
+.gallery-page .title-container p {
+	text-decoration: none;
+	color: #1f1f1f;
+	font-family: "Manrope", Helvetica, Arial, sans-serif;
+	font-size: 15px;
+	font-weight: 600;
+	line-height: 1;
+	letter-spacing: -0.02rem;
+}
+
+.gallery-page .gallery-root .card img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	backface-visibility: hidden;
+}
+
+.gallery-root {
+	position: relative;
+	width: 100vw;
+	height: 100svh;
+	overflow: hidden;
+	background-color: #e3e3db;
+}
+
+.gallery-root .gallery-container {
+	position: relative;
+	width: 100%;
+	height: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	transform-style: preserve-3d;
+	perspective: 2000px;
+	will-change: transform;
+}
+
+.gallery-root .gallery {
+	position: relative;
+	width: 600px;
+	height: 600px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	transform-origin: center;
+	will-change: transform;
+}
+
+.gallery-root .card {
+	position: absolute;
+	width: 45px;
+	height: 60px;
+	border-radius: 4px;
+	transform-origin: center;
+	will-change: transform;
+	transform-style: preserve-3d;
+	backface-visibility: visible;
+	overflow: hidden;
+}
+
+.gallery-page .title-container {
+	position: fixed;
+	bottom: 18%;
+	left: 50%;
+	transform: translate(-50%, 0);
+	width: min(36rem, calc(100% - 3rem));
+	min-height: 42px;
+	z-index: 5;
+	pointer-events: none;
+	clip-path: none;
+}
+
+.gallery-page .work-details {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 0.65rem;
+	text-align: center;
+}
+
+.gallery-page .work-details__eyebrow {
+	margin: 0;
+	color: #5a5a5a;
+	font-family: "Manrope", Helvetica, Arial, sans-serif;
+	font-size: 0.7rem;
+	font-weight: 600;
+	letter-spacing: 0.08em;
+	text-transform: uppercase;
+}
+
+.gallery-page .work-details__title {
+	position: relative;
+	margin: 0;
+	width: 100%;
+	overflow: hidden;
+	color: #1f1f1f;
+	font-family: "Manrope", Helvetica, Arial, sans-serif;
+	font-size: clamp(1.35rem, 3.2vw, 2.15rem);
+	font-weight: 700;
+	letter-spacing: -0.04rem;
+	line-height: 1.15;
+}
+
+.gallery-page .work-details__title .word {
+	position: relative;
+	display: inline-block;
+	margin-right: 0.28em;
+	will-change: transform;
+}
+
+.gallery-page .work-details__desc {
+	margin: 0;
+	max-width: 32rem;
+	color: #3a3a3a;
+	font-family: "Source Serif 4", Georgia, "Times New Roman", serif;
+	font-size: clamp(0.85rem, 1.2vw, 1rem);
+	font-weight: 400;
+	line-height: 1.45;
+	letter-spacing: 0.01em;
+}
+
+.gallery-page .work-details__stack {
+	margin: 0.15rem 0 0;
+	color: #1f1f1f;
+	font-family: "Manrope", Helvetica, Arial, sans-serif;
+	font-size: 0.78rem;
+	font-weight: 600;
+	letter-spacing: 0.02em;
+}
+
+.gallery-page .gallery-footer {
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	width: 100vw;
+	padding: 2em;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	z-index: 2;
+	pointer-events: none;
+}
+
+.gallery-page .gallery-footer p {
+	color: #1f1f1f;
+	font-family: "Manrope", Helvetica, Arial, sans-serif;
+	font-size: 15px;
+	font-weight: 600;
+}

@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Projects Room Concepts</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<style>
+  :root { --ink: #f3efe8; --muted: #9a958c; --accent: #ffb46a; --line: rgb(243 239 232 / 0.14); }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { height: 100%; background: #060607; color: var(--ink); font-family: "Manrope", system-ui, sans-serif; overflow: hidden; }
+  canvas { position: fixed; inset: 0; display: block; width: 100%; height: 100%; }
+  .vignette { position: fixed; inset: 0; pointer-events: none; background: radial-gradient(ellipse 75% 70% at 50% 45%, transparent 55%, rgb(0 0 0 / 0.55) 100%); }
+  .grain { position: fixed; inset: -50%; pointer-events: none; opacity: 0.07; mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>"); }
+  .bar { position: fixed; top: 0; left: 0; right: 0; height: 64px; display: flex; align-items: center; justify-content: space-between; padding: 0 40px; font: 600 14px/1 "Manrope", sans-serif; letter-spacing: 0.04em; text-transform: uppercase; z-index: 5; }
+  .bar b { font-weight: 800; }
+  .bar .menu { display: flex; align-items: center; gap: 10px; }
+  .bar .menu i { display: grid; gap: 5px; width: 20px; } .bar .menu i s { display: block; height: 1.5px; background: var(--ink); }
+  .bar nav { display: flex; gap: 24px; }
+  .intro { position: fixed; left: 48px; bottom: 112px; z-index: 5; max-width: 560px; }
+  .intro h2 { font: 800 clamp(40px, 4vw, 64px)/0.92 "Montserrat", sans-serif; letter-spacing: -0.03em; text-transform: uppercase; }
+  .intro h2 span { color: var(--accent); }
+  .intro p { margin-top: 16px; font-size: 17px; line-height: 1.5; color: var(--muted); max-width: 420px; }
+  .hint { position: fixed; left: 48px; bottom: 48px; z-index: 5; font-size: 13px; color: var(--muted); }
+  .controls { position: fixed; right: 48px; bottom: 40px; z-index: 5; display: flex; align-items: center; gap: 16px; font-size: 13px; font-weight: 600; color: var(--muted); }
+  .controls b { color: var(--ink); }
+  .controls span.btn { width: 46px; height: 46px; border-radius: 50%; border: 1px solid var(--line); display: grid; place-items: center; color: var(--ink); }
+  .controls svg { width: 18px; height: 18px; }
+  .chip { position: fixed; top: 84px; left: 48px; z-index: 5; height: 30px; padding: 0 14px; display: inline-flex; align-items: center; border-radius: 999px; border: 1px solid color-mix(in srgb, var(--accent) 45%, transparent); color: var(--accent); font: 700 12px/1 "Manrope", sans-serif; letter-spacing: 0.06em; text-transform: uppercase; }
+  :root.theme-light { --ink: #17191a; --muted: #5f6361; --line: rgb(23 25 26 / 0.16); }
+  :root.theme-light body { background: #eeeeec; }
+  :root.theme-cream body { background: #ece6da; }
+  :root.theme-light .vignette { background: radial-gradient(ellipse 80% 75% at 50% 45%, transparent 60%, rgb(120 110 95 / 0.18) 100%); }
+  :root.theme-light .grain { opacity: 0.05; mix-blend-mode: multiply; }
+  :root.theme-light .bar .menu i s { background: var(--ink); }
+  :root.theme-light .controls span.btn { background: rgb(255 255 255 / 0.5); }
+  @media (max-width: 767px) {
+    .bar { padding: 0 16px; } .bar nav { display: none; }
+    .chip { top: 72px; left: 16px; }
+    .intro { left: 16px; right: 16px; top: 116px; bottom: auto; }
+    .intro h2 { font-size: 34px; } .intro p { font-size: 15px; margin-top: 10px; }
+    .hint { display: none; }
+    .controls { left: 16px; right: 16px; bottom: 24px; } .controls > span:first-child { margin-right: auto; }
+  }
+</style>
+</head>
+<body>
+<canvas id="scene"></canvas>
+<div class="vignette"></div>
+<div class="grain"></div>
+<header class="bar"><b>Haris</b><span class="menu"><i><s></s><s></s></i>Menu</span><nav><span>Email</span><span>LinkedIn</span></nav></header>
+<span class="chip" id="chip"></span>
+<section class="intro"><h2 id="title"></h2><p id="lede"></p></section>
+<p class="hint" id="hint"></p>
+<div class="controls"><span><b>03</b> / 12</span>
+  <span class="btn"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M13 8H3M7 4 3 8l4 4"/></svg></span>
+  <span class="btn"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span>
+</div>
+<script type="module" src="./concepts.js"></script>
+</body>
+</html>

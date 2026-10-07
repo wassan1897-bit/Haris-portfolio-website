@@ -1,0 +1,704 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="shortcut icon" href="./assets/img/favicon.ico" />
+		<title>Muhammad Haris, AI Automation Engineer</title>
+		<meta
+			name="description"
+			content="Muhammad Haris designs and builds production AI and automation systems for operations-heavy businesses: workflow platforms, voice and chat agents, and full-stack AI products."
+		/>
+		<style>
+			html,
+			body {
+				background: var(--surface-0, #f1efe7);
+			}
+			.intro-receive-wipe {
+				position: fixed;
+				inset: 0;
+				z-index: 5000;
+				background: var(--surface-0, #f1efe7);
+				pointer-events: none;
+			}
+		</style>
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&display=swap" rel="stylesheet" />
+		<link rel="preload" as="image" href="./assets/img/haris-hero-wall.webp" />
+		<link rel="preload" as="image" href="./assets/img/haris-hero-type-profile-color.jpg" />
+		<link rel="stylesheet" href="style.css" />
+		<link rel="stylesheet" href="./crossroads/css/base.css" />
+		<link rel="stylesheet" href="./nav-bar/nav-bar.css" />
+		<link rel="stylesheet" href="./sticky-cursor/sticky-cursor.css" />
+		<link rel="stylesheet" href="./magnetic-button/magnetic-button.css" />
+		<link rel="stylesheet" href="./scaling/style.css" />
+		<link rel="stylesheet" href="./hero/hero.css" />
+		<link rel="stylesheet" href="./workspace/workspace.css" />
+		<script type="importmap">
+			{
+				"imports": {
+					"three": "./vendor/three/build/three.module.min.js",
+					"three/addons/": "./vendor/three/addons/"
+				}
+			}
+		</script>
+	</head>
+	<body data-page="about">
+		<div class="intro-receive-wipe" id="intro-receive-wipe" style="display: none" aria-hidden="true"></div>
+		<script>
+			;(function () {
+				try {
+					if (sessionStorage.getItem('harisFromIntro') === '1') {
+						var w = document.getElementById('intro-receive-wipe')
+						if (w) w.style.display = 'block'
+					}
+				} catch (e) {}
+			})()
+		</script>
+
+		<header class="site-header site-header--over-hero" id="js-site-header">
+			<div class="site-header__bar">
+				<a href="about.html" class="site-header__logo">Haris</a>
+
+				<button
+					class="site-header__toggle"
+					id="js-menu-btn"
+					type="button"
+					aria-label="Open menu"
+					aria-expanded="false"
+					aria-controls="js-nav"
+					data-magnetic
+				>
+					<div class="site-header__burger" id="js-burger" aria-hidden="true"></div>
+					<div class="site-header__label">
+						<p class="site-header__label-text site-header__label-text--menu" id="js-label-menu">Menu</p>
+						<p class="site-header__label-text site-header__label-text--close" id="js-label-close">Close</p>
+					</div>
+					<div class="sticky-bounds" id="js-sticky-bounds" aria-hidden="true"></div>
+				</button>
+
+				<div class="site-header__actions" id="js-header-actions">
+					<a
+						class="site-header__action--email"
+						href="mailto:hello@autoany.io"
+						>Email</a
+					>
+					<a
+						href="https://www.linkedin.com/"
+						target="_blank"
+						rel="noopener noreferrer"
+						>LinkedIn</a
+					>
+				</div>
+			</div>
+
+			<nav class="site-nav" id="js-nav" aria-hidden="true" inert aria-label="Primary">
+				<div class="site-nav__wrapper">
+					<div class="site-nav__container">
+						<div class="site-nav__body" id="js-nav-body">
+							<a
+								href="about.html"
+								class="site-nav__link"
+								data-index="0"
+								data-src="./assets/img/nav-about-preview.png"
+								data-label="About"
+								data-dot="2"
+								data-line1="Diagnose first. Then build."
+								data-line2="Production AI across the full stack."
+								>About</a
+							>
+							<a
+								href="work.html"
+								class="site-nav__link"
+								data-index="1"
+								data-src="./assets/img/nav-work-preview.png"
+								data-label="Work"
+								data-dot="1"
+								data-line1="Real automations. Real impact."
+								data-line2="From AI workflows to business systems."
+								>Work</a
+							>
+							<a
+								href="scaling.html"
+								class="site-nav__link"
+								data-index="2"
+								data-src="./assets/img/nav-connect-preview.png"
+								data-label="Connect"
+								data-dot="1"
+								data-line1="Let’s build what compounds."
+								data-line2="Briefs, calls, and next steps."
+								>Connect</a
+							>
+						</div>
+
+						<div class="site-nav__highlight" id="js-nav-highlight" aria-hidden="true">
+							<p class="site-nav__highlight-line" id="js-nav-line1"></p>
+							<p class="site-nav__highlight-line site-nav__highlight-line--soft" id="js-nav-line2"></p>
+						</div>
+
+						<div class="site-nav__footer">
+							<ul>
+								<li><span>Built by:</span> Muhammad Haris</li>
+							</ul>
+							<ul>
+								<li><span>Focus:</span> Production AI systems</li>
+							</ul>
+							<ul>
+								<li><span>Stack:</span> n8n · Claude · Voice AI</li>
+							</ul>
+							<ul class="site-nav__socials" aria-label="Connect">
+								<li>
+									<a
+										class="site-nav__icon about-magnetic__item"
+										href="https://www.upwork.com/"
+										target="_blank"
+										rel="noopener noreferrer"
+										aria-label="Upwork"
+										data-popup="upwork"
+									>
+										<span class="site-nav__icon-ring" aria-hidden="true">
+											<img src="./assets/img/nav-icons/upwork.svg" alt="" width="24" height="24" />
+										</span>
+										<span class="about-magnetic__popup" aria-hidden="true">
+											<img
+												src="./assets/img/connect/upwork-profile.png"
+												alt="Upwork profile — Muhammad H."
+												width="1024"
+												height="296"
+											/>
+										</span>
+									</a>
+								</li>
+								<li>
+									<a
+										class="site-nav__icon about-magnetic__item"
+										href="https://www.linkedin.com/"
+										target="_blank"
+										rel="noopener noreferrer"
+										aria-label="LinkedIn"
+										data-popup="linkedin"
+									>
+										<span class="site-nav__icon-ring" aria-hidden="true">
+											<img src="./assets/img/nav-icons/linkedin.svg" alt="" width="24" height="24" />
+										</span>
+										<span class="about-magnetic__popup" aria-hidden="true">
+											<img
+												src="./assets/img/connect/linkedin-profile.png"
+												alt="LinkedIn profile — Muhammad Haris"
+												width="799"
+												height="499"
+											/>
+										</span>
+									</a>
+								</li>
+								<li>
+									<a
+										class="site-nav__icon about-magnetic__item"
+										href="mailto:hello@autoany.io"
+										aria-label="Email"
+									>
+										<span class="site-nav__icon-ring" aria-hidden="true">
+											<img src="./assets/img/nav-icons/mail.svg" alt="" width="24" height="24" />
+										</span>
+									</a>
+								</li>
+								<li>
+									<a
+										class="site-nav__icon about-magnetic__item"
+										href="mailto:hello@autoany.io?subject=Project%20brief"
+										aria-label="Contact"
+									>
+										<span class="site-nav__icon-ring" aria-hidden="true">
+											<img src="./assets/img/nav-icons/call.svg" alt="" width="24" height="24" />
+										</span>
+									</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+
+					<div class="site-nav__image" id="js-nav-image">
+						<img
+							src="./assets/img/nav-about-preview.png"
+							alt="Preview"
+							id="js-nav-image-el"
+							width="500"
+							height="450"
+						/>
+					</div>
+				</div>
+			</nav>
+
+			<div class="site-header__background" id="js-background" aria-hidden="true"></div>
+		</header>
+
+		<div class="site-flow" id="site-flow" data-transition="wrapper">
+			<section class="site-panel site-panel--hero" id="panel-hero" data-enter="pending" aria-label="Introduction">
+				<aside class="ph-rail">
+					<a href="about.html" class="ph-mark" aria-label="Muhammad Haris, home">MH</a>
+					<div class="ph-rail__links" role="navigation" aria-label="Sections">
+						<a href="#panel-hero" data-hero-scroll="#panel-hero">Home</a>
+						<a href="#panel-works" data-hero-scroll="#panel-works">Work</a>
+						<a href="#panel-scaling" data-hero-scroll="#panel-scaling">Contact</a>
+					</div>
+					<button type="button" class="ph-burger" aria-label="Open menu"><i></i><i></i></button>
+				</aside>
+
+				<figure class="ph-panel">
+					<img
+						src="./assets/img/haris-hero-wall.webp"
+						width="941"
+						height="1672"
+						alt="Muhammad Haris, AI automation engineer, leaning on a concrete wall"
+						fetchpriority="high"
+						decoding="async"
+					/>
+					<span class="ph-shade" aria-hidden="true"></span>
+				</figure>
+
+				<div class="ph-top">
+					<a href="https://github.com/Haris001-bit" target="_blank" rel="noopener noreferrer">GitHub</a>
+					<a class="ph-pill" href="mailto:hello@autoany.io?subject=Project%20brief">Start a project</a>
+				</div>
+				<div class="ph-slide" aria-hidden="true"><span>01</span><i></i></div>
+
+				<div class="ph-titles ph-titles--photo" aria-hidden="true">
+					<p class="ph-title">Automate<span class="ph-the">the</span><br />busywork</p>
+				</div>
+				<div class="ph-titles ph-titles--white">
+					<h1 class="ph-title">Automate<span class="ph-the">the</span><br />busywork</h1>
+				</div>
+
+				<span class="ph-bar ph-bar--top" aria-hidden="true"></span>
+				<span class="ph-bar ph-bar--bottom" aria-hidden="true"></span>
+
+				<div class="ph-sub">
+					<p class="ph-lead">Muhammad Haris, AI automation engineer</p>
+					<p class="ph-pitch">Production AI for operations-heavy businesses in the US, UK and Middle East</p>
+					<div class="ph-ledger">
+						<div class="ph-stat"><b data-count="6700" data-suffix="+">6,700+</b><small>support conversations automated</small></div>
+						<div class="ph-stat"><b data-count="21000" data-suffix="+">21,000+</b><small>agent minutes saved</small></div>
+						<div class="ph-stat"><b data-count="7">7</b><small>live client deployments of one product</small></div>
+					</div>
+					<a class="ph-cta" href="#panel-works" data-hero-scroll="#panel-works">See what I've shipped <i></i></a>
+					<div class="ph-logos" aria-label="Tools Haris builds with">
+						<ul class="ph-logos__track">
+							<li class="ph-tool ph-tool--word"><img src="./assets/img/tools/n8n.png" alt="n8n" height="21" /></li>
+							<li class="ph-tool"><img src="./assets/img/tools/make.png" alt="" height="22" /><span>Make</span></li>
+							<li class="ph-tool ph-tool--word"><img src="./assets/img/tools/zapier.png" alt="Zapier" height="21" /></li>
+							<li class="ph-tool"><img src="./assets/img/tools/ghl.png" alt="" height="22" /><span>GoHighLevel</span></li>
+							<li class="ph-tool ph-tool--word"><img src="./assets/img/tools/retell.png" alt="Retell AI" height="21" /></li>
+							<li class="ph-tool ph-tool--word"><img src="./assets/img/tools/claude.png" alt="Claude" height="21" /></li>
+							<li class="ph-tool"><img src="./assets/img/tools/openai.svg" alt="" height="22" /><span>OpenAI</span></li>
+							<li class="ph-tool"><img src="./assets/img/tools/airtable.svg" alt="" height="22" /><span>Airtable</span></li>
+							<li class="ph-tool"><img src="./assets/img/tools/twilio.svg" alt="" height="22" /><span>Twilio</span></li>
+							<li class="ph-tool"><img src="./assets/img/tools/python.svg" alt="" height="22" /><span>Python</span></li>
+							<li class="ph-tool"><img src="./assets/img/tools/nodejs.svg" alt="" height="22" /><span>Node.js</span></li>
+							<li class="ph-tool"><img src="./assets/img/tools/postgresql.svg" alt="" height="22" /><span>PostgreSQL</span></li>
+							<li class="ph-tool"><img src="./assets/img/tools/nextjs.svg" alt="" height="22" /><span>Next.js</span></li>
+							<li class="ph-tool"><img src="./assets/img/tools/webflow.svg" alt="" height="22" /><span>Webflow</span></li>
+							<li class="ph-tool ph-tool--word" aria-hidden="true"><img src="./assets/img/tools/n8n.png" alt="" height="21" /></li>
+							<li class="ph-tool" aria-hidden="true"><img src="./assets/img/tools/make.png" alt="" height="22" /><span>Make</span></li>
+							<li class="ph-tool ph-tool--word" aria-hidden="true"><img src="./assets/img/tools/zapier.png" alt="" height="21" /></li>
+							<li class="ph-tool" aria-hidden="true"><img src="./assets/img/tools/ghl.png" alt="" height="22" /><span>GoHighLevel</span></li>
+							<li class="ph-tool ph-tool--word" aria-hidden="true"><img src="./assets/img/tools/retell.png" alt="" height="21" /></li>
+							<li class="ph-tool ph-tool--word" aria-hidden="true"><img src="./assets/img/tools/claude.png" alt="" height="21" /></li>
+							<li class="ph-tool" aria-hidden="true"><img src="./assets/img/tools/openai.svg" alt="" height="22" /><span>OpenAI</span></li>
+							<li class="ph-tool" aria-hidden="true"><img src="./assets/img/tools/airtable.svg" alt="" height="22" /><span>Airtable</span></li>
+							<li class="ph-tool" aria-hidden="true"><img src="./assets/img/tools/twilio.svg" alt="" height="22" /><span>Twilio</span></li>
+							<li class="ph-tool" aria-hidden="true"><img src="./assets/img/tools/python.svg" alt="" height="22" /><span>Python</span></li>
+							<li class="ph-tool" aria-hidden="true"><img src="./assets/img/tools/nodejs.svg" alt="" height="22" /><span>Node.js</span></li>
+							<li class="ph-tool" aria-hidden="true"><img src="./assets/img/tools/postgresql.svg" alt="" height="22" /><span>PostgreSQL</span></li>
+							<li class="ph-tool" aria-hidden="true"><img src="./assets/img/tools/nextjs.svg" alt="" height="22" /><span>Next.js</span></li>
+							<li class="ph-tool" aria-hidden="true"><img src="./assets/img/tools/webflow.svg" alt="" height="22" /><span>Webflow</span></li>
+						</ul>
+					</div>
+					<a class="ph-pill ph-pill--mobile" href="mailto:hello@autoany.io?subject=Project%20brief">Start a project</a>
+				</div>
+			</section>
+
+			<section class="site-panel site-panel--works ws" id="panel-works" aria-label="Projects">
+				<picture class="ws__poster ws__poster--day" aria-hidden="true">
+					<source media="(max-width: 767px)" srcset="./workspace/poster/day-mobile.webp" />
+					<img src="./workspace/poster/day.webp" width="2000" height="900" alt="" loading="lazy" decoding="async" />
+				</picture>
+				<picture class="ws__poster ws__poster--night" aria-hidden="true">
+					<source media="(max-width: 767px)" srcset="./workspace/poster/night-mobile.webp" />
+					<img src="./workspace/poster/night.webp" width="2000" height="900" alt="" loading="lazy" decoding="async" />
+				</picture>
+				<canvas class="ws__canvas" aria-hidden="true"></canvas>
+				<div class="ws__vignette" aria-hidden="true"></div>
+				<div class="ws__grain" aria-hidden="true"></div>
+
+				<div class="ws__corner">
+					<button type="button" class="ws__dn" aria-pressed="false" aria-label="Switch to night">
+						<span class="ws__dn-knob" aria-hidden="true"></span>
+						<span class="ws__dn-opt ws__dn-opt--day"
+							><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.2" /><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6" /></svg
+							>Day</span
+						>
+						<span class="ws__dn-opt ws__dn-opt--night"
+							><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z" /></svg
+							>Night</span
+						>
+					</button>
+					<p class="ws__time" aria-live="off"><span>Your time</span> <b></b></p>
+				</div>
+
+				<div class="ws__intro">
+					<h2 class="ws__title">The work,<br /><span>on the wall</span></h2>
+					<p class="ws__lede">Twelve systems running in production. Pick a card to step inside one.</p>
+				</div>
+
+				<ul class="ws__list" aria-label="All projects"></ul>
+
+				<p class="ws__hint">Hover a card to light it up. Click to open it.</p>
+				<div class="ws__controls">
+					<span class="ws__count" aria-live="polite"><b>01</b> / <span>12</span></span>
+					<button type="button" class="ws__btn ws__btn--prev" aria-label="Previous project">
+						<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M13 8H3M7 4 3 8l4 4" /></svg>
+					</button>
+					<button type="button" class="ws__btn ws__btn--next" aria-label="Next project">
+						<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" /></svg>
+					</button>
+				</div>
+
+				<div class="ws__scrim" aria-hidden="true"></div>
+				<aside class="ws__detail" aria-label="Project details">
+					<div class="ws__file-top">
+						<p class="ws__tag"><b class="ws__num">01</b> / 12 <span aria-hidden="true">&middot;</span> <span class="ws__kind"></span></p>
+						<button type="button" class="ws__close" aria-label="Close project">
+							<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M4 4l8 8M12 4l-8 8" /></svg>
+						</button>
+					</div>
+					<h3 class="ws__name"></h3>
+					<p class="ws__copy"></p>
+					<div class="ws__figs"></div>
+					<p class="ws__label">Built with</p>
+					<ul class="ws__stack"></ul>
+					<div class="ws__actions">
+						<a class="ws__cta" href="mailto:hello@autoany.io"
+							>Start a similar project
+							<svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" /></svg
+						></a>
+						<button type="button" class="ws__back">Back to the wall</button>
+					</div>
+					<div class="ws__pager">
+						<button type="button" class="ws__pager-btn ws__pager-btn--prev"><i aria-hidden="true"></i><small>Previous</small><span></span></button>
+						<button type="button" class="ws__pager-btn ws__pager-btn--next"><i aria-hidden="true"></i><small>Next</small><span></span></button>
+					</div>
+				</aside>
+			</section>
+
+			<!--
+				THESIS: Proof bento after Projects — systems, stack, and operator in one composition.
+				OWN-WORLD: cream #f1efe7, Manrope + Source Serif, white soft-shadow cards.
+				STORY: visitor sees production depth, then can chat.
+				FIRST VIEWPORT: title + 5-cell bento (team, stats, logos, quote, tech).
+				FORM: Aceternity Scaling bento motion grammar, adapted to Haris/AutoAny.
+				FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, and DESIGN.md
+			-->
+			<section
+				class="site-panel site-panel--scaling"
+				id="panel-scaling"
+				data-transition="container"
+				data-namespace="scaling"
+				aria-label="Connect"
+			>
+				<div class="scaling">
+					<header class="scaling__header">
+						<p class="scaling__eyebrow">End of the tour</p>
+						<h2 class="scaling__title">Let’s Build What Compounds</h2>
+						<p class="scaling__lede">
+							If the problem is real and the timing is right, we start with a clear diagnosis —
+							then ship only what will keep working after the first win.
+						</p>
+					</header>
+
+					<div class="scaling__bento">
+						<article class="scaling-card scaling-card--team">
+							<div class="scaling-team__grid" aria-hidden="true">
+								<!-- 5×5 — diamond photos + edge fog like Aceternity -->
+								<div class="scaling-tile scaling-tile--empty"></div>
+								<div class="scaling-tile scaling-tile--empty"></div>
+								<div class="scaling-tile scaling-tile--empty"></div>
+								<div class="scaling-tile scaling-tile--empty"></div>
+								<div class="scaling-tile scaling-tile--empty"></div>
+
+								<div class="scaling-tile scaling-tile--empty"></div>
+								<div class="scaling-tile scaling-tile--empty"></div>
+								<div class="scaling-tile scaling-tile--photo">
+									<img src="./assets/img/haris-scaling-01.png" alt="" width="160" height="160" loading="lazy" />
+								</div>
+								<div class="scaling-tile scaling-tile--empty"></div>
+								<div class="scaling-tile scaling-tile--empty"></div>
+
+								<div class="scaling-tile scaling-tile--empty"></div>
+								<div class="scaling-tile scaling-tile--photo">
+									<img src="./assets/img/haris-scaling-02.jpg" alt="" width="160" height="160" loading="lazy" />
+								</div>
+								<div class="scaling-tile scaling-tile--empty"></div>
+								<div class="scaling-tile scaling-tile--photo">
+									<img src="./assets/img/haris-scaling-03.png" alt="" width="160" height="160" loading="lazy" />
+								</div>
+								<div class="scaling-tile scaling-tile--empty"></div>
+
+								<div class="scaling-tile scaling-tile--empty"></div>
+								<div class="scaling-tile scaling-tile--empty"></div>
+								<div class="scaling-tile scaling-tile--photo">
+									<img src="./assets/img/haris-scaling-01.png" alt="" width="160" height="160" loading="lazy" />
+								</div>
+								<div class="scaling-tile scaling-tile--empty"></div>
+								<div class="scaling-tile scaling-tile--empty"></div>
+
+								<div class="scaling-tile scaling-tile--empty"></div>
+								<div class="scaling-tile scaling-tile--empty"></div>
+								<div class="scaling-tile scaling-tile--empty"></div>
+								<div class="scaling-tile scaling-tile--empty"></div>
+								<div class="scaling-tile scaling-tile--empty"></div>
+							</div>
+							<div class="scaling-team__foot">
+								<p class="scaling-team__label">Get to know the operator</p>
+								<a class="scaling-chat" href="mailto:hello@autoany.io">
+									<span class="scaling-chat__wipe" aria-hidden="true"></span>
+									<span class="scaling-chat__icon" aria-hidden="true">
+										<svg class="scaling-chat__icon-arrow" viewBox="0 0 20 20" width="18" height="18" aria-hidden="true">
+											<!-- full 5×5 faint grid -->
+											<g fill="#fff6d0" opacity="0.28">
+												<circle cx="2" cy="2" r="1.15" /><circle cx="6" cy="2" r="1.15" /><circle cx="10" cy="2" r="1.15" /><circle cx="14" cy="2" r="1.15" /><circle cx="18" cy="2" r="1.15" />
+												<circle cx="2" cy="6" r="1.15" /><circle cx="6" cy="6" r="1.15" /><circle cx="10" cy="6" r="1.15" /><circle cx="14" cy="6" r="1.15" /><circle cx="18" cy="6" r="1.15" />
+												<circle cx="2" cy="10" r="1.15" /><circle cx="6" cy="10" r="1.15" /><circle cx="10" cy="10" r="1.15" /><circle cx="14" cy="10" r="1.15" /><circle cx="18" cy="10" r="1.15" />
+												<circle cx="2" cy="14" r="1.15" /><circle cx="6" cy="14" r="1.15" /><circle cx="10" cy="14" r="1.15" /><circle cx="14" cy="14" r="1.15" /><circle cx="18" cy="14" r="1.15" />
+												<circle cx="2" cy="18" r="1.15" /><circle cx="6" cy="18" r="1.15" /><circle cx="10" cy="18" r="1.15" /><circle cx="14" cy="18" r="1.15" /><circle cx="18" cy="18" r="1.15" />
+											</g>
+											<!-- bright arrow →  ( . . . # . / . . . . # / # # # # # / . . . . # / . . . # . ) -->
+											<g fill="#fffaf0">
+												<circle cx="14" cy="2" r="1.2" />
+												<circle cx="18" cy="6" r="1.2" />
+												<circle cx="2" cy="10" r="1.2" />
+												<circle cx="6" cy="10" r="1.2" />
+												<circle cx="10" cy="10" r="1.2" />
+												<circle cx="14" cy="10" r="1.2" />
+												<circle cx="18" cy="10" r="1.2" />
+												<circle cx="18" cy="14" r="1.2" />
+												<circle cx="14" cy="18" r="1.2" />
+											</g>
+										</svg>
+										<img
+											class="scaling-chat__icon-photo"
+											src="./assets/img/haris-chat-avatar.png"
+											alt=""
+											width="36"
+											height="36"
+										/>
+									</span>
+									<span class="scaling-chat__label">Chat with Haris</span>
+								</a>
+							</div>
+						</article>
+
+						<article class="scaling-card scaling-card--stats">
+							<div class="scaling-stats__bg" aria-hidden="true"></div>
+							<div class="scaling-stats__top">
+								<div id="scaling-ticker-mount"></div>
+								<p class="scaling-stats__caption">Systems shipped</p>
+							</div>
+							<ul class="scaling-skills" aria-label="Skills">
+								<li><button type="button" class="scaling-skill">Data Analysis</button></li>
+								<li><button type="button" class="scaling-skill">Artificial Intelligence</button></li>
+								<li><button type="button" class="scaling-skill">AI Agent Development</button></li>
+								<li><button type="button" class="scaling-skill">AI Chatbot</button></li>
+								<li><button type="button" class="scaling-skill">AI Consulting</button></li>
+								<li><button type="button" class="scaling-skill">Business Consulting</button></li>
+								<li><button type="button" class="scaling-skill">CRM Automation</button></li>
+								<li><button type="button" class="scaling-skill">Chatbot Development</button></li>
+								<li><button type="button" class="scaling-skill">ElevenLabs</button></li>
+								<li><button type="button" class="scaling-skill">Make.com</button></li>
+								<li><button type="button" class="scaling-skill">n8n</button></li>
+								<li><button type="button" class="scaling-skill">Zapier</button></li>
+								<li><button type="button" class="scaling-skill">HubSpot</button></li>
+								<li><button type="button" class="scaling-skill">Lead Generation</button></li>
+							</ul>
+						</article>
+
+						<article class="scaling-card scaling-card--logos" aria-label="Platforms">
+							<div class="scaling-marquee">
+								<div class="scaling-marquee__track" id="scaling-logos-track">
+									<!-- filled by scaling/script.js -->
+								</div>
+							</div>
+						</article>
+
+						<article class="scaling-card scaling-card--quote">
+							<div class="scaling-quote__bg" aria-hidden="true"></div>
+							<p class="scaling-quote__brand">Upwork</p>
+							<p class="scaling-quote__badges">
+								Top Rated Plus · AI Systems Expert · 100% Job Success · $30K+ Earned
+							</p>
+							<p class="scaling-quote__text">
+								I build production AI systems across the full stack: workflow automation (n8n, Make,
+								Zapier, Power Automate), voice AI agents (VAPI, Bland.ai, Retell AI), AI chatbots and
+								RAG systems, CRM integrations (GoHighLevel, HubSpot), and AI-native applications built
+								with Claude Code, Claude Cowork, and Cursor.
+							</p>
+							<div class="scaling-quote__foot">
+								<p class="scaling-quote__meta">— Muhammad Haris · AI systems</p>
+								<div class="scaling-quote__socials">
+									<a
+										class="scaling-quote__social"
+										href="https://www.upwork.com/"
+										target="_blank"
+										rel="noopener noreferrer"
+										aria-label="Upwork"
+										data-popup="upwork"
+										data-magnetic
+									>
+										<img
+											src="./assets/img/tools/upwork.png"
+											alt=""
+											width="28"
+											height="28"
+										/>
+										<span class="about-magnetic__popup" aria-hidden="true">
+											<img
+												src="./assets/img/connect/upwork-profile.png"
+												alt="Upwork profile — Muhammad H."
+												width="1024"
+												height="296"
+											/>
+										</span>
+									</a>
+									<a
+										class="scaling-quote__social"
+										href="https://www.linkedin.com/"
+										target="_blank"
+										rel="noopener noreferrer"
+										aria-label="LinkedIn"
+										data-popup="linkedin"
+										data-magnetic
+									>
+										<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true">
+											<path
+												d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 1 1 0-4.125 2.062 2.062 0 0 1 0 4.125zM7.119 20.452H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"
+											/>
+										</svg>
+										<span class="about-magnetic__popup" aria-hidden="true">
+											<img
+												src="./assets/img/connect/linkedin-profile.png"
+												alt="LinkedIn profile — Muhammad Haris"
+												width="799"
+												height="499"
+											/>
+										</span>
+									</a>
+								</div>
+							</div>
+						</article>
+
+						<article class="scaling-card scaling-card--tech">
+							<p class="scaling-tech__label">Technologies we use</p>
+							<div class="scaling-marquee scaling-marquee--tech scaling-tech__marquee">
+								<div class="scaling-marquee__track" id="scaling-tech-track">
+									<!-- filled by scaling/script.js -->
+								</div>
+							</div>
+						</article>
+					</div>
+
+					<footer class="scaling__close">
+						<div class="scaling__close-copy">
+							<p class="scaling__close-kicker">Next step</p>
+							<p class="scaling__close-line">
+								Send a short note with the problem, the constraint, and the timeline.
+								You’ll get an honest read before any build starts.
+							</p>
+						</div>
+						<div class="scaling__close-actions">
+							<div class="scaling__close-socials">
+								<a
+									class="scaling-quote__social"
+									href="https://www.upwork.com/"
+									target="_blank"
+									rel="noopener noreferrer"
+									aria-label="Upwork"
+									data-popup="upwork"
+									data-magnetic
+								>
+									<img src="./assets/img/tools/upwork.png" alt="" width="28" height="28" />
+									<span class="about-magnetic__popup" aria-hidden="true">
+										<img
+											src="./assets/img/connect/upwork-profile.png"
+											alt="Upwork profile — Muhammad H."
+											width="1024"
+											height="296"
+										/>
+									</span>
+								</a>
+								<a
+									class="scaling-quote__social"
+									href="https://www.linkedin.com/"
+									target="_blank"
+									rel="noopener noreferrer"
+									aria-label="LinkedIn"
+									data-popup="linkedin"
+									data-magnetic
+								>
+									<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true">
+										<path
+											d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 1 1 0-4.125 2.062 2.062 0 0 1 0 4.125zM7.119 20.452H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"
+										/>
+									</svg>
+									<span class="about-magnetic__popup" aria-hidden="true">
+										<img
+											src="./assets/img/connect/linkedin-profile.png"
+											alt="LinkedIn profile — Muhammad Haris"
+											width="799"
+											height="499"
+										/>
+									</span>
+								</a>
+								<a
+									class="scaling-quote__social"
+									href="mailto:hello@autoany.io"
+									aria-label="Email"
+									data-magnetic
+								>
+									<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true">
+										<path
+											d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z"
+										/>
+									</svg>
+								</a>
+								<a
+									class="scaling-quote__social"
+									href="mailto:hello@autoany.io?subject=Project%20brief"
+									aria-label="Contact"
+									data-magnetic
+								>
+									<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true">
+										<path
+											d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1C10.61 21 3 13.39 3 4c0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"
+										/>
+									</svg>
+								</a>
+							</div>
+							<p class="scaling__close-meta">Muhammad Haris · Available for select work</p>
+						</div>
+					</footer>
+				</div>
+			</section>
+		</div>
+
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+		<script src="https://unpkg.com/split-type"></script>
+		<script src="./nav-bar/nav-bar.js"></script>
+		<script src="./sticky-cursor/sticky-cursor.js"></script>
+		<script src="./magnetic-button/magnetic-button.js"></script>
+		<script src="./scaling/script.js?v=team-grid1"></script>
+		<script src="./page-flow.js"></script>
+		<script src="./hero/hero.js"></script>
+		<script type="module" src="./workspace/workspace.js"></script>
+		<script src="app.js"></script>
+	</body>
+</html>

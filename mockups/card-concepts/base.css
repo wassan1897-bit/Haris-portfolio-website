@@ -1,0 +1,12 @@
+/* Shared reset and the site bar, so every concept sits in the same page frame. */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { width: 1440px; height: 900px; overflow: hidden; }
+body { font-family: "Manrope", system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+img { display: block; }
+.bar { position: absolute; top: 0; left: 0; right: 0; height: 72px; display: flex; align-items: center; justify-content: space-between; padding: 0 48px; font: 600 13px/1 "Manrope", sans-serif; letter-spacing: 0.06em; text-transform: uppercase; z-index: 20; }
+.bar b { font-weight: 800; letter-spacing: 0.02em; font-size: 15px; }
+.bar nav { display: flex; gap: 28px; }
+.bar .menu { display: flex; align-items: center; gap: 10px; }
+.bar .menu i { display: grid; gap: 5px; width: 20px; } .bar .menu i s { display: block; height: 1.5px; background: currentColor; }
+/* mockup only: a pointer drawn where the visitor's mouse is */
+.cursor { position: absolute; width: 22px; height: 22px; z-index: 50; pointer-events: none; filter: drop-shadow(0 2px 3px rgb(0 0 0 / 0.35)); }

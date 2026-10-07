@@ -1,0 +1,51 @@
+/* Pixel scan — scoped so About cream column stays intact */
+.pixel-scan {
+	padding: 18svh 1.25rem 22svh;
+	max-width: 100vw;
+	box-sizing: border-box;
+	background: #0f0f0f;
+	color: #f1efe7;
+	text-align: center;
+	font-family: 'Manrope', Helvetica, Arial, sans-serif;
+	-webkit-font-smoothing: antialiased;
+}
+
+.pixel-scan__spacer {
+	height: 28svh;
+	pointer-events: none;
+}
+
+.pixel-scan__spacer--short {
+	height: 10svh;
+}
+
+.pixel-scan__kicker {
+	display: block;
+	margin: 6svh auto;
+	color: rgba(241, 239, 231, 0.55);
+	font-size: clamp(0.75rem, 1.4vw, 0.9rem);
+	font-weight: 600;
+	letter-spacing: 0.14em;
+	text-transform: uppercase;
+}
+
+.pixel-scan h2 {
+	display: block;
+	margin: 6svw 0;
+	color: #f1efe7;
+	font-family: 'Manrope', Helvetica, Arial, sans-serif;
+	font-size: clamp(3.5rem, 18vw, 12rem);
+	font-weight: 700;
+	line-height: 0.95;
+	letter-spacing: -0.04em;
+}
+
+.pixel-scan__hint {
+	display: block;
+	margin: 10svh auto 0;
+	color: rgba(241, 239, 231, 0.4);
+	font-size: 0.75rem;
+	font-weight: 500;
+	letter-spacing: 0.12em;
+	text-transform: uppercase;
+}

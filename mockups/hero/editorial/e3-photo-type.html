@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Hero E3: Photo Type</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<style>
+  /* Giant headline filled with photography on white, turning solid white where it crosses the portrait panel */
+  :root { --ink: #1a1d1c; --muted: #8a8f8d; --line: #ececec; --teal: #4fd1c5; --panel-left: 62%; --panel-bottom: 52px; --rail: 96px; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { background: #fff; color: var(--ink); font-family: "Montserrat", system-ui, sans-serif; }
+  a { color: inherit; text-decoration: none; }
+
+  .hero { position: relative; height: 100dvh; min-height: 640px; overflow: hidden; }
+
+  /* left rail */
+  .rail { position: absolute; inset: 0 auto 0 0; width: var(--rail); border-right: 1px solid var(--line); display: flex; flex-direction: column; align-items: center; justify-content: space-between; padding: 34px 0 40px; z-index: 4; }
+  .mark { width: 36px; height: 36px; border-radius: 50%; background: var(--ink); color: #fff; display: grid; place-items: center; font-size: 12px; font-weight: 800; letter-spacing: -0.02em; }
+  .rail nav { display: flex; flex-direction: column-reverse; gap: 38px; }
+  .rail nav a { writing-mode: vertical-rl; transform: rotate(180deg); font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; }
+  .burger { display: grid; gap: 6px; width: 22px; }
+  .burger i { display: block; height: 1.5px; background: var(--ink); }
+  .burger i:nth-child(2) { width: 60%; }
+
+  /* portrait panel */
+  .panel { position: absolute; top: 0; right: 0; bottom: var(--panel-bottom); left: var(--panel-left); border-bottom-left-radius: 10px; overflow: hidden; background: #2a2f2e; }
+  .panel img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 18%; filter: grayscale(0.85) contrast(1.06) brightness(0.92); }
+  .panel::after { content: ""; position: absolute; inset: 0; background: rgb(40 90 85 / 0.22); mix-blend-mode: color; }
+
+  .top { position: absolute; top: 30px; right: 56px; z-index: 5; display: flex; align-items: center; gap: 36px; color: #fff; font-size: 12px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; }
+  .pill { height: 46px; padding: 0 34px; display: inline-flex; align-items: center; border-radius: 999px; border: 2px solid transparent;
+    background: linear-gradient(#2d3433, #2d3433) padding-box, linear-gradient(90deg, #6ee7d8, #3aa7c9) border-box; }
+
+  .slide { position: absolute; z-index: 5; left: calc(var(--panel-left) + 52px); bottom: calc(var(--panel-bottom) + 120px); color: #fff; font-size: 12px; font-weight: 600; letter-spacing: 0.1em; display: flex; flex-direction: column; align-items: center; gap: 12px; }
+  .slide span { writing-mode: vertical-rl; transform: rotate(180deg); }
+  .slide i { display: block; width: 1.5px; height: 38px; background: #fff; }
+
+  /* headline, two stacked copies */
+  .titles { position: absolute; inset: 0; z-index: 3; pointer-events: none; }
+  .titles--white { clip-path: inset(0 0 var(--panel-bottom) var(--panel-left) round 0 0 0 10px); }
+  .title { position: absolute; top: 25vh; left: calc(var(--rail) + 130px); font-weight: 800; font-size: clamp(96px, 10.6vw, 176px); line-height: 0.84; letter-spacing: -0.03em; text-transform: uppercase; white-space: nowrap; }
+  .title .the { display: inline-block; vertical-align: top; margin: 0.08em 0 0 0.12em; writing-mode: vertical-rl; font-size: 0.3em; line-height: 1; letter-spacing: 0.04em; font-weight: 700; }
+  .titles--photo .title { color: transparent; background: url("../../../public/landing/assets/img/haris-frames/frame-1.5.jpg") 40% 30% / cover; -webkit-background-clip: text; background-clip: text; filter: grayscale(0.8) contrast(0.95) brightness(1.75); }
+  .titles--photo .the { color: #b9bebc; -webkit-text-fill-color: #b9bebc; }
+  .titles--white .title { color: #fff; }
+  .titles--white .the { color: rgb(255 255 255 / 0.7); }
+
+  .sub { position: absolute; z-index: 4; left: calc(var(--rail) + 134px); top: calc(25vh + clamp(96px, 10.6vw, 176px) * 1.68 + 40px); display: grid; gap: 22px; font-size: 12px; font-weight: 500; letter-spacing: 0.42em; text-transform: uppercase; color: var(--muted); }
+  .cta { display: inline-flex; align-items: center; gap: 14px; margin-top: 18px; color: var(--ink); font-weight: 700; letter-spacing: 0.2em; }
+  .cta i { display: block; width: 36px; height: 1.5px; background: var(--ink); }
+
+  @media (max-width: 767px) {
+    :root { --rail: 0px; --panel-left: 0%; --panel-bottom: 0px; }
+    .hero { height: auto; min-height: 100dvh; display: flex; flex-direction: column; }
+    .rail { position: absolute; inset: 0 0 auto 0; width: auto; height: 64px; flex-direction: row; padding: 0 16px; border: 0; }
+    .rail nav { display: none; }
+    .mark { background: #fff; color: var(--ink); }
+    .burger i { background: #fff; }
+    .top { display: none; }
+    .panel { position: relative; height: 52vh; flex: none; border-radius: 0; }
+    .slide { display: none; }
+    .titles { position: relative; inset: auto; }
+    .titles--white { display: none; }
+    .title { position: relative; top: auto; left: auto; padding: 30px 16px 0; font-size: 13.5vw; }
+    .sub { position: relative; left: auto; top: auto; padding: 26px 16px 40px; font-size: 11px; letter-spacing: 0.28em; gap: 16px; }
+  }
+</style>
+</head>
+<body>
+<section class="hero">
+  <aside class="rail">
+    <span class="mark">MH</span>
+    <nav><a href="#">Home</a><a href="#">About</a><a href="#">Work</a><a href="#">Contact</a></nav>
+    <span class="burger" aria-hidden="true"><i></i><i></i></span>
+  </aside>
+
+  <figure class="panel"><img src="../../../public/landing/assets/img/haris-video-poster.jpg" alt="Muhammad Haris" /></figure>
+
+  <div class="top"><a href="#">Upwork</a><a class="pill" href="#">Start a project</a></div>
+  <div class="slide"><span>01</span><i></i></div>
+
+  <div class="titles titles--photo" aria-hidden="true">
+    <p class="title">Automate<span class="the">the</span><br />busywork</p>
+  </div>
+  <div class="titles titles--white">
+    <h1 class="title">Automate<span class="the">the</span><br />busywork</h1>
+  </div>
+
+  <div class="sub">
+    <p>AI automation with Muhammad Haris</p>
+    <p>n8n, voice agents, RAG and CRM</p>
+    <a class="cta" href="#">See the work <i></i></a>
+  </div>
+</section>
+</body>
+</html>

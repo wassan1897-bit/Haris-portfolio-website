@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Hero A2: Cinema</title>
+<link rel="stylesheet" href="_dark.css" />
+<style>
+  /* Film-poster layout: the face sits top-centre, the message sits underneath it.
+     In the build this is the turnaround video, playing once and settling on this frame. */
+  .hero { position: relative; min-height: 100dvh; display: flex; flex-direction: column; overflow: hidden; text-align: center; }
+  .bg { position: absolute; top: -35px; left: 50%; width: 1100px; height: 619px; transform: translateX(-50%);
+    -webkit-mask-image: radial-gradient(ellipse 52% 60% at 50% 42%, #000 45%, transparent 100%);
+            mask-image: radial-gradient(ellipse 52% 60% at 50% 42%, #000 45%, transparent 100%); }
+  .bg img { width: 100%; height: 100%; object-fit: cover; }
+  .bg::after { content: ""; position: absolute; inset: 0; background: linear-gradient(0deg, var(--bg) 8%, rgb(13 13 14 / 0) 50%); }
+  nav .links { margin-left: auto; margin-right: 32px; }
+  .glow { position: absolute; inset: auto 0 0 0; height: 55%; background: radial-gradient(ellipse 50% 60% at 50% 100%, rgb(255 106 61 / 0.10), transparent 70%); }
+
+  .bottom { position: relative; z-index: 2; margin-top: auto; padding: 0 var(--pad) 40px; display: flex; flex-direction: column; align-items: center; }
+  h1 { font-size: clamp(42px, 4.9vw, 76px); line-height: 1; letter-spacing: -0.045em; font-weight: 600; max-width: 1000px; }
+  .sub { margin-top: 20px; font-size: 18px; line-height: 1.55; color: #c9c6bf; max-width: 560px; }
+  .ctas { margin-top: 30px; display: flex; gap: 12px; justify-content: center; }
+
+  .stats { list-style: none; display: flex; gap: 0; margin-top: 44px; border-top: 1px solid var(--line); width: 100%; justify-content: center; }
+  .stats li { padding: 20px 44px 0; font-size: 14px; color: var(--muted); }
+  .stats li + li { border-left: 1px solid var(--line); }
+  .stats b { color: var(--ink); font-weight: 600; font-size: 16px; margin-right: 6px; }
+
+  @media (max-width: 767px) {
+    .bg { width: 760px; height: 428px; top: 20px; }
+    .bottom { padding-bottom: 28px; }
+    h1 { font-size: 40px; }
+    .sub { font-size: 16px; }
+    .ctas { flex-wrap: wrap; }
+    .stats { flex-direction: column; align-items: center; margin-top: 28px; }
+    .stats li { padding: 10px 0 0; }
+    .stats li + li { border-left: 0; }
+  }
+</style>
+</head>
+<body>
+<section class="hero">
+  <div class="glow"></div>
+  <div class="bg"><img src="../../../public/landing/assets/img/haris-frames/frame-7.0.jpg" alt="Muhammad Haris" /></div>
+
+  <nav>
+    <div class="logo">Haris<span>.</span></div>
+    <div class="links"><a href="#">Work</a><a href="#">How I work</a><a href="#">About</a></div>
+    <a class="btn btn--primary btn--sm" href="#">Start a project</a>
+    <span class="menu">Menu</span>
+  </nav>
+
+  <div class="bottom">
+      <p class="mono" style="margin-bottom:20px">Muhammad Haris, AI automation consultant</p>
+      <h1>I build AI that does your team's <span class="accent">boring work.</span></h1>
+      <p class="sub">n8n, voice agents, RAG and CRM automations for operations-heavy businesses. Shipped to production, not left as demos.</p>
+      <div class="ctas">
+        <a class="btn btn--primary" href="#">Start a project <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
+        <a class="btn btn--ghost" href="#">See the work</a>
+      </div>
+      <ul class="stats">
+      <li><b>Top Rated Plus</b>on Upwork</li>
+      <li><b>100%</b>Job Success</li>
+      <li><b>$30K+</b>earned</li>
+      <li><b>23</b>systems shipped</li>
+    </ul>
+  </div>
+</section>
+</body>
+</html>

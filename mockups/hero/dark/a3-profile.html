@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Hero A3: Profile</title>
+<link rel="stylesheet" href="_dark.css" />
+<style>
+  /* Side profile on the right, looking back at the headline */
+  .hero { position: relative; min-height: 100dvh; display: grid; grid-template-rows: auto 1fr auto; overflow: hidden; }
+  .bg { position: absolute; inset: 0; }
+  .bg img { width: 100%; height: 100%; object-fit: cover; object-position: 30% 40%; transform: scale(1.12); transform-origin: 70% 40%; }
+  .bg::after { content: ""; position: absolute; inset: 0;
+    background: linear-gradient(90deg, rgb(13 13 14 / 0.92) 0%, rgb(13 13 14 / 0.55) 34%, rgb(13 13 14 / 0) 55%),
+                linear-gradient(0deg, rgb(13 13 14 / 0.9) 0%, rgb(13 13 14 / 0) 26%),
+                linear-gradient(180deg, rgb(13 13 14 / 0.75) 0%, rgb(13 13 14 / 0) 14%); }
+
+  .copy { position: relative; z-index: 2; align-self: center; padding: 0 var(--pad); max-width: 760px; }
+  h1 { font-size: clamp(48px, 6.4vw, 104px); line-height: 0.95; letter-spacing: -0.05em; font-weight: 600; }
+  .sub { margin-top: 28px; font-size: 19px; line-height: 1.55; color: #c9c6bf; max-width: 470px; }
+  .ctas { margin-top: 38px; display: flex; gap: 12px; }
+
+  .foot { position: relative; z-index: 2; display: flex; justify-content: space-between; align-items: center; padding: 0 var(--pad) 34px; }
+  .tools { display: flex; align-items: center; gap: 34px; }
+  .tools img { height: 22px; width: auto; filter: grayscale(1) brightness(0) invert(0.75); }
+  .upwork { display: flex; align-items: center; gap: 12px; font-size: 14px; color: var(--muted); }
+  .upwork b { color: var(--ink); font-weight: 500; }
+
+  @media (max-width: 767px) {
+    .hero { display: flex; flex-direction: column; }
+    .bg { position: relative; height: 54vh; order: -1; }
+    .bg img { object-position: 62% 30%; transform: none; }
+    .bg::after { background: linear-gradient(0deg, var(--bg) 0%, rgb(13 13 14 / 0) 50%); }
+    nav { position: absolute; top: 0; left: 0; right: 0; }
+    .copy { margin-top: -40px; }
+    h1 { font-size: 52px; }
+    .sub { font-size: 16px; }
+    .foot { flex-direction: column; align-items: flex-start; gap: 18px; padding-top: 36px; }
+    .tools { gap: 22px; flex-wrap: wrap; }
+  }
+</style>
+</head>
+<body>
+<section class="hero">
+  <div class="bg"><img src="../../../public/landing/assets/img/haris-frames/frame-0.2.jpg" alt="Muhammad Haris" /></div>
+
+  <nav>
+    <div class="logo">Haris<span>.</span></div>
+    <div class="links"><a href="#">Work</a><a href="#">How I work</a><a href="#">About</a></div>
+    <a class="btn btn--primary btn--sm" href="#">Start a project</a>
+    <span class="menu">Menu</span>
+  </nav>
+
+  <div class="copy">
+    <h1>Diagnose first.<br /><span class="accent">Then build.</span></h1>
+    <p class="sub">If the honest answer is "don't automate this", you'll hear it before either of us spends money finding out.</p>
+    <div class="ctas">
+      <a class="btn btn--primary" href="#">Start a project <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
+      <a class="btn btn--ghost" href="#">See the work</a>
+    </div>
+  </div>
+
+  <div class="foot">
+    <p class="upwork"><b>Top Rated Plus</b> on Upwork, 100% Job Success</p>
+    <div class="tools">
+      <img src="../../../public/landing/assets/img/tools/n8n.png" alt="n8n" />
+      <img src="../../../public/landing/assets/img/tools/zapier.png" alt="Zapier" />
+      <img src="../../../public/landing/assets/img/tools/retell.png" alt="Retell AI" />
+      <img src="../../../public/landing/assets/img/tools/claude.png" alt="Claude" />
+    </div>
+  </div>
+</section>
+</body>
+</html>

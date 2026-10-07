@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8" /><title>Figure Test</title>
+<link rel="stylesheet" href="./base.css" />
+<script type="importmap">{ "imports": { "three": "/landing/vendor/three/build/three.module.min.js", "three/addons/": "/landing/vendor/three/addons/" } }</script>
+</head><body style="background:#222">
+<canvas id="scene" width="1440" height="900"></canvas>
+<script type="module">
+  import { THREE, stage, backdrop, finish } from './kit.js'
+  import { makeHaris, POSES } from './haris.js'
+  const { scene, camera, render, renderer } = stage({ fov: 30, env: 0.5, shadows: true })
+  backdrop(scene, '#4a4f57', '#1b1d21')
+  camera.position.set(0, 1.2, 6.5)
+  camera.lookAt(0, 0.9, 0)
+  const key = new THREE.DirectionalLight('#fff', 2.5); key.position.set(-3, 5, 4); key.castShadow = true; scene.add(key)
+  scene.add(new THREE.HemisphereLight('#cfd8e6', '#3a3330', 0.6))
+  const floor = new THREE.Mesh(new THREE.PlaneGeometry(20, 20), new THREE.MeshStandardMaterial({ color: '#555' })); floor.rotation.x = -Math.PI / 2; floor.receiveShadow = true; scene.add(floor)
+  const poses = [['stand', 0.5, {}], ['sit', 0, { lSh: [-0.6, 0, 0.1], lEl: [-1.1, 0, 0], rSh: [-0.6, 0, -0.1], rEl: [-1.1, 0, 0], spine: [0.15, 0, 0], neck: [0.2, 0, 0] }], ['kneel', -0.6, { rSh: [-2.4, 0, -0.2], rEl: [-0.5, 0, 0], lSh: [-0.8, 0, 0.2], lEl: [-0.9, 0, 0] }]]
+  poses.forEach(([name, ry, extra], i) => {
+    const h = makeHaris()
+    h.pose({ ...POSES[name], ...extra })
+    h.root.position.x = (i - 1) * 1.6
+    h.root.rotation.y = ry
+    scene.add(h.root)
+  })
+  await finish(render)
+</script></body></html>

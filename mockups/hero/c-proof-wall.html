@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Hero C: Proof Wall</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg: #f3f4f1;
+    --ink: #111311;
+    --muted: #5c615c;
+    --line: rgb(17 19 17 / 0.1);
+    --accent: #2945d6;     /* cobalt */
+    --shadow: 0 28px 50px -24px rgb(30 40 30 / 0.35);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { background: var(--bg); color: var(--ink); font-family: "Schibsted Grotesk", system-ui, sans-serif; }
+  .hero { min-height: 100dvh; display: grid; grid-template-rows: auto 1fr; grid-template-columns: minmax(0, 1fr); overflow: hidden; }
+
+  nav { height: 72px; display: flex; align-items: center; justify-content: space-between; padding: 0 60px; border-bottom: 1px solid var(--line); }
+  .logo { font-weight: 800; font-size: 20px; letter-spacing: -0.03em; }
+  .links { display: flex; gap: 36px; font-size: 14.5px; font-weight: 500; color: var(--muted); }
+  .links b { color: var(--ink); font-weight: 600; }
+  .btn { display: inline-flex; align-items: center; gap: 10px; height: 52px; padding: 0 24px; border-radius: 10px; font-size: 15px; font-weight: 600; text-decoration: none; white-space: nowrap; }
+  .btn--accent { background: var(--accent); color: #fff; }
+  .btn--soft { background: #fff; color: var(--ink); box-shadow: inset 0 0 0 1px var(--line); }
+  .btn--sm { height: 40px; padding: 0 16px; font-size: 14px; }
+  .menu { display: none; font-weight: 600; }
+
+  .main { display: grid; grid-template-columns: 610px minmax(0, 1fr); gap: 40px; align-items: center; padding-left: 60px; }
+  .who { display: flex; align-items: center; gap: 14px; margin-bottom: 30px; }
+  .who img { width: 52px; height: 52px; border-radius: 50%; object-fit: cover; object-position: 50% 15%; box-shadow: 0 0 0 3px #fff; }
+  .who p { font-size: 15px; font-weight: 600; line-height: 1.35; }
+  .who small { display: flex; align-items: center; gap: 6px; font-size: 13.5px; font-weight: 500; color: var(--muted); }
+  .who small img { width: 16px; height: 16px; box-shadow: none; border-radius: 0; }
+  h1 { font-size: clamp(52px, 5vw, 82px); line-height: 0.96; letter-spacing: -0.05em; font-weight: 800; }
+  h1 span { color: var(--accent); }
+  .sub { margin-top: 26px; font-size: 19px; line-height: 1.55; color: var(--muted); max-width: 500px; }
+  .ctas { margin-top: 38px; display: flex; gap: 12px; }
+
+  /* the work itself is the hero visual: real case-study posters, bleeding off the right edge */
+  .wall { display: flex; gap: 22px; align-items: flex-start; padding: 40px 0; }
+  .card { flex: 0 0 320px; }
+  .card:nth-child(2) { margin-top: 70px; }
+  .card:nth-child(3) { margin-top: 20px; }
+  .card:nth-child(4) { margin-top: 90px; }
+  .card img { display: block; width: 100%; aspect-ratio: 3 / 4; object-fit: cover; border-radius: 14px; box-shadow: var(--shadow); }
+  .card h3 { margin-top: 16px; font-size: 16px; font-weight: 700; letter-spacing: -0.01em; }
+  .card p { margin-top: 4px; font-size: 14px; color: var(--muted); }
+  .card p b { color: var(--accent); font-weight: 700; }
+
+  @media (max-width: 767px) {
+    nav { padding: 0 16px; height: 64px; }
+    .links, nav .btn { display: none; }
+    .menu { display: block; }
+    .main { grid-template-columns: minmax(0, 1fr); padding: 32px 0 0; gap: 8px; }
+    .copy { padding: 0 16px; }
+    .who { margin-bottom: 22px; }
+    h1 { font-size: 50px; }
+    .sub { font-size: 17px; margin-top: 18px; }
+    .ctas { margin-top: 26px; }
+    .wall { overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding-inline: 16px; padding: 28px 16px; gap: 14px; }
+    .card { flex-basis: 220px; scroll-snap-align: start; margin-top: 0 !important; }
+  }
+</style>
+</head>
+<body>
+<section class="hero">
+  <nav>
+    <div class="logo">haris</div>
+    <div class="links"><b>Work</b><span>How I work</span><span>About</span></div>
+    <a class="btn btn--accent btn--sm" href="#">Start a project</a>
+    <span class="menu">Menu</span>
+  </nav>
+
+  <div class="main">
+    <div class="copy">
+      <div class="who">
+        <img src="../../public/files-intro/haris-portrait.png" alt="Muhammad Haris" />
+        <div>
+          <p>Muhammad Haris</p>
+          <small><img src="../../public/landing/assets/img/tools/upwork.png" alt="" />Top Rated Plus, 100% Job Success</small>
+        </div>
+      </div>
+      <h1>Production AI.<br /><span>Not demos.</span></h1>
+      <p class="sub">Email triage, voice agents, compliance tracking and lead pipelines. 12 case studies, each one scoped and shipped by me.</p>
+      <div class="ctas">
+        <a class="btn btn--accent" href="#">Start a project</a>
+        <a class="btn btn--soft" href="#">Browse the work</a>
+      </div>
+    </div>
+
+    <div class="wall">
+      <article class="card">
+        <img src="../../public/landing/selected-works/img/email-triage-workflow.jpg" alt="" />
+        <h3>AI email triage</h3>
+        <p><b>222-node</b> n8n workflow, zero touch until review</p>
+      </article>
+      <article class="card">
+        <img src="../../public/landing/selected-works/img/ferpa-compliance.png" alt="" />
+        <h3>FERPA compliance tracking</h3>
+        <p>Credential expiry for <b>7 staff roles</b> in GoHighLevel</p>
+      </article>
+      <article class="card">
+        <img src="../../public/landing/selected-works/img/resume-screener.png" alt="" />
+        <h3>AI resume screener</h3>
+        <p>Saves <b>20-30 hrs a week</b> of CV reading</p>
+      </article>
+      <article class="card">
+        <img src="../../public/landing/selected-works/img/insurance-voice-agent-poster.jpg" alt="" />
+        <h3>Insurance voice agent</h3>
+        <p>Calls leads, books them into GoHighLevel</p>
+      </article>
+    </div>
+  </div>
+</section>
+</body>
+</html>

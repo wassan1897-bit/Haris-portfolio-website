@@ -1,0 +1,319 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>The Line</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Manrope:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="./base.css" />
+<link rel="stylesheet" href="./scene.css" />
+<script type="importmap">{ "imports": { "three": "/landing/vendor/three/build/three.module.min.js", "three/addons/": "/landing/vendor/three/addons/" } }</script>
+<style>
+  :root { --ink: #f2f0ea; --muted: #9a978f; --accent: #ffc21a; --on-accent: #15130e; --line: rgb(242 240 234 / 0.16); }
+  body { background: #0a0a0b; }
+  .intro small, .detail .k { font-family: "IBM Plex Mono"; font-weight: 600; }
+  .shade { background: linear-gradient(90deg, rgb(10 10 11 / 0), rgb(10 10 11 / 0.9) 30%, rgb(10 10 11 / 0.95)); }
+  .detail::before { content: ""; display: block; width: 132px; height: 10px; margin-bottom: 22px; background: repeating-linear-gradient(-45deg, var(--accent) 0 8px, #15130e 8px 16px); }
+</style>
+</head>
+<body>
+<canvas id="scene" width="1440" height="900"></canvas>
+<header class="bar"><b>Haris</b><nav><span>Email</span><span>LinkedIn</span></nav><span class="menu"><i><s></s><s></s></i>Menu</span></header>
+<script type="module">
+  import { THREE, RoundedBoxGeometry, stage, tex, cover, loadImg, backdrop, fonts, toScreen, finish, ui, chipHTML, detailHTML, PROJECTS, REF, LOGO, VIEW, PICK, pad, cursor } from './kit.js'
+  import { makeHaris, POSES } from './haris.js'
+
+  await fonts(['800 64px Montserrat', '600 28px Manrope', '600 24px "IBM Plex Mono"'])
+  const { scene, camera, render } = stage({ fov: 44, exposure: 1.0, env: 0.16, bloom: [0.5, 0.4, 0.92], shadows: true })
+  backdrop(scene, '#25272b', '#060607', 0.5, 0.3)
+  scene.fog = new THREE.Fog('#0c0d0f', 11, 30)
+  camera.position.set(0, 1.75, 8.2)
+  camera.lookAt(0, 2.05, 0)
+  const DETAIL = VIEW === 'detail'
+
+  const std = (color, roughness = 0.6, metalness = 0, extra = {}) => new THREE.MeshStandardMaterial({ color, roughness, metalness, ...extra })
+  const put = (geo, mat, x, y, z, { shadow = true, parent = scene } = {}) => {
+    const m = new THREE.Mesh(geo, mat)
+    m.position.set(x, y, z)
+    m.castShadow = shadow
+    m.receiveShadow = true
+    parent.add(m)
+    return m
+  }
+
+  // ---------- floor: sealed concrete with painted safety lanes ----------
+  const concrete = tex(512, 512, (c, w, h) => {
+    c.fillStyle = '#4a4b4d'
+    c.fillRect(0, 0, w, h)
+    for (let i = 0; i < 9000; i++) {
+      const v = 60 + Math.random() * 30
+      c.fillStyle = `rgba(${v},${v},${v + 2},${Math.random() * 0.35})`
+      c.fillRect(Math.random() * w, Math.random() * h, 2, 2)
+    }
+    c.strokeStyle = 'rgba(20,20,20,0.35)'
+    c.lineWidth = 2
+    c.strokeRect(0, 0, w, h)
+  })
+  concrete.wrapS = concrete.wrapT = THREE.RepeatWrapping
+  concrete.repeat.set(10, 10)
+  const floor = put(new THREE.PlaneGeometry(60, 60), std('#8a8b8d', 0.62, 0, { map: concrete }), 0, 0, 0, { shadow: false })
+  floor.rotation.x = -Math.PI / 2
+  for (const z of [1.45, -0.85]) {
+    const s = put(new THREE.PlaneGeometry(22, 0.1), std('#d9a514', 0.55), 0, 0.003, z, { shadow: false })
+    s.rotation.x = -Math.PI / 2
+  }
+
+  // ---------- conveyor ----------
+  const BELT_Y = 0.9
+  const BELT_Z = 0.62
+  const ribs = tex(256, 64, (c, w, h) => {
+    c.fillStyle = '#1b1c1e'
+    c.fillRect(0, 0, w, h)
+    c.fillStyle = '#2a2b2e'
+    for (let x = 0; x < w; x += 16) c.fillRect(x, 0, 5, h)
+  })
+  ribs.wrapS = THREE.RepeatWrapping
+  ribs.repeat.set(26, 1)
+  put(new THREE.BoxGeometry(14, 0.05, 0.62), std('#ffffff', 0.85, 0, { map: ribs }), 0, BELT_Y, BELT_Z)
+  const frameMat = std('#334150', 0.42, 0.55)
+  for (const s of [-1, 1]) put(new THREE.BoxGeometry(14, 0.12, 0.05), frameMat, 0, BELT_Y - 0.01, BELT_Z + s * 0.335)
+  const legGeo = new THREE.BoxGeometry(0.07, BELT_Y - 0.06, 0.07)
+  const legs = new THREE.InstancedMesh(legGeo, frameMat, 18)
+  let li = 0
+  for (let x = -6.3; x <= 6.4; x += 1.6) for (const s of [-1, 1]) {
+    legs.setMatrixAt(li++, new THREE.Matrix4().makeTranslation(x, (BELT_Y - 0.06) / 2, BELT_Z + s * 0.31))
+  }
+  legs.count = li
+  legs.castShadow = true
+  scene.add(legs)
+  // parts arriving on the left, finished robots leaving on the right
+  const cardboard = std('#b08a5a', 0.85)
+  for (const x of [-4.4, -3.1, -1.9]) put(new RoundedBoxGeometry(0.34, 0.24, 0.34, 2, 0.02), cardboard, x, BELT_Y + 0.145, BELT_Z + (x % 2) * 0.05).rotation.y = x * 0.4
+
+  const shell = std('#e6e2da', 0.35, 0.05)
+  const darkPart = std('#1d1f22', 0.4, 0.5)
+  const eye = new THREE.MeshBasicMaterial({ color: new THREE.Color(0.6, 2.4, 2.8), toneMapped: false })
+  function robot(x, z, { done = true, ry = 0 } = {}) {
+    const g = new THREE.Group()
+    g.position.set(x, BELT_Y + 0.025, z)
+    g.rotation.y = ry
+    scene.add(g)
+    put(new RoundedBoxGeometry(0.26, 0.3, 0.2, 3, 0.05), shell, 0, 0.17, 0, { parent: g })
+    put(new THREE.CylinderGeometry(0.03, 0.03, 0.05, 10), darkPart, 0, 0.345, 0, { parent: g })
+    const head = new THREE.Group()
+    head.position.set(0, 0.45, 0)
+    head.rotation.z = done ? 0 : 0.18
+    g.add(head)
+    put(new RoundedBoxGeometry(0.22, 0.16, 0.18, 3, 0.05), shell, 0, 0, 0, { parent: head })
+    put(new THREE.BoxGeometry(0.17, 0.08, 0.01), darkPart, 0, 0, 0.09, { parent: head })
+    for (const s of [-1, 1]) put(new THREE.CircleGeometry(0.018, 14), eye, s * 0.045, 0, 0.096, { parent: head, shadow: false })
+    put(new THREE.CylinderGeometry(0.006, 0.006, 0.1, 6), darkPart, 0.05, 0.12, 0, { parent: head })
+    put(new THREE.SphereGeometry(0.018, 10, 8), std('#ff5a36', 0.4, 0, { emissive: '#ff3b1a', emissiveIntensity: 1.5 }), 0.05, 0.18, 0, { parent: head })
+    for (const s of done ? [-1, 1] : [1]) put(new THREE.CapsuleGeometry(0.035, 0.16, 3, 10), shell, s * 0.17, 0.15, 0, { parent: g }).rotation.z = s * 0.15
+    if (!done) {
+      // open chest: the board he is working on
+      put(new THREE.PlaneGeometry(0.15, 0.15), new THREE.MeshBasicMaterial({ color: new THREE.Color(0.25, 1.4, 0.6), toneMapped: false }), 0, 0.18, 0.102, { parent: g, shadow: false })
+      // the loose arm on the belt
+      const arm = put(new THREE.CapsuleGeometry(0.035, 0.16, 3, 10), shell, -0.3, 0.035, 0.12, { parent: g })
+      arm.rotation.z = Math.PI / 2
+    }
+    return g
+  }
+  robot(0.08, BELT_Z - 0.04, { done: false, ry: 0.15 })
+  robot(2.3, BELT_Z, { ry: -0.3 })
+  robot(3.5, BELT_Z + 0.04, { ry: -0.2 })
+
+  // ---------- Haris at the line ----------
+  const haris = makeHaris({ jacket: '#2d3a48', knit: '#cbbfae', cap: '#1a1c20' })
+  haris.root.position.set(0.0, 0, -0.08)
+  haris.pose({ ...POSES.stand, spine: [0.32, 0, 0], neck: [0.32, 0, 0], head: [0.12, 0.1, 0],
+    rSh: [-0.95, 0.1, 0.05], rEl: [-0.85, 0, 0.1], rHand: [0, 0, 0.3],
+    lSh: [-0.95, 0, -0.05], lEl: [-0.75, 0, -0.1], lHip: [0, 0, 0.04], rHip: [0, 0, -0.04] })
+  haris.root.traverse((o) => (o.castShadow = true))
+  scene.add(haris.root)
+  // screwdriver in his right hand
+  const sd = new THREE.Group()
+  put(new THREE.CylinderGeometry(0.016, 0.02, 0.1, 10), std('#f2b705', 0.4), 0, 0, 0, { parent: sd })
+  put(new THREE.CylinderGeometry(0.004, 0.004, 0.12, 6), std('#c9ccd0', 0.25, 1), 0, -0.1, 0, { parent: sd })
+  sd.position.set(0, -0.06, 0.03)
+  sd.rotation.x = 0.9
+  haris.J.rHand.add(sd)
+
+  // ---------- lights ----------
+  scene.add(new THREE.HemisphereLight('#8a96a8', '#1a1714', 0.55))
+  const work = new THREE.SpotLight('#ffeed6', 70, 14, 0.62, 0.55, 1.4)
+  work.position.set(0.4, 4.4, 1.9)
+  work.target.position.set(0, 0.9, 0.3)
+  work.castShadow = true
+  work.shadow.mapSize.set(1024, 1024)
+  work.shadow.bias = -0.0004
+  scene.add(work, work.target)
+  const fill = new THREE.DirectionalLight('#b9c9e0', 0.55)
+  fill.position.set(-3, 5, 8)
+  scene.add(fill)
+
+  // the work lamp over the conveyor
+  const lamp = new THREE.Group()
+  lamp.position.set(0.35, 3.35, 1.05)
+  scene.add(lamp)
+  put(new THREE.CylinderGeometry(0.05, 0.32, 0.26, 24, 1, true), std('#2e3a46', 0.4, 0.6, { side: THREE.DoubleSide }), 0, 0, 0, { parent: lamp, shadow: false })
+  put(new THREE.SphereGeometry(0.07, 14, 10), new THREE.MeshBasicMaterial({ color: new THREE.Color(3, 2.7, 2.2), toneMapped: false }), 0, -0.08, 0, { parent: lamp, shadow: false })
+  put(new THREE.CylinderGeometry(0.006, 0.006, 4, 6), darkPart, 0, 2.1, 0, { parent: lamp, shadow: false })
+
+  // the bay behind: steel columns and far, hazy lights
+  const colMat = std('#22272d', 0.5, 0.6)
+  for (const x of [-9, -4.5, 0, 4.5, 9]) {
+    put(new THREE.BoxGeometry(0.34, 12, 0.34), colMat, x, 6, -7.5, { shadow: false })
+    put(new THREE.SphereGeometry(0.09, 10, 8), new THREE.MeshBasicMaterial({ color: new THREE.Color(2.2, 1.9, 1.5), toneMapped: false }), x + 2.2, 5.6, -7.2, { shadow: false })
+  }
+  put(new THREE.BoxGeometry(30, 0.4, 0.3), colMat, 0, 7.2, -7.5, { shadow: false })
+
+  // ---------- the overhead line ----------
+  const RAIL_Y = 3.62
+  const curve = new THREE.CatmullRomCurve3([[-4.4, 2.4], [-3.7, 0.3], [-2.3, -1.6], [0, -2.15], [2.3, -1.6], [3.7, 0.3], [4.4, 2.4]].map(([x, z]) => new THREE.Vector3(x, RAIL_Y, z)))
+  const railMat = std('#3a3f46', 0.35, 0.8)
+  put(new THREE.TubeGeometry(curve, 160, 0.04, 8), railMat, 0, 0, 0, { shadow: false })
+  put(new THREE.TubeGeometry(curve, 160, 0.03, 8), railMat, 0, 0.13, 0, { shadow: false })
+  for (let u = 0.04; u < 1; u += 0.12) {
+    const p = curve.getPointAt(u)
+    put(new THREE.CylinderGeometry(0.012, 0.012, 5, 6), railMat, p.x, RAIL_Y + 2.6, p.z, { shadow: false })
+  }
+
+  // steel tag: punched hole, photo, stamped name, tool badge
+  const CW = 0.6
+  const CH = 0.8
+  async function tagTex(p, i) {
+    const [img, logo] = await Promise.all([loadImg(REF + p.img), loadImg(LOGO + p.logo)])
+    return tex(600, 800, (c, w, h) => {
+      const g = c.createLinearGradient(0, 0, w, h)
+      g.addColorStop(0, '#d3d6da')
+      g.addColorStop(1, '#a3a7ad')
+      c.fillStyle = g
+      c.fillRect(0, 0, w, h)
+      for (let y = 0; y < h; y += 2) {
+        c.fillStyle = `rgba(255,255,255,${Math.random() * 0.08})`
+        c.fillRect(0, y, w, 1)
+      }
+      c.strokeStyle = 'rgba(40,42,46,0.35)'
+      c.lineWidth = 3
+      c.strokeRect(14, 14, w - 28, h - 28)
+      c.fillStyle = '#1b1c1e'
+      c.beginPath()
+      c.arc(w / 2, 46, 17, 0, Math.PI * 2)
+      c.fill()
+      for (const [x, y] of [[34, 34], [w - 34, 34], [34, h - 34], [w - 34, h - 34]]) {
+        c.fillStyle = '#7d8187'
+        c.beginPath()
+        c.arc(x, y, 7, 0, Math.PI * 2)
+        c.fill()
+        c.fillStyle = 'rgba(255,255,255,0.5)'
+        c.beginPath()
+        c.arc(x - 2, y - 2, 3, 0, Math.PI * 2)
+        c.fill()
+      }
+      c.fillStyle = '#2a2c30'
+      c.font = '600 24px "IBM Plex Mono"'
+      c.fillText('NO. ' + pad(i), 46, 56)
+      c.save()
+      c.beginPath()
+      c.roundRect(40, 92, w - 80, 440, 10)
+      c.clip()
+      cover(c, img, 40, 92, w - 80, 440)
+      c.restore()
+      c.fillStyle = '#fff'
+      c.beginPath()
+      c.arc(w - 82, 52, 30, 0, Math.PI * 2)
+      c.fill()
+      if (logo) c.drawImage(logo, w - 102, 32, 40, 40)
+      c.fillStyle = '#17181a'
+      c.font = `800 ${p.card.length > 8 ? 58 : 66}px Montserrat`
+      c.fillText(p.card.toUpperCase(), 42, 610)
+      c.fillStyle = '#3d4045'
+      c.font = '600 28px Manrope'
+      c.fillText(p.sub, 44, 656)
+      c.save()
+      c.beginPath()
+      c.rect(42, 700, w - 84, 30)
+      c.clip()
+      for (let x = 20; x < w + 40; x += 30) {
+        c.fillStyle = '#e8b10f'
+        c.beginPath()
+        c.moveTo(x, 700)
+        c.lineTo(x + 15, 700)
+        c.lineTo(x - 15, 730)
+        c.lineTo(x - 30, 730)
+        c.fill()
+      }
+      c.restore()
+    })
+  }
+  const maps = await Promise.all(PROJECTS.map(tagTex))
+  const plateGeo = new RoundedBoxGeometry(CW + 0.02, CH + 0.02, 0.018, 2, 0.012)
+  const faceGeo = new THREE.PlaneGeometry(CW, CH)
+  const plateMat = std('#a7abb1', 0.4, 0.8)
+  const hookMat = std('#2c3036', 0.35, 0.8)
+  const cards = PROJECTS.map((p, i) => {
+    const u = 0.05 + i * 0.082
+    const at = curve.getPointAt(u)
+    const g = new THREE.Group()
+    g.position.copy(at)
+    scene.add(g)
+    put(new THREE.BoxGeometry(0.16, 0.08, 0.1), hookMat, 0, -0.02, 0, { parent: g, shadow: false }) // trolley
+    put(new THREE.CylinderGeometry(0.008, 0.008, 0.3, 6), hookMat, 0, -0.2, 0, { parent: g, shadow: false })
+    const tag = new THREE.Group()
+    tag.position.set(0, -0.35 - CH / 2, 0)
+    g.add(tag)
+    put(plateGeo, plateMat, 0, 0, 0, { parent: tag })
+    const m = new THREE.MeshStandardMaterial({ map: maps[i], roughness: 0.42, metalness: 0.35, emissive: '#ffffff', emissiveMap: maps[i], emissiveIntensity: 0.16 })
+    put(faceGeo, m, 0, 0, 0.0101, { parent: tag, shadow: false })
+    const back = put(faceGeo, m, 0, 0, -0.0101, { parent: tag, shadow: false })
+    back.rotation.y = Math.PI
+    // every tag turns to the viewer as it passes
+    g.rotation.y = Math.atan2(camera.position.x - at.x, camera.position.z - at.z)
+    tag.rotation.z = Math.sin(i * 2.3) * 0.03
+    return { g, tag, m, at }
+  })
+
+  const p = PROJECTS[PICK]
+  const sel = cards[PICK]
+  if (!DETAIL) {
+    // the tag under the inspection light: bigger, brighter, swinging toward you
+    sel.tag.scale.setScalar(1.12)
+    sel.tag.rotation.x = -0.12
+    sel.m.emissiveIntensity = 0.42
+    const insp = new THREE.SpotLight('#fff3dd', 40, 6, 0.4, 0.5, 1.2)
+    insp.position.copy(sel.at).add(new THREE.Vector3(0.6, 0.4, 2))
+    insp.target = sel.tag
+    scene.add(insp)
+    cards.forEach((c, i) => i !== PICK && (c.m.emissiveIntensity = 0.1))
+    scene.updateMatrixWorld(true)
+    const a = toScreen(sel.tag.localToWorld(new THREE.Vector3(0, -CH / 2, 0)), camera)
+    ui('intro', `<small>Production line / 12 systems</small><h2>Built on the line</h2><p>Every system Haris ships comes off this line. Move the line to bring a tag under the light, click it to read the work order.</p>`)
+    ui('chip', chipHTML(p, PICK), { left: a.x - 90 + 'px', top: a.y + 16 + 'px' })
+    ui('hint', `<kbd>&larr;</kbd><kbd>&rarr;</kbd> move the line &nbsp;&middot;&nbsp; click a tag to open it`)
+    ui('ctrl', `<span><b>${pad(PICK)}</b> / 12</span><i>&larr;</i><i>&rarr;</i>`)
+    const t = toScreen(sel.tag.localToWorld(new THREE.Vector3(0.05, -0.05, 0)), camera)
+    cursor(t.x, t.y)
+  } else {
+    // unhooked and lowered to you on its cable; he looks up from the robot
+    scene.remove(sel.g)
+    const g = new THREE.Group()
+    g.position.set(-1.05, 1.82, 5.4)
+    g.rotation.set(0.02, 0.32, -0.02)
+    g.scale.setScalar(1.6)
+    scene.add(g)
+    g.add(sel.tag)
+    sel.tag.position.set(0, 0, 0)
+    sel.tag.rotation.set(0, 0, 0)
+    sel.tag.scale.setScalar(1)
+    sel.m.emissiveIntensity = 0.3
+    put(new THREE.CylinderGeometry(0.006, 0.006, 6, 6), hookMat, 0, CH / 2 + 3, 0, { parent: g, shadow: false })
+    cards.forEach((c, i) => i !== PICK && (c.m.emissiveIntensity = 0.04))
+    haris.pose({ neck: [0.0, 0.35, 0], head: [-0.25, 0.25, 0] })
+    ui('shade', '')
+    ui('detail', detailHTML(p, PICK, { k: 'Work order', next: 'Next on the line', back: 'Back to the line' }))
+    ui('close', '&times;')
+  }
+  await finish(render)
+</script>
+</body>
+</html>

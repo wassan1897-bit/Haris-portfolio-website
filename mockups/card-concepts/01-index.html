@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Editorial Index</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="./base.css" />
+<style>
+  :root { --paper: #efe9df; --ink: #1a1d1c; --muted: #8a857c; --line: rgb(26 29 28 / 0.14); --accent: #c2410c; }
+  body { background: var(--paper); color: var(--ink); }
+  /* ---------- browse: one big typographic list ---------- */
+  .head { position: absolute; left: 48px; right: 48px; top: 104px; display: flex; justify-content: space-between; align-items: end; }
+  .head h2 { font: 800 15px/1 "Montserrat"; letter-spacing: 0.14em; text-transform: uppercase; }
+  .head p { font-size: 14px; color: var(--muted); }
+  .cols { position: absolute; left: 48px; right: 48px; top: 146px; display: grid; grid-template-columns: 70px 1fr 220px 230px; font: 700 11px/1 "Manrope"; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); padding-bottom: 12px; border-bottom: 1px solid var(--ink); }
+  .list { position: absolute; left: 48px; right: 48px; top: 172px; list-style: none; }
+  .list li { display: grid; grid-template-columns: 70px 1fr 220px 230px; align-items: center; height: 56px; border-bottom: 1px solid var(--line); transition: none; }
+  .list .n { font: 600 13px/1 "Manrope"; color: var(--muted); }
+  .list .t { font: 800 40px/1 "Montserrat"; letter-spacing: -0.035em; text-transform: uppercase; }
+  .list .s { font-size: 14px; font-weight: 600; }
+  .list .f { font-size: 14px; color: var(--muted); }
+  .list .f b { color: var(--ink); font-weight: 800; }
+  /* hovered row: the rest of the list fades back */
+  .list.has-hover li { opacity: 0.28; }
+  .list.has-hover li.on { opacity: 1; }
+  .list li.on .t { transform: translateX(28px); }
+  .list li.on .n { color: var(--accent); }
+  .list li.on .t::before { content: ""; position: absolute; margin: 18px 0 0 -30px; width: 18px; height: 3px; background: var(--accent); }
+  .peek { position: absolute; width: 290px; height: 370px; z-index: 10; transform: rotate(-3deg); box-shadow: 0 30px 60px -20px rgb(40 30 15 / 0.45); background: #fff; padding: 10px 10px 46px; }
+  .peek img { width: 100%; height: 100%; object-fit: cover; }
+  .peek span { position: absolute; left: 14px; bottom: 15px; font: 700 12px/1 "Manrope"; letter-spacing: 0.08em; text-transform: uppercase; }
+  .peek i { position: absolute; right: 12px; bottom: 9px; width: 28px; height: 28px; border-radius: 50%; background: #fff; border: 1px solid var(--line); display: grid; place-items: center; }
+  .peek i img { width: 16px; height: 16px; object-fit: contain; }
+  .foot { position: absolute; left: 48px; right: 48px; bottom: 30px; display: flex; justify-content: space-between; font-size: 13px; color: var(--muted); }
+  /* ---------- detail: a magazine spread ---------- */
+  .spread { position: absolute; inset: 0; display: grid; grid-template-columns: 640px 1fr; }
+  .spread .photo { position: relative; overflow: hidden; }
+  .spread .photo img { width: 100%; height: 100%; object-fit: cover; }
+  .spread .photo figcaption { position: absolute; left: 48px; bottom: 36px; color: #fff; font: 600 12px/1.4 "Manrope"; letter-spacing: 0.1em; text-transform: uppercase; text-shadow: 0 1px 8px rgb(0 0 0 / 0.4); }
+  .spread .text { padding: 110px 72px 40px 72px; position: relative; }
+  .spread .kicker { display: flex; gap: 16px; align-items: center; font: 700 12px/1 "Manrope"; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); }
+  .spread .kicker s { flex: 0 0 40px; height: 1px; background: var(--accent); }
+  .spread h1 { margin-top: 24px; font: 800 76px/0.9 "Montserrat"; letter-spacing: -0.045em; text-transform: uppercase; }
+  .spread .copy { margin-top: 28px; font-size: 18px; line-height: 1.6; max-width: 560px; }
+  .spread .copy::first-letter { float: left; font: 800 64px/0.8 "Montserrat"; margin: 6px 10px 0 0; color: var(--accent); }
+  .ledger { margin-top: 36px; display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid var(--ink); }
+  .ledger div { padding: 18px 18px 0 0; }
+  .ledger b { display: block; font: 800 40px/1 "Montserrat"; letter-spacing: -0.03em; }
+  .ledger span { display: block; margin-top: 8px; font-size: 13px; color: var(--muted); }
+  .built { margin-top: 32px; font-size: 14px; color: var(--muted); }
+  .built b { color: var(--ink); font-weight: 700; }
+  .pager { position: absolute; left: 72px; right: 72px; bottom: 36px; display: flex; justify-content: space-between; align-items: center; padding-top: 18px; border-top: 1px solid var(--line); font-size: 14px; }
+  .pager b { font: 800 22px/1 "Montserrat"; text-transform: uppercase; letter-spacing: -0.02em; }
+  .pager small { display: block; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 6px; }
+  .close { position: absolute; top: 24px; right: 40px; width: 48px; height: 48px; border-radius: 50%; border: 1px solid var(--line); display: grid; place-items: center; font-size: 20px; }
+  .is-detail .bar { color: #fff; right: auto; width: 640px; }
+  .is-detail .bar nav { display: none; }
+</style>
+</head>
+<body>
+<header class="bar"><b>Haris</b><nav><span>Email</span><span>LinkedIn</span></nav><span class="menu"><i><s></s><s></s></i>Menu</span></header>
+<main id="root"></main>
+<script type="module">
+  import { PROJECTS, REF, LOGO, VIEW, PICK, pad, platform, cursor, ready } from './data.js'
+  const root = document.getElementById('root')
+  const p = PROJECTS[PICK]
+  if (VIEW === 'browse') {
+    root.innerHTML = `
+      <div class="head"><h2>Index of work</h2><p>Twelve systems running in production. Hover a name to see it, click to read it.</p></div>
+      <div class="cols"><span>No.</span><span>Project</span><span>Built with</span><span>Headline</span></div>
+      <ul class="list has-hover">${PROJECTS.map((q, i) => `
+        <li class="${i === PICK ? 'on' : ''}"><span class="n">${pad(i)}</span><span class="t">${q.card}</span><span class="s">${platform(q)}</span>
+        <span class="f">${q.figs[0] ? `<b>${q.figs[0][0]}</b> ${q.figs[0][1]}` : q.tag.replace('Case study, ', '')}</span></li>`).join('')}</ul>
+      <div class="peek" style="left:640px;top:150px"><img src="${REF + p.img}" alt=""><span>${p.sub}</span><i><img src="${LOGO + p.logo}" alt=""></i></div>
+      <div class="foot"><span>Arrow keys move through the list</span><span>${pad(PICK)} / 12</span></div>`
+    cursor(612, 254, true)
+  } else {
+    document.body.classList.add('is-detail')
+    const n = PROJECTS[PICK + 1]
+    root.innerHTML = `
+      <article class="spread">
+        <figure class="photo"><img src="${REF + p.img}" alt=""><figcaption>${pad(PICK)} / 12<br>${p.sub}</figcaption></figure>
+        <div class="text">
+          <span class="kicker"><s></s>${p.tag}</span>
+          <h1>${p.name}</h1>
+          <p class="copy">${p.copy}</p>
+          <div class="ledger">${p.figs.map((f) => `<div><b>${f[0]}</b><span>${f[1]}</span></div>`).join('')}</div>
+          <p class="built">Built with <b>${p.stack.join(', ')}</b></p>
+          <div class="pager"><span>Back to the index</span><span style="text-align:right"><small>Next project</small><b>${n.card} &rarr;</b></span></div>
+          <span class="close">&times;</span>
+        </div>
+      </article>`
+  }
+  ready()
+</script>
+</body>
+</html>

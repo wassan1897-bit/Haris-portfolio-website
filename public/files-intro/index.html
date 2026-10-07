@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8" />
+   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+   <title>Muhammad Haris - AI Consultant</title>
+
+   <!-- Warm landing so wipe → load feels continuous -->
+   <link rel="prefetch" href="/landing/about.html" />
+   <link rel="prefetch" href="/landing/style.css" />
+   <link rel="prefetch" href="/landing/app.js" />
+   <link rel="prefetch" href="/landing/nav-curved/nav-curved.css" />
+   <link rel="prefetch" href="/landing/nav-curved/nav-curved.js" />
+   <link rel="prefetch" href="/landing/assets/img/haris-video-poster.jpg" />
+   <link rel="prefetch" href="/landing/assets/video/haris-portrait.mp4" />
+   <link rel="preload" href="./haris-portrait.png" as="image" />
+   <link rel="prefetch" href="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" />
+   <link rel="prefetch" href="https://unpkg.com/split-type" />
+
+   <!-- Connected Styles -->
+   <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+   <!-- ===== HTML ===== -->
+   <div class="preloader">
+      <div class="intro-title">
+         <h1>Muhammad Haris</h1>
+      </div>
+      <div class="outro-title">
+         <h1>H</h1>
+      </div>
+   </div>
+
+   <div class="split-overlay">
+      <div class="intro-title">
+         <h1>Muhammad Haris</h1>
+      </div>
+      <div class="outro-title">
+         <h1>H</h1>
+      </div>
+   </div>
+
+   <div class="tags-overlay">
+      <div class="tag tag-1">
+         <p>AI Consultant</p>
+      </div>
+      <div class="tag tag-2">
+         <p>Workflow Automation</p>
+      </div>
+      <div class="tag tag-3">
+         <p>Production AI Systems</p>
+      </div>
+   </div>
+
+   <div class="container">
+      <nav>
+         <p id="logo">MH</p>
+         <p>Portfolio</p>
+      </nav>
+
+      <div class="hero-img"></div>
+
+      <div class="card">
+         <div class="card-media">
+            <img
+               class="card-photo"
+               src="./haris-portrait.png"
+               alt="Muhammad Haris"
+               width="768"
+               height="1024"
+               decoding="async"
+            />
+         </div>
+         <p class="card-bio">AI Consultant | Workflow Automation | Production AI systems for operations-heavy businesses</p>
+      </div>
+
+      <footer>
+         <p>AutoAny</p>
+         <p>Operations-Heavy AI</p>
+      </footer>
+   </div>
+
+   <!-- Page Transitions/7 line wipe → landing -->
+   <div class="page-wipe" aria-hidden="true"></div>
+   <!-- ======================= -->
+
+   <!-- Connected libs -->
+   <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.1/dist/gsap.min.js"></script>
+   <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.1/dist/ScrollTrigger.min.js"></script>
+   <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.1/dist/SplitText.min.js"></script>
+
+   <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.1/dist/CustomEase.min.js"></script>
+   <!-- Connected script -->
+   <script src="script.js"></script>
+</body>
+
+</html>

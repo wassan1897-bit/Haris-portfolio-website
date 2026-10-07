@@ -1,0 +1,587 @@
+/* Hero: "Automate the busywork". Giant headline filled with a black-and-white still on white,
+   turning solid white where it crosses the portrait panel. Both photos are fixed images, no video. */
+
+.site-panel--hero {
+	--ph-ink: #1a1d1c;
+	--ph-muted: #8a8f8d;
+	--ph-line: #ececec;
+	--ph-rail: 96px;
+	--ph-panel-left: 62%;
+	--ph-panel-bottom: 52px;
+	--ph-title-size: clamp(96px, 10.6vw, 176px);
+
+	position: relative;
+	height: 100vh;
+	height: 100svh;
+	min-height: 640px;
+	overflow: hidden;
+	background: #ffffff;
+	color: var(--ph-ink);
+	font-family: "Montserrat", "Manrope", Helvetica, Arial, sans-serif;
+}
+
+/* ---- left rail ---- */
+.ph-rail {
+	position: absolute;
+	inset: 0 auto 0 0;
+	z-index: 4;
+	width: var(--ph-rail);
+	border-right: 1px solid var(--ph-line);
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: space-between;
+	padding: 34px 0 40px;
+}
+.ph-mark {
+	width: 36px;
+	height: 36px;
+	border-radius: 50%;
+	background: var(--ph-ink);
+	color: #fff;
+	display: grid;
+	place-items: center;
+	font-size: 12px;
+	font-weight: 800;
+	letter-spacing: -0.02em;
+}
+.ph-rail__links {
+	display: flex;
+	flex-direction: column-reverse;
+	gap: 38px;
+}
+.ph-rail__links a {
+	writing-mode: vertical-rl;
+	transform: rotate(180deg);
+	font-size: 11px;
+	font-weight: 600;
+	letter-spacing: 0.08em;
+	text-transform: uppercase;
+	transition: opacity 0.2s ease;
+}
+.ph-rail__links a:hover {
+	opacity: 0.55;
+}
+.ph-burger {
+	display: grid;
+	gap: 6px;
+	width: 22px;
+	padding: 6px 0;
+}
+.ph-burger i {
+	display: block;
+	height: 1.5px;
+	background: var(--ph-ink);
+}
+.ph-burger i:nth-child(2) {
+	width: 60%;
+}
+
+/* ---- portrait panel ---- */
+/* The panel's box always covers the whole hero; the visible panel is a clip of it. The entrance
+   sweeps the clip open instead of moving the box, so it causes no layout shifts. */
+.ph-panel {
+	position: absolute;
+	inset: 0;
+	margin: 0;
+	overflow: hidden;
+	background: #2a2f2e;
+	clip-path: inset(0 0 var(--ph-panel-bottom) var(--ph-panel-left) round 0 0 0 10px);
+}
+.ph-panel img {
+	position: absolute;
+	top: 0;
+	right: 0;
+	display: block;
+	width: calc(100% - var(--ph-panel-left));
+	max-width: none;
+	height: calc(100% - var(--ph-panel-bottom));
+	object-fit: cover;
+	object-position: 50% 30%;
+}
+/* Desktop: give the photo its full, uncropped size and position it the way object-fit: cover
+   at 50% 30% would. The entrance then frames the face with a transform alone.
+   62cqw and 38cqw match --ph-panel-left; 941 x 1672 is the photo's size. */
+@supports (width: 1cqw) {
+	@media (min-width: 768px) {
+		.ph-panel {
+			container-type: size;
+		}
+		.ph-panel img {
+			right: auto;
+			width: max(38cqw, (100cqh - var(--ph-panel-bottom)) * 941 / 1672);
+			height: auto;
+			aspect-ratio: 941 / 1672;
+			left: calc(62cqw + (38cqw - max(38cqw, (100cqh - var(--ph-panel-bottom)) * 941 / 1672)) / 2);
+			top: calc((100cqh - var(--ph-panel-bottom) - max(38cqw, (100cqh - var(--ph-panel-bottom)) * 941 / 1672) * 1672 / 941) * 0.3);
+		}
+	}
+}
+
+/* Desktop opening shot: the photo is sized to his face and its left edge fades out */
+.ph-panel img.is-fit {
+	-webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 var(--ph-fade, 0%));
+	mask-image: linear-gradient(90deg, transparent 0%, #000 var(--ph-fade, 0%));
+}
+
+/* Darkens the full-bleed opening shot so the white title reads; faded out by hero.js */
+.ph-shade {
+	position: absolute;
+	inset: 0;
+	/* dark under the title, light over his face so it reads clearly */
+	background: linear-gradient(
+		90deg,
+		rgb(10 12 12 / 0.62) 0%,
+		rgb(10 12 12 / 0.5) 42%,
+		rgb(10 12 12 / 0.16) 76%,
+		rgb(10 12 12 / 0.1) 100%
+	);
+	opacity: 0;
+	pointer-events: none;
+}
+
+/* Cinema letterbox, only visible during the entrance */
+.ph-bar {
+	position: absolute;
+	left: 0;
+	right: 0;
+	z-index: 6;
+	height: 11%;
+	background: #0b0b0b;
+	transform: scaleY(0);
+	pointer-events: none;
+}
+.ph-bar--top {
+	top: 0;
+	transform-origin: top;
+}
+.ph-bar--bottom {
+	bottom: 0;
+	transform-origin: bottom;
+}
+
+.ph-top {
+	position: absolute;
+	top: 30px;
+	right: 56px;
+	z-index: 5;
+	display: flex;
+	align-items: center;
+	gap: 36px;
+	color: #fff;
+	font-size: 12px;
+	font-weight: 700;
+	letter-spacing: 0.06em;
+	text-transform: uppercase;
+}
+.ph-pill {
+	height: 46px;
+	padding: 0 34px;
+	display: inline-flex;
+	align-items: center;
+	border-radius: 999px;
+	border: 2px solid transparent;
+	background:
+		linear-gradient(#2d3433, #2d3433) padding-box,
+		linear-gradient(90deg, #6ee7d8, #3aa7c9) border-box;
+	transition: transform 0.2s ease;
+}
+.ph-pill:active {
+	transform: scale(0.98);
+}
+.ph-pill--mobile {
+	display: none;
+}
+
+.ph-slide {
+	position: absolute;
+	z-index: 5;
+	left: calc(var(--ph-panel-left) + 52px);
+	bottom: calc(var(--ph-panel-bottom) + 120px);
+	color: #fff;
+	font-size: 12px;
+	font-weight: 600;
+	letter-spacing: 0.1em;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 12px;
+}
+.ph-slide span {
+	writing-mode: vertical-rl;
+	transform: rotate(180deg);
+}
+.ph-slide i {
+	display: block;
+	width: 1.5px;
+	height: 38px;
+	background: #fff;
+	transform-origin: top;
+}
+
+/* ---- headline: two stacked copies ---- */
+.ph-titles {
+	position: absolute;
+	inset: 0;
+	z-index: 3;
+	pointer-events: none;
+}
+.ph-titles--white {
+	clip-path: inset(0 0 52px 62% round 0 0 0 10px);
+}
+.ph-title {
+	position: absolute;
+	top: 25%;
+	left: calc(var(--ph-rail) + 130px);
+	margin: 0;
+	font-weight: 800;
+	font-size: var(--ph-title-size);
+	line-height: 0.84;
+	letter-spacing: -0.03em;
+	text-transform: uppercase;
+	white-space: nowrap;
+	/* split letters lose kerning, so both copies drop it to stay aligned */
+	font-kerning: none;
+}
+.ph-the {
+	display: inline-block;
+	vertical-align: top;
+	margin: 0.08em 0 0 0.12em;
+	writing-mode: vertical-rl;
+	font-size: 0.3em;
+	line-height: 1;
+	letter-spacing: 0.04em;
+	font-weight: 700;
+}
+.ph-titles--photo .ph-title {
+	color: transparent;
+	background: url("../assets/img/haris-hero-type-profile-color.jpg") 50% 42% / cover;
+	-webkit-background-clip: text;
+	background-clip: text;
+}
+.ph-titles--photo .ph-the {
+	color: #8a8a87;
+	-webkit-text-fill-color: #8a8a87;
+}
+.ph-titles--white .ph-title {
+	color: #fff;
+}
+.ph-titles--white .ph-the {
+	color: rgb(255 255 255 / 0.7);
+}
+
+.ph-sub {
+	position: absolute;
+	z-index: 4;
+	left: calc(var(--ph-rail) + 134px);
+	top: calc(25% + var(--ph-title-size) * 1.68 + 40px);
+	display: grid;
+	justify-items: start;
+	font-family: "Manrope", Helvetica, Arial, sans-serif;
+	font-size: 19px;
+	font-weight: 500;
+	line-height: 1.35;
+	letter-spacing: -0.005em;
+	color: #7a7f7d;
+}
+.ph-sub p {
+	margin: 0;
+	/* when a line wraps on small screens, split it evenly instead of leaving one word alone */
+	text-wrap: balance;
+}
+.ph-lead {
+	font-size: 21px;
+	font-weight: 700;
+	color: var(--ph-ink);
+}
+.ph-pitch {
+	margin-top: 6px !important;
+}
+
+/* ---- stat ledger: the PDF's three headline numbers ---- */
+.ph-ledger {
+	display: grid;
+	grid-template-columns: repeat(3, auto);
+	margin: 26px 0 4px;
+}
+.ph-stat {
+	position: relative;
+	padding: 0 34px;
+}
+.ph-stat:first-child {
+	padding-left: 0;
+}
+.ph-stat + .ph-stat::before {
+	content: "";
+	display: block;
+	position: absolute;
+	left: 0;
+	top: 0;
+	bottom: 0;
+	width: 1px;
+	background: #e4e4e1;
+	transform-origin: top;
+	transform: scaleY(var(--ph-rule, 1));
+}
+.ph-stat b {
+	display: block;
+	font-size: 34px;
+	font-weight: 800;
+	line-height: 1;
+	letter-spacing: -0.035em;
+	color: var(--ph-ink);
+	font-variant-numeric: tabular-nums;
+}
+.ph-stat small {
+	display: block;
+	max-width: 150px;
+	margin-top: 8px;
+	font-size: 13.5px;
+	line-height: 1.35;
+	color: #7a7f7d;
+}
+
+/* ---- tools: named logos scrolling on a loop ---- */
+.ph-logos {
+	width: calc(62vw - var(--ph-rail) - 190px);
+	margin-top: 46px;
+	overflow: hidden;
+	-webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+	mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+}
+.ph-logos__track {
+	--ph-logo-gap: 44px;
+	display: flex;
+	align-items: center;
+	gap: var(--ph-logo-gap);
+	width: max-content;
+	margin: 0;
+	padding: 6px 0;
+	list-style: none;
+	animation: ph-logos-scroll 42s linear infinite;
+}
+.ph-logos:hover .ph-logos__track,
+.site-panel--hero.is-offscreen .ph-logos__track {
+	animation-play-state: paused;
+}
+@keyframes ph-logos-scroll {
+	to {
+		transform: translateX(calc(-50% - var(--ph-logo-gap) / 2));
+	}
+}
+.ph-tool {
+	display: flex;
+	align-items: center;
+	gap: 9px;
+	flex: none;
+	transition: transform 0.3s ease;
+}
+.ph-tool:hover {
+	transform: translateY(-2px);
+}
+.ph-tool img {
+	display: block;
+	height: 22px;
+	width: auto;
+	max-width: none;
+}
+.ph-tool--word img {
+	height: 21px;
+}
+.ph-tool span {
+	font-size: 15px;
+	font-weight: 600;
+	line-height: 1;
+	letter-spacing: -0.01em;
+	color: #2b2f2e;
+	white-space: nowrap;
+}
+@media (prefers-reduced-motion: reduce) {
+	.ph-logos__track {
+		animation: none;
+	}
+}
+
+/* shorter laptop screens: tighten the block so the logos stay on screen */
+@media (min-width: 768px) and (max-height: 860px) {
+	.ph-sub {
+		top: calc(25% + var(--ph-title-size) * 1.68 + 28px);
+		font-size: 17px;
+	}
+	.ph-lead {
+		font-size: 19px;
+	}
+	.ph-ledger {
+		margin-top: 18px;
+	}
+	.ph-stat b {
+		font-size: 28px;
+	}
+	.ph-stat small {
+		font-size: 12.5px;
+	}
+	.ph-cta {
+		margin-top: 18px !important;
+	}
+	.ph-logos {
+		margin-top: 26px;
+	}
+}
+
+.ph-cta {
+	display: inline-flex;
+	align-items: center;
+	gap: 14px;
+	margin-top: 28px;
+	font-family: "Montserrat", "Manrope", Helvetica, Arial, sans-serif;
+	font-size: 12px;
+	line-height: 1.2;
+	color: var(--ph-ink);
+	font-weight: 700;
+	letter-spacing: 0.2em;
+	text-transform: uppercase;
+}
+.ph-cta i {
+	display: block;
+	width: 36px;
+	height: 1.5px;
+	background: var(--ph-ink);
+	transform-origin: left;
+	transition: transform 0.3s ease;
+}
+.ph-cta:hover i {
+	transform: scaleX(1.5);
+}
+
+/* ---- entrance: hidden until hero.js plays it (or gives up) ---- */
+/* dark while waiting, so the black boot screen runs straight into the dark opening shot */
+.site-panel--hero[data-enter="pending"] {
+	background: #0b0b0b;
+}
+.site-panel--hero[data-enter="pending"] .ph-panel,
+.site-panel--hero[data-enter="pending"] .ph-titles,
+.site-panel--hero[data-enter="pending"] .ph-rail > *,
+.site-panel--hero[data-enter="pending"] .ph-top,
+.site-panel--hero[data-enter="pending"] .ph-slide,
+.site-panel--hero[data-enter="pending"] .ph-sub > * {
+	visibility: hidden;
+}
+
+/* html and body never scroll on this page (.site-flow does), so the reserved gutter only
+   showed up as an empty strip beside the hero */
+body[data-page="about"] {
+	scrollbar-gutter: auto;
+}
+
+/* The global header hides while the hero is on screen (the hero has its own rail) */
+.site-header {
+	transition: opacity 0.35s ease, visibility 0.35s;
+}
+.site-header.site-header--over-hero:not(.site-header--open) {
+	opacity: 0 !important;
+	visibility: hidden;
+	pointer-events: none;
+}
+
+@media (max-width: 767px) {
+	.site-panel--hero {
+		--ph-rail: 0px;
+		--ph-panel-left: 0%;
+		--ph-panel-bottom: 0px;
+		--ph-title-size: 13.5vw;
+		height: auto;
+		min-height: 100svh;
+		display: flex;
+		flex-direction: column;
+	}
+	.ph-rail {
+		inset: 0 0 auto 0;
+		width: auto;
+		height: 64px;
+		flex-direction: row;
+		padding: 0 16px;
+		border: 0;
+	}
+	.ph-rail__links,
+	.ph-top,
+	.ph-slide,
+	.ph-titles--white {
+		display: none;
+	}
+	/* the hero is taller than the screen here, so size the bars to the screen, not the hero */
+	.ph-bar {
+		height: 8svh;
+	}
+	.ph-bar--bottom {
+		bottom: auto;
+		top: 92svh;
+		transform-origin: bottom;
+	}
+	.ph-mark {
+		background: #fff;
+		color: var(--ph-ink);
+	}
+	.ph-burger i {
+		background: #fff;
+	}
+	.ph-panel {
+		position: relative;
+		inset: auto;
+		height: 52svh;
+		flex: none;
+		clip-path: none;
+	}
+	.ph-panel img {
+		width: 100%;
+		height: 100%;
+	}
+	.ph-titles {
+		position: relative;
+		inset: auto;
+	}
+	.ph-title {
+		position: relative;
+		top: auto;
+		left: auto;
+		padding: 30px 16px 0;
+	}
+	.ph-pill--mobile {
+		display: inline-flex;
+		justify-self: start;
+		margin-top: 10px;
+		color: #fff;
+		font-size: 12px;
+		font-weight: 700;
+		letter-spacing: 0.06em;
+	}
+	.ph-sub {
+		position: relative;
+		left: auto;
+		top: auto;
+		padding: 24px 16px 40px;
+		font-size: 16px;
+	}
+	.ph-lead {
+		font-size: 18px;
+	}
+	.ph-ledger {
+		width: 100%;
+		margin-top: 22px;
+	}
+	.ph-stat {
+		padding: 0 12px;
+	}
+	.ph-stat b {
+		font-size: 24px;
+	}
+	.ph-stat small {
+		font-size: 12px;
+	}
+	.ph-logos {
+		width: 100%;
+		margin-top: 30px;
+	}
+	.ph-pill--mobile {
+		margin-top: 22px;
+	}
+}

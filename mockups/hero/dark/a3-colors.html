@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Hero A3: Colour options</title>
+<link rel="stylesheet" href="_dark.css" />
+<style>
+  /* Colour options. Pick one with ?p=name. Each also grades the photo so the smoke matches the page. */
+  :root { --sub: #c9c6bf; --hl: var(--accent); --on-accent: #1a0d07; --grade: transparent; --img-filter: none; }
+  :root[data-p="mono"]      { --bg:#0b0b0b; --ink:#f5f5f3; --muted:#9a9a97; --sub:#c4c4c1; --accent:#f5f5f3; --on-accent:#0b0b0b; --hl:#8a8a87; --img-filter: grayscale(1) contrast(1.05); }
+  :root[data-p="navy"]      { --bg:#0a1222; --ink:#eef3fb; --muted:#93a3bd; --sub:#c3cee0; --accent:#8ec5ff; --on-accent:#06142a; --grade: rgb(30 70 150 / 0.32); }
+  :root[data-p="emerald"]   { --bg:#07110d; --ink:#eef5f1; --muted:#90a89b; --sub:#c2d3c9; --accent:#34d399; --on-accent:#03140c; --grade: rgb(20 110 70 / 0.26); }
+  :root[data-p="champagne"] { --bg:#0e0c09; --ink:#f4efe5; --muted:#a79f92; --sub:#d0c8ba; --accent:#d8b46a; --on-accent:#1b1406; --grade: rgb(150 110 40 / 0.24); }
+  :root[data-p="lime"]      { --bg:#0b0c0a; --ink:#f3f4ee; --muted:#9b9e94; --sub:#c8cbc0; --accent:#c6f135; --on-accent:#131a00; --img-filter: grayscale(0.6); }
+  :root[data-p="blue"]      { --bg:#08090c; --ink:#f1f3f8; --muted:#979cab; --sub:#c6cad6; --accent:#3d7bff; --on-accent:#ffffff; --hl:#6f9bff; --grade: rgb(40 80 200 / 0.22); }
+  .hl { color: var(--hl); }
+  .btn--primary { color: var(--on-accent); }
+  .logo span { color: var(--accent); }
+  .bg img { filter: var(--img-filter); }
+  .bg::before { content: ""; position: absolute; inset: 0; z-index: 1; background: var(--grade); mix-blend-mode: color; pointer-events: none; }
+  .bg::after { z-index: 2; }
+
+  /* Side profile on the right, looking back at the headline */
+  .hero { position: relative; min-height: 100dvh; display: grid; grid-template-rows: auto 1fr auto; overflow: hidden; }
+  .bg { position: absolute; inset: 0; }
+  .bg img { width: 100%; height: 100%; object-fit: cover; object-position: 30% 40%; transform: scale(1.12); transform-origin: 70% 40%; }
+  .bg::after { content: ""; position: absolute; inset: 0;
+    background: linear-gradient(90deg, rgb(from var(--bg) r g b / 0.92) 0%, rgb(from var(--bg) r g b / 0.55) 34%, rgb(from var(--bg) r g b / 0) 55%),
+                linear-gradient(0deg, rgb(from var(--bg) r g b / 0.9) 0%, rgb(from var(--bg) r g b / 0) 26%),
+                linear-gradient(180deg, rgb(from var(--bg) r g b / 0.75) 0%, rgb(from var(--bg) r g b / 0) 14%); }
+
+  .copy { position: relative; z-index: 2; align-self: center; padding: 0 var(--pad); max-width: 760px; }
+  h1 { font-size: clamp(48px, 6.4vw, 104px); line-height: 0.95; letter-spacing: -0.05em; font-weight: 600; }
+  .sub { margin-top: 28px; font-size: 19px; line-height: 1.55; color: var(--sub); max-width: 470px; }
+  .ctas { margin-top: 38px; display: flex; gap: 12px; }
+
+  .foot { position: relative; z-index: 2; display: flex; justify-content: space-between; align-items: center; padding: 0 var(--pad) 34px; }
+  .tools { display: flex; align-items: center; gap: 34px; }
+  .tools img { height: 22px; width: auto; filter: grayscale(1) brightness(0) invert(0.75); }
+  .upwork { display: flex; align-items: center; gap: 12px; font-size: 14px; color: var(--muted); }
+  .upwork b { color: var(--ink); font-weight: 500; }
+
+  @media (max-width: 767px) {
+    .hero { display: flex; flex-direction: column; }
+    .bg { position: relative; height: 54vh; order: -1; }
+    .bg img { object-position: 62% 30%; transform: none; }
+    .bg::after { background: linear-gradient(0deg, var(--bg) 0%, rgb(from var(--bg) r g b / 0) 50%); }
+    nav { position: absolute; top: 0; left: 0; right: 0; }
+    .copy { margin-top: -40px; }
+    h1 { font-size: 52px; }
+    .sub { font-size: 16px; }
+    .foot { flex-direction: column; align-items: flex-start; gap: 18px; padding-top: 36px; }
+    .tools { gap: 22px; flex-wrap: wrap; }
+  }
+</style>
+<script>document.documentElement.dataset.p = new URLSearchParams(location.search).get("p") || "mono";</script>
+</head>
+<body>
+<section class="hero">
+  <div class="bg"><img src="../../../public/landing/assets/img/haris-frames/frame-0.2.jpg" alt="Muhammad Haris" /></div>
+
+  <nav>
+    <div class="logo">Haris<span>.</span></div>
+    <div class="links"><a href="#">Work</a><a href="#">How I work</a><a href="#">About</a></div>
+    <a class="btn btn--primary btn--sm" href="#">Start a project</a>
+    <span class="menu">Menu</span>
+  </nav>
+
+  <div class="copy">
+    <h1>Diagnose first.<br /><span class="hl">Then build.</span></h1>
+    <p class="sub">If the honest answer is "don't automate this", you'll hear it before either of us spends money finding out.</p>
+    <div class="ctas">
+      <a class="btn btn--primary" href="#">Start a project <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
+      <a class="btn btn--ghost" href="#">See the work</a>
+    </div>
+  </div>
+
+  <div class="foot">
+    <p class="upwork"><b>Top Rated Plus</b> on Upwork, 100% Job Success</p>
+    <div class="tools">
+      <img src="../../../public/landing/assets/img/tools/n8n.png" alt="n8n" />
+      <img src="../../../public/landing/assets/img/tools/zapier.png" alt="Zapier" />
+      <img src="../../../public/landing/assets/img/tools/retell.png" alt="Retell AI" />
+      <img src="../../../public/landing/assets/img/tools/claude.png" alt="Claude" />
+    </div>
+  </div>
+</section>
+</body>
+</html>

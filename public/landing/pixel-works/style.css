@@ -1,0 +1,133 @@
+/* Scroll Animation 57 — pixel reveal works (vanilla) */
+.pixel-works {
+	width: 100%;
+	padding: 10vw 5vw;
+	background: #f1efe7;
+	color: #171717;
+	font-family: 'Manrope', Helvetica, Arial, sans-serif;
+	box-sizing: border-box;
+}
+
+.pixel-works__title {
+	margin: 0 0 5vw;
+	font-size: clamp(2rem, 4vw, 4.5rem);
+	font-weight: 600;
+	letter-spacing: -0.04em;
+	line-height: 1;
+	text-align: left;
+}
+
+.pixel-works__row {
+	display: flex;
+	gap: 1rem;
+	margin-bottom: 0;
+	width: 100%;
+}
+
+.pixel-works__row + .pixel-works__row {
+	margin-top: 6vw;
+}
+
+.pixel-works__spacer {
+	flex-shrink: 0;
+}
+
+.pixel-works__item {
+	flex-shrink: 0;
+	min-width: 0;
+}
+
+.pixel-works__item--offset-sm {
+	padding-top: 8vw;
+}
+
+.pixel-works__item--offset-md {
+	padding-top: 10vw;
+}
+
+.pixel-works__item--offset-lg {
+	padding-top: 12vw;
+}
+
+.pixel-works__caption {
+	margin: 0.75rem 0 0;
+	font-family: 'DM Mono', ui-monospace, monospace;
+	font-size: clamp(0.75rem, 1.3vw, 1.15rem);
+	letter-spacing: -0.03em;
+	color: #171717;
+	text-align: left;
+	text-transform: none;
+}
+
+.pixel-image {
+	position: relative;
+	overflow: hidden;
+	opacity: 0;
+	width: 100%;
+}
+
+.pixel-image canvas {
+	position: absolute;
+	inset: 0;
+	width: 100%;
+	height: 100%;
+	display: block;
+}
+
+.pixel-image img[data-pixel-src] {
+	position: absolute;
+	opacity: 0;
+	pointer-events: none;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+
+.w-5-12 { width: 41.666%; }
+.w-4-12 { width: 33.333%; }
+.w-3-12 { width: 25%; }
+.w-2-12 { width: 16.666%; }
+.w-1-12 { width: 8.333%; }
+
+.h-32vw { height: 32vw; }
+.h-30vw { height: 30vw; }
+.h-28vw { height: 28vw; }
+.h-24vw { height: 24vw; }
+.h-20vw { height: 20vw; }
+.h-36vw { height: 36vw; }
+
+@media (max-width: 62.5rem) {
+	.pixel-works {
+		padding: 4.5rem 1.15rem 5rem;
+	}
+	.pixel-works__row {
+		flex-direction: column;
+		gap: 2rem;
+	}
+	.pixel-works__row + .pixel-works__row {
+		margin-top: 2rem;
+	}
+	.pixel-works__spacer {
+		display: none;
+	}
+	.pixel-works__item,
+	.w-5-12,
+	.w-4-12,
+	.w-3-12 {
+		width: 100%;
+	}
+	.pixel-works__item--offset-sm,
+	.pixel-works__item--offset-md,
+	.pixel-works__item--offset-lg {
+		padding-top: 0;
+	}
+	.h-32vw,
+	.h-30vw,
+	.h-28vw,
+	.h-24vw,
+	.h-20vw,
+	.h-36vw {
+		height: 58vw;
+		min-height: 14rem;
+	}
+}

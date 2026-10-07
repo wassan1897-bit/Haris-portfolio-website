@@ -1,0 +1,95 @@
+/* Physics Effects / 1 — sticky cursor + magnetic */
+
+.sticky-cursor {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 15px;
+	height: 15px;
+	border-radius: 50%;
+	background-color: #1a1a1a;
+	pointer-events: none;
+	z-index: 10050;
+	will-change: transform, width, height;
+	opacity: 1;
+}
+
+html.has-sticky-cursor,
+html.has-sticky-cursor body,
+html.has-sticky-cursor a,
+html.has-sticky-cursor button,
+html.has-sticky-cursor .about-tool,
+html.has-sticky-cursor .sticky-bounds,
+html.has-sticky-cursor .site-panel--works,
+html.has-sticky-cursor .site-panel--works *,
+html.has-sticky-cursor .site-panel--scaling,
+html.has-sticky-cursor .site-panel--scaling *,
+html.has-sticky-cursor .slide,
+html.has-sticky-cursor .slider-nav,
+html.has-sticky-cursor .works-stack,
+html.has-sticky-cursor .works-stack * {
+	cursor: none !important;
+}
+
+html.has-sticky-cursor.sticky-cursor--native,
+html.has-sticky-cursor.sticky-cursor--native * {
+	cursor: auto !important;
+}
+
+.site-header__toggle {
+	position: relative;
+}
+
+.sticky-bounds {
+	position: absolute;
+	inset: 0;
+	border-radius: inherit;
+	pointer-events: all;
+	z-index: 2;
+}
+
+.site-header__toggle .sticky-bounds {
+	inset: -8px;
+	border-radius: 999px;
+}
+
+.sticky-bounds:hover {
+	transform: scale(2.4);
+}
+
+.header__button {
+	position: relative;
+}
+
+.header__button .sticky-bounds {
+	position: absolute;
+	inset: 0;
+	border-radius: inherit;
+	pointer-events: all;
+	z-index: 2;
+}
+
+.header__button .sticky-bounds:hover {
+	transform: scale(2.4);
+}
+
+.magnetic {
+	display: inline-flex;
+	position: relative;
+	will-change: transform;
+}
+
+@media (pointer: coarse) {
+	.sticky-cursor {
+		display: none !important;
+	}
+
+	html.has-sticky-cursor,
+	html.has-sticky-cursor * {
+		cursor: auto !important;
+	}
+
+	.sticky-bounds:hover {
+		transform: none;
+	}
+}
