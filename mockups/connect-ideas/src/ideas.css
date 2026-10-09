@@ -1,0 +1,55 @@
+/* Concept overlays mapped into the live room for the mockup captures only. */
+.ix-quad { position: fixed; left: 0; top: 0; z-index: 40; transform-origin: 0 0; pointer-events: none; }
+
+/* ---------- 1: the monitor's screen ---------- */
+.ix-screen { width: 1270px; height: 730px; padding: 0; background: #101215; color: #e9ebee; font-family: "Manrope", sans-serif; overflow: hidden; }
+.ix-menubar { height: 30px; display: flex; align-items: center; justify-content: space-between; padding: 0 16px; background: #0b0c0e; color: #9aa1ad; font: 600 13px/1 "Manrope"; }
+.ix-menubar b { color: #e9ebee; }
+.ix-desk { position: relative; height: 700px; background: radial-gradient(80% 70% at 30% 20%, #1c2027, #0f1114 70%); }
+.ix-win { position: absolute; border-radius: 12px; background: #15171b; box-shadow: 0 0 0 1px rgb(255 255 255 / 0.06), 0 30px 60px -20px rgb(0 0 0 / 0.8); overflow: hidden; }
+.ix-win__bar { height: 38px; display: flex; align-items: center; gap: 8px; padding: 0 14px; background: #1e2127; color: #9aa1ad; font: 600 13px/1 "Manrope"; }
+.ix-win__bar i { width: 11px; height: 11px; border-radius: 50%; }
+.ix-win__bar span { margin-left: 10px; }
+.ix-mail { left: 40px; top: 40px; width: 690px; height: 610px; }
+.ix-field { display: flex; gap: 14px; padding: 14px 22px; border-bottom: 1px solid rgb(255 255 255 / 0.07); font: 500 15px/1.3 "Manrope"; }
+.ix-field small { width: 70px; color: #7d8592; }
+.ix-field b { font-weight: 700; }
+.ix-chip { display: inline-flex; align-items: center; gap: 8px; height: 26px; padding: 0 10px 0 4px; border-radius: 999px; background: rgb(255 255 255 / 0.08); font: 700 13px/1 "Manrope"; }
+.ix-chip img { width: 20px; height: 20px; border-radius: 50%; object-fit: cover; object-position: 50% 22%; }
+.ix-body { padding: 22px; font: 500 16px/1.75 "Manrope"; color: #c9ced6; }
+.ix-body p { margin: 0 0 4px; }
+.ix-body em { font-style: normal; color: #6b7380; }
+.ix-caret { display: inline-block; width: 2px; height: 18px; margin-left: 2px; vertical-align: -3px; background: #ffb46a; }
+.ix-send { position: absolute; left: 22px; right: 22px; bottom: 20px; display: flex; align-items: center; justify-content: space-between; }
+.ix-send b { display: inline-flex; align-items: center; gap: 10px; height: 44px; padding: 0 22px; border-radius: 10px; background: #ffb46a; color: #1b120a; font: 800 15px/1 "Manrope"; }
+.ix-send small { color: #7d8592; font: 600 13px/1 "Manrope"; }
+.ix-reviews { left: 760px; top: 40px; width: 470px; height: 610px; }
+.ix-reviews__list { padding: 14px; display: grid; gap: 12px; }
+.ix-rev { display: grid; grid-template-columns: 1fr; gap: 6px; padding: 8px; border-radius: 10px; background: #1b1e24; box-shadow: 0 0 0 1px rgb(255 255 255 / 0.05); }
+.ix-rev img { width: 100%; border-radius: 6px; }
+.ix-rev small { display: flex; justify-content: space-between; padding: 0 4px; color: #9aa1ad; font: 600 12px/1 "Manrope"; }
+.ix-rev.on { box-shadow: 0 0 0 2px #ffb46a; }
+.ix-back { position: absolute; left: 40px; bottom: 16px; color: #7d8592; font: 600 13px/1 "Manrope"; }
+.ix-pointer { position: absolute; width: 18px; height: 18px; }
+
+/* ---------- 2: printed reviews on the desk, and a card to write on ---------- */
+.ix-slip { width: 760px; padding: 18px 18px 0; background: #fbfaf6; box-shadow: 0 0 0 1px rgb(0 0 0 / 0.04); }
+.ix-slip img { width: 100%; }
+.ix-slip p { padding: 14px 4px 18px; color: #3d3a35; font: 700 22px/1 "Manrope"; display: flex; justify-content: space-between; }
+.ix-slip p small { color: #8a857c; font-weight: 600; }
+.ix-paper-shade { position: fixed; inset: 0; z-index: 41; pointer-events: none; }
+.ix-card { width: 900px; height: 600px; padding: 54px 60px; background: #f3ecdd; color: #2b2620; font-family: "Manrope", sans-serif; background-image: repeating-linear-gradient(0deg, transparent 0 63px, rgb(120 90 60 / 0.18) 63px 65px); background-position: 0 150px; }
+.ix-card h4 { font: 800 54px/1 "Montserrat"; letter-spacing: -0.03em; text-transform: uppercase; }
+.ix-card ol { margin-top: 30px; list-style: none; display: grid; gap: 18px; }
+.ix-card li { display: flex; gap: 22px; align-items: baseline; font: 600 30px/1.3 "Manrope"; color: #5a5146; }
+.ix-card li b { color: #b8642a; font-weight: 800; }
+.ix-card .stamp { position: absolute; right: 60px; bottom: 54px; padding: 18px 30px; border-radius: 14px; background: #17191a; color: #f3efe8; font: 800 30px/1 "Manrope"; }
+.ix-caption { position: fixed; left: 40px; bottom: 34px; z-index: 50; color: #e9e4da; font: 600 15px/1.5 "Manrope"; text-shadow: 0 1px 12px #000; max-width: 420px; }
+.ix-caption b { display: block; font: 800 34px/1 "Montserrat"; letter-spacing: -0.03em; text-transform: uppercase; margin-bottom: 10px; }
+.ix-dim { position: fixed; inset: 0; z-index: 44; background: rgb(8 7 6 / 0.62); }
+.ix-held { position: fixed; z-index: 45; left: 50%; top: 50%; width: 820px; transform: translate(-50%, -50%) rotate(-1.2deg); padding: 22px 22px 0; background: #fbfaf6; box-shadow: 0 60px 120px -30px #000; }
+.ix-held img { width: 100%; }
+.ix-held p { display: flex; justify-content: space-between; padding: 16px 4px 20px; color: #3d3a35; font: 700 16px/1 "Manrope"; }
+.ix-held p small { color: #8a857c; font-weight: 600; }
+.ix-hint { position: fixed; z-index: 46; left: 50%; bottom: 60px; transform: translateX(-50%); display: flex; gap: 12px; }
+.ix-hint span { display: inline-flex; align-items: center; height: 42px; padding: 0 18px; border-radius: 999px; background: rgb(255 255 255 / 0.1); box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.16); color: #f3efe8; font: 700 13px/1 "Manrope"; }

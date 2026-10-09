@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>The Finale</title>
+<link rel="stylesheet" href="./base.css" />
+<style>
+  body { background: #ffffff; color: #1a1d1c; }
+  .head { position: absolute; left: 40px; right: 40px; top: 92px; display: flex; justify-content: space-between; align-items: baseline; }
+  .head b { font: 800 26px/1 "Montserrat"; letter-spacing: -0.02em; text-transform: uppercase; }
+  .head span { color: #8a8f8d; font: 500 14px/1 "Manrope"; }
+  .grid { position: absolute; left: 40px; right: 40px; top: 140px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 0 28px; align-items: start; }
+  .col { display: grid; gap: 26px; }
+  .col:nth-child(2) { margin-top: 36px; }
+  .col:nth-child(3) { margin-top: 12px; }
+  figure img { width: 100%; box-shadow: 0 0 0 1px #ececec; }
+  figcaption { display: flex; justify-content: space-between; margin-top: 10px; color: #8a8f8d; font: 500 12.5px/1 "Manrope"; }
+  figcaption b { color: #1a1d1c; font-weight: 700; }
+  .strip { position: absolute; left: 40px; right: 40px; top: 562px; display: grid; grid-template-columns: 1.2fr 1fr 1fr 1fr auto; gap: 24px; padding-top: 16px; border-top: 1px solid #1a1d1c; font: 600 14px/1.5 "Manrope"; }
+  .strip small { display: block; color: #8a8f8d; font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; }
+  /* the hero's signature, closing the page: capitals filled with the portrait */
+  .giant { position: absolute; left: 28px; bottom: -34px; font: 800 262px/0.84 "Montserrat"; letter-spacing: -0.055em; text-transform: uppercase; white-space: nowrap; color: transparent; background: url(/landing/assets/img/haris-hero-type-profile-color.jpg) 50% 42% / cover; -webkit-background-clip: text; background-clip: text; }
+</style>
+</head>
+<body>
+<header class="bar"><b>Haris</b><span class="menu"><i><s></s><s></s></i>Menu</span><nav><span>Email</span><span>LinkedIn</span></nav></header>
+<div class="head"><b>Reviews</b><span>33 contracts on Upwork, 100% Job Success, Top Rated Plus</span></div>
+<div class="grid">
+  <div class="col">
+    <figure><img src="./samples/review-01.png" alt="" /><figcaption><b>AI customer support agent</b><span>Upwork</span></figcaption></figure>
+    <figure><img src="./samples/review-04.png" alt="" /><figcaption><b>FERPA staff compliance</b><span>Upwork</span></figcaption></figure>
+  </div>
+  <div class="col">
+    <figure><img src="./samples/review-02.png" alt="" /><figcaption><b>Multi-inbox email triage</b><span>Upwork</span></figcaption></figure>
+    <figure><img src="./samples/review-05.png" alt="" /><figcaption><b>Timezone-aware WhatsApp bot</b><span>Upwork</span></figcaption></figure>
+  </div>
+  <div class="col">
+    <figure><img src="./samples/review-03.png" alt="" /><figcaption><b>Insurance voice agent</b><span>Upwork</span></figcaption></figure>
+    <figure><img src="./samples/review-06.png" alt="" /><figcaption><b>Grocery flyer data system</b><span>Upwork</span></figcaption></figure>
+  </div>
+</div>
+<div class="strip"><span><small>Write</small>hello@autoany.io &#8599;</span><span><small>Hire</small>Upwork</span><span><small>Follow</small>LinkedIn</span><span><small>Local time</small>Karachi 12:24 PM</span><span><small>&nbsp;</small>Back to top</span></div>
+<p class="giant">Let&rsquo;s talk</p>
+</body>
+</html>

@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>After Hours</title>
+<link rel="stylesheet" href="./base.css" />
+<style>
+  :root { --bg: #0a0a0b; --ink: #f3efe8; --muted: #9a958c; --amber: #ffb46a; --line: rgb(243 239 232 / 0.12); }
+  body { background: var(--bg); color: var(--ink); }
+  /* the same slatted wall as the room, barely there */
+  .wall { position: absolute; inset: 0; background:
+    radial-gradient(60% 50% at 75% 0%, rgb(255 170 90 / 0.08), transparent 70%),
+    repeating-linear-gradient(90deg, rgb(255 255 255 / 0.022) 0 2px, transparent 2px 24px); }
+  .eyebrow { display: flex; align-items: center; gap: 12px; color: var(--amber); font: 700 12px/1 "Manrope"; letter-spacing: 0.16em; text-transform: uppercase; }
+  .eyebrow::before { content: ""; width: 30px; height: 1.5px; background: currentColor; }
+  h2 { margin-top: 22px; font: 800 76px/0.9 "Montserrat"; letter-spacing: -0.045em; text-transform: uppercase; }
+  h2 span { color: var(--amber); }
+  .lede { margin-top: 24px; max-width: 440px; color: var(--muted); font: 500 17px/1.6 "Manrope"; }
+
+  /* ---------- proof ---------- */
+  .proof-copy { position: absolute; left: 64px; top: 132px; width: 540px; z-index: 2; }
+  .profile { margin-top: 30px; display: flex; align-items: center; gap: 14px; padding: 12px 16px 12px 12px; width: max-content; border-radius: 18px; background: rgb(255 255 255 / 0.05); box-shadow: inset 0 0 0 1px var(--line); }
+  .profile img { width: 46px; height: 46px; border-radius: 14px; object-fit: cover; object-position: 50% 22%; }
+  .profile b { display: flex; align-items: center; gap: 6px; font: 800 15px/1 "Manrope"; }
+  .profile small { display: flex; gap: 14px; margin-top: 7px; color: var(--muted); font: 600 12px/1 "Manrope"; }
+  .profile small i { display: inline-block; width: 7px; height: 7px; margin-right: 6px; border-radius: 50%; background: #14a800; vertical-align: 1px; }
+  .profile small i.pink { background: #e8459b; }
+  .profile .up { width: 26px; height: 26px; margin-left: 8px; border-radius: 7px; }
+  .ledger { position: absolute; left: 64px; bottom: 60px; width: 560px; display: grid; grid-template-columns: repeat(4, 1fr); border-top: 1px solid rgb(243 239 232 / 0.5); z-index: 2; }
+  .ledger div { padding: 18px 16px 0 0; }
+  .ledger div + div { padding-left: 18px; border-left: 1px solid var(--line); }
+  .ledger b { display: block; font: 800 38px/1 "Montserrat"; letter-spacing: -0.04em; }
+  .ledger small { display: block; margin-top: 8px; color: var(--muted); font: 700 11px/1.3 "Manrope"; letter-spacing: 0.1em; text-transform: uppercase; }
+
+  /* reviews: framed prints on the wall, each under its own picture light */
+  .prints { position: absolute; left: 676px; top: 108px; width: 712px; display: grid; grid-template-columns: 1fr 1fr; column-gap: 40px; align-items: start; }
+  .col { display: grid; gap: 64px; }
+  .col:nth-child(2) { margin-top: 70px; }
+  .print { position: relative; }
+  .print .lamp { position: absolute; left: 50%; top: -34px; width: 130px; height: 7px; margin-left: -65px; border-radius: 4px; background: #1a1714; box-shadow: 0 1px 0 rgb(255 255 255 / 0.06) inset; }
+  .print .lamp::after { content: ""; position: absolute; left: 12px; right: 12px; bottom: -2px; height: 3px; border-radius: 2px; background: #ffd9a8; box-shadow: 0 0 14px 4px rgb(255 180 106 / 0.55); opacity: 0.55; }
+  .print .cone { position: absolute; left: -40px; right: -40px; top: -30px; bottom: -40px; z-index: -1; background: radial-gradient(60% 60% at 50% 18%, rgb(255 170 90 / 0.16), transparent 75%); opacity: 0.55; }
+  .frame { padding: 10px 10px 0; border-radius: 6px; background: #f4f1ea; box-shadow: 0 0 0 6px #17130f, 0 0 0 7px rgb(255 255 255 / 0.05), 0 40px 70px -30px #000; filter: brightness(0.82); }
+  .frame img { width: 100%; height: auto; border-radius: 3px; }
+  .frame p { display: flex; justify-content: space-between; align-items: center; padding: 10px 4px 11px; color: #1b1a17; font: 700 12.5px/1 "Manrope"; }
+  .frame p small { color: #77716a; font-weight: 600; }
+  /* the one under the cursor: its light comes up, it lifts toward you */
+  .print.on .lamp::after, .print.on .cone { opacity: 1; }
+  .print.on .frame { filter: none; transform: translateY(-6px) scale(1.02); box-shadow: 0 0 0 6px #17130f, 0 0 0 7px rgb(255 200 140 / 0.25), 0 50px 80px -30px #000; }
+  .print.on .zoom { position: absolute; right: 14px; bottom: 54px; width: 38px; height: 38px; display: grid; place-items: center; border-radius: 50%; background: #17191a; color: #fff; font: 700 15px/1 "Manrope"; }
+  .cursor { position: absolute; z-index: 30; width: 18px; height: 18px; border-radius: 50%; background: var(--amber); box-shadow: 0 0 0 6px rgb(255 180 106 / 0.2); }
+
+  /* ---------- contact ---------- */
+  .portrait { position: absolute; right: 0; top: 0; width: 860px; height: 900px; }
+  .portrait img { width: 100%; height: 100%; object-fit: cover; object-position: 38% 40%; filter: contrast(1.05); }
+  .portrait::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, var(--bg) 0%, rgb(10 10 11 / 0.6) 26%, transparent 55%), linear-gradient(0deg, var(--bg) 0%, transparent 30%); }
+  .rim { position: absolute; right: 330px; top: 120px; width: 420px; height: 420px; border-radius: 50%; background: radial-gradient(circle, rgb(255 170 90 / 0.14), transparent 70%); }
+  .contact-copy { position: absolute; left: 64px; top: 122px; width: 640px; z-index: 2; }
+  .contact-copy h2 { font-size: 98px; }
+  .steps { margin-top: 34px; display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid var(--line); }
+  .steps div { padding: 16px 14px 0 0; }
+  .steps div + div { padding-left: 16px; border-left: 1px solid var(--line); }
+  .steps span { color: var(--amber); font: 800 11px/1 "Manrope"; letter-spacing: 0.1em; }
+  .steps b { display: block; margin: 9px 0 5px; font: 800 15px/1.2 "Manrope"; }
+  .steps small { color: var(--muted); font: 500 13px/1.45 "Manrope"; }
+  .links { margin-top: 30px; display: grid; gap: 10px; width: 560px; }
+  .link { display: grid; grid-template-columns: 46px 1fr 40px; align-items: center; gap: 16px; padding: 10px 12px 10px 10px; border-radius: 18px; background: rgb(255 255 255 / 0.05); box-shadow: inset 0 0 0 1px var(--line); }
+  .link .ic { width: 46px; height: 46px; display: grid; place-items: center; border-radius: 14px; background: rgb(255 255 255 / 0.07); }
+  .link .ic img { width: 22px; height: 22px; border-radius: 6px; }
+  .link .ic svg { width: 20px; height: 20px; }
+  .link b { display: block; font: 800 16px/1.1 "Manrope"; }
+  .link small { display: block; margin-top: 4px; color: var(--muted); font: 500 13px/1 "Manrope"; }
+  .link .go { width: 40px; height: 40px; display: grid; place-items: center; border-radius: 50%; box-shadow: inset 0 0 0 1px var(--line); }
+  .link.primary { background: var(--amber); box-shadow: 0 24px 50px -24px rgb(255 160 80 / 0.6); color: #1b120a; }
+  .link.primary .ic { background: rgb(0 0 0 / 0.12); }
+  .link.primary small { color: rgb(27 18 10 / 0.7); }
+  .link.primary .go { background: #1b120a; color: var(--amber); box-shadow: none; }
+  .status { position: absolute; right: 64px; bottom: 132px; z-index: 2; display: flex; align-items: center; gap: 10px; height: 36px; padding: 0 16px 0 12px; border-radius: 999px; background: rgb(255 255 255 / 0.08); box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.14); font: 700 13px/1 "Manrope"; }
+  .status i { width: 8px; height: 8px; border-radius: 50%; background: #4ade80; box-shadow: 0 0 0 4px rgb(74 222 128 / 0.2); }
+  .status small { color: var(--muted); font-weight: 600; }
+  .foot { position: absolute; left: 64px; right: 64px; bottom: 34px; z-index: 2; display: flex; align-items: center; justify-content: space-between; padding-top: 18px; border-top: 1px solid var(--line); color: var(--muted); font: 600 13px/1 "Manrope"; }
+  .tools { display: flex; align-items: center; gap: 26px; }
+  .tools img { height: 20px; width: auto; filter: grayscale(1) brightness(1.8); opacity: 0.55; }
+  .view-proof .contact, .view-contact .proof { display: none; }
+</style>
+</head>
+<body>
+<script>document.body.className = 'view-' + (new URLSearchParams(location.search).get('view') || 'proof')</script>
+<div class="wall"></div>
+<header class="bar"><b>Haris</b><span class="menu"><i><s></s><s></s></i>Menu</span><nav><span>Email</span><span>LinkedIn</span></nav></header>
+
+<section class="proof">
+  <div class="proof-copy">
+    <p class="eyebrow">Client proof</p>
+    <h2>What clients<br />say after<br /><span>the build</span></h2>
+    <p class="lede">Every review comes from a finished Upwork contract. Thirty-three jobs in, the Job Success score is still 100%.</p>
+    <div class="profile"><img src="/landing/assets/img/haris-hero-wall.webp" alt="" /><div><b>Muhammad H.</b><small><span><i></i>100% Job Success</span><span><i class="pink"></i>Top Rated Plus</span></small></div><img class="up" src="/landing/assets/img/tools/upwork.png" alt="" /></div>
+  </div>
+  <div class="ledger"><div><b>$30K+</b><small>Earned on Upwork</small></div><div><b>33</b><small>Jobs done</small></div><div><b>633</b><small>Hours worked</small></div><div><b>100%</b><small>Job Success</small></div></div>
+  <div class="prints">
+    <div class="col">
+      <div class="print"><span class="lamp"></span><span class="cone"></span><div class="frame"><img src="./samples/review-01.png" alt="" /><p>Sample client <small>Contract title</small></p></div></div>
+      <div class="print on"><span class="lamp"></span><span class="cone"></span><div class="frame"><img src="./samples/review-03.png" alt="" /><p>Sample client <small>Contract title</small></p></div><span class="zoom">&#8599;</span></div>
+    </div>
+    <div class="col">
+      <div class="print"><span class="lamp"></span><span class="cone"></span><div class="frame"><img src="./samples/review-02.png" alt="" /><p>Sample client <small>Contract title</small></p></div></div>
+      <div class="print"><span class="lamp"></span><span class="cone"></span><div class="frame"><img src="./samples/review-04.png" alt="" /><p>Sample client <small>Contract title</small></p></div></div>
+    </div>
+  </div>
+  <span class="cursor" style="left:900px;top:500px"></span>
+</section>
+
+<section class="contact">
+  <div class="rim"></div>
+  <figure class="portrait"><img src="/landing/assets/img/haris-bg.jpg" alt="" /></figure>
+  <div class="contact-copy">
+    <p class="eyebrow">Contact</p>
+    <h2>Let&rsquo;s build<br />what<br /><span>compounds</span></h2>
+    <div class="steps"><div><span>01</span><b>Send a short note</b><small>The problem, the constraint and the timeline.</small></div><div><span>02</span><b>Get an honest read</b><small>A clear answer before any build starts.</small></div><div><span>03</span><b>Ship what lasts</b><small>Only what keeps working after the first win.</small></div></div>
+    <div class="links">
+      <div class="link primary"><span class="ic"><svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z" fill="currentColor"/></svg></span><span><b>Start a project</b><small>hello@autoany.io</small></span><span class="go">&rarr;</span></div>
+      <div class="link"><span class="ic"><img src="/landing/assets/img/tools/upwork.png" alt="" /></span><span><b>Hire on Upwork</b><small>Top Rated Plus, 100% Job Success</small></span><span class="go">&rarr;</span></div>
+    </div>
+  </div>
+  <p class="status"><i></i>Available for select work <small>&middot; Karachi 12:24 PM</small></p>
+  <footer class="foot"><span>&copy; 2026 Muhammad Haris</span><span class="tools"><img src="/landing/assets/img/tools/n8n.png" alt=""><img src="/landing/assets/img/tools/make.png" alt=""><img src="/landing/assets/img/tools/zapier.png" alt=""><img src="/landing/assets/img/tools/ghl.png" alt=""><img src="/landing/assets/img/tools/openai.svg" alt=""><img src="/landing/assets/img/tools/claude.png" alt=""><img src="/landing/assets/img/tools/twilio.svg" alt=""></span><span>Back to top &uarr;</span></footer>
+</section>
+<div class="grain"></div>
+</body>
+</html>

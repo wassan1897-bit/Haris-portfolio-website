@@ -2104,6 +2104,9 @@ function init() {
 		let timeScale = 1 // debug only: slows the animations so test captures can catch them mid-move
 		let forceSip = null // debug only: hold the sip at one phase
 		let debugView = null // debug only: a fixed close-up camera
+		let lightRest = null // debug only: resting level for every picture light (0..1)
+		let wallWash = 0 // debug only: warm wash on the wall behind the cards at night (0..1)
+		let nightFill = 0 // debug only: extra soft fill at night, so the wall itself reads
 		let running = false
 		let raf = 0
 		let idleFrames = 0
@@ -2195,18 +2198,22 @@ function init() {
 				}
 				const quiet = open && i !== focus ? 0.35 : 1
 				const on = c.on
+				// light level: the lit card, or every card at the debug resting level being tried out
+				const lv = lightRest !== null ? Math.max(on, lightRest) : on
 				// night: lights down, the lit card switches on. Day: the sun lights the room, lamps barely on.
-				c.intensity = lerp(DL.rest + (DL.hover - DL.rest) * on, 0.95 + 5.9 * on, nk) * quiet * c.lit
+				c.intensity = lerp(DL.rest + (DL.hover - DL.rest) * lv, 0.95 + 5.9 * lv, nk) * quiet * c.lit
 				// without bloom a very bright bar clips to flat white, so the light tier keeps it warmer
-				c.glow.material.emissiveIntensity = (tier === 0 ? 0.35 + 1.5 * on : lerp(0.6 + 2.4 * on, 1.1 + 7.9 * on, nk)) * c.lit
-				c.halo.material.opacity = tier === 0 ? (0.18 + 0.82 * on) * quiet * c.lit * nk : 0
-				c.beam.material.uniforms.uStrength.value = lerp(DL.beam[0] + (DL.beam[1] - DL.beam[0]) * on, 0.03 + 0.2 * on, nk) * quiet * c.lit
+				c.glow.material.emissiveIntensity = (tier === 0 ? 0.35 + 1.5 * lv : lerp(0.6 + 2.4 * lv, 1.1 + 7.9 * lv, nk)) * c.lit
+				c.halo.material.opacity = tier === 0 ? (0.18 + 0.82 * lv) * quiet * c.lit * nk : 0
+				c.beam.material.uniforms.uStrength.value = lerp(DL.beam[0] + (DL.beam[1] - DL.beam[0]) * lv, 0.03 + 0.2 * lv, nk) * quiet * c.lit
 				c.glow.material.emissive.setRGB(...DL.glow).lerp(NIGHT_GLOW, nk)
 				// no wall wash and no glowing print by day: that is what made the card look foggy
-				c.wash.visible = false
+				// (debug: a warm wash on the wall behind each card, at night only)
+				c.wash.visible = wallWash > 0 && nk > 0.01
+				if (c.wash.visible) c.wash.material.opacity = wallWash * nk * c.lit * (0.75 + 0.25 * on)
 				// in flight the print carries its own light, so it reads clearly away from its lamp
 				const fe = c.flyT > 0 ? easeInOut(c.flyT) : 0
-				c.art.material.emissiveIntensity = Math.max((0.035 + 0.165 * on) * nk, fe * lerp(0.5, 0.72, nk))
+				c.art.material.emissiveIntensity = Math.max((0.035 + 0.165 * lv) * nk, fe * lerp(0.5, 0.72, nk))
 				c.print.children[0].castShadow = fe === 0
 				c.topLight.material.opacity = (DL.top[0] + (DL.top[1] - DL.top[0]) * on) * (1 - nk) * c.lit * (1 - fe)
 				c.topLight.visible = c.topLight.material.opacity > 0.003
@@ -2335,6 +2342,12 @@ function init() {
 					const xs = pts.map((v) => r.left + ((v.x + 1) / 2) * r.width)
 					const ys = pts.map((v) => r.top + ((1 - v.y) / 2) * r.height)
 					return [Math.min(...xs), Math.min(...ys), Math.max(...xs), Math.max(...ys)].map(Math.round)
+				},
+				lights(rest, wash = 0, fill = 0) {
+					lightRest = rest
+					wallWash = wash
+					nightFill = fill
+					hemi.intensity = lerp(LOOK.hemi[0], LOOK.hemi[1] + nightFill, nightMix)
 				},
 				sipAt(p) {
 					forceSip = p

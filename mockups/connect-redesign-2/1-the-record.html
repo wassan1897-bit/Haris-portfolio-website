@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>The Record</title>
+<link rel="stylesheet" href="./base.css" />
+<style>
+  body { background: #0f0f0f; color: #ecebe7; }
+  .muted { color: #7b7973; }
+  /* ---------- reviews: an index of contracts; the review photo follows the cursor ---------- */
+  h2 { position: absolute; left: 48px; top: 104px; font: 800 112px/0.86 "Montserrat"; letter-spacing: -0.05em; text-transform: uppercase; }
+  .aside { position: absolute; left: 1000px; top: 118px; width: 330px; font: 500 15px/1.6 "Manrope"; color: #a8a6a0; }
+  .aside a { display: inline-block; margin-top: 14px; color: #ecebe7; font-weight: 700; border-bottom: 1px solid #ecebe7; padding-bottom: 2px; }
+  table { position: absolute; left: 48px; right: 48px; top: 378px; border-collapse: collapse; }
+  th { padding: 0 0 12px; text-align: left; color: #6c6a65; font: 600 12px/1 "Manrope"; letter-spacing: 0.08em; text-transform: uppercase; border-bottom: 1px solid #ecebe7; }
+  td { height: 66px; border-bottom: 1px solid rgb(255 255 255 / 0.1); font: 500 15px/1 "Manrope"; color: #8e8c86; }
+  td.n { width: 90px; font-variant-numeric: tabular-nums; }
+  td.t { width: 620px; color: #ecebe7; font: 600 30px/1 "Manrope"; letter-spacing: -0.02em; }
+  td.r { text-align: right; color: #ecebe7; }
+  tr.dim td { opacity: 0.32; }
+  tr.on td.t { padding-left: 24px; }
+  .photo { position: absolute; left: 820px; top: 330px; width: 470px; transform: rotate(-2.5deg); box-shadow: 0 50px 90px -30px #000, 0 0 0 1px rgb(255 255 255 / 0.08); }
+  .photo img { width: 100%; }
+  .cur { position: absolute; left: 800px; top: 520px; width: 12px; height: 12px; border-radius: 50%; background: #ecebe7; }
+  /* ---------- contact: the address is the headline ---------- */
+  .lead { position: absolute; left: 48px; top: 150px; width: 640px; font: 500 22px/1.5 "Manrope"; color: #a8a6a0; }
+  .lead b { color: #ecebe7; font-weight: 700; }
+  .mail { position: absolute; left: 40px; top: 360px; font: 800 158px/1 "Montserrat"; letter-spacing: -0.055em; white-space: nowrap; }
+  .mail::after { content: ""; display: block; height: 6px; margin-top: 18px; background: #ecebe7; }
+  .row { position: absolute; left: 48px; right: 48px; bottom: 44px; display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr auto; gap: 24px; padding-top: 18px; border-top: 1px solid rgb(255 255 255 / 0.14); font: 600 14px/1.5 "Manrope"; }
+  .row small { display: block; color: #6c6a65; font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; }
+  .face { position: absolute; right: 48px; top: 120px; width: 230px; height: 288px; object-fit: cover; object-position: 50% 22%; filter: grayscale(1) contrast(1.05); }
+  .view-list .contact, .view-contact .list { display: none; }
+</style>
+</head>
+<body>
+<script>document.body.className = 'view-' + (new URLSearchParams(location.search).get('view') || 'list')</script>
+<header class="bar"><b>Haris</b><span class="menu"><i><s></s><s></s></i>Menu</span><nav><span>Email</span><span>LinkedIn</span></nav></header>
+
+<section class="list">
+  <h2>In their<br />words</h2>
+  <p class="aside">Thirty-three contracts on Upwork, each closed with a review. 100% Job Success and Top Rated Plus. Hover a contract to read what the client wrote.<br /><a>Open the Upwork profile</a></p>
+  <table>
+    <tr><th>No.</th><th>Contract</th><th>Built with</th><th style="text-align:right">Review</th></tr>
+    <tr class="dim"><td class="n">01</td><td class="t">AI customer support agent</td><td>n8n, OpenAI, Airtable</td><td class="r">Read</td></tr>
+    <tr class="dim"><td class="n">02</td><td class="t">Multi-inbox email triage</td><td>n8n, Microsoft Graph</td><td class="r">Read</td></tr>
+    <tr class="on"><td class="n">03</td><td class="t">Insurance voice agent</td><td>Retell AI, GoHighLevel</td><td class="r">Read</td></tr>
+    <tr class="dim"><td class="n">04</td><td class="t">FERPA staff compliance</td><td>Next.js, PostgreSQL</td><td class="r">Read</td></tr>
+    <tr class="dim"><td class="n">05</td><td class="t">Timezone-aware WhatsApp bot</td><td>n8n, Twilio</td><td class="r">Read</td></tr>
+    <tr class="dim"><td class="n">06</td><td class="t">Grocery flyer data system</td><td>Make, OpenAI Vision</td><td class="r">Read</td></tr>
+  </table>
+  <figure class="photo"><img src="./samples/review-03.png" alt="" /></figure>
+  <span class="cur"></span>
+</section>
+
+<section class="contact">
+  <p class="lead"><b>Have a problem worth automating?</b> Send the problem, the constraint and the timeline. You get an honest read before anything is built.</p>
+  <img class="face" src="/landing/assets/img/haris-hero-wall.webp" alt="" />
+  <p class="mail">hello@autoany.io</p>
+  <div class="row"><span><small>Based in</small>Karachi, Pakistan &middot; 12:24 PM</span><span><small>Hire</small>Upwork</span><span><small>Follow</small>LinkedIn</span><span><small>Status</small>Taking select work</span><span><small>&nbsp;</small>Back to top</span></div>
+</section>
+</body>
+</html>

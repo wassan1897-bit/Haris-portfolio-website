@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Split Ink</title>
+<link rel="stylesheet" href="./base.css" />
+<style>
+  :root { --bg: #0d0e0e; --ink: #f4f4f2; --muted: #8c8f8d; --line: rgb(255 255 255 / 0.12); --seam: 520px; }
+  body { background: var(--bg); color: var(--ink); }
+  /* the hero's photo panel, mirrored to the left, with the same small corner */
+  .panel { position: absolute; left: 0; top: 0; bottom: 52px; width: var(--seam); border-bottom-right-radius: 10px; overflow: hidden; background: #2a2f2e; }
+  .panel img { width: 100%; height: 100%; object-fit: cover; }
+  .panel::after { content: ""; position: absolute; inset: 0; background: linear-gradient(0deg, rgb(8 9 9 / 0.85), transparent 45%); }
+  /* the hero's right-hand rail, mirrored */
+  .rail { position: absolute; right: 0; top: 0; bottom: 0; width: 96px; border-left: 1px solid var(--line); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 36px; z-index: 3; }
+  .rail span { writing-mode: vertical-rl; color: var(--muted); font: 600 11px/1 "Manrope"; letter-spacing: 0.1em; text-transform: uppercase; }
+  .rail span.on { color: var(--ink); }
+  .bar nav { margin-right: 96px; }
+  /* headline across the seam: white over the photo, photo-filled over the black */
+  .title { position: absolute; left: 300px; top: 122px; z-index: 2; }
+  .title h2 { font: 800 150px/0.84 "Montserrat"; letter-spacing: -0.05em; text-transform: uppercase; white-space: nowrap; }
+  .title .over { position: absolute; inset: 0; clip-path: inset(0 calc(100% - (var(--seam) - 300px)) 0 0); color: #fff; }
+  .title .under { clip-path: inset(0 0 0 calc(var(--seam) - 300px)); color: transparent; background: linear-gradient(rgb(255 255 255 / 0.32), rgb(255 255 255 / 0.32)), url(/landing/assets/img/haris-hero-type-profile-color.jpg) 50% 30% / cover; -webkit-background-clip: text; background-clip: text; -webkit-text-stroke: 1px rgb(255 255 255 / 0.16); }
+  .label { display: flex; align-items: center; gap: 12px; color: #6ee7d8; font: 700 12px/1 "Manrope"; letter-spacing: 0.16em; text-transform: uppercase; }
+  .label::before { content: ""; width: 30px; height: 1px; background: currentColor; }
+  .lede { color: #b8bab8; font: 500 16.5px/1.6 "Manrope"; }
+
+  /* ---------- proof ---------- */
+  .proof .label { position: absolute; left: 560px; top: 100px; }
+  .panel-stats { position: absolute; left: 40px; width: calc(var(--seam) - 80px); bottom: 92px; z-index: 2; display: grid; grid-template-columns: 1fr 1fr; border-top: 1px solid rgb(255 255 255 / 0.55); }
+  .panel-stats div { padding: 14px 0 12px; }
+  .panel-stats div:nth-child(even) { padding-left: 18px; border-left: 1px solid var(--line); }
+  .panel-stats div:nth-child(n + 3) { border-top: 1px solid var(--line); }
+  .panel-stats b { display: block; font: 800 34px/1 "Montserrat"; letter-spacing: -0.04em; }
+  .panel-stats small { display: block; margin-top: 6px; color: #c9cbc9; font: 600 12px/1 "Manrope"; }
+  .proof .lede { position: absolute; left: 560px; top: 410px; width: 300px; }
+  .proof .badges { position: absolute; left: 560px; top: 540px; display: grid; gap: 10px; }
+  .badge { display: inline-flex; align-items: center; gap: 9px; height: 34px; padding: 0 14px; width: max-content; border-radius: 999px; box-shadow: inset 0 0 0 1px var(--line); font: 700 12.5px/1 "Manrope"; }
+  .badge i { width: 8px; height: 8px; border-radius: 50%; background: #14a800; }
+  .badge i.pink { background: #e8459b; }
+  .badge img { width: 18px; height: 18px; border-radius: 5px; }
+  /* two columns of reviews drifting in opposite directions, faded at the ends */
+  .flow { position: absolute; left: 900px; right: 120px; top: 392px; bottom: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 16px; -webkit-mask-image: linear-gradient(180deg, transparent, #000 14%, #000 80%, transparent); mask-image: linear-gradient(180deg, transparent, #000 14%, #000 80%, transparent); }
+  .flow .col { display: grid; gap: 16px; align-content: start; }
+  .flow .col:nth-child(2) { transform: translateY(-90px); }
+  .card { padding: 8px 8px 0; border-radius: 12px; background: #fff; box-shadow: 0 30px 50px -30px #000; }
+  .card img { width: 100%; height: auto; border-radius: 6px; }
+  .card p { display: flex; justify-content: space-between; padding: 8px 4px 10px; color: #141515; font: 700 11.5px/1 "Manrope"; }
+  .card p small { color: #7c7e7d; font-weight: 600; }
+
+  /* ---------- contact ---------- */
+  .contact .panel img { object-position: 42% 40%; }
+  .contact .label { position: absolute; left: 560px; top: 100px; }
+  .contact-right { position: absolute; left: 560px; right: 136px; top: 420px; }
+  .mail { display: inline-block; margin-top: 26px; font: 700 42px/1 "Montserrat"; letter-spacing: -0.03em; padding-bottom: 8px; border-bottom: 2px solid #6ee7d8; }
+  .actions { margin-top: 26px; display: flex; gap: 12px; }
+  .pill { display: inline-flex; align-items: center; gap: 10px; height: 48px; padding: 0 26px; border-radius: 999px; border: 2px solid transparent; background: linear-gradient(#202625, #202625) padding-box, linear-gradient(90deg, #6ee7d8, #3aa7c9) border-box; font: 700 12.5px/1 "Manrope"; letter-spacing: 0.06em; text-transform: uppercase; }
+  .ghost { display: inline-flex; align-items: center; gap: 9px; height: 48px; padding: 0 20px; border-radius: 999px; box-shadow: inset 0 0 0 1px var(--line); font: 700 12.5px/1 "Manrope"; letter-spacing: 0.06em; text-transform: uppercase; }
+  .ghost img { width: 18px; height: 18px; border-radius: 5px; }
+  .steps { margin-top: 40px; display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid var(--line); }
+  .steps div { padding: 16px 18px 0 0; }
+  .steps div + div { padding-left: 18px; border-left: 1px solid var(--line); }
+  .steps span { color: #6ee7d8; font: 800 11px/1 "Manrope"; letter-spacing: 0.1em; }
+  .steps b { display: block; margin: 9px 0 5px; font: 800 15px/1.2 "Manrope"; }
+  .steps small { color: var(--muted); font: 500 13px/1.45 "Manrope"; }
+  .panel-meta { position: absolute; left: 40px; bottom: 96px; z-index: 2; }
+  .panel-meta .avail { display: inline-flex; align-items: center; gap: 9px; height: 32px; padding: 0 14px 0 12px; border-radius: 999px; background: rgb(255 255 255 / 0.12); box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.2); font: 700 12.5px/1 "Manrope"; }
+  .panel-meta .avail i { width: 8px; height: 8px; border-radius: 50%; background: #6ee7d8; }
+  .panel-meta b { display: block; margin-top: 12px; font: 800 28px/1 "Montserrat"; letter-spacing: -0.03em; }
+  .panel-meta small { display: block; margin-top: 7px; color: #c9cbc9; font: 500 13.5px/1 "Manrope"; }
+  .foot { position: absolute; left: 560px; right: 136px; bottom: 26px; display: flex; justify-content: space-between; color: var(--muted); font: 600 12.5px/1 "Manrope"; }
+  .view-proof .contact, .view-contact .proof { display: none; }
+</style>
+</head>
+<body>
+<script>document.body.className = 'view-' + (new URLSearchParams(location.search).get('view') || 'proof')</script>
+<header class="bar"><b>Haris</b><span class="menu"><i><s></s><s></s></i>Menu</span><nav><span>Email</span><span>LinkedIn</span></nav></header>
+<aside class="rail"><span>Contact</span><span class="on">Proof</span><span>Work</span><span>Home</span></aside>
+
+<section class="proof">
+  <figure class="panel"><img src="/landing/assets/img/haris-hero-wall.webp" alt="" style="object-position:50% 22%" /></figure>
+  <div class="panel-stats"><div><b>$30K+</b><small>Earned on Upwork</small></div><div><b>33</b><small>Jobs completed</small></div><div><b>633</b><small>Hours worked</small></div><div><b>100%</b><small>Job Success</small></div></div>
+  <p class="label">Client proof</p>
+  <div class="title"><h2 class="under">Clients<br />say it</h2><h2 class="over">Clients<br />say it</h2></div>
+  <p class="lede">Every review comes from a finished Upwork contract. Thirty-three jobs in, the Job Success score is still 100%.</p>
+  <div class="badges"><span class="badge"><i></i>100% Job Success</span><span class="badge"><i class="pink"></i>Top Rated Plus</span><span class="badge"><img src="/landing/assets/img/tools/upwork.png" alt="" />View the profile</span></div>
+  <div class="flow">
+    <div class="col">
+      <div class="card"><img src="./samples/review-01.png" alt="" /><p>Sample client <small>Contract</small></p></div>
+      <div class="card"><img src="./samples/review-05.png" alt="" /><p>Sample client <small>Contract</small></p></div>
+      <div class="card"><img src="./samples/review-02.png" alt="" /><p>Sample client <small>Contract</small></p></div>
+    </div>
+    <div class="col">
+      <div class="card"><img src="./samples/review-03.png" alt="" /><p>Sample client <small>Contract</small></p></div>
+      <div class="card"><img src="./samples/review-06.png" alt="" /><p>Sample client <small>Contract</small></p></div>
+      <div class="card"><img src="./samples/review-04.png" alt="" /><p>Sample client <small>Contract</small></p></div>
+    </div>
+  </div>
+</section>
+
+<section class="contact">
+  <figure class="panel"><img src="/landing/assets/img/haris-bg.jpg" alt="" /></figure>
+  <div class="panel-meta"><span class="avail"><i></i>Available for select work</span><b>Muhammad Haris</b><small>AI automation engineer, Karachi &middot; 12:24 PM</small></div>
+  <p class="label">Contact</p>
+  <div class="title" style="top:126px"><h2 class="under">Let&rsquo;s<br />talk</h2><h2 class="over">Let&rsquo;s<br />talk</h2></div>
+  <div class="contact-right">
+    <p class="lede" style="max-width:520px">If the problem is real and the timing is right, we start with a clear diagnosis, then ship only what will keep working after the first win.</p>
+    <a class="mail">hello@autoany.io</a>
+    <div class="actions"><span class="pill">Start a project &nbsp;&#8599;</span><span class="ghost"><img src="/landing/assets/img/tools/upwork.png" alt="" />Upwork</span><span class="ghost">LinkedIn</span></div>
+    <div class="steps"><div><span>01</span><b>Send a short note</b><small>The problem, the constraint and the timeline.</small></div><div><span>02</span><b>Get an honest read</b><small>A clear answer before any build starts.</small></div><div><span>03</span><b>Ship what lasts</b><small>Only what keeps working after the first win.</small></div></div>
+  </div>
+  <footer class="foot"><span>&copy; 2026 Muhammad Haris</span><span>Back to top &uarr;</span></footer>
+</section>
+<div class="grain"></div>
+</body>
+</html>

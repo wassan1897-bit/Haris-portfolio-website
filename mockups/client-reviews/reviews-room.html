@@ -1,0 +1,353 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Client Reviews Room</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<script type="importmap">{ "imports": { "three": "/landing/vendor/three/build/three.module.min.js", "three/addons/": "/landing/vendor/three/addons/" } }</script>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { width: 1440px; height: 900px; overflow: hidden; }
+  body { font-family: "Manrope", sans-serif; background: #e6e6e4; color: #1f2122; -webkit-font-smoothing: antialiased; }
+  body.night { background: #0b0b0c; color: #f1eee8; }
+  canvas { position: absolute; inset: 0; display: block; }
+  .bar { position: absolute; top: 0; left: 0; right: 0; z-index: 5; height: 64px; padding: 0 22px; display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; font: 600 15px/1 "Manrope"; letter-spacing: 0.04em; text-transform: uppercase; }
+  .bar b { font-weight: 800; letter-spacing: 0; }
+  .bar .menu { display: flex; align-items: center; gap: 10px; }
+  .bar .menu i { display: grid; gap: 5px; width: 22px; } .bar .menu i s { display: block; height: 1.5px; background: currentColor; }
+  .bar nav { justify-self: end; display: flex; gap: 20px; }
+  .info { position: absolute; left: 22px; top: 72px; z-index: 5; display: flex; gap: 22px; color: #6f716f; font: 600 12.5px/1 "Manrope"; }
+  .night .info { color: #8f8c86; }
+  .label { position: absolute; left: 40px; bottom: 46px; z-index: 5; }
+  .label i { display: block; width: 26px; height: 26px; border-radius: 7px; background: #14a800 url(/landing/assets/img/tools/upwork.png) center / 26px; margin-bottom: 14px; }
+  .label b { display: block; font: 600 26px/1 "Manrope"; letter-spacing: -0.02em; }
+  .label small { display: block; margin-top: 7px; color: #6f716f; font: 500 13px/1 "Manrope"; }
+  .night .label small { color: #8f8c86; }
+  .btns { position: absolute; right: 40px; bottom: 46px; z-index: 5; display: grid; gap: 14px; }
+  .btn { position: relative; width: 64px; height: 64px; display: grid; place-items: center; border-radius: 20px; background: rgb(255 255 255 / 0.55); box-shadow: 0 10px 30px -14px rgb(0 0 0 / 0.25); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); }
+  .night .btn { background: rgb(255 255 255 / 0.08); box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.1); }
+  .btn svg { width: 22px; height: 22px; }
+  /* autoplay ring on the pause button */
+  .btn .ring { position: absolute; inset: 6px; }
+  .count { position: absolute; left: 50%; bottom: 46px; z-index: 5; transform: translateX(-50%); display: flex; align-items: center; gap: 14px; color: #6f716f; font: 600 13px/1 "Manrope"; font-variant-numeric: tabular-nums; }
+  .count b { color: #1f2122; }
+  .night .count b { color: #f1eee8; }
+  .close { position: absolute; z-index: 6; width: 46px; height: 46px; display: grid; place-items: center; border-radius: 50%; background: #1f2122; color: #fff; font: 600 20px/1 "Manrope"; }
+  .next { position: absolute; z-index: 6; display: flex; align-items: center; gap: 10px; color: #4d504f; font: 600 13px/1 "Manrope"; }
+  .next i { width: 120px; height: 3px; border-radius: 2px; background: rgb(0 0 0 / 0.1); position: relative; overflow: hidden; }
+  .next i::after { content: ""; position: absolute; inset: 0; width: 62%; background: #1f2122; }
+</style>
+</head>
+<body>
+<canvas id="c" width="1440" height="900"></canvas>
+<header class="bar"><b>Haris</b><span class="menu"><i><s></s><s></s></i>Menu</span><nav><span>Email</span><span>LinkedIn</span></nav></header>
+<p class="info"><span>Thursday, 8 Oct</span><span>Karachi 12:24 PM</span></p>
+<div class="label"><i></i><b>Client reviews</b><small>From 33 contracts on Upwork</small></div>
+<div class="btns">
+  <span class="btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M15 4h5v5M20 4l-6 6M9 20H4v-5M4 20l6-6"/></svg></span>
+  <span class="btn"><svg class="ring" viewBox="0 0 52 52"><circle cx="26" cy="26" r="24" fill="none" stroke="currentColor" stroke-opacity="0.15" stroke-width="2"/><circle cx="26" cy="26" r="24" fill="none" stroke="currentColor" stroke-width="2" stroke-dasharray="150.8" stroke-dashoffset="57" transform="rotate(-90 26 26)" stroke-linecap="round"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><rect x="7" y="6" width="3.2" height="12" rx="1"/><rect x="13.8" y="6" width="3.2" height="12" rx="1"/></svg></span>
+</div>
+<p class="count"><b>01</b> / 12</p>
+
+<script type="module">
+import * as THREE from 'three'
+import { RoundedBoxGeometry } from 'three/addons/geometries/RoundedBoxGeometry.js'
+import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js'
+
+const qs = new URLSearchParams(location.search)
+const OPEN = qs.get('view') === 'open'
+const NIGHT = qs.get('mode') === 'night'
+if (NIGHT) document.body.classList.add('night')
+
+// ---------- reviews: the first is the real one, the rest are stand-ins until the photos arrive ----------
+const REVIEWS = [
+	{ img: './assets/review-amazon-fba.png', crop: [0, 0, 805, 330], title: 'Amazon FBA agent', sub: 'Lahore, Pakistan', real: true },
+	{ img: '/mockups/connect-redesign-2/samples/review-01.png', title: 'Support agent', sub: 'Sample review' },
+	{ img: '/mockups/connect-redesign-2/samples/review-02.png', title: 'Email triage', sub: 'Sample review' },
+	{ img: '/mockups/connect-redesign-2/samples/review-03.png', title: 'Voice agent', sub: 'Sample review' },
+	{ img: '/mockups/connect-redesign-2/samples/review-05.png', title: 'WhatsApp bot', sub: 'Sample review' },
+]
+const ACTIVE = 0
+
+await Promise.all(['600 60px Manrope', '500 34px Manrope', '800 40px Montserrat', 'italic 500 40px Manrope', '700 30px Manrope'].map((f) => document.fonts.load(f)))
+const load = (src) => new Promise((r) => { const i = new Image(); i.onload = () => r(i); i.onerror = () => r(null); i.src = src })
+const imgs = await Promise.all(REVIEWS.map((r) => load(r.img)))
+const upLogo = await load('/landing/assets/img/tools/upwork.png')
+
+const renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('c'), antialias: true, preserveDrawingBuffer: true })
+renderer.setPixelRatio(1)
+renderer.setSize(1440, 900, false)
+renderer.toneMapping = THREE.ACESFilmicToneMapping
+renderer.toneMappingExposure = NIGHT ? 1 : 1.05
+renderer.shadowMap.enabled = true
+renderer.shadowMap.type = THREE.PCFSoftShadowMap
+const scene = new THREE.Scene()
+const pm = new THREE.PMREMGenerator(renderer)
+scene.environment = pm.fromScene(new RoomEnvironment(), 0.04).texture
+scene.environmentIntensity = NIGHT ? 0.05 : 0.35
+const camera = new THREE.PerspectiveCamera(32, 1440 / 900, 0.1, 100)
+camera.position.set(0, 1.78, 7.3)
+camera.lookAt(0, 1.6, 0)
+
+const tex = (w, h, draw) => {
+	const cv = document.createElement('canvas')
+	cv.width = w
+	cv.height = h
+	draw(cv.getContext('2d'), w, h)
+	const t = new THREE.CanvasTexture(cv)
+	t.colorSpace = THREE.SRGBColorSpace
+	t.anisotropy = 8
+	return t
+}
+const mat = (color, roughness = 0.8, metalness = 0) => new THREE.MeshStandardMaterial({ color, roughness, metalness })
+function add(geo, m, [x, y, z], { rot = [0, 0, 0], cast = true, receive = true, parent = scene } = {}) {
+	const o = new THREE.Mesh(geo, m)
+	o.position.set(x, y, z)
+	o.rotation.set(...rot)
+	o.castShadow = cast
+	o.receiveShadow = receive
+	parent.add(o)
+	return o
+}
+
+// ---------- room: one soft wall, the same tone running into the floor ----------
+const WALL = NIGHT ? '#151516' : '#e7e7e5'
+add(new THREE.PlaneGeometry(40, 14), mat(WALL, 0.95), [0, 4, 0], { cast: false })
+add(new THREE.PlaneGeometry(40, 20), mat(NIGHT ? '#111112' : '#dededc', 0.9), [0, 0, 5], { rot: [-Math.PI / 2, 0, 0], cast: false })
+
+scene.add(new THREE.HemisphereLight(NIGHT ? '#3a3632' : '#ffffff', NIGHT ? '#050505' : '#c9c9c6', NIGHT ? 0.25 : 1.15))
+const key = new THREE.DirectionalLight(NIGHT ? '#9fb4ff' : '#ffffff', NIGHT ? 0.15 : 1.5)
+key.position.set(-4, 7, 8)
+key.castShadow = true
+key.shadow.mapSize.set(2048, 2048)
+key.shadow.radius = 8
+key.shadow.blurSamples = 16
+Object.assign(key.shadow.camera, { left: -8, right: 8, top: 6, bottom: -2, near: 1, far: 30 })
+key.shadow.bias = -0.0004
+scene.add(key)
+
+// ---------- cards: a white print with the review photo fading in under the title ----------
+const CW = 1.25
+const CH = 1.6
+const CY = 2.3
+const GAP = 1.95
+function cardTexture(r, img) {
+	return tex(900, 1152, (c, w, h) => {
+		c.fillStyle = '#fbfbfa'
+		c.fillRect(0, 0, w, h)
+		if (img) {
+			const [sx, sy, sw, sh] = r.crop || [0, 0, img.width, img.height]
+			// the photo fills the lower part, scaled to the card width
+			const dh = (w * sh) / sw
+			const y = h - Math.max(dh, 640) - 40
+			c.drawImage(img, sx, sy, sw, sh, 40, y + 40, w - 80, ((w - 80) * sh) / sw)
+			// fade its top edge into the card, like a print soaking into paper
+			const g = c.createLinearGradient(0, y, 0, y + 170)
+			g.addColorStop(0, 'rgba(251,251,250,1)')
+			g.addColorStop(1, 'rgba(251,251,250,0)')
+			c.fillStyle = g
+			c.fillRect(0, y, w, 170)
+		}
+		c.textAlign = 'center'
+		c.fillStyle = '#2b2d2e'
+		c.font = '600 60px Manrope'
+		c.fillText(r.title, w / 2, 150)
+		c.fillStyle = '#7a7d7c'
+		c.font = '500 34px Manrope'
+		c.fillText(r.sub, w / 2, 205)
+		// stars under the name
+		c.fillStyle = '#f26a1b'
+		c.font = '700 38px Manrope'
+		c.fillText('★★★★★', w / 2, 272)
+		// the Upwork mark, bottom left, like the round avatars on the reference cards
+		c.save()
+		c.shadowColor = 'rgba(0,0,0,0.25)'
+		c.shadowBlur = 18
+		c.fillStyle = '#ffffff'
+		c.beginPath()
+		c.arc(100, h - 100, 50, 0, Math.PI * 2)
+		c.fill()
+		c.restore()
+		if (upLogo) c.drawImage(upLogo, 70, h - 130, 60, 60)
+	})
+}
+const cardGeo = new RoundedBoxGeometry(CW, CH, 0.03, 3, 0.012)
+const faceGeo = new THREE.PlaneGeometry(CW, CH)
+const edge = mat('#f4f4f2', 0.6)
+const cards = REVIEWS.map((r, i) => {
+	const g = new THREE.Group()
+	scene.add(g)
+	add(cardGeo, edge, [0, 0, 0], { parent: g })
+	add(faceGeo, new THREE.MeshStandardMaterial({ map: cardTexture(r, imgs[i]), roughness: 0.7, emissive: '#ffffff', emissiveMap: null, emissiveIntensity: 0 }), [0, 0, 0.0155], { parent: g, cast: false })
+	return g
+})
+// sliding order: the active card in the middle, the rest to either side
+const order = [-2, -1, 0, 1, 2]
+const slot = (i) => order[(i - ACTIVE + 2 + REVIEWS.length) % REVIEWS.length]
+cards.forEach((g, i) => {
+	const s = slot(i)
+	g.position.set(s * GAP, CY, 0.16)
+	if (NIGHT) g.children[1].material.emissiveIntensity = 0
+})
+// autoplay: a thin bar under the card on show, filling until it opens
+if (!OPEN) {
+	add(new THREE.PlaneGeometry(CW, 0.012), new THREE.MeshBasicMaterial({ color: NIGHT ? '#3a3a3a' : '#cfcfcc' }), [0, CY - CH / 2 - 0.09, 0.02], { cast: false })
+	add(new THREE.PlaneGeometry(CW * 0.62, 0.012), new THREE.MeshBasicMaterial({ color: NIGHT ? '#f1eee8' : '#1f2122' }), [-CW * 0.19, CY - CH / 2 - 0.09, 0.021], { cast: false })
+}
+
+// ---------- the opened review: the card spreads into one wide print on the wall ----------
+if (OPEN) {
+	const PW = 4.2
+	const PH = 2.15
+	cards.forEach((g, i) => {
+		const s = slot(i)
+		if (s === 0) g.visible = false
+		else g.position.x = s * GAP + Math.sign(s) * 1.5
+	})
+	const shot = imgs[0]
+	const t = tex(2520, 1290, (c, w, h) => {
+		c.fillStyle = '#fbfbfa'
+		c.fillRect(0, 0, w, h)
+		// the screenshot itself, full height on the left
+		const sh = h - 120
+		const sw = (shot.width * sh) / shot.height
+		c.save()
+		c.shadowColor = 'rgba(0,0,0,0.18)'
+		c.shadowBlur = 40
+		c.shadowOffsetY = 14
+		c.fillStyle = '#fff'
+		c.fillRect(60, 60, sw, sh)
+		c.restore()
+		c.drawImage(shot, 60, 60, sw, sh)
+		// pins on the screenshot, like the markers on the reference
+		const pin = (x, y, label) => {
+			c.fillStyle = 'rgba(242,106,27,0.18)'
+			c.beginPath()
+			c.arc(x, y, 30, 0, Math.PI * 2)
+			c.fill()
+			c.fillStyle = '#f26a1b'
+			c.beginPath()
+			c.arc(x, y, 13, 0, Math.PI * 2)
+			c.fill()
+			c.font = '700 30px Manrope'
+			const tw = c.measureText(label).width
+			c.fillStyle = '#1f2122'
+			c.beginPath()
+			c.roundRect(x + 44, y - 30, tw + 44, 60, 30)
+			c.fill()
+			c.fillStyle = '#ffffff'
+			c.fillText(label, x + 66, y + 10)
+		}
+		const k = sh / shot.height
+		pin(60 + 300 * k, 60 + 276 * k, 'Rated 5.0')
+		pin(60 + 520 * k, 60 + 384 * k, 'Endorsed by the client')
+		pin(60 + 560 * k, 60 + 160 * k, '$220 fixed price')
+		// the words, on the right
+		const x = 60 + sw + 110
+		const wrap = (text, font, maxW, lh, y, color) => {
+			c.font = font
+			c.fillStyle = color
+			let line = ''
+			for (const word of text.split(' ')) {
+				const test = line ? line + ' ' + word : word
+				if (c.measureText(test).width > maxW && line) {
+					c.fillText(line, x, y)
+					y += lh
+					line = word
+				} else line = test
+			}
+			c.fillText(line, x, y)
+			return y + lh
+		}
+		const maxW = w - x - 90
+		c.textAlign = 'left'
+		c.fillStyle = '#8a8d8c'
+		c.font = '700 26px Manrope'
+		c.fillText('CLIENT REVIEW  01 / 12', x, 140)
+		c.fillStyle = '#f26a1b'
+		c.font = '700 58px Manrope'
+		c.fillText('★★★★★', x, 238)
+		c.fillStyle = '#1f2122'
+		c.font = '800 58px Montserrat'
+		c.fillText('5.0', x + 330, 236)
+		let y = wrap('“Sameer is highly recommended for AI automation projects using n8n.”', 'italic 600 70px Manrope', maxW, 88, 360, '#1f2122')
+		y += 24
+		c.font = '600 30px Manrope'
+		c.fillStyle = '#5c5f5e'
+		let cx = x
+		for (const e of ['Committed to Quality', 'Solution Oriented', 'Clear Communicator']) {
+			const tw = c.measureText(e).width + 48
+			c.fillStyle = '#ecedeb'
+			c.beginPath()
+			c.roundRect(cx, y - 40, tw, 58, 12)
+			c.fill()
+			c.fillStyle = '#3d403f'
+			c.fillText(e, cx + 24, y - 1)
+			cx += tw + 16
+		}
+		y += 90
+		c.strokeStyle = '#e2e3e0'
+		c.lineWidth = 2
+		c.beginPath()
+		c.moveTo(x, y - 40)
+		c.lineTo(w - 90, y - 40)
+		c.stroke()
+		y = wrap('AI Automation Specialist: Build AI Agent for Amazon Wholesale FBA Product Analysis', '700 38px Manrope', maxW, 52, y + 14, '#1f2122')
+		c.font = '500 32px Manrope'
+		c.fillStyle = '#6c6f6e'
+		c.fillText('Feb 13 to Feb 20, 2026   ·   Fixed price   ·   $220 earned', x, y + 18)
+		c.fillText('Client in Lahore, Pakistan   ·   5.0 of 2 reviews', x, y + 72)
+	})
+	const panel = new THREE.Group()
+	panel.position.set(0, 2.08, 0.22)
+	scene.add(panel)
+	add(new RoundedBoxGeometry(PW, PH, 0.03, 3, 0.012), edge, [0, 0, 0], { parent: panel })
+	add(new THREE.PlaneGeometry(PW, PH), new THREE.MeshStandardMaterial({ map: t, roughness: 0.75 }), [0, 0, 0.0155], { parent: panel, cast: false })
+	// overlay controls placed on the panel's corners
+	scene.updateMatrixWorld(true)
+	const toPx = (v) => { const p = v.clone().project(camera); return [(p.x + 1) * 720, (1 - p.y) * 450] }
+	const [rx, ty] = toPx(new THREE.Vector3(PW / 2, PH / 2, 0.24).add(panel.position).sub(new THREE.Vector3(0, 0, 0.22)))
+	const [, by] = toPx(new THREE.Vector3(0, -PH / 2, 0).add(panel.position))
+	document.body.insertAdjacentHTML('beforeend', `<span class="close" style="left:${rx - 23}px;top:${ty - 23}px">&times;</span><p class="next" style="left:${720 - 140}px;top:${by + 22}px">Next review in 4s <i></i></p>`)
+	document.querySelector('.count').style.display = 'none'
+}
+
+// ---------- the desk, the chair and the plant, below the wall ----------
+const white = mat(NIGHT ? '#cfcfcc' : '#f7f7f5', 0.45)
+const DZ = 1.25
+add(new RoundedBoxGeometry(2.7, 0.05, 0.8, 2, 0.01), white, [0, 0.8, DZ])
+// trestle legs: two crossing bars each side
+for (const sx of [-1.12, 1.12]) {
+	for (const tilt of [0.42, -0.42]) add(new THREE.BoxGeometry(0.035, 0.86, 0.035), white, [sx, 0.39, DZ], { rot: [tilt, 0, 0] })
+	add(new THREE.BoxGeometry(0.03, 0.03, 0.62), white, [sx, 0.76, DZ])
+}
+// black shell chair, its back to us
+const shell = new THREE.MeshPhysicalMaterial({ color: '#141516', roughness: 0.35, clearcoat: 0.6, clearcoatRoughness: 0.3 })
+const chair = new THREE.Group()
+chair.position.set(0.02, 0, DZ + 0.62)
+scene.add(chair)
+const seat = new THREE.LatheGeometry([[0, 0], [0.22, 0.01], [0.27, 0.05], [0.28, 0.09]].map(([a, b]) => new THREE.Vector2(a, b)), 40)
+add(seat, shell, [0, 0.43, 0], { parent: chair }).scale.set(1, 1, 0.95)
+add(new THREE.CylinderGeometry(0.29, 0.25, 0.42, 40, 1, true, -Math.PI * 0.62, Math.PI * 1.24), new THREE.MeshPhysicalMaterial({ color: '#141516', roughness: 0.35, clearcoat: 0.6, side: THREE.DoubleSide }), [0, 0.74, 0.02], { parent: chair, rot: [0.08, Math.PI, 0] })
+const legMat = mat('#101010', 0.4, 0.6)
+for (const [lx, lz] of [[-0.2, -0.18], [0.2, -0.18], [-0.2, 0.18], [0.2, 0.18]]) add(new THREE.CylinderGeometry(0.012, 0.012, 0.46, 10), legMat, [lx, 0.22, lz], { parent: chair, rot: [lz * 0.5, 0, -lx * 0.5] })
+// plant in a copper pot
+const plant = new THREE.Group()
+plant.position.set(0.12, 0.825, DZ - 0.12)
+scene.add(plant)
+add(new THREE.SphereGeometry(0.07, 32, 20, 0, Math.PI * 2, 0, Math.PI * 0.62), new THREE.MeshPhysicalMaterial({ color: '#d79a74', metalness: 0.9, roughness: 0.28 }), [0, 0.07, 0], { parent: plant, rot: [Math.PI, 0, 0] })
+const leaf = new THREE.MeshStandardMaterial({ color: '#2f6f86', roughness: 0.5, side: THREE.DoubleSide })
+for (let i = 0; i < 7; i++) {
+	const a = (i / 7) * Math.PI * 2
+	const l = add(new THREE.SphereGeometry(0.06, 16, 10), leaf, [Math.cos(a) * 0.07, 0.2 + (i % 3) * 0.04, Math.sin(a) * 0.05], { parent: plant })
+	l.scale.set(1.3, 0.22, 0.6)
+	l.rotation.set(0.5 * Math.sin(a), -a, 0.6 * Math.cos(a))
+}
+add(new THREE.CylinderGeometry(0.006, 0.006, 0.22, 6), mat('#2f5a3a'), [0, 0.15, 0], { parent: plant })
+
+renderer.render(scene, camera)
+renderer.render(scene, camera)
+window.__ready = true
+</script>
+</body>
+</html>

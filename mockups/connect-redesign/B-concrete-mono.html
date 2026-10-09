@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Concrete Mono</title>
+<link rel="stylesheet" href="./base.css" />
+<style>
+  :root { --bg: #111213; --ink: #f5f5f3; --muted: #8f918f; --line: rgb(255 255 255 / 0.13); }
+  body { background: var(--bg); color: var(--ink); }
+  .concrete { position: absolute; inset: 0; background: radial-gradient(80% 60% at 20% 0%, rgb(255 255 255 / 0.06), transparent 60%), radial-gradient(60% 50% at 100% 100%, rgb(255 255 255 / 0.03), transparent 60%); }
+  /* the hero's signature: capitals filled with the black-and-white photograph */
+  .phototype { font: 800 158px/0.86 "Montserrat"; letter-spacing: -0.05em; text-transform: uppercase; color: transparent; background: linear-gradient(rgb(255 255 255 / 0.3), rgb(255 255 255 / 0.3)), url(/landing/assets/img/haris-hero-type.jpg) 78% 6% / 1700px auto; -webkit-background-clip: text; background-clip: text; -webkit-text-stroke: 1px rgb(255 255 255 / 0.18); }
+  .label { display: flex; align-items: center; gap: 12px; color: var(--muted); font: 700 12px/1 "Manrope"; letter-spacing: 0.18em; text-transform: uppercase; }
+  .label::before { content: ""; width: 30px; height: 1px; background: currentColor; }
+  .lede { color: #b9bbb9; font: 500 17px/1.6 "Manrope"; }
+  .pill { display: inline-flex; align-items: center; gap: 10px; height: 50px; padding: 0 28px; border-radius: 999px; border: 2px solid transparent; background: linear-gradient(#232827, #232827) padding-box, linear-gradient(90deg, #6ee7d8, #3aa7c9) border-box; color: #fff; font: 700 13px/1 "Manrope"; letter-spacing: 0.06em; text-transform: uppercase; }
+  .ghost { display: inline-flex; align-items: center; gap: 10px; height: 50px; padding: 0 22px; border-radius: 999px; box-shadow: inset 0 0 0 1px var(--line); font: 700 13px/1 "Manrope"; letter-spacing: 0.06em; text-transform: uppercase; }
+  .ghost img { width: 20px; height: 20px; border-radius: 5px; }
+
+  /* ---------- proof ---------- */
+  .proof .label { position: absolute; left: 64px; top: 110px; }
+  .proof .phototype { position: absolute; left: 56px; top: 138px; }
+  .proof-left { position: absolute; left: 64px; top: 452px; width: 420px; }
+  .ledger { margin-top: 30px; display: grid; grid-template-columns: 1fr 1fr; border-top: 1px solid rgb(255 255 255 / 0.6); }
+  .ledger div { padding: 16px 0 14px; }
+  .ledger div:nth-child(even) { padding-left: 20px; border-left: 1px solid var(--line); }
+  .ledger div:nth-child(n + 3) { border-top: 1px solid var(--line); }
+  .ledger b { display: block; font: 800 40px/1 "Montserrat"; letter-spacing: -0.04em; }
+  .ledger small { display: block; margin-top: 7px; color: var(--muted); font: 600 12.5px/1 "Manrope"; }
+  /* reviews as a contact sheet of prints, running off the edge: drag or use the arrows */
+  .sheet { position: absolute; left: 540px; top: 452px; display: flex; gap: 22px; align-items: flex-start; }
+  .shot { width: 372px; flex: none; padding: 10px 10px 0; background: #fff; border-radius: 4px; box-shadow: 0 40px 70px -30px #000; transform: rotate(var(--r)); }
+  .shot img { width: 100%; height: auto; }
+  .shot p { display: flex; justify-content: space-between; padding: 10px 4px 12px; color: #151617; font: 700 12.5px/1 "Manrope"; }
+  .shot p small { color: #7b7d7c; font-weight: 600; }
+  .shot:nth-child(2) { margin-top: 40px; }
+  .shot:nth-child(3) { margin-top: 12px; }
+  .sheet-controls { position: absolute; left: 540px; bottom: 48px; display: flex; align-items: center; gap: 14px; color: var(--muted); font: 600 13px/1 "Manrope"; }
+  .sheet-controls i { width: 46px; height: 46px; display: grid; place-items: center; border-radius: 50%; box-shadow: inset 0 0 0 1px var(--line); color: var(--ink); font-style: normal; }
+  .sheet-controls .bar2 { width: 160px; height: 2px; background: var(--line); position: relative; margin-left: 10px; }
+  .sheet-controls .bar2::after { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 34%; background: var(--ink); }
+
+  /* ---------- contact ---------- */
+  .photo { position: absolute; inset: 0; background: url(/landing/assets/img/haris-hero-type.jpg) 70% 30% / cover; filter: brightness(0.62) contrast(1.08); }
+  .photo::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgb(17 18 19 / 0.97) 0%, rgb(17 18 19 / 0.8) 38%, transparent 70%), linear-gradient(0deg, rgb(17 18 19 / 0.95), transparent 35%); }
+  .contact-copy { position: absolute; left: 64px; top: 120px; width: 760px; }
+  .contact-copy h2 { margin-top: 24px; font: 800 112px/0.88 "Montserrat"; letter-spacing: -0.05em; text-transform: uppercase; }
+  .contact-copy h2 em { font-style: normal; color: transparent; -webkit-text-stroke: 1.5px rgb(255 255 255 / 0.75); }
+  .mail { display: inline-block; margin-top: 34px; font: 700 46px/1 "Montserrat"; letter-spacing: -0.03em; border-bottom: 2px solid rgb(255 255 255 / 0.35); padding-bottom: 8px; }
+  .actions { margin-top: 30px; display: flex; gap: 12px; }
+  .steps { position: absolute; left: 64px; right: 64px; bottom: 96px; display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid var(--line); }
+  .steps div { padding: 18px 24px 0 0; }
+  .steps div + div { padding-left: 24px; border-left: 1px solid var(--line); }
+  .steps span { color: var(--muted); font: 800 11px/1 "Manrope"; letter-spacing: 0.12em; }
+  .steps b { display: block; margin: 9px 0 5px; font: 800 16px/1.2 "Manrope"; }
+  .steps small { color: var(--muted); font: 500 13.5px/1.45 "Manrope"; }
+  .foot { position: absolute; left: 64px; right: 64px; bottom: 32px; display: flex; justify-content: space-between; color: var(--muted); font: 600 12.5px/1 "Manrope"; letter-spacing: 0.04em; }
+  .avail { position: absolute; right: 64px; top: 128px; display: flex; align-items: center; gap: 10px; color: #d9dad8; font: 700 12px/1 "Manrope"; letter-spacing: 0.1em; text-transform: uppercase; }
+  .avail i { width: 8px; height: 8px; border-radius: 50%; background: #6ee7d8; box-shadow: 0 0 0 4px rgb(110 231 216 / 0.18); }
+  .view-proof .contact, .view-contact .proof { display: none; }
+</style>
+</head>
+<body>
+<script>document.body.className = 'view-' + (new URLSearchParams(location.search).get('view') || 'proof')</script>
+<div class="concrete"></div>
+<header class="bar"><b>Haris</b><span class="menu"><i><s></s><s></s></i>Menu</span><nav><span>Email</span><span>LinkedIn</span></nav></header>
+
+<section class="proof">
+  <p class="label">Client proof, from Upwork</p>
+  <h2 class="phototype">Clients<br />say it</h2>
+  <div class="proof-left">
+    <p class="lede">Every review comes from a finished Upwork contract. Thirty-three jobs in, the Job Success score is still 100%.</p>
+    <div class="ledger"><div><b>$30K+</b><small>Earned on Upwork</small></div><div><b>33</b><small>Jobs completed</small></div><div><b>633</b><small>Hours worked</small></div><div><b>100%</b><small>Job Success, Top Rated Plus</small></div></div>
+  </div>
+  <div class="sheet">
+    <div class="shot" style="--r:-1.6deg"><img src="./samples/review-01.png" alt="" /><p>Sample client <small>Contract title</small></p></div>
+    <div class="shot" style="--r:1.2deg"><img src="./samples/review-03.png" alt="" /><p>Sample client <small>Contract title</small></p></div>
+    <div class="shot" style="--r:-0.8deg"><img src="./samples/review-02.png" alt="" /><p>Sample client <small>Contract title</small></p></div>
+  </div>
+  <div class="sheet-controls"><i>&larr;</i><i>&rarr;</i><span class="bar2"></span><span>Drag to read more</span></div>
+</section>
+
+<section class="contact">
+  <div class="photo"></div>
+  <p class="avail"><i></i>Available for select work</p>
+  <div class="contact-copy">
+    <p class="label">Contact</p>
+    <h2>Let&rsquo;s build<br />what <em>compounds</em></h2>
+    <a class="mail">hello@autoany.io</a>
+    <div class="actions"><span class="pill">Start a project &nbsp;&#8599;</span><span class="ghost"><img src="/landing/assets/img/tools/upwork.png" alt="" />Upwork</span><span class="ghost">LinkedIn</span></div>
+  </div>
+  <div class="steps"><div><span>01</span><b>Send a short note</b><small>The problem, the constraint and the timeline.</small></div><div><span>02</span><b>Get an honest read</b><small>A clear answer before any build starts.</small></div><div><span>03</span><b>Ship what lasts</b><small>Only what keeps working after the first win.</small></div></div>
+  <footer class="foot"><span>&copy; 2026 Muhammad Haris, Karachi</span><span>Back to top &uarr;</span></footer>
+</section>
+<div class="grain"></div>
+</body>
+</html>
