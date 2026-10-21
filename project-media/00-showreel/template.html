@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width={{W}}, height={{H}}" />
+    <title>Haris showreel</title>
+    <script src="assets/gsap.min.js"></script>
+    <style>
+      @font-face { font-family: "Inter"; src: url("assets/fonts/inter-latin-400-normal.woff2") format("woff2"); font-weight: 400; font-display: block; }
+      @font-face { font-family: "Inter"; src: url("assets/fonts/inter-latin-500-normal.woff2") format("woff2"); font-weight: 500; font-display: block; }
+      @font-face { font-family: "Inter"; src: url("assets/fonts/inter-latin-600-normal.woff2") format("woff2"); font-weight: 600; font-display: block; }
+      @font-face { font-family: "Inter"; src: url("assets/fonts/inter-latin-700-normal.woff2") format("woff2"); font-weight: 700; font-display: block; }
+      @font-face { font-family: "Inter"; src: url("assets/fonts/inter-latin-800-normal.woff2") format("woff2"); font-weight: 800; font-display: block; }
+
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { width: {{W}}px; height: {{H}}px; overflow: hidden; background: #0d0e10; }
+      body { font-family: "Inter", sans-serif; color: #f4f1ec; -webkit-font-smoothing: antialiased; }
+      #root { position: relative; width: 100%; height: 100%; overflow: hidden; background: #0d0e10; }
+
+      /* every scene fills the frame and pushes in from the right */
+      .scene { position: absolute; left: 0; top: 0; width: 100%; height: 100%; overflow: hidden; background: #0d0e10; }
+      .vw { position: absolute; left: 0; top: 0; width: 100%; height: 100%; }
+      .vw video { position: absolute; left: 0; top: 0; width: 100%; height: 100%; object-fit: cover; }
+      .dim { position: absolute; left: 0; top: 0; width: 100%; height: 100%; background: #000; opacity: 0; pointer-events: none; }
+
+      /* Haris's card: the same shape as his clip, so he is never cropped */
+      .card { position: absolute; left: {{CARD_X}}px; top: {{CARD_Y}}px; width: {{CARD_W}}px; height: {{CARD_H}}px; border-radius: 30px; overflow: hidden; background: #111; box-shadow: 0 70px 160px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 255, 255, 0.09); }
+      .card video { position: absolute; left: 0; top: 0; width: 100%; height: 100%; object-fit: cover; filter: brightness(1.08) contrast(1.04); }
+      .glow { position: absolute; left: 0; top: 0; width: 100%; height: 100%; background: radial-gradient(900px 760px at 78% 52%, rgba(214, 168, 120, 0.22), rgba(13, 14, 16, 0) 70%), radial-gradient(1400px 900px at 20% 40%, rgba(255, 255, 255, 0.05), rgba(13, 14, 16, 0) 70%); }
+      .glow--warm { background: radial-gradient(900px 760px at 78% 52%, rgba(242, 184, 75, 0.22), rgba(13, 14, 16, 0) 70%); opacity: 0; }
+      .glow--grid { background: radial-gradient(1100px 900px at 20% 50%, rgba(214, 168, 120, 0.16), rgba(13, 14, 16, 0) 70%), radial-gradient(1400px 1000px at 75% 50%, rgba(143, 212, 111, 0.07), rgba(13, 14, 16, 0) 70%); }
+
+      .ln { display: block; overflow: hidden; padding-bottom: 0.06em; }
+      .ln > span { display: block; }
+      .kicker { font-size: 30px; font-weight: 600; letter-spacing: 0.24em; text-transform: uppercase; color: rgba(244, 241, 236, 0.6); }
+
+      .intro-text { position: absolute; left: 160px; top: 50%; width: 1180px; transform: translateY(-50%); }
+      .big { margin-top: 34px; font-size: 176px; font-weight: 800; line-height: 0.9; letter-spacing: -0.045em; text-transform: uppercase; }
+      .intro-sub { margin-top: 48px; max-width: 940px; font-size: 40px; font-weight: 400; line-height: 1.35; color: rgba(244, 241, 236, 0.72); }
+
+      .inter { position: absolute; left: 0; top: 0; width: 100%; height: 100%; }
+      .inter-text { position: absolute; left: 160px; top: 50%; width: 1200px; transform: translateY(-50%); }
+      .mid { margin-top: 34px; font-size: 104px; font-weight: 700; line-height: 1.02; letter-spacing: -0.035em; }
+
+      /* project titles, bottom left, in the project's colour */
+      .scrim { position: absolute; left: 0; right: 0; bottom: 0; height: 640px; background: linear-gradient(rgba(5, 6, 8, 0), rgba(5, 6, 8, 0.55) 45%, rgba(5, 6, 8, 0.9)); pointer-events: none; }
+      .ttl { position: absolute; left: 150px; bottom: 150px; width: 1700px; opacity: 0; }
+      .tag { display: flex; align-items: center; gap: 18px; font-size: 30px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--c); }
+      .tag i { width: 14px; height: 14px; border-radius: 50%; background: var(--c); box-shadow: 0 0 24px var(--c); }
+      .title { margin-top: 22px; font-size: 92px; font-weight: 700; line-height: 1.02; letter-spacing: -0.03em; text-shadow: 0 2px 6px rgba(0, 0, 0, 0.45), 0 10px 50px rgba(0, 0, 0, 0.7); }
+      .corner { position: absolute; right: 150px; top: 120px; opacity: 0; }
+      .idx { font-size: 64px; font-weight: 700; letter-spacing: -0.02em; font-variant-numeric: tabular-nums; }
+      .idx span { color: rgba(244, 241, 236, 0.45); }
+
+      .chrome { opacity: 0; }
+
+      /* the finale */
+      .grid-label { position: absolute; left: 150px; top: 70px; font-size: 28px; font-weight: 600; letter-spacing: 0.24em; text-transform: uppercase; color: rgba(244, 241, 236, 0.6); opacity: 0; }
+      .card--grid { top: {{CARD_Y}}px; }
+      .tile { position: absolute; border-radius: 18px; overflow: hidden; background: #15161a; box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.07); }
+      .tile video { position: absolute; left: 0; top: 0; width: 100%; height: 100%; object-fit: cover; }
+      .next { position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: center; padding: 0 56px; border-radius: 18px; border: 2px dashed rgba(244, 241, 236, 0.22); }
+      .next p { font-size: 26px; font-weight: 600; letter-spacing: 0.2em; color: rgba(244, 241, 236, 0.5); }
+      .next b { margin-top: 14px; font-size: 56px; font-weight: 700; line-height: 1.05; letter-spacing: -0.03em; }
+      .end-text { position: absolute; left: 1430px; top: 50%; width: 1030px; transform: translateY(-50%); }
+      .end-big { font-size: 150px; font-weight: 800; line-height: 0.9; letter-spacing: -0.045em; text-transform: uppercase; }
+      .end-sub { margin-top: 40px; font-size: 40px; font-weight: 500; color: rgba(244, 241, 236, 0.72); opacity: 0; }
+      .end-mail { margin-top: 18px; font-size: 40px; font-weight: 600; color: #8fd46f; opacity: 0; }
+
+      #fade { position: absolute; left: 0; top: 0; width: 100%; height: 100%; background: #0d0e10; pointer-events: none; }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="{{D}}" data-width="{{W}}" data-height="{{H}}">
+      {{SCENES}}
+      <div class="chrome scrim"></div>
+      {{TITLES}}
+      <div id="fade"></div>
+    </div>
+    <script>
+      const tl = gsap.timeline({ paused: true, defaults: { ease: "power3.out" } });
+      const D = {{D}};
+      // in from black and back to black, so the reel loops cleanly
+      tl.fromTo("#fade", { opacity: 1 }, { opacity: 0, duration: 0.45, ease: "power1.out" }, 0);
+      tl.to("#fade", { opacity: 1, duration: 0.45, ease: "power1.in" }, D - 0.45);
+      {{JS}}
+      window.__timelines["main"] = tl;
+    </script>
+  </body>
+</html>

@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>About Haris mockups</title>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&family=Montserrat:wght@600;700;800&display=swap" rel="stylesheet" />
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body { width: 1440px; height: 900px; overflow: hidden; background: #0b0c0f; color: #f2efe8; -webkit-font-smoothing: antialiased; }
+.mono { font-family: "JetBrains Mono", monospace; font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; }
+.serif { font-family: "Instrument Serif", serif; }
+.grain::after { content: ""; position: absolute; inset: 0; pointer-events: none; opacity: 0.08; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)'/%3E%3C/svg%3E"); }
+.hdr { position: absolute; left: 0; right: 0; top: 0; height: 64px; display: flex; align-items: center; justify-content: space-between; padding: 0 20px; font: 600 15px Montserrat; z-index: 20; }
+.hdr span:nth-child(2) { font-weight: 500; }
+section { position: absolute; inset: 0; display: none; overflow: hidden; }
+body[data-v="a"] #a, body[data-v="b"] #b, body[data-v="c"] #c, body[data-v="d"] #d { display: block; }
+
+/* ===== A. opening titles: letterbox, subtitles ===== */
+#a { background: #050506; }
+#a .bars { position: absolute; left: 0; right: 0; height: 128px; background: #000; z-index: 5; }
+#a .shot { position: absolute; left: 0; right: 0; top: 128px; bottom: 128px; overflow: hidden; }
+#a .shot img { position: absolute; right: -40px; top: -330px; width: 980px; filter: contrast(1.08) saturate(0.85) brightness(0.92); }
+#a .shot::before { content: ""; position: absolute; inset: 0; z-index: 1; background: linear-gradient(90deg, #050506 0%, #050506 34%, rgba(5,5,6,0.6) 52%, rgba(5,5,6,0) 70%); }
+#a .shot::after { content: ""; position: absolute; inset: 0; z-index: 1; background: radial-gradient(60% 80% at 75% 40%, rgba(255, 170, 90, 0.12), transparent 70%); }
+#a .tc { position: absolute; z-index: 6; top: 52px; color: #8a8780; }
+#a .t1 { left: 44px; } #a .t2 { right: 44px; color: #c7c2b8; }
+#a .t2 b { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: #e5484d; margin-right: 10px; vertical-align: 1px; }
+#a .title { position: absolute; z-index: 3; left: 110px; top: 250px; }
+#a .title .mono { color: #8fd46f; }
+#a .title h2 { margin-top: 22px; font-weight: 400; font-size: 104px; line-height: 0.96; letter-spacing: -0.02em; }
+#a .title h2 em { color: #a7a29a; }
+#a .title p { margin-top: 30px; max-width: 470px; font: 400 18px/1.6 "Inter Tight"; color: #c4c0b8; }
+#a .sub { position: absolute; z-index: 6; left: 0; right: 0; bottom: 52px; text-align: center; font: 500 22px "Inter Tight"; color: #f5e9b8; text-shadow: 0 2px 6px #000; }
+#a .sub small { display: block; margin-top: 8px; font-family: "JetBrains Mono"; font-size: 11px; letter-spacing: 0.2em; color: #77746d; text-shadow: none; }
+body[data-s="2"] #a .shot img { width: 1160px; right: -170px; top: -440px; }
+body[data-s="2"] #a .title { opacity: 0.0; }
+body[data-s="2"] #a .shot::before { background: linear-gradient(90deg, rgba(5,5,6,0.85) 0%, rgba(5,5,6,0.2) 45%, rgba(5,5,6,0) 70%); }
+#a .facts { position: absolute; z-index: 3; left: 110px; top: 300px; display: none; }
+body[data-s="2"] #a .facts { display: block; }
+#a .facts .serif { font-size: 64px; line-height: 1.05; max-width: 640px; }
+#a .facts .serif em { color: #8fd46f; }
+#a .facts .mono { margin-top: 26px; color: #9a958c; line-height: 2; }
+
+/* ===== B. the rim light: words light up as you scroll ===== */
+#b { background: #070708; }
+#b .photo { position: absolute; right: 0; top: 0; width: 900px; height: 900px; overflow: hidden; }
+#b .photo img { position: absolute; right: -380px; top: -40px; height: 980px; filter: grayscale(1) contrast(1.15) brightness(0.95); }
+#b .photo::before { content: ""; position: absolute; inset: 0; z-index: 1; background: linear-gradient(90deg, #070708 0%, rgba(7,7,8,0.75) 30%, rgba(7,7,8,0) 60%); }
+#b .glow { position: absolute; right: 240px; top: -120px; width: 620px; height: 620px; border-radius: 50%; background: radial-gradient(closest-side, rgba(255,255,255,0.18), transparent); z-index: 2; mix-blend-mode: screen; }
+#b .copy { position: absolute; left: 110px; top: 170px; width: 760px; z-index: 3; }
+#b .copy .mono { color: #8a8780; display: flex; gap: 22px; }
+#b .copy .mono b { color: #f2efe8; font-weight: 400; }
+#b .copy p.big { margin-top: 34px; font: 500 46px/1.18 "Inter Tight"; letter-spacing: -0.02em; color: #2c2c2e; }
+#b .copy p.big span.on { color: #f2efe8; }
+#b .copy p.big span.mid { color: #8a8780; }
+#b .sig { position: absolute; left: 110px; bottom: 90px; z-index: 3; display: flex; gap: 70px; }
+#b .sig div b { display: block; font: 600 42px "Inter Tight"; letter-spacing: -0.03em; }
+#b .sig div span { display: block; margin-top: 8px; color: #8a8780; }
+#b .scrub { position: absolute; left: 110px; right: 640px; bottom: 60px; height: 1px; background: #2a2a2c; z-index: 3; }
+#b .scrub i { display: block; height: 1px; width: 58%; background: #f2efe8; }
+
+/* ===== C. contact sheet: a film strip of portraits, three chapters ===== */
+#c { background: #0d0d0f; }
+#c .strip { position: absolute; left: 96px; top: -60px; width: 470px; bottom: -60px; background: #121214; transform: rotate(-4deg); box-shadow: 0 40px 90px rgba(0,0,0,0.6); }
+#c .strip .holes { position: absolute; top: 0; bottom: 0; width: 26px; background: repeating-linear-gradient(180deg, transparent 0 14px, #2a2a2c 14px 30px, transparent 30px 44px); }
+#c .strip .holes.l { left: 12px; } #c .strip .holes.r { right: 12px; }
+#c .frames { position: absolute; left: 56px; right: 56px; top: 30px; display: grid; gap: 22px; }
+#c .fr { position: relative; height: 310px; overflow: hidden; background: #000; }
+#c .fr img { position: absolute; width: 100%; height: 100%; object-fit: cover; filter: grayscale(1) contrast(1.1); }
+#c .fr.cur img { filter: none; }
+#c .fr span { position: absolute; left: 10px; bottom: 8px; font: 500 11px "JetBrains Mono"; color: #f5d27a; letter-spacing: 0.12em; }
+#c .fr.cur::after { content: ""; position: absolute; inset: 0; border: 3px solid #8fd46f; }
+#c .right { position: absolute; left: 700px; right: 110px; top: 150px; }
+#c .right .mono { color: #8a8780; }
+#c h2 { margin-top: 20px; font-family: "Instrument Serif"; font-weight: 400; font-size: 88px; line-height: 0.95; letter-spacing: -0.02em; }
+#c h2 em { color: #8fd46f; }
+#c .ch { margin-top: 46px; display: grid; gap: 0; }
+#c .ch div { display: grid; grid-template-columns: 70px 1fr; padding: 22px 0; border-top: 1px solid #26262a; }
+#c .ch div b { font: 500 12px "JetBrains Mono"; color: #5f5d58; padding-top: 6px; }
+#c .ch div p { font: 400 18px/1.55 "Inter Tight"; color: #6c6a65; }
+#c .ch div p strong { display: block; font: 600 24px "Inter Tight"; color: #6c6a65; margin-bottom: 4px; }
+#c .ch div.on b { color: #8fd46f; }
+#c .ch div.on p { color: #cfcac0; }
+#c .ch div.on p strong { color: #f2efe8; }
+
+/* ===== D. end credits: every role is Haris ===== */
+#d { background: #000; }
+#d .name { position: absolute; left: 0; right: 0; top: 70px; text-align: center; font: 800 300px/0.8 "Montserrat"; letter-spacing: -0.04em; color: transparent; background: url("img/haris-hero-type.jpg") 62% 30% / 1700px auto; -webkit-background-clip: text; background-clip: text; filter: contrast(1.2); }
+#d .lead { position: absolute; left: 0; right: 0; top: 345px; text-align: center; }
+#d .lead .serif { font-size: 40px; font-style: italic; color: #d8d3c8; }
+#d .credits { position: absolute; left: 0; right: 0; top: 440px; display: grid; justify-content: center; gap: 22px; }
+#d .cr { display: grid; grid-template-columns: 360px 360px; column-gap: 36px; align-items: baseline; }
+#d .cr .r { text-align: right; font: 400 13px "JetBrains Mono"; letter-spacing: 0.18em; text-transform: uppercase; color: #8a8780; }
+#d .cr .n { font: 500 24px "Inter Tight"; color: #f2efe8; }
+#d .cr .n small { font: 400 13px "JetBrains Mono"; color: #6a6863; letter-spacing: 0.1em; margin-left: 10px; }
+#d .fade { position: absolute; left: 0; right: 0; bottom: 0; height: 260px; background: linear-gradient(transparent, #000); }
+#d .note { position: absolute; left: 44px; bottom: 40px; color: #6a6863; z-index: 2; }
+#d .note2 { position: absolute; right: 44px; bottom: 40px; color: #6a6863; z-index: 2; }
+body[data-s="2"] #d .name { top: -150px; opacity: 0.35; }
+body[data-s="2"] #d .lead { top: 120px; }
+body[data-s="2"] #d .credits { top: 210px; }
+</style>
+</head>
+<body data-v="a" data-s="1">
+<div class="hdr"><span>HARIS</span><span>☰&nbsp; MENU</span><span>EMAIL &nbsp;&nbsp; LINKEDIN</span></div>
+
+<!-- A -->
+<section id="a" class="grain">
+	<div class="bars" style="top:0"></div><div class="bars" style="bottom:0"></div>
+	<p class="mono tc t1">Scene 02 · About Haris</p>
+	<p class="mono tc t2"><b></b>Karachi · 24 fps</p>
+	<div class="shot"><img src="img/haris-video-poster.jpg" alt="" /></div>
+	<div class="title">
+		<p class="mono">[ About Haris ]</p>
+		<h2 class="serif">Diagnose first.<br /><em>Then build.</em></h2>
+		<p>I'm Haris, an AI automation engineer in Karachi. I build production AI for operations-heavy businesses in the US, UK and the Middle East.</p>
+	</div>
+	<div class="facts">
+		<p class="serif">Most of my work starts with a messy process <em>and ends with something that runs on its own.</em></p>
+		<p class="mono">33 Upwork contracts · 100% Job Success<br />7 live deployments of one product</p>
+	</div>
+	<p class="sub" id="subA">"I start with the process, not the model."<small>00:02:14</small></p>
+</section>
+
+<!-- B -->
+<section id="b" class="grain">
+	<div class="photo"><img src="img/haris-hero-type.jpg" alt="" /></div>
+	<div class="glow"></div>
+	<div class="copy">
+		<p class="mono"><b>(About Haris)</b><span>AI automation engineer</span><span>Karachi, PK</span></p>
+		<p class="big"><span class="on">I'm Haris. I build the AI that sits behind support desks, inboxes and sales teams,</span> <span class="mid">and I start every project</span> <span>by finding out where the work actually gets stuck. Then I build the system that unsticks it, and stay until it runs on its own.</span></p>
+	</div>
+	<div class="scrub"><i></i></div>
+	<div class="sig">
+		<div><b>33</b><span class="mono">Upwork contracts</span></div>
+		<div><b>100%</b><span class="mono">Job Success</span></div>
+		<div><b>3</b><span class="mono">Regions: US, UK, Middle East</span></div>
+	</div>
+</section>
+
+<!-- C -->
+<section id="c" class="grain">
+	<div class="strip">
+		<i class="holes l"></i><i class="holes r"></i>
+		<div class="frames">
+			<div class="fr"><img src="img/haris-hero-type.jpg" style="object-position: 70% 30%" alt="" /><span>14A</span></div>
+			<div class="fr cur"><img src="img/haris-video-poster.jpg" style="object-position: 50% 28%" alt="" /><span>15A</span></div>
+			<div class="fr"><img src="img/haris-chat-avatar.png" style="object-position: 50% 20%" alt="" /><span>16A</span></div>
+		</div>
+	</div>
+	<div class="right">
+		<p class="mono">(About Haris) · Frame 15 of 36</p>
+		<h2>The person <em>behind the pipelines.</em></h2>
+		<div class="ch">
+			<div><b>01</b><p><strong>Diagnose</strong>I sit with the team first and map where the hours really go.</p></div>
+			<div class="on"><b>02</b><p><strong>Build</strong>n8n, Python and the right model for each step, wired into the tools you already use.</p></div>
+			<div><b>03</b><p><strong>Ship and stay</strong>Live in production, measured, and looked after until it runs without me.</p></div>
+		</div>
+	</div>
+</section>
+
+<!-- D -->
+<section id="d" class="grain">
+	<p class="name">HARIS</p>
+	<div class="lead"><p class="serif">A film by one engineer.</p></div>
+	<div class="credits">
+		<div class="cr"><span class="r">Diagnosis</span><span class="n">Haris</span></div>
+		<div class="cr"><span class="r">Architecture</span><span class="n">Haris</span></div>
+		<div class="cr"><span class="r">Workflows and agents</span><span class="n">Haris <small>n8n · Python · Claude</small></span></div>
+		<div class="cr"><span class="r">Deployment</span><span class="n">Haris</span></div>
+		<div class="cr"><span class="r">Filmed on location</span><span class="n">Karachi <small>for the US, UK, Middle East</small></span></div>
+		<div class="cr"><span class="r">Reviews</span><span class="n">33 contracts <small>100% Job Success</small></span></div>
+	</div>
+	<div class="fade"></div>
+	<p class="mono note">(About Haris)</p>
+	<p class="mono note2">Scroll to roll credits</p>
+</section>
+</body>
+</html>

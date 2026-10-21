@@ -1,0 +1,111 @@
+<!doctype html>
+<html><head><meta charset="utf-8" />
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,500..900&family=Inter+Tight:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{width:1920px;height:1080px;overflow:hidden;background:#0d0d0e;color:#ece8e0;font-family:"Inter Tight",sans-serif;-webkit-font-smoothing:antialiased}
+.layer{position:absolute;left:0;top:0;width:1920px;height:1080px}
+#rev img{width:100%;height:100%;display:block}
+#page{background:#0d0d0e;overflow:hidden}
+/* the busywork, drifting in the dark behind the headline */
+#bg span{position:absolute;white-space:nowrap;font:500 44px "Archivo",sans-serif;font-stretch:100%;color:#ece8e0;will-change:transform,opacity,filter}
+#bg span s{position:absolute;left:-2%;right:-2%;top:52%;height:3px;background:#ff8a3d;transform-origin:0 50%}
+/* the headline, built letter by letter */
+#head{position:absolute;left:0;right:0;top:330px;text-align:center;font:900 196px/0.9 "Archivo",sans-serif;font-stretch:125%;letter-spacing:-.03em;white-space:nowrap}
+#head b{display:inline-block;font-weight:900;will-change:transform,filter,opacity}
+#head b.sp{width:.28em}
+#head b.dot{color:#ff8a3d}
+.sub{position:absolute;left:0;right:0;top:600px;text-align:center;font:400 27px/1.5 "Inter Tight";color:#bdb8ae}
+.btns{position:absolute;left:0;right:0;top:720px;display:flex;justify-content:center;gap:16px}
+.b{padding:19px 30px;border-radius:999px;font:500 20px "Inter Tight"}
+.b1{background:#ece8e0;color:#111}
+.b2{box-shadow:inset 0 0 0 1.5px #4a4843;color:#ece8e0}
+.status{position:absolute;left:0;right:0;top:830px;text-align:center;font:500 15px "JetBrains Mono",monospace;letter-spacing:.16em;text-transform:uppercase;color:#77736c}
+.status i{display:inline-block;width:8px;height:8px;border-radius:50%;background:#58c26a;margin-right:10px;vertical-align:1px}
+/* the footer that rises at the very end */
+#foot{position:absolute;left:0;right:0;bottom:0;height:200px;background:#ff8a3d;color:#160b04;transform:translateY(100%)}
+#foot .big{position:absolute;left:44px;bottom:68px;font:900 92px/1 "Archivo",sans-serif;font-stretch:125%;letter-spacing:-.03em}
+#foot .row{position:absolute;left:44px;right:44px;bottom:24px;display:flex;justify-content:space-between;font:500 15px "JetBrains Mono",monospace;letter-spacing:.14em;text-transform:uppercase}
+#foot .links{position:absolute;right:44px;bottom:82px;display:flex;gap:36px;font:500 22px "Inter Tight"}
+.nav{position:absolute;left:20px;right:20px;top:20px;display:flex;justify-content:space-between;font:600 16px "Inter Tight";z-index:9;color:#fff}
+</style></head>
+<body>
+<div class="layer" id="page">
+  <div class="layer" id="bg"></div>
+  <div id="head"></div>
+  <p class="sub" id="sub">Tell me what still eats your team’s week. I’ll reply within a day<br />with how I’d automate it, how long it takes and a fixed price.</p>
+  <div class="btns" id="btns"><span class="b b1">Start a project</span><span class="b b2">Hire on Upwork</span><span class="b b2">hello@autoany.io</span></div>
+  <p class="status" id="status"><i></i>Taking new projects · 4:12 PM in Karachi</p>
+  <div id="foot"><p class="big">MUHAMMAD HARIS</p><div class="links"><span>Upwork ↗</span><span>LinkedIn ↗</span><span>Back to top ↑</span></div><div class="row"><span>AI automation engineer · Karachi</span><span>© 2026</span></div></div>
+</div>
+<div class="layer" id="rev"><img src="reviews.png" /></div>
+<div class="nav"><span>HARIS</span><span>☰ MENU</span><span>EMAIL &nbsp; LINKEDIN</span></div>
+<script>
+const clamp = (v) => Math.min(1, Math.max(0, v)), lerp = (a, b, k) => a + (b - a) * k
+const io = (k) => (k < 0.5 ? 4 * k * k * k : 1 - Math.pow(-2 * k + 2, 3) / 2), out = (k) => 1 - Math.pow(1 - k, 3)
+let seed = 21
+const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647
+// the headline: every letter starts scattered below, tilted and blurred
+const head = document.getElementById('head')
+const TEXT = "LET’S TALK."
+const letters = [...TEXT].map((ch) => {
+  const b = document.createElement('b')
+  b.textContent = ch === ' ' ? ' ' : ch
+  if (ch === ' ') b.className = 'sp'
+  if (ch === '.') b.className = 'dot'
+  head.appendChild(b)
+  return { b, x: (rnd() - 0.5) * 900, y: 260 + rnd() * 520, r: (rnd() - 0.5) * 140, d: rnd() * 0.35 }
+})
+// the busywork: tasks that surface in the dark, then get struck through and fade (automated)
+const TASKS = ['Missed call, 9:42 PM', 'Ticket #4821', 'Re: Re: Fwd: invoice', 'Follow up with the lead?', 'Update the CRM', 'Copy, paste, repeat', 'Weekly report, again', 'Who replied to this?', 'Book the appointment', 'Chase the payment', 'Is the area covered?', 'Out of office', 'Sort the inbox', 'Call back tomorrow']
+const bg = document.getElementById('bg')
+const SPOTS = [[90, 130], [1320, 150], [640, 100], [1500, 640], [60, 640], [1250, 930], [140, 900], [760, 990], [1560, 250], [330, 230], [1520, 800], [1000, 220], [420, 980], [60, 780]]
+const tasks = TASKS.map((txt, i) => {
+  const s = document.createElement('span')
+  s.innerHTML = txt + '<s></s>'
+  bg.appendChild(s)
+  const [x, y] = SPOTS[i]
+  return { s, line: s.querySelector('s'), x, y, at: 0.6 + i * 0.42 + rnd() * 0.3, z: 0.55 + rnd() * 0.7 }
+})
+const rev = document.getElementById('rev'), page = document.getElementById('page'), foot = document.getElementById('foot')
+const sub = document.getElementById('sub'), btns = document.getElementById('btns'), status = document.getElementById('status')
+// p: scroll progress (0 reviews on screen, 1 the very end); t: seconds since the page landed, for the drifting tasks
+window.render = (p, t) => {
+  const a = io(clamp(p / 0.25))
+  rev.style.transform = `translate3d(0, ${(-a * 1080).toFixed(1)}px, 0)`
+  page.style.transform = `translate3d(0, ${((1 - a) * 1080 * 0.55).toFixed(1)}px, 0)`
+  // the letters assemble between p 0.1 and 0.6
+  letters.forEach((L) => {
+    const k = io(clamp((p - 0.1 - L.d * 0.25) / 0.35))
+    L.b.style.transform = `translate3d(${(L.x * (1 - k)).toFixed(1)}px, ${(L.y * (1 - k)).toFixed(1)}px, 0) rotate(${(L.r * (1 - k)).toFixed(1)}deg)`
+    L.b.style.filter = k < 0.97 ? `blur(${((1 - k) * 10).toFixed(1)}px)` : 'none'
+    L.b.style.opacity = clamp(0.25 + k * 1.2).toFixed(3)
+  })
+  const r = out(clamp((p - 0.5) / 0.15))
+  ;[sub, btns, status].forEach((el, i) => {
+    const k = out(clamp((p - 0.5 - i * 0.04) / 0.14))
+    el.style.opacity = k.toFixed(3)
+    el.style.transform = `translate3d(0, ${((1 - k) * 30).toFixed(1)}px, 0)`
+  })
+  // the tasks: blurred and far, they come into focus, are struck through, and fade
+  const on = clamp((p - 0.3) / 0.2)
+  tasks.forEach((T) => {
+    const cyc = 6.5
+    const u = ((t - T.at) % cyc + cyc) % cyc / cyc
+    const vis = t < T.at ? 0 : Math.sin(Math.PI * clamp(u / 0.85))
+    const focus = clamp(u / 0.35)
+    const strike = clamp((u - 0.4) / 0.18)
+    T.s.style.opacity = (vis * on * lerp(0.25, 0.55, T.z - 0.55)).toFixed(3)
+    T.s.style.filter = `blur(${lerp(9, 1.2, focus * (T.z > 0.9 ? 1 : 0.7)).toFixed(1)}px)`
+    T.s.style.transform = `translate3d(${T.x}px, ${(T.y - u * 40).toFixed(1)}px, 0) scale(${T.z.toFixed(2)})`
+    T.line.style.transform = `scaleX(${out(strike).toFixed(3)})`
+  })
+  // the footer rises at the end
+  const f = io(clamp((p - 0.86) / 0.14))
+  foot.style.transform = `translate3d(0, ${((1 - f) * 100).toFixed(2)}%, 0)`
+  head.style.transform = `translate3d(0, ${(-f * 90).toFixed(1)}px, 0)`
+  ;[sub, btns, status].forEach((el) => { if (f > 0) el.style.transform = `translate3d(0, ${(-f * 90).toFixed(1)}px, 0)` })
+}
+document.fonts.ready.then(() => { window.render(0, 0); window.__ready = true })
+</script>
+</body></html>

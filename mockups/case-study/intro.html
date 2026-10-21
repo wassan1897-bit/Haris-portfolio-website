@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Case study, cinematic intro</title>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..700;1,6..96,400..700&family=Manrope:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet" />
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+:root { --bg: #251014; --bg2: #2f161b; --acc: #ff7a59; --ink: #f6eee9; --mute: rgb(246 238 233 / .62); --line: rgb(246 238 233 / .12); --ease: cubic-bezier(.7, 0, .2, 1); --out: cubic-bezier(.16, 1, .3, 1); }
+html, body { width: 1440px; height: 900px; overflow: hidden; background: #000; color: var(--ink); font-family: "Manrope", sans-serif; -webkit-font-smoothing: antialiased; }
+.mono { font: 500 11.5px "JetBrains Mono"; letter-spacing: .16em; text-transform: uppercase; color: var(--mute); }
+.mono b { color: var(--acc); font-weight: 500; }
+.serif { font-family: "Bodoni Moda", serif; font-weight: 500; letter-spacing: -.03em; }
+.serif em { font-style: italic; font-weight: 400; color: var(--acc); }
+
+/* the page underneath (design C) */
+#page { position: absolute; inset: 0; background: var(--bg); }
+.top { position: absolute; left: 0; right: 0; top: 0; height: 66px; display: flex; align-items: center; justify-content: space-between; padding: 0 40px; border-bottom: 1px solid var(--line); }
+.top .x { display: inline-flex; align-items: center; gap: 10px; font: 600 13px "Manrope"; }
+.top .x i { width: 34px; height: 34px; border-radius: 50%; box-shadow: inset 0 0 0 1px var(--line); display: grid; place-items: center; font-style: normal; }
+.head { position: absolute; left: 56px; right: 56px; top: 104px; display: flex; justify-content: space-between; align-items: flex-end; }
+.head h1 { margin-top: 14px; font-size: 70px; line-height: .95; }
+.head p.d { max-width: 420px; font: 400 15px/1.55 "Manrope"; color: var(--mute); }
+.grid { position: absolute; left: 56px; right: 56px; top: 270px; bottom: 40px; display: grid; grid-template-columns: 1.15fr 1fr 1fr; grid-template-rows: 1fr 1fr; gap: 16px; }
+.t { position: relative; border-radius: 20px; background: var(--bg2); box-shadow: inset 0 0 0 1px var(--line); padding: 22px 24px; overflow: hidden; }
+.t1 { grid-row: 1 / 3; padding: 0; background: transparent; box-shadow: none; }
+.big { margin-top: 14px; font: 500 72px/.9 "Bodoni Moda"; letter-spacing: -.02em; }
+.t small { display: block; margin-top: 10px; font: 400 13.5px/1.4 "Manrope"; color: var(--mute); }
+.bars { position: absolute; left: 24px; right: 24px; bottom: 22px; display: flex; align-items: flex-end; gap: 6px; height: 70px; }
+.bars i { flex: 1; border-radius: 3px 3px 1px 1px; background: linear-gradient(var(--acc), rgb(255 122 89 / .3)); transform-origin: bottom; }
+.t4 { background: var(--acc); color: #1b0a0d; }
+.t4 .mono { color: rgb(27 10 13 / .7); }
+.flow { margin-top: 16px; display: grid; gap: 8px; }
+.flow p { display: flex; align-items: center; gap: 10px; padding: 9px 12px; border-radius: 10px; background: rgb(246 238 233 / .06); font: 600 13px "Manrope"; }
+.flow p i { width: 22px; height: 22px; border-radius: 50%; background: var(--acc); color: #1b0a0d; display: grid; place-items: center; font: 700 11px "Manrope"; font-style: normal; }
+.cap { position: absolute; left: 22px; right: 22px; bottom: 20px; padding: 16px 18px; border-radius: 14px; background: rgb(20 8 10 / .6); backdrop-filter: blur(14px); z-index: 14; }
+.cap p { margin-top: 6px; font: 500 15px/1.4 "Manrope"; }
+
+/* page parts start hidden; the intro hands over to them */
+.rise { opacity: 0; transform: translateY(26px); }
+.go .rise { opacity: 1; transform: none; transition: opacity .8s ease var(--d, 0s), transform 1s var(--out) var(--d, 0s); }
+.go .bars i { animation: grow .9s var(--out) both; animation-delay: calc(1.1s + var(--i) * .05s); }
+@keyframes grow { from { transform: scaleY(0); } }
+
+/* the film: one video element that starts full screen and lands in the tile */
+#film { position: absolute; z-index: 10; overflow: hidden; background: #000; left: 0; top: 0; width: 1440px; height: 900px; border-radius: 0; transition: left 1.3s var(--ease), top 1.3s var(--ease), width 1.3s var(--ease), height 1.3s var(--ease), border-radius 1.3s var(--ease); }
+#film video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transform: scale(1.12); transition: transform 6s linear, filter 1s ease; filter: brightness(.55); }
+.started #film video { transform: scale(1); filter: brightness(.8); }
+.landed #film video { filter: none; transition: transform 1.3s var(--ease), filter 1s ease; }
+
+/* letterbox and titles over the film */
+.bar { position: absolute; left: 0; right: 0; height: 120px; background: #000; z-index: 11; transition: transform 1s var(--ease); }
+.bar.t { top: 0; } .bar.b { bottom: 0; }
+.landed .bar.t { transform: translateY(-100%); } .landed .bar.b { transform: translateY(100%); }
+#titles { position: absolute; left: 0; right: 0; top: 0; bottom: 0; z-index: 12; display: grid; place-items: center; text-align: center; pointer-events: none; transition: opacity .5s ease; background: radial-gradient(52% 46% at 50% 50%, rgb(20 6 9 / .78), rgb(20 6 9 / 0) 100%); }
+.landed #titles { opacity: 0; }
+#titles .kick { opacity: 0; transform: translateY(10px); transition: opacity .7s ease .5s, transform .9s var(--out) .5s; }
+#titles h2 { margin-top: 26px; font-size: 118px; line-height: .95; }
+#titles h2 span { display: inline-block; overflow: hidden; vertical-align: bottom; padding-bottom: .1em; }
+#titles h2 span i { display: inline-block; font-style: inherit; transform: translateY(110%); transition: transform 1.1s var(--out); }
+#titles .meta { margin-top: 30px; display: flex; gap: 36px; justify-content: center; opacity: 0; transition: opacity .8s ease 1.9s; }
+#titles .meta b { display: block; font: 500 34px "Bodoni Moda"; color: #fff; }
+#titles .meta span { font: 500 11px "JetBrains Mono"; letter-spacing: .14em; text-transform: uppercase; color: var(--mute); }
+.started #titles .kick { opacity: 1; transform: none; }
+.started #titles h2 span i { transform: none; }
+.started #titles h2 span:nth-child(3) i { transition-delay: 1s; }
+.started #titles h2 span:nth-child(1) i { transition-delay: .75s; }
+.started #titles .meta { opacity: 1; }
+#skip { position: absolute; right: 40px; bottom: 150px; z-index: 13; padding: 9px 16px; border-radius: 999px; background: rgb(246 238 233 / .12); box-shadow: inset 0 0 0 1px rgb(246 238 233 / .25); font: 600 12.5px "Manrope"; color: var(--ink); transition: opacity .4s ease; }
+.landed #skip { opacity: 0; }
+#count { position: absolute; left: 40px; bottom: 150px; z-index: 13; font: 500 12px "JetBrains Mono"; letter-spacing: .16em; color: var(--mute); }
+.landed #count { opacity: 0; transition: opacity .4s; }
+</style>
+</head>
+<body>
+<div id="page">
+	<div class="top rise" style="--d:.2s"><span class="mono"><b>05 / 05</b> &nbsp;Case study</span><span class="x">Close <i>✕</i></span></div>
+	<div class="head"><div class="rise" style="--d:.35s"><p class="mono"><b>AI agent</b> &nbsp;· &nbsp;Live, 24/7</p><h1 class="serif">The night shift, <em>handled.</em></h1></div><p class="d rise" style="--d:.5s">A Level 1 support agent for a broadband provider: triage, live outage checks and tickets, out of hours, with no human involved.</p></div>
+	<div class="grid">
+		<div class="t t1" id="slot"><div class="cap rise" style="--d:1.3s"><p class="mono"><b>▶ Watch again</b> &nbsp;12 s</p><p>A flight through the outage check and the five routing lanes.</p></div></div>
+		<div class="t rise" style="--d:.7s"><p class="mono">Tickets resolved</p><p class="big">790+</p><small>end to end, no person touched them</small><div class="bars"><i style="height:22%;--i:0"></i><i style="height:34%;--i:1"></i><i style="height:30%;--i:2"></i><i style="height:48%;--i:3"></i><i style="height:44%;--i:4"></i><i style="height:60%;--i:5"></i><i style="height:70%;--i:6"></i><i style="height:66%;--i:7"></i><i style="height:82%;--i:8"></i><i style="height:100%;--i:9"></i></div></div>
+		<div class="t rise" style="--d:.82s"><p class="mono">Support time saved</p><p class="big">7,101</p><small>minutes handed back to the team</small></div>
+		<div class="t t4 rise" style="--d:.94s"><p class="mono">Out of hours</p><p class="big">0</p><small style="color:rgb(27 10 13 / .75)">humans needed overnight</small></div>
+		<div class="t rise" style="--d:1.06s"><p class="mono">How a query moves</p><div class="flow"><p><i>1</i>Triage: customer or prospect</p><p><i>2</i>Live outage check</p><p><i>3</i>Ticket to the right team</p></div></div>
+	</div>
+</div>
+
+<div id="film"><video src="img/clip05.mp4" muted playsinline></video></div>
+<i class="bar t"></i><i class="bar b"></i>
+<div id="titles"><div>
+	<p class="mono kick"><b>Case study 05</b> &nbsp;· &nbsp;AI agent</p>
+	<h2 class="serif"><span><i>The night shift,</i></span><br /><span><i><em>handled.</em></i></span></h2>
+	<div class="meta"><div><b>790+</b><span>tickets resolved</span></div><div><b>7,101</b><span>minutes saved</span></div><div><b>0</b><span>humans overnight</span></div></div>
+</div></div>
+<span id="count">00:00 · INTRO</span>
+<span id="skip">Skip intro →</span>
+
+<script>
+const film = document.getElementById('film'), v = film.querySelector('video'), slot = document.getElementById('slot')
+const html = document.documentElement
+const INTRO = 4200
+v.play()
+requestAnimationFrame(() => requestAnimationFrame(() => html.classList.add('started')))
+const t0 = performance.now()
+const tick = () => { const s = (performance.now() - t0) / 1000; document.getElementById('count').textContent = `00:0${Math.min(9, Math.floor(s))} · INTRO`; if (!html.classList.contains('landed')) requestAnimationFrame(tick) }
+tick()
+function land() {
+	if (html.classList.contains('landed')) return
+	const r = slot.getBoundingClientRect()
+	html.classList.add('landed')
+	Object.assign(film.style, { left: r.left + 'px', top: r.top + 'px', width: r.width + 'px', height: r.height + 'px', borderRadius: '20px' })
+	document.getElementById('page').classList.add('go')
+}
+setTimeout(land, INTRO)
+addEventListener('wheel', land); addEventListener('pointerdown', land); addEventListener('keydown', land)
+</script>
+</body>
+</html>

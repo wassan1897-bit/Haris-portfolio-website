@@ -1,0 +1,498 @@
+/* Selected work (an index of big project names with a sticky preview frame) and the base of Up close
+   (the film strip itself is styled in upclose.css). Both sit after the projects section.
+   Motion is transform and opacity only, and every box has a fixed size, so nothing shifts the layout.
+   Driven by selected.js and upclose.js. */
+
+.sw,
+.uc {
+	--sw-bg: #121212;
+	--sw-ink: #f1efe9;
+	--sw-dim: #6e6c68;
+	--sw-mute: #9a9792;
+	--sw-line: rgb(241 239 233 / 0.12);
+	--sw-blue: #7b9bff;
+	--sw-mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+	--sw-grot: "Inter Tight", "Montserrat", Helvetica, Arial, sans-serif;
+	--sw-out: cubic-bezier(0.16, 1, 0.3, 1);
+
+	position: relative;
+	min-height: 0;
+	overflow: clip;
+	background: var(--sw-bg);
+	color: var(--sw-ink);
+	font-family: var(--sw-grot);
+	-webkit-font-smoothing: antialiased;
+}
+
+.sw__head,
+.uc__head {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	gap: 20px;
+	font: 400 13px/1 var(--sw-mono);
+	letter-spacing: 0.1em;
+	text-transform: uppercase;
+	color: var(--sw-mute);
+}
+
+/* ---------------- selected work ---------------- */
+.sw {
+	padding: 150px 3vw 160px;
+}
+.sw__head {
+	padding-bottom: 36px;
+	border-bottom: 1px solid var(--sw-line);
+}
+.sw__pause {
+	padding: 0;
+	border: 0;
+	background: none;
+	color: inherit;
+	font: inherit;
+	letter-spacing: inherit;
+	text-transform: inherit;
+	cursor: pointer;
+}
+.sw__pause:hover {
+	color: var(--sw-ink);
+}
+.sw__head-r {
+	display: flex;
+	gap: 24px;
+}
+.sw__grid {
+	display: grid;
+	grid-template-columns: minmax(0, 1fr) 24vw;
+	column-gap: 3.4vw;
+	align-items: start;
+}
+
+.sw__list {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+.sw-item {
+	border-bottom: 1px solid var(--sw-line);
+}
+.sw-item a {
+	position: relative;
+	display: grid;
+	grid-template-columns: 4vw minmax(0, 1fr) auto;
+	align-items: baseline;
+	row-gap: 22px;
+	min-height: 37vh;
+	min-height: 37svh;
+	padding: 9vh 0 7vh;
+	color: inherit;
+	text-decoration: none;
+	cursor: pointer;
+}
+.sw-item__no {
+	font: 400 13px/1 var(--sw-mono);
+	color: var(--sw-dim);
+	transition: color 0.4s ease;
+}
+.sw-item__name {
+	margin: 0;
+	font-family: var(--sw-grot);
+	font-size: clamp(54px, 6.6vw, 128px);
+	font-weight: 600;
+	line-height: 0.95;
+	letter-spacing: -0.045em;
+	color: var(--sw-dim);
+	transition: color 0.45s ease, transform 0.7s var(--sw-out);
+}
+.sw-item__year {
+	font: 400 13px/1 var(--sw-mono);
+	color: var(--sw-mute);
+	text-align: right;
+}
+.sw-item__meta {
+	grid-column: 2;
+	margin: 0;
+	font: 400 13px/1.5 var(--sw-mono);
+	letter-spacing: 0.08em;
+	text-transform: uppercase;
+	color: var(--sw-mute);
+}
+.sw-item__meta b {
+	margin-left: 18px;
+	font-weight: 400;
+	color: var(--sw-blue);
+}
+.sw-item__go {
+	grid-column: 3;
+	align-self: center;
+	font: 500 13px/1 var(--sw-mono);
+	letter-spacing: 0.1em;
+	text-transform: uppercase;
+	color: var(--sw-ink);
+	white-space: nowrap;
+	opacity: 0;
+	transform: translate3d(-8px, 0, 0);
+	transition: opacity 0.4s ease, transform 0.5s var(--sw-out);
+}
+.sw-item.is-active .sw-item__name {
+	color: var(--sw-ink);
+}
+.sw-item.is-active .sw-item__no {
+	color: var(--sw-blue);
+}
+.sw-item.is-active .sw-item__go {
+	opacity: 1;
+	transform: none;
+}
+.sw-item.is-hover .sw-item__name {
+	color: var(--sw-blue);
+	transform: translate3d(1.6vw, 0, 0);
+}
+.sw-item__thumb {
+	display: none;
+}
+
+/* the sticky frame on the right */
+.sw__panel {
+	position: sticky;
+	top: calc(50vh - 15vw - 20px);
+	top: calc(50svh - 15vw - 20px);
+	margin-top: 6vh;
+}
+.sw__frame {
+	position: relative;
+	width: 100%;
+	aspect-ratio: 4 / 5;
+	overflow: hidden;
+	border: 1px solid var(--sw-line);
+	border-radius: 4px;
+	background: #191919;
+}
+.sw__shot {
+	position: absolute;
+	inset: 0;
+	opacity: 0;
+	transform: scale(1.04);
+	transition: opacity 0.5s ease, transform 0.9s var(--sw-out);
+}
+.sw__shot.is-on {
+	opacity: 1;
+	transform: none;
+}
+.sw__big {
+	position: absolute;
+	inset: 0;
+	display: grid;
+	place-items: center;
+	font: 600 clamp(56px, 5.4vw, 104px)/1 var(--sw-grot);
+	letter-spacing: -0.04em;
+	color: #8c8a86;
+	opacity: 0;
+	transition: opacity 0.35s ease;
+}
+/* after a click the frame shows the clicked clip, even under the cursor */
+.sw.is-picked .sw__shot.is-on {
+	opacity: 1;
+}
+.sw.is-picked .sw__big {
+	opacity: 0;
+}
+.sw.is-hovering:not(.is-picked) .sw__shot {
+	opacity: 0;
+}
+.sw.is-hovering:not(.is-picked) .sw__big {
+	opacity: 1;
+}
+.sw__cap {
+	display: flex;
+	justify-content: space-between;
+	margin-top: 16px;
+	font: 400 13px/1 var(--sw-mono);
+	letter-spacing: 0.1em;
+	text-transform: uppercase;
+	color: var(--sw-mute);
+}
+.sw__cap b {
+	font-weight: 400;
+	color: var(--sw-blue);
+}
+.sw__bar {
+	position: relative;
+	height: 2px;
+	margin-top: 14px;
+	background: var(--sw-line);
+	overflow: hidden;
+}
+.sw__bar i {
+	position: absolute;
+	inset: 0;
+	background: var(--sw-blue);
+	transform-origin: 0 50%;
+	transform: scaleX(0.25);
+	transition: transform 0.6s var(--sw-out);
+}
+
+/* a picture: a coloured board with a phone screen on it, or a full-bleed still */
+.pic {
+	position: absolute;
+	inset: 0;
+	display: grid;
+	place-items: center;
+	overflow: hidden;
+	background: var(--pic-bg, #1d2a4a);
+}
+.pic img {
+	display: block;
+}
+.pic--phone img {
+	position: absolute;
+	left: 50%;
+	top: 10%;
+	height: 80%;
+	width: auto;
+	transform: translateX(-50%);
+	border-radius: 7% / 3.4%;
+	box-shadow: 0 30px 60px rgb(0 0 0 / 0.35), 0 0 0 6px #10131a;
+}
+.pic--full video,
+.pic--full img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+
+/* the card that follows the cursor, and the round label on it */
+.sw__float {
+	position: absolute;
+	left: 0;
+	top: 0;
+	z-index: 5;
+	width: 17vw;
+	aspect-ratio: 4 / 5;
+	margin: -10.6vw 0 0 -8.5vw;
+	pointer-events: none;
+	opacity: 0;
+	transition: opacity 0.3s ease;
+	will-change: transform;
+}
+.sw__float .pic {
+	opacity: 0;
+	transition: opacity 0.25s ease;
+}
+.sw__float .pic.is-on {
+	opacity: 1;
+}
+.sw.is-hovering .sw__float {
+	opacity: 1;
+}
+.sw-cursor {
+	position: absolute;
+	left: 0;
+	top: 0;
+	z-index: 6;
+	display: grid;
+	place-items: center;
+	width: 88px;
+	height: 88px;
+	margin: -44px 0 0 -44px;
+	border-radius: 50%;
+	background: var(--sw-blue);
+	color: #10162e;
+	font: 500 12px/1 var(--sw-mono);
+	letter-spacing: 0.12em;
+	pointer-events: none;
+	opacity: 0;
+	transform: scale(0.4);
+	transition: opacity 0.25s ease;
+	will-change: transform;
+}
+.sw.is-hovering .sw-cursor,
+.uc.is-hovering .sw-cursor {
+	opacity: 1;
+}
+.sw.is-paused .sw__float {
+	display: none;
+}
+
+/* ---------------- up close ---------------- */
+.uc {
+	height: calc(100vh + var(--uc-run, 1800px));
+	height: calc(100svh + var(--uc-run, 1800px));
+}
+.uc__pin {
+	position: sticky;
+	top: 0;
+	height: 100vh;
+	height: 100svh;
+	overflow: hidden;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	padding: 0 3vw;
+	cursor: pointer;
+}
+.uc__head {
+	margin-bottom: 40px;
+}
+.uc__track {
+	display: flex;
+	gap: 1.5vw;
+	width: max-content;
+	will-change: transform;
+	touch-action: pan-y;
+	user-select: none;
+}
+.uc-card {
+	flex: none;
+	width: 23.4vw;
+	margin: 0;
+}
+.uc-card__img {
+	position: relative;
+	aspect-ratio: 4 / 5;
+	border-radius: 3px;
+	overflow: hidden;
+}
+.uc-card__img .pic {
+	transition: transform 0.9s var(--sw-out);
+}
+.uc-card:hover .uc-card__img .pic {
+	transform: scale(1.03);
+}
+.uc-card figcaption {
+	display: flex;
+	justify-content: space-between;
+	margin-top: 16px;
+	font: 400 13px/1 var(--sw-mono);
+	letter-spacing: 0.1em;
+	text-transform: uppercase;
+	color: var(--sw-mute);
+}
+.uc-card img {
+	-webkit-user-drag: none;
+}
+
+/* the site header over these dark screens */
+.site-header.site-header--on-dark2:not(.site-header--open) .site-header__logo,
+.site-header.site-header--on-dark2:not(.site-header--open) .site-header__toggle,
+.site-header.site-header--on-dark2:not(.site-header--open) .site-header__actions a {
+	color: #f1efe9;
+}
+.site-header.site-header--on-dark2:not(.site-header--open) .site-header__burger::before,
+.site-header.site-header--on-dark2:not(.site-header--open) .site-header__burger::after {
+	background-color: #f1efe9;
+}
+
+/* ---------------- tablets and phones ---------------- */
+@media (max-width: 1023px), (hover: none) {
+	.sw-item a,
+	.uc__pin {
+		cursor: pointer;
+	}
+	.sw__float,
+	.sw-cursor {
+		display: none;
+	}
+}
+@media (max-width: 1023px) {
+	.sw {
+		padding: 110px 6vw 100px;
+	}
+	.sw__grid {
+		grid-template-columns: minmax(0, 1fr);
+	}
+	.sw__panel {
+		display: none;
+	}
+	.sw-item a {
+		grid-template-columns: 9vw minmax(0, 1fr) auto;
+		min-height: 0;
+		padding: 56px 0 48px;
+	}
+	.sw-item__thumb {
+		display: block;
+		grid-column: 2 / -1;
+		position: relative;
+		margin-top: 6px;
+		aspect-ratio: 4 / 3;
+		border-radius: 4px;
+		overflow: hidden;
+	}
+	.sw-item__go {
+		display: none;
+	}
+	.sw__head-r .sw__pause {
+		display: none;
+	}
+	.uc {
+		height: auto;
+		padding: 90px 0 100px;
+	}
+	.uc__pin {
+		position: relative;
+		height: auto;
+		padding: 0;
+	}
+	.uc__head {
+		padding: 0 6vw;
+	}
+	.uc__scroller {
+		overflow-x: auto;
+		scroll-snap-type: x mandatory;
+		scrollbar-width: none;
+		scroll-padding-left: 6vw;
+		padding: 0 6vw;
+	}
+	.uc__scroller::-webkit-scrollbar {
+		display: none;
+	}
+	.uc__track {
+		transform: none !important;
+		gap: 14px;
+		padding-right: 6vw;
+	}
+	.uc-card {
+		width: 70vw;
+		scroll-snap-align: start;
+	}
+}
+@media (max-width: 767px) {
+	.sw-item__name {
+		font-size: clamp(40px, 11vw, 60px);
+	}
+	.sw-item__meta b {
+		display: block;
+		margin: 6px 0 0;
+	}
+	.uc-card {
+		width: 78vw;
+	}
+}
+@media (prefers-reduced-motion: reduce) {
+	.sw-item__name,
+	.sw__shot,
+	.sw__bar i,
+	.uc-card__img .pic {
+		transition: none;
+	}
+	.sw__float,
+	.sw-cursor {
+		display: none;
+	}
+}
+
+/* the site's own dot cursor steps aside while the VIEW / LOOK circle is showing */
+html:has(.sw.is-hovering) .sticky-cursor,
+html:has(.uc.is-hovering) .sticky-cursor {
+	opacity: 0 !important;
+}
+
+/* once a row is clicked, its clip plays in the frame; the small hover card steps aside */
+.sw.is-picked .sw__float {
+	opacity: 0;
+}
+
+/* the custom cursor circle (VIEW, PLAY, LOOK) is switched off; the normal pointer is used */
+.sw-cursor {
+	display: none !important;
+}

@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Entering the portfolio, more options</title>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,700..900&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&family=Inter+Tight:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body { width: 1440px; height: 900px; overflow: hidden; background: #0a0a0a; color: #f2efe8; -webkit-font-smoothing: antialiased; }
+.hdr { position: absolute; left: 0; right: 0; top: 0; height: 70px; display: flex; align-items: center; justify-content: space-between; padding: 0 20px; font: 600 15px "Inter Tight"; z-index: 40; }
+.hdr span:not(:first-child) { font-weight: 500; }
+.f { display: none; position: absolute; inset: 0; overflow: hidden; }
+.proj { position: absolute; inset: 0; background: url(img/p1.png) center / cover; }
+.mono { font: 500 12px "JetBrains Mono"; letter-spacing: 0.16em; text-transform: uppercase; color: #8a857c; }
+.arch { font-family: Archivo; font-weight: 800; font-stretch: 78%; text-transform: uppercase; letter-spacing: -0.01em; line-height: 1; white-space: nowrap; }
+.serif { font-family: "Instrument Serif"; font-weight: 400; }
+.line { position: absolute; left: 0; width: 1440px; height: 1px; background: #f2efe8; box-shadow: 0 0 12px rgb(255 255 255 / 0.5); }
+.fade { -webkit-mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent); mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent); }
+
+/* B, sliced title: the top and bottom halves of the words, cut by the line */
+.half { position: absolute; left: 0; width: 1440px; overflow: hidden; }
+.half p { position: absolute; left: 0; width: 1440px; text-align: center; font-size: 150px; }
+.half.top { top: 300px; height: 150px; }
+.half.top p { top: 64px; }
+.half.bot { top: 450px; height: 150px; }
+.half.bot p { top: -86px; }
+
+/* C, countdown */
+svg.o { position: absolute; left: 0; top: 0; }
+.num { position: absolute; left: 0; right: 0; top: 200px; text-align: center; font-size: 420px; line-height: 1; }
+</style>
+</head>
+<body>
+
+<!-- ============ B. SLICED TITLE ============ -->
+<section class="f" id="b1">
+	<div class="line fade" style="top:450px"></div>
+	<div class="half top"><p class="arch" style="transform:translateX(-380px)">Selected work</p></div>
+	<div class="half bot"><p class="arch" style="transform:translateX(380px);color:#6d6a64">Selected work</p></div>
+	<p class="mono" style="position:absolute;left:64px;top:470px">Entering the portfolio</p>
+</section>
+<section class="f" id="b2">
+	<div class="line fade" style="top:450px"></div>
+	<div class="half top"><p class="arch" style="transform:translateX(-90px)">Selected work</p></div>
+	<div class="half bot"><p class="arch" style="transform:translateX(90px);color:#a8a49c">Selected work</p></div>
+	<p class="mono" style="position:absolute;left:64px;top:470px">Entering the portfolio</p>
+	<p class="mono" style="position:absolute;right:64px;top:470px">2024 to 2026</p>
+</section>
+<section class="f" id="b3">
+	<div class="half top"><p class="arch">Selected work</p></div>
+	<div class="half bot"><p class="arch">Selected work</p></div>
+	<p class="serif" style="position:absolute;left:0;right:0;top:640px;text-align:center;font-size:40px;font-style:italic;color:#cfcac0">Five projects, shipped and live.</p>
+	<p class="mono" style="position:absolute;left:64px;top:820px">Entering the portfolio</p>
+	<p class="mono" style="position:absolute;right:64px;top:820px">2024 to 2026</p>
+</section>
+<section class="f" id="b4">
+	<div class="proj"></div>
+	<div style="position:absolute;left:0;right:0;top:0;height:250px;background:#0a0a0a"></div>
+	<div style="position:absolute;left:0;right:0;top:650px;bottom:0;background:#0a0a0a"></div>
+	<div class="half top" style="top:100px"><p class="arch">Selected work</p></div>
+	<div class="half bot" style="top:650px"><p class="arch">Selected work</p></div>
+</section>
+
+<!-- ============ C. COUNTDOWN TO 01 ============ -->
+<section class="f" id="c1">
+	<p class="num arch">05</p>
+	<div class="line fade" style="top:720px;opacity:.25"></div>
+	<div class="line" style="top:720px;width:180px"></div>
+	<p class="mono" style="position:absolute;left:64px;top:690px">Five projects ahead</p>
+	<p class="mono" style="position:absolute;right:64px;top:690px">Autonomous agent</p>
+</section>
+<section class="f" id="c2">
+	<p class="num arch" style="opacity:.12;transform:translateY(-60px);filter:blur(6px)">04</p>
+	<p class="num arch">03</p>
+	<div class="line fade" style="top:720px;opacity:.25"></div>
+	<div class="line" style="top:720px;width:720px"></div>
+	<p class="mono" style="position:absolute;left:64px;top:690px">Five projects ahead</p>
+	<p class="mono" style="position:absolute;right:64px;top:690px">Email automation</p>
+</section>
+<section class="f" id="c3">
+	<p class="num arch" style="color:#8fd46f;text-shadow:0 0 80px rgb(143 212 111 / .35)">01</p>
+	<div class="line" style="top:720px;background:#8fd46f;box-shadow:0 0 14px #8fd46f,0 0 50px rgb(143 212 111/.4)"></div>
+	<p class="mono" style="position:absolute;left:64px;top:690px;color:#8fd46f">Entering the portfolio</p>
+	<p class="mono" style="position:absolute;right:64px;top:690px;color:#f2efe8">Marketplace app</p>
+</section>
+<section class="f" id="c4">
+	<div class="proj" style="opacity:.75"></div>
+	<div style="position:absolute;inset:0;background:radial-gradient(circle at 82% 88%, transparent 0 18%, rgb(10 10 10 / .7) 60%)"></div>
+	<p class="arch" style="position:absolute;left:880px;top:430px;font-size:330px;color:rgb(143 212 111 / .55)">01</p>
+</section>
+
+<!-- ============ D. HORIZON ============ -->
+<section class="f" id="d1">
+	<div style="position:absolute;left:0;right:0;top:300px;height:150px;overflow:hidden">
+		<p class="arch" style="position:absolute;left:0;right:0;top:120px;text-align:center;font-size:230px">Portfolio</p>
+	</div>
+	<div style="position:absolute;left:220px;right:220px;top:380px;height:140px;background:radial-gradient(ellipse at 50% 50%, rgb(255 255 255 / .16), transparent 70%)"></div>
+	<div class="line fade" style="top:450px"></div>
+</section>
+<section class="f" id="d2">
+	<p class="serif" style="position:absolute;left:0;right:0;top:170px;text-align:center;font-size:44px;font-style:italic;color:#cfcac0">Entering the</p>
+	<div style="position:absolute;left:0;right:0;top:200px;height:250px;overflow:hidden">
+		<p class="arch" style="position:absolute;left:0;right:0;top:40px;text-align:center;font-size:230px">Portfolio</p>
+	</div>
+	<div style="position:absolute;left:0;right:0;top:451px;height:250px;overflow:hidden;opacity:.18;filter:blur(3px);-webkit-mask-image:linear-gradient(#000,transparent 70%);mask-image:linear-gradient(#000,transparent 70%)">
+		<p class="arch" style="position:absolute;left:0;right:0;top:-40px;text-align:center;font-size:230px;transform:scaleY(-1)">Portfolio</p>
+	</div>
+	<div style="position:absolute;left:120px;right:120px;top:360px;height:180px;background:radial-gradient(ellipse at 50% 50%, rgb(255 255 255 / .22), transparent 70%)"></div>
+	<div class="line fade" style="top:450px"></div>
+	<p class="mono" style="position:absolute;left:0;right:0;top:760px;text-align:center">Five projects · 2024 to 2026</p>
+</section>
+<section class="f" id="d3">
+	<div style="position:absolute;left:0;right:0;top:200px;height:250px;overflow:hidden;opacity:.5">
+		<p class="arch" style="position:absolute;left:0;right:0;top:40px;text-align:center;font-size:230px">Portfolio</p>
+	</div>
+	<div style="position:absolute;left:-200px;right:-200px;top:150px;height:600px;background:radial-gradient(ellipse at 50% 50%, rgb(220 255 205 / .95) 0 6%, rgb(143 212 111 / .55) 22%, rgb(18 38 31 / .4) 48%, transparent 70%)"></div>
+	<div class="line fade" style="top:450px;height:3px;background:#fff;box-shadow:0 0 30px #fff,0 0 90px #8fd46f"></div>
+</section>
+<section class="f" id="d4">
+	<div class="proj"></div>
+	<div style="position:absolute;left:-200px;right:-200px;top:0;height:900px;background:radial-gradient(ellipse at 50% 50%, rgb(143 212 111 / .25), transparent 60%)"></div>
+</section>
+
+<!-- ============ E. THROUGH THE O ============ -->
+<section class="f" id="e1"><svg class="o" width="1440" height="900" data-k="1" data-fill="1"></svg></section>
+<section class="f" id="e2"><div class="proj"></div><svg class="o" width="1440" height="900" data-k="2.6"></svg></section>
+<section class="f" id="e3"><div class="proj"></div><svg class="o" width="1440" height="900" data-k="9"></svg></section>
+<section class="f" id="e4"><div class="proj"></div></section>
+
+<div class="hdr" id="hdr"><span>HARIS</span><span>☰&nbsp; MENU</span><span>EMAIL &nbsp;&nbsp; LINKEDIN</span></div>
+<script>
+const id = new URLSearchParams(location.search).get('f') || 'b1'
+const sec = document.getElementById(id)
+sec.style.display = 'block'
+if (/4$/.test(id)) document.getElementById('hdr').style.display = 'none'
+
+// E: "PORTFOLIO" as a black sheet with a hole where the O's counter is; scaling around the O flies through it
+const svg = sec.querySelector('svg.o')
+if (svg) document.fonts.ready.then(() => {
+	const NS = 'http://www.w3.org/2000/svg'
+	const k = +svg.dataset.k
+	svg.innerHTML = `<g id="g"><path id="sheet" fill="#0a0a0a" fill-rule="evenodd"/>
+	<text id="t" x="720" y="560" text-anchor="middle" fill="#f2efe8" style="font-family:Archivo;font-weight:800;font-stretch:78%;font-size:240px;letter-spacing:-2px">PORTFOLIO</text>
+	<text x="720" y="300" text-anchor="middle" fill="#cfcac0" style="font-family:'Instrument Serif';font-style:italic;font-size:48px">Entering the</text></g>`
+	const t = svg.querySelector('#t')
+	const b = t.getExtentOfChar(5) // the second O
+	const cx = b.x + b.width / 2
+	const cy = 560 - 240 * 0.36
+	const rx = b.width * 0.2
+	const ry = 240 * 0.25
+	const big = 'M-20000 -20000 H20000 V20000 H-20000 Z'
+	const hole = svg.dataset.fill ? '' : ` M${cx - rx} ${cy} a${rx} ${ry} 0 1 0 ${2 * rx} 0 a${rx} ${ry} 0 1 0 ${-2 * rx} 0 Z`
+	svg.querySelector('#sheet').setAttribute('d', big + hole)
+	svg.querySelector('#g').setAttribute('transform', `translate(${cx} ${cy}) scale(${k}) translate(${-cx} ${-cy})`)
+	document.body.dataset.ready = '1'
+})
+else document.body.dataset.ready = '1'
+</script>
+</body>
+</html>

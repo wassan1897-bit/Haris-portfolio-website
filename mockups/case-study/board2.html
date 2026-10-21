@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>View project page, four more ideas</title>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..700;1,6..96,400..700&family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+:root { --bg: #251014; --bg2: #2f161b; --acc: #ff7a59; --ink: #f6eee9; --mute: rgb(246 238 233 / .62); --line: rgb(246 238 233 / .12); }
+html, body { width: 1440px; height: 900px; overflow: hidden; background: var(--bg); color: var(--ink); font-family: "Manrope", sans-serif; -webkit-font-smoothing: antialiased; }
+.f { display: none; position: absolute; inset: 0; overflow: hidden; }
+.mono { font: 500 11.5px "JetBrains Mono"; letter-spacing: .16em; text-transform: uppercase; color: var(--mute); }
+.mono b { color: var(--acc); font-weight: 500; }
+.serif { font-family: "Bodoni Moda", serif; font-weight: 500; letter-spacing: -.03em; }
+.serif em { font-style: italic; font-weight: 400; color: var(--acc); }
+.top { position: absolute; left: 0; right: 0; top: 0; height: 66px; display: flex; align-items: center; justify-content: space-between; padding: 0 40px; border-bottom: 1px solid var(--line); z-index: 5; }
+.top .x { display: inline-flex; align-items: center; gap: 10px; font: 600 13px "Manrope"; }
+.top .x i { width: 34px; height: 34px; border-radius: 50%; box-shadow: inset 0 0 0 1px var(--line); display: grid; place-items: center; font-style: normal; }
+.shot { border-radius: 14px; overflow: hidden; box-shadow: 0 40px 90px -40px rgb(0 0 0 / .8), 0 0 0 1px var(--line); background: #000 center / cover no-repeat; }
+.lab { position: absolute; left: 50%; bottom: 18px; transform: translateX(-50%); z-index: 9; padding: 8px 16px; border-radius: 999px; background: #f6eee9; color: #161614; font: 600 13px "Manrope"; white-space: nowrap; }
+
+/* ===== D. Before and after ===== */
+#D .side { position: absolute; top: 66px; bottom: 0; padding: 60px 56px; }
+#D .before { left: 0; width: 720px; background: #17141a; filter: saturate(.4); }
+#D .after { left: 720px; right: 0; }
+#D h2 { margin-top: 18px; font-size: 62px; line-height: .98; }
+#D .q { margin-top: 34px; display: grid; gap: 10px; }
+#D .q p { display: grid; grid-template-columns: 70px 1fr auto; align-items: center; padding: 14px 16px; border-radius: 12px; background: rgb(246 238 233 / .05); font: 500 14px "Manrope"; }
+#D .q p span { font: 500 12px "JetBrains Mono"; color: var(--mute); }
+#D .q p em { font-style: normal; font: 600 12px "Manrope"; color: #c9a7a0; }
+#D .after .q p { background: rgb(255 122 89 / .1); box-shadow: inset 0 0 0 1px rgb(255 122 89 / .25); }
+#D .after .q p em { color: #7df0a4; }
+#D .handle { position: absolute; left: 720px; top: 66px; bottom: 0; width: 2px; margin-left: -1px; background: var(--ink); z-index: 3; }
+#D .handle i { position: absolute; left: 50%; top: 50%; width: 56px; height: 56px; margin: -28px; border-radius: 50%; background: var(--ink); color: #161614; display: grid; place-items: center; font-style: normal; font-weight: 800; }
+#D .tot { position: absolute; left: 56px; right: 56px; bottom: 50px; display: flex; gap: 40px; }
+#D .tot b { display: block; font: 500 52px/1 "Bodoni Moda"; }
+#D .tot span { font: 400 13px "Manrope"; color: var(--mute); }
+
+/* ===== E. One night, replayed ===== */
+#E .l { position: absolute; left: 56px; top: 110px; width: 420px; }
+#E h2 { margin-top: 18px; font-size: 64px; line-height: .96; }
+#E .l p.s { margin-top: 20px; font: 400 16px/1.6 "Manrope"; color: var(--mute); }
+#E .clock { margin-top: 40px; font: 400 96px/1 "JetBrains Mono"; letter-spacing: -.04em; color: var(--acc); }
+#E .clock small { display: block; margin-top: 10px; font: 500 12px "JetBrains Mono"; letter-spacing: .16em; color: var(--mute); }
+#E .tl { position: absolute; left: 540px; right: 56px; top: 100px; bottom: 30px; }
+#E .tl::before { content: ""; position: absolute; left: 80px; top: 10px; bottom: 10px; width: 2px; background: var(--line); }
+#E .ev { position: relative; display: grid; grid-template-columns: 80px 1fr; gap: 30px; margin-bottom: 22px; }
+#E .ev time { font: 500 14px "JetBrains Mono"; color: var(--mute); padding-top: 4px; }
+#E .ev::after { content: ""; position: absolute; left: 75px; top: 6px; width: 12px; height: 12px; border-radius: 50%; background: var(--bg); box-shadow: 0 0 0 2px var(--mute); }
+#E .ev.on::after { background: var(--acc); box-shadow: 0 0 0 2px var(--acc), 0 0 16px var(--acc); }
+#E .ev.on time { color: var(--acc); }
+#E .ev div b { display: block; font: 700 17px "Manrope"; }
+#E .ev div p { margin-top: 5px; font: 400 14px/1.5 "Manrope"; color: var(--mute); }
+#E .ev .shot { margin-top: 12px; height: 180px; width: 100%; }
+#E .ev.dim { opacity: .35; }
+
+/* ===== F. System map ===== */
+#F h2 { position: absolute; left: 56px; top: 104px; font-size: 56px; line-height: 1; }
+#F .hint { position: absolute; left: 58px; top: 172px; font: 400 14px "Manrope"; color: var(--mute); }
+#F svg.map { position: absolute; left: 0; top: 0; width: 1440px; height: 900px; }
+#F .n { position: absolute; width: 180px; padding: 14px 16px; border-radius: 16px; background: var(--bg2); box-shadow: inset 0 0 0 1px var(--line); }
+#F .n small { font: 500 10.5px "JetBrains Mono"; letter-spacing: .12em; color: var(--mute); text-transform: uppercase; }
+#F .n b { display: block; margin-top: 6px; font: 700 15px/1.25 "Manrope"; }
+#F .n.on { background: var(--acc); color: #1b0a0d; box-shadow: 0 0 0 6px rgb(255 122 89 / .18), 0 20px 40px -10px rgb(255 122 89 / .5); }
+#F .n.on small { color: rgb(27 10 13 / .7); }
+#F .panel { position: absolute; right: 40px; top: 110px; bottom: 40px; width: 400px; padding: 28px; border-radius: 22px; background: #f6eee9; color: #1b1b19; }
+#F .panel .mono { color: #77736b; }
+#F .panel h3 { margin-top: 14px; font: 500 38px/1 "Bodoni Moda"; letter-spacing: -.03em; }
+#F .panel p { margin-top: 14px; font: 400 15px/1.55 "Manrope"; color: #4a4741; }
+#F .panel .shot { margin-top: 20px; height: 200px; }
+#F .panel .r { margin-top: 18px; display: flex; gap: 22px; }
+#F .panel .r b { display: block; font: 500 34px/1 "Bodoni Moda"; }
+#F .panel .r span { font: 400 12px "Manrope"; color: #77736b; }
+
+/* ===== G. Sideways chapters ===== */
+#G .strip { position: absolute; left: 0; top: 66px; bottom: 0; display: flex; transform: translateX(-380px); }
+#G .pn { position: relative; flex: none; height: 100%; padding: 70px 50px; border-right: 1px solid var(--line); }
+#G .p1 { width: 760px; }
+#G .p2 { width: 620px; background: var(--acc); color: #1b0a0d; }
+#G .p3 { width: 760px; }
+#G .p1 h2 { margin-top: 20px; font-size: 86px; line-height: .92; }
+#G .giant { font: 500 280px/.8 "Bodoni Moda"; letter-spacing: -.05em; }
+#G .p2 .mono { color: rgb(27 10 13 / .7); }
+#G .p2 p.l { margin-top: 30px; font: 500 22px/1.4 "Manrope"; max-width: 460px; }
+#G .p3 .shot { margin-top: 26px; height: 360px; }
+#G .p3 h3 { margin-top: 16px; font-size: 44px; line-height: 1; }
+#G .rail { position: absolute; left: 40px; right: 40px; bottom: 26px; display: flex; gap: 8px; z-index: 4; }
+#G .rail i { flex: 1; height: 3px; border-radius: 3px; background: rgb(246 238 233 / .2); }
+#G .rail i.on { background: var(--ink); }
+#G .scrollhint { position: absolute; right: 40px; top: 90px; z-index: 4; font: 600 13px "Manrope"; color: var(--mute); }
+</style>
+</head>
+<body>
+<section class="f" id="D">
+	<div class="top"><span class="mono"><b>05 / 05</b> &nbsp;Case study</span><span class="x">Close <i>✕</i></span></div>
+	<div class="side before"><p class="mono">Before &nbsp;· &nbsp;a night without the agent</p><h2 class="serif">Every query waited <em style="color:#c9a7a0">until morning.</em></h2>
+		<div class="q"><p><span>21:42</span>"My broadband is down again"<em>Waiting</em></p><p><span>23:05</span>New customer asking about coverage<em>Waiting</em></p><p><span>01:17</span>Billing question, account locked<em>Waiting</em></p><p><span>02:14</span>"Is there an outage in my area?"<em>Waiting</em></p></div>
+		<div class="tot"><div><b>Morning</b><span>the earliest anyone answered</span></div><div><b>Every</b><span>query needed a person to triage</span></div></div></div>
+	<div class="side after"><p class="mono"><b>After</b> &nbsp;· &nbsp;the same night, with the agent</p><h2 class="serif">Every query <em>handled in minutes.</em></h2>
+		<div class="q"><p><span>21:42</span>Outage confirmed, ticket to Tech<em>Solved</em></p><p><span>23:05</span>Coverage checked, lead created<em>Solved</em></p><p><span>01:17</span>Routed to Billing with context<em>Ticketed</em></p><p><span>02:14</span>Live outage check, customer told<em>Solved</em></p></div>
+		<div class="tot"><div><b>790+</b><span>tickets resolved end to end</span></div><div><b>0</b><span>humans needed out of hours</span></div></div></div>
+	<div class="handle"><i>⇆</i></div>
+</section>
+
+<section class="f" id="E">
+	<div class="top"><span class="mono"><b>05 / 05</b> &nbsp;Case study</span><span class="x">Close <i>✕</i></span></div>
+	<div class="l"><p class="mono"><b>One night, replayed</b> &nbsp;· &nbsp;an example query</p><h2 class="serif">The night shift, <em>handled.</em></h2>
+		<p class="s">Scroll to follow one real query through the agent, from the first message to the ticket on the right desk.</p>
+		<p class="clock">02:14:31<small>Customer message received</small></p></div>
+	<div class="tl">
+		<div class="ev on"><time>02:14:31</time><div><b>A customer writes in</b><p>"My internet has been down since this evening, is it just me?"</p></div></div>
+		<div class="ev on"><time>02:14:33</time><div><b>Triage in the CRM</b><p>Recognised as an existing customer from their details, account found in Airtable.</p></div></div>
+		<div class="ev on"><time>02:14:35</time><div><b>Live outage check</b><p>n8n calls the network API: a known fault in their area, engineers already on it.</p><div class="shot" style="background-image:url(img/n8n-outage.webp)"></div></div></div>
+		<div class="ev dim"><time>02:14:41</time><div><b>Ticket to Technical support</b><p>Structured, with the address, the fault ID and the full conversation.</p></div></div>
+	</div>
+</section>
+
+<section class="f" id="F">
+	<div class="top"><span class="mono"><b>05 / 05</b> &nbsp;Case study</span><span class="x">Close <i>✕</i></span></div>
+	<h2 class="serif">How it <em>works.</em></h2><p class="hint">Click any part of the system to see what it does.</p>
+	<svg class="map" viewBox="0 0 1440 900"><g fill="none" stroke="rgb(246 238 233 / .25)" stroke-width="2"><path d="M220 440 C260 440 260 340 300 340"/><path d="M220 440 C260 440 260 540 300 540"/><path d="M480 340 C520 340 520 440 560 440"/><path d="M480 540 C520 540 520 440 560 440"/><path d="M740 440 C770 440 770 340 800 340"/><path d="M740 440 C770 440 770 560 800 560"/></g><path d="M480 340 C520 340 520 440 560 440" stroke="#ff7a59" stroke-width="3"/></svg>
+	<div class="n" style="left:40px;top:405px"><small>Channel</small><b>Customer chat, out of hours</b></div>
+	<div class="n" style="left:300px;top:305px"><small>Voiceflow</small><b>Conversation layer</b></div>
+	<div class="n" style="left:300px;top:505px"><small>Airtable</small><b>CRM triage</b></div>
+	<div class="n on" style="left:560px;top:405px"><small>n8n</small><b>Live outage check</b></div>
+	<div class="n" style="left:800px;top:305px;width:150px"><small>Answer</small><b>Customer told</b></div>
+	<div class="n" style="left:800px;top:525px;width:150px"><small>5 lanes</small><b>Ticket to a team</b></div>
+	<div class="panel"><p class="mono">n8n · Workflow 01</p><h3>Live outage check</h3><p>Before anything is escalated, n8n asks the network API whether the customer's area has a known fault, so people are told the truth straight away and engineers are not sent duplicates.</p><div class="shot" style="background-image:url(img/n8n-outage.webp)"></div><div class="r"><div><b>23</b><span>nodes</span></div><div><b>5</b><span>team lanes after it</span></div></div></div>
+</section>
+
+<section class="f" id="G">
+	<div class="top"><span class="mono"><b>05 / 05</b> &nbsp;Case study</span><span class="x">Close <i>✕</i></span></div>
+	<p class="scrollhint">Scroll → chapters move sideways</p>
+	<div class="strip">
+		<div class="pn p1"><p class="mono"><b>01</b> &nbsp;The brief</p><h2 class="serif">The night shift, <em>handled.</em></h2><p style="margin-top:24px;max-width:520px;font:400 17px/1.6 Manrope;color:var(--mute)">A broadband provider's support queue went quiet every night and was full every morning. They wanted the first line handled around the clock.</p></div>
+		<div class="pn p2"><p class="mono">02 &nbsp;The result</p><p class="giant">790+</p><p class="l">tickets resolved end to end, and 7,101 minutes of support time handed back to the team.</p></div>
+		<div class="pn p3"><p class="mono"><b>03</b> &nbsp;The build</p><h3 class="serif">Five lanes, <em>one per team.</em></h3><div class="shot" style="background-image:url(img/n8n-routing.webp)"></div></div>
+	</div>
+	<div class="rail"><i class="on"></i><i class="on"></i><i></i><i></i><i></i></div>
+</section>
+
+<script>
+const id = (new URLSearchParams(location.search).get('f') || 'D').toUpperCase()
+document.getElementById(id).style.display = 'block'
+const L = { D: 'D. Before and after', E: 'E. One night, replayed', F: 'F. System map', G: 'G. Sideways chapters' }
+document.body.insertAdjacentHTML('beforeend', `<span class="lab">${L[id]}</span>`)
+</script>
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!doctype html>
+<html><head><meta charset="utf-8" />
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..700;1,6..96,400..700&family=Manrope:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{width:1440px;height:900px;overflow:hidden;background:#111;color:#f2efe8;font-family:Manrope,sans-serif}
+.k{font:500 13px "JetBrains Mono",monospace;letter-spacing:.16em;text-transform:uppercase;color:#a9a49a}
+.head{position:absolute;left:56px;right:56px;top:40px;display:flex;justify-content:space-between}
+h2{position:absolute;left:56px;top:92px;font:400 64px/1 "Bodoni Moda",serif;letter-spacing:-.02em}
+h2 em{color:#e3b85c}
+/* the strip */
+.strip{position:absolute;left:-40px;right:-40px;top:280px;height:360px;background:#050505;transform:rotate(-2deg)}
+.holes{position:absolute;left:0;right:0;height:22px;background:repeating-linear-gradient(90deg,transparent 0 18px,#1d1d1d 18px 40px,transparent 40px 56px)}
+.holes i{display:none}
+.holes.t{top:10px}.holes.b{bottom:10px}
+.holes::after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(90deg,#050505 0 20px,transparent 20px 36px)}
+.frames{position:absolute;top:46px;bottom:46px;left:-800px;display:flex;gap:14px;align-items:center}
+.f{position:relative;height:100%;flex:none;overflow:hidden;border-radius:3px;filter:saturate(.7) brightness(.6)}
+.f img{height:100%;display:block}
+.f b{position:absolute;left:10px;top:10px;font:500 11px "JetBrains Mono",monospace;letter-spacing:.14em;color:#fff;background:rgba(0,0,0,.55);padding:4px 7px;border-radius:4px}
+.f.on{filter:none;box-shadow:0 0 0 3px #e3b85c,0 30px 80px rgba(0,0,0,.6);transform:scale(1.22);z-index:2;margin:0 34px}
+/* caption of the frame in focus */
+.cap{position:absolute;left:56px;bottom:56px;width:560px}
+.cap p.t{margin-top:12px;font:400 34px/1.15 "Bodoni Moda",serif}
+.cap p.t em{color:#e3b85c}
+.go{position:absolute;right:56px;bottom:64px;display:flex;gap:22px;align-items:center}
+.btn{padding:15px 22px;border-radius:999px;background:#f2efe8;color:#111;font:700 12px Manrope;letter-spacing:.14em;text-transform:uppercase}
+/* scrubber: one tick group per project */
+.scrub{position:absolute;left:56px;right:56px;bottom:20px;display:flex;gap:6px}
+.scrub span{flex:1;height:3px;background:#2b2b2b;border-radius:2px}
+.scrub span.on{background:#e3b85c}
+.note{position:absolute;right:56px;top:96px;width:330px;font:400 15px/1.5 Manrope;color:#a9a49a}
+</style></head><body>
+<div class="head"><p class="k">(Up close)</p><p class="k">Drag or scroll · 27 frames</p></div>
+<h2>Every project, <em>frame by frame.</em></h2>
+<p class="note">A contact sheet of the real moments from each project film. Drag the strip; the frame in the middle wakes up and plays a 3 second loop.</p>
+<div class="strip">
+  <div class="holes t"></div><div class="holes b"></div>
+  <div class="frames">
+    <div class="f"><img src="img/01-marketplace-5.5.jpg"><b>01 · 00:05</b></div>
+    <div class="f"><img src="img/01-voice-agent-8.5.jpg"><b>S01 · 00:08</b></div>
+    <div class="f"><img src="img/03-email-automation-5.5.jpg"><b>03 · 00:05</b></div>
+    <div class="f"><img src="img/02-household-investing-5.5.jpg"><b>S02 · 00:05</b></div>
+    <div class="f on"><img src="img/03-estimation-5.5.jpg"><b>S03 · 00:05</b></div>
+    <div class="f"><img src="img/04-change-detection-8.5.jpg"><b>S04 · 00:08</b></div>
+    <div class="f"><img src="img/05-autonomous-agent-8.5.jpg"><b>05 · 00:08</b></div>
+    <div class="f"><img src="img/04-compliance-platform-8.5.jpg"><b>04 · 00:08</b></div>
+  </div>
+</div>
+<div class="cap"><p class="k" style="color:#e3b85c">White-label estimator · 00:05</p><p class="t">The vision model reads the photo. <em>A fixed rubric sets the price.</em></p></div>
+<div class="go"><span class="k">Frame 14 / 27</span><span class="btn">Open project →</span></div>
+<div class="scrub"><span></span><span></span><span></span><span></span><span></span><span class="on"></span><span></span><span></span><span></span></div>
+</body></html>

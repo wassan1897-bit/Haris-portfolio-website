@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>About + showreel storyboard</title>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@500;600;800;900&family=JetBrains+Mono:wght@400;500&family=Montserrat:wght@600;700&display=swap" rel="stylesheet" />
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body { width: 1440px; height: 900px; overflow: hidden; background: #0a0a0a; color: #f2efe8; -webkit-font-smoothing: antialiased; }
+.f { position: absolute; inset: 0; display: none; overflow: hidden; background: #0a0a0a; }
+body[data-f="1"] #f1, body[data-f="2"] #f2, body[data-f="3"] #f3, body[data-f="4"] #f4, body[data-f="5"] #f5, body[data-f="6"] #f6, body[data-f="7"] #f7, body[data-f="8"] #f8, body[data-f="9"] #f9 { display: block; }
+.hdr { position: absolute; left: 0; right: 0; top: 0; height: 64px; display: flex; align-items: center; justify-content: space-between; padding: 0 20px; font: 600 15px Montserrat; z-index: 30; color: #fff; }
+.hdr.dark { color: #141414; }
+.mono { font-family: "JetBrains Mono", monospace; font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; }
+
+/* page 2: about */
+.ab { position: absolute; inset: 0; background: #0a0a0a; }
+.ab .ph { position: absolute; right: 0; top: 0; bottom: 0; width: 760px; overflow: hidden; }
+.ab .ph img { position: absolute; right: -330px; top: -20px; height: 960px; filter: grayscale(1) contrast(1.15) brightness(0.9); }
+.ab .ph::before { content: ""; position: absolute; inset: 0; z-index: 1; background: linear-gradient(90deg, #0a0a0a 0%, rgba(10,10,10,0.7) 28%, rgba(10,10,10,0) 60%); }
+.ab .tag { position: absolute; z-index: 3; left: 130px; top: 250px; color: #8fd46f; }
+.ab .tag::before { content: "( "; } .ab .tag::after { content: " )"; }
+.ab .para { position: absolute; z-index: 3; left: 130px; top: 290px; width: 600px; font: 400 37px/1.08 "Instrument Serif"; letter-spacing: -0.005em; }
+.ab .para .l { display: block; }
+.ab .para em { color: #8fd46f; }
+.ab .foot { position: absolute; z-index: 3; white-space: nowrap; left: 130px; top: 730px; display: flex; align-items: baseline; gap: 18px; }
+.ab .foot .mono { font-size: 9px; color: #9a958c; }
+.ab .foot i { font: italic 400 24px "Instrument Serif"; }
+.cue { position: absolute; left: 50%; bottom: 46px; width: 26px; height: 26px; margin-left: -13px; border: 1px solid rgba(255,255,255,0.6); border-radius: 50%; }
+.cue::after { content: ""; position: absolute; left: 50%; top: 50%; width: 4px; height: 4px; margin: -2px; border-radius: 50%; background: #fff; }
+
+/* reel card */
+.card { position: absolute; left: 50%; top: 50%; overflow: hidden; background: #111; box-shadow: 0 40px 90px rgba(0,0,0,0.35); }
+.card img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.card .w { position: absolute; left: 0; right: 0; top: 50%; transform: translateY(-50%); text-align: center; font: 900 30px "Inter Tight"; letter-spacing: -0.03em; text-transform: uppercase; color: #9be15d; z-index: 2; }
+.cream { position: absolute; inset: 0; background: #efebe3; }
+.built { position: absolute; left: 0; right: 0; text-align: center; color: #141414; }
+.built b { font: 900 1em "Inter Tight"; letter-spacing: -0.04em; text-transform: uppercase; }
+.built i { font: italic 400 1.12em "Instrument Serif"; letter-spacing: -0.01em; }
+.slices { position: absolute; left: 50%; display: flex; gap: 6px; transform: translateX(-50%); }
+.slices span { display: block; overflow: hidden; position: relative; }
+.slices span img { position: absolute; top: 0; height: 100%; }
+</style>
+</head>
+<body data-f="1">
+
+<!-- 1. the hero, as it is now -->
+<section class="f" id="f1"><img src="img/A-hero.png" style="width:1440px;height:900px" alt="" /></section>
+
+<!-- 2. 1 to 2: the hero lifts away, its photo darkening; the about text rises, each line out of blur -->
+<section class="f" id="f2">
+	<div class="ab" style="top: 380px"></div>
+	<img src="img/A-hero.png" style="position:absolute;left:0;top:-470px;width:1440px;height:900px;filter:brightness(0.55)" alt="" />
+	<div style="position:absolute;left:0;right:0;top:430px;bottom:0;background:#0a0a0a"></div>
+	<p class="mono" style="position:absolute;left:130px;top:520px;color:#8fd46f">( About Haris )</p>
+	<p style="position:absolute;left:130px;top:560px;width:600px;font:400 37px/1.08 'Instrument Serif';color:#6e6a63;filter:blur(1.4px)">AI engineer, automation builder,<br />the one who maps the process</p>
+	<p style="position:absolute;left:130px;top:640px;width:600px;font:400 37px/1.08 'Instrument Serif';color:#2e2c29;filter:blur(3px)">before touching a model: call it</p>
+	<div class="ab" style="top: 430px; left: 680px; background: transparent"><div class="ph" style="top:0;opacity:0.35"><img src="img/haris-hero-type.jpg" alt="" /></div></div>
+	<i class="cue"></i>
+</section>
+
+<!-- 3. page 2: about, settled -->
+<section class="f" id="f3">
+	<div class="ab">
+		<div class="ph"><img src="img/haris-hero-type.jpg" alt="" /></div>
+		<p class="mono tag">About Haris</p>
+		<p class="para"><span class="l">AI engineer, automation builder, the one</span><span class="l">who maps the process before touching</span><span class="l">a model: call it what you will. I work from</span><span class="l">Karachi, my clients are in the US, the UK</span><span class="l">and the Middle East. For shipping an AI</span><span class="l">agent, as for fixing a support desk, distance</span><span class="l">has never been the problem. <em>Busywork,</em></span><span class="l"><em>however, is.</em></span></p>
+		<div class="foot"><span class="mono">AI automation engineer in Karachi.</span><i>Built remotely, run in production.</i></div>
+		<i class="cue"></i>
+	</div>
+</section>
+
+<!-- 4. 2 to 3: the text lifts away; the reel arrives as slices that snap together -->
+<section class="f" id="f4">
+	<div class="ab" style="top:-330px">
+		<div class="ph"><img src="img/haris-hero-type.jpg" alt="" /></div>
+		<p class="para" style="top:290px"><span class="l">a model: call it what you will. I work from</span><span class="l">Karachi, my clients are in the US, the UK</span><span class="l">and the Middle East. For shipping an AI</span><span class="l">agent, as for fixing a support desk, distance</span><span class="l">has never been the problem. <em>Busywork,</em></span><span class="l"><em>however, is.</em></span></p>
+		<div class="foot" style="top:600px"><span class="mono">AI automation engineer in Karachi.</span><i>Built remotely, run in production.</i></div>
+	</div>
+	<div class="slices" style="top:620px;height:200px">
+		<span style="width:120px;margin-top:-22px"><img src="img/reel-a.png" style="left:-60px" /></span>
+		<span style="width:150px"><img src="img/reel-a.png" style="left:-200px" /></span>
+		<span style="background:#9be15d;width:10px"></span>
+		<span style="width:200px;margin-top:16px"><img src="img/reel-a.png" style="left:-360px" /></span>
+		<span style="width:110px;margin-top:-12px"><img src="img/reel-a.png" style="left:-570px" /></span>
+		<span style="width:170px"><img src="img/reel-a.png" style="left:-690px" /></span>
+	</div>
+	<i class="cue"></i>
+</section>
+
+<!-- 5. the reel card, assembled, small on black -->
+<section class="f" id="f5">
+	<div class="card" style="width:440px;height:248px;margin:-124px 0 0 -220px"><img src="img/reel-a.png" alt="" /><p class="w" style="font-size:26px">AI agents</p></div>
+	<i class="cue"></i>
+</section>
+
+<!-- 6. the page turns cream, BUILT BY Haris. frames the card -->
+<section class="f" id="f6">
+	<div class="cream"></div>
+	<div class="hdr dark"><span>HARIS</span><span>☰&nbsp; MENU</span><span>EMAIL &nbsp;&nbsp; LINKEDIN</span></div>
+	<p class="built" style="top:150px;font-size:20px"><b>Built by</b> <i>Haris.</i></p>
+	<div class="card" style="width:560px;height:315px;margin:-157px 0 0 -280px"><img src="img/reel-b.png" alt="" /><p class="w" style="font-size:30px;color:#fff">RAG systems</p></div>
+	<p class="built" style="top:690px;font-size:72px"><b>Built by</b> <i>Haris.</i></p>
+	<i class="cue" style="border-color:rgba(0,0,0,0.5)"></i>
+</section>
+
+<!-- 7. page 3: the reel grows to nearly fill the screen and plays -->
+<section class="f" id="f7">
+	<div class="cream"></div>
+	<div class="hdr dark"><span>HARIS</span><span>☰&nbsp; MENU</span><span>EMAIL &nbsp;&nbsp; LINKEDIN</span></div>
+	<div class="card" style="width:1290px;height:726px;margin:-338px 0 0 -645px"><img src="img/reel-c.png" alt="" /></div>
+</section>
+
+<!-- 8. 3 to 4: the reel collapses to a thin strip of slices and the page drops to black -->
+<section class="f" id="f8">
+	<div style="position:absolute;inset:0;background:#000"></div>
+	<div style="position:absolute;left:0;width:150px;top:430px;height:44px;background:#efebe3"></div>
+	<div style="position:absolute;right:0;width:150px;top:430px;height:44px;background:#efebe3"></div>
+	<div class="slices" style="top:430px;height:44px;gap:4px">
+		<span style="width:210px"><img src="img/reel-c.png" style="left:-150px;height:820px;top:-380px" /></span>
+		<span style="width:210px"><img src="img/reel-c.png" style="left:-360px;height:820px;top:-380px" /></span>
+		<span style="width:210px"><img src="img/reel-c.png" style="left:-570px;height:820px;top:-380px" /></span>
+		<span style="width:210px"><img src="img/reel-c.png" style="left:-780px;height:820px;top:-380px" /></span>
+		<span style="width:210px"><img src="img/reel-c.png" style="left:-990px;height:820px;top:-380px" /></span>
+	</div>
+	<div class="hdr"><span>HARIS</span><span>☰&nbsp; MENU</span><span>EMAIL &nbsp;&nbsp; LINKEDIN</span></div>
+</section>
+
+<!-- 9. page 4: the projects begin -->
+<section class="f" id="f9"><img src="img/B-intro.png" style="width:1440px;height:900px" alt="" /></section>
+
+<div class="hdr" id="h"><span>HARIS</span><span>☰&nbsp; MENU</span><span>EMAIL &nbsp;&nbsp; LINKEDIN</span></div>
+<script>
+	// the shared header only on frames that do not carry their own
+	const f = document.body.dataset.f;
+	if (['1', '6', '7', '8', '9'].includes(f)) document.getElementById('h').style.display = 'none';
+</script>
+</body>
+</html>

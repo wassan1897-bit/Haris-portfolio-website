@@ -1,0 +1,274 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1920, height=1080" />
+    <title>Compliance platform, project clip</title>
+    <script src="assets/gsap.min.js"></script>
+    <style>
+      @font-face { font-family: "Inter"; src: url("assets/fonts/inter-latin-400-normal.woff2") format("woff2"); font-weight: 400; font-display: block; }
+      @font-face { font-family: "Inter"; src: url("assets/fonts/inter-latin-500-normal.woff2") format("woff2"); font-weight: 500; font-display: block; }
+      @font-face { font-family: "Inter"; src: url("assets/fonts/inter-latin-600-normal.woff2") format("woff2"); font-weight: 600; font-display: block; }
+      @font-face { font-family: "Inter"; src: url("assets/fonts/inter-latin-700-normal.woff2") format("woff2"); font-weight: 700; font-display: block; }
+      @font-face { font-family: "Inter"; src: url("assets/fonts/inter-latin-800-normal.woff2") format("woff2"); font-weight: 800; font-display: block; }
+
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { width: 1920px; height: 1080px; overflow: hidden; background: #1b1230; }
+      body { font-family: "Inter", sans-serif; color: #f1ecff; -webkit-font-smoothing: antialiased; }
+      #root { position: relative; width: 100%; height: 100%; overflow: hidden; }
+      #stage { position: absolute; inset: 0; overflow: hidden; }
+      svg { display: block; }
+      .ar { font-family: sans-serif; direction: rtl; }
+
+      /* ---------- light and air ---------- */
+      .bg { position: absolute; inset: 0; background: radial-gradient(1400px 980px at 50% 46%, #33255a 0%, #241a42 46%, #1b1230 100%); }
+      #haze { position: absolute; left: 260px; top: 40px; width: 1400px; height: 1000px; border-radius: 50%; background: radial-gradient(closest-side, rgba(185, 164, 255, 0.2), rgba(185, 164, 255, 0.06) 55%, rgba(185, 164, 255, 0) 100%); }
+      #streak { position: absolute; left: -900px; top: -300px; width: 520px; height: 1700px; background: linear-gradient(90deg, rgba(220, 208, 255, 0), rgba(220, 208, 255, 0.13) 50%, rgba(220, 208, 255, 0)); transform-origin: 50% 50%; opacity: 0; }
+      .grainbox { position: absolute; inset: -60px; overflow: hidden; pointer-events: none; }
+      #grain { position: absolute; left: 0; top: 0; width: 2100px; height: 1260px; opacity: 0.1; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' seed='21' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23n)'/%3E%3C/svg%3E"); }
+      .vig { position: absolute; inset: 0; box-shadow: inset 0 0 360px rgba(10, 5, 22, 0.55); pointer-events: none; }
+      .chap { position: absolute; left: 110px; top: 92px; font-size: 22px; font-weight: 700; letter-spacing: 0.24em; text-transform: uppercase; color: #c9bcff; }
+
+      /* ---------- 1 hook ---------- */
+      #hook { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; text-align: center; }
+      .hk { font-size: 118px; font-weight: 800; letter-spacing: -0.035em; line-height: 1.04; color: #f6f2ff; }
+      .hk--lav { color: #b9a4ff; }
+
+      /* ---------- 2 vaults ---------- */
+      #s2 { position: absolute; inset: 0; }
+      #ask { position: absolute; left: 410px; top: 118px; width: 1100px; padding: 22px 34px; border-radius: 26px; text-align: center; background: rgba(241, 236, 255, 0.08); border: 2px solid rgba(185, 164, 255, 0.45); }
+      #ask .en { font-size: 34px; font-weight: 600; color: #f6f2ff; }
+      #ask .ar { font-size: 31px; color: #cfc3ff; margin-top: 8px; }
+      #vaults { position: absolute; inset: 0; perspective: 1500px; }
+      .vault { position: absolute; top: 380px; width: 380px; height: 460px; transform-style: preserve-3d; }
+      .vault__tilt { position: relative; width: 100%; height: 100%; padding: 30px 30px; border-radius: 26px; background: linear-gradient(180deg, rgba(60, 45, 105, 0.95), rgba(36, 26, 66, 0.95)); border: 2px solid rgba(241, 236, 255, 0.22); box-shadow: 0 40px 90px rgba(8, 3, 20, 0.6); }
+      .v__k { font-size: 18px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: #bdb1e8; }
+      .v__n { font-size: 34px; font-weight: 800; margin-top: 6px; color: #f6f2ff; }
+      .v__doc { display: block; height: 22px; border-radius: 6px; background: rgba(241, 236, 255, 0.14); margin-top: 18px; }
+      .v__glow { position: absolute; inset: -4px; border-radius: 28px; border: 4px solid #b9a4ff; box-shadow: 0 0 70px rgba(185, 164, 255, 0.6), inset 0 0 50px rgba(185, 164, 255, 0.25); opacity: 0; }
+      .lock { position: absolute; left: 50%; top: 50%; width: 120px; height: 120px; margin: -40px 0 0 -60px; border-radius: 50%; display: grid; place-items: center; background: #120b22; border: 3px solid rgba(241, 236, 255, 0.35); }
+      .lock svg { width: 56px; height: 56px; }
+      #beam { position: absolute; left: 0; top: 0; filter: drop-shadow(0 0 14px rgba(185, 164, 255, 0.9)); }
+      #beam path { fill: none; stroke: #d9ceff; stroke-width: 6; stroke-linecap: round; stroke-dasharray: 1 1; }
+      #flare { position: absolute; left: 260px; top: 372px; width: 600px; height: 16px; border-radius: 50%; background: radial-gradient(closest-side, rgba(240, 234, 255, 0.95), rgba(185, 164, 255, 0.4) 45%, rgba(185, 164, 255, 0)); opacity: 0; }
+      #cap2 { position: absolute; left: 0; right: 0; top: 900px; text-align: center; font-size: 34px; font-weight: 600; color: #e6deff; }
+      #cap2 b { color: #b9a4ff; font-weight: 700; }
+
+      /* ---------- 3 retrieval run ---------- */
+      #s3 { position: absolute; inset: 0; }
+      #s3 .chap { top: 92px; }
+      #runTitle { position: absolute; left: 110px; top: 138px; font-size: 64px; font-weight: 800; letter-spacing: -0.03em; color: #f6f2ff; }
+      #trackWrap { position: absolute; left: 0; top: 330px; width: 1920px; height: 470px; perspective: 1600px; }
+      #track { position: absolute; left: 0; top: 40px; width: 3100px; height: 360px; }
+      .stg { position: absolute; top: 0; width: 480px; height: 340px; padding: 30px 32px; border-radius: 26px; background: rgba(43, 32, 78, 0.92); border: 2px solid rgba(241, 236, 255, 0.2); box-shadow: 0 40px 90px rgba(8, 3, 20, 0.55); }
+      .stg__fx { position: absolute; inset: -4px; border-radius: 28px; border: 4px solid #b9a4ff; box-shadow: 0 0 60px rgba(185, 164, 255, 0.55); opacity: 0; }
+      .stg__i { font-size: 20px; font-weight: 800; letter-spacing: 0.16em; color: #a99bd6; }
+      .stg__t { font-size: 34px; font-weight: 800; line-height: 1.12; margin-top: 10px; color: #f6f2ff; }
+      .stg__v { position: absolute; left: 32px; right: 32px; bottom: 30px; }
+      .code { display: inline-flex; align-items: center; gap: 12px; padding: 12px 18px; border-radius: 14px; background: #120b22; color: #d9ceff; font-size: 22px; font-weight: 600; }
+      .code svg { width: 26px; height: 26px; }
+      .bars { display: flex; align-items: flex-end; gap: 3px; height: 54px; }
+      .bars i { display: block; flex: 1; border-radius: 2px; background: #b9a4ff; }
+      .bars--w i { background: #f1ecff; }
+      .bars + .bars { margin-top: 10px; }
+      .bars--8 { gap: 10px; height: 110px; }
+      .cites { display: flex; gap: 10px; margin-top: 14px; }
+      .cites span { padding: 6px 14px; border-radius: 10px; background: #b9a4ff; color: #1b1230; font-size: 20px; font-weight: 800; }
+      .ln { display: block; height: 14px; border-radius: 7px; background: rgba(241, 236, 255, 0.28); margin-top: 12px; }
+
+      /* ---------- 4 answer ---------- */
+      #s4 { position: absolute; inset: 0; }
+      #endTitle { position: absolute; left: 0; right: 0; top: 110px; text-align: center; font-size: 72px; font-weight: 800; letter-spacing: -0.03em; color: #f6f2ff; }
+      #endTitle span { color: #b9a4ff; }
+      #answer { position: absolute; left: 400px; top: 290px; width: 1120px; height: 470px; padding: 40px 48px; border-radius: 32px; background: #fbf9ff; color: #1b1230; box-shadow: 0 60px 140px rgba(8, 3, 20, 0.7); }
+      .an__h { display: flex; align-items: center; gap: 18px; }
+      .an__av { display: grid; place-items: center; width: 66px; height: 66px; border-radius: 18px; background: #ece6ff; flex: none; }
+      .an__av svg { width: 36px; height: 36px; }
+      .an__who { font-size: 28px; font-weight: 800; }
+      .an__sub { font-size: 20px; color: #5c5275; margin-top: 2px; }
+      .an__pill { margin-left: auto; padding: 8px 18px; border-radius: 99px; background: #1b1230; color: #e9e2ff; font-size: 20px; font-weight: 700; }
+      .an__body { margin-top: 30px; }
+      .an__row { display: flex; align-items: center; gap: 12px; margin-top: 18px; }
+      .an__row i { display: block; height: 16px; border-radius: 8px; background: #e3dcf3; }
+      .ct { padding: 4px 11px; border-radius: 8px; background: #6d4ed8; color: #fff; font-size: 18px; font-weight: 800; flex: none; }
+      .an__src { display: flex; gap: 12px; margin-top: 34px; }
+      .src { display: flex; align-items: center; gap: 10px; padding: 12px 18px; border-radius: 14px; background: #f1edfa; font-size: 20px; font-weight: 700; color: #3a2f57; }
+      .src svg { width: 22px; height: 22px; }
+      #evals { position: absolute; left: 0; right: 0; top: 820px; display: flex; justify-content: center; gap: 18px; }
+      .ev { display: flex; align-items: center; gap: 12px; padding: 14px 26px; border-radius: 99px; border: 2px solid rgba(185, 164, 255, 0.5); background: rgba(185, 164, 255, 0.1); font-size: 26px; font-weight: 600; color: #ece6ff; }
+      .ev .ar { font-size: 26px; }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="12" data-width="1920" data-height="1080">
+      <div id="stage">
+        <div class="bg"></div>
+        <div id="haze"></div>
+        <div id="streak"></div>
+
+        <!-- ================= 1. HOOK ================= -->
+        <div id="hook">
+          <p class="hk" id="h1">Many tenants.</p>
+          <p class="hk" id="h2">One platform.</p>
+          <p class="hk hk--lav" id="h3">Their data never mixes.</p>
+        </div>
+
+        <!-- ================= 2. THE VAULTS ================= -->
+        <div id="s2">
+          <div id="ask">
+            <p class="en">What changed in the new data protection rules?</p>
+            <p class="ar" lang="ar">ما الذي تغيّر في قواعد حماية البيانات الجديدة؟</p>
+          </div>
+          <svg id="beam" width="1920" height="1080" viewBox="0 0 1920 1080"><path id="beamPath" pathLength="1" d="M960 226 C960 300 560 300 560 378" /></svg>
+          <div id="vaults">
+            <div class="vault" id="vA" style="left: 370px">
+              <div class="vault__tilt" style="transform: rotateY(16deg)">
+                <i class="v__glow" id="gA"></i>
+                <p class="v__k">Tenant</p><p class="v__n">Organisation A</p>
+                <i class="v__doc" style="width: 92%"></i><i class="v__doc" style="width: 78%"></i><i class="v__doc" style="width: 86%"></i><i class="v__doc" style="width: 64%"></i><i class="v__doc" style="width: 82%"></i><i class="v__doc" style="width: 70%"></i>
+              </div>
+            </div>
+            <div class="vault" id="vB" style="left: 770px">
+              <div class="vault__tilt">
+                <p class="v__k">Tenant</p><p class="v__n">Organisation B</p>
+                <i class="v__doc" style="width: 84%"></i><i class="v__doc" style="width: 70%"></i><i class="v__doc" style="width: 90%"></i><i class="v__doc" style="width: 60%"></i><i class="v__doc" style="width: 76%"></i><i class="v__doc" style="width: 88%"></i>
+                <div class="lock" id="lB"><svg viewBox="0 0 24 24" fill="none" stroke="#e9e2ff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="10" rx="2" /><path d="M8 11V8a4 4 0 0 1 8 0v3" /></svg></div>
+              </div>
+            </div>
+            <div class="vault" id="vC" style="left: 1170px">
+              <div class="vault__tilt" style="transform: rotateY(-16deg)">
+                <p class="v__k">Tenant</p><p class="v__n">Organisation C</p>
+                <i class="v__doc" style="width: 74%"></i><i class="v__doc" style="width: 88%"></i><i class="v__doc" style="width: 66%"></i><i class="v__doc" style="width: 92%"></i><i class="v__doc" style="width: 72%"></i><i class="v__doc" style="width: 80%"></i>
+                <div class="lock" id="lC"><svg viewBox="0 0 24 24" fill="none" stroke="#e9e2ff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="10" rx="2" /><path d="M8 11V8a4 4 0 0 1 8 0v3" /></svg></div>
+              </div>
+            </div>
+          </div>
+          <div id="flare"></div>
+          <p id="cap2">Scope is enforced at retrieval, <b>so tenant data never mixes.</b></p>
+        </div>
+
+        <!-- ================= 3. THE RETRIEVAL RUN ================= -->
+        <div id="s3">
+          <p class="chap">Tenant-safe hybrid retrieval</p>
+          <p id="runTitle">One question, five stages.</p>
+          <div id="trackWrap">
+            <div id="track">
+              <div class="stg" style="left: 200px"><i class="stg__fx" id="f1"></i><p class="stg__i">01</p><p class="stg__t">ACL filter in the query</p>
+                <div class="stg__v"><span class="code"><svg viewBox="0 0 24 24" fill="none" stroke="#b9a4ff" stroke-width="2" stroke-linejoin="round"><path d="M12 3l8 3v6c0 4.5-3.4 8.3-8 9-4.6-.7-8-4.5-8-9V6z" /><path d="M8.5 12l2.5 2.5 4.5-5" /></svg>tenant = Organisation A</span></div></div>
+              <div class="stg" style="left: 800px"><i class="stg__fx" id="f2"></i><p class="stg__i">02</p><p class="stg__t">Dense top-40 + BM25 top-40</p>
+                <div class="stg__v"><div class="bars" id="bDense"></div><div class="bars bars--w" id="bBm25"></div></div></div>
+              <div class="stg" style="left: 1400px"><i class="stg__fx" id="f3"></i><p class="stg__i">03</p><p class="stg__t">Reciprocal rank fusion</p>
+                <div class="stg__v"><div class="bars" id="bFuse" style="height: 110px"></div></div></div>
+              <div class="stg" style="left: 2000px"><i class="stg__fx" id="f4"></i><p class="stg__i">04</p><p class="stg__t">Cross-encoder rerank to top-8</p>
+                <div class="stg__v"><div class="bars bars--8" id="bTop8"></div></div></div>
+              <div class="stg" style="left: 2600px"><i class="stg__fx" id="f5"></i><p class="stg__i">05</p><p class="stg__t">Answer with citations</p>
+                <div class="stg__v"><i class="ln" style="width: 94%"></i><i class="ln" style="width: 80%"></i><div class="cites"><span>1</span><span>2</span><span>3</span></div></div></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ================= 4. THE ANSWER ================= -->
+        <div id="s4">
+          <p id="endTitle">16 consultant personas. <span>Every answer cited.</span></p>
+          <div id="answer">
+            <div class="an__h">
+              <span class="an__av"><svg viewBox="0 0 24 24" fill="none" stroke="#6d4ed8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="8" width="16" height="12" rx="3" /><path d="M12 8V4M9 14h.01M15 14h.01M2 13v3M22 13v3" /></svg></span>
+              <div><p class="an__who">Consultant persona</p><p class="an__sub">Answering from its own knowledge partition</p></div>
+              <span class="an__pill">1 of 16</span>
+            </div>
+            <div class="an__body">
+              <div class="an__row"><i style="width: 62%"></i><span class="ct">1</span><i style="width: 22%"></i></div>
+              <div class="an__row"><i style="width: 40%"></i><span class="ct">2</span><i style="width: 44%"></i></div>
+              <div class="an__row"><i style="width: 72%"></i><span class="ct">3</span></div>
+              <div class="an__row"><i style="width: 54%"></i></div>
+            </div>
+            <div class="an__src">
+              <span class="src"><svg viewBox="0 0 24 24" fill="none" stroke="#6d4ed8" stroke-width="2" stroke-linejoin="round"><path d="M6 3h8l4 4v14H6z" /><path d="M14 3v4h4M9 12h6M9 16h6" /></svg>Source 1</span>
+              <span class="src"><svg viewBox="0 0 24 24" fill="none" stroke="#6d4ed8" stroke-width="2" stroke-linejoin="round"><path d="M6 3h8l4 4v14H6z" /><path d="M14 3v4h4M9 12h6M9 16h6" /></svg>Source 2</span>
+              <span class="src"><svg viewBox="0 0 24 24" fill="none" stroke="#6d4ed8" stroke-width="2" stroke-linejoin="round"><path d="M6 3h8l4 4v14H6z" /><path d="M14 3v4h4M9 12h6M9 16h6" /></svg>Source 3</span>
+            </div>
+          </div>
+          <div id="evals">
+            <p class="ev" id="ev1">English · <span class="ar" lang="ar">العربية</span></p>
+            <p class="ev" id="ev2">Evaluated with RAGAS + Arize Phoenix</p>
+          </div>
+        </div>
+
+        <div class="grainbox"><div id="grain"></div></div>
+        <div class="vig"></div>
+      </div>
+    </div>
+
+    <script>
+      // retrieval bars: fixed, formula-based heights (no randomness)
+      const h = (i, k) => 18 + Math.round(36 * Math.abs(Math.sin(i * 1.7 + k)) ** 0.8);
+      const fill = (id, n, f) => { const el = document.getElementById(id); for (let i = 0; i < n; i++) { const b = document.createElement("i"); b.style.height = f(i) + "px"; el.appendChild(b); } };
+      fill("bDense", 40, (i) => h(i, 0.3));
+      fill("bBm25", 40, (i) => h(i, 2.1));
+      const fused = Array.from({ length: 40 }, (_, i) => h(i, 0.3) + h(i, 2.1)).sort((a, b) => b - a);
+      fill("bFuse", 40, (i) => fused[i]);
+      fill("bTop8", 8, (i) => 108 - i * 9);
+
+      const tl = gsap.timeline({ paused: true, defaults: { ease: "power3.out" } });
+      const D = 12;
+
+      // ---------- ambient: film grain flicker, slow haze breath (both back to frame 0 at t=12) ----------
+      tl.fromTo("#grain", { x: 0, y: 0 }, { x: -120, y: -80, duration: D, ease: "steps(96)" }, 0);
+      tl.fromTo("#haze", { scale: 1 }, { scale: 1.12, duration: 3, ease: "sine.inOut", yoyo: true, repeat: 3 }, 0);
+      const sweep = (t) => tl.fromTo("#streak", { x: 0, opacity: 0, rotation: 18 }, { keyframes: [ { opacity: 1, duration: 0.25, ease: "none" }, { x: 3000, duration: 1.1, ease: "power2.inOut" }, { opacity: 0, duration: 0.2, ease: "none" } ], immediateRender: false }, t);
+
+      // ================= 1. hook (0 - 2.6) =================
+      const line = (sel, t) => tl.fromTo(sel, { opacity: 0, scale: 1.1, filter: "blur(14px)" }, { opacity: 1, scale: 1, filter: "blur(0px)", duration: 0.75, ease: "power2.out" }, t);
+      line("#h1", 0.25);
+      line("#h2", 0.8);
+      line("#h3", 1.35);
+      sweep(1.3);
+      tl.to("#hook", { scale: 1.35, opacity: 0, filter: "blur(10px)", duration: 0.55, ease: "power2.in" }, 2.3);
+
+      // ================= 2. the vaults (2.6 - 5.4) =================
+      tl.fromTo("#ask", { opacity: 0, y: -30 }, { opacity: 1, y: 0, duration: 0.7 }, 2.65);
+      tl.fromTo("#ask .ar", { opacity: 0, filter: "blur(8px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.6, ease: "power2.out" }, 3.0);
+      [["#vA", 2.75], ["#vB", 2.85], ["#vC", 2.95]].forEach(([s, t]) =>
+        tl.fromTo(s, { opacity: 0, z: -600, y: 60 }, { opacity: 1, z: 0, y: 0, duration: 1.0, ease: "expo.out" }, t));
+      tl.fromTo("#beamPath", { attr: { "stroke-dashoffset": 1 } }, { attr: { "stroke-dashoffset": 0 }, duration: 0.5, ease: "power2.in" }, 3.55);
+      tl.fromTo("#flare", { opacity: 0, scaleX: 0.3 }, { keyframes: [ { opacity: 1, scaleX: 1.2, duration: 0.18, ease: "power2.out" }, { opacity: 0.35, scaleX: 1, duration: 0.6, ease: "power1.out" } ] }, 4.03);
+      tl.fromTo("#gA", { opacity: 0 }, { opacity: 1, duration: 0.3, ease: "power2.out" }, 4.03);
+      tl.fromTo(["#lB", "#lC"], { opacity: 0, scale: 1.6 }, { opacity: 1, scale: 1, duration: 0.45, ease: "back.out(2)", stagger: 0.1 }, 4.1);
+      tl.to(["#vB", "#vC"], { opacity: 0.5, duration: 0.5 }, 4.3);
+      tl.fromTo("#cap2", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.6 }, 4.25);
+      tl.fromTo("#vaults", { scale: 1 }, { scale: 1.05, duration: 2.3, ease: "sine.inOut" }, 2.9);
+      // the camera goes into Organisation A
+      tl.to("#s2", { scale: 1.5, opacity: 0, filter: "blur(8px)", transformOrigin: "29% 55%", duration: 0.55, ease: "power2.in" }, 5.05);
+
+      // ================= 3. the retrieval run (5.4 - 8.6) =================
+      tl.fromTo("#s3 .chap", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.5 }, 5.45);
+      tl.fromTo("#runTitle", { opacity: 0, y: 24, filter: "blur(10px)" }, { opacity: 1, y: 0, filter: "blur(0px)", duration: 0.7, ease: "power2.out" }, 5.5);
+      tl.fromTo("#trackWrap", { opacity: 0 }, { opacity: 1, duration: 0.4, ease: "none" }, 5.45);
+      // constant drift: stage i is centred at 5.5 + 0.75 * i
+      tl.fromTo("#track", { x: 520 }, { x: -1880, duration: 3.0, ease: "none" }, 5.5);
+      ["#f1", "#f2", "#f3", "#f4", "#f5"].forEach((f, i) => {
+        const t = 5.5 + 0.75 * i;
+        tl.fromTo(f, { opacity: 0 }, { opacity: 1, duration: 0.2, ease: "none" }, t - 0.25);
+        if (i < 4) tl.to(f, { opacity: 0, duration: 0.3, ease: "none" }, t + 0.3);
+      });
+      tl.fromTo("#bDense i, #bBm25 i", { scaleY: 0, transformOrigin: "50% 100%" }, { scaleY: 1, duration: 0.3, stagger: 0.006 }, 5.85);
+      tl.fromTo("#bFuse i", { scaleY: 0, transformOrigin: "50% 100%" }, { scaleY: 1, duration: 0.3, stagger: 0.008 }, 6.6);
+      tl.fromTo("#bTop8 i", { scaleY: 0, transformOrigin: "50% 100%" }, { scaleY: 1, duration: 0.35, ease: "back.out(1.6)", stagger: 0.04 }, 7.4);
+      tl.to("#s3", { opacity: 0, scale: 0.94, filter: "blur(6px)", duration: 0.45, ease: "power2.in" }, 8.45);
+
+      // ================= 4. the answer (8.6 - 12) =================
+      tl.fromTo("#endTitle", { opacity: 0, scale: 1.08, filter: "blur(12px)" }, { opacity: 1, scale: 1, filter: "blur(0px)", duration: 0.8, ease: "power2.out" }, 8.75);
+      tl.fromTo("#answer", { opacity: 0, scale: 0.95, y: 40 }, { opacity: 1, scale: 1, y: 0, duration: 0.9, ease: "expo.out" }, 9.0);
+      tl.fromTo("#answer .an__row", { opacity: 0, x: -20 }, { opacity: 1, x: 0, duration: 0.4, stagger: 0.12 }, 9.35);
+      tl.fromTo("#answer .ct", { scale: 0.3 }, { scale: 1, duration: 0.4, ease: "back.out(2.6)", stagger: 0.12 }, 9.45);
+      tl.fromTo("#answer .src", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.4, stagger: 0.1 }, 9.9);
+      tl.fromTo(".ev", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.5, stagger: 0.15 }, 10.2);
+      sweep(10.0);
+
+      // ---------- loop out: slow fade back to the empty stage ----------
+      tl.to("#s4", { opacity: 0, scale: 1.04, duration: 0.45, ease: "power1.in" }, 11.55);
+
+      window.__timelines["main"] = tl;
+    </script>
+  </body>
+</html>

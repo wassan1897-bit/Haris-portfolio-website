@@ -1,0 +1,128 @@
+/* Between the reel and the projects: "Entering the portfolio".
+   The reel ends on black; a glowing horizon line draws across it, "PORTFOLIO" rises from behind the line
+   with a faint reflection under it, then the camera flies through the second O into project 01, which
+   already sits behind it (projects.js holds its stage in place for that last screen of scrolling).
+   The word, its reflection and the black sheet with the hole are one SVG built by enter.js; scroll drives
+   it through attribute and transform writes only. */
+
+.ent {
+	position: relative;
+	z-index: 5;
+	background: #0a0a0a;
+	color: #f2efe8;
+	-webkit-font-smoothing: antialiased;
+}
+.ent__pin {
+	position: relative;
+	padding: 22svh 6vw;
+	text-align: center;
+}
+.ent__title {
+	margin: 0;
+	font-family: "Archivo", "Inter Tight", Helvetica, Arial, sans-serif;
+	font-weight: 800;
+	font-stretch: 78%;
+	font-size: clamp(64px, 16vw, 240px);
+	line-height: 0.9;
+	letter-spacing: -0.01em;
+	text-transform: uppercase;
+}
+.ent__title span {
+	display: block;
+	margin-bottom: 0.18em;
+	font-family: "Instrument Serif", "Times New Roman", Georgia, serif;
+	font-size: 0.2em;
+	font-weight: 400;
+	font-style: italic;
+	letter-spacing: 0;
+	text-transform: none;
+	color: #cfcac0;
+}
+.ent__cap {
+	margin: 34px 0 0;
+	font: 500 12px/1 "JetBrains Mono", ui-monospace, Menlo, monospace;
+	letter-spacing: 0.16em;
+	text-transform: uppercase;
+	color: #8a857c;
+}
+.ent__svg,
+.ent__line {
+	display: none;
+}
+
+/* ---------------- the film: desktop with motion allowed ---------------- */
+/* it overlaps the last screen of the reel (which is black by then) and the first screen of the projects */
+.ent.is-cine {
+	height: calc(100vh + 220vh);
+	height: calc(100svh + 220svh);
+	margin: -100vh 0;
+	margin: -100svh 0;
+	background: transparent;
+	pointer-events: none;
+}
+.ent.is-cine .ent__pin {
+	position: sticky;
+	top: 0;
+	height: 100vh;
+	height: 100svh;
+	padding: 0;
+	overflow: hidden;
+	visibility: hidden;
+}
+.ent.is-cine.is-on .ent__pin {
+	visibility: visible;
+}
+.ent.is-cine .ent__title {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	overflow: hidden;
+	clip-path: inset(50%);
+	white-space: nowrap;
+}
+.ent.is-cine .ent__svg {
+	display: block;
+	position: absolute;
+	inset: 0;
+	width: 100%;
+	height: 100%;
+	overflow: visible;
+}
+.ent.is-cine .ent__line {
+	display: block;
+	position: absolute;
+	left: 0;
+	right: 0;
+	top: var(--ent-line, 58%);
+	height: 1px;
+	background: #f2efe8;
+	box-shadow: 0 0 12px rgb(255 255 255 / 0.55), 0 0 40px rgb(255 255 255 / 0.2);
+	-webkit-mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
+	mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
+	transform: scaleX(0);
+	will-change: transform, opacity;
+}
+.ent.is-cine .ent__cap {
+	position: absolute;
+	left: 0;
+	right: 0;
+	bottom: 7svh;
+	margin: 0;
+	opacity: 0;
+}
+
+/* the projects' stage is lifted into view behind the O while the camera flies through it */
+.site-panel--works.pj.is-lifted {
+	overflow: visible;
+}
+
+/* light header text over this black page */
+.site-header.site-header--on-ent:not(.site-header--open) .site-header__logo,
+.site-header.site-header--on-ent:not(.site-header--open) .site-header__toggle,
+.site-header.site-header--on-ent:not(.site-header--open) .site-header__actions a {
+	color: #f2efe8;
+}
+.site-header.site-header--on-ent:not(.site-header--open) .site-header__burger::before,
+.site-header.site-header--on-ent:not(.site-header--open) .site-header__burger::after {
+	background-color: #f2efe8;
+}

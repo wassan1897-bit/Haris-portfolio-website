@@ -1,0 +1,1 @@
+AI customer support for a UK fibre broadband provider: one chat agent calling six single-job backend workflows. 6,700+ conversations and 2,400+ tickets automated across 7 departments, and the same backend later ran a phone voice agent.

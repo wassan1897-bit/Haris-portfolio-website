@@ -1,0 +1,331 @@
+/* Projects, the "cinema" look: on desktop each project opens on its clip alone, full screen, then the clip glides
+   into a stage on the right over a blurred copy of itself (projects-cinema.js), with the copy on the left; a Bodoni Moda headline with its key words in the
+   accent colour, a Manrope line under it, and a glass bar along the bottom with three results and the tools.
+   Loaded after projects.css and only restyles it: the markup, the wipe and the clip playback are unchanged. */
+
+.site-panel--works.pj {
+	--pj-display: "Bodoni Moda", "Didot", "Bodoni 72", Georgia, serif;
+	--pj-text: "Manrope", "Inter", Helvetica, Arial, sans-serif;
+}
+
+/* ---------- the copy (all sizes) ---------- */
+.pj-case__title {
+	font-family: var(--pj-display);
+	font-style: normal;
+	font-weight: 500;
+	font-size: clamp(42px, 6.4vw, 104px);
+	line-height: 0.94;
+	letter-spacing: -0.035em;
+	font-variation-settings: "opsz" 96;
+}
+.pj-case__title span {
+	font-style: italic;
+	font-weight: 400;
+}
+.pj-case__desc {
+	max-width: 32em;
+	margin-top: 24px;
+	font-family: var(--pj-text);
+	font-style: normal;
+	font-size: clamp(15px, 1.15vw, 18px);
+	line-height: 1.55;
+	color: rgb(242 239 232 / 0.78);
+}
+.pj-case__view {
+	gap: 14px;
+	height: 54px;
+	margin-top: 34px;
+	padding: 0 8px 0 24px;
+	border-radius: 999px;
+	background: #f2efe8;
+	color: #161614;
+	font: 600 15px/1 var(--pj-text);
+	letter-spacing: 0;
+	text-transform: none;
+	transition: background-color 0.3s ease;
+}
+.pj-case__view:hover {
+	background: #fff;
+}
+.pj-case__view i {
+	width: 40px;
+	height: 40px;
+	border: 0;
+	background: var(--pj-accent);
+	color: #161614;
+}
+.pj-case__view:hover i,
+.pj-case__view:focus-visible i {
+	background: var(--pj-accent);
+	color: #161614;
+}
+.pj-case__num {
+	display: none;
+}
+
+/* ---------- the results and the tools ---------- */
+.pj-case__stats {
+	position: relative;
+	z-index: 3;
+	display: grid;
+	grid-template-columns: repeat(3, minmax(0, 1fr));
+	border-radius: 20px;
+	background: rgb(20 20 22 / 0.42);
+	-webkit-backdrop-filter: blur(18px);
+	backdrop-filter: blur(18px);
+	box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.1);
+	font-family: var(--pj-text);
+}
+.pj-case__stats > p {
+	margin: 0;
+	padding: 18px 22px;
+}
+.pj-case__stats > p + p {
+	border-left: 1px solid rgb(255 255 255 / 0.1);
+}
+.pj-case__stats b {
+	display: block;
+	font: 500 clamp(26px, 2.4vw, 40px) / 1 var(--pj-display);
+	letter-spacing: -0.02em;
+	color: #fff;
+	white-space: nowrap;
+}
+.pj-case__stats span {
+	display: block;
+	margin-top: 8px;
+	font-size: 12.5px;
+	line-height: 1.35;
+	color: rgb(242 239 232 / 0.6);
+}
+.pj-case__stats .pj-case__tools {
+	display: flex;
+	flex-wrap: wrap;
+	align-content: center;
+	gap: 7px;
+	border-left: 1px solid rgb(255 255 255 / 0.1);
+}
+.pj-case__tools span {
+	display: inline-flex;
+	align-items: center;
+	gap: 7px;
+	height: 30px;
+	margin: 0;
+	padding: 0 12px;
+	border-radius: 999px;
+	background: rgb(242 239 232 / 0.94);
+	font: 600 12px/1 var(--pj-text);
+	color: #1b1b19;
+	white-space: nowrap;
+}
+.pj-case__tools img {
+	width: auto;
+	height: 14px;
+}
+
+/* ---------- desktop: the clip fills the screen ---------- */
+@media (min-width: 1024px) {
+	.pj-case .pj-screen__in {
+		display: block;
+		padding: 0;
+	}
+	.pj-case__media,
+	.pj-case__media.pj-anim {
+		position: absolute;
+		inset: 0;
+		z-index: 0;
+		/* projects.css aligns it to the end, which would shrink an absolute box to nothing */
+		justify-self: stretch;
+		align-self: stretch;
+		width: auto;
+		height: auto;
+		margin: 0;
+		transform: scale(1.04);
+	}
+	.pj.is-seen .pj-screen.is-active .pj-case__media.pj-anim {
+		transform: none;
+	}
+	/* settled: the clip plays sharp and whole on a stage on the right; a blurred copy of its poster fills the
+	   screen behind it, so the page still reads as one full-screen scene, and the copy has the left to itself */
+	.pj-case__media::before {
+		content: "";
+		position: absolute;
+		inset: -8%;
+		background: var(--pj-bg) var(--pj-poster) 60% 50% / cover no-repeat;
+		filter: blur(42px) saturate(1.15) brightness(0.62);
+	}
+	.pj-case__frame {
+		position: absolute;
+		left: 42vw;
+		top: calc(44vh - 54vw * 9 / 32);
+		width: 54vw;
+		height: auto;
+		aspect-ratio: 16 / 9;
+		border-radius: 18px;
+		background: #000;
+		box-shadow: 0 60px 140px -40px rgb(0 0 0 / 0.75);
+		transform-origin: 50% 50%;
+		transition:
+			transform 1.25s cubic-bezier(0.7, 0, 0.2, 1),
+			border-radius 1.25s cubic-bezier(0.7, 0, 0.2, 1);
+	}
+	.pj-case__frame video {
+		object-fit: cover;
+	}
+	.pj-case__media::after {
+		content: "";
+		position: absolute;
+		inset: 0;
+		background:
+			linear-gradient(90deg, var(--pj-bg) 0%, color-mix(in srgb, var(--pj-bg) 82%, transparent) 30%, transparent 48%),
+			linear-gradient(180deg, transparent 60%, var(--pj-bg) 100%);
+		pointer-events: none;
+		transition: opacity 0.9s ease 0.3s;
+	}
+	.pj-case__text {
+		position: absolute;
+		left: 4vw;
+		top: 50%;
+		width: min(35vw, 580px);
+		transform: translateY(calc(-50% - 6vh));
+		transition:
+			opacity 0.8s ease 0.45s,
+			transform 1s cubic-bezier(0.16, 1, 0.3, 1) 0.45s;
+	}
+	.pj-case__title {
+		font-size: clamp(40px, 5vw, 92px);
+	}
+	.pj-case__stats {
+		position: absolute;
+		left: 4vw;
+		right: 7vw;
+		bottom: 5vh;
+		grid-template-columns: repeat(3, minmax(0, 1fr)) minmax(0, 1.35fr);
+	}
+	.pj .pj-case .pj-case__stats.pj-anim {
+		transition:
+			opacity 0.8s ease 0.65s,
+			transform 1s cubic-bezier(0.16, 1, 0.3, 1) 0.65s;
+	}
+
+	/* the opening: the clip alone, full screen, with a small label and a progress line (projects-cinema.js) */
+	.pj-case.is-intro .pj-case__frame {
+		transform: translate(-19vw, 6vh) scale(var(--pj-is, 2));
+		border-radius: 0;
+	}
+	.pj-case.is-intro .pj-case__media::after {
+		opacity: 0;
+		transition-delay: 0s;
+	}
+	.pj-case.is-intro .pj-case__text {
+		opacity: 0;
+		transform: translateY(calc(-50% - 6vh + 34px));
+		transition-duration: 0.3s;
+		transition-delay: 0s;
+	}
+	.pj .pj-case.is-intro .pj-case__stats.pj-anim {
+		opacity: 0;
+		transform: translate3d(0, 30px, 0);
+		transition-duration: 0.3s;
+		transition-delay: 0s;
+	}
+	.pj-case__intro {
+		position: absolute;
+		left: 4vw;
+		bottom: 7vh;
+		z-index: 4;
+		width: min(40vw, 620px);
+		font-family: var(--pj-text);
+		text-shadow: 0 2px 18px rgb(0 0 0 / 0.6);
+		opacity: 0;
+		transform: translate3d(0, 12px, 0);
+		transition:
+			opacity 0.4s ease,
+			transform 0.5s ease;
+		pointer-events: none;
+	}
+	.pj-case.is-intro .pj-case__intro {
+		opacity: 1;
+		transform: none;
+		transition-delay: 0.5s;
+	}
+	.pj-case__intro p {
+		margin: 0;
+		font: 600 11px/1.2 var(--pj-text);
+		letter-spacing: 0.2em;
+		text-transform: uppercase;
+		color: rgb(242 239 232 / 0.7);
+	}
+	.pj-case__intro b {
+		margin-right: 0.8em;
+		color: var(--pj-accent);
+	}
+	.pj-case__intro .pj-case__intro-name {
+		margin-top: 12px;
+		font: 400 clamp(28px, 2.6vw, 42px) / 1.1 var(--pj-display);
+		letter-spacing: -0.02em;
+		text-transform: none;
+		color: #fff;
+	}
+	.pj-case__intro-bar {
+		display: block;
+		height: 2px;
+		margin-top: 20px;
+		border-radius: 2px;
+		background: rgb(255 255 255 / 0.2);
+		overflow: hidden;
+	}
+	.pj-case__intro-bar i {
+		display: block;
+		height: 100%;
+		background: var(--pj-accent);
+		transform: scaleX(0);
+		transform-origin: 0 50%;
+	}
+	.pj-case.is-intro .pj-case__intro-bar i {
+		transform: scaleX(1);
+		transition: transform 3.6s linear;
+	}
+	.pj-case__meta,
+	.pj-case__cat {
+		color: rgb(242 239 232 / 0.6);
+	}
+}
+@media (min-width: 1024px) and (max-height: 820px) {
+	.pj-case__title {
+		font-size: clamp(40px, min(5vw, 9.5vh), 92px);
+	}
+	.pj-case__desc {
+		margin-top: 18px;
+	}
+	.pj-case__view {
+		margin-top: 24px;
+	}
+	.pj-case__stats > p {
+		padding: 14px 20px;
+	}
+}
+
+/* ---------- tablets and phones: the clip on top, then the copy, then the results ---------- */
+@media (max-width: 1023px) {
+	.pj-case__stats {
+		grid-column: 1;
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+	}
+	.pj-case__stats .pj-case__tools {
+		grid-column: 1 / -1;
+		border-left: 0;
+		border-top: 1px solid rgb(255 255 255 / 0.1);
+	}
+}
+@media (max-width: 767px) {
+	.pj-case__stats > p {
+		padding: 12px 12px;
+	}
+	.pj-case__stats span {
+		font-size: 11px;
+	}
+	.pj-case__view {
+		height: 48px;
+		margin-top: 22px;
+	}
+}

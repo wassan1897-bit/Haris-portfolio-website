@@ -1,0 +1,411 @@
+/* Page 3, the showreel. On desktop it slides in sideways from About on the same cream, with "Built by Haris."
+   around the small card; the card grows to about three quarters of the screen and plays, then black bars close
+   in from top and bottom (their edges bow into the card on the way), crop it to a thin strip and the page is
+   black for the projects. Scroll drives all of it (about-reel.js); transform and opacity only. */
+
+.rl {
+	--ar-ink: #f2efe8;
+	--ar-mute: #9a958c;
+	--ar-green: #8fd46f;
+	--ar-cream: #ffffff;
+	--ar-serif: "Instrument Serif", "Times New Roman", Georgia, serif;
+	--ar-mono: "JetBrains Mono", ui-monospace, Menlo, monospace;
+	--ar-sans: "Inter Tight", "Montserrat", Helvetica, Arial, sans-serif;
+	position: relative;
+	z-index: 3;
+	-webkit-font-smoothing: antialiased;
+}
+/* the curved top edge it rises on, flat at rest and once landed */
+.rl::before {
+	content: "";
+	position: absolute;
+	left: 0;
+	right: 0;
+	top: -88px;
+	height: 90px;
+	background: #0a0a0a;
+	border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+	transform: scaleY(var(--rl-curve, 0));
+	transform-origin: 50% 100%;
+	pointer-events: none;
+}
+
+/* ---------------- showreel ---------------- */
+.rl {
+	background: #0a0a0a;
+	color: #141414;
+}
+.rl__pin {
+	position: relative;
+	height: 100vh;
+	height: 100svh;
+	min-height: 600px;
+	overflow: hidden;
+}
+.rl__cream {
+	position: absolute;
+	inset: 0;
+	background: var(--ar-cream);
+	opacity: 0;
+}
+.rl__built {
+	position: absolute;
+	left: 0;
+	right: 0;
+	z-index: 1;
+	margin: 0;
+	text-align: center;
+	line-height: 1;
+	opacity: 0;
+	white-space: nowrap;
+}
+.rl__built b {
+	font-family: var(--ar-sans);
+	font-weight: 800;
+	letter-spacing: -0.045em;
+	text-transform: uppercase;
+}
+.rl__built i {
+	font-family: var(--ar-serif);
+	font-size: 1.14em;
+	letter-spacing: -0.01em;
+}
+.rl__built--sm {
+	top: 15%;
+	font-size: 20px;
+}
+.rl__built--lg {
+	bottom: 11%;
+	font-size: clamp(56px, 6.2vw, 104px);
+}
+.rl__card {
+	position: absolute;
+	inset: 0;
+	z-index: 2;
+	width: min(74vw, 128vh);
+	height: calc(min(74vw, 128vh) * 9 / 16);
+	margin: auto;
+	overflow: hidden;
+	background: #111;
+	box-shadow: 0 40px 100px rgb(0 0 0 / 0.35);
+	transform-origin: 50% 50%;
+	will-change: transform;
+}
+.rl__video {
+	display: block;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+/* the reel assembles from glitchy pieces on the way in (built by about-reel.js) */
+.rl__glitch {
+	position: absolute;
+	inset: 0;
+	pointer-events: none;
+}
+.rl__glitch span {
+	position: absolute;
+	opacity: 0;
+	background: var(--poster) center / cover no-repeat;
+}
+.rl__glitch span.is-white {
+	background: #fff;
+}
+
+/* the bars that close in at the end; their inner edges bulge into the card */
+.rl__bar {
+	position: absolute;
+	left: 0;
+	right: 0;
+	z-index: 3;
+	height: 51%;
+	background: #0a0a0a;
+	transform: translate3d(0, -100%, 0);
+	pointer-events: none;
+	display: none;
+}
+.rl__bar::after {
+	content: "";
+	position: absolute;
+	left: 0;
+	right: 0;
+	width: min(74vw, 128vh);
+	margin: 0 auto;
+	height: 120px;
+	background: #0a0a0a;
+	transform: scaleY(var(--rl-bulge, 0));
+}
+.rl__bar--top {
+	top: 0;
+}
+.rl__bar--top::after {
+	top: calc(100% - 1px);
+	border-radius: 0 0 50% 50% / 0 0 100% 100%;
+	transform-origin: 50% 0;
+}
+.rl__bar--bot {
+	bottom: 0;
+	transform: translate3d(0, 100%, 0);
+}
+.rl__bar--bot::after {
+	bottom: calc(100% - 1px);
+	border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+	transform-origin: 50% 100%;
+}
+
+/* where the page scroll lands the reel (site-scroll.js): after the screen it slides in on */
+.rl__stop {
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 1px;
+	height: 1px;
+	pointer-events: none;
+}
+
+/* the pinned film, desktop with motion allowed: it overlaps About's two pinned screens, so it is pinned and
+   off to the right while About lands, slides in on the second, then runs (one screen in, three of film) */
+.rl.is-cine {
+	height: calc(100vh + 400vh);
+	height: calc(100svh + 400svh);
+	margin-top: -200vh;
+	margin-top: -200svh;
+	overflow: clip;
+	background: transparent;
+}
+.rl.is-cine::before,
+.rl.is-cine .rl__cream,
+.rl.is-cine .rl__glitch {
+	display: none;
+}
+.rl.is-cine .rl__stop {
+	top: 100vh;
+	top: 100svh;
+}
+.rl.is-cine .rl__bar {
+	display: block;
+}
+.rl.is-cine .rl__pin {
+	position: sticky;
+	top: 0;
+	background: var(--ar-cream);
+	will-change: transform;
+}
+.rl.is-cine .rl__card {
+	background: transparent;
+	box-shadow: 0 34px 90px rgb(0 0 0 / 0.28);
+}
+.rl.is-cine .rl__video {
+	opacity: 0;
+}
+
+/* lights down: as the reel grows the page dims to a dark room, lit softly in the colour of the project playing,
+   and a control bar sits under the screen (chapters, play and pause, time) */
+.rl__room,
+.rl__ctrl {
+	display: none;
+}
+.rl.is-cine {
+	pointer-events: none;
+}
+.rl.is-cine .rl__room {
+	display: block;
+	position: absolute;
+	inset: 0;
+	overflow: hidden;
+	background: radial-gradient(75% 80% at 50% 45%, #1e1d1b, #0b0b0c 72%);
+	opacity: 0;
+}
+.rl__amb {
+	position: absolute;
+	left: 50%;
+	top: 45%;
+	width: 110vw;
+	height: 95vh;
+	transform: translate(-50%, -50%);
+	background: radial-gradient(closest-side, currentColor, transparent);
+	color: #d6a878;
+	opacity: 0.22;
+	transition: color 0.9s ease;
+}
+.rl.is-cine .rl__ctrl {
+	display: flex;
+	position: absolute;
+	z-index: 4;
+	left: 50%;
+	top: calc(50% + min(74vw, 128vh) * 9 / 32 - 3.1svh + 22px);
+	width: min(74vw, 128vh);
+	margin-left: calc(min(74vw, 128vh) / -2);
+	align-items: center;
+	justify-content: space-between;
+	gap: 24px;
+	color: #f2efe8;
+	font-family: var(--ar-sans);
+	opacity: 0;
+	visibility: hidden;
+}
+.rl.is-room .rl__ctrl {
+	visibility: visible;
+	pointer-events: auto;
+}
+.rl__ctrl-lab {
+	margin: 0;
+	font: 500 11.5px/1 var(--ar-mono);
+	letter-spacing: 0.12em;
+	text-transform: uppercase;
+	white-space: nowrap;
+	color: rgb(242 239 232 / 0.55);
+}
+/* a nav: undo the site-wide nav rule (style.css makes every nav fixed and full width) */
+.rl .rl__chaps {
+	position: static;
+	z-index: auto;
+	width: auto;
+	padding: 0;
+	display: flex;
+	justify-content: center;
+	gap: 4px;
+}
+.rl__chaps button {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 7px;
+	padding: 6px 10px;
+	border: 0;
+	border-radius: 8px;
+	background: none;
+	color: rgb(242 239 232 / 0.5);
+	font: 500 11.5px var(--ar-sans);
+	letter-spacing: 0.04em;
+	cursor: pointer;
+	transition: color 0.3s;
+}
+.rl__chaps button i {
+	width: 7px;
+	height: 7px;
+	border-radius: 50%;
+	background: rgb(242 239 232 / 0.3);
+	transition:
+		background-color 0.3s,
+		box-shadow 0.3s,
+		transform 0.3s;
+}
+.rl__chaps button b {
+	position: absolute;
+	bottom: calc(100% + 6px);
+	left: 50%;
+	padding: 6px 10px;
+	border-radius: 6px;
+	background: rgb(242 239 232 / 0.12);
+	font-weight: 500;
+	white-space: nowrap;
+	color: #f2efe8;
+	opacity: 0;
+	transform: translate(-50%, 4px);
+	transition:
+		opacity 0.2s,
+		transform 0.2s;
+	pointer-events: none;
+}
+.rl__chaps button:hover b,
+.rl__chaps button:focus-visible b {
+	opacity: 1;
+	transform: translate(-50%, 0);
+}
+.rl__chaps button:hover,
+.rl__chaps button[aria-current="true"] {
+	color: #f2efe8;
+}
+.rl__chaps button[aria-current="true"] i {
+	background: var(--c, #f2efe8);
+	box-shadow: 0 0 12px var(--c, #f2efe8);
+	transform: scale(1.3);
+}
+.rl__play {
+	display: inline-flex;
+	align-items: center;
+	gap: 10px;
+	height: 36px;
+	padding: 0 16px 0 14px;
+	border: 1px solid rgb(242 239 232 / 0.25);
+	border-radius: 999px;
+	background: none;
+	color: #f2efe8;
+	font: 500 13px var(--ar-sans);
+	font-variant-numeric: tabular-nums;
+	white-space: nowrap;
+	cursor: pointer;
+	transition: border-color 0.25s;
+}
+.rl__play:hover {
+	border-color: rgb(242 239 232 / 0.6);
+}
+.rl__play i {
+	box-sizing: border-box;
+	width: 10px;
+	height: 12px;
+	border-left: 3px solid currentColor;
+	border-right: 3px solid currentColor;
+}
+.rl__play.is-paused i {
+	border: 0;
+	background: currentColor;
+	clip-path: polygon(0 0, 100% 50%, 0 100%);
+}
+.rl__time {
+	color: rgb(242 239 232 / 0.65);
+}
+.rl__ctrl button:focus-visible {
+	outline: 2px solid #f2efe8;
+	outline-offset: 3px;
+}
+
+/* the header over these screens */
+.site-header.site-header--on-dark3:not(.site-header--open) .site-header__logo,
+.site-header.site-header--on-dark3:not(.site-header--open) .site-header__toggle,
+.site-header.site-header--on-dark3:not(.site-header--open) .site-header__actions a {
+	color: #f2efe8;
+}
+.site-header.site-header--on-dark3:not(.site-header--open) .site-header__burger::before,
+.site-header.site-header--on-dark3:not(.site-header--open) .site-header__burger::after {
+	background-color: #f2efe8;
+}
+
+/* ---------------- tablets, phones and reduced motion: a still layout ---------------- */
+.rl:not(.is-cine) {
+	min-height: 0;
+	background: var(--ar-cream);
+}
+.rl:not(.is-cine) .rl__pin {
+	height: auto;
+	min-height: 0;
+	padding: 90px 6vw 110px;
+}
+.rl:not(.is-cine) .rl__built {
+	position: static;
+	opacity: 1;
+}
+.rl:not(.is-cine) .rl__built--sm {
+	margin-bottom: 34px;
+}
+.rl:not(.is-cine) .rl__built--lg {
+	margin-top: 34px;
+	font-size: clamp(40px, 10vw, 80px);
+}
+.rl:not(.is-cine) .rl__card {
+	position: relative;
+	inset: auto;
+	width: 100%;
+	height: auto;
+	aspect-ratio: 16 / 9;
+}
+.rl:not(.is-cine) .rl__glitch {
+	display: none;
+}
+
+/* the control bar under the reel is switched off (user request, 2026-10-14) */
+.rl.is-cine .rl__ctrl {
+	display: none;
+}

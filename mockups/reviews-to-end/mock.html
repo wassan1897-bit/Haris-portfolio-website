@@ -1,0 +1,96 @@
+<!doctype html>
+<html><head><meta charset="utf-8" />
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,700..900&family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..700;1,6..96,400..700&family=Inter+Tight:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{width:1920px;height:1080px;overflow:hidden;background:#0d0d0d;color:#ece8e0;font-family:"Inter Tight",sans-serif}
+.layer{position:absolute;left:0;top:0;width:1920px;height:1080px}
+.layer img.full{width:100%;height:100%;display:block}
+/* the interlude stage */
+#stage{background:radial-gradient(60% 70% at 50% 62%,#2a2a2a,#121212 70%,#0b0b0b)}
+#word{position:absolute;left:0;right:0;top:110px;text-align:center;font:900 520px/0.82 "Archivo",sans-serif;font-stretch:62%;letter-spacing:-.02em;color:#ece8e0;white-space:nowrap}
+#word sup{font:500 40px "Inter Tight";vertical-align:top;position:relative;top:40px;margin-left:6px}
+#me{position:absolute;left:50%;bottom:-60px;width:700px;transform-origin:50% 100%;filter:grayscale(1) contrast(1.12) brightness(.95)}
+#dim{position:absolute;inset:0;background:#0b0b0b;opacity:0}
+#q{position:absolute;left:0;right:0;top:0;height:1080px}
+#q span{position:absolute;white-space:nowrap;font:400 92px/1 "Bodoni Moda",serif;letter-spacing:-.02em;color:#ece8e0;will-change:transform}
+#q span.acc{color:#ff8a3d;font-style:italic}
+#q span.it{font-style:italic}
+.nav{position:fixed;left:20px;right:20px;top:20px;display:flex;justify-content:space-between;font:600 16px "Inter Tight";z-index:9;color:#fff}
+.tag{position:fixed;left:24px;bottom:22px;z-index:9;font:500 13px "Inter Tight";color:#8c8880;background:rgba(0,0,0,.5);padding:6px 10px;border-radius:6px}
+</style></head>
+<body>
+<div class="layer" id="last"><img class="full" src="last.png" /></div>
+<div class="layer" id="stage">
+  <div id="word">HARIS<sup>®</sup></div>
+  <img id="me" src="haris-cut.png" />
+  <div id="dim"></div>
+</div>
+<div class="layer" id="q"></div>
+<div class="layer" id="rev"><img class="full" src="reviews.png" /></div>
+<div class="nav"><span>HARIS</span><span>☰ MENU</span><span>EMAIL &nbsp; LINKEDIN</span></div>
+<p class="tag" id="tag">Scroll 0%</p>
+<script>
+const clamp = (v) => Math.min(1, Math.max(0, v))
+const lerp = (a, b, k) => a + (b - a) * k
+const io = (k) => (k < 0.5 ? 4 * k * k * k : 1 - Math.pow(-2 * k + 2, 3) / 2)
+const out = (k) => 1 - Math.pow(1 - k, 3)
+const W = 1920, H = 1080
+// the question, as two lines; each word starts somewhere else, at its own size and depth
+const LINES = [['So,', 'what', 'should', 'we'], ['automate', 'first', '?']]
+const q = document.getElementById('q')
+let seed = 9
+const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647
+const words = []
+LINES.forEach((ln, li) => ln.forEach((w) => {
+  const s = document.createElement('span')
+  s.textContent = w
+  if (w === '?') s.className = 'acc'
+  if (w === 'first') s.className = 'it'
+  q.appendChild(s)
+  words.push({ s, li, from: { x: (rnd() - 0.5) * 1300, y: (rnd() - 0.5) * 760, sc: 0.55 + rnd() * 1.1, bl: 2 + rnd() * 6, d: rnd() * 0.25 } })
+}))
+// final layout: centred lines
+function place() {
+  const gap = 26
+  LINES.forEach((ln, li) => {
+    const ws = words.filter((w) => w.li === li)
+    const total = ws.reduce((a, w) => a + w.s.offsetWidth, 0) + gap * (ws.length - 1)
+    let x = (W - total) / 2
+    ws.forEach((w) => { w.x = x; w.y = 690 + li * 112; x += w.s.offsetWidth + gap })
+  })
+}
+const rev = document.getElementById('rev'), stage = document.getElementById('stage'), last = document.getElementById('last')
+const me = document.getElementById('me'), word = document.getElementById('word'), dim = document.getElementById('dim')
+window.setP = (p) => {
+  // 0 to 0.22: the reviews scroll away, the stage rises under them
+  const a = io(clamp(p / 0.22))
+  rev.style.transform = `translate3d(0, ${-a * H}px, 0)`
+  // the stage follows the scroll up, then pins; it leaves with the last page at the end
+  const e = io(clamp((p - 0.8) / 0.2))
+  stage.style.transform = `translate3d(0, ${((1 - a) * H - e * H * 0.35).toFixed(1)}px, 0)`
+  // a slow push-in while pinned
+  const push = clamp((p - 0.15) / 0.6)
+  me.style.transform = `translate3d(-50%, ${lerp(60, 0, out(clamp(p / 0.3))).toFixed(1)}px, 0) scale(${lerp(1.06, 1, push).toFixed(4)})`
+  word.style.transform = `translate3d(0, ${lerp(90, 0, out(clamp(p / 0.3))).toFixed(1)}px, 0) scale(${lerp(0.96, 1, push).toFixed(4)})`
+  // the photo and the name fade into the dark once the question has formed
+  dim.style.opacity = (0.8 * io(clamp((p - 0.62) / 0.14))).toFixed(3)
+  // 0.3 to 0.62: the words drift in and lock into the question
+  words.forEach((w) => {
+    const k = io(clamp((p - 0.28 - w.from.d * 0.12) / 0.26))
+    const x = lerp(w.x + w.from.x, w.x, k)
+    const y = lerp(w.y + w.from.y, w.y, k) - e * 360
+    const sc = lerp(w.from.sc, 1, k)
+    w.s.style.transform = `translate3d(${x.toFixed(1)}px, ${y.toFixed(1)}px, 0) scale(${sc.toFixed(3)})`
+    w.s.style.opacity = (clamp((p - 0.24) / 0.1) * lerp(0.35, 1, k) * (1 - clamp((p - 0.9) / 0.1))).toFixed(3)
+    w.s.style.filter = k < 0.98 ? `blur(${((1 - k) * w.from.bl).toFixed(1)}px)` : 'none'
+  })
+  // 0.8 to 1: the last page slides up over everything
+  last.style.transform = `translate3d(0, ${((1 - e) * H).toFixed(1)}px, 0)`
+  last.style.zIndex = e > 0 ? 3 : 0
+  rev.style.zIndex = 4
+  document.getElementById('tag').textContent = 'Scroll ' + Math.round(p * 100) + '%'
+}
+document.fonts.ready.then(() => { place(); window.setP(window.__p || 0); window.__ready = true })
+</script>
+</body></html>

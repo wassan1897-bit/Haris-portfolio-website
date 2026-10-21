@@ -1,0 +1,1 @@
+A financial operating system for household investing: a tool-using AI agent that answers questions from your own accounts and shows where every number comes from, with the private side walled off by lint rules that fail the build.

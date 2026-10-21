@@ -1,0 +1,54 @@
+<!doctype html>
+<html><head><meta charset="utf-8" />
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..700;1,6..96,400..700&family=Manrope:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{width:1440px;height:900px;overflow:hidden;background:#111;color:#f2efe8;font-family:Manrope,sans-serif}
+.k{font:500 13px "JetBrains Mono",monospace;letter-spacing:.16em;text-transform:uppercase;color:#a9a49a}
+.head{position:absolute;left:56px;right:56px;top:40px;display:flex;justify-content:space-between}
+h2{position:absolute;left:56px;top:88px;font:400 58px/1 "Bodoni Moda",serif;letter-spacing:-.02em}
+h2 em{color:#ff8a65}
+.track{position:absolute;left:56px;top:200px;display:flex;gap:28px}
+.card{position:relative;flex:none;width:880px;height:600px;border-radius:22px;background:#1a1a1a;box-shadow:inset 0 0 0 1px #2a2a2a;overflow:hidden}
+.card .shot{position:absolute;left:28px;top:28px;right:300px;bottom:28px;border-radius:12px;overflow:hidden;background:#fff}
+.card .shot img{width:100%;height:100%;object-fit:cover;object-position:30% 40%}
+.pin{position:absolute;width:34px;height:34px;margin:-17px 0 0 -17px;border-radius:50%;background:#ff8a65;color:#1a0d08;display:grid;place-items:center;font:700 14px Manrope;box-shadow:0 0 0 8px rgba(255,138,101,.25)}
+.pin.on{box-shadow:0 0 0 8px rgba(255,138,101,.25),0 0 0 22px rgba(255,138,101,.1)}
+.side{position:absolute;right:28px;top:34px;width:244px;bottom:28px;display:flex;flex-direction:column}
+.side h3{margin-top:12px;font:400 30px/1.05 "Bodoni Moda",serif}
+.notes{margin-top:26px;display:grid;gap:12px}
+.n{display:grid;grid-template-columns:26px 1fr;gap:10px;padding:12px;border-radius:12px;background:#222;font:500 13.5px/1.45 Manrope;color:#cfcac0}
+.n b{display:grid;place-items:center;width:26px;height:26px;border-radius:50%;background:#333;color:#fff;font:700 12px Manrope}
+.n.on{background:#2d1c16;box-shadow:inset 0 0 0 1px #ff8a65;color:#fff}.n.on b{background:#ff8a65;color:#1a0d08}
+.side .go{margin-top:auto;font:700 12px Manrope;letter-spacing:.14em;text-transform:uppercase}
+.card.next{width:520px;opacity:.55}
+.card.next .shot{right:28px}
+.lens{position:absolute;left:283px;top:303px;width:210px;height:210px;border-radius:50%;overflow:hidden;box-shadow:0 0 0 4px #ff8a65,0 20px 60px rgba(0,0,0,.6);background:#fff}
+.lens img{position:absolute;width:3280px;max-width:none;left:-1183px;top:-489px}
+.foot{position:absolute;left:56px;right:56px;bottom:30px;display:flex;justify-content:space-between}
+</style></head><body>
+<div class="head"><p class="k">(Up close)</p><p class="k">Drag or scroll · 9 projects</p></div>
+<h2>The real screens, <em>with the notes.</em></h2>
+<div class="track">
+  <article class="card">
+    <div class="shot"><img src="../../public/landing/projects/media/05-autonomous-agent/n8n-outage.webp">
+      <span class="pin" style="left:14%;top:52%">1</span>
+      <span class="pin on" style="left:44%;top:40%">2</span>
+      <span class="pin" style="left:86%;top:16%">3</span>
+    </div>
+    <div class="lens"><img src="../../public/landing/projects/media/05-autonomous-agent/n8n-outage.webp"></div>
+    <div class="side">
+      <p class="k" style="color:#ff8a65">05 · n8n workflow</p>
+      <h3>The live outage check</h3>
+      <div class="notes">
+        <p class="n"><b>1</b>A webhook from the agent starts the check.</p>
+        <p class="n on"><b>2</b>The caller's area is checked against live outage data before anyone escalates.</p>
+        <p class="n"><b>3</b>Every branch answers the agent with its own response.</p>
+      </div>
+      <p class="go">Open project →</p>
+    </div>
+  </article>
+  <article class="card next"><div class="shot"><img src="../../public/landing/projects/media/02-broadband-support/dashboard.webp" style="object-position:0 0"></div></article>
+</div>
+<div class="foot"><p class="k">Hover a pin, or move the lens over the screen</p><p class="k">01 / 09</p></div>
+</body></html>

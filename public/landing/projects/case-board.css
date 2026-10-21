@@ -1,0 +1,452 @@
+/* The project case files, first screen: the results board and its cinematic intro (case-board.js).
+   Bodoni Moda for the big type, Manrope for the rest, each project in its own colours (--pj-bg, --pj-accent). */
+
+.pjb {
+	--pjb-card: color-mix(in srgb, var(--pj-bg) 82%, #fff 6%);
+	--pjb-line: rgb(246 238 233 / 0.12);
+	--pjb-mute: rgb(246 238 233 / 0.62);
+	--pjb-out: cubic-bezier(0.16, 1, 0.3, 1);
+	--pjb-ease: cubic-bezier(0.7, 0, 0.2, 1);
+	display: flex;
+	flex-direction: column;
+	min-height: calc(100svh - 120px);
+	padding: 18px 0 24px;
+	font-family: "Manrope", "Inter", sans-serif;
+	color: #f6eee9;
+}
+.pjb__head {
+	display: flex;
+	justify-content: space-between;
+	align-items: flex-end;
+	gap: 40px;
+}
+.pjb__kick {
+	margin: 0;
+	font: 500 11.5px/1.2 "JetBrains Mono", ui-monospace, monospace;
+	letter-spacing: 0.16em;
+	text-transform: uppercase;
+	color: var(--pjb-mute);
+}
+.pjb__kick b {
+	font-weight: 500;
+	color: var(--pj-accent);
+}
+.pjb__title {
+	margin: 14px 0 0;
+	font: 500 clamp(40px, 4.6vw, 70px) / 0.95 "Bodoni Moda", Georgia, serif;
+	letter-spacing: -0.03em;
+}
+.pjb__title em,
+.pjb__ttl em {
+	font-style: italic;
+	font-weight: 400;
+	color: var(--pj-accent);
+}
+.pjb__desc {
+	max-width: 420px;
+	margin: 0;
+	font: 400 15px/1.55 "Manrope", sans-serif;
+	color: var(--pjb-mute);
+}
+
+.pjb__grid {
+	flex: 1;
+	display: grid;
+	grid-template-columns: 1.15fr 1fr 1fr;
+	grid-template-rows: minmax(190px, 1fr) minmax(190px, 1fr);
+	gap: 16px;
+	margin-top: 34px;
+}
+.pjb__tile {
+	position: relative;
+	overflow: hidden;
+	padding: 22px 24px;
+	border-radius: 20px;
+	background: var(--pjb-card);
+	box-shadow: inset 0 0 0 1px var(--pjb-line);
+}
+.pjb__tile--video {
+	grid-row: 1 / 3;
+	padding: 0;
+	background: #000;
+}
+.pjb__slot {
+	position: absolute;
+	inset: 0;
+}
+.pjb__slot .pjb__film {
+	position: absolute;
+	inset: 0;
+	border-radius: 20px;
+}
+/* in the tile the whole clip shows, nothing cropped; its edges are close to the page colour, so the tile takes it */
+.pjb__slot .pjb__film {
+	background: var(--pj-bg);
+}
+.pjb__slot .pjb__film video {
+	object-fit: contain;
+}
+.pjb__tile--video {
+	background: var(--pj-bg);
+}
+.pjb__cap {
+	position: absolute;
+	left: 18px;
+	right: 18px;
+	bottom: 18px;
+	z-index: 2;
+	margin: 0;
+	padding: 14px 18px;
+	border-radius: 14px;
+	background: rgb(15 8 10 / 0.6);
+	-webkit-backdrop-filter: blur(14px);
+	backdrop-filter: blur(14px);
+	font: 500 15px/1.4 "Manrope", sans-serif;
+	cursor: pointer;
+}
+.pjb__cap span {
+	display: block;
+	margin-bottom: 6px;
+	font: 500 11px "JetBrains Mono", monospace;
+	letter-spacing: 0.16em;
+	text-transform: uppercase;
+	color: var(--pjb-mute);
+}
+.pjb__cap b {
+	font-weight: 500;
+	color: var(--pj-accent);
+}
+.pjb__lab {
+	margin: 0;
+	font: 500 11px "JetBrains Mono", monospace;
+	letter-spacing: 0.16em;
+	text-transform: uppercase;
+	color: var(--pjb-mute);
+}
+.pjb__big {
+	margin: 14px 0 0;
+	font: 500 clamp(48px, 5vw, 72px) / 0.9 "Bodoni Moda", Georgia, serif;
+	letter-spacing: -0.02em;
+	white-space: nowrap;
+}
+.pjb__sub {
+	margin: 10px 0 0;
+	font: 400 13.5px/1.4 "Manrope", sans-serif;
+	color: var(--pjb-mute);
+}
+.pjb__bars {
+	position: absolute;
+	left: 24px;
+	right: 24px;
+	bottom: 22px;
+	display: flex;
+	align-items: flex-end;
+	gap: 6px;
+	height: 28%;
+}
+.pjb__bars i {
+	flex: 1;
+	border-radius: 3px 3px 1px 1px;
+	background: linear-gradient(var(--pj-accent), color-mix(in srgb, var(--pj-accent) 30%, transparent));
+	transform-origin: 50% 100%;
+}
+.pjb__tile--accent {
+	background: var(--pj-accent);
+	box-shadow: none;
+	color: #1b0a0d;
+}
+.pjb__tile--accent .pjb__lab,
+.pjb__tile--accent .pjb__sub {
+	color: rgb(27 10 13 / 0.72);
+}
+.pjb__steps {
+	display: grid;
+	gap: 8px;
+	margin: 16px 0 0;
+	padding: 0;
+	list-style: none;
+	counter-reset: pjb;
+}
+.pjb__steps li {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	padding: 9px 12px;
+	border-radius: 10px;
+	background: rgb(246 238 233 / 0.06);
+	font: 600 13px/1.3 "Manrope", sans-serif;
+	counter-increment: pjb;
+}
+.pjb__steps li::before {
+	content: counter(pjb);
+	flex: none;
+	display: grid;
+	place-items: center;
+	width: 22px;
+	height: 22px;
+	border-radius: 50%;
+	background: var(--pj-accent);
+	color: #1b0a0d;
+	font: 700 11px "Manrope", sans-serif;
+}
+.pjb__more {
+	margin: 22px 0 0;
+	font: 500 11px "JetBrains Mono", monospace;
+	letter-spacing: 0.16em;
+	text-transform: uppercase;
+	color: var(--pjb-mute);
+}
+.pjb-story__h {
+	margin-bottom: 18px;
+}
+
+/* ---------------- the film ---------------- */
+.pjb__film {
+	overflow: hidden;
+	background: #000;
+}
+.pjb__film video {
+	position: absolute;
+	inset: 0;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+.pj-detail > .pjb__film {
+	position: absolute;
+	z-index: 30;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	border-radius: 0;
+	transition:
+		left 1.3s var(--pjb-ease, cubic-bezier(0.7, 0, 0.2, 1)),
+		top 1.3s var(--pjb-ease, cubic-bezier(0.7, 0, 0.2, 1)),
+		width 1.3s var(--pjb-ease, cubic-bezier(0.7, 0, 0.2, 1)),
+		height 1.3s var(--pjb-ease, cubic-bezier(0.7, 0, 0.2, 1)),
+		border-radius 1.3s var(--pjb-ease, cubic-bezier(0.7, 0, 0.2, 1));
+}
+.pj-detail > .pjb__film video {
+	filter: brightness(0.55);
+	transform: scale(1.12);
+	transition:
+		transform 6s linear,
+		filter 1s ease;
+}
+.pjb-go > .pjb__film video {
+	filter: brightness(0.8);
+	transform: none;
+}
+.pjb-landing > .pjb__film video {
+	filter: none;
+	transition:
+		transform 1.3s cubic-bezier(0.7, 0, 0.2, 1),
+		filter 1s ease;
+}
+
+/* letterbox, titles and the skip button: only while the intro plays */
+.pj-detail > .pjb__bar {
+	position: absolute;
+	left: 0;
+	right: 0;
+	z-index: 31;
+	height: 13%;
+	background: #000;
+	transition: transform 1s cubic-bezier(0.7, 0, 0.2, 1);
+}
+.pjb__bar--t {
+	top: 0;
+}
+.pjb__bar--b {
+	bottom: 0;
+}
+.pjb-landing > .pjb__bar--t,
+.pjb-landed > .pjb__bar--t {
+	transform: translateY(-101%);
+}
+.pjb-landing > .pjb__bar--b,
+.pjb-landed > .pjb__bar--b {
+	transform: translateY(101%);
+}
+.pj-detail > .pjb__titles,
+.pj-detail > .pjb__skip {
+	display: none;
+}
+.pjb-intro > .pjb__titles {
+	position: absolute;
+	inset: 0;
+	z-index: 32;
+	display: grid;
+	place-items: center;
+	padding: 0 6vw;
+	text-align: center;
+	pointer-events: none;
+	background: radial-gradient(52% 46% at 50% 50%, rgb(15 6 9 / 0.78), rgb(15 6 9 / 0) 100%);
+	transition: opacity 0.5s ease;
+	font-family: "Manrope", sans-serif;
+	color: #f6eee9;
+}
+.pjb-landing > .pjb__titles {
+	opacity: 0;
+}
+.pjb__titles .pjb__kick {
+	opacity: 0;
+	transform: translateY(10px);
+	transition:
+		opacity 0.7s ease 0.5s,
+		transform 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.5s;
+}
+.pjb__ttl {
+	max-width: 15ch;
+	margin: 24px auto 0;
+	font: 500 clamp(52px, 8vw, 118px) / 0.95 "Bodoni Moda", Georgia, serif;
+	letter-spacing: -0.03em;
+}
+.pjb__ttl span {
+	display: inline-block;
+	overflow: hidden;
+	padding-bottom: 0.1em;
+	vertical-align: bottom;
+}
+.pjb__ttl span i {
+	display: inline-block;
+	font-style: inherit;
+	transform: translateY(110%);
+	transition: transform 1.1s cubic-bezier(0.16, 1, 0.3, 1) 0.75s;
+}
+.pjb__ttl span + span i {
+	transition-delay: 1s;
+}
+.pjb__meta {
+	display: flex;
+	justify-content: center;
+	gap: 36px;
+	margin-top: 30px;
+	opacity: 0;
+	transition: opacity 0.8s ease 1.9s;
+}
+.pjb__meta b {
+	display: block;
+	font: 500 34px "Bodoni Moda", Georgia, serif;
+	color: #fff;
+}
+.pjb__meta span {
+	font: 500 11px "JetBrains Mono", monospace;
+	letter-spacing: 0.14em;
+	text-transform: uppercase;
+	color: rgb(246 238 233 / 0.62);
+}
+.pjb-go > .pjb__titles .pjb__kick {
+	opacity: 1;
+	transform: none;
+}
+.pjb-go > .pjb__titles .pjb__ttl span i {
+	transform: none;
+}
+.pjb-go > .pjb__titles .pjb__meta {
+	opacity: 1;
+}
+.pjb-intro > .pjb__skip {
+	display: block;
+	position: absolute;
+	right: 4vw;
+	bottom: calc(13% + 24px);
+	z-index: 33;
+	padding: 9px 16px;
+	border: 0;
+	border-radius: 999px;
+	background: rgb(246 238 233 / 0.14);
+	box-shadow: inset 0 0 0 1px rgb(246 238 233 / 0.28);
+	color: #f6eee9;
+	font: 600 12.5px "Manrope", sans-serif;
+	cursor: pointer;
+}
+.pjb-landing > .pjb__skip {
+	display: none;
+}
+
+/* the board rises in as the film lands */
+.pjb-intro .pjb__in,
+.pjb-intro .pjb__tile:not(.pjb__tile--video) {
+	opacity: 0;
+	transform: translateY(26px);
+}
+.pjb-intro .pjb__tile--video {
+	background: transparent;
+}
+.pjb-landing .pjb__in,
+.pjb-landed .pjb__in {
+	opacity: 1;
+	transform: none;
+	transition:
+		opacity 0.8s ease var(--d, 0.3s),
+		transform 1s cubic-bezier(0.16, 1, 0.3, 1) var(--d, 0.3s);
+}
+.pjb__grid > :nth-child(2) {
+	--d: 0.5s;
+}
+.pjb__grid > :nth-child(3) {
+	--d: 0.62s;
+}
+.pjb__grid > :nth-child(4) {
+	--d: 0.74s;
+}
+.pjb__grid > :nth-child(5) {
+	--d: 0.86s;
+}
+.pjb__cap {
+	--d: 1s;
+}
+.pjb-landing .pjb__bars i {
+	animation: pjb-grow 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
+	animation-delay: calc(0.8s + var(--i) * 0.05s);
+}
+@keyframes pjb-grow {
+	from {
+		transform: scaleY(0);
+	}
+}
+
+/* ---------------- tablets and phones: stacked ---------------- */
+@media (max-width: 1023px) {
+	.pjb__head {
+		flex-direction: column;
+		align-items: flex-start;
+		gap: 16px;
+	}
+	.pjb__grid {
+		grid-template-columns: 1fr 1fr;
+		grid-template-rows: auto;
+	}
+	.pjb__tile--video {
+		grid-column: 1 / -1;
+		grid-row: auto;
+		aspect-ratio: 16 / 9;
+	}
+	.pjb__tile:last-child {
+		grid-column: 1 / -1;
+	}
+	.pjb__bars {
+		position: static;
+		height: 60px;
+		margin-top: 18px;
+	}
+}
+@media (max-width: 767px) {
+	.pjb__grid {
+		grid-template-columns: 1fr;
+	}
+	.pjb__ttl {
+		font-size: 44px;
+	}
+	.pjb__meta {
+		gap: 20px;
+	}
+	.pjb__meta b {
+		font-size: 24px;
+	}
+	.pjb__cap {
+		display: none;
+	}
+}

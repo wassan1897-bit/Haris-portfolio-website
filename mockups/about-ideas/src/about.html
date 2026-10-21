@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>About ideas</title>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@400;500;600;800&family=JetBrains+Mono:wght@400;500&family=Montserrat:wght@600;800&display=swap" rel="stylesheet" />
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body { width: 1440px; height: 900px; overflow: hidden; background: #0a0a0b; color: #f2efe8; -webkit-font-smoothing: antialiased; font-family: "Inter Tight", sans-serif; }
+.mono { font-family: "JetBrains Mono", monospace; font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; }
+.serif { font-family: "Instrument Serif", serif; font-weight: 400; }
+em { color: #a7a29a; }
+.g { color: #8fd46f; }
+section { position: absolute; inset: 0; display: none; overflow: hidden; }
+.hdr { position: absolute; left: 0; right: 0; top: 0; height: 64px; display: flex; align-items: center; justify-content: space-between; padding: 0 20px; font: 600 15px Montserrat; z-index: 30; }
+.grain::after { content: ""; position: absolute; inset: 0; pointer-events: none; z-index: 25; opacity: 0.07; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)'/%3E%3C/svg%3E"); }
+/* photo placeholder: a lit, empty frame that says where the portrait goes */
+.ph { position: absolute; overflow: hidden; background: radial-gradient(60% 55% at 62% 38%, #3a3631 0%, #1c1a18 45%, #0e0d0d 100%); }
+.ph::before { content: ""; position: absolute; left: 30%; top: 16%; width: 40%; height: 120%; border-radius: 48% 48% 0 0; background: radial-gradient(70% 40% at 50% 22%, #2b2825, #141312 70%); box-shadow: 0 0 0 1px rgba(255, 220, 180, 0.08), 8px -6px 40px rgba(255, 200, 150, 0.12); }
+.ph span { position: absolute; left: 50%; bottom: 26px; transform: translateX(-50%); white-space: nowrap; font: 400 11px "JetBrains Mono"; letter-spacing: 0.2em; text-transform: uppercase; color: #6e6a63; border: 1px dashed #3a3834; padding: 8px 14px; }
+.ph.bw { filter: grayscale(1); }
+</style>
+</head>
+<body>
+<div class="hdr"><span>HARIS</span><span style="font-weight:500">☰&nbsp; MENU</span><span>EMAIL &nbsp;&nbsp; LINKEDIN</span></div>
+
+<!-- 1 OPENING TITLES -->
+<section id="v1" class="grain" style="background:#050506">
+	<div style="position:absolute;left:0;right:0;top:0;height:128px;background:#000;z-index:5"></div>
+	<div style="position:absolute;left:0;right:0;bottom:0;height:128px;background:#000;z-index:5"></div>
+	<p class="mono" style="position:absolute;z-index:6;left:44px;top:84px;color:#8a8780">Scene 02 · About Haris</p>
+	<p class="mono" style="position:absolute;z-index:6;right:44px;top:84px;color:#c7c2b8"><b style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#e5484d;margin-right:10px"></b>Karachi · 24 fps</p>
+	<div class="ph" style="left:560px;right:0;top:128px;bottom:128px"><span>Photo of Haris</span></div>
+	<div style="position:absolute;left:0;top:128px;bottom:128px;width:900px;z-index:2;background:linear-gradient(90deg,#050506 0%,#050506 55%,rgba(5,5,6,0) 100%)"></div>
+	<div style="position:absolute;z-index:3;left:110px;top:250px">
+		<p class="mono g">[ About Haris ]</p>
+		<h2 class="serif" style="margin-top:22px;font-size:104px;line-height:0.96;letter-spacing:-0.02em">Diagnose first.<br /><em>Then build.</em></h2>
+		<p style="margin-top:30px;max-width:470px;font:400 18px/1.6 'Inter Tight';color:#c4c0b8">I'm Haris, an AI automation engineer in Karachi. I build production AI for operations-heavy businesses in the US, the UK and the Middle East.</p>
+	</div>
+	<p style="position:absolute;z-index:6;left:0;right:0;bottom:52px;text-align:center;font:500 22px 'Inter Tight';color:#f5e9b8">"I start with the process, not the model."<small class="mono" style="display:block;margin-top:8px;color:#77746d;font-size:10px">00:02:14</small></p>
+</section>
+
+<!-- 2 PORTRAIT REVEAL -->
+<section id="v2" class="grain">
+	<div class="ph" style="left:600px;width:240px;top:0;bottom:0"><span style="bottom:40px">Photo</span></div>
+	<div style="position:absolute;left:600px;width:240px;top:0;bottom:0;box-shadow:0 0 0 1px rgba(255,255,255,0.06)"></div>
+	<p class="serif" style="position:absolute;left:110px;top:330px;width:440px;font-size:46px;line-height:1.1">Before I build anything, <em>I watch how the work really happens.</em></p>
+	<div style="position:absolute;left:900px;top:330px;width:420px">
+		<p class="mono g">[ About Haris ]</p>
+		<p style="margin-top:22px;font:400 17px/1.65 'Inter Tight';color:#6e6b64">AI automation engineer in Karachi. Support agents, inbox automation, voice agents and the workflows behind them, for clients in the US, the UK and the Middle East.</p>
+	</div>
+	<p class="mono" style="position:absolute;left:0;right:0;bottom:44px;text-align:center;color:#5e5b55">Scroll: the slit widens into the portrait</p>
+</section>
+
+<!-- 3 INTERVIEW -->
+<section id="v3" class="grain" style="background:#0c0c0d">
+	<div class="ph bw" style="left:0;width:820px;top:0;bottom:0"><span>Side profile of Haris, lit from behind</span></div>
+	<div style="position:absolute;left:0;width:820px;top:0;bottom:0;background:linear-gradient(90deg,rgba(12,12,13,0) 50%,#0c0c0d 100%)"></div>
+	<div style="position:absolute;left:60px;bottom:90px;display:flex;align-items:stretch;gap:16px">
+		<i style="display:block;width:4px;background:#8fd46f"></i>
+		<div><p style="font:600 24px 'Inter Tight'">Muhammad Haris</p><p class="mono" style="margin-top:8px;color:#a7a29a">AI automation engineer · Karachi</p></div>
+	</div>
+	<div style="position:absolute;left:880px;right:110px;top:230px">
+		<p class="mono" style="color:#6e6b64">Q 02 / 03 · How do you start?</p>
+		<p class="serif" style="margin-top:26px;font-size:54px;line-height:1.08">"I sit with the team first and map where the hours really go. <em>The model comes last.</em>"</p>
+		<div style="display:flex;gap:10px;margin-top:46px"><i style="width:28px;height:2px;background:#3a3834"></i><i style="width:46px;height:2px;background:#f2efe8"></i><i style="width:28px;height:2px;background:#3a3834"></i></div>
+		<p class="mono" style="margin-top:18px;color:#4e4c47">Next · Who do you work with?</p>
+	</div>
+</section>
+
+<!-- 4 CONTACT SHEET -->
+<section id="v4" class="grain" style="background:#0d0d0f">
+	<div style="position:absolute;left:96px;top:-60px;width:470px;bottom:-60px;background:#121214;transform:rotate(-4deg);box-shadow:0 40px 90px rgba(0,0,0,0.6)">
+		<i style="position:absolute;left:12px;top:0;bottom:0;width:26px;background:repeating-linear-gradient(180deg,transparent 0 14px,#2a2a2c 14px 30px,transparent 30px 44px)"></i>
+		<i style="position:absolute;right:12px;top:0;bottom:0;width:26px;background:repeating-linear-gradient(180deg,transparent 0 14px,#2a2a2c 14px 30px,transparent 30px 44px)"></i>
+		<div style="position:absolute;left:56px;right:56px;top:30px;display:grid;gap:22px">
+			<div class="ph bw" style="position:relative;height:310px"><span>Frame 14A</span></div>
+			<div class="ph" style="position:relative;height:310px;outline:3px solid #8fd46f"><span style="color:#8fd46f;border-color:#8fd46f">Frame 15A · photo</span></div>
+			<div class="ph bw" style="position:relative;height:310px"><span>Frame 16A</span></div>
+		</div>
+	</div>
+	<div style="position:absolute;left:700px;right:110px;top:150px">
+		<p class="mono" style="color:#8a8780">(About Haris) · Frame 15 of 36</p>
+		<h2 class="serif" style="margin-top:20px;font-size:88px;line-height:0.95;letter-spacing:-0.02em">The person <em class="g" style="color:#8fd46f">behind the pipelines.</em></h2>
+		<div style="margin-top:46px">
+			<div style="display:grid;grid-template-columns:70px 1fr;padding:22px 0;border-top:1px solid #26262a"><b class="mono" style="color:#5f5d58;padding-top:6px">01</b><p style="font:400 18px/1.55 'Inter Tight';color:#6c6a65"><strong style="display:block;font:600 24px 'Inter Tight';margin-bottom:4px">Diagnose</strong>I sit with the team first and map where the hours really go.</p></div>
+			<div style="display:grid;grid-template-columns:70px 1fr;padding:22px 0;border-top:1px solid #26262a"><b class="mono g" style="padding-top:6px">02</b><p style="font:400 18px/1.55 'Inter Tight';color:#cfcac0"><strong style="display:block;font:600 24px 'Inter Tight';color:#f2efe8;margin-bottom:4px">Build</strong>n8n, Python and the right model for each step, wired into the tools you already use.</p></div>
+			<div style="display:grid;grid-template-columns:70px 1fr;padding:22px 0;border-top:1px solid #26262a"><b class="mono" style="color:#5f5d58;padding-top:6px">03</b><p style="font:400 18px/1.55 'Inter Tight';color:#6c6a65"><strong style="display:block;font:600 24px 'Inter Tight';margin-bottom:4px">Ship and stay</strong>Live in production, measured, and looked after until it runs without me.</p></div>
+		</div>
+	</div>
+</section>
+
+<!-- 5 END CREDITS -->
+<section id="v5" class="grain" style="background:#000">
+	<p style="position:absolute;left:0;right:0;top:70px;text-align:center;font:800 300px/0.8 Montserrat;letter-spacing:-0.04em;color:transparent;-webkit-text-stroke:1.5px #5e5b55">HARIS</p>
+	<p class="mono" style="position:absolute;left:0;right:0;top:300px;text-align:center;color:#5e5b55">Photo of Haris shows through the letters</p>
+	<p class="serif" style="position:absolute;left:0;right:0;top:345px;text-align:center;font-size:40px;font-style:italic;color:#d8d3c8">A film by one engineer.</p>
+	<div style="position:absolute;left:0;right:0;top:440px;display:grid;justify-content:center;gap:22px">
+		<div style="display:grid;grid-template-columns:360px 360px;column-gap:36px;align-items:baseline"><span class="mono" style="text-align:right;color:#8a8780;font-size:13px">Diagnosis</span><span style="font:500 24px 'Inter Tight'">Haris</span></div>
+		<div style="display:grid;grid-template-columns:360px 360px;column-gap:36px;align-items:baseline"><span class="mono" style="text-align:right;color:#8a8780;font-size:13px">Architecture</span><span style="font:500 24px 'Inter Tight'">Haris</span></div>
+		<div style="display:grid;grid-template-columns:360px 360px;column-gap:36px;align-items:baseline"><span class="mono" style="text-align:right;color:#8a8780;font-size:13px">Workflows and agents</span><span style="font:500 24px 'Inter Tight'">Haris <small class="mono" style="color:#6a6863;margin-left:10px">n8n · Python · Claude</small></span></div>
+		<div style="display:grid;grid-template-columns:360px 360px;column-gap:36px;align-items:baseline"><span class="mono" style="text-align:right;color:#8a8780;font-size:13px">Deployment</span><span style="font:500 24px 'Inter Tight'">Haris</span></div>
+		<div style="display:grid;grid-template-columns:360px 360px;column-gap:36px;align-items:baseline"><span class="mono" style="text-align:right;color:#8a8780;font-size:13px">Filmed on location</span><span style="font:500 24px 'Inter Tight'">Karachi <small class="mono" style="color:#6a6863;margin-left:10px">for the US, UK, Middle East</small></span></div>
+		<div style="display:grid;grid-template-columns:360px 360px;column-gap:36px;align-items:baseline"><span class="mono" style="text-align:right;color:#8a8780;font-size:13px">Reviews</span><span style="font:500 24px 'Inter Tight'">33 contracts <small class="mono" style="color:#6a6863;margin-left:10px">100% Job Success</small></span></div>
+	</div>
+	<div style="position:absolute;left:0;right:0;bottom:0;height:240px;background:linear-gradient(transparent,#000)"></div>
+	<p class="mono" style="position:absolute;right:44px;bottom:40px;color:#6a6863">Scroll to roll credits</p>
+</section>
+
+<script>
+const v = new URLSearchParams(location.search).get('v') || '1';
+document.getElementById('v' + v).style.display = 'block';
+</script>
+</body>
+</html>

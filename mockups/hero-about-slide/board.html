@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Hero to About, sideways slide</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500&family=Instrument+Serif:ital@0;1&family=Montserrat:wght@600&display=swap" rel="stylesheet" />
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body { width: 1440px; height: 900px; overflow: hidden; background: #f1eee9; -webkit-font-smoothing: antialiased; }
+:root { --cream: #f1eee9; --ink: #1d1d1b; --mute: #55534f; }
+.hero { position: absolute; left: 0; top: 0; width: 1440px; height: 900px; background: url(img/hero.png) 0 0 / 1440px 900px; }
+/* the stripes that wipe the hero's left side away, right to left */
+.stripes { position: absolute; left: 0; top: 0; width: 893px; height: 900px; }
+.stripes i { position: absolute; top: 0; height: 900px; background: var(--cream); }
+/* the sideways track: the photo and the About copy move together, like one wide page */
+.track { position: absolute; left: 0; top: 0; height: 900px; width: 3000px; }
+.photo { position: absolute; top: 0; left: 893px; width: 547px; overflow: hidden; }
+.photo img { position: absolute; left: 0; width: 547px; height: 972px; top: -37px; }
+.about { position: absolute; top: 0; left: 1570px; width: 870px; color: var(--ink); font-family: "Inter Tight", sans-serif; }
+.lab { font: 500 12px "Inter Tight"; letter-spacing: 0.04em; text-transform: uppercase; color: var(--ink); }
+.lead { margin-top: 20px; font: 400 40px/1.12 "Inter Tight"; letter-spacing: -0.015em; max-width: 780px; }
+.cols { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; margin-top: 88px; max-width: 780px; }
+.cols p:not(.lab) { margin-top: 18px; font: 400 14.5px/1.5 "Inter Tight"; color: #2c2b28; }
+.nums { display: flex; gap: 46px; margin-top: 64px; }
+.nums b { display: block; font: 400 34px "Inter Tight"; letter-spacing: -0.02em; }
+.nums small { display: block; margin-top: 6px; font: 500 11px "Inter Tight"; text-transform: uppercase; letter-spacing: 0.04em; color: var(--mute); }
+.hdr { position: absolute; left: 0; right: 0; top: 0; height: 70px; display: flex; align-items: center; justify-content: space-between; padding: 0 26px; z-index: 9; color: var(--ink); }
+.hdr .logo { font: italic 400 30px "Instrument Serif"; }
+.hdr nav { display: flex; gap: 48px; font: 500 12px "Inter Tight"; letter-spacing: 0.04em; text-transform: uppercase; }
+.hdr .r { font: 500 12px "Inter Tight"; letter-spacing: 0.04em; text-transform: uppercase; }
+</style>
+</head>
+<body>
+<div class="hero" id="hero"></div>
+<div class="stripes" id="stripes"></div>
+<div id="under" style="position:absolute;left:893px;top:848px;width:547px;height:52px;background:var(--cream);opacity:0"></div>
+<div class="track" id="track">
+	<div class="photo" id="photo"><img src="img/photo.webp" alt="" /></div>
+	<div class="about">
+		<div style="position:absolute;top:210px;left:0;width:870px">
+			<p class="lab">About</p>
+			<p class="lead">I build AI that takes real work off a team's plate: support agents that answer at 2am, inboxes that sort themselves, and the workflows that connect them to the tools you already use.</p>
+			<div class="cols">
+				<div><p class="lab">How I work</p><p>I start with the process, not the model. I map how the work moves today, find the steps that eat the most hours, and automate those first. Everything ships with logs, so you can see what the agent did and why.</p></div>
+				<div><p class="lab">What you get</p><p>Production systems, not demos. Built for operations-heavy teams in the US, the UK and the Middle East, and handed over with the docs and dashboards your team needs to run them.</p></div>
+			</div>
+			<div class="nums">
+				<div><b>33</b><small>Upwork contracts, 100% JSS</small></div>
+				<div><b>6,700+</b><small>Conversations automated</small></div>
+				<div><b>21,000+</b><small>Agent minutes saved</small></div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="hdr" id="hdr"><span style="font:600 15px Montserrat">HARIS</span><span style="font:500 15px 'Inter Tight'">☰&nbsp; MENU</span><span style="font:500 15px 'Inter Tight'">EMAIL &nbsp;&nbsp; LINKEDIN</span></div>
+<script>
+const q = new URLSearchParams(location.search)
+const w = +(q.get('w') || 0) // the stripe wipe, 0 to 1
+const h = +(q.get('h') || 0) // the sideways slide, 0 to 1
+const clamp = (v) => Math.min(1, Math.max(0, v))
+const inOut = (t) => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2)
+
+// stripes: 22 columns across the hero's left side; the ones nearest the photo start first
+const N = 22, colW = 893 / N, st = document.getElementById('stripes')
+for (let i = 0; i < N; i++) {
+	const fromRight = N - 1 - i
+	const t = inOut(clamp((w - (fromRight / (N - 1)) * 0.55) / 0.45))
+	const el = document.createElement('i')
+	el.style.width = (colW * t + (t > 0 ? 0.5 : 0)).toFixed(2) + 'px'
+	el.style.left = (i * colW + colW * (1 - t)).toFixed(2) + 'px'
+	st.appendChild(el)
+}
+// the photo: no title over it once the wipe starts; it grows to the full height as the hero goes
+const photo = document.getElementById('photo')
+const g = inOut(clamp((w - 0.5) / 0.5))
+photo.style.height = (848 + 52 * g) + 'px'
+document.getElementById('under').style.opacity = clamp(w / 0.6)
+photo.style.borderRadius = `0 0 0 ${10 * (1 - g)}px`
+document.getElementById('hero').style.display = w >= 1 ? 'none' : ''
+if (w === 0) { photo.style.display = 'none'; st.style.display = 'none' }
+// the slide: the photo and the About copy move left together by 1140px
+const D = 1140
+document.getElementById('track').style.transform = `translateX(${(-inOut(h) * D).toFixed(1)}px)`
+document.getElementById('hdr').style.opacity = clamp((w - 0.7) / 0.3)
+</script>
+</body>
+</html>

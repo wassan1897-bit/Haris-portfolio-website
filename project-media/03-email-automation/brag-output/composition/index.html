@@ -1,0 +1,342 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1920, height=1080" />
+    <title>Email automation, project clip</title>
+    <script src="assets/gsap.min.js"></script>
+    <style>
+      @font-face { font-family: "Inter"; src: url("assets/fonts/inter-latin-400-normal.woff2") format("woff2"); font-weight: 400; font-display: block; }
+      @font-face { font-family: "Inter"; src: url("assets/fonts/inter-latin-500-normal.woff2") format("woff2"); font-weight: 500; font-display: block; }
+      @font-face { font-family: "Inter"; src: url("assets/fonts/inter-latin-600-normal.woff2") format("woff2"); font-weight: 600; font-display: block; }
+      @font-face { font-family: "Inter"; src: url("assets/fonts/inter-latin-700-normal.woff2") format("woff2"); font-weight: 700; font-display: block; }
+      @font-face { font-family: "Inter"; src: url("assets/fonts/inter-latin-800-normal.woff2") format("woff2"); font-weight: 800; font-display: block; }
+
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { width: 1920px; height: 1080px; overflow: hidden; background: #0f2a30; }
+      body { font-family: "Inter", sans-serif; color: #eef2f8; -webkit-font-smoothing: antialiased; }
+      #root { position: relative; width: 100%; height: 100%; overflow: hidden; }
+      #stage { position: absolute; inset: 0; overflow: hidden; }
+      svg { display: block; }
+
+      /* ---------- background ---------- */
+      .bg { position: absolute; inset: 0; background: radial-gradient(1500px 1050px at 58% 45%, #1d4a55 0%, #153a42 48%, #0f2a30 100%); }
+      .grain { position: absolute; inset: 0; opacity: 0.07; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' seed='5' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='240' height='240' filter='url(%23n)'/%3E%3C/svg%3E"); }
+      .grid-wrap { position: absolute; inset: 0; overflow: hidden; -webkit-mask-image: radial-gradient(1100px 760px at 58% 50%, #000 30%, transparent 100%); mask-image: radial-gradient(1100px 760px at 58% 50%, #000 30%, transparent 100%); }
+      #grid { position: absolute; left: 0; top: 0; width: 2016px; height: 1080px; background-image: radial-gradient(rgba(238, 242, 248, 0.18) 1.6px, transparent 2.1px); background-size: 48px 48px; }
+      #glowA { position: absolute; left: 520px; top: -40px; width: 1160px; height: 1160px; border-radius: 50%; background: radial-gradient(closest-side, rgba(143, 216, 230, 0.16), rgba(143, 216, 230, 0.05) 50%, rgba(143, 216, 230, 0) 100%); }
+      .vig { position: absolute; inset: 0; box-shadow: inset 0 0 320px rgba(4, 14, 17, 0.45); pointer-events: none; }
+
+      /* ---------- eyebrow + progress ---------- */
+      #ebGroup { position: absolute; left: 720px; top: 104px; width: 1100px; }
+      #prog { display: flex; gap: 10px; }
+      #prog span { display: block; width: 56px; height: 5px; border-radius: 3px; background: rgba(238, 242, 248, 0.2); overflow: hidden; }
+      #prog i { display: block; width: 100%; height: 100%; background: #8fd8e6; transform-origin: 0 50%; }
+      .ebs { position: relative; height: 40px; margin-top: 16px; }
+      .eb { position: absolute; left: 0; top: 0; display: flex; align-items: center; gap: 14px; font-size: 27px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: #eef2f8; white-space: nowrap; }
+      .eb b { display: block; width: 12px; height: 12px; border-radius: 50%; background: #8fd8e6; box-shadow: 0 0 14px rgba(143, 216, 230, 0.8); }
+
+      /* ---------- inbox ---------- */
+      #mailWrap { position: absolute; left: 110px; top: 150px; width: 540px; height: 790px; }
+      .mail { width: 100%; height: 100%; overflow: hidden; background: #ffffff; color: #14213f; border-radius: 30px; box-shadow: 0 50px 110px rgba(2, 10, 14, 0.6); }
+      .mail__h { display: flex; align-items: center; gap: 16px; padding: 24px 28px; border-bottom: 2px solid #eef0f4; }
+      .mail__ic { display: grid; place-items: center; width: 54px; height: 54px; border-radius: 14px; background: #14213f; flex: none; }
+      .mail__ic svg { width: 28px; height: 28px; }
+      .mail__t { font-size: 26px; font-weight: 700; }
+      .mail__s { font-size: 18px; color: #4f596b; margin-top: 2px; }
+      .rows { position: relative; }
+      .row { position: relative; height: 150px; padding: 20px 28px 0 44px; border-bottom: 2px solid #eef0f4; }
+      .row__dot { position: absolute; left: 18px; top: 30px; width: 12px; height: 12px; border-radius: 50%; background: #1f8aa0; }
+      .row__top { display: flex; justify-content: space-between; align-items: baseline; }
+      .row__from { font-size: 21px; font-weight: 700; }
+      .row__time { font-size: 17px; color: #5b6475; }
+      .row__sub { font-size: 20px; font-weight: 600; margin-top: 4px; }
+      .row__pre { font-size: 18px; color: #5b6475; margin-top: 4px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+      .row--old .row__from, .row--old .row__sub { font-weight: 500; color: #3b4558; }
+      #rNew { position: absolute; left: 0; right: 0; top: 0; background: #eefafc; }
+      .chips { display: flex; gap: 8px; margin-top: 10px; }
+      .chip { display: inline-flex; align-items: center; gap: 6px; height: 30px; padding: 0 12px; border-radius: 99px; font-size: 15px; font-weight: 700; white-space: nowrap; }
+      .chip svg { width: 15px; height: 15px; }
+      .chip--file { background: #eef0f4; color: #3b4558; }
+      .chip--path { background: #0f2a30; color: #bfeef7; }
+      .chip--ok { background: #d8f3f8; color: #0d4e5c; }
+      .chip--draft { background: #14213f; color: #ffffff; }
+      #oldRows { position: absolute; left: 0; right: 0; top: 150px; }
+
+      /* ---------- right side ---------- */
+      .ln { fill: none; stroke: #7fa5ad; stroke-width: 3; stroke-linejoin: round; stroke-linecap: butt; stroke-dasharray: 1 1; stroke-dashoffset: 1; }
+      .dash { fill: none; stroke: #7fa5ad; stroke-width: 2.5; stroke-dasharray: 6 8; opacity: 0; }
+      .ah { fill: #7fa5ad; opacity: 0; }
+      .lane-hit { stroke: #8fd8e6; stroke-width: 5; }
+      #classify { position: absolute; left: 720px; top: 470px; width: 240px; height: 140px; display: grid; place-items: center; text-align: center; padding: 0 20px; border-radius: 22px; background: #8fd8e6; color: #0b2329; font-size: 25px; font-weight: 800; line-height: 1.18; box-shadow: 0 24px 60px rgba(0, 0, 0, 0.4); }
+      #classify small { display: block; font-size: 18px; font-weight: 700; color: #1d5a66; margin-top: 4px; }
+      #clRing { position: absolute; inset: -12px; border-radius: 30px; border: 3px solid rgba(143, 216, 230, 0.8); opacity: 0; }
+      .plab { position: absolute; left: 1196px; height: 34px; display: flex; align-items: center; font-size: 19px; font-weight: 700; color: #a9c3c8; white-space: nowrap; }
+      #pl3 { color: #0b2329; background: #8fd8e6; padding: 0 12px; border-radius: 99px; left: 1190px; }
+      .fx { position: absolute; left: 1330px; display: flex; align-items: center; gap: 14px; height: 60px; padding: 0 22px 0 12px; border-radius: 99px; background: rgba(143, 216, 230, 0.12); border: 2px solid rgba(143, 216, 230, 0.5); color: #d6f4f9; font-size: 22px; font-weight: 600; white-space: nowrap; }
+      .fx span { display: grid; place-items: center; width: 36px; height: 36px; border-radius: 50%; background: #8fd8e6; }
+      .fx svg { width: 20px; height: 20px; }
+
+      .nd { position: absolute; width: 220px; height: 100px; display: grid; place-items: center; text-align: center; padding: 0 16px; border-radius: 18px; border: 2px solid rgba(238, 242, 248, 0.38); background: #133b44; color: #eef2f8; font-size: 23px; font-weight: 600; line-height: 1.15; }
+      .nd--ai { border-color: #8fd8e6; background: #17464f; }
+      .nd--gate { background: #0b2024; border: 3px solid #eef2f8; font-weight: 800; }
+      .nd--out { background: #eef2f8; color: #0b2329; border-color: #eef2f8; font-weight: 700; height: 90px; }
+      .nd__fx { position: absolute; inset: -6px; border-radius: 22px; border: 4px solid #8fd8e6; box-shadow: 0 0 34px rgba(143, 216, 230, 0.55); opacity: 0; }
+      .elab { position: absolute; font-size: 17px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #a9c3c8; }
+      #rules { position: absolute; left: 860px; top: 520px; width: 200px; height: 130px; }
+      #rules p { position: absolute; left: 0; right: 0; top: 52px; text-align: center; font-size: 21px; font-weight: 700; line-height: 1.15; color: #0b2329; }
+      #draft { position: absolute; left: 1150px; top: 560px; width: 670px; height: 300px; padding: 28px 34px; border-radius: 26px; background: #ffffff; color: #14213f; box-shadow: 0 40px 90px rgba(2, 10, 14, 0.55); }
+      .dr__h { display: flex; justify-content: space-between; align-items: center; }
+      .dr__t { font-size: 24px; font-weight: 800; }
+      .dr__to { font-size: 18px; color: #5b6475; margin-top: 2px; }
+      #drReady { display: inline-flex; align-items: center; height: 36px; padding: 0 16px; border-radius: 99px; background: #0f2a30; color: #bfeef7; font-size: 17px; font-weight: 700; }
+      .dr__b { margin-top: 22px; }
+      .dr__hi { font-size: 22px; font-weight: 600; }
+      .bar { display: block; height: 13px; border-radius: 7px; background: #dfe5ec; margin-top: 14px; transform-origin: 0 50%; }
+      .pulse { position: absolute; left: -10px; top: -10px; width: 20px; height: 20px; border-radius: 50%; background: #c9f3fa; box-shadow: 0 0 16px 6px rgba(143, 216, 230, 0.7); opacity: 0; }
+
+      /* ---------- results ---------- */
+      #res { position: absolute; left: 110px; top: 330px; width: 1700px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 60px; }
+      .st { border-top: 3px solid rgba(143, 216, 230, 0.75); padding-top: 28px; }
+      .st__n { font-size: 150px; font-weight: 800; letter-spacing: -0.04em; line-height: 1; font-variant-numeric: tabular-nums; color: #ffffff; }
+      .st__l { font-size: 30px; line-height: 1.3; color: #c6dde1; margin-top: 18px; max-width: 470px; }
+      #live { position: absolute; left: 110px; top: 760px; display: flex; align-items: center; gap: 14px; padding: 16px 28px 16px 16px; border-radius: 99px; background: #8fd8e6; color: #0b2329; font-size: 28px; font-weight: 700; }
+      #live span { display: grid; place-items: center; width: 46px; height: 46px; border-radius: 50%; background: #0b2329; }
+      #live i { display: block; width: 14px; height: 14px; border-radius: 50%; background: #8fd8e6; }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="12" data-width="1920" data-height="1080">
+      <div id="stage">
+        <div class="bg"></div>
+        <div class="grid-wrap"><div id="grid"></div></div>
+        <div id="glowA"></div>
+        <div class="grain"></div>
+
+        <!-- ================= INBOX ================= -->
+        <div id="mailWrap">
+          <div class="mail">
+            <div class="mail__h">
+              <span class="mail__ic"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2" /><path d="M3.5 6.5 12 13l8.5-6.5" /></svg></span>
+              <div><p class="mail__t">Shared inbox</p><p class="mail__s">Client document requests</p></div>
+            </div>
+            <div class="rows">
+              <div class="row" id="rNew">
+                <i class="row__dot"></i>
+                <div class="row__top"><p class="row__from">New client</p><p class="row__time">09:14</p></div>
+                <p class="row__sub">Document request</p>
+                <div class="chips">
+                  <span class="chip chip--file"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M20 11.5 12.4 19a5 5 0 0 1-7.1-7.1l8-8a3.3 3.3 0 0 1 4.7 4.7l-8 8a1.7 1.7 0 0 1-2.4-2.4l7.3-7.3" /></svg>2 files</span>
+                  <span class="chip chip--path" id="cPath">Path 3 of 8</span>
+                  <span class="chip chip--ok" id="cThread">Thread matched</span>
+                  <span class="chip chip--draft" id="cDraft">Draft ready</span>
+                </div>
+              </div>
+              <div id="oldRows">
+                <div class="row row--old"><div class="row__top"><p class="row__from">Returning client</p><p class="row__time">08:52</p></div><p class="row__sub">Re: Order update</p><p class="row__pre">Thanks, that's everything received on our side.</p></div>
+                <div class="row row--old"><div class="row__top"><p class="row__from">Web form</p><p class="row__time">08:31</p></div><p class="row__sub">New enquiry</p><p class="row__pre">Submitted through the website intake form.</p></div>
+                <div class="row row--old"><div class="row__top"><p class="row__from">Returning client</p><p class="row__time">Yesterday</p></div><p class="row__sub">Re: Invoice query</p><p class="row__pre">Following up on the earlier thread about billing.</p></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ================= SCENE 1 + 2: classify into eight paths ================= -->
+        <div id="s12">
+          <svg width="1920" height="1080" viewBox="0 0 1920 1080" style="position: absolute; left: 0; top: 0">
+            <path class="ln" id="lIn" pathLength="1" d="M650 540 H710" />
+            <path class="ln lane" pathLength="1" d="M960 540 C1040 540 1080 290 1150 290 H1180" />
+            <path class="ln lane" pathLength="1" d="M960 540 C1040 540 1080 361 1150 361 H1180" />
+            <path class="ln lane" id="lane3" pathLength="1" d="M960 540 C1040 540 1080 432 1150 432 H1180" />
+            <path class="ln lane" pathLength="1" d="M960 540 C1040 540 1080 503 1150 503 H1180" />
+            <path class="ln lane" pathLength="1" d="M960 540 C1040 540 1080 574 1150 574 H1180" />
+            <path class="ln lane" pathLength="1" d="M960 540 C1040 540 1080 645 1150 645 H1180" />
+            <path class="ln lane" pathLength="1" d="M960 540 C1040 540 1080 716 1150 716 H1180" />
+            <path class="ln lane" pathLength="1" d="M960 540 C1040 540 1080 787 1150 787 H1180" />
+            <path class="ln lane-hit" id="hit3" pathLength="1" d="M960 540 C1040 540 1080 432 1150 432 H1180" />
+          </svg>
+          <div id="classify"><i id="clRing"></i><div>AI classify and route<small>8 paths</small></div></div>
+          <p class="plab" style="top: 273px">Path 1</p>
+          <p class="plab" style="top: 344px">Path 2</p>
+          <p class="plab" id="pl3" style="top: 415px">Path 3</p>
+          <p class="plab" style="top: 486px">Path 4</p>
+          <p class="plab" style="top: 557px">Path 5</p>
+          <p class="plab" style="top: 628px">Path 6</p>
+          <p class="plab" style="top: 699px">Path 7</p>
+          <p class="plab" style="top: 770px">Path 8</p>
+          <p class="fx" id="fx1" style="top: 330px"><span><svg viewBox="0 0 24 24" fill="none" stroke="#0b2329" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5" /></svg></span>Attachments filed to OneDrive</p>
+          <p class="fx" id="fx2" style="top: 510px"><span><svg viewBox="0 0 24 24" fill="none" stroke="#0b2329" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5" /></svg></span>CRM ledger updated</p>
+          <p class="fx" id="fx3" style="top: 690px"><span><svg viewBox="0 0 24 24" fill="none" stroke="#0b2329" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5" /></svg></span>Thread matched to its record</p>
+        </div>
+
+        <!-- ================= SCENE 3: drafted, checked, gated ================= -->
+        <div id="s3">
+          <svg width="1920" height="1080" viewBox="0 0 1920 1080" style="position: absolute; left: 0; top: 0">
+            <path class="ln" id="d1" pathLength="1" d="M940 350 H1012" />
+            <path class="ln" id="d2" pathLength="1" d="M1240 350 H1312" />
+            <path class="ln" id="d3" pathLength="1" d="M1540 350 H1565 V265 H1592" />
+            <path class="ln" id="d4" pathLength="1" d="M1540 350 H1565 V445 H1592" style="opacity: 0.45" />
+            <path class="ah" id="ah1" d="M1008 341 L1021 350 L1008 359 Z" />
+            <path class="ah" id="ah2" d="M1308 341 L1321 350 L1308 359 Z" />
+            <path class="ah" id="ah3" d="M1588 256 L1601 265 L1588 274 Z" />
+            <path class="ah" id="ah4" d="M1588 436 L1601 445 L1588 454 Z" style="fill-opacity: 0.45" />
+            <path class="dash" id="rd1" d="M900 524 V470 H830 V408" />
+            <path class="dash" id="rd2" d="M1020 524 V470 H1130 V408" />
+          </svg>
+          <div class="nd nd--ai" id="nDraft" style="left: 720px; top: 300px"><i class="nd__fx" id="fDraft"></i>Draft writer</div>
+          <div class="nd nd--ai" id="nComp" style="left: 1020px; top: 300px"><i class="nd__fx" id="fComp"></i>AI compliance pass</div>
+          <div class="nd nd--gate" id="nGate" style="left: 1320px; top: 300px"><i class="nd__fx" id="fGate"></i>Deterministic gate</div>
+          <div class="nd nd--out" id="nBox" style="left: 1600px; top: 220px; width: 230px"><i class="nd__fx" id="fBox"></i>Draft in mailbox</div>
+          <div class="nd nd--out" id="nHum" style="left: 1600px; top: 400px; width: 230px">Human escalation</div>
+          <p class="elab" id="eClr" style="left: 1572px; top: 196px">clears</p>
+          <p class="elab" id="eHld" style="left: 1572px; top: 500px">held</p>
+          <div id="rules">
+            <svg width="200" height="130" viewBox="0 0 200 130"><path d="M2 22 V108 A98 20 0 0 0 198 108 V22" fill="#e3edf0" stroke="#7fa5ad" stroke-width="2.5" /><ellipse cx="100" cy="22" rx="98" ry="20" fill="#f4f8f9" stroke="#7fa5ad" stroke-width="2.5" /></svg>
+            <p>Living rules doc</p>
+          </div>
+          <div id="draft">
+            <div class="dr__h">
+              <div><p class="dr__t">Draft reply</p><p class="dr__to">To: New client · Re: Document request</p></div>
+              <span id="drReady">Ready for review</span>
+            </div>
+            <div class="dr__b">
+              <p class="dr__hi" id="drHi">Hi,</p>
+              <i class="bar" style="width: 96%"></i>
+              <i class="bar" style="width: 88%"></i>
+              <i class="bar" style="width: 92%"></i>
+              <i class="bar" style="width: 54%"></i>
+            </div>
+          </div>
+          <div class="pulse" id="pu"></div>
+        </div>
+
+        <!-- ================= RESULTS ================= -->
+        <div id="res">
+          <div class="st"><p class="st__n" id="n1">224</p><p class="st__l">nodes in the email pipeline</p></div>
+          <div class="st"><p class="st__n" id="n2">38</p><p class="st__l">nodes in the web-intake pipeline</p></div>
+          <div class="st"><p class="st__n" id="n3">8</p><p class="st__l">reasoning paths, each with its own scoped model call</p></div>
+        </div>
+        <p id="live"><span><i></i></span>Live in production on a real client inbox</p>
+
+        <!-- ================= EYEBROW ================= -->
+        <div id="ebGroup">
+          <div id="prog"><span><i id="bar1"></i></span><span><i id="bar2"></i></span><span><i id="bar3"></i></span><span><i id="bar4"></i></span></div>
+          <div class="ebs">
+            <p class="eb" id="eb1"><b></b>An enquiry lands</p>
+            <p class="eb" id="eb2"><b></b>Eight scoped paths</p>
+            <p class="eb" id="eb3"><b></b>Drafted, checked, gated</p>
+            <p class="eb" id="eb4"><b></b>The build</p>
+          </div>
+        </div>
+
+        <div class="vig"></div>
+      </div>
+    </div>
+
+    <script>
+      const tl = gsap.timeline({ paused: true, defaults: { ease: "power3.out" } });
+      const D = 12;
+
+      // ---------- ambient (lands back on frame 0 at t=12) ----------
+      tl.fromTo("#grid", { x: 0 }, { x: -48, duration: D, ease: "none" }, 0);
+      tl.fromTo("#glowA", { scale: 1 }, { scale: 1.1, duration: 3, ease: "sine.inOut", yoyo: true, repeat: 3 }, 0);
+
+      // ---------- progress + eyebrows ----------
+      tl.fromTo("#prog", { opacity: 0 }, { opacity: 1, duration: 0.4 }, 0.45);
+      tl.fromTo("#bar1", { scaleX: 0 }, { scaleX: 1, duration: 2.3, ease: "none" }, 0.5);
+      tl.fromTo("#bar2", { scaleX: 0 }, { scaleX: 1, duration: 2.6, ease: "none" }, 2.8);
+      tl.fromTo("#bar3", { scaleX: 0 }, { scaleX: 1, duration: 3.0, ease: "none" }, 5.4);
+      tl.fromTo("#bar4", { scaleX: 0 }, { scaleX: 1, duration: 3.2, ease: "none" }, 8.4);
+      const ebIn = (sel, t) => tl.fromTo(sel, { opacity: 0, y: 18 }, { opacity: 1, y: 0, duration: 0.5 }, t);
+      const ebOut = (sel, t) => tl.to(sel, { opacity: 0, y: -14, duration: 0.28, ease: "power2.in" }, t);
+      ebIn("#eb1", 0.5); ebOut("#eb1", 2.6);
+      ebIn("#eb2", 2.9); ebOut("#eb2", 5.1);
+      ebIn("#eb3", 5.45); ebOut("#eb3", 8.15);
+      ebIn("#eb4", 8.75);
+
+      const pop = (sel, t) => tl.fromTo(sel, { opacity: 0, scale: 0.86, y: 12 }, { opacity: 1, scale: 1, y: 0, duration: 0.45, ease: "back.out(1.6)" }, t);
+      const draw = (sel, t, d) => tl.fromTo(sel, { strokeDashoffset: 1 }, { strokeDashoffset: 0, duration: d, ease: "power2.inOut" }, t);
+      const fade = (sel, t, d = 0.15) => tl.fromTo(sel, { opacity: 0 }, { opacity: 1, duration: d, ease: "none" }, t);
+      const chip = (sel, t) => tl.fromTo(sel, { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 0.4, ease: "back.out(2.2)" }, t);
+
+      // ================= SCENE 1: an enquiry lands (0 - 2.8) =================
+      tl.fromTo("#mailWrap", { y: 110, opacity: 0 }, { y: 0, opacity: 1, duration: 0.9, ease: "expo.out" }, 0.05);
+      tl.fromTo("#oldRows", { y: -150 }, { y: 0, duration: 0.6, ease: "power3.inOut" }, 0.95);
+      tl.fromTo("#rNew", { opacity: 0, x: -30 }, { opacity: 1, x: 0, duration: 0.5 }, 1.2);
+      draw("#lIn", 1.45, 0.25);
+      pop("#classify", 1.6);
+      tl.fromTo("#clRing", { opacity: 0, scale: 0.9 }, { keyframes: [ { opacity: 1, scale: 1, duration: 0.35, ease: "power2.out" }, { opacity: 0, scale: 1.12, duration: 0.6, ease: "power1.in" } ] }, 1.85);
+
+      // ================= SCENE 2: eight scoped paths (2.8 - 5.4) =================
+      tl.fromTo(".lane", { strokeDashoffset: 1 }, { strokeDashoffset: 0, duration: 0.45, ease: "power2.inOut", stagger: 0.05 }, 2.85);
+      tl.fromTo(".plab", { opacity: 0, x: -10 }, { opacity: 1, x: 0, duration: 0.35, stagger: 0.05 }, 3.1);
+      draw("#hit3", 3.6, 0.35);
+      chip("#cPath", 3.8);
+      tl.fromTo("#fx1", { opacity: 0, x: -20 }, { opacity: 1, x: 0, duration: 0.45 }, 4.0);
+      tl.fromTo("#fx2", { opacity: 0, x: -20 }, { opacity: 1, x: 0, duration: 0.45 }, 4.3);
+      tl.fromTo("#fx3", { opacity: 0, x: -20 }, { opacity: 1, x: 0, duration: 0.45 }, 4.6);
+      chip("#cThread", 4.7);
+      tl.to("#s12", { opacity: 0, x: -40, duration: 0.35, ease: "power2.in" }, 5.05);
+
+      // ================= SCENE 3: drafted, checked, gated (5.4 - 8.4) =================
+      pop("#nDraft", 5.45);
+      pop("#rules", 5.55);
+      fade("#rd1", 5.75, 0.3);
+      draw("#d1", 5.75, 0.2);
+      fade("#ah1", 5.93, 0.08);
+      pop("#nComp", 5.85);
+      fade("#rd2", 6.0, 0.3);
+      draw("#d2", 6.05, 0.2);
+      fade("#ah2", 6.23, 0.08);
+      pop("#nGate", 6.15);
+      draw("#d3", 6.35, 0.22);
+      draw("#d4", 6.35, 0.22);
+      fade("#ah3", 6.55, 0.08);
+      tl.fromTo("#ah4", { opacity: 0 }, { opacity: 1, duration: 0.08, ease: "none" }, 6.55);
+      pop("#nBox", 6.45);
+      tl.fromTo("#nHum", { opacity: 0, scale: 0.86 }, { opacity: 0.45, scale: 1, duration: 0.45, ease: "back.out(1.6)" }, 6.5);
+      fade("#eClr", 6.6, 0.3);
+      tl.fromTo("#eHld", { opacity: 0 }, { opacity: 0.6, duration: 0.3, ease: "none" }, 6.6);
+      pop("#draft", 5.62);
+      tl.fromTo("#drHi", { opacity: 0 }, { opacity: 1, duration: 0.2, ease: "none" }, 6.2);
+      tl.fromTo("#draft .bar", { scaleX: 0 }, { scaleX: 1, duration: 0.32, ease: "power1.inOut", stagger: 0.24 }, 6.3);
+
+      // the reply travels: writer, compliance pass, gate, mailbox
+      tl.set("#pu", { x: 830, y: 350 }, 0);
+      tl.to("#pu", { keyframes: [
+        { opacity: 1, duration: 0.06, ease: "none" },
+        { x: 1130, duration: 0.25, ease: "none" },
+        { x: 1430, duration: 0.25, ease: "none" },
+        { x: 1565, duration: 0.11, ease: "none" },
+        { y: 265, duration: 0.07, ease: "none" },
+        { x: 1715, duration: 0.12, ease: "none" },
+        { opacity: 0, duration: 0.08, ease: "none" },
+      ] }, 6.75);
+      const flash = (sel, t) => { fade(sel, t, 0.1); tl.to(sel, { opacity: 0, duration: 0.35, ease: "power1.out" }, t + 0.2); };
+      flash("#fDraft", 6.75);
+      flash("#fComp", 7.0);
+      flash("#fGate", 7.25);
+      fade("#fBox", 7.5);
+      chip("#drReady", 7.55);
+      chip("#cDraft", 7.6);
+
+      // ================= SCENE 4: the build (8.4 - 12) =================
+      tl.to("#mailWrap", { x: -580, opacity: 0, duration: 0.45, ease: "power3.in" }, 8.05);
+      tl.to("#s3", { opacity: 0, y: -30, duration: 0.4, ease: "power2.in" }, 8.08);
+      tl.to("#ebGroup", { x: -610, duration: 0.6, ease: "power3.inOut" }, 8.25);
+      tl.fromTo("#res .st", { opacity: 0, y: 50 }, { opacity: 1, y: 0, duration: 0.7, ease: "expo.out", stagger: 0.14 }, 8.7);
+      [["#n1", 224, 8.75], ["#n2", 38, 8.89], ["#n3", 8, 9.03]].forEach(([sel, to, t]) => {
+        const el = document.querySelector(sel);
+        const o = { v: 0 };
+        tl.fromTo(o, { v: 0 }, { v: to, duration: 1.2, ease: "power2.out", onUpdate: () => (el.textContent = String(Math.round(o.v))) }, t);
+      });
+      tl.fromTo("#live", { opacity: 0, y: 24, scale: 0.94 }, { opacity: 1, y: 0, scale: 1, duration: 0.55, ease: "back.out(1.7)" }, 10.2);
+      tl.fromTo("#live i", { scale: 1 }, { scale: 0.6, duration: 0.4, ease: "sine.inOut", yoyo: true, repeat: 1 }, 10.8);
+
+      // ---------- loop out: back to the empty stage ----------
+      tl.to(["#res", "#live", "#ebGroup"], { opacity: 0, duration: 0.33, ease: "power1.in" }, 11.67);
+
+      window.__timelines["main"] = tl;
+    </script>
+  </body>
+</html>

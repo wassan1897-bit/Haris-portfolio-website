@@ -1,0 +1,120 @@
+<!doctype html>
+<html><head><meta charset="utf-8" />
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..700;1,6..96,400..700&family=Manrope:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{width:1920px;height:1080px;overflow:hidden;background:#121212;color:#f2efe8;font-family:Manrope,sans-serif}
+.v{display:none;position:relative;width:1920px;height:1080px}
+body[data-v="a"] .va,body[data-v="b"] .vb,body[data-v="c"] .vc,body[data-v="d"] .vd{display:block}
+.k{font:500 13px "JetBrains Mono",monospace;letter-spacing:.16em;text-transform:uppercase;color:#9a9792}
+.acc{color:#e3b85c}
+.nav{position:absolute;left:20px;right:20px;top:20px;display:flex;justify-content:space-between;font:600 16px Manrope;z-index:9}
+.h2{font:400 58px/1 "Bodoni Moda",serif;letter-spacing:-.02em}
+.h2 em{color:#e3b85c}
+img{display:block}
+
+/* A: proof rails */
+.va .head{position:absolute;left:420px;top:130px}
+.va .reel{position:absolute;left:420px;top:250px;width:1080px}
+.va .chap{position:absolute;left:420px;top:730px;width:1080px}
+.rail{position:absolute;top:250px;width:300px}
+.rail.l{left:70px}.rail.r{right:70px}
+.stat{padding:18px 0;border-bottom:1px solid #262626}
+.stat b{display:block;font:400 54px/1 "Bodoni Moda",serif}
+.stat small{display:block;margin-top:8px}
+.chip{display:flex;justify-content:space-between;align-items:center;padding:12px 16px;margin-top:10px;border-radius:999px;background:#1a1a1a;box-shadow:inset 0 0 0 1px rgba(227,184,92,.3);font:500 14px Manrope}
+.chip b{font:500 13px "JetBrains Mono",monospace;color:#e3b85c}
+.bar{height:5px;border-radius:3px;background:#2a2a2a;margin-top:-4px;position:relative;overflow:hidden}
+.va .foot{position:absolute;left:420px;right:420px;bottom:60px;display:flex;justify-content:space-between}
+
+/* B: marquees */
+.mq{position:absolute;left:-200px;right:-200px;white-space:nowrap;font:italic 400 38px "Bodoni Moda",serif;color:#3a3833}
+.mq span{margin-right:70px}.mq em{color:#7d6634;font-style:italic}
+.vb .reel{position:absolute;left:340px;top:300px;width:1240px;box-shadow:0 40px 120px #000}
+.vb .chap{position:absolute;left:340px;top:840px;width:1240px}
+.vb .head{position:absolute;left:340px;top:120px;right:340px;display:flex;justify-content:space-between;align-items:flex-end}
+.fadeL,.fadeR{position:absolute;top:0;bottom:0;width:300px;z-index:2}
+.fadeL{left:0;background:linear-gradient(90deg,#121212,transparent)}.fadeR{right:0;background:linear-gradient(-90deg,#121212,transparent)}
+
+/* C: reel + finale */
+.vc .head{position:absolute;left:340px;top:90px;right:340px;display:flex;justify-content:space-between;align-items:flex-end}
+.vc .reel{position:absolute;left:470px;top:190px;width:980px}
+.vc .chap{position:absolute;left:470px;top:610px;width:980px}
+.fin{position:absolute;left:0;right:0;top:700px;bottom:0;border-top:1px solid #222;background:radial-gradient(60% 120% at 50% 100%,rgba(227,184,92,.12),transparent 70%)}
+.fin .big{position:absolute;left:0;right:0;top:60px;text-align:center;font:400 96px/1 "Bodoni Moda",serif;letter-spacing:-.03em}
+.fin .big em{color:#e3b85c}
+.fin .ctas{position:absolute;left:0;right:0;top:200px;display:flex;justify-content:center;gap:22px;align-items:center}
+.btn{padding:18px 30px;border-radius:999px;background:#f2efe8;color:#111;font:700 13px Manrope;letter-spacing:.14em;text-transform:uppercase}
+.ghost{padding:17px 26px;border-radius:999px;box-shadow:inset 0 0 0 1px rgba(242,239,232,.35);font:700 13px Manrope;letter-spacing:.14em;text-transform:uppercase}
+.fin .credits{position:absolute;left:60px;right:60px;bottom:34px;display:flex;justify-content:space-between}
+
+/* D: full-bleed cinema */
+.vd .reelbig{position:absolute;left:0;top:0;width:1920px;height:1080px;object-fit:cover;object-position:50% 50%;filter:brightness(.95)}
+.vd .grad{position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,10,10,.85),transparent 22%,transparent 70%,rgba(10,10,10,.92))}
+.vd .head{position:absolute;left:70px;top:110px}
+.vd .meta{position:absolute;right:70px;top:150px;text-align:right}
+.vd .chap{position:absolute;left:70px;right:70px;bottom:46px}
+.vd .chap img{width:100%}
+.vd .side{position:absolute;right:70px;bottom:190px;display:flex;gap:40px}
+.vd .side div b{display:block;font:400 46px/1 "Bodoni Moda",serif}
+</style></head>
+<body data-v="a">
+<div class="nav"><span>HARIS</span><span>☰ MENU</span><span>EMAIL &nbsp; LINKEDIN</span></div>
+
+<!-- A: the reel with two rails of proof -->
+<section class="v va">
+  <div class="head"><p class="k">(Client reviews)</p><p class="h2" style="margin-top:14px">The reviews, <em>on the record.</em></p></div>
+  <div class="rail l">
+    <p class="k acc">The record</p>
+    <div class="stat"><b>100%</b><small class="k">Job success</small></div>
+    <div class="stat"><b>Top Rated <span class="acc" style="font-style:italic">Plus</span></b><small class="k">Upwork</small></div>
+    <div class="stat"><b>33</b><small class="k">Jobs completed</small></div>
+    <div class="stat"><b>728</b><small class="k">Hours on Upwork</small></div>
+    <div class="stat" style="border:0"><b>$30K+</b><small class="k">Earned</small></div>
+  </div>
+  <img class="reel" src="reel.png" />
+  <img class="chap" src="chapters.png" />
+  <div class="rail r">
+    <p class="k acc">Clients endorsed</p>
+    <p class="k" style="margin-top:8px;color:#5f5c57">Across these 7 reviews</p>
+    <div class="chip">Committed to Quality <b>×5</b></div>
+    <div class="chip">Clear Communicator <b>×4</b></div>
+    <div class="chip">Solution Oriented <b>×4</b></div>
+    <div class="chip">Collaborative <b>×4</b></div>
+    <div class="chip">Reliable <b>×3</b></div>
+    <div class="chip">Detail Oriented <b>×2</b></div>
+  </div>
+</section>
+
+<!-- B: client words drifting past, the reel in the middle -->
+<section class="v vb">
+  <div class="mq" style="top:200px;transform:translateX(-120px)"><span>“consistently delivers <em>high-quality results</em>”</span><span>“<em>World-class communication</em>”</span><span>“an <em>exceptional freelancer</em>”</span><span>“went <em>the extra mile</em>”</span><span>“got my problem <em>solved FAST</em>”</span></div>
+  <div class="mq" style="top:960px;transform:translateX(-520px)"><span>“<em>highly recommend him</em>”</span><span>“strong <em>attention to detail</em>”</span><span>“completed work <em>before any deadlines</em>”</span><span>“we are already discussing <em>our next project</em>”</span></div>
+  <div class="fadeL"></div><div class="fadeR"></div>
+  <div class="head"><div><p class="k">(Client reviews)</p><p class="h2" style="margin-top:14px">The reviews, <em>on the record.</em></p></div><p class="k">Upwork · Top Rated Plus · 100% Job Success</p></div>
+  <img class="reel" src="reel.png" />
+  <img class="chap" src="chapters.png" />
+</section>
+
+<!-- C: the reel, then the site's ending -->
+<section class="v vc">
+  <div class="head"><div><p class="k">(Client reviews)</p><p class="h2" style="margin-top:12px;font-size:48px">The reviews, <em>on the record.</em></p></div><p class="k">Upwork · Top Rated Plus · 100% Job Success</p></div>
+  <img class="reel" src="reel.png" />
+  <img class="chap" src="chapters.png" />
+  <div class="fin">
+    <p class="big">Your project, <em>next on the record.</em></p>
+    <div class="ctas"><span class="btn">Start a project →</span><span class="ghost">Hire on Upwork ↗</span><span class="ghost">LinkedIn ↗</span><span class="k" style="margin-left:14px">hello@autoany.io · 8:23 PM in Karachi</span></div>
+    <div class="credits"><p class="k">Muhammad Haris · AI automation engineer</p><p class="k">Directed, built and automated in Karachi</p><p class="k">© 2026 · Back to top ↑</p></div>
+  </div>
+</section>
+
+<!-- D: the reel full screen, like the project screens -->
+<section class="v vd">
+  <img class="reelbig" src="reel.png" />
+  <div class="grad"></div>
+  <div class="head"><p class="k">(Client reviews)</p><p class="h2" style="margin-top:14px;font-size:72px">The reviews, <em>on the record.</em></p></div>
+  <div class="meta"><p class="k">Upwork · Top Rated Plus</p><p class="k" style="margin-top:10px">100% Job Success</p></div>
+  <div class="side"><div><b>33</b><span class="k">Jobs</span></div><div><b>728</b><span class="k">Hours</span></div><div><b>$30K+</b><span class="k">Earned</span></div></div>
+  <div class="chap"><img src="chapters.png" /></div>
+</section>
+</body></html>

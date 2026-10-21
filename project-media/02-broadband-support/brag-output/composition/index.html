@@ -1,0 +1,290 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1920, height=1080" />
+    <title>AI customer support, project clip</title>
+    <script src="assets/gsap.min.js"></script>
+    <style>
+      @font-face { font-family: "Inter"; src: url("assets/fonts/inter-latin-400-normal.woff2") format("woff2"); font-weight: 400; font-display: block; }
+      @font-face { font-family: "Inter"; src: url("assets/fonts/inter-latin-500-normal.woff2") format("woff2"); font-weight: 500; font-display: block; }
+      @font-face { font-family: "Inter"; src: url("assets/fonts/inter-latin-600-normal.woff2") format("woff2"); font-weight: 600; font-display: block; }
+      @font-face { font-family: "Inter"; src: url("assets/fonts/inter-latin-700-normal.woff2") format("woff2"); font-weight: 700; font-display: block; }
+      @font-face { font-family: "Inter"; src: url("assets/fonts/inter-latin-800-normal.woff2") format("woff2"); font-weight: 800; font-display: block; }
+
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { width: 1920px; height: 1080px; overflow: hidden; background: #0c0c0d; }
+      body { font-family: "Inter", sans-serif; color: #eef2f8; -webkit-font-smoothing: antialiased; }
+      #root { position: relative; width: 100%; height: 100%; overflow: hidden; }
+      #stage { position: absolute; inset: 0; overflow: hidden; }
+      svg { display: block; }
+
+      /* ---------- background ---------- */
+      .bg { position: absolute; inset: 0; background: radial-gradient(1500px 1050px at 55% 45%, #1f1f22 0%, #151517 48%, #0c0c0d 100%); }
+      .grain { position: absolute; inset: 0; opacity: 0.07; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' seed='11' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='240' height='240' filter='url(%23n)'/%3E%3C/svg%3E"); }
+      .grid-wrap { position: absolute; inset: 0; overflow: hidden; -webkit-mask-image: radial-gradient(1100px 760px at 55% 50%, #000 30%, transparent 100%); mask-image: radial-gradient(1100px 760px at 55% 50%, #000 30%, transparent 100%); }
+      #grid { position: absolute; left: 0; top: 0; width: 2016px; height: 1080px; background-image: linear-gradient(rgba(238, 242, 248, 0.06) 1px, transparent 1px), linear-gradient(90deg, rgba(238, 242, 248, 0.06) 1px, transparent 1px); background-size: 48px 48px; }
+      .glow { position: absolute; border-radius: 50%; pointer-events: none; }
+      #glowA { left: 300px; top: -60px; width: 1200px; height: 1200px; background: radial-gradient(closest-side, rgba(245, 180, 59, 0.16), rgba(245, 180, 59, 0.05) 50%, rgba(245, 180, 59, 0) 100%); }
+      .vig { position: absolute; inset: 0; box-shadow: inset 0 0 320px rgba(0, 0, 0, 0.45); pointer-events: none; }
+
+      /* ---------- eyebrow + progress ---------- */
+      #ebGroup { position: absolute; left: 690px; top: 104px; width: 1100px; }
+      #prog { display: flex; gap: 10px; }
+      #prog span { display: block; width: 56px; height: 5px; border-radius: 3px; background: rgba(238, 242, 248, 0.2); overflow: hidden; }
+      #prog i { display: block; width: 100%; height: 100%; background: #f5b43b; transform-origin: 0 50%; }
+      .ebs { position: relative; height: 40px; margin-top: 16px; }
+      .eb { position: absolute; left: 0; top: 0; display: flex; align-items: center; gap: 14px; font-size: 27px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: #eef2f8; white-space: nowrap; }
+      .eb b { display: block; width: 12px; height: 12px; border-radius: 50%; background: #f5b43b; box-shadow: 0 0 14px rgba(245, 180, 59, 0.8); }
+
+      /* ---------- chat ---------- */
+      #chatWrap { position: absolute; left: 110px; top: 150px; width: 520px; height: 790px; }
+      .chat { width: 100%; height: 100%; display: flex; flex-direction: column; overflow: hidden; background: #ffffff; color: #14213f; border-radius: 34px; box-shadow: 0 50px 110px rgba(2, 6, 16, 0.6); }
+      .chat__h { display: flex; align-items: center; gap: 16px; padding: 24px 28px; border-bottom: 2px solid #eef0f4; }
+      .ai-av { display: grid; place-items: center; width: 56px; height: 56px; border-radius: 50%; background: #f5b43b; color: #1c1405; font-size: 20px; font-weight: 800; flex: none; }
+      .chat__name { font-size: 26px; font-weight: 700; }
+      .chat__on { display: flex; align-items: center; gap: 8px; font-size: 18px; color: #4f596b; margin-top: 2px; }
+      .chat__on i { display: block; width: 9px; height: 9px; border-radius: 50%; background: #22c55e; }
+      .chat__body { flex: 1; display: flex; flex-direction: column; gap: 14px; padding: 26px 24px; background: #f7f8fb; }
+      .m { max-width: 400px; padding: 15px 20px; border-radius: 24px; font-size: 23px; line-height: 1.36; }
+      .m--me { align-self: flex-end; background: #14213f; color: #fff; border-bottom-right-radius: 7px; }
+      .m--ai { align-self: flex-start; background: #e9ecf2; color: #14213f; border-bottom-left-radius: 7px; }
+      .m-slot { position: relative; align-self: flex-start; }
+      .typing { position: absolute; left: 0; top: 0; display: flex; gap: 8px; padding: 21px 22px; background: #e9ecf2; border-radius: 24px; border-bottom-left-radius: 7px; opacity: 0; }
+      .typing i { display: block; width: 11px; height: 11px; border-radius: 50%; background: #79839a; }
+
+      /* ---------- architecture ---------- */
+      .arch { position: absolute; inset: 0; }
+      .ln { fill: none; stroke: #7f8eaa; stroke-width: 3; stroke-linejoin: round; stroke-dasharray: 1 1; stroke-dashoffset: 1; }
+      .ah { fill: #7f8eaa; opacity: 0; }
+      #agent { position: absolute; left: 690px; top: 480px; width: 210px; height: 120px; display: grid; place-items: center; text-align: center; padding: 0 18px; border-radius: 22px; background: #f5b43b; color: #1c1405; font-size: 26px; font-weight: 800; line-height: 1.15; box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45); }
+      #agentRing { position: absolute; inset: -12px; border-radius: 30px; border: 3px solid rgba(245, 180, 59, 0.75); opacity: 0; }
+      #intent { position: absolute; left: 690px; top: 410px; display: flex; align-items: center; gap: 10px; padding: 8px 16px; border-radius: 99px; border: 2px solid rgba(245, 180, 59, 0.7); color: #fcd58a; font-size: 20px; font-weight: 700; white-space: nowrap; }
+      .svc { position: absolute; left: 990px; width: 280px; height: 82px; display: grid; place-items: center; text-align: center; padding: 0 14px; border-radius: 16px; border: 2px solid rgba(238, 242, 248, 0.32); background: #1b1b1f; color: #eef2f8; font-size: 23px; font-weight: 600; line-height: 1.15; }
+      .svc__fx { position: absolute; inset: -5px; border-radius: 20px; border: 4px solid #f5b43b; box-shadow: 0 0 34px rgba(245, 180, 59, 0.5); opacity: 0; }
+      .tag { position: absolute; left: 1310px; display: flex; align-items: center; gap: 12px; height: 54px; padding: 0 20px 0 12px; border-radius: 99px; background: rgba(245, 180, 59, 0.12); border: 2px solid rgba(245, 180, 59, 0.45); color: #fde3a7; font-size: 22px; font-weight: 600; white-space: nowrap; }
+      .tag span { display: grid; place-items: center; width: 30px; height: 30px; border-radius: 50%; background: #f5b43b; }
+      .tag svg { width: 18px; height: 18px; }
+      .pulse { position: absolute; left: -10px; top: -10px; width: 20px; height: 20px; border-radius: 50%; background: #ffd27a; box-shadow: 0 0 16px 6px rgba(245, 180, 59, 0.65); opacity: 0; }
+      #dept { position: absolute; left: 1310px; top: 640px; width: 490px; height: 94px; display: flex; align-items: center; justify-content: space-between; padding: 0 24px; border-radius: 18px; background: #eef2f8; color: #0f1a30; }
+      .dept__k { font-size: 17px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #4f596b; }
+      .dept__v { font-size: 26px; font-weight: 800; margin-top: 2px; }
+      .dots { display: flex; gap: 9px; }
+      .dots i { display: block; width: 20px; height: 20px; border-radius: 6px; background: #c9d0dc; }
+      #mail { position: absolute; left: 1310px; top: 548px; width: 490px; height: 66px; display: flex; align-items: center; gap: 14px; padding: 0 20px; border-radius: 16px; background: #121214; border: 2px solid rgba(238, 242, 248, 0.4); color: #eef2f8; font-size: 22px; font-weight: 600; }
+      #mail svg { width: 28px; height: 28px; flex: none; }
+
+      /* ---------- results ---------- */
+      #res { position: absolute; left: 110px; top: 330px; width: 1700px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 60px; }
+      .st { border-top: 3px solid rgba(245, 180, 59, 0.75); padding-top: 28px; }
+      .st__n { font-size: 132px; font-weight: 800; letter-spacing: -0.04em; line-height: 1; font-variant-numeric: tabular-nums; color: #ffffff; }
+      .st__l { font-size: 30px; line-height: 1.3; color: #c9d2e3; margin-top: 18px; max-width: 470px; }
+      .st__l b { color: #fcd58a; font-weight: 700; }
+      #reuse { position: absolute; left: 110px; top: 760px; display: flex; align-items: center; gap: 14px; padding: 16px 28px 16px 16px; border-radius: 99px; background: #f5b43b; color: #1c1405; font-size: 28px; font-weight: 700; }
+      #reuse span { display: grid; place-items: center; width: 46px; height: 46px; border-radius: 50%; background: #1c1405; }
+      #reuse svg { width: 24px; height: 24px; }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="12" data-width="1920" data-height="1080">
+      <div id="stage">
+        <div class="bg"></div>
+        <div class="grid-wrap"><div id="grid"></div></div>
+        <div class="glow" id="glowA"></div>
+        <div class="grain"></div>
+
+        <!-- ================= CHAT ================= -->
+        <div id="chatWrap">
+          <div class="chat">
+            <div class="chat__h">
+              <span class="ai-av">AI</span>
+              <div>
+                <p class="chat__name">Support</p>
+                <p class="chat__on"><i></i>Online now</p>
+              </div>
+            </div>
+            <div class="chat__body">
+              <p class="m m--me" id="c1">My broadband has been down since this morning.</p>
+              <div class="m-slot">
+                <div class="typing" id="typing"><i></i><i></i><i></i></div>
+                <p class="m m--ai" id="a1">Sorry about that. I'm checking your account and your area now.</p>
+              </div>
+              <p class="m m--ai" id="a2">There's no outage near you, so I've raised a ticket with the right team.</p>
+              <p class="m m--ai" id="a3">You'll get an email with your ticket number shortly.</p>
+              <p class="m m--me" id="c2">Great, thank you.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- ================= ARCHITECTURE ================= -->
+        <div class="arch" id="arch">
+          <svg width="1920" height="1080" viewBox="0 0 1920 1080" style="position: absolute; left: 0; top: 0">
+            <path class="ln" id="l0" pathLength="1" d="M900 540 H945 V255 H980" />
+            <path class="ln" id="l1" pathLength="1" d="M900 540 H945 V363 H980" />
+            <path class="ln" id="l2" pathLength="1" d="M900 540 H945 V471 H980" />
+            <path class="ln" id="l3" pathLength="1" d="M900 540 H945 V579 H980" />
+            <path class="ln" id="l4" pathLength="1" d="M900 540 H945 V687 H980" />
+            <path class="ln" id="l5" pathLength="1" d="M900 540 H945 V795 H980" />
+            <path class="ah" id="h0" d="M977 246 L991 255 L977 264 Z" />
+            <path class="ah" id="h1" d="M977 354 L991 363 L977 372 Z" />
+            <path class="ah" id="h2" d="M977 462 L991 471 L977 480 Z" />
+            <path class="ah" id="h3" d="M977 570 L991 579 L977 588 Z" />
+            <path class="ah" id="h4" d="M977 678 L991 687 L977 696 Z" />
+            <path class="ah" id="h5" d="M977 786 L991 795 L977 804 Z" />
+            <path class="ln" id="lt0" pathLength="1" d="M1270 255 H1306" />
+            <path class="ln" id="lt2" pathLength="1" d="M1270 471 H1306" />
+            <path class="ln" id="lt4" pathLength="1" d="M1270 687 H1306" />
+            <path class="ln" id="lt4m" pathLength="1" d="M1270 687 H1288 V581 H1306" />
+            <path class="ln" id="lt5" pathLength="1" d="M1270 795 H1306" />
+          </svg>
+          <div class="pulse" id="pu0"></div>
+          <div class="pulse" id="pu2"></div>
+          <div class="pulse" id="pu4"></div>
+          <div class="pulse" id="pu5"></div>
+
+          <p id="intent">Intent: no connection</p>
+          <div id="agent"><i id="agentRing"></i>AI support agent</div>
+
+          <div class="svc" id="s0" style="top: 214px"><i class="svc__fx" id="fx0"></i>Account lookup</div>
+          <div class="svc" id="s1" style="top: 322px">Coverage check</div>
+          <div class="svc" id="s2" style="top: 430px"><i class="svc__fx" id="fx2"></i>Outage check</div>
+          <div class="svc" id="s3" style="top: 538px">Prospect creation</div>
+          <div class="svc" id="s4" style="top: 646px"><i class="svc__fx" id="fx4"></i>Ticketing and routing</div>
+          <div class="svc" id="s5" style="top: 754px"><i class="svc__fx" id="fx5"></i>Metrics</div>
+
+          <p class="tag" id="t0" style="top: 228px"><span><svg viewBox="0 0 24 24" fill="none" stroke="#1c1405" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5" /></svg></span>Existing customer</p>
+          <p class="tag" id="t2" style="top: 444px"><span><svg viewBox="0 0 24 24" fill="none" stroke="#1c1405" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5" /></svg></span>No outage in the area</p>
+          <div id="mail"><svg viewBox="0 0 24 24" fill="none" stroke="#fcd58a" stroke-width="2" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2" /><path d="M3.5 6.5 12 13l8.5-6.5" /></svg>Customer email sent</div>
+          <div id="dept">
+            <div><p class="dept__k">Routed to</p><p class="dept__v">1 of 7 departments</p></div>
+            <div class="dots"><i></i><i></i><i></i><i id="dHit"></i><i></i><i></i><i></i></div>
+          </div>
+          <p class="tag" id="t5" style="top: 768px"><span><svg viewBox="0 0 24 24" fill="none" stroke="#1c1405" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5" /></svg></span>Logged to analytics</p>
+        </div>
+
+        <!-- ================= RESULTS ================= -->
+        <div id="res">
+          <div class="st"><p class="st__n" id="n1">6,700+</p><p class="st__l">customer conversations automated</p></div>
+          <div class="st"><p class="st__n" id="n2">2,400+</p><p class="st__l">support tickets automated across <b>7 departments</b></p></div>
+          <div class="st"><p class="st__n" id="n3">21,000+</p><p class="st__l">agent minutes saved, estimated</p></div>
+        </div>
+        <p id="reuse"><span><svg viewBox="0 0 24 24" fill="none" stroke="#f5b43b" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6.6 3.5h3l1.5 4-2 1.3a11 11 0 0 0 6.1 6.1l1.3-2 4 1.5v3a2 2 0 0 1-2.2 2A17 17 0 0 1 4.6 5.7a2 2 0 0 1 2-2.2z" /></svg></span>Same backend later reused by a phone voice agent</p>
+
+        <!-- ================= EYEBROW ================= -->
+        <div id="ebGroup">
+          <div id="prog"><span><i id="bar1"></i></span><span><i id="bar2"></i></span><span><i id="bar3"></i></span><span><i id="bar4"></i></span></div>
+          <div class="ebs">
+            <p class="eb" id="eb1"><b></b>A customer writes in</p>
+            <p class="eb" id="eb2"><b></b>Six single-job workflows</p>
+            <p class="eb" id="eb3"><b></b>Routed to the right team</p>
+            <p class="eb" id="eb4"><b></b>Verified results</p>
+          </div>
+        </div>
+
+        <div class="vig"></div>
+      </div>
+    </div>
+
+    <script>
+      const tl = gsap.timeline({ paused: true, defaults: { ease: "power3.out" } });
+      const D = 12;
+      const fmt = (n) => n.toLocaleString("en-GB");
+
+      // ---------- ambient (lands back on frame 0 at t=12) ----------
+      tl.fromTo("#grid", { x: 0 }, { x: -48, duration: D, ease: "none" }, 0);
+      tl.fromTo("#glowA", { scale: 1 }, { scale: 1.1, duration: 3, ease: "sine.inOut", yoyo: true, repeat: 3 }, 0);
+
+      // ---------- progress + eyebrows ----------
+      tl.fromTo("#prog", { opacity: 0 }, { opacity: 1, duration: 0.4 }, 0.45);
+      tl.fromTo("#bar1", { scaleX: 0 }, { scaleX: 1, duration: 2.3, ease: "none" }, 0.5);
+      tl.fromTo("#bar2", { scaleX: 0 }, { scaleX: 1, duration: 2.8, ease: "none" }, 2.8);
+      tl.fromTo("#bar3", { scaleX: 0 }, { scaleX: 1, duration: 2.8, ease: "none" }, 5.6);
+      tl.fromTo("#bar4", { scaleX: 0 }, { scaleX: 1, duration: 3.2, ease: "none" }, 8.4);
+      const ebIn = (sel, t) => tl.fromTo(sel, { opacity: 0, y: 18 }, { opacity: 1, y: 0, duration: 0.5 }, t);
+      const ebOut = (sel, t) => tl.to(sel, { opacity: 0, y: -14, duration: 0.28, ease: "power2.in" }, t);
+      ebIn("#eb1", 0.5); ebOut("#eb1", 2.6);
+      ebIn("#eb2", 2.9); ebOut("#eb2", 5.4);
+      ebIn("#eb3", 5.7); ebOut("#eb3", 8.2);
+      ebIn("#eb4", 8.75);
+
+      const bubble = (sel, t, origin) =>
+        tl.fromTo(sel, { opacity: 0, y: 22, scale: 0.92, transformOrigin: origin }, { opacity: 1, y: 0, scale: 1, duration: 0.45, ease: "back.out(1.5)" }, t);
+      const pop = (sel, t) => tl.fromTo(sel, { opacity: 0, scale: 0.85, y: 12 }, { opacity: 1, scale: 1, y: 0, duration: 0.45, ease: "back.out(1.6)" }, t);
+      const draw = (sel, t, d) => tl.fromTo(sel, { strokeDashoffset: 1 }, { strokeDashoffset: 0, duration: d, ease: "power2.inOut" }, t);
+      const head = (sel, t) => tl.fromTo(sel, { opacity: 0 }, { opacity: 1, duration: 0.1, ease: "none" }, t);
+      const flashOn = (sel, t) => tl.fromTo(sel, { opacity: 0 }, { opacity: 1, duration: 0.15, ease: "none" }, t);
+      const tagIn = (sel, t) => tl.fromTo(sel, { opacity: 0, x: -16 }, { opacity: 1, x: 0, duration: 0.4 }, t);
+      // a call travels from the agent along its line: right, along the trunk, right again (1800 px/s)
+      const call = (sel, cy, t) => {
+        tl.set(sel, { x: 900, y: 540 }, 0);
+        tl.to(sel, { keyframes: [
+          { x: 945, opacity: 1, duration: 0.03, ease: "none" },
+          { y: cy, duration: Math.max(0.03, Math.abs(cy - 540) / 1800), ease: "none" },
+          { x: 990, duration: 0.03, ease: "none" },
+          { opacity: 0, duration: 0.08, ease: "none" },
+        ] }, t);
+      };
+
+      // ================= SCENE 1: a customer writes in (0 - 2.8) =================
+      tl.fromTo("#chatWrap", { y: 110, opacity: 0 }, { y: 0, opacity: 1, duration: 0.9, ease: "expo.out" }, 0.05);
+      bubble("#c1", 0.85, "100% 100%");
+      pop("#agent", 1.05);
+      tl.fromTo("#agentRing", { opacity: 0, scale: 0.9 }, { keyframes: [ { opacity: 1, scale: 1, duration: 0.35, ease: "power2.out" }, { opacity: 0, scale: 1.12, duration: 0.6, ease: "power1.in" } ] }, 1.3);
+      tl.fromTo("#intent", { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.45 }, 1.5);
+      tl.fromTo("#typing", { opacity: 0 }, { opacity: 1, duration: 0.15, ease: "none", immediateRender: false }, 1.35);
+      tl.fromTo("#typing i", { y: 0 }, { y: -7, duration: 0.14, ease: "sine.inOut", yoyo: true, repeat: 1, stagger: 0.07 }, 1.4);
+      tl.to("#typing", { opacity: 0, duration: 0.1, ease: "none" }, 1.72);
+      bubble("#a1", 1.74, "0% 100%");
+
+      // ================= SCENE 2: six single-job workflows (2.8 - 5.6) =================
+      ["#s0", "#s1", "#s2", "#s3", "#s4", "#s5"].forEach((s, i) => pop(s, 2.85 + i * 0.07));
+      ["#l0", "#l1", "#l2", "#l3", "#l4", "#l5"].forEach((l, i) => draw(l, 2.95 + i * 0.06, 0.35));
+      ["#h0", "#h1", "#h2", "#h3", "#h4", "#h5"].forEach((h, i) => head(h, 3.27 + i * 0.06));
+      tl.to("#intent", { opacity: 0.55, duration: 0.4 }, 3.3);
+
+      call("#pu0", 255, 3.7);
+      flashOn("#fx0", 3.9);
+      draw("#lt0", 3.95, 0.12);
+      tagIn("#t0", 4.0);
+      call("#pu2", 471, 4.3);
+      flashOn("#fx2", 4.45);
+      draw("#lt2", 4.5, 0.12);
+      tagIn("#t2", 4.55);
+      tl.to(["#s1", "#s3"], { opacity: 0.45, duration: 0.5 }, 4.0);
+
+      // ================= SCENE 3: routed to the right team (5.6 - 8.4) =================
+      call("#pu4", 687, 5.52);
+      flashOn("#fx4", 5.64);
+      draw("#lt4", 5.68, 0.12);
+      pop("#dept", 5.72);
+      tl.fromTo("#dept .dots i", { scale: 0.4, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.3, ease: "back.out(2)", stagger: 0.04 }, 5.82);
+      tl.to("#dHit", { backgroundColor: "#f5b43b", scale: 1.25, duration: 0.3, ease: "back.out(2.5)" }, 6.5);
+      bubble("#a2", 6.2, "0% 100%");
+      draw("#lt4m", 6.7, 0.2);
+      pop("#mail", 6.85);
+      call("#pu5", 795, 7.05);
+      flashOn("#fx5", 7.2);
+      draw("#lt5", 7.25, 0.12);
+      tagIn("#t5", 7.3);
+      bubble("#a3", 7.25, "0% 100%");
+      bubble("#c2", 7.75, "100% 100%");
+
+      // ================= SCENE 4: verified results (8.4 - 12) =================
+      tl.to("#chatWrap", { x: -560, opacity: 0, duration: 0.45, ease: "power3.in" }, 8.1);
+      tl.to("#arch", { opacity: 0, y: -30, duration: 0.4, ease: "power2.in" }, 8.12);
+      tl.to("#ebGroup", { x: -580, duration: 0.6, ease: "power3.inOut" }, 8.25);
+      tl.fromTo("#res .st", { opacity: 0, y: 50 }, { opacity: 1, y: 0, duration: 0.7, ease: "expo.out", stagger: 0.14 }, 8.7);
+      [["#n1", 6700, 8.75], ["#n2", 2400, 8.89], ["#n3", 21000, 9.03]].forEach(([sel, to, t]) => {
+        const el = document.querySelector(sel);
+        const o = { v: 0 };
+        tl.fromTo(o, { v: 0 }, { v: to, duration: 1.3, ease: "power2.out", onUpdate: () => (el.textContent = fmt(Math.round(o.v / 100) * 100) + "+") }, t);
+      });
+      tl.fromTo("#reuse", { opacity: 0, y: 24, scale: 0.94 }, { opacity: 1, y: 0, scale: 1, duration: 0.55, ease: "back.out(1.7)" }, 10.2);
+
+      // ---------- loop out: back to the empty stage ----------
+      tl.to(["#res", "#reuse", "#ebGroup"], { opacity: 0, duration: 0.33, ease: "power1.in" }, 11.67);
+
+      window.__timelines["main"] = tl;
+    </script>
+  </body>
+</html>

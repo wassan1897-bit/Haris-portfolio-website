@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>About v2 and the sideways run into the reel</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@500&family=Montserrat:wght@600&display=swap" rel="stylesheet" />
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+:root { --cream: #f1eee9; --ink: #1b1b19; --text: #34322e; --mute: #6f6b64; --line: rgb(27 27 25 / 0.12); --card: #faf8f5; --green: #14a800; }
+html, body { width: 1440px; height: 900px; overflow: hidden; background: var(--cream); color: var(--ink); font-family: "Inter Tight", sans-serif; -webkit-font-smoothing: antialiased; }
+.track { position: absolute; left: 0; top: 0; height: 900px; width: 4000px; }
+.mono { font: 500 11px "JetBrains Mono", monospace; letter-spacing: 0.12em; text-transform: uppercase; color: var(--mute); }
+.lab { font: 500 11.5px "Inter Tight"; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink); }
+
+/* ---------- About ---------- */
+.photo { position: absolute; left: 0; top: 0; width: 547px; height: 900px; overflow: hidden; background: #2b2b2b; }
+.photo img { position: absolute; left: 0; top: -37px; width: 547px; height: 972px; }
+.photo .tag { position: absolute; left: 24px; right: 24px; bottom: 24px; display: flex; justify-content: space-between; align-items: flex-end; padding: 16px 18px; border-radius: 14px; background: rgb(20 20 22 / 0.42); backdrop-filter: blur(14px); color: #f4f1ec; }
+.photo .tag b { display: block; font: 500 16px "Inter Tight"; }
+.photo .tag small { display: block; margin-top: 4px; font: 400 12.5px "Inter Tight"; color: rgb(244 241 236 / 0.72); }
+.dot { display: inline-block; width: 7px; height: 7px; border-radius: 50%; background: #38c172; box-shadow: 0 0 0 4px rgb(56 193 114 / 0.18); margin-right: 8px; vertical-align: 1px; }
+
+.copy { position: absolute; top: 0; left: 633px; width: 751px; height: 900px; }
+.row-top { position: absolute; top: 104px; left: 0; right: 0; display: flex; justify-content: space-between; align-items: center; }
+.pill { display: inline-flex; align-items: center; padding: 8px 14px; border: 1px solid var(--line); border-radius: 999px; font: 500 12.5px "Inter Tight"; color: var(--text); background: rgb(255 255 255 / 0.45); }
+.lead { position: absolute; top: 146px; left: 0; width: 751px; font: 400 37px/1.15 "Inter Tight"; letter-spacing: -0.018em; color: var(--ink); }
+.lead em { font: italic 400 1.13em "Instrument Serif"; letter-spacing: 0; }
+
+.grid { position: absolute; top: 382px; left: 0; right: 0; display: grid; grid-template-columns: 1fr 1.08fr; gap: 28px; }
+.steps li { list-style: none; display: grid; grid-template-columns: 34px 1fr; padding: 13px 0; border-top: 1px solid var(--line); }
+.steps li:last-child { border-bottom: 1px solid var(--line); }
+.steps .n { font: 500 11px "JetBrains Mono"; color: var(--mute); padding-top: 3px; }
+.steps b { display: block; font: 500 15.5px "Inter Tight"; }
+.steps small { display: block; margin-top: 3px; font: 400 13px "Inter Tight"; color: var(--mute); }
+
+.up { padding: 18px 20px 16px; border: 1px solid var(--line); border-radius: 16px; background: var(--card); box-shadow: 0 1px 0 rgb(255 255 255 / 0.8) inset, 0 18px 40px -28px rgb(27 27 25 / 0.35); }
+.up-head { display: flex; align-items: center; gap: 10px; }
+.up-head img { width: 26px; height: 26px; border-radius: 7px; }
+.up-head b { font: 600 15px "Inter Tight"; }
+.badge { margin-left: auto; padding: 5px 10px; border-radius: 999px; background: rgb(20 168 0 / 0.1); color: #0f7a00; font: 600 11.5px "Inter Tight"; }
+.up-nums { display: grid; grid-template-columns: repeat(4, 1fr); margin-top: 16px; }
+.up-nums div { padding-right: 8px; }
+.up-nums div + div { padding-left: 14px; border-left: 1px solid var(--line); }
+.up-nums strong { display: block; font: 400 24px/1 "Inter Tight"; letter-spacing: -0.02em; }
+.up-nums span { display: block; margin-top: 6px; font: 500 10.5px "Inter Tight"; letter-spacing: 0.06em; text-transform: uppercase; color: var(--mute); }
+.up-foot { display: flex; justify-content: space-between; align-items: center; margin-top: 16px; padding-top: 13px; border-top: 1px solid var(--line); font: 400 12.5px "Inter Tight"; color: var(--mute); }
+.up-foot a { color: var(--ink); font-weight: 500; text-decoration: none; white-space: nowrap; }
+
+.impact { position: absolute; top: 646px; left: 0; right: 0; display: grid; grid-template-columns: repeat(4, 1fr); }
+.impact div + div { padding-left: 20px; border-left: 1px solid var(--line); }
+.impact strong { display: block; font: 400 34px/1 "Inter Tight"; letter-spacing: -0.025em; }
+.impact span { display: block; margin-top: 9px; font: 400 12.5px/1.35 "Inter Tight"; color: var(--mute); max-width: 150px; }
+
+.stack { position: absolute; top: 744px; left: 0; right: 0; }
+.logos { position: relative; margin-top: 12px; height: 34px; overflow: hidden; -webkit-mask-image: linear-gradient(90deg, #000 85%, transparent); mask-image: linear-gradient(90deg, #000 85%, transparent); }
+.logos div { position: absolute; left: 0; top: 0; display: flex; gap: 30px; align-items: center; height: 34px; white-space: nowrap; }
+.logos span { display: inline-flex; align-items: center; gap: 8px; font: 500 14px "Inter Tight"; color: var(--text); }
+.logos img { height: 20px; width: auto; filter: grayscale(1) contrast(1.1); opacity: 0.85; }
+.logos img.mark { height: 18px; }
+
+.ctas { position: absolute; top: 816px; left: 0; right: 0; display: flex; gap: 10px; align-items: center; }
+.btn { display: inline-flex; align-items: center; gap: 9px; height: 44px; padding: 0 20px; border-radius: 999px; font: 500 14px "Inter Tight"; text-decoration: none; color: var(--ink); border: 1px solid rgb(27 27 25 / 0.2); background: transparent; }
+.btn.dark { background: var(--ink); color: #f4f1ec; border-color: var(--ink); }
+.btn img, .btn svg { width: 17px; height: 17px; }
+.ctas .mail { margin-left: auto; font: 400 13px "Inter Tight"; color: var(--mute); }
+
+/* ---------- reel page (continues sideways, same cream) ---------- */
+.reel { position: absolute; top: 0; left: 1440px; width: 1440px; height: 900px; background: var(--cream); }
+.reel .card { position: absolute; left: 50%; top: 50%; width: 432px; height: 243px; transform: translate(-50%, -50%); background: url(img/reel.webp) center / cover; border-radius: 6px; box-shadow: 0 30px 70px -30px rgb(0 0 0 / 0.45); }
+.reel .sm { position: absolute; left: 0; right: 0; top: 18%; text-align: center; font: 800 20px "Inter Tight"; letter-spacing: -0.04em; text-transform: uppercase; }
+.reel .sm i, .reel .lg i { font: italic 400 1.14em "Instrument Serif"; text-transform: none; letter-spacing: -0.01em; }
+.reel .lg { position: absolute; left: 0; right: 0; bottom: 11%; text-align: center; font: 800 90px "Inter Tight"; letter-spacing: -0.045em; text-transform: uppercase; }
+
+.hdr { position: absolute; left: 0; right: 0; top: 0; height: 70px; display: flex; align-items: center; justify-content: space-between; padding: 0 26px; z-index: 9; color: var(--ink); }
+.hdr span { font: 500 15px "Inter Tight"; }
+.hdr .logo { font: 600 15px Montserrat; }
+.hdr .light { color: #f4f1ec; }
+</style>
+</head>
+<body>
+<div class="track" id="track">
+	<!-- About -->
+	<figure class="photo" id="photo">
+		<img src="img/photo.webp" alt="" />
+		<div class="tag" id="tag"><div><b>Muhammad Haris</b><small>AI automation engineer</small></div><small style="color:rgb(244 241 236 / .8)">Karachi, PK</small></div>
+	</figure>
+	<div class="copy" id="copy">
+		<div class="row-top a"><span class="lab">(02)&nbsp;&nbsp; About Haris</span><span class="pill"><span class="dot"></span>Available for new projects&nbsp;&nbsp;·&nbsp;&nbsp;Karachi, GMT+5</span></div>
+		<p class="lead a">I build AI that takes real work off a team's plate: support agents that answer at 2am, inboxes that <em>sort themselves</em>, and the workflows that connect them to the tools you already use.</p>
+		<div class="grid a">
+			<div>
+				<p class="lab" style="margin-bottom:12px">How I work</p>
+				<ul class="steps">
+					<li><span class="n">01</span><div><b>Map the work</b><small>Find the steps that eat the most hours.</small></div></li>
+					<li><span class="n">02</span><div><b>Build with logs</b><small>Every agent shows what it did and why.</small></div></li>
+					<li><span class="n">03</span><div><b>Ship and stay</b><small>Monitored in production, not handed off and gone.</small></div></li>
+				</ul>
+			</div>
+			<div class="up">
+				<div class="up-head"><img src="img/tools/upwork.png" alt="" /><b>Upwork</b><span class="badge">Top Rated Plus</span></div>
+				<div class="up-nums">
+					<div><strong>100%</strong><span>Job success</span></div>
+					<div><strong>$30K+</strong><span>Earned</span></div>
+					<div><strong>33</strong><span>Jobs</span></div>
+					<div><strong>633</strong><span>Hours</span></div>
+				</div>
+				<div class="up-foot"><span>Claude Code, n8n, GHL, Zapier, Voice AI and CRM</span><a href="#">View profile ↗</a></div>
+			</div>
+		</div>
+		<div class="impact a">
+			<div><strong>6,700+</strong><span>support conversations automated</span></div>
+			<div><strong>21,000+</strong><span>agent minutes saved</span></div>
+			<div><strong>7</strong><span>live client deployments of one product</span></div>
+			<div><strong>3</strong><span>regions: the US, the UK and the Middle East</span></div>
+		</div>
+		<div class="stack a">
+			<p class="lab">The stack I ship with</p>
+			<div class="logos"><div>
+				<img src="img/tools/n8n.png" alt="n8n" class="mark" />
+				<span><img src="img/tools/make.png" alt="" />Make</span>
+				<img src="img/tools/zapier.png" alt="Zapier" class="mark" />
+				<span><img src="img/tools/ghl.png" alt="" />GoHighLevel</span>
+				<img src="img/tools/retell.png" alt="Retell AI" class="mark" />
+				<img src="img/tools/claude.png" alt="Claude" class="mark" />
+				<span><img src="img/tools/openai.svg" alt="" />OpenAI</span>
+				<span><img src="img/tools/airtable.svg" alt="" />Airtable</span>
+				<span><img src="img/tools/twilio.svg" alt="" />Twilio</span>
+				<span><img src="img/tools/python.svg" alt="" />Python</span>
+				<span><img src="img/tools/postgresql.svg" alt="" />PostgreSQL</span>
+			</div></div>
+		</div>
+		<div class="ctas a">
+			<a class="btn dark" href="#">Start a project <span style="font-size:15px">↗</span></a>
+			<a class="btn" href="#"><img src="img/tools/upwork.png" alt="" style="border-radius:4px" />Hire on Upwork</a>
+			<a class="btn" href="#"><svg viewBox="0 0 24 24" fill="#0a66c2"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.34V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg>LinkedIn</a>
+			<span class="mail">hello@autoany.io</span>
+		</div>
+	</div>
+	<!-- the reel page, right after About on the same sideways run -->
+	<section class="reel" id="reel">
+		<p class="sm" id="sm">Built by <i>Haris.</i></p>
+		<div class="card" id="card"></div>
+		<p class="lg" id="lg">Built by <i>Haris.</i></p>
+	</section>
+</div>
+<div class="hdr"><span class="logo" id="hl">HARIS</span><span>☰&nbsp; MENU</span><span>EMAIL &nbsp;&nbsp; LINKEDIN</span></div>
+<script>
+const q = new URLSearchParams(location.search)
+const x = +(q.get('x') || 0) // sideways position: 0 = photo where the hero had it, 1 = About landed, 2 = reel page
+const grow = +(q.get('g') || 0) // the reel card growing, 0 to 1
+const clamp = (v) => Math.min(1, Math.max(0, v))
+const ease = (t) => t * t * (3 - 2 * t)
+// before landing, the photo starts at the hero's spot (893px) and travels to 0; the copy comes in from the right
+let tx
+if (x <= 1) tx = 893 * (1 - ease(x)) // track offset so the photo sits at 893 * (1 - x)
+else tx = -1440 * ease(x - 1)
+document.getElementById('track').style.transform = `translateX(${tx.toFixed(1)}px)`
+// the copy's rows arrive one after another as the page lands
+const rows = [...document.querySelectorAll('.copy .a')]
+rows.forEach((r, i) => {
+	const t = x <= 1 ? clamp((x - 0.35 - i * 0.06) / 0.4) : 1
+	r.style.opacity = t
+	r.style.transform = `translateX(${((1 - ease(t)) * 120).toFixed(1)}px)`
+})
+document.getElementById('tag').style.opacity = clamp((x - 0.7) / 0.3)
+// the reel card grows like today's reel
+const card = document.getElementById('card')
+const s = 1 + ease(grow) * (1066 / 432 - 1)
+card.style.transform = `translate(-50%, -50%) scale(${s.toFixed(4)})`
+document.getElementById('sm').style.opacity = 1 - ease(grow) * 2
+document.getElementById('lg').style.opacity = 1 - ease(grow) * 2
+// the header logo turns light over the photo
+const photoLeft = tx
+if (photoLeft < 60 && photoLeft + 547 > 60) document.getElementById('hl').classList.add('light')
+</script>
+</body>
+</html>

@@ -1,0 +1,112 @@
+/* Selected work case files (selected-detail.js). They reuse the project case-file styles (projects/projects.css)
+   and the results board (projects/case-board.css); this file only places them over the screen and fits the
+   portrait (4:5) clips. */
+
+.sw-cases {
+	--pj-ink: #f2efe8;
+	--pj-muted: #b9b4aa;
+	--pj-line: rgb(242 239 232 / 0.16);
+	--pj-serif: "Instrument Serif", "Times New Roman", Georgia, serif;
+	--pj-sans: "Montserrat", Helvetica, Arial, sans-serif;
+	--pj-wipe: 0.75s cubic-bezier(0.62, 0.02, 0.22, 1);
+	--pj-out: cubic-bezier(0.16, 1, 0.3, 1);
+}
+/* under the site header (z-index 2000), over everything on the page */
+.sw-cases .pj-detail {
+	position: fixed;
+	z-index: 1500;
+	height: 100vh;
+	height: 100dvh;
+	color: var(--pj-ink);
+	font-family: var(--pj-sans);
+	-webkit-font-smoothing: antialiased;
+}
+.sw-case__gap {
+	margin-top: 40px !important;
+}
+
+/* ---------- the intro: the whole portrait clip on the right, the titles on the left ---------- */
+.pj-detail--sw > .pjb__film {
+	background: var(--pj-bg);
+}
+/* a blurred copy of the poster fills the screen around the clip */
+.pj-detail--sw > .pjb__film::before {
+	content: "";
+	position: absolute;
+	inset: -80px;
+	background: var(--pjb-poster) center / cover no-repeat;
+	filter: blur(56px) brightness(0.32) saturate(1.1);
+	transition: opacity 1s ease;
+}
+.pj-detail--sw.pjb-landing > .pjb__film::before {
+	opacity: 0;
+}
+.pj-detail--sw > .pjb__film video {
+	top: 13%;
+	height: 74%;
+	object-fit: contain;
+	object-position: 88% 50%;
+	transform: scale(1.04);
+	transition:
+		transform 6s linear,
+		filter 1s ease,
+		top 1.3s cubic-bezier(0.7, 0, 0.2, 1),
+		height 1.3s cubic-bezier(0.7, 0, 0.2, 1),
+		object-position 1.3s cubic-bezier(0.7, 0, 0.2, 1);
+}
+.pj-detail--sw.pjb-go > .pjb__film video {
+	filter: none;
+	transform: none;
+}
+.pj-detail--sw.pjb-landing > .pjb__film video {
+	top: 0;
+	height: 100%;
+	object-position: 50% 50%;
+}
+@media (min-width: 768px) {
+	.pj-detail--sw.pjb-intro > .pjb__titles {
+		place-items: center start;
+		padding: 0 0 0 7vw;
+		text-align: left;
+		background: linear-gradient(90deg, rgb(4 6 10 / 0.78), rgb(4 6 10 / 0.4) 42%, rgb(4 6 10 / 0) 60%);
+	}
+	.pj-detail--sw .pjb__titles > div {
+		max-width: 44vw;
+	}
+	.pj-detail--sw .pjb__ttl {
+		max-width: 12ch;
+		margin-left: 0;
+		font-size: clamp(46px, 5.2vw, 92px);
+	}
+	.pj-detail--sw .pjb__meta {
+		justify-content: flex-start;
+	}
+}
+/* phones: the clip on top, the titles underneath */
+@media (max-width: 767px) {
+	.pj-detail--sw > .pjb__film video {
+		top: 14%;
+		height: 42%;
+		object-position: 50% 50%;
+	}
+	.pj-detail--sw.pjb-intro > .pjb__titles {
+		place-items: end center;
+		padding: 0 20px calc(13svh + 84px);
+		background: linear-gradient(0deg, rgb(4 6 10 / 0.85), rgb(4 6 10 / 0) 50%);
+	}
+	.pj-detail--sw .pjb__ttl {
+		margin-top: 14px;
+		font-size: 34px;
+	}
+	.pj-detail--sw .pjb__meta {
+		margin-top: 18px;
+	}
+}
+
+/* ---------- the board: a portrait video tile ---------- */
+@media (max-width: 1023px) {
+	.pj-detail--sw .pjb__tile--video {
+		aspect-ratio: auto;
+		height: min(112vw, 72svh);
+	}
+}

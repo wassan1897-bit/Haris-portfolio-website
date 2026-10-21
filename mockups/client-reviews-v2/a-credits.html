@@ -1,0 +1,65 @@
+<!doctype html>
+<html><head><meta charset="utf-8" />
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..700;1,6..96,400..700&family=Manrope:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{width:1440px;height:900px;overflow:hidden;background:#0b0b0b;color:#f2efe8;font-family:Manrope,sans-serif}
+.k{font:500 13px "JetBrains Mono",monospace;letter-spacing:.16em;text-transform:uppercase;color:#9a9792}
+.head{position:absolute;left:44px;right:44px;top:92px;display:flex;justify-content:space-between;z-index:5}
+.bar{position:absolute;left:0;right:0;height:64px;background:#000;z-index:4}
+.bar.t{top:0}.bar.b{bottom:0}
+/* the roll */
+.view{position:absolute;left:0;right:0;top:130px;bottom:120px;overflow:hidden;
+  -webkit-mask-image:linear-gradient(transparent 0,#000 26%,#000 74%,transparent 100%);mask-image:linear-gradient(transparent 0,#000 26%,#000 74%,transparent 100%)}
+.roll{position:absolute;left:50%;width:900px;margin-left:-450px;top:0;text-align:center;animation:roll 14s linear infinite}
+@keyframes roll{from{transform:translateY(560px)}to{transform:translateY(-2380px)}}
+.roll .kick{font:500 13px "JetBrains Mono",monospace;letter-spacing:.24em;text-transform:uppercase;color:#e3b85c}
+.roll h2{margin-top:18px;font:400 72px/1 "Bodoni Moda",serif;letter-spacing:-.02em}
+.roll h2 em{color:#e3b85c}
+.gap{height:150px}
+.stars{font-size:22px;letter-spacing:.3em;color:#e3b85c}
+.stars b{margin-left:10px;font:500 15px "JetBrains Mono",monospace;letter-spacing:.1em;color:#f2efe8}
+.q{margin:22px auto 0;max-width:820px;font:italic 400 44px/1.18 "Bodoni Moda",serif}
+.cr{display:grid;grid-template-columns:1fr 1fr;gap:12px 28px;margin:44px auto 0;max-width:820px}
+.cr dt{text-align:right;font:500 12px/1.9 "JetBrains Mono",monospace;letter-spacing:.2em;text-transform:uppercase;color:#77736d}
+.cr dd{text-align:left;font:500 18px/1.5 Manrope;color:#e8e4dc}
+.sep{margin:110px auto;width:8px;height:8px;border-radius:50%;background:#e3b85c;box-shadow:0 0 18px #e3b85c}
+.big{font:400 96px/1 "Bodoni Moda",serif;letter-spacing:-.03em}
+.big em{color:#e3b85c}
+.cta{display:inline-block;margin-top:34px;padding:17px 28px;border-radius:999px;background:#f2efe8;color:#111;font:700 13px Manrope;letter-spacing:.14em;text-transform:uppercase}
+/* film texture */
+.grain{position:absolute;inset:-50px;opacity:.07;z-index:3;pointer-events:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' seed='4'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)'/%3E%3C/svg%3E");animation:grain .5s steps(4) infinite}
+@keyframes grain{0%{transform:translate(0,0)}25%{transform:translate(-20px,10px)}50%{transform:translate(10px,-15px)}75%{transform:translate(-8px,-6px)}}
+.side{position:absolute;left:44px;bottom:96px;z-index:5}
+.side p+p{margin-top:8px}
+.tc{position:absolute;right:44px;bottom:96px;z-index:5;text-align:right}
+.prog{width:220px;height:2px;background:#2a2a2a;margin-top:12px;position:relative;overflow:hidden}
+.prog i{position:absolute;inset:0;background:#e3b85c;transform-origin:0 50%;animation:prog 14s linear infinite}
+@keyframes prog{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+</style></head><body>
+<div class="bar t"></div><div class="bar b"></div>
+<div class="head"><p class="k">(Client reviews)</p><p class="k">Upwork · 33 contracts · 100% Job Success</p></div>
+<div class="view"><div class="roll">
+  <p class="kick">The end credits</p>
+  <h2>In their <em>own words.</em></h2>
+  <div class="gap"></div>
+  <p class="stars">★★★★★<b>5.0</b></p>
+  <p class="q">“Sameer is highly recommended for AI automation projects using n8n.”</p>
+  <dl class="cr"><dt>Client</dt><dd>Amazon wholesale FBA, Lahore</dd><dt>Built</dt><dd>An AI agent for product analysis</dd><dt>Endorsed</dt><dd>Committed to Quality · Solution Oriented · Clear Communicator</dd><dt>Contract</dt><dd>Upwork, February 2026</dd></dl>
+  <div class="sep"></div>
+  <p class="stars">★★★★★<b>5.0</b></p>
+  <p class="q">“Thank you for all your hard work and will be working with you again in the future.”</p>
+  <dl class="cr"><dt>Client</dt><dd>David, on Upwork</dd><dt>Built</dt><dd>Garage door and electrical voice agents</dd><dt>Contract</dt><dd>Upwork, August to October 2026</dd></dl>
+  <div class="sep"></div>
+  <p class="big">Top Rated <em>Plus.</em></p>
+  <p class="big" style="margin-top:10px">100% Job Success.</p>
+  <dl class="cr"><dt>Jobs</dt><dd>33 completed</dd><dt>Hours</dt><dd>633 worked</dd><dt>Earned</dt><dd>$30K+ on Upwork</dd></dl>
+  <div class="sep"></div>
+  <p class="kick">Post-credits scene</p>
+  <p class="big" style="margin-top:18px">Your project, <em>next.</em></p>
+  <span class="cta">Start a project →</span>
+</div></div>
+<div class="side"><p class="k">Reel 10 · Credits</p><p class="k" style="color:#5f5c57">Scroll to roll</p></div>
+<div class="tc"><p class="k">02 / 03 reviews</p><div class="prog"><i></i></div></div>
+<div class="grain"></div>
+</body></html>

@@ -1,0 +1,417 @@
+/* Page 2, About Haris, laid out like a keynote slide: a white third on the left (monogram, name, one bold line,
+   links) and the photo across the other two thirds, his studio backdrop carried across so he stays at a natural
+   size on the right, with a dark see-through column of text over it. On desktop the hero turns into it: the hero's
+   text leaves, then the photo panel widens to the left and the column and the copy come in; one more screen
+   carries on sideways into the showreel (about-reel.js). Scroll drives all of it (about-h.js).
+   Phones, tablets and reduced motion get the same content stacked. */
+
+.hx {
+	--hx-ink: #1b1b19;
+	--hx-mute: #8a867f;
+	--hx-acc: #e8925a;
+	--hx-studio: radial-gradient(70% 80% at 72% 45%, #3c3c3f, #29292b 55%, #19191b);
+
+	position: relative;
+	z-index: 2;
+	background: #fff;
+	color: var(--hx-ink);
+	font-family: "Inter Tight", "Montserrat", Helvetica, Arial, sans-serif;
+	-webkit-font-smoothing: antialiased;
+}
+.hx a {
+	color: inherit;
+	text-decoration: none;
+}
+.hx__stop {
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 1px;
+	height: 1px;
+	pointer-events: none;
+}
+
+/* the hero's parts that leave on scroll are wrapped; the wrappers are invisible to layout except in the film */
+.ph-exit {
+	display: contents;
+}
+.site-panel--hero.is-covered {
+	visibility: hidden;
+}
+
+/* ---------------- the photo ---------------- */
+.hx__photo {
+	position: relative;
+	margin: 0;
+	overflow: hidden;
+	background: var(--hx-studio);
+}
+.hx__photo img {
+	display: block;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	object-position: 50% 26%;
+}
+
+/* ---------------- the white side ---------------- */
+.hx__mark {
+	margin: 0;
+	font: 800 64px/1 "Archivo", "Inter Tight", sans-serif;
+	font-stretch: 78%;
+	letter-spacing: -0.01em;
+	color: transparent;
+	-webkit-text-stroke: 1.2px #b9b5ad;
+	background: repeating-linear-gradient(135deg, #cfcbc3 0 1px, transparent 1px 5px);
+	-webkit-background-clip: text;
+	background-clip: text;
+}
+.hx__who {
+	margin: 0;
+}
+.hx__who b {
+	display: block;
+	font: 600 19px "Inter Tight", sans-serif;
+	letter-spacing: -0.01em;
+}
+.hx__who i {
+	display: block;
+	margin-top: 4px;
+	font: italic 400 19px "Instrument Serif", Georgia, serif;
+	color: var(--hx-mute);
+}
+.hx__who::after {
+	content: "";
+	display: block;
+	width: 26px;
+	margin-top: 22px;
+	border-top: 1px solid #c9c5bd;
+	transform: scaleX(var(--rule, 1));
+	transform-origin: 0 50%;
+}
+.hx__h {
+	margin: 0;
+	max-width: 420px;
+	font: 700 clamp(36px, 3.5vw, 54px) / 1.06 "Inter Tight", sans-serif;
+	letter-spacing: -0.035em;
+}
+.hx__h em {
+	font-family: "Instrument Serif", Georgia, serif;
+	font-size: 1.08em;
+	font-style: italic;
+	font-weight: 400;
+	letter-spacing: -0.01em;
+}
+.hx__links {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	gap: 12px;
+	margin: 0;
+	font: 500 13.5px "Inter Tight", sans-serif;
+}
+.hx__links a {
+	display: inline-flex;
+	align-items: center;
+	gap: 8px;
+	transition: opacity 0.25s;
+}
+.hx__links a:hover {
+	opacity: 0.6;
+}
+.hx__links i {
+	font-style: normal;
+	font-size: 12px;
+	color: var(--hx-mute);
+	transition: transform 0.25s;
+}
+.hx__links a:hover i {
+	transform: translate(2px, -2px);
+}
+.hx .hx__go {
+	height: 46px;
+	padding: 0 22px;
+	margin-bottom: 8px;
+	border-radius: 999px;
+	background: var(--hx-ink);
+	color: #fff;
+}
+.hx .hx__go:hover {
+	opacity: 1;
+	background: #36342f;
+}
+.hx .hx__go i {
+	color: var(--hx-acc);
+}
+.hx__foot {
+	display: flex;
+	justify-content: space-between;
+	margin: 0;
+	font: 500 11.5px "Inter Tight", sans-serif;
+	color: var(--hx-mute);
+}
+
+/* lines of copy, each rising out of its own mask (split by about-h.js on desktop); the padding keeps
+   descenders and the italic's overhang from being clipped */
+.hx-ln {
+	display: block;
+	overflow: hidden;
+	padding: 0 0.06em 0.12em;
+	margin: 0 -0.06em -0.12em;
+}
+.hx-li {
+	display: block;
+	will-change: transform;
+}
+.hx.is-landed .hx-li {
+	will-change: auto;
+}
+
+/* ---------------- the dark column ---------------- */
+.hx__panel {
+	background: rgb(14 14 16 / 0.58);
+	color: rgb(244 241 236 / 0.84);
+}
+.hx__panel p {
+	margin: 14px 0 0;
+	font: 400 13.5px/1.65 "Inter Tight", sans-serif;
+}
+.hx__panel .hx__plab.hx__plab--gap {
+	margin-top: 26px;
+}
+.hx__build {
+	display: grid;
+	gap: 9px;
+	margin: 12px 0 0;
+	padding: 0;
+	list-style: none;
+	font: 400 13px/1.55 "Inter Tight", sans-serif;
+}
+.hx__build li {
+	position: relative;
+	padding-left: 16px;
+}
+.hx__build li::before {
+	content: "";
+	position: absolute;
+	left: 0;
+	top: 0.62em;
+	width: 6px;
+	height: 1px;
+	background: var(--hx-acc);
+}
+.hx__build b {
+	font-weight: 600;
+	color: #f4f1ec;
+}
+.hx__panel p.hx__creds {
+	margin-top: 22px;
+	padding-top: 16px;
+	border-top: 1px solid rgb(244 241 236 / 0.12);
+	font-size: 12px;
+	color: rgb(244 241 236 / 0.6);
+}
+.hx__creds a {
+	color: inherit;
+	text-decoration: underline;
+	text-underline-offset: 3px;
+}
+.hx__panel .hx__plab {
+	margin: 0 0 4px;
+	font: 600 11.5px/1.2 "Inter Tight", sans-serif;
+	letter-spacing: 0.16em;
+	text-transform: uppercase;
+	color: var(--hx-acc);
+}
+
+/* ---------------- still layout (the base): phones, tablets, reduced motion ---------------- */
+.hx__track {
+	display: flex;
+	flex-direction: column;
+}
+.hx__photo {
+	aspect-ratio: 16 / 11;
+}
+.hx__side {
+	display: grid;
+	gap: 26px;
+	padding: 56px 6vw 60px;
+}
+.hx__foot {
+	gap: 20px;
+}
+.hx__panel {
+	padding: 48px 6vw 60px;
+	background: #19191b;
+}
+@media (max-width: 767px) {
+	.hx__photo {
+		margin-top: 64px;
+		aspect-ratio: 4 / 4.4;
+	}
+	.hx__mark {
+		font-size: 52px;
+	}
+}
+
+/* ---------------- the film: desktop with motion allowed ----------------
+   (the same test as about-h.js, in CSS so the page is laid out this way from the first paint) */
+@media (min-width: 1024px) and (prefers-reduced-motion: no-preference) {
+	/* it lies over the hero for the two screens it is pinned: hero to About, then About on to the reel */
+	.hx {
+		height: calc(100vh + 200vh);
+		height: calc(100svh + 200svh);
+		margin-top: -100vh;
+		margin-top: -100svh;
+		background: transparent;
+		pointer-events: none;
+	}
+	.hx__stop {
+		top: 100vh;
+		top: 100svh;
+	}
+	.hx__pin {
+		position: sticky;
+		top: 0;
+		height: 100vh;
+		height: 100svh;
+		overflow: hidden;
+		visibility: hidden;
+	}
+	.hx.is-on .hx__pin {
+		visibility: visible;
+		background: #fff;
+	}
+	.hx__track {
+		position: absolute;
+		inset: 0;
+		display: block;
+		will-change: transform;
+	}
+	/* the photo panel spans the screen; about-h.js clips it to the hero's panel and widens it to two thirds */
+	.hx__photo {
+		position: absolute;
+		left: 0;
+		top: 0;
+		width: 100%;
+		height: 100%;
+		aspect-ratio: auto;
+		margin: 0;
+	}
+	.hx__photo img {
+		position: absolute;
+		left: 0;
+		top: 0;
+		width: auto;
+		height: auto;
+		max-width: none;
+		object-fit: fill;
+		transform-origin: 0 0;
+		will-change: transform;
+		/* his left edge fades into the backdrop as the panel opens (--hx-m goes from 1 to 0); when he is
+		   shorter than the screen his lower edge fades too (--hx-bf) */
+		-webkit-mask-image: linear-gradient(90deg, rgb(0 0 0 / var(--hx-m, 1)), #000 32%), linear-gradient(#000 var(--hx-bf, 100%), transparent);
+		-webkit-mask-composite: source-in;
+		mask-image: linear-gradient(90deg, rgb(0 0 0 / var(--hx-m, 1)), #000 32%), linear-gradient(#000 var(--hx-bf, 100%), transparent);
+		mask-composite: intersect;
+	}
+	.hx__side {
+		position: absolute;
+		left: 0;
+		top: 0;
+		bottom: 0;
+		display: block;
+		padding: 0;
+	}
+	.hx__mark {
+		position: absolute;
+		left: 56px;
+		top: 12vh;
+	}
+	.hx__who {
+		position: absolute;
+		left: 56px;
+		top: 24vh;
+	}
+	.hx__h {
+		position: absolute;
+		left: 56px;
+		right: 40px;
+		top: 40vh;
+	}
+	.hx__links {
+		position: absolute;
+		left: 56px;
+		top: 66vh;
+	}
+	.hx__foot {
+		position: absolute;
+		left: 56px;
+		right: 40px;
+		bottom: 40px;
+	}
+	.hx__panel {
+		position: absolute;
+		top: 0;
+		bottom: 0;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		padding: 40px 44px 0;
+		background: rgb(14 14 16 / 0.58);
+	}
+	.hx__row {
+		will-change: transform, opacity;
+	}
+	.hx__panel > p {
+		translate: var(--hx-px, 0px) 0;
+	}
+	.hx.is-landed .hx__side,
+	.hx.is-landed .hx__panel {
+		pointer-events: auto;
+	}
+	/* once it has landed nothing moves, so the text is drawn straight onto the page (sharpest) */
+	.hx.is-landed .hx__track,
+	.hx.is-landed .hx__row,
+	.hx.is-landed .hx__photo img {
+		will-change: auto;
+	}
+
+	/* the hero stays put under About while its text leaves; hidden once About covers it */
+	.site-panel--hero {
+		position: sticky;
+		top: 0;
+	}
+	.ph-exit {
+		display: block;
+		position: absolute;
+		inset: 0;
+		pointer-events: none;
+	}
+	.ph-exit--title {
+		z-index: 3;
+	}
+	.ph-exit--rail,
+	.ph-exit--sub {
+		z-index: 4;
+	}
+	.ph-exit--top {
+		z-index: 5;
+	}
+	.ph-exit > .ph-rail,
+	.ph-exit > .ph-top,
+	.ph-exit > .ph-sub {
+		pointer-events: auto;
+	}
+}
+
+/* header text turns light where it sits over the photo */
+.site-header.site-header--hx-l:not(.site-header--open) .site-header__logo,
+.site-header.site-header--hx-c:not(.site-header--open) .site-header__toggle,
+.site-header.site-header--hx-r:not(.site-header--open) .site-header__actions a {
+	color: #f2efe8;
+}
+.site-header.site-header--hx-c:not(.site-header--open) .site-header__burger::before,
+.site-header.site-header--hx-c:not(.site-header--open) .site-header__burger::after {
+	background-color: #f2efe8;
+}

@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Entering the portfolio, line storyboard</title>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,700..900&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&family=Inter+Tight:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body { width: 1440px; height: 900px; overflow: hidden; background: #0a0a0a; color: #f2efe8; -webkit-font-smoothing: antialiased; }
+.hdr { position: absolute; left: 0; right: 0; top: 0; height: 70px; display: flex; align-items: center; justify-content: space-between; padding: 0 20px; font: 600 15px "Inter Tight"; z-index: 40; color: #f2efe8; }
+.frame { display: none; position: absolute; inset: 0; overflow: hidden; }
+.mono { font: 500 12px "JetBrains Mono"; letter-spacing: 0.16em; text-transform: uppercase; color: #9a958c; }
+/* the line */
+.line { position: absolute; top: 450px; height: 1px; background: #f2efe8; box-shadow: 0 0 12px rgb(255 255 255 / 0.55), 0 0 40px rgb(255 255 255 / 0.18); }
+.big { position: absolute; left: 0; right: 0; text-align: center; line-height: 0.9; white-space: nowrap; }
+.big b { font-family: Archivo; font-weight: 800; font-stretch: 78%; text-transform: uppercase; letter-spacing: -0.01em; }
+.big i { font-family: "Instrument Serif"; font-weight: 400; letter-spacing: -0.01em; }
+.stop { position: absolute; top: 450px; width: 0; }
+.stop::before { content: ""; position: absolute; left: -1px; top: -9px; width: 1px; height: 18px; background: #f2efe8; opacity: 0.7; }
+.stop span { position: absolute; left: 0; transform: translateX(-50%); white-space: nowrap; }
+.stop .n { top: -38px; font: 500 12px "JetBrains Mono"; letter-spacing: 0.1em; color: #f2efe8; }
+.stop .t { top: 22px; font: 400 13px "Inter Tight"; color: #8a857c; }
+.dot { position: absolute; top: 450px; width: 9px; height: 9px; margin: -4px 0 0 -4px; border-radius: 50%; background: #fff; box-shadow: 0 0 14px #fff, 0 0 40px rgb(255 255 255 / 0.5); }
+.fade { -webkit-mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent); mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent); }
+.cap { position: absolute; left: 50%; bottom: 46px; transform: translateX(-50%); font: 500 12px "JetBrains Mono"; letter-spacing: 0.16em; text-transform: uppercase; color: #5f5b55; }
+</style>
+</head>
+<body>
+
+<!-- 1. the reel's strip collapses: instead of vanishing, it thins to one glowing line the width of the card -->
+<section class="frame" id="f1">
+	<div class="line" style="left:180px;width:1080px;height:2px"></div>
+	<div style="position:absolute;left:180px;width:1080px;top:446px;height:9px;background:url(img/strip.png) center/1440px 900px;opacity:0.35;filter:blur(1px)"></div>
+</section>
+
+<!-- 2. the line runs out to both edges; "Entering the portfolio" writes itself above it -->
+<section class="frame" id="f2">
+	<div class="line fade" style="left:0;width:1440px"></div>
+	<p class="mono" style="position:absolute;left:64px;top:420px;color:#f2efe8">Entering the portfolio</p>
+	<p class="mono" style="position:absolute;right:64px;top:420px">2024 to 2026</p>
+	<p class="big" style="top:262px;font-size:112px"><b style="opacity:.95">Enter</b><b style="opacity:.25">ing</b></p>
+</section>
+
+<!-- 3. the full line: big title above, five stops along it, one per project; a bright dot starts to travel -->
+<section class="frame" id="f3">
+	<p class="big" style="top:262px;font-size:112px"><b>Entering</b> <i style="font-size:1.12em">the portfolio.</i></p>
+	<div class="line fade" style="left:0;width:1440px"></div>
+	<div class="stop" style="left:240px"><span class="n">01</span><span class="t">Marketplace app</span></div>
+	<div class="stop" style="left:480px"><span class="n">02</span><span class="t">AI support</span></div>
+	<div class="stop" style="left:720px"><span class="n">03</span><span class="t">Email automation</span></div>
+	<div class="stop" style="left:960px"><span class="n">04</span><span class="t">Compliance AI</span></div>
+	<div class="stop" style="left:1200px"><span class="n">05</span><span class="t">Autonomous agent</span></div>
+	<div class="dot" style="left:96px"></div>
+	<p class="cap">5 projects · shipped and live</p>
+</section>
+
+<!-- 4. the dot reaches 01: the stop lights up in project 01's green, the title steps back -->
+<section class="frame" id="f4">
+	<p class="big" style="top:262px;font-size:112px;opacity:.14"><b>Entering</b> <i style="font-size:1.12em">the portfolio.</i></p>
+	<div class="line fade" style="left:0;width:1440px;opacity:.5"></div>
+	<div class="line" style="left:0;width:240px;background:#8fd46f;box-shadow:0 0 14px #8fd46f,0 0 50px rgb(143 212 111/.4)"></div>
+	<div class="stop" style="left:240px"><span class="n" style="color:#8fd46f;top:-38px;font-size:13px">01 / 05</span></div>
+	<p style="position:absolute;left:240px;top:482px;transform:translateX(-14%);font:400 52px 'Instrument Serif';white-space:nowrap">Two-Sided <i style="color:#8fd46f">Marketplace App</i></p>
+	<div class="stop" style="left:480px;opacity:.4"><span class="n">02</span></div>
+	<div class="stop" style="left:720px;opacity:.4"><span class="n">03</span></div>
+	<div class="stop" style="left:960px;opacity:.4"><span class="n">04</span></div>
+	<div class="stop" style="left:1200px;opacity:.4"><span class="n">05</span></div>
+	<div class="dot" style="left:240px;background:#d8ffc4;box-shadow:0 0 16px #8fd46f,0 0 60px #8fd46f"></div>
+</section>
+
+<!-- 5. the line opens: the black splits into two bars with curved edges (the reel's exit, reversed) and project 01 shows through the slit -->
+<section class="frame" id="f5">
+	<div style="position:absolute;inset:0;background:url(img/p1.png) center/cover"></div>
+	<svg style="position:absolute;left:0;top:0" width="1440" height="900" viewBox="0 0 1440 900">
+		<path d="M0 0 H1440 V330 Q720 395 0 330 Z" fill="#0a0a0a" />
+		<path d="M0 900 H1440 V570 Q720 505 0 570 Z" fill="#0a0a0a" />
+		<path d="M0 330 Q720 395 1440 330" fill="none" stroke="#8fd46f" stroke-width="1.5" opacity=".8" />
+		<path d="M0 570 Q720 505 1440 570" fill="none" stroke="#8fd46f" stroke-width="1.5" opacity=".8" />
+	</svg>
+</section>
+
+<!-- 6. project 01 landed, its own reveal plays -->
+<section class="frame" id="f6">
+	<div style="position:absolute;inset:0;background:url(img/p1.png) center/cover"></div>
+</section>
+
+<div class="hdr" id="hdr"><span>HARIS</span><span style="font-weight:500">☰&nbsp; MENU</span><span style="font-weight:500">EMAIL &nbsp;&nbsp; LINKEDIN</span></div>
+<script>
+const f = new URLSearchParams(location.search).get('f') || '1'
+document.getElementById('f' + f).style.display = 'block'
+if (f === '6') document.getElementById('hdr').style.display = 'none'
+</script>
+</body>
+</html>

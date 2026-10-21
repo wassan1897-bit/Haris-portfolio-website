@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Project screens, new UI and text</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..800;1,6..96,400..800&family=Syne:wght@500..800&family=Bricolage+Grotesque:opsz,wght@12..96,300..800&family=Manrope:wght@400..700&family=DM+Sans:opsz,wght@9..40,400..700&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600;700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@500&family=Montserrat:wght@600&family=Archivo:wdth,wght@62..125,800&display=swap" rel="stylesheet" />
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body { width: 1440px; height: 900px; overflow: hidden; font-family: "Inter Tight", sans-serif; -webkit-font-smoothing: antialiased; }
+body { background: var(--bg); color: #f2efe8; }
+.hdr { position: absolute; left: 0; right: 0; top: 0; height: 64px; display: flex; align-items: center; justify-content: space-between; padding: 0 22px; z-index: 30; font: 500 15px "Inter Tight"; }
+.hdr b { font: 600 15px Montserrat; }
+.mono { font: 500 11.5px "JetBrains Mono"; letter-spacing: .14em; text-transform: uppercase; }
+.acc { color: var(--acc); }
+em.s { font-family: "Instrument Serif"; font-style: italic; font-weight: 400; letter-spacing: -.005em; }
+.f { display: none; position: absolute; inset: 0; overflow: hidden; }
+.vid { background: #000 var(--poster) center / cover no-repeat; }
+.live { display: inline-flex; align-items: center; gap: 8px; }
+.live::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--acc); box-shadow: 0 0 10px var(--acc); }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.chips span { display: inline-flex; align-items: center; gap: 7px; height: 32px; padding: 0 13px; border-radius: 999px; background: rgb(242 239 232 / .94); font: 500 12.5px "Inter Tight"; color: #1b1b19; }
+.chips img { height: 14px; width: auto; }
+.cta { display: inline-flex; align-items: center; gap: 14px; height: 54px; padding: 0 8px 0 24px; border-radius: 999px; background: #f2efe8; color: #161614; font: 500 15px "Inter Tight"; }
+.cta i { width: 40px; height: 40px; border-radius: 50%; background: var(--acc); color: #161614; display: grid; place-items: center; font-style: normal; }
+.rail { position: absolute; right: 26px; top: 50%; transform: translateY(-50%); display: grid; gap: 14px; font: 500 12px "JetBrains Mono"; color: rgb(242 239 232 / .35); text-align: right; }
+.rail .on { color: #f2efe8; }
+.rail .on::before { content: "— "; }
+
+/* ===== A. results first ===== */
+#A .l { position: absolute; left: 64px; top: 128px; width: 560px; }
+#A .top { display: flex; gap: 14px; align-items: center; color: rgb(242 239 232 / .6); }
+#A h2 { margin-top: 30px; font: 500 74px/1 "Inter Tight"; letter-spacing: -.045em; }
+#A h2 em.s { color: var(--acc); font-size: 1.08em; }
+#A .line { margin-top: 24px; font: 400 18px/1.5 "Inter Tight"; color: rgb(242 239 232 / .7); max-width: 520px; }
+#A .nums { display: grid; grid-template-columns: repeat(3, 1fr); margin-top: 40px; border-top: 1px solid rgb(255 255 255 / .14); }
+#A .nums div { padding: 18px 16px 0 0; }
+#A .nums div + div { padding-left: 18px; border-left: 1px solid rgb(255 255 255 / .14); }
+#A .nums b { display: block; font: 400 46px/1 "Instrument Serif"; color: #fff; }
+#A .nums span { display: block; margin-top: 8px; font: 400 12.5px/1.35 "Inter Tight"; color: rgb(242 239 232 / .55); }
+#A .chips { margin-top: 30px; }
+#A .cta { position: absolute; left: 64px; bottom: 70px; }
+#A .card { position: absolute; left: 680px; right: 84px; top: 50%; transform: translateY(-46%); aspect-ratio: 16 / 9; border-radius: 22px; overflow: hidden; box-shadow: 0 60px 120px -50px rgb(0 0 0 / .8), 0 0 0 1px rgb(255 255 255 / .08); }
+#A .card .bar { position: absolute; left: 0; right: 0; bottom: 0; display: flex; justify-content: space-between; padding: 16px 20px; background: linear-gradient(transparent, rgb(0 0 0 / .65)); font: 500 12px "JetBrains Mono"; letter-spacing: .1em; color: rgb(255 255 255 / .8); }
+
+/* ===== B. cinema ===== */
+#B .vid { position: absolute; inset: 0; }
+#B .shade { position: absolute; inset: 0; background: linear-gradient(90deg, var(--bg) 0%, color-mix(in srgb, var(--bg) 88%, transparent) 34%, transparent 70%), linear-gradient(transparent 55%, var(--bg)); }
+#B .l { position: absolute; left: 64px; top: 170px; width: 600px; }
+#B h2 { margin-top: 22px; font: 400 92px/.95 "Instrument Serif"; letter-spacing: -.02em; }
+#B h2 em { color: var(--acc); }
+#B .line { margin-top: 22px; font: 400 18px/1.5 "Inter Tight"; color: rgb(242 239 232 / .75); max-width: 500px; }
+#B .cta { margin-top: 34px; }
+#B .glass { position: absolute; left: 64px; right: 64px; bottom: 50px; display: grid; grid-template-columns: repeat(3, 1fr) 1.4fr; border-radius: 20px; background: rgb(20 20 22 / .45); backdrop-filter: blur(18px); box-shadow: inset 0 0 0 1px rgb(255 255 255 / .1); }
+#B .glass div { padding: 20px 24px; }
+#B .glass div + div { border-left: 1px solid rgb(255 255 255 / .1); }
+#B .glass b { display: block; font: 600 34px/1 "Inter Tight"; letter-spacing: -.03em; }
+#B .glass span { display: block; margin-top: 8px; font: 400 12.5px "Inter Tight"; color: rgb(242 239 232 / .6); }
+#B .glass .chips span { display: inline-flex; margin: 0; font: 500 12.5px "Inter Tight"; color: #1b1b19; }
+
+/* ===== C. case file ===== */
+#C .meta { position: absolute; left: 64px; right: 64px; top: 100px; display: grid; grid-template-columns: repeat(5, 1fr); border-top: 1px solid rgb(255 255 255 / .14); border-bottom: 1px solid rgb(255 255 255 / .14); }
+#C .meta div { padding: 14px 0; }
+#C .meta small { display: block; font: 500 10.5px "JetBrains Mono"; letter-spacing: .14em; text-transform: uppercase; color: rgb(242 239 232 / .45); }
+#C .meta b { display: block; margin-top: 6px; font: 500 14px "Inter Tight"; }
+#C h2 { position: absolute; left: 64px; right: 64px; top: 186px; font: 500 64px/1 "Inter Tight"; letter-spacing: -.045em; }
+#C h2 em.s { color: var(--acc); }
+#C .card { position: absolute; left: 64px; top: 300px; width: 800px; height: 450px; border-radius: 18px; overflow: hidden; box-shadow: 0 40px 90px -40px rgb(0 0 0 / .8); }
+#C .col { position: absolute; left: 904px; right: 64px; top: 300px; }
+#C .col h4 { font: 500 11px "JetBrains Mono"; letter-spacing: .14em; text-transform: uppercase; color: var(--acc); }
+#C .col p { margin: 8px 0 22px; font: 400 15px/1.5 "Inter Tight"; color: rgb(242 239 232 / .78); }
+#C .col .r b { font: 400 40px/1 "Instrument Serif"; color: #fff; }
+#C .col .r { display: flex; align-items: baseline; gap: 12px; padding: 10px 0; border-top: 1px solid rgb(255 255 255 / .1); }
+#C .col .r span { font: 400 13px "Inter Tight"; color: rgb(242 239 232 / .6); }
+#C .cta { position: absolute; left: 904px; bottom: 76px; }
+
+/* font pairings for concept B (?font=1..6) */
+body[data-font="2"] #B h2 { font: 300 96px/.95 "Fraunces"; font-variation-settings: "opsz" 144; letter-spacing: -.035em; }
+body[data-font="2"] #B h2 em { font-style: italic; font-weight: 300; }
+body[data-font="2"] #B .line, body[data-font="2"] #B .glass span { font-family: "DM Sans"; }
+body[data-font="2"] #B .glass b { font: 400 36px/1 "Fraunces"; letter-spacing: -.02em; }
+body[data-font="3"] #B h2 { font: 500 100px/.92 "Bodoni Moda"; letter-spacing: -.035em; }
+body[data-font="3"] #B h2 em { font-style: italic; font-weight: 400; }
+body[data-font="3"] #B .line, body[data-font="3"] #B .glass span { font-family: "Manrope"; }
+body[data-font="3"] #B .glass b { font: 500 38px/1 "Bodoni Moda"; }
+body[data-font="4"] #B h2 { font: 800 118px/.86 "Archivo"; font-stretch: 70%; text-transform: uppercase; letter-spacing: -.005em; }
+body[data-font="4"] #B h2 em { font-style: normal; }
+body[data-font="4"] #B .glass b { font: 800 40px/1 "Archivo"; font-stretch: 75%; letter-spacing: 0; }
+body[data-font="5"] #B h2 { font: 700 84px/.98 "Syne"; letter-spacing: -.04em; }
+body[data-font="5"] #B h2 em { font-style: normal; }
+body[data-font="5"] #B .line, body[data-font="5"] #B .glass span { font-family: "Manrope"; }
+body[data-font="5"] #B .glass b { font: 700 34px/1 "Syne"; letter-spacing: -.03em; }
+body[data-font="6"] #B h2 { font: 600 92px/.95 "Bricolage Grotesque"; font-variation-settings: "opsz" 96; letter-spacing: -.045em; }
+body[data-font="6"] #B h2 em { font-style: normal; font-weight: 300; }
+body[data-font="6"] #B .line, body[data-font="6"] #B .glass span { font-family: "Bricolage Grotesque"; font-variation-settings: "opsz" 14; }
+body[data-font="6"] #B .glass b { font: 600 36px/1 "Bricolage Grotesque"; letter-spacing: -.03em; }
+.flab { position: absolute; right: 64px; top: 92px; z-index: 40; padding: 8px 14px; border-radius: 999px; background: rgb(242 239 232 / .94); color: #161614; font: 600 13px "Inter Tight"; }
+</style>
+</head>
+<body>
+<section class="f" id="A">
+	<div class="l">
+		<p class="mono top"><span class="acc" data-k="no"></span><span data-k="kind"></span><span class="live" data-k="status"></span></p>
+		<h2 data-k="h"></h2>
+		<p class="line" data-k="line"></p>
+		<div class="nums" data-k="nums"></div>
+		<div class="chips" data-k="chips"></div>
+	</div>
+	<span class="cta">View the case study <i>→</i></span>
+	<div class="card vid"><div class="bar"><span class="live">Playing</span><span data-k="tag"></span></div></div>
+	<div class="rail" data-k="rail"></div>
+</section>
+
+<section class="f" id="B">
+	<div class="vid"></div><div class="shade"></div>
+	<div class="l">
+		<p class="mono" style="color:rgb(242 239 232 / .6)"><span class="acc" data-k="no"></span> &nbsp;<span data-k="kind"></span></p>
+		<h2 data-k="hb"></h2>
+		<p class="line" data-k="line"></p>
+		<span class="cta">View the case study <i>→</i></span>
+	</div>
+	<div class="glass" data-k="glass"></div>
+	<div class="rail" data-k="rail"></div>
+</section>
+
+<section class="f" id="C">
+	<div class="meta" data-k="meta"></div>
+	<h2 data-k="h"></h2>
+	<div class="card vid"></div>
+	<div class="col" data-k="col"></div>
+	<span class="cta">Full case study <i>→</i></span>
+	<div class="rail" data-k="rail"></div>
+</section>
+
+<div class="hdr"><b>HARIS</b><span>☰&nbsp; MENU</span><span>EMAIL &nbsp;&nbsp; LINKEDIN</span></div>
+<script>
+const P = {
+	1: { bg: '#12261f', acc: '#8fd46f', poster: '01-marketplace', kind: 'Mobile app', tag: 'iOS + Android', status: 'Live on both stores', year: '2025', client: 'Home-services marketplace', role: 'Solo developer',
+		h: 'One web app, <em class="s">two app stores.</em>', hb: 'Two stores, <em>no Mac.</em>',
+		line: 'A homeowner-and-contractor marketplace taken from the web to native iOS and Android, built solo with no Mac anywhere in the pipeline.',
+		nums: [['1st', 'submission approved by Apple'], ['2', 'stores live: App Store and Google Play'], ['0', 'Macs used to build and sign it']],
+		tools: [['React', ''], ['TypeScript', ''], ['Capacitor', ''], ['Postgres', 'postgresql.svg']],
+		problem: 'A web-only marketplace needed real iOS and Android apps, and an earlier app from the same publisher had been rejected three times.',
+		built: 'Native shell, ported AI write-up feature, and a fully cloud-signed release pipeline run from Windows.' },
+	2: { bg: '#0c0c0d', acc: '#f2b84b', poster: '02-broadband-support', kind: 'AI support', tag: 'Chat + voice', status: 'Live in production', year: '2025', client: 'UK fibre broadband provider', role: 'AI automation lead',
+		h: 'One chat agent, <em class="s">six workflows behind it.</em>', hb: 'Support that <em>never queues.</em>',
+		line: 'End-to-end AI customer support for a UK fibre broadband provider: the agent talks to customers, six single-purpose workflows do the work.',
+		nums: [['6,700+', 'customer conversations automated'], ['2,400+', 'tickets routed across 7 departments'], ['21,000+', 'agent minutes saved (est.)']],
+		tools: [['n8n', 'n8n.png'], ['OpenAI', 'openai.svg'], ['Airtable', 'airtable.svg'], ['Teams', '']],
+		problem: 'Every enquiry landed on people, out of hours too, with no split between customers, prospects or departments.',
+		built: 'A chat agent over six stateless backend workflows, later reused for a phone voice agent without a rewrite.' },
+	3: { bg: '#0f2a30', acc: '#8fd8e6', poster: '03-email-automation', kind: 'Email automation', tag: 'Outlook + OneDrive', status: 'Live in production', year: '2026', client: 'Document-services company', role: 'Automation engineer',
+		h: 'Every enquiry filed, logged <em class="s">and answered.</em>', hb: 'The inbox <em>sorts itself.</em>',
+		line: 'Classifies email and web-form enquiries, files attachments, updates a live CRM ledger and drafts replies for a human to approve.',
+		nums: [['224', 'node email pipeline, plus a 38-node intake'], ['8', 'separate reasoning paths, one per job'], ['1', 'editable rules doc, no redeploys']],
+		tools: [['n8n', 'n8n.png'], ['Microsoft Graph', ''], ['Outlook', ''], ['OpenAI', 'openai.svg']],
+		problem: 'A high volume of client document requests arriving by email and web form, all handled by hand.',
+		built: 'Two coordinated workflows sharing one CRM and one rule set, with thread-aware matching across mailbox and CRM.' },
+	4: { bg: '#1b1230', acc: '#b9a4ff', poster: '04-compliance-platform', kind: 'AI platform', tag: 'English + Arabic', status: 'Multi-tenant', year: '2026', client: 'Compliance software company', role: 'AI automation lead',
+		h: 'Many tenants, one platform. <em class="s">Data never mixes.</em>', hb: 'Many tenants. <em>One platform.</em>',
+		line: 'A bilingual compliance platform where 16 AI consultant personas advise many organisations without ever mixing their data.',
+		nums: [['16', 'AI consultant personas'], ['2', 'languages: English and Arabic'], ['80→8', 'candidates reranked per answer']],
+		tools: [['.NET', ''], ['React', ''], ['FastAPI', ''], ['Python', 'python.svg']],
+		problem: 'One AI platform had to advise many client organisations, in two languages, with zero risk of data leaking between them.',
+		built: 'Hybrid retrieval with access control inside the search query, graph memory, a browser agent and RAG evals.' },
+	5: { bg: '#251014', acc: '#ff7a59', poster: '05-autonomous-agent', kind: 'AI agent', tag: 'Level 1 support', status: 'Live, 24/7', year: '2025', client: 'Broadband provider', role: 'AI automation engineer',
+		h: 'The night shift, <em class="s">handled.</em>', hb: 'The night shift, <em>handled.</em>',
+		line: 'A Level 1 support agent for a broadband provider that triages customers, checks outages and opens tickets out of hours, with no human involved.',
+		nums: [['790+', 'tickets resolved end to end'], ['7,101', 'minutes of support time saved'], ['0', 'humans needed out of hours']],
+		tools: [['n8n', 'n8n.png'], ['OpenAI', 'openai.svg'], ['Voiceflow', ''], ['Airtable', 'airtable.svg']],
+		problem: 'Out-of-hours queries waited until morning, and every ticket needed a person to triage and route it.',
+		built: 'Live CRM triage, real-time outage checks via APIs and structured tickets handed to the right team.' },
+}
+const q = new URLSearchParams(location.search)
+const f = q.get('f') || 'A'
+const p = P[q.get('p') || 5]
+const n = q.get('p') || 5
+document.documentElement.style.setProperty('--bg', p.bg)
+document.documentElement.style.setProperty('--acc', p.acc)
+document.documentElement.style.setProperty('--poster', `url(img/${p.poster}.webp)`)
+document.body.dataset.font = q.get('font') || '1'
+const NAMES = { 1: 'Now: Instrument Serif + Inter Tight', 2: 'Fraunces + DM Sans', 3: 'Bodoni Moda + Manrope', 4: 'Archivo Condensed + Inter Tight', 5: 'Syne + Manrope', 6: 'Bricolage Grotesque' }
+if (q.get('font')) document.body.insertAdjacentHTML('beforeend', `<span class="flab">${q.get('font')}. ${NAMES[q.get('font')]}</span>`)
+const sec = document.getElementById(f)
+sec.style.display = 'block'
+const set = (k, html) => sec.querySelectorAll(`[data-k="${k}"]`).forEach((e) => (e.innerHTML = html))
+set('no', '0' + n + ' / 05')
+set('kind', p.kind)
+set('status', p.status)
+set('tag', p.tag)
+set('h', p.h)
+set('hb', p.hb)
+set('line', p.line)
+set('nums', p.nums.map(([b, s]) => `<div><b>${b}</b><span>${s}</span></div>`).join(''))
+set('glass', p.nums.map(([b, s]) => `<div><b>${b}</b><span>${s}</span></div>`).join('') + `<div><div class="chips">${p.tools.map(([t, i]) => `<span>${i ? `<img src="img/tools/${i}" alt="">` : ''}${t}</span>`).join('')}</div></div>`)
+set('chips', p.tools.map(([t, i]) => `<span>${i ? `<img src="img/tools/${i}" alt="">` : ''}${t}</span>`).join(''))
+set('rail', [1, 2, 3, 4, 5].map((i) => `<span class="${i == n ? 'on' : ''}">0${i}</span>`).join(''))
+set('meta', [['Project', '0' + n + ' / 05'], ['Client', p.client], ['Type', p.kind], ['My role', p.role], ['Status', p.status]].map(([a, b]) => `<div><small>${a}</small><b>${b}</b></div>`).join(''))
+set('col', `<h4>The problem</h4><p>${p.problem}</p><h4>What I built</h4><p>${p.built}</p><h4>Result</h4>` + p.nums.map(([b, s]) => `<div class="r"><b>${b}</b><span>${s}</span></div>`).join(''))
+</script>
+</body>
+</html>

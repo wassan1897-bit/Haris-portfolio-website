@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>About, light ideas</title>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Montserrat:wght@600;800&family=Mrs+Saint+Delafield&display=swap" rel="stylesheet" />
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+:root { --bg: #f4f2ec; --paper: #fbfaf6; --ink: #1a1a1a; --mute: #75716a; --line: #dedad1; --acc: #3f7d3a; }
+html, body { width: 1440px; height: 900px; overflow: hidden; background: var(--bg); color: var(--ink); -webkit-font-smoothing: antialiased; font-family: "Inter Tight", sans-serif; }
+.mono { font-family: "JetBrains Mono", monospace; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--mute); }
+.serif { font-family: "Instrument Serif", serif; font-weight: 400; }
+em { font-style: italic; color: var(--mute); }
+section { position: absolute; inset: 0; display: none; }
+.hdr { position: absolute; left: 0; right: 0; top: 0; height: 64px; display: flex; align-items: center; justify-content: space-between; padding: 0 20px; font: 600 15px Montserrat; z-index: 10; }
+.ph { position: relative; overflow: hidden; background: linear-gradient(160deg, #e6e2d8, #d8d3c7); border-radius: 4px; }
+.ph::before { content: ""; position: absolute; left: 28%; top: 18%; width: 44%; height: 110%; border-radius: 48% 48% 0 0; background: linear-gradient(180deg, #cdc7ba, #c3bdaf); }
+.ph span { position: absolute; left: 50%; bottom: 18px; transform: translateX(-50%); white-space: nowrap; font: 400 10px "JetBrains Mono"; letter-spacing: 0.18em; text-transform: uppercase; color: #8f8a80; background: rgba(251,250,246,0.7); padding: 6px 10px; }
+.tools { display: flex; gap: 34px; align-items: center; font: 600 17px "Inter Tight"; color: #3a3833; }
+.tools span::before { content: ""; display: inline-block; width: 8px; height: 8px; border-radius: 2px; background: #c9c3b6; margin-right: 10px; vertical-align: 2px; }
+.num b { display: block; font: 400 56px/1 "Instrument Serif"; }
+.num span { display: block; margin-top: 8px; }
+</style>
+</head>
+<body>
+<div class="hdr"><span>HARIS</span><span style="font-weight:500">☰&nbsp; MENU</span><span>EMAIL &nbsp;&nbsp; LINKEDIN</span></div>
+
+<!-- A. EDITORIAL SPREAD -->
+<section id="v1">
+	<p class="mono" style="position:absolute;left:110px;top:130px">(02) About</p>
+	<h2 class="serif" style="position:absolute;left:110px;top:170px;font-size:96px;line-height:0.96;letter-spacing:-0.02em">Diagnose first.<br /><em>Then build.</em></h2>
+	<div style="position:absolute;left:110px;top:430px;width:780px;display:grid;grid-template-columns:1fr 1fr;gap:40px;font:400 17px/1.65 'Inter Tight';color:#3a3833">
+		<p>I'm Haris, an AI automation engineer in Karachi. I build production AI for operations-heavy businesses in the US, the UK and the Middle East: support agents, inbox automation, voice agents and the workflows behind them.</p>
+		<p>Every project starts with the process, not the model. I map where the hours really go, build the system that takes the busywork away, and stay until it runs on its own.</p>
+	</div>
+	<div style="position:absolute;left:110px;top:660px;width:780px;display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--line);padding-top:22px">
+		<div><p class="mono">Based in</p><p style="margin-top:8px;font:500 18px 'Inter Tight'">Karachi, Pakistan</p></div>
+		<div><p class="mono">Clients in</p><p style="margin-top:8px;font:500 18px 'Inter Tight'">US · UK · Middle East</p></div>
+		<div><p class="mono">Track record</p><p style="margin-top:8px;font:500 18px 'Inter Tight'">33 contracts · 100% JSS</p></div>
+	</div>
+	<div class="ph" style="position:absolute;right:110px;top:130px;width:400px;height:540px"><span>Photo of Haris</span></div>
+	<p class="mono" style="position:absolute;right:110px;top:688px">Karachi, 2026</p>
+</section>
+
+<!-- B. ONE CALM STATEMENT -->
+<section id="v2">
+	<p class="mono" style="position:absolute;left:0;right:0;top:150px;text-align:center">(02) About Haris</p>
+	<p class="serif" style="position:absolute;left:180px;right:180px;top:200px;text-align:center;font-size:58px;line-height:1.16;letter-spacing:-0.01em">I'm Haris <span class="ph" style="display:inline-block;width:92px;height:56px;vertical-align:-8px;border-radius:30px"></span>, an AI automation engineer in Karachi. I find where the hours go <em>and build the system that gives them back,</em> for teams in the US, the UK and the Middle East.</p>
+	<div style="position:absolute;left:250px;right:250px;top:600px;display:grid;grid-template-columns:repeat(3,1fr);text-align:center">
+		<div class="num"><b>6,700+</b><span class="mono">Conversations automated</span></div>
+		<div class="num" style="border-left:1px solid var(--line);border-right:1px solid var(--line)"><b>21,000+</b><span class="mono">Agent minutes saved</span></div>
+		<div class="num"><b>100%</b><span class="mono">Job Success on Upwork</span></div>
+	</div>
+	<p class="mono" style="position:absolute;left:0;right:0;top:790px;text-align:center">A small photo sits inside the sentence, next to the name</p>
+</section>
+
+<!-- C. SPEC SHEET -->
+<section id="v3" style="background:var(--paper)">
+	<div style="position:absolute;left:110px;right:110px;top:120px;display:grid;grid-template-columns:360px 1fr;column-gap:80px">
+		<div>
+			<div class="ph" style="width:300px;height:380px"><span>Photo of Haris</span></div>
+			<p style="margin-top:20px;font:600 22px 'Inter Tight'">Muhammad Haris</p>
+			<p class="mono" style="margin-top:6px">AI automation engineer</p>
+		</div>
+		<div style="border-top:1px solid var(--ink)">
+			<div style="display:grid;grid-template-columns:180px 1fr;padding:22px 0;border-bottom:1px solid var(--line)"><p class="mono">About</p><p style="font:400 18px/1.6 'Inter Tight'">AI automation engineer in Karachi, building production AI for operations-heavy businesses.</p></div>
+			<div style="display:grid;grid-template-columns:180px 1fr;padding:22px 0;border-bottom:1px solid var(--line)"><p class="mono">Approach</p><p style="font:400 18px/1.6 'Inter Tight'">Process first, model last. Map the hours, build the system, stay until it runs on its own.</p></div>
+			<div style="display:grid;grid-template-columns:180px 1fr;padding:22px 0;border-bottom:1px solid var(--line)"><p class="mono">Builds</p><p style="font:400 18px/1.6 'Inter Tight'">Support agents · Inbox automation · Voice agents · RAG systems · Mobile apps</p></div>
+			<div style="display:grid;grid-template-columns:180px 1fr;padding:22px 0;border-bottom:1px solid var(--line)"><p class="mono">Clients</p><p style="font:400 18px/1.6 'Inter Tight'">US · UK · Middle East · 33 contracts, 100% Job Success</p></div>
+			<div style="display:grid;grid-template-columns:180px 1fr;padding:22px 0;border-bottom:1px solid var(--line)"><p class="mono">Tools</p><div class="tools" style="gap:22px;font-size:15px"><span>n8n</span><span>Claude</span><span>OpenAI</span><span>Python</span><span>Airtable</span><span>Twilio</span></div></div>
+		</div>
+	</div>
+</section>
+
+<!-- D. A NOTE -->
+<section id="v4">
+	<div style="position:absolute;left:50%;top:120px;width:760px;margin-left:-380px;height:680px;background:var(--paper);box-shadow:0 30px 70px rgba(60,50,30,0.12);transform:rotate(-1.2deg);padding:70px 80px">
+		<p class="mono">(02) About · A short note</p>
+		<p class="serif" style="margin-top:26px;font-size:64px;line-height:1">Hi, I'm Haris.</p>
+		<div style="margin-top:30px;font:400 19px/1.7 'Inter Tight';color:#3a3833">
+			<p>I build AI that quietly takes work off people's plates: the support agent that answers at 2am, the inbox that sorts itself, the ticket that lands with the right team.</p>
+			<p style="margin-top:18px">I work from Karachi with teams in the US, the UK and the Middle East, and I always start the same way: by watching how the work really happens.</p>
+		</div>
+		<p style="margin-top:34px;font:400 64px/1 'Mrs Saint Delafield';color:var(--ink)">Haris</p>
+		<div class="ph" style="position:absolute;right:-60px;top:-30px;width:170px;height:210px;transform:rotate(6deg);box-shadow:0 18px 40px rgba(60,50,30,0.18);border:8px solid #fff;border-bottom-width:30px"><span style="bottom:6px">Photo</span></div>
+	</div>
+</section>
+
+<script>
+const v = new URLSearchParams(location.search).get('v') || '1';
+document.getElementById('v' + v).style.display = 'block';
+</script>
+</body>
+</html>

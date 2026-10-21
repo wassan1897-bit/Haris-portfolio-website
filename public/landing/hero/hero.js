@@ -13,8 +13,9 @@
 
 	const wait = (ms) => new Promise((r) => setTimeout(r, ms))
 
-	// Opening-shot framing for haris-hero-wall.webp (941x1672). Landmarks are source pixels:
-	// hat top 250, brow 360, glasses start x 580, face centre (700, 560), chin 830.
+	// Opening-shot framing for haris-hero-studio.webp (941x1672). Landmarks are source pixels:
+	// hair top 150, brow 514, glasses start x 340, face centre (576, 702), chin 931. The opening shot
+	// frames the band from 300 (above the hair) to 960 (below the chin).
 	// The shot sits between letterbox bars, so it aims at the band from 13% to 86% of the screen.
 	const IMG_W = 941
 	const IMG_H = 1672
@@ -22,21 +23,20 @@
 	// Desktop: photo sized so the face fits between the bars and the eyes clear the title,
 	// anchored to the right edge, its left edge fading into the dark behind the title
 	function desktopFrame(w, h, titleRight) {
-		const fitBand = (0.73 * h) / (830 - 360)
-		const eyesClear = (w - titleRight - 20) / (IMG_W - 580)
+		const fitBand = (0.73 * h) / (960 - 300)
+		const eyesClear = (w - titleRight - 20) / (IMG_W - 340)
 		const coverH = (h / IMG_H) * 1.02
 		const fs = Math.max(Math.min(fitBand, eyesClear), fitBand * 0.6, coverH)
 		const width = IMG_W * fs
 		const height = IMG_H * fs
-		// Centre the brow-to-chin band (360 to 830) between the bars. At full size this is the framing
-		// approved on 2026-10-05: band top on the top bar, chin on the bottom bar.
-		const top = Math.min(Math.max(0.495 * h - 595 * fs, h - height), 0)
+		// Centre the hair-to-chin band (300 to 960) between the bars
+		const top = Math.min(Math.max(0.495 * h - 630 * fs, h - height), 0)
 		return {
 			top,
 			left: w - width,
 			width,
 			height,
-			transformOrigin: `${(700 / IMG_W) * 100}% ${(560 / IMG_H) * 100}%`,
+			transformOrigin: `${(576 / IMG_W) * 100}% ${(702 / IMG_H) * 100}%`,
 		}
 	}
 
@@ -45,11 +45,11 @@
 		const s = Math.max(w / IMG_W, h / IMG_H)
 		const visW = w / s
 		const spareX = IMG_W * s - w
-		const left = spareX > 0 ? Math.min(Math.max(700 - visW / 2, 0), IMG_W - visW) : 0
+		const left = spareX > 0 ? Math.min(Math.max(576 - visW / 2, 0), IMG_W - visW) : 0
 		const posX = spareX > 0 ? ((left * s) / spareX) * 100 : 50
 		return {
 			objectPosition: `${posX}% 50%`,
-			transformOrigin: `${((700 - left) / visW) * 100}% ${(540 / IMG_H) * 100}%`,
+			transformOrigin: `${((576 - left) / visW) * 100}% ${(690 / IMG_H) * 100}%`,
 		}
 	}
 
@@ -174,11 +174,13 @@
 			const split = typeof SplitType !== 'undefined' ? new SplitType(whiteTitle, { types: 'chars' }) : null
 			const chars = split ? split.chars : [whiteTitle]
 			gsap.set(chars, { opacity: 0, y: 34, filter: blur(14) })
-			gsap.set(whiteTitle, { letterSpacing: '0.04em' })
+			// it tightens to the tracking set in hero.css, so the swap to the photo-filled copy below is invisible
+			const restSpacing = getComputedStyle(whiteTitle).letterSpacing
+			gsap.set(whiteTitle, { letterSpacing: '0.09em' })
 			reveal()
 
 			tl.to(panelImg, { ...framed(1.02), duration: 2.0, ease: 'power2.out' }, 0)
-			tl.to(whiteTitle, { letterSpacing: '-0.03em', duration: 1.9, ease: 'power2.out' }, 0.1)
+			tl.to(whiteTitle, { letterSpacing: restSpacing, duration: 1.9, ease: 'power2.out' }, 0.1)
 			tl.to(chars, { opacity: 1, y: 0, filter: blur(0), duration: 1.0, stagger: 0.04 }, 0.2)
 
 			// Swap the split letters back for plain text and bring in the photo-filled copy underneath.
@@ -279,7 +281,7 @@
 
 		if (header && flow && 'IntersectionObserver' in window) {
 			const io = new IntersectionObserver(
-				([entry]) => header.classList.toggle('site-header--over-hero', entry.intersectionRatio > 0),
+				([entry]) => header.classList.toggle('site-header--over-hero', entry.intersectionRatio > 0 && flow.scrollTop < (window.__heroHeaderEnd || hero.offsetHeight) - 60),
 				{ root: flow, rootMargin: '-1px 0px -90% 0px', threshold: 0 },
 			)
 			io.observe(hero)

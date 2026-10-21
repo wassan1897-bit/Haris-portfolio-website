@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>About + video page, reference scroll</title>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=Inter+Tight:wght@400;500;600&family=Montserrat:wght@600&display=swap" rel="stylesheet" />
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+:root { --cream: #ecebe4; --ink: #15151b; --mute: #55555c; --yellow: #fbec74; }
+html, body { width: 1440px; height: 900px; overflow: hidden; background: #000; -webkit-font-smoothing: antialiased; font-family: "Inter Tight", sans-serif; color: var(--ink); }
+.hdr { position: absolute; left: 0; right: 0; top: 0; height: 64px; display: flex; align-items: center; justify-content: space-between; padding: 0 20px; font: 600 15px Montserrat; z-index: 40; color: var(--hc, #15151b); }
+.under { position: absolute; left: 0; top: 0; width: 1440px; height: 900px; }
+.under img { position: absolute; left: 0; top: 0; width: 100%; height: 100%; object-fit: cover; }
+/* the cream page that rises with a curved top edge */
+.page { position: absolute; left: 0; width: 1440px; background: var(--cream); }
+.page svg.edge { position: absolute; left: 0; width: 1440px; height: 120px; display: block; }
+.title { font-family: Archivo; font-weight: 800; font-stretch: 78%; text-transform: uppercase; letter-spacing: -0.01em; line-height: 0.86; text-align: center; color: var(--ink); }
+.sub { text-align: center; font: 500 15px "Inter Tight"; letter-spacing: 0.02em; text-transform: uppercase; color: #2c2c33; }
+.lab { font: 500 13px "Inter Tight"; text-transform: uppercase; letter-spacing: 0.02em; color: #2c2c33; }
+.desc { font: 400 50px/1.1 "Inter Tight"; letter-spacing: -0.015em; color: var(--ink); }
+.pill { display: inline-block; padding: 6px 14px; border-radius: 4px; background: var(--yellow); font: 500 13px "Inter Tight"; }
+.list { font: 400 13px/1.45 "Inter Tight"; color: #2c2c33; }
+.row { display: grid; grid-template-columns: 70px 1fr auto; padding: 8px 0; border-bottom: 1px solid #b9b8b1; font: 400 13px "Inter Tight"; }
+.reel { position: absolute; overflow: hidden; background: #111; }
+.reel img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.frame { display: none; position: absolute; inset: 0; overflow: hidden; }
+</style>
+</head>
+<body>
+
+<!-- 1. hero as it is -->
+<section class="frame" id="f1"><div class="under"><img src="img/hero.png" /></div></section>
+
+<!-- 2. scroll: the cream page rises over the hero on a curved edge; the hero drifts up slower -->
+<section class="frame" id="f2">
+	<div class="under" style="top:-150px"><img src="img/hero.png" style="filter:brightness(0.9)" /></div>
+	<div class="page" style="top:520px;height:600px">
+		<svg class="edge" style="top:-60px" viewBox="0 0 1440 120" preserveAspectRatio="none"><path d="M0 120 L0 60 Q720 -10 1440 60 L1440 120 Z" fill="#ecebe4" /></svg>
+		<p class="title" style="margin-top:70px;font-size:250px">Muhammad</p>
+	</div>
+</section>
+
+<!-- 3. the title rises into place; the curve flattens as the page lands -->
+<section class="frame" id="f3">
+	<div class="under" style="top:-330px"><img src="img/hero.png" style="filter:brightness(0.85)" /></div>
+	<div class="page" style="top:180px;height:900px">
+		<svg class="edge" style="top:-24px;height:50px" viewBox="0 0 1440 120" preserveAspectRatio="none"><path d="M0 120 L0 70 Q720 20 1440 70 L1440 120 Z" fill="#ecebe4" /></svg>
+		<p class="title" style="margin-top:60px;font-size:230px">Muhammad<br />Haris</p>
+		<p class="sub" style="margin-top:22px">AI automation engineer</p>
+	</div>
+</section>
+
+<!-- 4. About landed -->
+<section class="frame" id="f4" style="background:var(--cream)">
+	<p class="title" style="margin-top:140px;font-size:230px">Muhammad<br />Haris</p>
+	<p class="sub" style="margin-top:22px">AI automation engineer</p>
+	<div style="position:absolute;left:150px;top:690px;width:1140px">
+		<p class="lab">Description</p>
+		<p class="desc" style="margin-top:18px">Haris is an AI automation engineer in Karachi.</p>
+	</div>
+</section>
+
+<!-- 5. scrolling on: the title shrinks and stays at the top, the description rides up under it -->
+<section class="frame" id="f5" style="background:var(--cream)">
+	<p class="title" style="margin-top:80px;font-size:74px">Muhammad<br />Haris</p>
+	<p class="sub" style="margin-top:8px;font-size:12px">AI automation engineer</p>
+	<div style="position:absolute;left:150px;top:300px;width:1180px">
+		<p class="lab">Description</p>
+		<p class="desc" style="margin-top:18px">Haris builds production AI for operations-heavy businesses in the US, the UK and the Middle East: support agents that answer at 2am, inboxes that sort themselves, and the workflows that connect them to the tools teams already use.</p>
+	</div>
+	<div style="position:absolute;left:150px;right:150px;top:700px;display:grid;grid-template-columns:200px 240px 1fr;gap:40px">
+		<div><p class="lab">©2026</p><p style="margin-top:14px"><span class="pill">Start a project</span></p></div>
+		<div><p class="lab">Services</p><p class="list" style="margin-top:14px">AI agents<br />Voice agents<br />n8n workflows<br />Email automation<br />RAG systems<br />Mobile apps</p></div>
+		<div><p class="lab">Track record</p><div style="margin-top:10px"><div class="row"><span>33</span><span>Upwork contracts</span><span>100% JSS</span></div><div class="row"><span>6,700+</span><span>Conversations automated</span><span>Live</span></div><div class="row"><span>21,000+</span><span>Agent minutes saved</span><span>Est.</span></div></div></div>
+	</div>
+</section>
+
+<!-- 6. the end of About: the showreel plays right below, small, on the same cream -->
+<section class="frame" id="f6" style="background:var(--cream)">
+	<p class="title" style="margin-top:80px;font-size:74px">Muhammad<br />Haris</p>
+	<p class="sub" style="margin-top:8px;font-size:12px">AI automation engineer</p>
+	<div style="position:absolute;left:150px;right:150px;top:250px;display:grid;grid-template-columns:200px 240px 1fr;gap:40px">
+		<div><p class="lab">©2026</p><p style="margin-top:14px"><span class="pill">Start a project</span></p></div>
+		<div><p class="lab">Services</p><p class="list" style="margin-top:14px">AI agents<br />Voice agents<br />n8n workflows<br />Email automation<br />RAG systems<br />Mobile apps</p></div>
+		<div><p class="lab">Track record</p><div style="margin-top:10px"><div class="row"><span>33</span><span>Upwork contracts</span><span>100% JSS</span></div><div class="row"><span>6,700+</span><span>Conversations automated</span><span>Live</span></div><div class="row"><span>21,000+</span><span>Agent minutes saved</span><span>Est.</span></div></div></div>
+	</div>
+	<div class="reel" style="left:470px;top:560px;width:500px;height:281px"><img src="img/reel-a.png" /></div>
+	<p class="lab" style="position:absolute;left:470px;top:852px">Showreel · 2024 to 2026</p>
+</section>
+
+<!-- 7. the video page: the reel grows as you scroll, on the same cream -->
+<section class="frame" id="f7" style="background:var(--cream)">
+	<p class="title" style="margin-top:80px;font-size:74px">Muhammad<br />Haris</p>
+	<p class="sub" style="margin-top:8px;font-size:12px">AI automation engineer</p>
+	<div class="reel" style="left:150px;top:230px;width:1140px;height:641px"><img src="img/reel.png" /></div>
+</section>
+
+<!-- 8. into the projects: the project page rises over the reel on the same curved edge -->
+<section class="frame" id="f8" style="background:var(--cream)">
+	<p class="title" style="margin-top:80px;font-size:74px">Muhammad<br />Haris</p>
+	<div class="reel" style="left:150px;top:90px;width:1140px;height:641px"><img src="img/reel.png" /></div>
+	<div class="page" style="top:470px;height:600px;background:transparent">
+		<svg class="edge" style="top:-60px" viewBox="0 0 1440 120" preserveAspectRatio="none"><path d="M0 120 L0 60 Q720 -10 1440 60 L1440 120 Z" fill="#12261f" /></svg>
+		<div style="position:absolute;left:0;top:59px;width:1440px;height:700px;overflow:hidden"><img src="img/p1.png" style="width:1440px;height:900px;margin-top:-60px" /></div>
+	</div>
+</section>
+
+<div class="hdr" id="hdr"><span>HARIS</span><span style="font-weight:500">☰&nbsp; MENU</span><span>EMAIL &nbsp;&nbsp; LINKEDIN</span></div>
+<script>
+const f = new URLSearchParams(location.search).get('f') || '1';
+document.getElementById('f' + f).style.display = 'block';
+const h = document.getElementById('hdr');
+if (f === '1') h.style.display = 'none';
+if (f === '2' || f === '8') h.style.setProperty('--hc', '#fff');
+</script>
+</body>
+</html>

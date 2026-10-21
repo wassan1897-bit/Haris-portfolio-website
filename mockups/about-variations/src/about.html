@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>About, variations on the current design</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400&family=Montserrat:wght@200;300;600&family=Mrs+Saint+Delafield&family=Urbanist:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+:root { --copper: #c48a66; }
+html, body { width: 1440px; height: 900px; overflow: hidden; background: #0a0a0a; color: #f2efe8; -webkit-font-smoothing: antialiased; font-family: "Urbanist", sans-serif; }
+section { position: absolute; inset: 0; display: none; overflow: hidden; }
+.hdr { position: absolute; left: 0; right: 0; top: 0; height: 64px; display: flex; align-items: center; justify-content: space-between; padding: 0 20px; font: 600 15px Montserrat; z-index: 30; }
+.tag { font: 400 10px "JetBrains Mono"; letter-spacing: 0.24em; text-transform: uppercase; color: var(--copper); }
+.body p { margin: 0 0 1.4em; font: 400 16px/1.55 "Urbanist"; }
+.sign, .body .sign { font: 400 60px/1 "Mrs Saint Delafield"; }
+.title { font-family: Montserrat; font-weight: 200; line-height: 0.98; letter-spacing: -0.02em; text-transform: uppercase; }
+.title .c { color: var(--copper); font-weight: 300; }
+.panel { position: absolute; overflow: hidden; background: linear-gradient(180deg, #4b4b4c 0%, #333334 40%, #161617 78%, #0a0a0a 100%); }
+.panel--txt { background: linear-gradient(180deg, #5a5a5b 0%, #3a3a3b 34%, #151516 70%, #0a0a0a 100%); }
+/* portrait placeholder */
+.ph::before { content: ""; position: absolute; left: 50%; top: 14%; width: 46%; height: 100%; transform: translateX(-50%); border-radius: 48% 48% 0 0; background: radial-gradient(60% 30% at 50% 18%, #6b6966, #3a3937 60%, #1a1a1a 100%); }
+.ph > b { position: absolute; left: 50%; bottom: 30px; transform: translateX(-50%); white-space: nowrap; font: 400 10px "JetBrains Mono"; letter-spacing: 0.2em; text-transform: uppercase; color: #8a8780; border: 1px dashed #4a4946; padding: 7px 12px; z-index: 2; }
+.ph::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(10,10,10,0) 55%, #0a0a0a 100%); }
+.light .ph::before { background: radial-gradient(60% 30% at 50% 18%, #c9c6bf, #b3afa7 60%, #a19c93 100%); }
+.light .ph::after { background: none; }
+.tools { position: absolute; left: 0; right: 0; display: flex; gap: 70px; justify-content: center; font: 500 22px Montserrat; color: #f2efe8; white-space: nowrap; }
+.tools span { opacity: 0.9; }
+</style>
+</head>
+<body>
+<div class="hdr"><span>HARIS</span><span style="font-weight:500">☰&nbsp; MENU</span><span>EMAIL &nbsp;&nbsp; LINKEDIN</span></div>
+
+<!-- 1. MIRRORED: text left, portrait right, the title crosses the gutter -->
+<section id="v1">
+	<div class="panel panel--txt" style="left:0;top:0;width:36%;height:100%">
+		<div class="body" style="position:absolute;left:16%;right:12%;top:26%">
+			<p class="tag" style="margin-bottom:22px">About Haris</p>
+			<p>Haris is an AI automation engineer based in Karachi. He builds production AI for operations-heavy businesses in the US, the UK and the Middle East.</p>
+			<p>His approach starts with the process, not the model. He maps where the hours really go, builds the system that takes the busywork away, and stays until it runs on its own.</p>
+			<p class="sign" style="margin-top:30px">Haris</p>
+		</div>
+	</div>
+	<div class="panel ph" style="left:calc(36% + 18px);top:0;right:0;height:100%"><b>Photo of Haris</b></div>
+	<p class="title" style="position:absolute;left:calc(36% - 150px);top:52%;font-size:110px;z-index:5">Diagnose<br />Build &amp;<br /><span class="c">Ship</span></p>
+</section>
+
+<!-- 2. TRIPTYCH: the portrait cut into three tall panels, one word on each -->
+<section id="v2">
+	<div style="position:absolute;left:0;right:0;top:0;height:68%;display:grid;grid-template-columns:1fr 1fr 1fr;gap:18px">
+		<div class="panel ph" style="position:relative;--x:0"><b>Photo · left third</b></div>
+		<div class="panel ph" style="position:relative"><b>Photo · centre</b></div>
+		<div class="panel ph" style="position:relative"><b>Photo · right third</b></div>
+	</div>
+	<div style="position:absolute;left:0;right:0;top:48%;display:grid;grid-template-columns:1fr 1fr 1fr;gap:18px;z-index:5">
+		<p class="title" style="text-align:center;font-size:84px">Diagnose</p>
+		<p class="title" style="text-align:center;font-size:84px">Build &amp;</p>
+		<p class="title" style="text-align:center;font-size:84px"><span class="c">Ship</span></p>
+	</div>
+	<div style="position:absolute;left:0;right:0;top:72%;display:grid;grid-template-columns:1fr 1fr 1fr;gap:18px">
+		<div class="body" style="padding:0 15%"><p class="tag" style="margin-bottom:12px">01 · About Haris</p><p>AI automation engineer in Karachi, building production AI for the US, the UK and the Middle East.</p></div>
+		<div class="body" style="padding:0 15%"><p class="tag" style="margin-bottom:12px">02 · Approach</p><p>Process first, model last. Map the hours, then build only what saves them.</p></div>
+		<div class="body" style="padding:0 15%"><p class="tag" style="margin-bottom:12px">03 · Track record</p><p>33 contracts at 100% Job Success. More than 6,700 conversations automated.</p></div>
+	</div>
+</section>
+
+<!-- 3. STONE LIGHT: the same layout, lit from the top in pale stone grey -->
+<section id="v3" class="light" style="background:#d9d7d2">
+	<div class="panel ph" style="left:0;top:0;width:64%;height:100%;background:linear-gradient(180deg,#f1efeb 0%,#dddad4 45%,#b9b5ae 100%)"><b style="color:#7d7870;border-color:#a9a49b">Photo of Haris</b></div>
+	<div class="panel" style="left:calc(64% + 18px);top:0;right:0;height:100%;background:linear-gradient(180deg,#f4f2ee 0%,#e4e1db 50%,#cfcbc4 100%)">
+		<div class="body" style="position:absolute;left:14%;right:16%;top:30%;color:#2b2a28">
+			<p class="tag" style="margin-bottom:22px;color:#9a6a4c">About Haris</p>
+			<p>Haris is an AI automation engineer based in Karachi. He builds production AI for operations-heavy businesses in the US, the UK and the Middle East.</p>
+			<p>His approach starts with the process, not the model. He maps where the hours really go, builds the system that takes the busywork away, and stays until it runs on its own.</p>
+			<p class="sign" style="margin-top:30px;color:#1a1a1a">Haris</p>
+		</div>
+	</div>
+	<p class="title" style="position:absolute;right:calc(36% + 50px);top:46%;font-size:110px;color:#1c1c1c;z-index:5;text-align:right">Diagnose<br />Build &amp;<br /><span class="c" style="color:#a8653f">Ship</span></p>
+</section>
+
+<!-- 4. ONE LINE: full-bleed portrait, the title runs across the whole width, the text floats over it -->
+<section id="v4">
+	<div class="panel ph" style="inset:0"><b style="bottom:auto;top:46%">Photo of Haris, full screen</b></div>
+	<div style="position:absolute;inset:0;background:linear-gradient(90deg, rgba(10,10,10,0) 40%, rgba(10,10,10,0.7) 75%, rgba(10,10,10,0.85) 100%)"></div>
+	<div class="body" style="position:absolute;right:110px;top:150px;width:380px;padding:34px 34px 20px;background:rgba(20,20,21,0.72);border:1px solid rgba(242,239,232,0.1);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px)">
+		<p class="tag" style="margin-bottom:20px">About Haris</p>
+		<p>AI automation engineer in Karachi, building production AI for the US, the UK and the Middle East.</p>
+		<p>Process first, model last. He maps the hours, builds the system, and stays until it runs on its own.</p>
+		<p class="sign" style="margin:10px 0 0;font-size:54px">Haris</p>
+	</div>
+	<p class="title" style="position:absolute;left:0;right:0;bottom:120px;text-align:center;font-size:98px;white-space:nowrap;z-index:5">Diagnose · Build &amp; <span class="c">Ship</span></p>
+	<div class="tools" style="bottom:40px;font-size:18px;gap:56px;opacity:0.8"><span>n8n</span><span>Make</span><span>Zapier</span><span>GoHighLevel</span><span>Retell</span><span>Claude</span><span>OpenAI</span><span>Airtable</span></div>
+</section>
+
+<script>
+const v = new URLSearchParams(location.search).get('v') || '1';
+document.getElementById('v' + v).style.display = 'block';
+</script>
+</body>
+</html>

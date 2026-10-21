@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1920, height=1080" />
+    <title>Marketplace app, one-take clip</title>
+    <script src="assets/gsap.min.js"></script>
+    <style>
+      @font-face { font-family: "Inter"; src: url("assets/fonts/inter-latin-400-normal.woff2") format("woff2"); font-weight: 400; font-display: block; }
+      @font-face { font-family: "Inter"; src: url("assets/fonts/inter-latin-600-normal.woff2") format("woff2"); font-weight: 600; font-display: block; }
+      @font-face { font-family: "Inter"; src: url("assets/fonts/inter-latin-700-normal.woff2") format("woff2"); font-weight: 700; font-display: block; }
+      @font-face { font-family: "Inter"; src: url("assets/fonts/inter-latin-800-normal.woff2") format("woff2"); font-weight: 800; font-display: block; }
+
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { width: 1920px; height: 1080px; overflow: hidden; background: #12261f; }
+      body { font-family: "Inter", sans-serif; color: #eefaf2; -webkit-font-smoothing: antialiased; }
+      #root { position: relative; width: 100%; height: 100%; overflow: hidden; }
+      #stage { position: absolute; inset: 0; overflow: hidden; }
+      svg { display: block; }
+
+      .bg { position: absolute; inset: 0; background: radial-gradient(1400px 980px at 50% 42%, #24503f 0%, #1a3b2f 46%, #12261f 100%); }
+      .grainbox { position: absolute; inset: -60px; overflow: hidden; pointer-events: none; }
+      #grain { position: absolute; left: 0; top: 0; width: 2100px; height: 1260px; opacity: 0.09; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' seed='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23n)'/%3E%3C/svg%3E"); }
+      .vig { position: absolute; inset: 0; box-shadow: inset 0 0 380px rgba(4, 14, 10, 0.6); pointer-events: none; }
+
+      /* ---------- the world the camera moves through (one take, no cuts) ---------- */
+      #world { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; transform-origin: 0 0; }
+      .ph { position: absolute; padding: 12px; border-radius: 46px; background: linear-gradient(150deg, #3a4741, #121815 60%); box-shadow: 0 40px 90px rgba(2, 10, 6, 0.6), 0 0 0 1.5px rgba(255, 255, 255, 0.08) inset; }
+      .ph__scr { width: 100%; height: 100%; border-radius: 34px; background-size: 100% 100%; }
+      #pC { left: 810px; top: 110px; width: 300px; height: 624px; }
+      #pL { left: 455px; top: 160px; width: 270px; height: 562px; }
+      #pR { left: 1195px; top: 160px; width: 270px; height: 562px; }
+      /* the AVAILABLE card, redrawn over the screenshot so it stays sharp in the macro shot */
+      #av { position: absolute; left: 834.6px; top: 194.5px; width: 250.4px; height: 58.5px; border-radius: 7px; border: 1px solid #d9dee6; background: #ffffff; color: #14213f; }
+      #avL { position: absolute; left: 14px; top: 14px; font-size: 9.6px; font-weight: 800; letter-spacing: 0.02em; color: #6b7280; }
+      #avS { position: absolute; left: 14px; top: 31px; font-size: 6.2px; color: #3f4a5c; }
+      #avT { position: absolute; left: 194.6px; top: 17.4px; width: 40.7px; height: 23.7px; border-radius: 12px; background: #cfd5dd; }
+      #avK { position: absolute; left: 2.5px; top: 2.5px; width: 18.7px; height: 18.7px; border-radius: 50%; background: #fff; box-shadow: 0 1px 2px rgba(0, 0, 0, 0.25); }
+      #avGlow { position: absolute; inset: -3px; border-radius: 9px; box-shadow: 0 0 14px 2px rgba(74, 222, 128, 0.55); opacity: 0; }
+
+      .rw { position: absolute; width: 220px; height: 64px; display: grid; place-items: center; text-align: center; border-radius: 14px; border: 1.5px solid rgba(238, 250, 242, 0.32); background: #1b3a2f; font-size: 17px; font-weight: 700; line-height: 1.1; color: #eefaf2; }
+      .rw--dest { background: #eefaf2; color: #0b1a15; border-color: #eefaf2; }
+      .rw--gate { border: 2.5px solid #f5b43b; background: #2f3424; color: #fde7b0; }
+      .rw__fx { position: absolute; inset: -4px; border-radius: 17px; border: 3px solid #6ee7a0; box-shadow: 0 0 26px rgba(110, 231, 160, 0.6); opacity: 0; }
+      #winbox { position: absolute; left: 405px; top: 818px; width: 270px; height: 128px; border: 1.5px dashed rgba(238, 250, 242, 0.45); border-radius: 18px; }
+      #winbox span { position: absolute; left: 14px; top: 6px; font-size: 11px; font-weight: 800; letter-spacing: 0.14em; color: #b9dcc7; }
+      .rl { fill: none; stroke: rgba(184, 228, 202, 0.55); stroke-width: 2.5; }
+      .light { position: absolute; left: -7px; top: -7px; width: 14px; height: 14px; border-radius: 50%; background: #c8ffd9; box-shadow: 0 0 14px 5px rgba(110, 231, 160, 0.75); opacity: 0; }
+      #apCk { position: absolute; left: 1598px; top: 886px; width: 34px; height: 34px; border-radius: 50%; background: #16a34a; display: grid; place-items: center; box-shadow: 0 0 0 5px rgba(22, 163, 74, 0.25); }
+      #apCk svg { width: 20px; height: 20px; }
+
+      /* ---------- lower thirds ---------- */
+      .lt { position: absolute; left: 110px; top: 952px; }
+      .lt i { display: block; width: 64px; height: 3px; background: #6ee7a0; transform-origin: 0 50%; }
+      .lt p { margin-top: 14px; font-size: 34px; font-weight: 700; color: #f3fff7; white-space: nowrap; }
+
+      /* ---------- the departure board ---------- */
+      #board { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+      .bd { padding: 34px 40px 40px; border-radius: 26px; background: #0b1712; box-shadow: 0 60px 140px rgba(0, 0, 0, 0.6), 0 0 0 2px rgba(110, 231, 160, 0.18) inset; }
+      .bd__h { display: flex; justify-content: space-between; font-size: 20px; font-weight: 800; letter-spacing: 0.24em; color: #8fcaa6; margin-bottom: 20px; }
+      .bd__row { display: flex; gap: 6px; margin-top: 10px; }
+      .cell { position: relative; width: 62px; height: 90px; display: grid; place-items: center; border-radius: 8px; background: linear-gradient(#17271f 50%, #13221b 50%); font-size: 58px; font-weight: 800; color: #eafff1; overflow: hidden; }
+      .cell::after { content: ""; position: absolute; left: 0; right: 0; top: 50%; height: 2px; margin-top: -1px; background: #07100c; }
+      .cell.g { color: #6ee7a0; }
+      #bdT { margin-top: 44px; font-size: 52px; font-weight: 800; letter-spacing: -0.02em; color: #f3fff7; }
+      #bdT span { color: #6ee7a0; }
+      #bdN { margin-top: 14px; font-size: 28px; font-weight: 600; color: #bfe3cc; }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="12" data-width="1920" data-height="1080">
+      <div id="stage">
+        <div class="bg"></div>
+
+        <div id="world">
+          <div class="ph" id="pL"><div class="ph__scr" style="background-image: url(assets/session.png)"></div></div>
+          <div class="ph" id="pR"><div class="ph__scr" style="background-image: url(assets/write.png)"></div></div>
+          <div class="ph" id="pC"><div class="ph__scr" style="background-image: url(assets/home.png)"></div></div>
+          <div id="av">
+            <i id="avGlow"></i>
+            <p id="avL">AVAILABLE</p>
+            <p id="avS">You're visible to homeowners nearby</p>
+            <div id="avT"><i id="avK"></i></div>
+          </div>
+
+          <svg width="1920" height="1080" viewBox="0 0 1920 1080" style="position: absolute; left: 0; top: 0">
+            <path class="rl" d="M330 880 H430" />
+            <path class="rl" d="M650 880 H705 V820 H760" />
+            <path class="rl" d="M705 880 V940 H760" />
+            <path class="rl" d="M980 820 H1080" />
+            <path class="rl" d="M980 940 H1080" />
+            <path class="rl" d="M1300 940 H1400" />
+          </svg>
+          <div id="winbox"><span>WINDOWS BOX, NO MAC</span></div>
+          <div class="rw rw--gate" style="left: 110px; top: 848px"><i class="rw__fx" id="r1"></i>Compliance pass</div>
+          <div class="rw" style="left: 430px; top: 848px"><i class="rw__fx" id="r2"></i>Native shell</div>
+          <div class="rw" style="left: 760px; top: 788px"><i class="rw__fx" id="r3"></i>Signed bundle</div>
+          <div class="rw rw--dest" style="left: 1080px; top: 788px"><i class="rw__fx" id="r4"></i>Google Play</div>
+          <div class="rw" style="left: 760px; top: 908px"><i class="rw__fx" id="r5"></i>Cloud macOS CI build</div>
+          <div class="rw" style="left: 1080px; top: 908px"><i class="rw__fx" id="r6"></i>Auto signing + upload</div>
+          <div class="rw rw--dest" style="left: 1400px; top: 900px; height: 80px; font-size: 22px"><i class="rw__fx" id="r7"></i>App Store</div>
+          <div id="apCk"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5" /></svg></div>
+          <i class="light" id="lA"></i>
+          <i class="light" id="lB"></i>
+        </div>
+
+        <div class="lt" id="lt1"><i></i><p>A contractor goes available</p></div>
+        <div class="lt" id="lt2"><i></i><p>A web marketplace, now native on iOS and Android</p></div>
+        <div class="lt" id="lt3"><i></i><p>Signed and shipped from Windows. No Mac.</p></div>
+
+        <div id="board">
+          <div class="bd">
+            <div class="bd__h"><span>RELEASE BOARD</span><span>STATUS</span></div>
+            <div class="bd__row" id="row1"></div>
+            <div class="bd__row" id="row2"></div>
+          </div>
+          <p id="bdT">Approved by Apple <span>on the first submission.</span></p>
+          <p id="bdN">An earlier app from the same publisher had been rejected three times.</p>
+        </div>
+
+        <div class="grainbox"><div id="grain"></div></div>
+        <div class="vig"></div>
+      </div>
+    </div>
+
+    <script>
+      // ---------- the split-flap rows (built at load, deterministic) ----------
+      const ROWS = [["row1", "GOOGLE PLAY     LIVE", 16], ["row2", "APP STORE   APPROVED", 12]];
+      const AZ = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+      const cells = [];
+      ROWS.forEach(([id, text, greenFrom], r) => {
+        const row = document.getElementById(id);
+        [...text].forEach((ch, c) => {
+          const el = document.createElement("span");
+          el.className = "cell" + (c >= greenFrom ? " g" : "");
+          el.textContent = "";
+          row.appendChild(el);
+          cells.push({ el, ch, k: r * 20 + c });
+        });
+      });
+
+      const tl = gsap.timeline({ paused: true, defaults: { ease: "power3.out" } });
+      const D = 12;
+      tl.fromTo("#grain", { x: 0, y: 0 }, { x: -120, y: -80, duration: D, ease: "steps(96)" }, 0);
+
+      // ---------- the camera: one continuous move, macro to wide to the runway ----------
+      const cam = (cx, cy, s) => ({ x: 960 - cx * s, y: 540 - cy * s, scale: s });
+      tl.set("#world", { ...cam(959.8, 223.8, 7.4), opacity: 0 }, 0);
+      tl.to("#world", { opacity: 1, duration: 0.5, ease: "none" }, 0);
+      tl.to("#world", { keyframes: [
+        { ...cam(959.8, 223.8, 6.9), duration: 1.6, ease: "none" },
+        { ...cam(960, 422, 1.62), duration: 1.8, ease: "power2.inOut" },
+        { ...cam(960, 600, 0.92), duration: 1.6, ease: "power2.inOut" },
+        { ...cam(400, 880, 1.9), duration: 0.9, ease: "power2.inOut" },
+        { ...cam(900, 880, 2.05), duration: 0.8, ease: "sine.inOut" },
+        { ...cam(1510, 940, 2.5), duration: 0.8, ease: "power2.inOut" },
+      ] }, 0);
+
+      // the toggle flips in the macro shot
+      tl.to("#avK", { x: 17.2, duration: 0.35, ease: "back.out(1.7)" }, 0.75);
+      tl.to("#avT", { backgroundColor: "#22c55e", duration: 0.25, ease: "power1.out" }, 0.75);
+      tl.to("#av", { backgroundColor: "#ecfaf1", borderColor: "#4ade80", duration: 0.3, ease: "power1.out" }, 0.75);
+      tl.to("#avL", { color: "#15803d", duration: 0.3, ease: "power1.out" }, 0.75);
+      tl.fromTo("#avS", { opacity: 0 }, { opacity: 1, duration: 0.4, ease: "power1.out" }, 0.9);
+      tl.fromTo("#avGlow", { opacity: 0 }, { opacity: 1, duration: 0.5, ease: "power2.out" }, 0.8);
+      tl.to("#avGlow", { opacity: 0, duration: 0.8, ease: "power1.in" }, 2.4);
+
+      // lower thirds
+      const lt = (sel, a, b) => {
+        tl.fromTo(sel + " i", { scaleX: 0 }, { scaleX: 1, duration: 0.5, ease: "power3.out" }, a);
+        tl.fromTo(sel + " p", { opacity: 0, x: -24 }, { opacity: 1, x: 0, duration: 0.5 }, a + 0.1);
+        tl.to(sel, { opacity: 0, duration: 0.3, ease: "power1.in" }, b);
+      };
+      lt("#lt1", 1.0, 2.75);
+      lt("#lt2", 4.0, 5.15);
+      lt("#lt3", 5.4, 7.25);
+
+      // the runway lights up as the camera travels it
+      const lightOn = (sel, t) => tl.fromTo(sel, { opacity: 0 }, { opacity: 1, duration: 0.15, ease: "none" }, t);
+      lightOn("#r1", 5.35); lightOn("#r2", 5.75);
+      lightOn("#r3", 6.25); lightOn("#r5", 6.3);
+      lightOn("#r4", 6.7); lightOn("#r6", 6.8);
+      lightOn("#r7", 7.35);
+      tl.set(["#lA", "#lB"], { x: 330, y: 880 }, 0);
+      tl.to("#lA", { keyframes: [ { opacity: 1, duration: 0.05, ease: "none" }, { x: 705, duration: 0.6, ease: "none" }, { y: 820, duration: 0.15, ease: "none" }, { x: 1080, duration: 0.6, ease: "none" }, { opacity: 0, duration: 0.1, ease: "none" } ] }, 5.4);
+      tl.to("#lB", { keyframes: [ { opacity: 1, duration: 0.05, ease: "none" }, { x: 705, duration: 0.6, ease: "none" }, { y: 940, duration: 0.15, ease: "none" }, { x: 1400, duration: 1.0, ease: "none" }, { opacity: 0, duration: 0.1, ease: "none" } ] }, 5.4);
+      tl.fromTo("#apCk", { scale: 0.2, opacity: 0, rotation: -60 }, { scale: 1, opacity: 1, rotation: 0, duration: 0.5, ease: "back.out(2.4)" }, 7.4);
+
+      // ---------- the board: the camera pushes into the App Store, the release board takes the frame ----------
+      tl.to("#world", { opacity: 0, filter: "blur(10px)", duration: 0.55, ease: "power2.in" }, 7.6);
+      tl.fromTo(".bd", { opacity: 0, scale: 0.35 }, { opacity: 1, scale: 1, duration: 0.8, ease: "expo.out" }, 7.75);
+      cells.forEach(({ el, ch, k }) => {
+        const o = { p: 0 };
+        tl.fromTo(o, { p: 0 }, { p: 1, duration: 0.7 + (k % 20) * 0.025, ease: "none", onUpdate: () => {
+          el.textContent = o.p >= 1 ? (ch === " " ? "" : ch) : AZ[(k * 7 + Math.floor(o.p * 14)) % 26];
+        } }, 8.05 + (k % 20) * 0.02 + Math.floor(k / 20) * 0.12);
+      });
+      tl.fromTo("#bdT", { opacity: 0, y: 24, filter: "blur(8px)" }, { opacity: 1, y: 0, filter: "blur(0px)", duration: 0.7, ease: "power2.out" }, 9.25);
+      tl.fromTo("#bdN", { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.6 }, 9.75);
+
+      // loop out
+      tl.to("#board", { opacity: 0, scale: 1.03, duration: 0.45, ease: "power1.in" }, 11.55);
+
+      window.__timelines["main"] = tl;
+    </script>
+  </body>
+</html>

@@ -1,0 +1,1 @@
+A production email system for a document-services company: eight scoped AI reasoning paths, a living rules document staff can edit, and a deterministic gate before any reply reaches the mailbox. Live on a real client inbox.

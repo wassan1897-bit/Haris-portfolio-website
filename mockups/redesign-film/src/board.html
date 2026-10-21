@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Film redesign mockups</title>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+:root { --bar: 96px; --ink: #f2efe8; --mute: #9a958c; --dim: #5e5b55; --green: #8fd46f; --sub: #f5e9b8; --black: #050506; }
+html, body { width: 1440px; height: 900px; overflow: hidden; background: var(--black); color: var(--ink); -webkit-font-smoothing: antialiased; font-family: "Inter Tight", sans-serif; }
+.mono { font-family: "JetBrains Mono", monospace; font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; }
+.serif { font-family: "Instrument Serif", serif; font-weight: 400; }
+em { font-style: italic; color: #a7a29a; }
+.g { color: var(--green); }
+
+/* the film frame every page sits in */
+.bar { position: absolute; left: 0; right: 0; height: var(--bar); background: var(--black); z-index: 20; display: flex; align-items: center; justify-content: space-between; padding: 0 44px; }
+.bar--top { top: 0; }
+.bar--bot { bottom: 0; }
+.bar .l, .bar .r { color: #8a8780; }
+.bar .c { position: absolute; left: 50%; transform: translateX(-50%); }
+.nav { display: flex; gap: 34px; color: #c9c4ba; }
+.nav b { color: var(--ink); font-weight: 500; }
+.rec::before { content: ""; display: inline-block; width: 8px; height: 8px; margin-right: 10px; border-radius: 50%; background: #e5484d; vertical-align: 1px; }
+.sub { text-align: center; font: 500 21px "Inter Tight"; color: var(--sub); text-shadow: 0 2px 6px #000; }
+.sub small { display: block; margin-top: 7px; font-family: "JetBrains Mono"; font-size: 10px; letter-spacing: 0.22em; color: #6e6b64; text-shadow: none; }
+.scenes { display: flex; gap: 8px; align-items: center; }
+.scenes i { display: block; width: 22px; height: 2px; background: #2c2b29; }
+.scenes i.on { background: var(--ink); width: 40px; }
+.frame { position: absolute; left: 0; right: 0; top: var(--bar); bottom: var(--bar); overflow: hidden; background: #0b0b0c; }
+.grain::after { content: ""; position: absolute; inset: 0; pointer-events: none; z-index: 15; opacity: 0.08; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)'/%3E%3C/svg%3E"); }
+.f { display: none; }
+body[data-f="1"] #f1, body[data-f="2"] #f2, body[data-f="3"] #f3, body[data-f="4"] #f4, body[data-f="5"] #f5, body[data-f="6"] #f6, body[data-f="7"] #f7 { display: block; }
+.fade-l::before { content: ""; position: absolute; inset: 0; z-index: 1; background: linear-gradient(90deg, #0b0b0c 0%, #0b0b0c 36%, rgba(11,11,12,0.55) 52%, rgba(11,11,12,0) 70%); }
+.warm::after { content: ""; position: absolute; inset: 0; z-index: 1; background: radial-gradient(55% 75% at 75% 40%, rgba(255,170,90,0.10), transparent 70%); }
+.copy { position: absolute; z-index: 3; left: 110px; }
+.copy h2 { font-size: 100px; line-height: 0.95; letter-spacing: -0.02em; margin-top: 22px; }
+.copy p.body { margin-top: 28px; max-width: 470px; font: 400 18px/1.6 "Inter Tight"; color: #c4c0b8; }
+.cta { display: inline-flex; align-items: center; gap: 14px; margin-top: 34px; color: var(--ink); }
+.cta i { display: grid; place-items: center; width: 40px; height: 40px; border: 1px solid rgba(242,239,232,0.45); border-radius: 50%; font-style: normal; }
+.stats { display: flex; gap: 44px; margin-top: 34px; }
+.stats div b { display: block; font: 400 40px "Instrument Serif"; }
+.stats div span { display: block; margin-top: 4px; color: var(--mute); font-size: 10px; }
+</style>
+</head>
+<body data-f="1">
+<div class="bar bar--top">
+	<span class="mono l" id="slate">Scene 01 · Opening</span>
+	<span class="mono c nav"><b>Haris</b><span>Work</span><span>About</span><span>Reel</span><span>Contact</span></span>
+	<span class="mono r rec">Karachi · 24 fps</span>
+</div>
+
+<!-- 1 HERO -->
+<section class="f" id="f1"><div class="frame grain fade-l warm">
+	<img src="img/haris-hero-wall.webp" style="position:absolute;right:-20px;top:-260px;width:820px;filter:contrast(1.06) brightness(0.86) saturate(0.8)" />
+	<div class="copy" style="top:120px">
+		<p class="mono g">[ Muhammad Haris · AI automation engineer ]</p>
+		<h2 class="serif" style="font-size:118px">Automate<br /><em>the busywork.</em></h2>
+		<p class="body">Production AI for operations-heavy businesses in the US, the UK and the Middle East.</p>
+		<div class="stats mono"><div><b>6,700+</b><span>conversations automated</span></div><div><b>21,000+</b><span>agent minutes saved</span></div><div><b>7</b><span>live deployments</span></div></div>
+		<p class="mono cta">See what I've shipped <i>↓</i></p>
+	</div>
+</div></section>
+
+<!-- 2 ABOUT -->
+<section class="f" id="f2"><div class="frame grain fade-l warm">
+	<img src="img/haris-video-poster.jpg" style="position:absolute;right:-40px;top:-330px;width:980px;filter:contrast(1.08) saturate(0.85) brightness(0.92)" />
+	<div class="copy" style="top:150px">
+		<p class="mono g">[ About Haris ]</p>
+		<h2 class="serif">Diagnose first.<br /><em>Then build.</em></h2>
+		<p class="body">I'm Haris, an AI automation engineer in Karachi. I map where the hours really go, build the system that takes the busywork away, and stay until it runs on its own.</p>
+		<p class="mono" style="margin-top:28px;color:var(--mute);line-height:2">33 Upwork contracts · 100% Job Success</p>
+	</div>
+</div></section>
+
+<!-- 3 SHOWREEL -->
+<section class="f" id="f3"><div class="frame grain">
+	<img src="img/reel.png" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:contrast(1.1)" />
+	<div style="position:absolute;inset:0;z-index:2;background:radial-gradient(70% 80% at 50% 50%, transparent 40%, rgba(0,0,0,0.55))"></div>
+		</div></section>
+
+<!-- 4 PROJECTS INTRO -->
+<section class="f" id="f4"><div class="frame grain" style="background:radial-gradient(60% 60% at 50% 50%, #151517, #0b0b0c)">
+	<div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center">
+		<p class="mono g">[ Scene 04 · The projects ]</p>
+		<h2 class="serif" style="margin-top:22px;font-size:108px;line-height:0.95;letter-spacing:-0.02em">Built to ship,<br /><em>not to demo.</em></h2>
+		<p class="mono" style="margin-top:34px;color:var(--mute)">Five client projects · Scroll to play</p>
+	</div>
+	<div class="mono" style="position:absolute;right:44px;top:50%;transform:translateY(-50%);display:grid;gap:10px;color:#4c4a46;text-align:right"><span style="color:var(--ink)">— 01</span><span>02</span><span>03</span><span>04</span><span>05</span></div>
+</div></section>
+
+<!-- 5 PROJECT -->
+<section class="f" id="f5"><div class="frame grain" style="background:radial-gradient(80% 90% at 70% 50%, #13241d, #0b0b0c 70%)">
+	<div class="copy" style="top:110px;width:470px">
+		<p class="mono" style="color:var(--mute)"><span class="g">04.1</span> · Client project · Mobile app</p>
+		<h2 class="serif" style="font-size:66px;line-height:1">Two-Sided Marketplace App,<br /><em>Shipped to Both Stores</em></h2>
+		<p class="body" style="font-size:16px">An existing web marketplace for homeowners and contractors, taken native for iOS and Android. Built solo on a Windows machine, with no Mac anywhere in the pipeline.</p>
+		<p class="mono" style="margin-top:22px;color:#8a8780;line-height:1.9">React / TypeScript · Capacitor · Postgres<br />Cloud macOS CI · Live on both stores</p>
+		<p class="mono cta">View the project <i>→</i></p>
+	</div>
+	<div style="position:absolute;right:100px;top:120px;width:700px;height:394px;overflow:hidden;box-shadow:0 40px 90px rgba(0,0,0,0.6)"><img src="img/p1.webp" style="width:100%;height:100%;object-fit:cover" /></div>
+	<p class="mono" style="position:absolute;right:100px;top:530px;color:#6e6b64">Take 01 · 00:12</p>
+	<div class="mono" style="position:absolute;right:44px;top:50%;transform:translateY(-50%);display:grid;gap:10px;color:#4c4a46;text-align:right"><span style="color:var(--ink)">— 01</span><span>02</span><span>03</span><span>04</span><span>05</span></div>
+</div></section>
+
+<!-- 6 SELECTED WORK -->
+<section class="f" id="f6"><div class="frame grain">
+	<p class="mono g" style="position:absolute;left:110px;top:56px">[ Scene 05 · Selected work ]</p>
+	<div style="position:absolute;left:110px;right:560px;top:110px">
+		<div style="display:grid;grid-template-columns:70px 1fr auto;align-items:baseline;padding:22px 0;border-top:1px solid #222"><span class="mono" style="color:var(--dim)">01</span><span class="serif" style="font-size:72px;line-height:1;color:var(--ink)">Fun Arena <em style="font-size:0.5em">iOS &amp; Android</em></span><span class="mono" style="color:var(--mute)">2026</span></div>
+		<div style="display:grid;grid-template-columns:70px 1fr auto;align-items:baseline;padding:22px 0;border-top:1px solid #222"><span class="mono" style="color:var(--dim)">02</span><span class="serif" style="font-size:72px;line-height:1;color:#46443f">WellPaws</span><span class="mono" style="color:var(--dim)">2025</span></div>
+		<div style="display:grid;grid-template-columns:70px 1fr auto;align-items:baseline;padding:22px 0;border-top:1px solid #222"><span class="mono" style="color:var(--dim)">03</span><span class="serif" style="font-size:72px;line-height:1;color:#46443f">ShopM2M</span><span class="mono" style="color:var(--dim)">2025</span></div>
+		<div style="display:grid;grid-template-columns:70px 1fr auto;align-items:baseline;padding:22px 0;border-top:1px solid #222;border-bottom:1px solid #222"><span class="mono" style="color:var(--dim)">04</span><span class="serif" style="font-size:72px;line-height:1;color:#46443f">Digital Media Team</span><span class="mono" style="color:var(--dim)">2024</span></div>
+	</div>
+	<div style="position:absolute;right:110px;top:110px;width:380px;height:475px;overflow:hidden"><img src="img/p5.webp" style="width:100%;height:100%;object-fit:cover;filter:contrast(1.05)" /></div>
+	<p class="mono" style="position:absolute;right:110px;top:600px;color:var(--mute)">(01 / 04) · iOS &amp; Android</p>
+</div></section>
+
+<!-- 7 REVIEWS -->
+<section class="f" id="f7"><div class="frame grain fade-l">
+	<img src="img/haris-hero-type.jpg" style="position:absolute;right:-300px;top:-60px;height:860px;filter:grayscale(1) contrast(1.1) brightness(0.55)" />
+	<div class="copy" style="top:120px;width:720px">
+		<p class="mono g">[ Scene 06 · What clients say ]</p>
+		<p class="serif" style="margin-top:28px;font-size:64px;line-height:1.05">“Highly recommended for AI automation projects <em>using n8n.”</em></p>
+		<p class="mono" style="margin-top:30px;color:var(--mute)">Upwork · Amazon FBA automation · ★★★★★ 5.0</p>
+		<p class="mono cta">Start a project <i>→</i></p>
+	</div>
+</div></section>
+
+<div class="bar bar--bot">
+	<span class="mono l scenes" id="dots"><i></i><i></i><i></i><i></i><i></i><i></i></span>
+	<p class="sub c" id="sub">"I start with the process, not the model."<small>00:02:14</small></p>
+	<span class="mono r" id="next">Scroll · Scene 02</span>
+</div>
+
+<script>
+const D = {
+	1: ['Scene 01 · Opening', '"Production AI, built to run on its own."', '00:00:04', 'Scroll · Scene 02', 0],
+	2: ['Scene 02 · About Haris', '"I start with the process, not the model."', '00:02:14', 'Scroll · Scene 03', 1],
+	3: ['Scene 03 · Showreel', 'Five projects. One engineer.', '00:04:12', 'Scroll · Scene 04', 2],
+	4: ['Scene 04 · The projects', '"Every one of these is live with a real client."', '00:05:40', 'Scroll · Take 01', 3],
+	5: ['Scene 04 · Take 01 of 05', '"Approved by Apple on the first submission."', '00:06:02', 'Scroll · Take 02', 3],
+	6: ['Scene 05 · Selected work', 'Hover a title to roll the footage.', '00:09:30', 'Scroll · Scene 06', 4],
+	7: ['Scene 06 · Reviews', '33 contracts. 100% Job Success.', '00:11:48', 'Fin.', 5],
+};
+const f = new URLSearchParams(location.search).get('f') || '1', d = D[f];
+document.body.dataset.f = f;
+document.getElementById('slate').textContent = d[0];
+document.getElementById('sub').innerHTML = d[1] + '<small>' + d[2] + '</small>';
+document.getElementById('next').textContent = d[3];
+document.querySelectorAll('#dots i').forEach((i, k) => i.classList.toggle('on', k === d[4]));
+</script>
+</body>
+</html>

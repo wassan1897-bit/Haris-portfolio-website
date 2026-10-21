@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1920, height=1080" />
+    <title>Autonomous support agent, flyover clip</title>
+    <script src="assets/gsap.min.js"></script>
+    <style>
+      @font-face { font-family: "Inter"; src: url("assets/fonts/inter-latin-400-normal.woff2") format("woff2"); font-weight: 400; font-display: block; }
+      @font-face { font-family: "Inter"; src: url("assets/fonts/inter-latin-600-normal.woff2") format("woff2"); font-weight: 600; font-display: block; }
+      @font-face { font-family: "Inter"; src: url("assets/fonts/inter-latin-700-normal.woff2") format("woff2"); font-weight: 700; font-display: block; }
+      @font-face { font-family: "Inter"; src: url("assets/fonts/inter-latin-800-normal.woff2") format("woff2"); font-weight: 800; font-display: block; }
+
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { width: 1920px; height: 1080px; overflow: hidden; background: #251014; }
+      body { font-family: "Inter", sans-serif; color: #fbeeea; -webkit-font-smoothing: antialiased; }
+      #root { position: relative; width: 100%; height: 100%; overflow: hidden; }
+      #stage { position: absolute; inset: 0; overflow: hidden; background: radial-gradient(1500px 1000px at 50% 45%, #3a1a20 0%, #2c1418 50%, #251014 100%); }
+      svg { display: block; }
+
+      /* ---------- the canvas, seen from a drone ---------- */
+      #cam { position: absolute; inset: 0; perspective: 1200px; perspective-origin: 50% 38%; }
+      #tilt { position: absolute; left: 960px; top: 600px; width: 0; height: 0; transform-style: preserve-3d; }
+      #plane { position: absolute; left: 0; top: 0; width: 4200px; height: 3600px; border-radius: 40px; background-color: #2a1418; background-image: radial-gradient(rgba(255, 220, 210, 0.13) 2px, transparent 2.5px); background-size: 34px 34px; }
+      .edge { fill: none; stroke: #8a7376; stroke-width: 3; }
+      .nd { position: absolute; width: 120px; height: 120px; margin: -60px 0 0 -60px; border-radius: 20px; background: #2f2528; border: 2px solid #5a4b4e; display: grid; place-items: center; box-shadow: 0 10px 24px rgba(10, 2, 4, 0.5); }
+      .nd--hook { border-radius: 60px 20px 20px 60px; }
+      .nd svg { width: 58px; height: 58px; }
+      .nd b { position: absolute; left: 50%; top: 132px; transform: translateX(-50%); white-space: nowrap; font-size: 20px; font-weight: 700; color: #f5e6e2; text-align: center; }
+      .nd small { position: absolute; left: 50%; top: 160px; transform: translateX(-50%); white-space: nowrap; font-size: 15px; font-weight: 600; color: #bba8a4; }
+      .nd i.fx { position: absolute; inset: -6px; border-radius: 24px; border: 4px solid #ff7a59; box-shadow: 0 0 40px rgba(255, 122, 89, 0.7), inset 0 0 26px rgba(255, 122, 89, 0.25); opacity: 0; }
+      .nd--hook i.fx { border-radius: 64px 24px 24px 64px; }
+      .tf { position: absolute; font-size: 16px; font-weight: 700; color: #bba8a4; }
+      .sticky { position: absolute; padding: 18px 22px; border-radius: 10px; background: #5a4a1a; color: #fff3c4; font-size: 22px; font-weight: 800; letter-spacing: 0.04em; box-shadow: 0 10px 24px rgba(10, 2, 4, 0.5); }
+      .lane { position: absolute; font-size: 30px; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; color: #ffb39f; }
+      .pk { position: absolute; left: -13px; top: -13px; width: 26px; height: 26px; border-radius: 50%; background: #ffe2d8; box-shadow: 0 0 22px 10px rgba(255, 122, 89, 0.8); opacity: 0; }
+
+      /* ---------- the drone HUD ---------- */
+      .hud { position: absolute; width: 60px; height: 60px; border-color: rgba(255, 214, 202, 0.55); border-style: solid; border-width: 0; }
+      #h1 { left: 60px; top: 60px; border-left-width: 3px; border-top-width: 3px; }
+      #h2 { right: 60px; top: 60px; border-right-width: 3px; border-top-width: 3px; }
+      #h3 { left: 60px; bottom: 60px; border-left-width: 3px; border-bottom-width: 3px; }
+      #h4 { right: 60px; bottom: 60px; border-right-width: 3px; border-bottom-width: 3px; }
+      #read { position: absolute; right: 90px; top: 84px; font-size: 20px; font-weight: 700; letter-spacing: 0.16em; color: #ffd6ca; font-variant-numeric: tabular-nums; text-align: right; }
+      #rec { position: absolute; left: 90px; top: 84px; display: flex; align-items: center; gap: 12px; font-size: 20px; font-weight: 800; letter-spacing: 0.2em; color: #ffd6ca; }
+      #rec i { display: block; width: 13px; height: 13px; border-radius: 50%; background: #ff5a3c; }
+      .cap { position: absolute; left: 110px; top: 890px; }
+      .cap .k { font-size: 22px; font-weight: 800; letter-spacing: 0.24em; color: #ff7a59; }
+      .cap .t { margin-top: 10px; font-size: 44px; font-weight: 800; letter-spacing: -0.015em; color: #fff4f0; text-shadow: 0 6px 30px rgba(20, 4, 8, 0.8); }
+
+      /* ---------- numbers ---------- */
+      #nums { position: absolute; left: 110px; top: 240px; width: 1700px; }
+      #nums .k { font-size: 24px; font-weight: 800; letter-spacing: 0.24em; color: #ff7a59; }
+      .row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 60px; margin-top: 40px; }
+      .st { border-top: 3px solid rgba(255, 122, 89, 0.75); padding-top: 26px; }
+      .st p { font-size: 150px; font-weight: 800; letter-spacing: -0.045em; line-height: 1; color: #fff4f0; font-variant-numeric: tabular-nums; }
+      .st span { display: block; margin-top: 18px; font-size: 30px; line-height: 1.3; color: #ecd2cb; }
+      #zero { margin-top: 70px; display: inline-flex; align-items: center; gap: 14px; padding: 16px 28px 16px 16px; border-radius: 99px; background: #ff7a59; color: #2a0e0a; font-size: 28px; font-weight: 800; }
+      #zero i { display: grid; place-items: center; width: 46px; height: 46px; border-radius: 50%; background: #2a0e0a; color: #ff7a59; font-style: normal; font-size: 22px; }
+
+      .grainbox { position: absolute; inset: -60px; overflow: hidden; pointer-events: none; }
+      #grain { position: absolute; left: 0; top: 0; width: 2100px; height: 1260px; opacity: 0.09; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' seed='17' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23n)'/%3E%3C/svg%3E"); }
+      .vig { position: absolute; inset: 0; box-shadow: inset 0 0 380px rgba(16, 4, 7, 0.75); pointer-events: none; }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="12" data-width="1920" data-height="1080">
+      <div id="stage">
+        <div id="cam"><div id="tilt"><div id="plane"><svg id="edges" width="4200" height="3600" viewBox="0 0 4200 3600" style="position: absolute; left: 0; top: 0"></svg></div></div></div>
+
+        <i class="hud" id="h1"></i><i class="hud" id="h2"></i><i class="hud" id="h3"></i><i class="hud" id="h4"></i>
+        <p id="rec"><i></i>n8n · LIVE</p>
+        <p id="read">ALT 120 · TILT 60°</p>
+
+        <div class="cap" id="cap1"><p class="k">WORKFLOW 01</p><p class="t">Live network and outage check</p></div>
+        <div class="cap" id="cap2" style="top: 130px"><p class="k">WORKFLOW 02</p><p class="t">Five department lanes, every ticket handed off</p></div>
+
+        <div id="nums">
+          <p class="k">AI SUPPORT DASHBOARD</p>
+          <div class="row">
+            <div class="st"><p id="n1">790</p><span>tickets resolved end to end by the AI agent</span></div>
+            <div class="st"><p id="n2">7,101</p><span>minutes of support team time saved</span></div>
+            <div class="st"><p id="n3">2,095</p><span>customer conversations handled</span></div>
+          </div>
+          <p id="zero"><i>0</i>Out-of-hours queries with zero human involvement</p>
+        </div>
+
+        <div class="grainbox"><div id="grain"></div></div>
+        <div class="vig"></div>
+      </div>
+    </div>
+
+    <script>
+      // ---------- icons, drawn like n8n node icons ----------
+      const IC = {
+        hook: '<svg viewBox="0 0 24 24" fill="none" stroke="#f5e6e2" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="6" r="2.6"/><circle cx="6" cy="17" r="2.6"/><circle cx="18" cy="17" r="2.6"/><path d="M10.6 8.2 7.4 14.6M13.4 8.2l3.2 6.4M8.6 17h6.8"/></svg>',
+        js: '<svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="2" fill="#f7df1e"/><text x="12" y="17.5" text-anchor="middle" font-family="Inter" font-weight="800" font-size="10" fill="#1a1a1a">JS</text></svg>',
+        http: '<svg viewBox="0 0 24 24" fill="none" stroke="#9f8cff" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3.2 3 14.8 0 18M12 3c-3 3.2-3 14.8 0 18"/></svg>',
+        if: '<svg viewBox="0 0 24 24" fill="none" stroke="#3fcf8e" stroke-width="2" stroke-linejoin="round"><path d="M12 22V3M5 6h11l3 3-3 3H5z"/></svg>',
+        edit: '<svg viewBox="0 0 24 24" fill="none" stroke="#9f8cff" stroke-width="1.9" stroke-linejoin="round"><path d="M4 20l1-5L16 4l4 4L9 19z"/></svg>',
+        ai: '<svg viewBox="0 0 24 24" fill="none" stroke="#f5e6e2" stroke-width="1.6"><circle cx="12" cy="12" r="3"/><ellipse cx="12" cy="12" rx="9" ry="4"/><ellipse cx="12" cy="12" rx="9" ry="4" transform="rotate(60 12 12)"/><ellipse cx="12" cy="12" rx="9" ry="4" transform="rotate(120 12 12)"/></svg>',
+        air: '<svg viewBox="0 0 24 24"><path d="M12 3 21 7l-9 4-9-4z" fill="#fcb400"/><path d="M13 12.5 21 9v8l-8 3.5z" fill="#18bfff"/><path d="M11 12.5 3 9v8.2L11 21z" fill="#f82b60"/></svg>',
+        teams: '<svg viewBox="0 0 24 24"><rect x="2" y="4" width="16" height="16" rx="3" fill="#6b63d6"/><text x="10" y="16.5" text-anchor="middle" font-family="Inter" font-weight="800" font-size="11" fill="#fff">T</text><circle cx="19.5" cy="8" r="2.5" fill="#8f88e6"/></svg>',
+        gmail: '<svg viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="2" fill="#f4f1f0"/><path d="M3 6.5 12 13l9-6.5" fill="none" stroke="#ea4335" stroke-width="2.4"/></svg>',
+        agg: '<svg viewBox="0 0 24 24" fill="none" stroke="#ff6d5a" stroke-width="2" stroke-linecap="round"><path d="M4 6l6 6-6 6M20 6l-6 6 6 6"/></svg>',
+        stat: '<svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="2" fill="#f7c21e"/><path d="M7 17V11M12 17V7M17 17v-4" stroke="#1a1a1a" stroke-width="2.4" stroke-linecap="round"/></svg>',
+      };
+      const plane = document.getElementById("plane"), edges = document.getElementById("edges");
+      const N = {};
+      const node = (id, type, x, y, label, sub) => {
+        const el = document.createElement("div");
+        el.className = "nd" + (type === "hook" ? " nd--hook" : "");
+        el.style.left = x + "px";
+        el.style.top = y + "px";
+        el.innerHTML = '<i class="fx"></i>' + IC[type] + "<b>" + label + "</b>" + (sub ? "<small>" + sub + "</small>" : "");
+        // node labels sit on a tilted 3D plane: far rows overlap in projection by design
+        el.querySelectorAll("b, small, text").forEach((t) => t.setAttribute("data-layout-allow-overlap", ""));
+        plane.appendChild(el);
+        N[id] = { x, y, el, fx: el.querySelector(".fx") };
+      };
+      const link = (a, b) => {
+        const A = N[a], B = N[b];
+        const x1 = A.x + 62, x2 = B.x - 62, dx = Math.max(60, (x2 - x1) * 0.5);
+        const p = document.createElementNS("http://www.w3.org/2000/svg", "path");
+        p.setAttribute("class", "edge");
+        p.setAttribute("d", `M${x1} ${A.y} C${x1 + dx} ${A.y} ${x2 - dx} ${B.y} ${x2} ${B.y}`);
+        edges.appendChild(p);
+      };
+
+      // ---------- workflow 01: the outage check, node for node ----------
+      [
+        ["w", "hook", 332, 705, "Webhook", "POST"], ["c3", "js", 614, 705, "Code in JavaScript3"], ["h", "http", 895, 705, "HTTP Request", "GET outage API"], ["i2", "if", 1179, 705, "If2"],
+        ["c4", "js", 1460, 401, "Code in JavaScript4"], ["e2", "edit", 1744, 401, "Edit Fields2", "manual"], ["c5", "js", 2025, 401, "Code in JavaScript5"], ["i3", "if", 2306, 401, "If3"],
+        ["c6", "js", 2590, 401, "Code in JavaScript6"], ["h2", "http", 2871, 401, "HTTP Request2"], ["e3", "edit", 3153, 401, "Edit Fields3", "manual"], ["r", "hook", 3436, 401, "Respond to Webhook"],
+        ["r2", "hook", 2590, 647, "Respond to Webhook2"], ["i1", "if", 1460, 947, "If1"], ["e1", "edit", 1744, 825, "Edit Fields1", "manual"], ["c1", "js", 2025, 825, "Code in JavaScript1"],
+        ["i", "if", 2306, 825, "If"], ["c", "js", 2590, 888, "Code in JavaScript"], ["h1", "http", 2871, 888, "HTTP Request1"], ["e", "edit", 3153, 888, "Edit Fields", "manual"],
+        ["r1", "hook", 3436, 888, "Respond to Webhook1"], ["c2", "js", 1744, 1069, "Code in JavaScript2"], ["r3", "hook", 2025, 1069, "Respond to Webhook3"],
+      ].forEach((n) => node(...n));
+      [["w", "c3"], ["c3", "h"], ["h", "i2"], ["i2", "c4"], ["i2", "i1"], ["c4", "e2"], ["e2", "c5"], ["c5", "i3"], ["i3", "c6"], ["i3", "r2"], ["c6", "h2"], ["h2", "e3"], ["e3", "r"],
+        ["i1", "e1"], ["i1", "c2"], ["e1", "c1"], ["c1", "i"], ["i", "r2"], ["i", "c"], ["c", "h1"], ["h1", "e"], ["e", "r1"], ["c2", "r3"]].forEach((l) => link(...l));
+      const tfs = [["true", 1250, 650], ["false", 1250, 745], ["true", 2378, 350], ["false", 2378, 445], ["true", 1530, 905], ["false", 1530, 990]];
+      tfs.forEach(([t, x, y]) => { const s = document.createElement("span"); s.className = "tf"; s.textContent = t; s.style.left = x + "px"; s.style.top = y + "px"; s.setAttribute("data-layout-allow-overlap", ""); plane.appendChild(s); });
+
+      // ---------- workflow 02: the routing lanes, one per department ----------
+      const LANES = [["Customer Service", "CS", "CUSTOMER SERVICE"], ["Technical Support", "TS", "TECH SUPPORT"], ["Billing", "Billing", "BILLING"], ["Installations", "Inst", "INSTALLATIONS"]];
+      const laneNodes = [];
+      const sticky = document.createElement("p"); sticky.className = "sticky"; sticky.style.left = "1500px"; sticky.style.top = "1460px"; sticky.textContent = "ALWAYS TICKETS"; sticky.setAttribute("data-layout-allow-overlap", ""); plane.appendChild(sticky);
+      LANES.forEach(([name, ab, up], li) => {
+        const y = 1760 + li * 400, k = "L" + li + "_";
+        const lab = document.createElement("p"); lab.className = "lane"; lab.textContent = name; lab.style.left = "240px"; lab.style.top = y - 150 + "px"; lab.setAttribute("data-layout-allow-overlap", ""); plane.appendChild(lab);
+        const main = [["hook", name + " Webhook"], ["ai", "Message a model"], ["stat", "InsertStatus " + ab], ["edit", "Catch Details " + ab], ["air", "Handover Record"], ["http", "GET Existing Tickets"], ["edit", "Edit Fields"], ["agg", "Aggregate"], ["ai", "Message a model"], ["if", "If"]];
+        main.forEach(([t, l], j) => node(k + j, t, 300 + j * 235, y, l));
+        const top = [["teams", "Message " + up + " chat"], ["gmail", "Send a message"], ["edit", "Edit Fields"], ["hook", "Respond to Webhook"]];
+        const bot = [["http", "Create Ticket"], ["teams", "Message " + up + " chat"], ["gmail", "Send a message"], ["air", "Create a record"], ["edit", "Edit Fields"], ["hook", "Respond to Webhook"]];
+        top.forEach(([t, l], j) => node(k + "t" + j, t, 2700 + j * 260, y - 115, l));
+        bot.forEach(([t, l], j) => node(k + "b" + j, t, 2700 + j * 245, y + 115, l));
+        for (let j = 0; j < 9; j++) link(k + j, k + (j + 1));
+        link(k + 9, k + "t0"); link(k + 9, k + "b0");
+        for (let j = 0; j < 3; j++) link(k + "t" + j, k + "t" + (j + 1));
+        for (let j = 0; j < 5; j++) link(k + "b" + j, k + "b" + (j + 1));
+        laneNodes.push([...main.map((_, j) => k + j), ...bot.map((_, j) => k + "b" + j)]);
+      });
+      // the fifth lane: escalations go straight to a person
+      (() => {
+        const y = 1760 + 4 * 400, k = "L4_";
+        const lab = document.createElement("p"); lab.className = "lane"; lab.textContent = "Escalation"; lab.style.left = "240px"; lab.style.top = y - 150 + "px"; lab.setAttribute("data-layout-allow-overlap", ""); plane.appendChild(lab);
+        const esc = [["hook", "Escalation Webhook"], ["stat", "InsertStatus ESC"], ["edit", "Catch Details ESC"], ["teams", "Message ESCALATION chat"], ["gmail", "Send a message"], ["air", "Create a record"]];
+        esc.forEach(([t, l], j) => node(k + j, t, 300 + j * 300, y, l));
+        for (let j = 0; j < 5; j++) link(k + j, k + (j + 1));
+        laneNodes.push(esc.map((_, j) => k + j));
+      })();
+
+      // packets
+      const mkPk = () => { const p = document.createElement("i"); p.className = "pk"; plane.appendChild(p); return p; };
+      const route01 = ["w", "c3", "h", "i2", "c4", "e2", "c5", "i3", "c6", "h2", "e3", "r"];
+      const pkA = mkPk();
+      const lanePk = laneNodes.map(() => mkPk());
+
+      const tl = gsap.timeline({ paused: true, defaults: { ease: "power3.out" } });
+      const D = 12;
+      tl.fromTo("#grain", { x: 0, y: 0 }, { x: -120, y: -80, duration: D, ease: "steps(96)" }, 0);
+
+      // ---------- the drone camera: low over workflow 01, then a crane up over the lanes ----------
+      const tiltEl = document.getElementById("tilt"), read = document.getElementById("read");
+      const camO = { tilt: 62, z: 420, px: 360, py: 470 };
+      const applyCam = () => {
+        tiltEl.style.transform = `rotateX(${camO.tilt}deg) translateZ(${camO.z}px)`;
+        plane.style.transform = `translate(${-camO.px}px, ${-camO.py}px)`;
+        read.textContent = `ALT ${Math.round(600 - camO.z * 0.6)} · TILT ${Math.round(camO.tilt)}°`;
+      };
+      applyCam();
+      // the camera trails the packet along workflow 01 (2.3 to 5.9), then cranes up
+      const segT = 0.3, startA = 2.4;
+      const camKeys = [{ tilt: 60, z: 440, px: 380, py: 520, duration: 2.3, ease: "sine.inOut" }];
+      route01.slice(1).forEach((id) => camKeys.push({ tilt: 58, z: 360, px: N[id].x - 120, py: N[id].y + 40, duration: segT, ease: "none" }));
+      camKeys.push({ tilt: 34, z: -1250, px: 2050, py: 2350, duration: 2.6, ease: "power2.inOut" });
+      camKeys.push({ tilt: 30, z: -1350, px: 2150, py: 2400, duration: 1.0, ease: "none" });
+      camKeys.push({ tilt: 12, z: -2600, px: 2100, py: 2000, duration: 2.0, ease: "power2.in" });
+      tl.to(camO, { keyframes: camKeys, onUpdate: applyCam }, 0);
+
+      // workflow 01: the webhook fires, the packet runs the true branch, every node lights as it passes
+      tl.fromTo("#plane", { opacity: 0 }, { opacity: 1, duration: 0.6, ease: "none" }, 0);
+      tl.fromTo(N.w.fx, { opacity: 0 }, { keyframes: [ { opacity: 1, duration: 0.2, ease: "power2.out" }, { opacity: 0.4, duration: 0.5, ease: "none" }, { opacity: 1, duration: 0.3, ease: "none" } ] }, 1.0);
+      tl.set(pkA, { x: N.w.x, y: N.w.y }, 0);
+      tl.to(pkA, { keyframes: [{ opacity: 1, duration: 0.1, ease: "none" }, ...route01.slice(1).map((id) => ({ x: N[id].x, y: N[id].y, duration: segT, ease: "none" })), { opacity: 0, duration: 0.15, ease: "none" }] }, startA);
+      route01.slice(1).forEach((id, i) => tl.fromTo(N[id].fx, { opacity: 0 }, { opacity: 1, duration: 0.12, ease: "none" }, startA + 0.1 + segT * (i + 1) - 0.05));
+
+      // workflow 02: packets run every lane at once and light each node on the way to the ticket
+      lanePk.forEach((p, li) => {
+        const ids = laneNodes[li], t0 = 6.6 + li * 0.18, st = 0.16;
+        tl.set(p, { x: N[ids[0]].x, y: N[ids[0]].y }, 0);
+        tl.to(p, { keyframes: [{ opacity: 1, duration: 0.08, ease: "none" }, ...ids.slice(1).map((id) => ({ x: N[id].x, y: N[id].y, duration: st, ease: "none" })), { opacity: 0, duration: 0.12, ease: "none" }] }, t0);
+        ids.forEach((id, j) => tl.fromTo(N[id].fx, { opacity: 0 }, { opacity: 1, duration: 0.1, ease: "none" }, t0 + j * st));
+      });
+
+      // captions and HUD
+      const cap = (sel, a, b) => { tl.fromTo(sel, { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.5 }, a); tl.to(sel, { opacity: 0, duration: 0.3, ease: "power1.in" }, b); };
+      cap("#cap1", 2.6, 5.7);
+      cap("#cap2", 6.5, 9.1);
+      tl.fromTo([".hud", "#rec", "#read"], { opacity: 0 }, { opacity: 1, duration: 0.5, ease: "none" }, 0.3);
+      tl.fromTo("#rec i", { opacity: 1 }, { opacity: 0.2, duration: 0.5, ease: "steps(1)", yoyo: true, repeat: 9 }, 0.3);
+
+      // ---------- the dashboard numbers ----------
+      tl.to("#plane", { opacity: 0, duration: 0.8, ease: "power1.inOut" }, 9.1);
+      tl.to([".hud", "#rec", "#read"], { opacity: 0, duration: 0.4, ease: "none" }, 9.1);
+      tl.fromTo("#nums .k", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.5 }, 9.3);
+      tl.fromTo("#nums .st", { opacity: 0, y: 50 }, { opacity: 1, y: 0, duration: 0.7, ease: "expo.out", stagger: 0.14 }, 9.4);
+      [["#n1", 790, 9.45, false], ["#n2", 7101, 9.59, true], ["#n3", 2095, 9.73, true]].forEach(([sel, to, t, comma]) => {
+        const el = document.querySelector(sel);
+        const o = { v: 0 };
+        tl.fromTo(o, { v: 0 }, { v: to, duration: 1.1, ease: "power2.out", onUpdate: () => (el.textContent = comma ? Math.round(o.v).toLocaleString("en-GB") : String(Math.round(o.v))) }, t);
+      });
+      tl.fromTo("#zero", { opacity: 0, y: 24, scale: 0.95 }, { opacity: 1, y: 0, scale: 1, duration: 0.55, ease: "back.out(1.7)" }, 10.4);
+
+      // loop out
+      tl.to("#nums", { opacity: 0, duration: 0.4, ease: "power1.in" }, 11.6);
+
+      window.__timelines["main"] = tl;
+    </script>
+  </body>
+</html>

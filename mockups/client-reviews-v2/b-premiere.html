@@ -1,0 +1,76 @@
+<!doctype html>
+<html><head><meta charset="utf-8" />
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..700;1,6..96,400..700&family=Manrope:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{width:1440px;height:900px;overflow:hidden;background:#0a0908;color:#f2efe8;font-family:Manrope,sans-serif}
+.k{font:500 13px "JetBrains Mono",monospace;letter-spacing:.16em;text-transform:uppercase;color:#9a9792}
+.head{position:absolute;left:44px;right:44px;top:92px;display:flex;justify-content:space-between;z-index:5}
+/* the projector beam and the dust in it */
+.beam{position:absolute;left:50%;top:-120px;width:1700px;height:1150px;margin-left:-850px;
+  background:conic-gradient(from 180deg at 50% 0%,transparent 0 158deg,rgba(255,226,170,.09) 168deg,rgba(255,236,200,.16) 180deg,rgba(255,226,170,.09) 192deg,transparent 202deg);
+  filter:blur(8px);animation:flick 2.2s steps(1) infinite}
+@keyframes flick{0%{opacity:1}12%{opacity:.82}14%{opacity:1}55%{opacity:.9}57%{opacity:1}80%{opacity:.86}82%{opacity:1}}
+.dust i{position:absolute;width:3px;height:3px;border-radius:50%;background:#ffe8c0;opacity:.0;animation:dust 8s linear infinite}
+@keyframes dust{0%{opacity:0;transform:translate(0,0)}15%{opacity:.6}85%{opacity:.5}100%{opacity:0;transform:translate(60px,-140px)}}
+/* laurels */
+.laurels{position:absolute;top:168px;left:0;right:0;display:flex;justify-content:center;gap:70px}
+.lau{position:relative;width:220px;height:150px;display:grid;place-items:center;text-align:center;animation:pop 8s cubic-bezier(.16,1,.3,1) infinite both}
+.lau:nth-child(2){animation-delay:.12s}.lau:nth-child(3){animation-delay:.24s}
+@keyframes pop{0%{opacity:0;transform:scale(.8)}8%{opacity:1;transform:none}92%{opacity:1}100%{opacity:0}}
+.lau svg{position:absolute;inset:0}
+.lau b{display:block;font:500 26px/1 "Bodoni Moda",serif;color:#f0d79c}
+.lau small{display:block;margin-top:8px;font:500 10.5px/1.3 "JetBrains Mono",monospace;letter-spacing:.18em;text-transform:uppercase;color:#cdbf9c}
+/* the quotes swap like a cut */
+.qs{position:absolute;left:0;right:0;top:370px;text-align:center}
+.qq{position:absolute;left:50%;width:1120px;margin-left:-560px}
+.qq p.q{font:400 66px/1.08 "Bodoni Moda",serif;letter-spacing:-.02em}
+.qq p.q em{font-style:italic;color:#f0d79c}
+.qq .who{margin-top:28px;font:500 13px "JetBrains Mono",monospace;letter-spacing:.2em;text-transform:uppercase;color:#a9a49a}
+.qq .who span{color:#f0d79c;letter-spacing:.3em}
+.w{display:inline-block;opacity:0;transform:translateY(24px);filter:blur(6px)}
+.q1 .w{animation:w1 8s cubic-bezier(.16,1,.3,1) infinite both}
+.q2 .w{animation:w2 8s cubic-bezier(.16,1,.3,1) infinite both}
+@keyframes w1{0%{opacity:0;transform:translateY(24px);filter:blur(6px)}9%{opacity:1;transform:none;filter:none}44%{opacity:1;filter:none}50%{opacity:0;filter:blur(6px)}100%{opacity:0}}
+@keyframes w2{0%,50%{opacity:0;transform:translateY(24px);filter:blur(6px)}59%{opacity:1;transform:none;filter:none}94%{opacity:1;filter:none}100%{opacity:0;filter:blur(6px)}}
+.who1{animation:o1 8s ease infinite both}.who2{animation:o2 8s ease infinite both}
+@keyframes o1{0%,10%{opacity:0}16%,44%{opacity:1}50%,100%{opacity:0}}
+@keyframes o2{0%,60%{opacity:0}66%,94%{opacity:1}100%{opacity:0}}
+/* a white flash on the cut */
+.flash{position:absolute;inset:0;background:#fff3dc;opacity:0;animation:flash 8s linear infinite;pointer-events:none}
+@keyframes flash{0%,49%{opacity:0}50%{opacity:.35}53%,100%{opacity:0}}
+.foot{position:absolute;left:44px;right:44px;bottom:56px;display:flex;justify-content:space-between;align-items:flex-end}
+.now{display:flex;gap:28px}
+.now p{font:500 13px "JetBrains Mono",monospace;letter-spacing:.14em;text-transform:uppercase;color:#5f5c57}
+.now p b{font-weight:500;color:#f0d79c;margin-right:8px}
+.now p.on{color:#f2efe8}
+.cta{padding:17px 26px;border-radius:999px;border:1px solid rgba(240,215,156,.5);color:#f0d79c;font:700 12px Manrope;letter-spacing:.16em;text-transform:uppercase}
+.vig{position:absolute;inset:0;box-shadow:inset 0 0 260px rgba(0,0,0,.9);pointer-events:none}
+</style></head><body>
+<div class="beam"></div>
+<div class="dust" id="dust"></div>
+<div class="head"><p class="k">(Client reviews)</p><p class="k">Now showing · Upwork</p></div>
+<div class="laurels">
+  <div class="lau"><svg class="lv" viewBox="0 0 220 150"></svg><div><b>5.0</b><small>Every client<br>review</small></div></div>
+  <div class="lau"><svg class="lv" viewBox="0 0 220 150"></svg><div><b>Top Rated</b><small>Plus<br>on Upwork</small></div></div>
+  <div class="lau"><svg class="lv" viewBox="0 0 220 150"></svg><div><b>100%</b><small>Job<br>Success</small></div></div>
+</div>
+<div class="qs">
+  <div class="qq q1"><p class="q" data-w>“…highly recommended for AI automation projects <em>using n8n.</em>”</p><p class="who who1"><span>★★★★★</span> &nbsp; Client · Amazon wholesale FBA · Lahore</p></div>
+  <div class="qq q2"><p class="q" data-w>“Thank you for all your hard work and <em>will be working with you again in the future.</em>”</p><p class="who who2"><span>★★★★★</span> &nbsp; David · Garage door and electrical voice agents</p></div>
+</div>
+<div class="flash"></div>
+<div class="foot">
+  <div class="now"><p class="on"><b>01</b>Amazon FBA agent</p><p><b>02</b>Voice agents</p><p><b>03</b>The Upwork record</p></div>
+  <span class="cta">Your project · coming soon →</span>
+</div>
+<div class="vig"></div>
+<script>
+// laurel branches: leaves along two arcs (deterministic)
+document.querySelectorAll('.lv').forEach(svg=>{let h='';const cx=110,cy=72,rx=96,ry=62;for(let i=0;i<8;i++){const th=(252-i*14)*Math.PI/180;const x=cx+rx*Math.cos(th),y=cy-ry*Math.sin(th);const base=Math.atan2(Math.sin(th),-Math.cos(th))*180/Math.PI;for(const k of[-1,1]){for(const s of[1,-1]){const X=s>0?x:220-x;const R=(base+k*32)*s;const ox=Math.cos((R-90)*Math.PI/180)*7,oy=Math.sin((R-90)*Math.PI/180)*7;h+=`<ellipse cx="${(X+ox).toFixed(1)}" cy="${(y+oy).toFixed(1)}" rx="4.2" ry="9.5" fill="#c9a861" opacity="${(.5+i*.06).toFixed(2)}" transform="rotate(${R.toFixed(1)} ${(X+ox).toFixed(1)} ${(y+oy).toFixed(1)})"/>`}}}h+=`<path d="M${(cx+rx*Math.cos(252*Math.PI/180)).toFixed(1)} ${(cy-ry*Math.sin(252*Math.PI/180)).toFixed(1)} Q110 150 ${(220-(cx+rx*Math.cos(252*Math.PI/180))).toFixed(1)} ${(cy-ry*Math.sin(252*Math.PI/180)).toFixed(1)}" stroke="#c9a861" stroke-width="1.5" fill="none" opacity=".6"/>`;svg.innerHTML=h});
+// split each quote into words, each rising in turn
+document.querySelectorAll('[data-w]').forEach(p=>{let n=0;const walk=(node)=>{[...node.childNodes].forEach(c=>{if(c.nodeType===3){const f=document.createDocumentFragment();c.textContent.split(/(\s+)/).forEach(t=>{if(/^\s+$/.test(t)||!t)f.append(t);else{const s=document.createElement('span');s.className='w';s.textContent=t;s.style.animationDelay=(n++*0.07)+'s';f.append(s)}});c.replaceWith(f)}else walk(c)})};walk(p)});
+// dust in the beam
+let seed=11;const r=()=>(seed=seed*16807%2147483647)/2147483647;const d=document.getElementById('dust');for(let i=0;i<46;i++){const e=document.createElement('i');e.style.left=(560+r()*320+(r()-.5)*500*r())+'px';e.style.top=(120+r()*700)+'px';e.style.animationDelay=(-r()*8).toFixed(2)+'s';e.style.animationDuration=(6+r()*5).toFixed(1)+'s';d.append(e)}
+</script>
+</body></html>

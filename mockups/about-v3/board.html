@@ -1,0 +1,246 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>About Haris, three directions</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600;700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&family=Montserrat:wght@600&family=Archivo:wdth,wght@62..125,700..900&display=swap" rel="stylesheet" />
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+:root { --cream: #f1eee9; --paper: #faf8f4; --ink: #161614; --text: #3a3833; --mute: #77736b; --line: rgb(22 22 20 / 0.12); --green: #3fbf6b; --lime: #e6f86b; }
+html, body { width: 1440px; height: 900px; overflow: hidden; font-family: "Inter Tight", sans-serif; -webkit-font-smoothing: antialiased; color: var(--ink); }
+.f { display: none; position: absolute; inset: 0; overflow: hidden; background: var(--cream); }
+.hdr { position: absolute; left: 0; right: 0; top: 0; height: 70px; display: flex; align-items: center; padding: 0 26px; z-index: 30; font: 500 15px "Inter Tight"; }
+.hdr .l { width: 547px; font: 600 15px Montserrat; color: #f4f1ec; margin-left: -6px; }
+.hdr .c { flex: 1; text-align: center; padding-right: 60px; }
+.hdr.dark { color: #f2efe8; }
+.photo { position: absolute; left: 0; top: 0; width: 547px; height: 900px; overflow: hidden; background: #2b2b2b; }
+.photo img { position: absolute; left: 0; top: -37px; width: 547px; height: 972px; }
+.mono { font-family: "JetBrains Mono", monospace; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; }
+.serif { font-family: "Instrument Serif", serif; font-weight: 400; }
+em.s { font-family: "Instrument Serif", serif; font-style: italic; font-weight: 400; letter-spacing: 0; }
+.dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: var(--green); box-shadow: 0 0 0 4px rgb(63 191 107 / 0.18); }
+.logo { display: inline-flex; align-items: center; gap: 8px; font: 500 14px "Inter Tight"; color: var(--text); white-space: nowrap; }
+.logo img { height: 19px; width: auto; }
+
+/* ================= A. EDITORIAL ================= */
+#a .sig { position: absolute; left: 34px; bottom: 34px; color: #f4f1ec; }
+#a .sig b { display: block; font: italic 400 46px/1 "Instrument Serif"; }
+#a .sig span { display: block; margin-top: 8px; font: 500 11px "JetBrains Mono"; letter-spacing: 0.14em; text-transform: uppercase; opacity: 0.75; }
+#a .badge { position: absolute; left: 481px; top: 560px; width: 132px; height: 132px; z-index: 5; }
+#a .badge .ring { position: absolute; inset: 0; border-radius: 50%; background: var(--lime); box-shadow: 0 18px 40px -16px rgb(0 0 0 / 0.45); }
+#a .badge svg { position: absolute; inset: 0; }
+#a .badge .c { position: absolute; left: 50%; top: 50%; width: 40px; height: 40px; margin: -20px; border-radius: 50%; background: var(--ink); display: grid; place-items: center; }
+#a .badge .c i { width: 10px; height: 10px; border-radius: 50%; background: #5bf28c; box-shadow: 0 0 12px #5bf28c; }
+#a .copy { position: absolute; left: 634px; top: 118px; width: 740px; }
+#a .kick { display: flex; justify-content: space-between; align-items: center; font: 500 12px "JetBrains Mono"; letter-spacing: 0.1em; color: var(--mute); text-transform: uppercase; }
+#a h2 { margin-top: 26px; font: 400 55px/1.1 "Inter Tight"; letter-spacing: -0.035em; }
+#a h2 .chip { display: inline-block; vertical-align: -0.06em; height: 0.78em; border-radius: 999px; overflow: hidden; box-shadow: 0 0 0 1px rgb(22 22 20 / 0.08); }
+#a h2 .chip img { height: 100%; width: auto; display: block; }
+#a h2 .lchip { display: inline-flex; align-items: center; justify-content: center; vertical-align: -0.04em; height: 0.78em; padding: 0 0.22em; border-radius: 999px; background: #fff; box-shadow: 0 0 0 1px rgb(22 22 20 / 0.1); }
+#a h2 .lchip img { height: 0.42em; width: auto; }
+#a h2 .grey { color: #a7a299; }
+#a .nums { position: absolute; left: 634px; top: 540px; width: 740px; display: grid; grid-template-columns: repeat(3, 1fr); }
+#a .nums div { padding: 18px 0 0; border-top: 1px solid var(--ink); }
+#a .nums div + div { margin-left: 28px; }
+#a .nums b { display: block; font: 400 78px/0.9 "Instrument Serif"; letter-spacing: -0.02em; }
+#a .nums span { display: block; margin-top: 12px; font: 400 14px/1.35 "Inter Tight"; color: var(--mute); }
+#a .foot { position: absolute; left: 634px; top: 760px; width: 740px; display: flex; align-items: center; justify-content: space-between; }
+#a .up { display: flex; align-items: center; gap: 14px; }
+#a .up img { width: 38px; height: 38px; border-radius: 10px; }
+#a .up b { display: block; font: 600 15px "Inter Tight"; }
+#a .up b em { font-style: normal; margin-left: 8px; padding: 3px 9px; border-radius: 999px; background: rgb(20 168 0 / 0.1); color: #0f7a00; font-size: 12px; }
+#a .up small { display: block; margin-top: 4px; font: 400 13px "Inter Tight"; color: var(--mute); }
+#a .cta { display: flex; gap: 10px; align-items: center; }
+#a .go { display: inline-flex; align-items: center; gap: 14px; height: 56px; padding: 0 8px 0 26px; border-radius: 999px; background: var(--ink); color: #f4f1ec; font: 500 16px "Inter Tight"; }
+#a .go i { width: 40px; height: 40px; border-radius: 50%; background: var(--lime); color: var(--ink); display: grid; place-items: center; font-style: normal; font-size: 18px; }
+#a .ic { width: 56px; height: 56px; border-radius: 50%; border: 1px solid var(--line); display: grid; place-items: center; background: rgb(255 255 255 / 0.5); }
+#a .ic img, #a .ic svg { width: 22px; height: 22px; border-radius: 5px; }
+#a .tools { position: absolute; left: 547px; right: 0; bottom: 0; height: 62px; border-top: 1px solid var(--line); display: flex; align-items: center; gap: 36px; padding-left: 87px; white-space: nowrap; overflow: hidden; -webkit-mask-image: linear-gradient(90deg, #000 85%, transparent); mask-image: linear-gradient(90deg, #000 85%, transparent); }
+#a .tools .lab { font: 500 11px "JetBrains Mono"; letter-spacing: 0.1em; color: var(--mute); text-transform: uppercase; }
+
+/* ================= B. BENTO ================= */
+#b .grid { position: absolute; left: 571px; top: 82px; right: 24px; bottom: 24px; display: grid; grid-template-columns: repeat(6, 1fr); grid-template-rows: 1.05fr 1fr 0.95fr; gap: 14px; }
+#b .t { position: relative; border-radius: 22px; background: var(--paper); box-shadow: 0 0 0 1px rgb(22 22 20 / 0.06), 0 20px 40px -32px rgb(22 22 20 / 0.4); padding: 24px 26px; overflow: hidden; }
+#b .lab { font: 500 11px "JetBrains Mono"; letter-spacing: 0.1em; text-transform: uppercase; color: var(--mute); }
+#b .t1 { grid-column: 1 / 5; }
+#b .t1 h2 { margin-top: 16px; font: 400 35px/1.12 "Inter Tight"; letter-spacing: -0.03em; }
+#b .t1 .row { position: absolute; left: 26px; right: 26px; bottom: 22px; display: flex; justify-content: space-between; align-items: center; font: 500 13px "Inter Tight"; color: var(--text); }
+#b .t2 { grid-column: 5 / 7; background: #fff; }
+#b .ringw { position: absolute; right: 22px; bottom: 20px; width: 118px; height: 118px; }
+#b .ringw b { position: absolute; inset: 0; display: grid; place-items: center; font: 500 26px "Inter Tight"; letter-spacing: -0.02em; }
+#b .ringw small { position: absolute; left: 0; right: 0; top: 70px; text-align: center; font: 500 9.5px "JetBrains Mono"; letter-spacing: 0.08em; color: var(--mute); }
+#b .t2 .uh { display: flex; align-items: center; gap: 10px; font: 600 15px "Inter Tight"; }
+#b .t2 .uh img { width: 28px; height: 28px; border-radius: 8px; }
+#b .t2 .badge { display: inline-block; margin-top: 14px; padding: 5px 10px; border-radius: 999px; background: rgb(20 168 0 / 0.1); color: #0f7a00; font: 600 12px "Inter Tight"; }
+#b .t2 ul { list-style: none; position: absolute; left: 26px; bottom: 22px; font: 400 13px/1.7 "Inter Tight"; color: var(--text); }
+#b .t2 ul b { font-weight: 600; color: var(--ink); }
+#b .t3 { grid-column: 1 / 3; }
+#b .clock { margin-top: 12px; font: 300 52px/1 "Inter Tight"; letter-spacing: -0.04em; }
+#b .clock small { font: 500 14px "Inter Tight"; letter-spacing: 0; color: var(--mute); margin-left: 6px; }
+#b .tz { position: absolute; left: 26px; right: 26px; bottom: 22px; display: grid; gap: 7px; font: 500 11px "JetBrains Mono"; color: var(--mute); }
+#b .tz div { display: grid; grid-template-columns: 54px 1fr; align-items: center; gap: 10px; }
+#b .tz i { position: relative; height: 6px; border-radius: 6px; background: rgb(22 22 20 / 0.07); }
+#b .tz i::after { content: ""; position: absolute; top: 0; bottom: 0; left: var(--a); width: var(--w); border-radius: 6px; background: var(--c, var(--ink)); }
+#b .t4 { grid-column: 3 / 7; background: var(--ink); color: #f2efe8; }
+#b .t4 .tlab { position: absolute; right: 26px; top: 22px; font: 500 11px "JetBrains Mono"; letter-spacing: .08em; color: #8fd46f; }
+#b .t4 .lab { color: rgb(242 239 232 / 0.55); }
+#b .big { margin-top: 14px; font: 400 76px/0.9 "Instrument Serif"; letter-spacing: -0.02em; }
+#b .big span { display: block; margin-top: 10px; font: 400 14px "Inter Tight"; letter-spacing: 0; color: rgb(242 239 232 / 0.6); }
+#b .bars { position: absolute; right: 26px; bottom: 24px; display: flex; align-items: flex-end; gap: 6px; height: 150px; }
+#b .bars i { width: 13px; border-radius: 4px 4px 2px 2px; background: linear-gradient(#8fd46f, rgb(143 212 111 / 0.35)); }
+#b .side { position: absolute; left: 26px; bottom: 22px; display: flex; gap: 34px; }
+#b .side b { display: block; font: 400 30px "Instrument Serif"; }
+#b .side span { font: 400 12.5px "Inter Tight"; color: rgb(242 239 232 / 0.6); }
+#b .t5 { grid-column: 1 / 5; }
+#b .t5 .lab { position: absolute; left: 26px; top: 20px; }
+#b .logos { position: absolute; left: 26px; right: 26px; bottom: 20px; display: grid; grid-template-columns: repeat(6, 1fr); gap: 8px; }
+#b .logos span { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; height: 64px; border-radius: 14px; background: #fff; box-shadow: 0 0 0 1px rgb(22 22 20 / 0.06); font: 500 11px "Inter Tight"; color: var(--text); }
+#b .logos img { height: 22px; width: auto; max-width: 70%; object-fit: contain; }
+#b .t6 { grid-column: 5 / 7; background: var(--lime); }
+#b .t6 h3 { margin-top: 12px; font: 500 24px/1.12 "Inter Tight"; letter-spacing: -0.02em; }
+#b .t6 .arr { position: absolute; right: 18px; bottom: 18px; width: 64px; height: 64px; border-radius: 50%; background: var(--ink); color: var(--lime); display: grid; place-items: center; font-size: 26px; }
+#b .t6 .soc { position: absolute; left: 26px; bottom: 26px; display: flex; gap: 8px; }
+#b .t6 .soc span { width: 36px; height: 36px; border-radius: 50%; background: rgb(22 22 20 / 0.08); display: grid; place-items: center; }
+#b .t6 .soc img, #b .t6 .soc svg { width: 17px; height: 17px; border-radius: 4px; }
+#b .tag { position: absolute; left: 22px; right: 22px; bottom: 22px; display: flex; justify-content: space-between; align-items: center; padding: 14px 16px; border-radius: 16px; background: rgb(20 20 22 / 0.42); backdrop-filter: blur(14px); color: #f4f1ec; }
+#b .tag b { display: block; font: 500 16px "Inter Tight"; }
+#b .tag small { font: 400 12.5px "Inter Tight"; opacity: 0.75; }
+
+/* ================= C. DARK STUDIO ================= */
+#c { background: #0d0e10; color: #f2efe8; }
+#c .glow { position: absolute; left: 547px; right: 0; top: 0; bottom: 0; background: radial-gradient(700px 500px at 88% 8%, rgb(143 212 111 / 0.13), transparent 70%), radial-gradient(800px 600px at 30% 100%, rgb(185 164 255 / 0.08), transparent 70%); }
+#c .photo::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, transparent 70%, #0d0e10); }
+#c .copy { position: absolute; left: 620px; top: 120px; width: 770px; }
+#c .kick { display: flex; align-items: center; gap: 14px; font: 500 12px "JetBrains Mono"; letter-spacing: 0.1em; text-transform: uppercase; color: rgb(242 239 232 / 0.55); }
+#c .kick .pill { margin-left: auto; display: inline-flex; align-items: center; gap: 9px; padding: 8px 14px; border-radius: 999px; background: rgb(255 255 255 / 0.06); box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.1); font-family: "Inter Tight"; letter-spacing: 0; text-transform: none; font-size: 13px; color: #f2efe8; }
+#c h2 { margin-top: 28px; font: 400 46px/1.1 "Inter Tight"; letter-spacing: -0.035em; }
+#c h2 .dim { color: rgb(242 239 232 / 0.2); }
+#c h2 em.s { color: #b8e986; }
+#c .nums { position: absolute; left: 620px; top: 500px; width: 770px; display: grid; grid-template-columns: 1fr 1.12fr 0.55fr; gap: 0; }
+#c .nums div { padding-right: 20px; }
+#c .nums b { display: block; font: 800 84px/0.9 "Archivo"; font-stretch: 78%; letter-spacing: -0.01em; color: transparent; -webkit-text-stroke: 1.4px rgb(242 239 232 / 0.85); }
+#c .nums div:first-child b { color: #f2efe8; -webkit-text-stroke: 0; }
+#c .nums span { display: block; margin-top: 12px; font: 400 14px/1.35 "Inter Tight"; color: rgb(242 239 232 / 0.55); }
+#c .glass { position: absolute; left: 620px; top: 676px; width: 770px; display: grid; grid-template-columns: 1.25fr 1fr; gap: 14px; }
+#c .g { border-radius: 18px; padding: 18px 20px; background: rgb(255 255 255 / 0.045); box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.09); backdrop-filter: blur(10px); }
+#c .g .uh { display: flex; align-items: center; gap: 10px; font: 600 15px "Inter Tight"; }
+#c .g .uh img { width: 26px; height: 26px; border-radius: 7px; }
+#c .g .uh em { margin-left: auto; padding: 4px 10px; border-radius: 999px; background: rgb(91 242 140 / 0.12); color: #7df0a4; font: 600 12px "Inter Tight"; font-style: normal; }
+#c .g .un { display: flex; gap: 22px; margin-top: 14px; }
+#c .g .un b { display: block; font: 500 22px "Inter Tight"; }
+#c .g .un span { font: 400 11.5px "Inter Tight"; color: rgb(242 239 232 / 0.5); }
+#c .g.cta { display: flex; flex-direction: column; justify-content: space-between; background: #f2efe8; color: var(--ink); }
+#c .g.cta h3 { font: 500 21px/1.15 "Inter Tight"; letter-spacing: -0.02em; }
+#c .g.cta .r { display: flex; justify-content: space-between; align-items: center; font: 500 14px "Inter Tight"; }
+#c .g.cta .r i { width: 40px; height: 40px; border-radius: 50%; background: var(--ink); color: #f2efe8; display: grid; place-items: center; font-style: normal; }
+#c .tools { position: absolute; left: 620px; bottom: 26px; width: 770px; display: flex; gap: 10px; flex-wrap: nowrap; overflow: hidden; -webkit-mask-image: linear-gradient(90deg, #000 85%, transparent); mask-image: linear-gradient(90deg, #000 85%, transparent); }
+#c .tools span { display: inline-flex; align-items: center; gap: 8px; padding: 8px 13px; border-radius: 999px; background: #f2efe8; font: 500 13px "Inter Tight"; color: var(--ink); white-space: nowrap; }
+#c .tools img { height: 16px; width: auto; }
+#c .sig { position: absolute; left: 34px; bottom: 34px; }
+#c .sig b { display: block; font: italic 400 44px/1 "Instrument Serif"; }
+#c .sig span { display: block; margin-top: 8px; font: 500 11px "JetBrains Mono"; letter-spacing: 0.14em; text-transform: uppercase; opacity: 0.7; }
+</style>
+</head>
+<body>
+
+<!-- ================= A. EDITORIAL ================= -->
+<section class="f" id="a">
+	<figure class="photo"><img src="img/photo.webp" alt="" /><div class="sig"><b>Muhammad Haris</b><span>AI automation engineer · Karachi</span></div></figure>
+	<div class="badge"><div class="ring"></div>
+		<svg viewBox="0 0 132 132"><defs><path id="ra" d="M66 66 m-48 0 a48 48 0 1 1 96 0 a48 48 0 1 1 -96 0" /></defs><text font-family="JetBrains Mono" font-weight="500" font-size="9.6" letter-spacing="1.9" fill="#161614"><textPath href="#ra">AVAILABLE FOR WORK · KARACHI GMT+5 ·</textPath></text></svg>
+		<div class="c"><i></i></div>
+	</div>
+	<div class="copy">
+		<p class="kick"><span>(02) &nbsp;About Haris</span><span>Karachi · GMT+5</span></p>
+		<h2>I build <span class="lchip"><img src="img/tools/n8n.png" alt="" /></span> workflows, <span class="chip"><img src="img/p2.jpg" alt="" /></span> support agents and inboxes that <em class="s">sort themselves</em>, <span class="grey">so your team gets its hours back and the work still gets done at 2am.</span></h2>
+	</div>
+	<div class="nums">
+		<div><b>6,700+</b><span>support conversations handled by agents I built</span></div>
+		<div><b>21k+</b><span>agent minutes saved for client teams</span></div>
+		<div><b>100%</b><span>job success on Upwork, across 33 contracts</span></div>
+	</div>
+	<div class="foot">
+		<div class="up"><img src="img/tools/upwork.png" alt="" /><div><b>Upwork<em>Top Rated Plus</em></b><small>$30K+ earned · 633 hours · clients in the US, UK and Middle East</small></div></div>
+		<div class="cta"><span class="go">Start a project <i>↗</i></span><span class="ic"><svg viewBox="0 0 24 24" fill="#0a66c2"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.34V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg></span></div>
+	</div>
+	<div class="tools"><span class="lab">Stack</span>
+		<span class="logo"><img src="img/tools/n8n.png" alt="" /></span><span class="logo"><img src="img/tools/make.png" alt="" />Make</span><span class="logo"><img src="img/tools/zapier.png" alt="" /></span><span class="logo"><img src="img/tools/ghl.png" alt="" />GoHighLevel</span><span class="logo"><img src="img/tools/retell.png" alt="" /></span><span class="logo"><img src="img/tools/claude.png" alt="" /></span><span class="logo"><img src="img/tools/openai.svg" alt="" />OpenAI</span><span class="logo"><img src="img/tools/airtable.svg" alt="" />Airtable</span><span class="logo"><img src="img/tools/twilio.svg" alt="" />Twilio</span>
+	</div>
+</section>
+
+<!-- ================= B. BENTO ================= -->
+<section class="f" id="b">
+	<figure class="photo"><img src="img/photo.webp" alt="" /><div class="tag"><span><b>Muhammad Haris</b><small>AI automation engineer</small></span><small><span class="dot" style="margin-right:8px"></span>Available</small></div></figure>
+	<div class="grid">
+		<div class="t t1">
+			<p class="lab">(02) About Haris</p>
+			<h2>I build production AI for teams buried in busywork: agents that answer at 2am, and inboxes that <em class="s">sort themselves.</em></h2>
+			<div class="row"><span>Karachi, Pakistan · working with teams in the US, UK and Middle East</span></div>
+		</div>
+		<div class="t t2">
+			<p class="uh"><img src="img/tools/upwork.png" alt="" />Upwork</p>
+			<span class="badge">Top Rated Plus</span>
+			<ul><li><b>$30K+</b> earned</li><li><b>33</b> contracts</li><li><b>633</b> hours</li></ul>
+			<div class="ringw"><svg viewBox="0 0 118 118"><circle cx="59" cy="59" r="50" fill="none" stroke="rgb(22 22 20 / .08)" stroke-width="9" /><circle cx="59" cy="59" r="50" fill="none" stroke="#14a800" stroke-width="9" stroke-linecap="round" stroke-dasharray="314.16" stroke-dashoffset="0" transform="rotate(-90 59 59)" /></svg><b>100%</b><small>JOB SUCCESS</small></div>
+		</div>
+		<div class="t t3">
+			<p class="lab">Local time</p>
+			<p class="clock">4:12 <small>PM · Karachi</small></p>
+			<div class="tz">
+				<div>LONDON<i style="--a:30%;--w:42%;--c:#8fd8e6"></i></div>
+				<div>NEW YORK<i style="--a:52%;--w:40%;--c:#f2b84b"></i></div>
+				<div>DUBAI<i style="--a:12%;--w:50%;--c:#b9a4ff"></i></div>
+			</div>
+		</div>
+		<div class="t t4">
+			<p class="lab">Impact, live in production</p><span class="tlab">● LIVE</span>
+			<p class="big">6,700+<span>support conversations handled by AI agents</span></p>
+			<div class="side"><div><b>21,000+</b><span>agent minutes saved</span></div><div><b>7</b><span>live client deployments</span></div></div>
+			<div class="bars"><i style="height:22%"></i><i style="height:30%"></i><i style="height:28%"></i><i style="height:41%"></i><i style="height:39%"></i><i style="height:52%"></i><i style="height:58%"></i><i style="height:55%"></i><i style="height:69%"></i><i style="height:78%"></i><i style="height:86%"></i><i style="height:100%"></i></div>
+		</div>
+		<div class="t t5">
+			<p class="lab">The stack I ship with</p>
+			<div class="logos">
+				<span><img src="img/tools/n8n.png" alt="" /></span><span><img src="img/tools/make.png" alt="" />Make</span><span><img src="img/tools/zapier.png" alt="" /></span><span><img src="img/tools/ghl.png" alt="" />GoHighLevel</span><span><img src="img/tools/retell.png" alt="" /></span><span><img src="img/tools/claude.png" alt="" /></span>
+				<span><img src="img/tools/openai.svg" alt="" />OpenAI</span><span><img src="img/tools/airtable.svg" alt="" />Airtable</span><span><img src="img/tools/twilio.svg" alt="" />Twilio</span><span><img src="img/tools/python.svg" alt="" />Python</span><span><img src="img/tools/postgresql.svg" alt="" />PostgreSQL</span><span><img src="img/tools/nodejs.svg" alt="" />Node.js</span>
+			</div>
+		</div>
+		<div class="t t6">
+			<p class="lab" style="color:rgb(22 22 20 / .6)">Start a project</p>
+			<h3>Got a process that eats hours every week?</h3>
+			<div class="soc"><span><img src="img/tools/upwork.png" alt="" /></span><span><svg viewBox="0 0 24 24" fill="#0a66c2"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.34V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45z"/></svg></span></div>
+			<span class="arr">↗</span>
+		</div>
+	</div>
+</section>
+
+<!-- ================= C. DARK STUDIO ================= -->
+<section class="f" id="c">
+	<div class="glow"></div>
+	<figure class="photo"><img src="img/photo.webp" alt="" /><div class="sig"><b>Muhammad Haris</b><span>AI automation engineer · Karachi</span></div></figure>
+	<div class="copy">
+		<p class="kick"><span>(02)</span><span>About Haris</span><span class="pill"><span class="dot"></span>Available for new projects</span></p>
+		<h2>I build production AI for teams buried in busywork. Agents that answer at 2am, <span class="dim">inboxes that <em class="s">sort themselves</em>, and the workflows that tie it all to the tools you already use.</span></h2>
+	</div>
+	<div class="nums">
+		<div><b>6,700+</b><span>support conversations handled by agents</span></div>
+		<div><b>21,000+</b><span>agent minutes saved</span></div>
+		<div><b>7</b><span>live client deployments</span></div>
+	</div>
+	<div class="glass">
+		<div class="g"><p class="uh"><img src="img/tools/upwork.png" alt="" />Upwork<em>Top Rated Plus</em></p><div class="un"><div><b>100%</b><span>Job success</span></div><div><b>$30K+</b><span>Earned</span></div><div><b>33</b><span>Contracts</span></div><div><b>633</b><span>Hours</span></div></div></div>
+		<div class="g cta"><h3>Got a process that eats hours every week?</h3><p class="r">Start a project <i>↗</i></p></div>
+	</div>
+	<div class="tools">
+		<span><img src="img/tools/n8n.png" alt="" /></span><span><img src="img/tools/make.png" alt="" />Make</span><span><img src="img/tools/zapier.png" alt="" /></span><span><img src="img/tools/ghl.png" alt="" />GoHighLevel</span><span><img src="img/tools/retell.png" alt="" /></span><span><img src="img/tools/claude.png" alt="" /></span><span><img src="img/tools/openai.svg" alt="" />OpenAI</span><span><img src="img/tools/airtable.svg" alt="" />Airtable</span>
+	</div>
+</section>
+
+<div class="hdr" id="hdr"><span class="l">HARIS</span><span class="c">☰&nbsp; MENU</span><span>EMAIL &nbsp;&nbsp; LINKEDIN</span></div>
+<script>
+const id = new URLSearchParams(location.search).get('f') || 'a'
+document.getElementById(id).style.display = 'block'
+if (id === 'c') document.getElementById('hdr').classList.add('dark')
+</script>
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!doctype html>
+<html><head><meta charset="utf-8" />
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..700;1,6..96,400..700&family=Manrope:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{width:1440px;height:900px;overflow:hidden;background:#111;color:#f2efe8;font-family:Manrope,sans-serif}
+.k{font:500 13px "JetBrains Mono",monospace;letter-spacing:.16em;text-transform:uppercase;color:#a9a49a}
+.head{position:absolute;left:56px;right:56px;top:40px;display:flex;justify-content:space-between}
+.idx{position:absolute;left:56px;top:120px;width:300px;display:grid;gap:4px}
+.idx p{display:flex;gap:14px;align-items:baseline;padding:11px 0;border-bottom:1px solid #222;font:400 22px "Bodoni Moda",serif;color:#6f6b64}
+.idx p span{font:500 11px "JetBrains Mono",monospace;letter-spacing:.14em}
+.idx p.on{color:#f2efe8}.idx p.on span{color:#b9a4ff}
+.stage{position:absolute;left:400px;right:56px;top:110px;bottom:120px;border-radius:22px;background:#1b1230;overflow:hidden;box-shadow:inset 0 0 0 1px #3a2c5c}
+.stage img.full{position:absolute;left:40px;right:40px;top:50%;width:calc(100% - 80px);transform:translateY(-50%);filter:brightness(.55);border-radius:8px}
+.lens{position:absolute;left:93px;top:255px;width:300px;height:300px;border-radius:50%;overflow:hidden;background:#fff;box-shadow:0 0 0 3px #b9a4ff,0 30px 80px rgba(0,0,0,.6)}
+.lens img{position:absolute;width:1989px;max-width:none;left:-298px;top:-626px}
+.lens::after{content:"";position:absolute;inset:0;border-radius:50%;box-shadow:inset 0 0 40px rgba(0,0,0,.35)}
+.tag{position:absolute;left:418px;top:300px;width:220px;padding:14px 16px;border-radius:12px;background:rgba(10,20,24,.85);font:500 14px/1.45 Manrope;box-shadow:inset 0 0 0 1px #5b4a8f}
+.tag b{display:block;margin-bottom:6px;font:500 11px "JetBrains Mono",monospace;letter-spacing:.14em;color:#b9a4ff}
+.cap{position:absolute;left:400px;right:56px;bottom:40px;display:flex;justify-content:space-between;align-items:flex-end}
+.cap h3{font:400 34px/1.1 "Bodoni Moda",serif}.cap h3 em{color:#b9a4ff}
+.zoom{display:flex;gap:8px}.zoom span{padding:9px 14px;border-radius:999px;background:#1d1d1d;font:600 12px Manrope}.zoom span.on{background:#f2efe8;color:#111}
+</style></head><body>
+<div class="head"><p class="k">(Up close)</p><p class="k">Move to look closer</p></div>
+<div class="idx">
+  <p><span>01</span>Marketplace app</p><p><span>02</span>AI support</p><p><span>03</span>Email automation</p><p class="on"><span>04</span>Compliance platform</p><p><span>05</span>Night shift agent</p>
+  <p><span>S02</span>Household investing</p><p><span>S03</span>Estimator</p><p><span>S04</span>Change detection</p>
+</div>
+<div class="stage">
+  <img class="full" src="../../public/landing/projects/media/04-compliance-platform/architecture.webp">
+  <div class="lens"><img src="../../public/landing/projects/media/04-compliance-platform/architecture.webp"></div>
+  <p class="tag"><b>Under the lens</b>Access scope is a hard filter inside the search query, never applied at generation.</p>
+</div>
+<div class="cap"><div><p class="k" style="color:#b9a4ff">04 · System architecture</p><h3 style="margin-top:10px">Zoomed out, it is a diagram. <em>Up close, it is the decisions.</em></h3></div><div class="zoom"><span>1x</span><span class="on">3x</span><span>6x</span></div></div>
+</body></html>

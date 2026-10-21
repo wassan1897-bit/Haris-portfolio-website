@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Last page, four ideas</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600;700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@500&family=Montserrat:wght@600;800&family=Archivo:wdth,wght@62..125,800&display=swap" rel="stylesheet" />
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+:root { --ink: #161614; --mute: #7a766f; --line: rgb(22 22 20 / .12); --lime: #e6f86b; --cream: #f1eee9; }
+html, body { width: 1440px; height: 900px; overflow: hidden; font-family: "Inter Tight", sans-serif; -webkit-font-smoothing: antialiased; color: var(--ink); }
+.f { display: none; position: absolute; inset: 0; overflow: hidden; background: #fff; }
+.hdr { position: absolute; left: 0; right: 0; top: 0; height: 70px; display: flex; align-items: center; justify-content: space-between; padding: 0 26px; z-index: 30; font: 500 15px "Inter Tight"; }
+.hdr b { font: 600 15px Montserrat; }
+.dark .hdr, .hdr.l { color: #f2efe8; }
+.mono { font: 500 11.5px "JetBrains Mono"; letter-spacing: .12em; text-transform: uppercase; color: var(--mute); }
+.dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: #3fbf6b; box-shadow: 0 0 0 4px rgb(63 191 107 / .18); }
+em.s { font-family: "Instrument Serif"; font-style: italic; font-weight: 400; letter-spacing: 0; }
+.ph { background: #2b2b2b url(img/full.webp) 50% 22% / cover no-repeat; }
+.foot { position: absolute; left: 56px; right: 56px; bottom: 30px; display: flex; justify-content: space-between; align-items: center; font: 500 12.5px "Inter Tight"; color: var(--mute); }
+.foot nav { display: flex; gap: 28px; }
+
+/* 1. sign-off */
+#a .big { position: absolute; left: 50px; right: 50px; top: 140px; font: 800 168px/.86 "Archivo"; font-stretch: 72%; text-transform: uppercase; letter-spacing: -.01em; }
+#a .big span { display: block; }
+#a .big .pill { display: inline-block; vertical-align: .08em; width: 2.1em; height: .74em; border-radius: 999px; }
+#a .big .o { color: transparent; -webkit-text-stroke: 2px var(--ink); }
+#a .mail { position: absolute; left: 56px; top: 612px; display: flex; align-items: center; gap: 18px; font: 400 52px "Inter Tight"; letter-spacing: -.03em; }
+#a .mail i { font-style: normal; display: inline-grid; place-items: center; width: 64px; height: 64px; border-radius: 50%; background: var(--lime); font-size: 26px; }
+#a .copy { position: absolute; left: 60px; top: 690px; font: 500 12.5px "Inter Tight"; color: var(--mute); }
+#a .side { position: absolute; right: 56px; top: 612px; text-align: right; }
+#a .side p { font: 300 44px "Inter Tight"; letter-spacing: -.03em; }
+#a .side small { display: block; margin-top: 8px; font: 500 13px "Inter Tight"; color: var(--mute); }
+#a .soc { position: absolute; left: 56px; right: 56px; top: 744px; display: grid; grid-template-columns: repeat(4, 1fr); border-top: 1px solid var(--line); }
+#a .soc span { display: flex; justify-content: space-between; padding: 18px 20px 0 0; font: 500 15px "Inter Tight"; }
+#a .soc span + span { padding-left: 20px; border-left: 1px solid var(--line); }
+
+/* 2. the brief */
+#b { background: var(--cream); }
+#b .l { position: absolute; left: 56px; top: 150px; width: 520px; }
+#b h2 { margin-top: 18px; font: 400 64px/1.02 "Inter Tight"; letter-spacing: -.04em; }
+#b .l p.sub { margin-top: 22px; font: 400 17px/1.5 "Inter Tight"; color: #4a4741; }
+#b .me { display: flex; align-items: center; gap: 14px; margin-top: 40px; }
+#b .me .av { width: 54px; height: 54px; border-radius: 50%; }
+#b .me b { display: block; font: 600 15px "Inter Tight"; }
+#b .me small { display: flex; align-items: center; gap: 8px; font: 400 13px "Inter Tight"; color: var(--mute); }
+#b .card { position: absolute; right: 56px; top: 110px; width: 700px; padding: 34px 36px; border-radius: 24px; background: #fff; box-shadow: 0 0 0 1px rgb(22 22 20 / .06), 0 50px 90px -50px rgb(22 22 20 / .4); }
+#b .step { display: flex; gap: 10px; align-items: center; font: 500 12px "JetBrains Mono"; letter-spacing: .08em; color: var(--mute); }
+#b .step i { width: 26px; height: 4px; border-radius: 4px; background: var(--ink); }
+#b .step i.o { background: rgb(22 22 20 / .12); }
+#b .q { margin-top: 26px; font: 500 24px/1.25 "Inter Tight"; letter-spacing: -.02em; }
+#b .chips { display: flex; flex-wrap: wrap; gap: 9px; margin-top: 18px; }
+#b .chips span { padding: 10px 15px; border-radius: 999px; box-shadow: inset 0 0 0 1px var(--line); font: 500 14px "Inter Tight"; color: #3a3833; }
+#b .chips span.on { background: var(--ink); color: #fff; box-shadow: none; }
+#b .row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 26px; }
+#b .in { height: 54px; padding: 0 18px; border-radius: 14px; background: var(--cream); display: flex; align-items: center; font: 400 15px "Inter Tight"; color: var(--mute); }
+#b .send { display: flex; justify-content: space-between; align-items: center; margin-top: 26px; padding-top: 22px; border-top: 1px solid var(--line); font: 400 13px "Inter Tight"; color: var(--mute); }
+#b .send b { display: inline-flex; align-items: center; gap: 12px; height: 54px; padding: 0 8px 0 24px; border-radius: 999px; background: var(--ink); color: #fff; font: 500 15px "Inter Tight"; }
+#b .send b i { width: 40px; height: 40px; border-radius: 50%; background: var(--lime); color: var(--ink); display: grid; place-items: center; font-style: normal; }
+
+/* 3. the closing scene (dark) */
+#c { background: #0d0e10; color: #f2efe8; }
+#c .ph { position: absolute; right: 0; top: 0; bottom: 0; width: 46%; -webkit-mask-image: linear-gradient(90deg, transparent, #000 40%); mask-image: linear-gradient(90deg, transparent, #000 40%); opacity: .9; }
+#c .ghost { position: absolute; left: -10px; bottom: -50px; font: 800 330px/.8 "Archivo"; font-stretch: 72%; text-transform: uppercase; color: rgb(255 255 255 / .04); white-space: nowrap; }
+#c .t { position: absolute; left: 70px; top: 190px; width: 820px; }
+#c h2 { margin-top: 22px; font: 400 86px/1 "Inter Tight"; letter-spacing: -.045em; }
+#c h2 em.s { color: #b8e986; }
+#c .t p.sub { margin-top: 26px; max-width: 560px; font: 400 18px/1.5 "Inter Tight"; color: rgb(242 239 232 / .62); }
+#c .btns { display: flex; gap: 12px; margin-top: 40px; }
+#c .btns span { display: inline-flex; align-items: center; gap: 12px; height: 58px; padding: 0 26px; border-radius: 999px; font: 500 16px "Inter Tight"; box-shadow: inset 0 0 0 1px rgb(255 255 255 / .2); }
+#c .btns span.p { background: var(--lime); color: var(--ink); box-shadow: none; }
+#c .btns img { width: 20px; height: 20px; border-radius: 5px; }
+#c .foot { color: rgb(242 239 232 / .45); }
+#c .avail { position: absolute; left: 70px; top: 130px; display: inline-flex; align-items: center; gap: 10px; padding: 8px 15px; border-radius: 999px; background: rgb(255 255 255 / .06); font: 500 13px "Inter Tight"; }
+
+/* 4. hours calculator */
+#d { background: #fff; }
+#d .l { position: absolute; left: 56px; top: 140px; width: 600px; }
+#d h2 { margin-top: 18px; font: 400 60px/1.04 "Inter Tight"; letter-spacing: -.04em; }
+#d .sl { margin-top: 44px; }
+#d .sl p { display: flex; justify-content: space-between; font: 500 14px "Inter Tight"; color: #3a3833; }
+#d .sl p b { font-weight: 600; color: var(--ink); }
+#d .track { position: relative; height: 6px; margin: 16px 0 30px; border-radius: 6px; background: rgb(22 22 20 / .1); }
+#d .track i { position: absolute; left: 0; top: 0; bottom: 0; border-radius: 6px; background: var(--ink); }
+#d .track b { position: absolute; top: 50%; width: 22px; height: 22px; margin: -11px 0 0 -11px; border-radius: 50%; background: #fff; box-shadow: 0 0 0 2px var(--ink), 0 6px 14px rgb(0 0 0 / .2); }
+#d .res { position: absolute; right: 56px; top: 120px; width: 600px; height: 640px; border-radius: 28px; background: var(--ink); color: #f2efe8; padding: 46px 48px; }
+#d .res .mono { color: rgb(242 239 232 / .5); }
+#d .res .n { margin-top: 18px; font: 400 168px/.85 "Instrument Serif"; letter-spacing: -.02em; }
+#d .res .n small { font: 400 28px "Inter Tight"; letter-spacing: -.01em; color: rgb(242 239 232 / .6); }
+#d .res p { margin-top: 18px; font: 400 17px/1.5 "Inter Tight"; color: rgb(242 239 232 / .7); }
+#d .res .eq { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 34px; }
+#d .res .eq div { padding: 18px; border-radius: 16px; background: rgb(255 255 255 / .06); }
+#d .res .eq b { display: block; font: 500 28px "Inter Tight"; letter-spacing: -.02em; }
+#d .res .eq span { font: 400 13px "Inter Tight"; color: rgb(242 239 232 / .55); }
+#d .res .go { position: absolute; left: 48px; right: 48px; bottom: 44px; display: flex; justify-content: space-between; align-items: center; height: 64px; padding: 0 10px 0 26px; border-radius: 999px; background: var(--lime); color: var(--ink); font: 500 17px "Inter Tight"; }
+#d .res .go i { width: 46px; height: 46px; border-radius: 50%; background: var(--ink); color: var(--lime); display: grid; place-items: center; font-style: normal; }
+</style>
+</head>
+<body>
+
+<section class="f" id="a">
+	<p class="mono" style="position:absolute;left:56px;top:110px">(08) &nbsp;Contact</p>
+	<p class="big"><span>Got <span class="pill ph"></span> busywork?</span><span class="o">Let's talk.</span></p>
+	<p class="mail">hello@autoany.io <i>↗</i></p>
+	<p class="copy">Click to copy · I reply within a day</p>
+	<div class="side"><p>4:12 PM</p><small><span class="dot"></span>&nbsp; Karachi, GMT+5 · available for new projects</small></div>
+	<div class="soc"><span>Upwork <em style="font-style:normal;color:var(--mute)">↗</em></span><span>LinkedIn <em style="font-style:normal;color:var(--mute)">↗</em></span><span>GitHub <em style="font-style:normal;color:var(--mute)">↗</em></span><span>Book a call <em style="font-style:normal;color:var(--mute)">↗</em></span></div>
+	<div class="foot"><span>© 2026 Muhammad Haris</span><nav><span>Work</span><span>About</span><span>Reviews</span><span>Back to top ↑</span></nav></div>
+</section>
+
+<section class="f" id="b">
+	<div class="l">
+		<p class="mono">(08) &nbsp;Start a project</p>
+		<h2>Tell me what's eating <em class="s">your hours.</em></h2>
+		<p class="sub">Three quick questions. I'll reply within a day with how I'd automate it, what it would take and a fixed price.</p>
+		<div class="me"><span class="av ph"></span><div><b>Muhammad Haris</b><small><span class="dot"></span>Usually replies within a day</small></div></div>
+	</div>
+	<div class="card">
+		<p class="step">STEP 1 OF 3 <i></i><i class="o"></i><i class="o"></i></p>
+		<p class="q">What should run by itself?</p>
+		<div class="chips"><span class="on">Customer support</span><span>Email inboxes</span><span>Lead follow-up</span><span>Phone calls</span><span class="on">CRM updates</span><span>Reports</span><span>Something else</span></div>
+		<p class="q" style="margin-top:30px">Which tools do you use today?</p>
+		<div class="chips"><span>Gmail</span><span class="on">HubSpot</span><span>GoHighLevel</span><span>Zendesk</span><span>Slack</span><span>Airtable</span></div>
+		<div class="row"><span class="in">Your name</span><span class="in">Work email</span></div>
+		<div class="send"><span>Or email hello@autoany.io</span><b>Next step <i>→</i></b></div>
+	</div>
+	<div class="foot"><span>© 2026 Muhammad Haris</span><nav><span>Upwork</span><span>LinkedIn</span><span>GitHub</span><span>Back to top ↑</span></nav></div>
+</section>
+
+<section class="f dark" id="c">
+	<div class="ph"></div>
+	<p class="ghost">Haris</p>
+	<p class="avail"><span class="dot"></span>Available for new projects · Karachi, GMT+5</p>
+	<div class="t">
+		<p class="mono" style="color:rgb(242 239 232 / .5)">(08) &nbsp;Your project, next</p>
+		<h2>Let's take the busywork <em class="s">off your plate.</em></h2>
+		<p class="sub">Send the problem, the tools you use and your timeline. You'll get a clear plan and a fixed price, usually the same day.</p>
+		<div class="btns"><span class="p">Start a project ↗</span><span><img src="img/tools/upwork.png" alt="" />Hire on Upwork</span><span>hello@autoany.io</span></div>
+	</div>
+	<div class="foot"><span>© 2026 Muhammad Haris</span><nav><span>LinkedIn</span><span>GitHub</span><span>Back to top ↑</span></nav></div>
+</section>
+
+<section class="f" id="d">
+	<div class="l">
+		<p class="mono">(08) &nbsp;What it's worth</p>
+		<h2>See how many hours <em class="s">you'd get back.</em></h2>
+		<div class="sl">
+			<p><span>Support tickets a week</span><b>400</b></p><div class="track"><i style="width:40%"></i><b style="left:40%"></b></div>
+			<p><span>Minutes your team spends on each</span><b>6 min</b></p><div class="track"><i style="width:30%"></i><b style="left:30%"></b></div>
+			<p><span>Share an agent can handle</span><b>60%</b></p><div class="track"><i style="width:60%"></i><b style="left:60%"></b></div>
+		</div>
+		<p style="font:400 13px 'Inter Tight';color:var(--mute)">Based on what Haris's agents handle in production today.</p>
+	</div>
+	<div class="res">
+		<p class="mono">Your estimate</p>
+		<p class="n">24 <small>hours a week</small></p>
+		<p>back to your team, about 1,250 hours a year, without hiring anyone new.</p>
+		<div class="eq"><div><b>240</b><span>tickets a week, answered by the agent</span></div><div><b>0.6</b><span>of a full-time hire, freed up</span></div></div>
+		<span class="go">Build this for me <i>↗</i></span>
+	</div>
+	<div class="foot"><span>© 2026 Muhammad Haris</span><nav><span>Upwork</span><span>LinkedIn</span><span>hello@autoany.io</span><span>Back to top ↑</span></nav></div>
+</section>
+
+<div class="hdr" id="hdr"><b>HARIS</b><span>☰&nbsp; MENU</span><span>EMAIL &nbsp;&nbsp; LINKEDIN</span></div>
+<script>
+const id = new URLSearchParams(location.search).get('f') || 'a'
+document.getElementById(id).style.display = 'block'
+if (id === 'c') document.getElementById('hdr').classList.add('l')
+</script>
+</body>
+</html>

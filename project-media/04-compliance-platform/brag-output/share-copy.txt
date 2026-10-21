@@ -1,0 +1,1 @@
+A bilingual English and Arabic compliance AI that advises many client organisations on one platform without ever mixing their data: tenant scope enforced inside the search query, hybrid retrieval with reranking, 16 consultant personas and RAG evaluation.

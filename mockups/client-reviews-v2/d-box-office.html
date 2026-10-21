@@ -1,0 +1,76 @@
+<!doctype html>
+<html><head><meta charset="utf-8" />
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..700;1,6..96,400..700&family=Manrope:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{width:1440px;height:900px;overflow:hidden;background:#101010;color:#f2efe8;font-family:Manrope,sans-serif}
+.k{font:500 13px "JetBrains Mono",monospace;letter-spacing:.16em;text-transform:uppercase;color:#9a9792}
+.head{position:absolute;left:44px;right:44px;top:92px;display:flex;justify-content:space-between}
+/* split-flap board */
+.board{position:absolute;left:44px;right:44px;top:140px;padding:22px 26px;border-radius:14px;background:#070707;box-shadow:inset 0 0 0 1px #1f1f1f;display:grid;grid-template-columns:1.7fr 1fr 1fr 1fr;gap:22px}
+.cell p{font:500 11px "JetBrains Mono",monospace;letter-spacing:.2em;text-transform:uppercase;color:#6c6862;margin-bottom:10px}
+.row{display:flex;gap:4px}
+.t{position:relative;width:30px;height:46px;border-radius:4px;overflow:hidden;background:linear-gradient(#1c1c1c 50%,#151515 50%);box-shadow:inset 0 0 0 1px #262626}
+.t::after{content:"";position:absolute;left:0;right:0;top:50%;height:1px;background:#050505}
+.strip{position:absolute;left:0;right:0;top:0;animation-timing-function:steps(1);animation-iteration-count:infinite;animation-duration:8s}
+.strip span{display:block;height:46px;font:700 26px/46px "JetBrains Mono",monospace;text-align:center;color:#f3e3b5}
+/* ticket stubs */
+.tickets{position:absolute;left:44px;right:44px;top:330px;display:flex;gap:28px;align-items:flex-start}
+.tk{position:relative;flex:none;width:560px;height:300px;display:flex;border-radius:14px;background:#f1e9d8;color:#1a1612;
+  animation:issue 8s cubic-bezier(.16,1,.3,1) infinite both}
+.tk:nth-child(2){animation-name:issue2;margin-top:34px}
+.tk:nth-child(3){animation-name:issue3;width:150px;background:transparent;color:#f2efe8}
+@keyframes issue{0%{opacity:0;transform:translateY(80px) rotate(-6deg)}10%{opacity:1;transform:rotate(-2.5deg)}95%{opacity:1;transform:rotate(-2.5deg)}100%{opacity:0}}
+@keyframes issue2{0%,12%{opacity:0;transform:translateY(80px) rotate(6deg)}24%{opacity:1;transform:rotate(1.5deg)}95%{opacity:1;transform:rotate(1.5deg)}100%{opacity:0}}
+@keyframes issue3{0%,26%{opacity:0;transform:translateY(60px)}36%,95%{opacity:1;transform:none}100%{opacity:0}}
+.stub{position:relative;width:150px;flex:none;padding:22px 18px;border-right:2px dashed rgba(26,22,18,.35);display:flex;flex-direction:column;justify-content:space-between;background:var(--acc);border-radius:14px 0 0 14px}
+.stub::before,.stub::after{content:"";position:absolute;right:-13px;width:24px;height:24px;border-radius:50%;background:#101010}
+.stub::before{top:-12px}.stub::after{bottom:-12px}
+.stub b{font:700 12px "JetBrains Mono",monospace;letter-spacing:.2em;text-transform:uppercase}
+.stub .st{font-size:20px;letter-spacing:.12em}
+.stub .no{font:400 46px/1 "Bodoni Moda",serif}
+.main{padding:24px 28px;display:flex;flex-direction:column}
+.main .lab{font:500 11px "JetBrains Mono",monospace;letter-spacing:.2em;text-transform:uppercase;color:#7a6f60}
+.main .q{margin-top:14px;font:italic 400 29px/1.18 "Bodoni Moda",serif}
+.main .meta{margin-top:auto;display:flex;justify-content:space-between;align-items:flex-end;font:500 12px/1.6 "JetBrains Mono",monospace;letter-spacing:.12em;text-transform:uppercase;color:#5a5046}
+.main .meta b{display:block;color:#1a1612}
+.bar{display:flex;gap:2px;height:30px;align-items:stretch}
+.bar i{width:2px;background:#1a1612}.bar i:nth-child(3n){width:4px}.bar i:nth-child(5n){width:1px}
+.blank{width:100%;height:100%;border:1.5px dashed rgba(242,239,232,.35);border-radius:14px;display:grid;place-items:center;text-align:center;padding:18px}
+.blank i{display:grid;place-items:center;width:46px;height:46px;margin:0 auto 12px;border-radius:50%;background:#f2efe8;color:#111;font:400 28px/1 Manrope;font-style:normal}
+.blank small{font:500 11px/1.5 "JetBrains Mono",monospace;letter-spacing:.16em;text-transform:uppercase;color:#bdb8ae}
+.foot{position:absolute;left:44px;right:44px;bottom:48px;display:flex;justify-content:space-between;align-items:flex-end}
+.foot h2{font:400 54px/1 "Bodoni Moda",serif;letter-spacing:-.02em}
+.foot h2 em{color:#f3c86b}
+</style></head><body>
+<div class="head"><p class="k">(Client reviews)</p><p class="k">Box office · Upwork</p></div>
+<div class="board" id="board"></div>
+<div class="tickets">
+  <div class="tk" style="--acc:#f3c86b">
+    <div class="stub"><b>Admit one</b><span class="st">★★★★★</span><span class="no">5.0</span><b>Feb 2026</b></div>
+    <div class="main"><p class="lab">Client review · Amazon wholesale FBA · Lahore</p>
+      <p class="q">“Sameer is highly recommended for AI automation projects using n8n.”</p>
+      <div class="meta"><span>Built<b>AI agent for product analysis</b></span><span class="bar"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span></div></div>
+  </div>
+  <div class="tk" style="--acc:#9ec5ff">
+    <div class="stub"><b>Admit one</b><span class="st">★★★★★</span><span class="no">5.0</span><b>Oct 2026</b></div>
+    <div class="main"><p class="lab">Client review · David · Upwork</p>
+      <p class="q">“Thank you for all your hard work and will be working with you again in the future.”</p>
+      <div class="meta"><span>Built<b>Garage door and electrical voice agents</b></span><span class="bar"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span></div></div>
+  </div>
+  <div class="tk"><div class="blank"><div><i>+</i><small>Your ticket<br>Start a project</small></div></div></div>
+</div>
+<div class="foot"><h2>Every review, <em>five stars.</em></h2><p class="k">Tap a ticket to see the Upwork record →</p></div>
+<script>
+// the board: each tile rolls through a few letters, then lands on its own
+const CELLS=[['Status','TOP RATED+'],['Job success','100%'],['Earned','$30K+'],['Hours','633']];
+const POOL='ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789$%+';let seed=5;const r=()=>(seed=seed*16807%2147483647)/2147483647;
+const css=document.createElement('style');let K='';let id=0;
+document.getElementById('board').innerHTML=CELLS.map(([lab,val],c)=>`<div class="cell"><p>${lab}</p><div class="row">${[...val.padEnd(c?6:10,' ')].map((ch,i)=>{
+  const n=6+Math.floor(r()*4);const seq=[...Array(n)].map(()=>POOL[Math.floor(r()*POOL.length)]);seq.push(ch===' '?'&nbsp;':ch);
+  const start=0.25+c*0.35+i*0.06, step=0.07;let kf='';seq.forEach((_,j)=>{kf+=`${((start+j*step)/8*100).toFixed(2)}%{transform:translateY(-${j*46}px)}`});
+  K+=`@keyframes f${id}{0%{transform:translateY(0)}${kf}100%{transform:translateY(-${(seq.length-1)*46}px)}}`;
+  return `<div class="t"><div class="strip" style="animation-name:f${id++}">${seq.map(x=>`<span>${x}</span>`).join('')}</div></div>`}).join('')}</div></div>`).join('');
+css.textContent=K;document.head.append(css);
+</script>
+</body></html>

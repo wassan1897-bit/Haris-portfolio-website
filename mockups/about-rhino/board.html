@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>About Haris, keynote layout</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@500&family=Montserrat:wght@600&family=Archivo:wdth,wght@62..125,800&display=swap" rel="stylesheet" />
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+:root { --ink: #1b1b19; --mute: #8a867f; --acc: #e8925a; }
+html, body { width: 1440px; height: 900px; overflow: hidden; background: #fff; font-family: "Inter Tight", sans-serif; -webkit-font-smoothing: antialiased; color: var(--ink); }
+.f { display: none; position: absolute; inset: 0; overflow: hidden; background: #fff; }
+.hdr { position: absolute; left: 0; right: 0; top: 0; height: 70px; display: flex; align-items: center; justify-content: space-between; padding: 0 26px; z-index: 30; font: 500 15px "Inter Tight"; }
+.hdr b { font: 600 15px Montserrat; }
+.hdr .r { color: #f4f1ec; }
+
+/* the photo side */
+.photo { position: absolute; top: 0; bottom: 0; right: 0; overflow: hidden; background: #2b2b2b; }
+.photo img { position: absolute; display: block; }
+.photo::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgb(10 10 12 / .15), transparent 40%), linear-gradient(transparent 70%, rgb(10 10 12 / .35)); }
+/* the studio backdrop carried across the wide area; the portrait fades into it on its left */
+.photo.studio { background: radial-gradient(900px 700px at 70% 45%, #3c3c3f, #29292b 55%, #19191b); }
+.photo.studio img { -webkit-mask-image: linear-gradient(90deg, transparent, #000 32%); mask-image: linear-gradient(90deg, transparent, #000 32%); }
+.panel { position: absolute; top: 0; bottom: 0; z-index: 2; padding: 0 44px; display: flex; flex-direction: column; justify-content: center; background: rgb(14 14 16 / 0.58); -webkit-backdrop-filter: blur(3px); backdrop-filter: blur(3px); color: rgb(244 241 236 / 0.86); }
+.panel .lab { font: 600 11.5px "Inter Tight"; letter-spacing: 0.16em; text-transform: uppercase; color: var(--acc); }
+.panel p { margin-top: 14px; font: 400 13.5px/1.6 "Inter Tight"; }
+.panel .lab + p { margin-top: 16px; }
+.panel .gap { margin-top: 36px; }
+.panel .nums { display: grid; grid-template-columns: 1fr 1fr; gap: 18px 16px; margin-top: 16px; }
+.panel .nums b { display: block; font: 600 24px "Inter Tight"; letter-spacing: -0.02em; color: #fff; }
+.panel .nums span { font: 400 12px/1.35 "Inter Tight"; color: rgb(244 241 236 / 0.6); }
+.panel .tools { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 16px; }
+.panel .tools span { display: inline-flex; align-items: center; gap: 6px; height: 28px; padding: 0 10px; border-radius: 999px; background: rgb(255 255 255 / 0.92); font: 500 11.5px "Inter Tight"; color: var(--ink); }
+.panel .tools img { height: 13px; width: auto; }
+
+/* the white side */
+.side { position: absolute; left: 0; top: 0; bottom: 0; padding: 0 56px; }
+.mark { position: absolute; left: 56px; top: 108px; font: 800 64px/1 "Archivo"; font-stretch: 78%; letter-spacing: -0.01em; color: transparent; -webkit-text-stroke: 1.2px #b9b5ad; background: repeating-linear-gradient(135deg, #cfcbc3 0 1px, transparent 1px 5px); -webkit-background-clip: text; background-clip: text; }
+.who { position: absolute; left: 56px; top: 218px; }
+.who b { display: block; font: 600 19px "Inter Tight"; letter-spacing: -0.01em; }
+.who i { display: block; margin-top: 4px; font: italic 400 19px "Instrument Serif"; color: var(--mute); }
+.who hr { width: 26px; margin-top: 22px; border: 0; border-top: 1px solid #c9c5bd; }
+.h { position: absolute; left: 56px; top: 360px; width: 390px; font: 700 50px/1.06 "Inter Tight"; letter-spacing: -0.035em; }
+.h em { font: italic 400 1.08em "Instrument Serif"; letter-spacing: -0.01em; }
+.links { position: absolute; left: 56px; top: 600px; display: flex; flex-direction: column; gap: 12px; font: 500 13px "Inter Tight"; }
+.links a { display: inline-flex; align-items: center; gap: 8px; color: var(--ink); text-decoration: none; }
+.links a::after { content: "↗"; font-size: 12px; color: var(--mute); }
+.links .go { display: inline-flex; width: max-content; align-items: center; gap: 10px; height: 44px; padding: 0 20px; border-radius: 999px; background: var(--ink); color: #fff; margin-bottom: 8px; }
+.links .go::after { color: var(--acc); }
+.foot { position: absolute; left: 56px; right: 40px; bottom: 40px; display: flex; justify-content: space-between; font: 500 11.5px "Inter Tight"; color: var(--mute); }
+
+/* frame 1: the hero as it is now, for comparison */
+#f1 .photo { left: 892px; bottom: 52px; border-radius: 0 0 0 10px; }
+#f1 .photo::after { display: none; }
+#f1 .t { position: absolute; left: 226px; top: 225px; font: 800 176px/0.84 Montserrat; letter-spacing: -0.03em; text-transform: uppercase; color: var(--ink); }
+#f1 .t span { display: block; }
+/* frame 2: halfway, the photo widening */
+#f2 .photo { left: 690px; }
+#f2 .ghost { position: absolute; left: 226px; top: 190px; font: 800 176px/0.84 Montserrat; letter-spacing: -0.03em; text-transform: uppercase; color: var(--ink); opacity: .12; filter: blur(6px); }
+</style>
+</head>
+<body>
+
+<!-- 1. the hero today -->
+<section class="f" id="f1">
+	<div class="photo"><img src="img/photo.webp" alt="" style="left:0;top:-37px;width:547px;height:972px" /></div>
+	<p class="t"><span>Automate</span><span>busywork</span></p>
+</section>
+
+<!-- 2. scrolling: hero text gone, the photo widens to the left -->
+<section class="f" id="f2">
+	<p class="ghost">Automate<br />busywork</p>
+	<div class="photo studio"><img src="img/photo.webp" alt="" style="right:-40px;top:-20px;width:575px;height:1022px" /></div>
+	<div class="side" style="width:690px"><p class="mark" style="opacity:.5">MH</p></div>
+</section>
+
+<!-- 3. About landed -->
+<section class="f" id="f3">
+	<div class="photo studio" style="left:480px"><img src="img/photo.webp" alt="" style="right:-40px;top:-20px;width:575px;height:1022px" /></div>
+	<div class="panel" style="left:480px;width:390px">
+		<p class="lab">How I work</p>
+		<p>I start with the process, not the model. I map how the work moves today, find the steps that eat the most hours and automate those first. Every agent ships with logs, so you can always see what it did and why.</p>
+		<p class="lab gap">In production</p>
+		<div class="nums">
+			<div><b>6,700+</b><span>support conversations automated</span></div>
+			<div><b>21,000+</b><span>agent minutes saved</span></div>
+			<div><b>100%</b><span>Upwork job success, Top Rated Plus</span></div>
+			<div><b>3</b><span>regions: the US, UK and Middle East</span></div>
+		</div>
+		<p class="lab gap">The stack</p>
+		<div class="tools">
+			<span><img src="img/tools/n8n.png" alt="" /></span><span><img src="img/tools/make.png" alt="" />Make</span><span><img src="img/tools/zapier.png" alt="" /></span><span><img src="img/tools/ghl.png" alt="" />GHL</span><span><img src="img/tools/retell.png" alt="" /></span><span><img src="img/tools/claude.png" alt="" /></span><span><img src="img/tools/openai.svg" alt="" />OpenAI</span><span><img src="img/tools/airtable.svg" alt="" />Airtable</span><span><img src="img/tools/twilio.svg" alt="" />Twilio</span>
+		</div>
+	</div>
+	<div class="side" style="width:480px">
+		<p class="mark">MH</p>
+		<div class="who"><b>Muhammad Haris</b><i>AI automation engineer</i><hr /></div>
+		<h2 class="h">Who am I? An engineer who <em>ships</em> AI.</h2>
+		<div class="links"><a class="go" href="#">Start a project</a><a href="#">Upwork profile</a><a href="#">LinkedIn</a></div>
+		<div class="foot"><span>hello@autoany.io</span><span>About / 02</span></div>
+	</div>
+</section>
+
+<div class="hdr"><b>HARIS</b><span class="r">☰&nbsp; MENU</span><span class="r">EMAIL &nbsp;&nbsp; LINKEDIN</span></div>
+<script>
+const id = new URLSearchParams(location.search).get('f') || 'f3'
+document.getElementById(id).style.display = 'block'
+</script>
+</body>
+</html>

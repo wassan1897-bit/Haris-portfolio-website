@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>View project page, three ideas</title>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..700;1,6..96,400..700&family=Manrope:wght@400;500;600;700&family=JetBrains+Mono:wght@500&family=Montserrat:wght@600&display=swap" rel="stylesheet" />
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+:root { --bg: #251014; --bg2: #2f161b; --acc: #ff7a59; --ink: #f6eee9; --mute: rgb(246 238 233 / .62); --line: rgb(246 238 233 / .12); }
+html, body { width: 1440px; height: 900px; overflow: hidden; background: var(--bg); color: var(--ink); font-family: "Manrope", sans-serif; -webkit-font-smoothing: antialiased; }
+.f { display: none; position: absolute; inset: 0; overflow: hidden; }
+.mono { font: 500 11.5px "JetBrains Mono"; letter-spacing: .16em; text-transform: uppercase; color: var(--mute); }
+.mono b { color: var(--acc); font-weight: 500; }
+.serif { font-family: "Bodoni Moda", serif; font-weight: 500; letter-spacing: -.03em; }
+.serif em { font-style: italic; font-weight: 400; color: var(--acc); }
+.top { position: absolute; left: 0; right: 0; top: 0; height: 66px; display: flex; align-items: center; justify-content: space-between; padding: 0 40px; border-bottom: 1px solid var(--line); z-index: 5; background: color-mix(in srgb, var(--bg) 85%, transparent); backdrop-filter: blur(10px); }
+.top .x { display: inline-flex; align-items: center; gap: 10px; font: 600 13px "Manrope"; }
+.top .x i { width: 34px; height: 34px; border-radius: 50%; box-shadow: inset 0 0 0 1px var(--line); display: grid; place-items: center; font-style: normal; }
+.prog { position: absolute; left: 0; top: 65px; height: 2px; width: 34%; background: var(--acc); z-index: 6; }
+.shot { border-radius: 14px; overflow: hidden; box-shadow: 0 40px 90px -40px rgb(0 0 0 / .8), 0 0 0 1px var(--line); background: #000 center / cover no-repeat; }
+.chip { display: inline-flex; align-items: center; gap: 7px; height: 30px; padding: 0 12px; border-radius: 999px; background: rgb(246 238 233 / .94); color: #1b1b19; font: 600 12px "Manrope"; }
+.chip img { height: 14px; }
+.lab { position: absolute; left: 50%; bottom: 18px; transform: translateX(-50%); z-index: 9; padding: 8px 16px; border-radius: 999px; background: #f6eee9; color: #161614; font: 600 13px "Manrope"; white-space: nowrap; }
+
+/* ===== A. Editorial case study ===== */
+#A .hero { position: absolute; left: 56px; right: 56px; top: 110px; }
+#A h1 { margin-top: 18px; font-size: 104px; line-height: .92; max-width: 900px; }
+#A .sub { margin-top: 22px; max-width: 620px; font: 400 18px/1.55 "Manrope"; color: var(--mute); }
+#A .meta { position: absolute; left: 56px; right: 56px; top: 470px; display: grid; grid-template-columns: repeat(5, 1fr); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+#A .meta div { padding: 16px 0; }
+#A .meta small { display: block; font: 500 10.5px "JetBrains Mono"; letter-spacing: .14em; color: var(--mute); text-transform: uppercase; }
+#A .meta b { display: block; margin-top: 7px; font: 600 15px "Manrope"; }
+#A .vid { position: absolute; left: 56px; right: 56px; top: 560px; height: 520px; }
+#A .play { position: absolute; left: 50%; top: 720px; width: 96px; height: 96px; margin-left: -48px; border-radius: 50%; background: rgb(246 238 233 / .94); color: #161614; display: grid; place-items: center; font-size: 26px; }
+#A .stamp { position: absolute; right: 56px; top: 128px; width: 150px; height: 150px; border-radius: 50%; display: grid; place-items: center; text-align: center; background: var(--acc); color: #1b0a0d; transform: rotate(-8deg); }
+#A .stamp b { display: block; font: 500 44px/1 "Bodoni Moda"; }
+#A .stamp span { font: 700 11px "Manrope"; letter-spacing: .08em; text-transform: uppercase; }
+
+/* ===== B. Scroll story (sticky media, chapters) ===== */
+#B .toc { position: absolute; left: 40px; top: 120px; width: 170px; display: grid; gap: 14px; }
+#B .toc p { font: 600 13px "Manrope"; color: var(--mute); display: flex; gap: 10px; }
+#B .toc p span { font: 500 11px "JetBrains Mono"; }
+#B .toc p.on { color: var(--ink); }
+#B .toc p.on span { color: var(--acc); }
+#B .col { position: absolute; left: 250px; top: 120px; width: 440px; }
+#B .ch + .ch { margin-top: 56px; }
+#B .ch h3 { margin-top: 14px; font-size: 46px; line-height: 1; }
+#B .ch p { margin-top: 16px; font: 400 16px/1.6 "Manrope"; color: var(--mute); }
+#B .ch.dim { opacity: .3; }
+#B .ch ul { margin-top: 18px; list-style: none; display: grid; gap: 10px; }
+#B .ch li { display: flex; gap: 12px; font: 500 15px/1.4 "Manrope"; }
+#B .ch li::before { content: ""; flex: none; width: 7px; height: 7px; margin-top: 7px; border-radius: 50%; background: var(--acc); }
+#B .stage { position: absolute; left: 750px; right: 40px; top: 120px; bottom: 50px; border-radius: 20px; background: var(--bg2); box-shadow: inset 0 0 0 1px var(--line); }
+#B .stage .shot { position: absolute; left: 34px; right: 34px; top: 70px; height: 420px; background-size: contain; background-color: #1c0c10; }
+#B .stage .mono { position: absolute; left: 34px; top: 30px; }
+#B .stage .tabs { position: absolute; left: 34px; right: 34px; bottom: 30px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+#B .stage .tabs i { height: 70px; border-radius: 10px; background: #000 center / cover no-repeat; opacity: .5; box-shadow: inset 0 0 0 1px var(--line); }
+#B .stage .tabs i.on { opacity: 1; box-shadow: 0 0 0 2px var(--acc); }
+
+/* ===== C. Results board ===== */
+#C .head { position: absolute; left: 56px; right: 56px; top: 104px; display: flex; justify-content: space-between; align-items: flex-end; }
+#C h1 { margin-top: 14px; font-size: 70px; line-height: .95; }
+#C .grid { position: absolute; left: 56px; right: 56px; top: 270px; bottom: 40px; display: grid; grid-template-columns: 1.15fr 1fr 1fr; grid-template-rows: 1fr 1fr; gap: 16px; }
+#C .t { position: relative; border-radius: 20px; background: var(--bg2); box-shadow: inset 0 0 0 1px var(--line); padding: 22px 24px; overflow: hidden; }
+#C .t1 { grid-row: 1 / 3; padding: 0; }
+#C .t1 .shot { position: absolute; left: 0; top: 0; right: 0; bottom: 0; border-radius: 20px; box-shadow: none; }
+#C .t1 .cap { position: absolute; left: 22px; right: 22px; bottom: 20px; padding: 16px 18px; border-radius: 14px; background: rgb(20 8 10 / .6); backdrop-filter: blur(14px); }
+#C .t1 .cap p { margin-top: 6px; font: 500 15px/1.4 "Manrope"; }
+#C .big { margin-top: 14px; font: 500 72px/.9 "Bodoni Moda"; letter-spacing: -.02em; }
+#C .t small { display: block; margin-top: 10px; font: 400 13.5px/1.4 "Manrope"; color: var(--mute); }
+#C .bars { position: absolute; left: 24px; right: 24px; bottom: 22px; display: flex; align-items: flex-end; gap: 6px; height: 70px; }
+#C .bars i { flex: 1; border-radius: 3px 3px 1px 1px; background: linear-gradient(var(--acc), rgb(255 122 89 / .3)); }
+#C .t4 { background: var(--acc); color: #1b0a0d; }
+#C .t4 .mono { color: rgb(27 10 13 / .7); }
+#C .t4 .big { color: #1b0a0d; }
+#C .t5 .flow { margin-top: 16px; display: grid; gap: 8px; }
+#C .t5 .flow p { display: flex; align-items: center; gap: 10px; padding: 9px 12px; border-radius: 10px; background: rgb(246 238 233 / .06); font: 600 13px "Manrope"; }
+#C .t5 .flow p i { width: 22px; height: 22px; border-radius: 50%; background: var(--acc); color: #1b0a0d; display: grid; place-items: center; font: 700 11px "Manrope"; font-style: normal; }
+#C .t6 .chips { margin-top: 14px; display: flex; flex-wrap: wrap; gap: 8px; }
+#C .t6 .go { position: absolute; left: 24px; right: 24px; bottom: 22px; display: flex; justify-content: space-between; align-items: center; height: 52px; padding: 0 8px 0 20px; border-radius: 999px; background: var(--ink); color: #161614; font: 600 14px "Manrope"; }
+#C .t6 .go i { width: 38px; height: 38px; border-radius: 50%; background: var(--acc); display: grid; place-items: center; font-style: normal; }
+</style>
+</head>
+<body>
+<section class="f" id="A">
+	<div class="top"><span class="mono"><b>05 / 05</b> &nbsp;Case study</span><span class="x">Close <i>✕</i></span></div><i class="prog" style="width:6%"></i>
+	<div class="hero">
+		<p class="mono"><b>AI agent</b> &nbsp;· &nbsp;Broadband provider</p>
+		<h1 class="serif">The night shift, <em>handled.</em></h1>
+		<p class="sub">A fully autonomous Level 1 support agent that triages customers, checks outages live and opens structured tickets out of hours, with no human involved.</p>
+	</div>
+	<div class="stamp"><div><b>790+</b><span>tickets solved</span></div></div>
+	<div class="meta"><div><small>Client</small><b>UK broadband provider</b></div><div><small>My role</small><b>AI automation engineer</b></div><div><small>Built with</small><b>n8n · OpenAI · Voiceflow</b></div><div><small>Status</small><b>Live, 24/7</b></div><div><small>Saved</small><b>7,101 minutes</b></div></div>
+	<div class="vid shot" style="background-image:url(img/poster.webp)"></div>
+	<span class="play">▶</span>
+</section>
+
+<section class="f" id="B">
+	<div class="top"><span class="mono"><b>05 / 05</b> &nbsp;The night shift, handled.</span><span class="x">Close <i>✕</i></span></div><i class="prog" style="width:52%"></i>
+	<div class="toc"><p><span>01</span>The problem</p><p class="on"><span>02</span>What I built</p><p><span>03</span>How it routes</p><p><span>04</span>Results</p></div>
+	<div class="col">
+		<div class="ch dim"><p class="mono"><b>01</b> &nbsp;The problem</p><h3 class="serif">Queries waited until <em>morning.</em></h3></div>
+		<div class="ch"><p class="mono"><b>02</b> &nbsp;What I built</p><h3 class="serif">An agent that <em>works the night shift.</em></h3>
+			<p>The conversation runs in Voiceflow; n8n does the work behind it, one job per workflow.</p>
+			<ul><li>Live CRM triage: an existing customer or a prospect</li><li>Real-time network and outage checks through APIs</li><li>Structured tickets handed to the right team</li></ul></div>
+		<div class="ch dim"><p class="mono"><b>03</b> &nbsp;How it routes</p><h3 class="serif">Five lanes, <em>one per team.</em></h3></div>
+	</div>
+	<div class="stage"><p class="mono"><b>Workflow 01</b> &nbsp;Live network and outage check</p><div class="shot" style="background-image:url(img/n8n-outage.webp)"></div>
+		<div class="tabs"><i class="on" style="background-image:url(img/n8n-outage.webp)"></i><i style="background-image:url(img/n8n-routing.webp)"></i><i style="background-image:url(img/voiceflow.webp)"></i><i style="background-image:url(img/dash-tickets.webp)"></i></div></div>
+</section>
+
+<section class="f" id="C">
+	<div class="top"><span class="mono"><b>05 / 05</b> &nbsp;Case study</span><span class="x">Close <i>✕</i></span></div>
+	<div class="head"><div><p class="mono"><b>AI agent</b> &nbsp;· &nbsp;Live, 24/7</p><h1 class="serif">The night shift, <em>handled.</em></h1></div><p style="max-width:420px;font:400 15px/1.55 Manrope;color:var(--mute)">A Level 1 support agent for a broadband provider: triage, live outage checks and tickets, out of hours, with no human involved.</p></div>
+	<div class="grid">
+		<div class="t t1"><div class="shot" style="background-image:url(img/poster.webp)"></div><div class="cap"><p class="mono"><b>▶ Watch</b> &nbsp;12 s</p><p>A flight through the outage check and the five routing lanes.</p></div></div>
+		<div class="t"><p class="mono">Tickets resolved</p><p class="big">790+</p><small>end to end, no person touched them</small><div class="bars"><i style="height:22%"></i><i style="height:34%"></i><i style="height:30%"></i><i style="height:48%"></i><i style="height:44%"></i><i style="height:60%"></i><i style="height:70%"></i><i style="height:66%"></i><i style="height:82%"></i><i style="height:100%"></i></div></div>
+		<div class="t"><p class="mono">Support time saved</p><p class="big">7,101</p><small>minutes handed back to the team</small></div>
+		<div class="t t4"><p class="mono">Out of hours</p><p class="big">0</p><small style="color:rgb(27 10 13 / .75)">humans needed overnight</small></div>
+		<div class="t t5"><p class="mono">How a query moves</p><div class="flow"><p><i>1</i>Triage: customer or prospect</p><p><i>2</i>Live outage check</p><p><i>3</i>Ticket to the right team</p></div></div>
+		<div class="t t6" style="display:none"></div>
+	</div>
+</section>
+
+<script>
+const id = (new URLSearchParams(location.search).get('f') || 'A').toUpperCase()
+document.getElementById(id).style.display = 'block'
+const L = { A: 'A. Editorial case study', B: 'B. Scroll story', C: 'C. Results board' }
+document.body.insertAdjacentHTML('beforeend', `<span class="lab">${L[id]}</span>`)
+</script>
+</body>
+</html>

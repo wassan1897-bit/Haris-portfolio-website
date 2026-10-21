@@ -1,0 +1,1 @@
+A white-label estimation product: photo in, price range out by SMS and email in minutes. A vision model reads the photo, a fixed rubric sets the price, and one core runs seven businesses.

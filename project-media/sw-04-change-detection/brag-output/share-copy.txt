@@ -1,0 +1,1 @@
+Change detection and risk intelligence: a weekly sweep of 42k checks across a very large set of public listings, where a flag only becomes a lead after a delayed, independently corroborated recheck.

@@ -1,0 +1,66 @@
+<!doctype html>
+<html><head><meta charset="utf-8" />
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,500;0,600;1,500&family=Inter+Tight:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{width:1920px;height:1080px;overflow:hidden;font-family:"Inter Tight",sans-serif;-webkit-font-smoothing:antialiased;
+  --bg:#f4f4f6;--card:#e9e9ed;--ink:#141416;--grey:#8d8d93;--mute:#55555b;--line:#d6d6dc;--btn:#141416;--btnInk:#fff}
+body.dark{--bg:#121212;--card:#1b1b1e;--ink:#ece8e0;--grey:#6f6c66;--mute:#a19d95;--line:#2c2c30;--btn:#ece8e0;--btnInk:#121212}
+body{background:var(--bg);color:var(--ink);background-image:repeating-linear-gradient(135deg,transparent 0 6px,rgba(127,127,127,.035) 6px 7px)}
+.nav{position:absolute;left:20px;right:20px;top:20px;display:flex;justify-content:space-between;font:600 16px "Inter Tight";z-index:9}
+/* the card, with the portrait breaking out of its top */
+.card{position:absolute;left:170px;right:170px;top:170px;height:740px;border-radius:44px;background:var(--card);overflow:visible}
+.card::after{content:"";position:absolute;inset:0;border-radius:44px;background:linear-gradient(90deg,transparent 55%,rgba(0,0,0,.06));pointer-events:none}
+body.dark .card::after{background:linear-gradient(90deg,transparent 55%,rgba(255,255,255,.035))}
+.clip{position:absolute;left:0;right:0;top:-200px;bottom:0;border-radius:0 0 44px 44px;overflow:hidden;clip-path:inset(0 0 0 0 round 0 0 44px 44px)}
+.me{position:absolute;right:30px;bottom:0;height:880px;filter:grayscale(1) contrast(1.08);-webkit-mask-image:linear-gradient(90deg,transparent,#000 14%);mask-image:linear-gradient(90deg,transparent,#000 14%)}
+.copy{position:absolute;left:130px;top:118px;width:780px}
+h1{font:600 92px/1.02 "Lora",serif;letter-spacing:-.02em}
+h1 span{display:block;color:var(--grey)}
+.lede{margin-top:26px;font:400 24px/1.5 "Inter Tight";color:var(--mute);max-width:680px}
+.btns{margin-top:36px;display:flex;gap:14px}
+.b{padding:18px 28px;border-radius:14px;font:500 20px "Inter Tight"}
+.b1{background:var(--btn);color:var(--btnInk);box-shadow:0 8px 24px rgba(0,0,0,.18)}
+.b2{box-shadow:inset 0 0 0 1.5px var(--line);color:var(--ink)}
+.stats{margin-top:52px;display:flex;gap:64px}
+.stats b{display:block;font:500 54px/1 "Lora",serif;letter-spacing:-.02em}
+.stats small{display:block;margin-top:10px;font:400 19px "Inter Tight";color:var(--mute)}
+.glass{position:absolute;right:70px;bottom:70px;width:520px;padding:30px 34px;border-radius:24px;background:rgba(40,40,44,.62);
+  -webkit-backdrop-filter:blur(18px);backdrop-filter:blur(18px);box-shadow:inset 0 0 0 1px rgba(255,255,255,.16);color:#fff;display:grid;grid-template-columns:1fr 64px;gap:6px 24px;align-items:center}
+.glass small{grid-column:1/-1;font:400 17px "Inter Tight";color:#b8b8bf}
+.glass b{font:500 26px "Inter Tight"}
+.glass p{font:400 18px/1.5 "Inter Tight";color:#d6d6dc}
+.glass i{grid-row:2/4;grid-column:2;display:grid;place-items:center;width:64px;height:64px;border-radius:14px;background:#fff;color:#111;font:500 26px "Inter Tight";font-style:normal}
+.dot{display:inline-block;width:9px;height:9px;border-radius:50%;background:#58c26a;margin-right:10px;vertical-align:3px}
+/* the tools, scrolling past */
+.tools{position:absolute;left:170px;right:170px;top:975px;display:flex;gap:80px;align-items:center;white-space:nowrap;
+  -webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
+.tools span{display:flex;align-items:center;gap:14px;font:600 28px "Inter Tight";color:var(--ink);opacity:.85}
+.tools img{height:34px;width:auto;filter:grayscale(1)}
+body.dark .tools img{filter:grayscale(1) brightness(1.6)}
+body.dark .tools img.ink{filter:grayscale(1) invert(1) brightness(1.2)}
+</style></head>
+<body>
+<div class="nav"><span>HARIS</span><span>☰ MENU</span><span>EMAIL &nbsp; LINKEDIN</span></div>
+<div class="card">
+  <div class="clip"><img class="me" src="haris-turtleneck-clean.png" /></div>
+  <div class="copy">
+    <h1>Let’s automate<span>the busywork.</span></h1>
+    <p class="lede">I build AI agents and automations that answer calls, handle support tickets and keep your CRM up to date, for founders and small teams.</p>
+    <div class="btns"><span class="b b1">Start a project</span><span class="b b2">Hire on Upwork</span></div>
+    <div class="stats"><div><b>33</b><small>Jobs completed</small></div><div><b>728</b><small>Hours on Upwork</small></div><div><b>100%</b><small>Job Success</small></div></div>
+  </div>
+  <div class="glass"><small><span class="dot"></span>Karachi · 4:12 PM</small><b>Taking new projects</b><i>↗</i><p>Send me what’s eating your team’s week. I’ll reply within a day with a plan and a fixed price.</p></div>
+</div>
+<div class="tools">
+  <span><img src="../../public/landing/assets/img/tools/n8n.png" class="ink"></span>
+  <span><img src="../../public/landing/assets/img/tools/retell.png"></span>
+  <span><img src="../../public/landing/assets/img/tools/openai.svg">OpenAI</span>
+  <span><img src="../../public/landing/assets/img/tools/claude.png" class="ink"></span>
+  <span><img src="../../public/landing/assets/img/tools/airtable.svg">Airtable</span>
+  <span><img src="../../public/landing/assets/img/tools/twilio.svg">Twilio</span>
+  <span><img src="../../public/landing/assets/img/tools/make.png">Make</span>
+  <span><img src="../../public/landing/assets/img/tools/zapier.png">Zapier</span>
+  <span><img src="../../public/landing/assets/img/tools/ghl.png">GoHighLevel</span>
+</div>
+</body></html>

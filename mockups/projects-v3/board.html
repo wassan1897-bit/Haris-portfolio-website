@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Project video and text, two plans</title>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..700;1,6..96,400..700&family=Manrope:wght@400;500;600;700&family=JetBrains+Mono:wght@500&family=Montserrat:wght@600&display=swap" rel="stylesheet" />
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body { width: 1440px; height: 900px; overflow: hidden; font-family: "Manrope", sans-serif; -webkit-font-smoothing: antialiased; color: #f2efe8; background: var(--bg); }
+.hdr { position: absolute; left: 0; right: 0; top: 0; height: 64px; display: flex; align-items: center; justify-content: space-between; padding: 0 22px; z-index: 30; font: 500 15px "Manrope"; }
+.hdr b { font: 600 15px Montserrat; }
+.mono { font: 500 11.5px "JetBrains Mono"; letter-spacing: .16em; text-transform: uppercase; color: rgb(242 239 232 / .6); }
+.mono b { color: var(--acc); font-weight: 500; }
+.f { display: none; position: absolute; inset: 0; overflow: hidden; }
+.clip { position: absolute; background: #000 var(--img) center / cover no-repeat; }
+h2 { font: 500 80px/.95 "Bodoni Moda"; letter-spacing: -.035em; }
+h2 em { font-style: italic; font-weight: 400; color: var(--acc); }
+.line { margin-top: 22px; max-width: 520px; font: 400 17px/1.55 "Manrope"; color: rgb(242 239 232 / .78); }
+.cta { display: inline-flex; align-items: center; gap: 14px; height: 54px; margin-top: 30px; padding: 0 8px 0 24px; border-radius: 999px; background: #f2efe8; color: #161614; font: 600 15px "Manrope"; }
+.cta i { width: 40px; height: 40px; border-radius: 50%; background: var(--acc); display: grid; place-items: center; font-style: normal; }
+.glass { position: absolute; left: 58px; right: 100px; bottom: 44px; display: grid; grid-template-columns: repeat(3, 1fr) 1.35fr; border-radius: 20px; background: rgb(20 20 22 / .42); backdrop-filter: blur(18px); box-shadow: inset 0 0 0 1px rgb(255 255 255 / .1); }
+.glass > p { padding: 18px 22px; }
+.glass > p + p { border-left: 1px solid rgb(255 255 255 / .1); }
+.glass b { display: block; font: 500 36px/1 "Bodoni Moda"; }
+.glass span { display: block; margin-top: 8px; font: 400 12.5px "Manrope"; color: rgb(242 239 232 / .6); }
+.chips { display: flex; flex-wrap: wrap; align-content: center; gap: 7px; }
+.chips span { display: inline-flex; align-items: center; gap: 7px; height: 30px; margin: 0; padding: 0 12px; border-radius: 999px; background: rgb(242 239 232 / .94); font: 600 12px "Manrope"; color: #1b1b19; }
+.chips img { height: 14px; }
+.rail { position: absolute; right: 26px; top: 50%; transform: translateY(-50%); display: grid; gap: 12px; font: 500 11px "JetBrains Mono"; color: rgb(242 239 232 / .35); text-align: right; }
+.rail .on { color: #f2efe8; }
+.lab { position: absolute; left: 50%; top: 82px; transform: translateX(-50%); z-index: 40; padding: 8px 16px; border-radius: 999px; background: #f2efe8; color: #161614; font: 600 13px "Manrope"; white-space: nowrap; }
+.prog { position: absolute; left: 58px; right: 100px; bottom: 26px; height: 3px; border-radius: 3px; background: rgb(255 255 255 / .14); }
+.prog i { display: block; height: 100%; border-radius: 3px; background: var(--acc); }
+
+/* plan 1: the clip re-cut for a stage on the right; the left 40% is clean page colour */
+/* the backdrop of the clip (grid, particles) runs full screen; its content is composed inside the right stage */
+.p1 .atmo { position: absolute; inset: 0; background: var(--img) center / cover; filter: blur(30px) brightness(.55); transform: scale(1.1); }
+.p1 .clip { left: 40vw; right: 2vw; top: 50%; aspect-ratio: 16/9; transform: translateY(-62%); background-size: cover; -webkit-mask-image: radial-gradient(75% 75% at 50% 50%, #000 60%, transparent); mask-image: radial-gradient(75% 75% at 50% 50%, #000 60%, transparent); }
+.p1 .shade { position: absolute; inset: 0; background: linear-gradient(90deg, color-mix(in srgb, var(--bg) 70%, transparent), transparent 45%), linear-gradient(transparent 62%, var(--bg)); }
+.p1 .t { position: absolute; left: 58px; top: 150px; width: 560px; }
+
+/* plan 2: intro full screen, then the clip settles to the right */
+.full .clip { inset: 0; }
+.full .tag { position: absolute; left: 58px; bottom: 60px; }
+.full .tag p:last-child { margin-top: 10px; font: 400 40px "Bodoni Moda"; letter-spacing: -.02em; }
+.mid .clip { left: 22vw; right: -6vw; top: 6vh; bottom: 6vh; border-radius: 18px; opacity: .95; }
+.mid .t { position: absolute; left: 58px; top: 170px; width: 560px; opacity: .45; transform: translateY(26px); filter: blur(2px); }
+.set .clip { left: 46vw; right: 4vw; top: 50%; aspect-ratio: 16/9; transform: translateY(-58%); border-radius: 16px; box-shadow: 0 60px 120px -40px rgb(0 0 0 / .8), 0 0 0 1px rgb(255 255 255 / .1); }
+.set .glow { position: absolute; left: 40vw; right: -6vw; top: 6%; bottom: 20%; background: radial-gradient(closest-side, color-mix(in srgb, var(--acc) 24%, transparent), transparent); }
+.set .t { position: absolute; left: 58px; top: 150px; width: 560px; }
+</style>
+</head>
+<body>
+<section class="f p1" id="p1"><div class="atmo"></div><div class="shade"></div><div class="clip"></div><div class="t" data-t></div><div class="glass" data-g></div></section>
+<section class="f full" id="p2a"><div class="clip"></div><div class="tag"><p class="mono" data-no></p><p data-name></p></div><div class="prog"><i style="width:28%"></i></div></section>
+<section class="f mid" id="p2b"><div class="clip"></div><div class="t" data-t></div></section>
+<section class="f set" id="p2c"><div class="glow"></div><div class="clip"></div><div class="t" data-t></div><div class="glass" data-g></div></section>
+<div class="hdr"><b>HARIS</b><span>☰&nbsp; MENU</span><span>EMAIL &nbsp;&nbsp; LINKEDIN</span></div>
+<script>
+const P = {
+	2: { bg: '#0c0c0d', acc: '#f2b84b', img: 'c02.jpg', name: 'AI support for a UK broadband provider', h: 'One chat agent, <em>six workflows behind it.</em>', line: 'End-to-end AI customer support for a UK fibre broadband provider: the agent talks to customers, six single-purpose workflows do the work.', nums: [['6,700+', 'customer conversations automated'], ['2,400+', 'tickets routed across 7 departments'], ['21,000+', 'agent minutes saved, estimated']], tools: ['Conversational AI', 'CRM and ticketing', 'Microsoft Teams', '<img src="img/tools/airtable.svg">Airtable'] },
+	4: { bg: '#1b1230', acc: '#b9a4ff', img: 'c04.jpg', name: 'Multi-tenant AI compliance platform', h: 'Many tenants, one platform. <em>Data never mixes.</em>', line: 'A bilingual compliance platform where 16 AI consultant personas advise many organisations without ever mixing their data.', nums: [['16', 'AI consultant personas'], ['2', 'languages, English and Arabic'], ['80 → 8', 'candidates reranked for every answer']], tools: ['.NET', 'React', 'FastAPI', '<img src="img/tools/python.svg">Python', 'Playwright'] },
+	1: { bg: '#12261f', acc: '#8fd46f', img: 'c01.jpg', name: 'Two-sided marketplace app', h: 'One web app, <em>two app stores.</em>', line: 'A homeowner-and-contractor marketplace taken from the web to native iOS and Android, built solo with no Mac anywhere in the pipeline.', nums: [['1st', 'submission approved by Apple'], ['2', 'stores live, App Store and Google Play'], ['0', 'Macs used to build and sign it']], tools: ['React / TypeScript', 'Capacitor', '<img src="img/tools/postgresql.svg">Postgres', 'Cloud macOS CI'] },
+}
+const q = new URLSearchParams(location.search)
+const n = q.get('p') || 4, p = P[n], f = q.get('f') || 'p1'
+const r = document.documentElement.style
+r.setProperty('--bg', p.bg); r.setProperty('--acc', p.acc); r.setProperty('--img', `url(img/${p.img})`)
+const s = document.getElementById(f); s.style.display = 'block'
+s.querySelectorAll('[data-t]').forEach((e) => (e.innerHTML = `<p class="mono"><b>0${n} / 05</b> &nbsp;Client project</p><h2 style="margin-top:22px">${p.h}</h2><p class="line">${p.line}</p><span class="cta">View the project <i>→</i></span>`))
+s.querySelectorAll('[data-g]').forEach((e) => (e.innerHTML = p.nums.map(([b, t]) => `<p><b>${b}</b><span>${t}</span></p>`).join('') + `<p class="chips">${p.tools.map((t) => `<span>${t}</span>`).join('')}</p>`))
+s.querySelectorAll('[data-no]').forEach((e) => (e.innerHTML = `<b>0${n} / 05</b> &nbsp;Client project`))
+s.querySelectorAll('[data-name]').forEach((e) => (e.textContent = p.name))
+const L = { p1: 'Plan 1: clips re-rendered with their content on the right', p2a: 'Plan 2, step 1: the clip plays alone, full screen', p2b: 'Plan 2, step 2: it glides right, the text rises', p2c: 'Plan 2, step 3: settled, the clip keeps playing' }
+document.body.insertAdjacentHTML('beforeend', `<span class="lab">${L[f]}</span>`)
+</script>
+</body>
+</html>

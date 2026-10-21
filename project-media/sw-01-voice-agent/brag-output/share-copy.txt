@@ -1,0 +1,1 @@
+Enterprise voice AI agent: a Retell AI phone agent that answers every call, checks live outages through n8n and routes callers to the right team with the context kept.

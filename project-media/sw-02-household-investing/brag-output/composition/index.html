@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1350" />
+    <title>Household investing, the trust boundary</title>
+    <script src="assets/gsap.min.js"></script>
+    <style>
+      @font-face { font-family: "Inter"; src: url("assets/fonts/inter-latin-400-normal.woff2") format("woff2"); font-weight: 400; font-display: block; }
+      @font-face { font-family: "Inter"; src: url("assets/fonts/inter-latin-600-normal.woff2") format("woff2"); font-weight: 600; font-display: block; }
+      @font-face { font-family: "Inter"; src: url("assets/fonts/inter-latin-700-normal.woff2") format("woff2"); font-weight: 700; font-display: block; }
+      @font-face { font-family: "Inter"; src: url("assets/fonts/inter-latin-800-normal.woff2") format("woff2"); font-weight: 800; font-display: block; }
+
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { width: 1080px; height: 1350px; overflow: hidden; background: #0d1410; }
+      body { font-family: "Inter", sans-serif; color: #f3efe4; -webkit-font-smoothing: antialiased; }
+      #root { position: relative; width: 100%; height: 100%; overflow: hidden; background: radial-gradient(1100px 1300px at 50% 40%, #18241c 0%, #111a14 55%, #0d1410 100%); }
+      .k { font-size: 21px; font-weight: 800; letter-spacing: 0.24em; color: #e3b85c; }
+
+      /* ---------- 1. the question ---------- */
+      #s1 { position: absolute; left: 0; top: 0; width: 100%; height: 100%; }
+      #ex { position: absolute; left: 90px; top: 150px; }
+      .q { position: absolute; right: 90px; top: 260px; max-width: 700px; padding: 30px 36px; border-radius: 34px 34px 8px 34px; background: #f3efe4; color: #13190f; font-size: 44px; font-weight: 700; line-height: 1.15; letter-spacing: -0.02em; }
+      .a { position: absolute; left: 90px; right: 90px; top: 560px; padding: 40px 42px; border-radius: 8px 34px 34px 34px; background: #17221a; box-shadow: inset 0 0 0 2px rgba(227, 184, 92, 0.35); }
+      .a .h { display: flex; align-items: center; gap: 16px; font-size: 22px; font-weight: 800; letter-spacing: 0.18em; color: #e3b85c; }
+      .a .h i { width: 40px; height: 40px; border-radius: 12px; background: #e3b85c; display: grid; place-items: center; font-style: normal; color: #13190f; font-size: 22px; }
+      .a p { margin-top: 22px; font-size: 38px; font-weight: 600; line-height: 1.22; color: #f3efe4; }
+      .ev { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 30px; }
+      .ev span { padding: 14px 22px; border-radius: 999px; background: rgba(227, 184, 92, 0.12); box-shadow: inset 0 0 0 2px rgba(227, 184, 92, 0.4); font-size: 26px; font-weight: 700; color: #f0d79c; }
+      #typing { display: inline-block; width: 4px; height: 44px; margin-left: 4px; vertical-align: -6px; background: #13190f; }
+
+      /* ---------- 2. the blueprint ---------- */
+      #s2 { position: absolute; left: 0; top: 0; width: 100%; height: 100%; }
+      #bp { position: absolute; left: 0; top: 0; width: 2200px; height: 1350px; transform-origin: 0 0; }
+      #grid { position: absolute; left: 0; top: 0; width: 2200px; height: 1350px; background-image: linear-gradient(rgba(227, 184, 92, 0.07) 1px, transparent 1px), linear-gradient(90deg, rgba(227, 184, 92, 0.07) 1px, transparent 1px); background-size: 54px 54px; }
+      .box { position: absolute; border-radius: 22px; background: #16211a; box-shadow: inset 0 0 0 2px #3c4a3e; padding: 22px 26px; }
+      .box b { display: block; font-size: 30px; font-weight: 800; color: #f3efe4; }
+      .box small { display: block; margin-top: 8px; font-size: 21px; font-weight: 600; color: #a8b3a6; }
+      .mono { border-radius: 30px; background: transparent; box-shadow: inset 0 0 0 3px rgba(243, 239, 228, 0.25); }
+      .mono > b { font-size: 22px; letter-spacing: 0.18em; color: #a8b3a6; }
+      .db { border-radius: 26px 26px 50px 50px / 26px 26px 40px 40px; }
+      .db.gold { background: #2a2414; box-shadow: inset 0 0 0 3px #e3b85c, 0 0 60px rgba(227, 184, 92, 0.25); }
+      .db.gold b { color: #f0d79c; }
+      .agent { background: #e3b85c; box-shadow: none; }
+      .agent b, .agent small { color: #13190f; }
+      svg.wires { position: absolute; left: 0; top: 0; }
+      .wire { fill: none; stroke: #5a6b5c; stroke-width: 4; }
+      .wire.gold { stroke: #e3b85c; }
+      .wire.bad { stroke: #ff6b57; stroke-dasharray: 16 14; }
+      .stamp { position: absolute; padding: 18px 28px; border: 6px solid #ff6b57; border-radius: 14px; color: #ff6b57; font-size: 40px; font-weight: 800; letter-spacing: 0.08em; transform: rotate(-9deg); background: rgba(13, 20, 16, 0.85); white-space: nowrap; }
+      .cap { position: absolute; left: 90px; right: 90px; top: 1060px; }
+      .cap .t { margin-top: 14px; font-size: 52px; font-weight: 800; line-height: 1.06; letter-spacing: -0.025em; color: #f6f2e8; }
+
+      /* ---------- 3. how it ships ---------- */
+      #s3 { position: absolute; left: 0; top: 0; width: 100%; height: 100%; }
+      .lane { position: absolute; left: 90px; right: 90px; height: 150px; border-radius: 26px; box-shadow: inset 0 0 0 2px #2c3a2f; }
+      .lane p { position: absolute; left: 30px; top: 22px; font-size: 20px; font-weight: 800; letter-spacing: 0.2em; color: #a8b3a6; }
+      .pr { position: absolute; top: 58px; height: 70px; padding: 0 22px; border-radius: 16px; background: #f3efe4; color: #13190f; display: flex; align-items: center; gap: 14px; font-size: 24px; font-weight: 700; white-space: nowrap; }
+      .pr i { width: 30px; height: 30px; border-radius: 50%; background: #2f9e62; display: grid; place-items: center; font-style: normal; color: #fff; font-size: 18px; }
+
+      /* ---------- 4. close ---------- */
+      #end { position: absolute; left: 90px; right: 90px; top: 250px; }
+      #end h2 { margin-top: 30px; font-size: 92px; font-weight: 800; line-height: 1; letter-spacing: -0.045em; color: #f6f2e8; }
+      #end h2 span { color: #e3b85c; }
+      #facts { margin-top: 60px; display: grid; gap: 18px; }
+      #facts p { display: flex; align-items: center; gap: 22px; padding: 22px 26px; border-radius: 20px; background: rgba(227, 184, 92, 0.08); box-shadow: inset 0 0 0 2px rgba(227, 184, 92, 0.24); font-size: 31px; font-weight: 700; color: #f3efe4; }
+      #facts p i { width: 52px; height: 52px; border-radius: 50%; background: #e3b85c; color: #13190f; display: grid; place-items: center; font-style: normal; font-size: 24px; font-weight: 800; flex: none; }
+      #stack { margin-top: 46px; font-size: 22px; font-weight: 700; letter-spacing: 0.16em; color: #a8b3a6; }
+
+      .grainbox { position: absolute; left: -60px; top: -60px; right: -60px; bottom: -60px; overflow: hidden; pointer-events: none; }
+      #grain { position: absolute; left: 0; top: 0; width: 1300px; height: 1560px; opacity: 0.08; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' seed='31' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23n)'/%3E%3C/svg%3E"); }
+      .vig { position: absolute; left: 0; top: 0; width: 100%; height: 100%; box-shadow: inset 0 0 320px rgba(4, 8, 5, 0.8); pointer-events: none; }
+      #fade { position: absolute; left: 0; top: 0; width: 100%; height: 100%; background: #0d1410; }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="12" data-width="1080" data-height="1350">
+      <div id="s1">
+        <p class="k" id="ex">EXAMPLE QUESTION</p>
+        <p class="q" id="q"><span id="qt"></span><i id="typing"></i></p>
+        <div class="a" id="a">
+          <p class="h"><i>✦</i>THE AGENT, WITH EVIDENCE</p>
+          <p>Here is what your own accounts say, and where each number comes from.</p>
+          <div class="ev"><span>Pension</span><span>ISA</span><span>Mortgage</span><span>Monthly spend</span></div>
+        </div>
+      </div>
+
+      <div id="s2">
+        <div id="bp">
+          <div id="grid"></div>
+          <svg class="wires" width="2200" height="1350" viewBox="0 0 2200 1350">
+            <path class="wire" d="M420 470 H560" />
+            <path class="wire" d="M420 470 C470 470 490 700 560 700" />
+            <path class="wire gold" d="M880 470 H1180" />
+            <path class="wire" d="M880 700 C1000 700 1060 760 1180 760" />
+            <path class="wire bad" id="badwire" d="M880 700 C1000 700 1020 520 1180 500" />
+            <path class="wire gold" d="M1500 470 H1640" />
+            <path class="wire gold" d="M1960 470 H2060" />
+          </svg>
+          <div class="box" style="left: 140px; top: 400px; width: 280px"><b>CI gates</b><small>on every change</small></div>
+          <div class="box mono" style="left: 520px; top: 330px; width: 400px; height: 500px"><b>MONOREPO</b></div>
+          <div class="box" style="left: 560px; top: 420px; width: 320px"><b>Investing app</b><small>money, accounts</small></div>
+          <div class="box" style="left: 560px; top: 650px; width: 320px"><b>Content app</b><small>public pages</small></div>
+          <div class="box db gold" style="left: 1180px; top: 410px; width: 320px"><b>PRIVATE DB</b><small style="color:#d9c48f">money + auth</small></div>
+          <div class="box db" style="left: 1180px; top: 700px; width: 320px"><b>PUBLIC DB</b><small>no PII</small></div>
+          <div class="box agent" style="left: 1640px; top: 410px; width: 320px"><b>Tool-using AI agent</b><small>reads the private side</small></div>
+          <div class="box" style="left: 2060px; top: 410px; width: 120px; padding: 22px 18px"><b>Ask</b><small>with evidence</small></div>
+          <p class="stamp" id="stamp" style="left: 900px; top: 560px">BLOCKED BY LINT RULE</p>
+        </div>
+        <div class="cap"><p class="k">THE TRUST BOUNDARY</p><p class="t">A privacy mistake fails the build, not production.</p></div>
+      </div>
+
+      <div id="s3">
+        <div class="lane" style="top: 250px"><p>FRESH-CONTEXT AI REVIEW</p></div>
+        <div class="lane" style="top: 440px"><p>MERGE QUEUE · ONE AT A TIME</p></div>
+        <div class="lane" style="top: 630px"><p>VERIFIED ON A REAL RUNNING BUILD</p></div>
+        <div class="pr" id="pr1" style="left: 130px"><i>✓</i>feat: rebalancing</div>
+        <div class="pr" id="pr2" style="left: 130px"><i>✓</i>db: migration</div>
+        <div class="pr" id="pr3" style="left: 130px"><i>✓</i>agent: evidence</div>
+        <div class="cap"><p class="k">HOW IT SHIPS</p><p class="t">Hundreds of pull requests, each reviewed by a fresh AI pass.</p></div>
+      </div>
+
+      <div id="end">
+        <p class="k">FOUNDING ENGINEER · LIVE</p>
+        <h2>Household investing, <span>with an agent that shows its evidence.</span></h2>
+        <div id="facts">
+          <p><i>1</i>Live, onboarding outside beta customers</p>
+          <p><i>2</i>Two AI dev agents, one production codebase</p>
+          <p><i>3</i>Groundwork for regulated open banking</p>
+        </div>
+        <p id="stack">NEXT.JS · REACT · POSTGRES · VERCEL</p>
+      </div>
+
+      <div class="grainbox"><div id="grain"></div></div>
+      <div class="vig"></div>
+      <div id="fade"></div>
+    </div>
+
+    <script>
+      const tl = gsap.timeline({ paused: true, defaults: { ease: "power3.out" } });
+      tl.fromTo("#grain", { x: 0, y: 0 }, { x: -120, y: -80, duration: 12, ease: "steps(96)" }, 0);
+      tl.fromTo("#fade", { opacity: 1 }, { opacity: 0, duration: 0.4, ease: "none" }, 0);
+      tl.to("#fade", { opacity: 1, duration: 0.4, ease: "none" }, 11.6);
+      tl.set(["#s2", "#s3", "#end"], { opacity: 0 }, 0);
+
+      // 1. the question types in, the agent answers with its evidence
+      const Q = "Can we afford to retire at 58?";
+      const qo = { n: 0 };
+      tl.fromTo("#ex", { opacity: 0 }, { opacity: 1, duration: 0.4, ease: "none" }, 0.2);
+      tl.fromTo("#q", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.5 }, 0.25);
+      tl.fromTo(qo, { n: 0 }, { n: Q.length, duration: 0.9, ease: "none", onUpdate: () => (document.getElementById("qt").textContent = Q.slice(0, Math.round(qo.n))) }, 0.4);
+      tl.fromTo("#typing", { opacity: 1 }, { opacity: 0, duration: 0.2, ease: "none" }, 1.35);
+      tl.fromTo("#a", { opacity: 0, y: 50 }, { opacity: 1, y: 0, duration: 0.6, ease: "expo.out" }, 1.45);
+      tl.fromTo(".ev span", { opacity: 0, scale: 0.85 }, { opacity: 1, scale: 1, duration: 0.35, ease: "back.out(2)", stagger: 0.08 }, 1.75);
+      tl.to("#s1", { opacity: 0, duration: 0.4, ease: "power1.in" }, 2.4);
+
+      // 2. a slow dolly along the blueprint; the bad import is stamped
+      tl.fromTo("#s2", { opacity: 0 }, { opacity: 1, duration: 0.4, ease: "none", immediateRender: false }, 2.6);
+      tl.fromTo("#bp", { x: -60, y: -330, scale: 1.4 }, { x: -2010, y: -330, scale: 1.4, duration: 4.0, ease: "sine.inOut" }, 2.6);
+      tl.fromTo("#badwire", { opacity: 0 }, { opacity: 1, duration: 0.3, ease: "none" }, 3.3);
+      tl.fromTo("#stamp", { opacity: 0, scale: 2.4, rotation: -20 }, { opacity: 1, scale: 1, rotation: -9, duration: 0.3, ease: "power4.in" }, 3.9);
+      tl.fromTo("#bp", { filter: "brightness(1)" }, { keyframes: [{ filter: "brightness(1.35)", duration: 0.06, ease: "none" }, { filter: "brightness(1)", duration: 0.3, ease: "none" }], immediateRender: false }, 4.2);
+      tl.fromTo("#s2 .cap", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.5 }, 3.0);
+      tl.to("#s2", { opacity: 0, duration: 0.4, ease: "power1.in" }, 6.3);
+
+      // 3. pull requests run the three lanes in turn
+      tl.fromTo("#s3", { opacity: 0 }, { opacity: 1, duration: 0.4, ease: "none", immediateRender: false }, 6.6);
+      ["#pr1", "#pr2", "#pr3"].forEach((id, i) => {
+        const t = 6.8 + i * 0.5;
+        tl.fromTo(id, { opacity: 0, x: -80, y: 250 }, { keyframes: [ { opacity: 1, x: 0, y: 250, duration: 0.35 }, { x: 0, y: 440, duration: 0.45, ease: "power2.inOut" }, { x: 400, y: 440, duration: 0.5, ease: "power2.inOut" }, { x: 400, y: 630, duration: 0.45, ease: "power2.inOut" }, { x: 540 - i * 270, y: 630, duration: 0.4, ease: "power2.out" } ] }, t);
+      });
+      tl.fromTo("#s3 .cap", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.5 }, 6.9);
+      tl.to("#s3", { opacity: 0, duration: 0.4, ease: "power1.in" }, 9.4);
+
+      // 4. close
+      tl.fromTo("#end", { opacity: 0 }, { opacity: 1, duration: 0.3, ease: "none", immediateRender: false }, 9.65);
+      tl.fromTo("#end .k", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.5 }, 9.7);
+      tl.fromTo("#end h2", { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.7, ease: "expo.out" }, 9.8);
+      tl.fromTo("#facts p", { opacity: 0, x: -30 }, { opacity: 1, x: 0, duration: 0.5, ease: "expo.out", stagger: 0.12 }, 10.15);
+      tl.fromTo("#stack", { opacity: 0 }, { opacity: 1, duration: 0.5, ease: "none" }, 10.7);
+
+      window.__timelines["main"] = tl;
+    </script>
+  </body>
+</html>

@@ -1,0 +1,1 @@
+A fully autonomous Level 1 support agent for a broadband provider: live CRM triage, real-time outage checks and structured tickets with smart handoffs. 790+ tickets resolved end to end and 7,101 minutes of support time saved.

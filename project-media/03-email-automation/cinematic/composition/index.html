@@ -1,0 +1,221 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1920, height=1080" />
+    <title>Email automation, documentary clip</title>
+    <script src="assets/gsap.min.js"></script>
+    <style>
+      @font-face { font-family: "Inter"; src: url("assets/fonts/inter-latin-400-normal.woff2") format("woff2"); font-weight: 400; font-display: block; }
+      @font-face { font-family: "Inter"; src: url("assets/fonts/inter-latin-600-normal.woff2") format("woff2"); font-weight: 600; font-display: block; }
+      @font-face { font-family: "Inter"; src: url("assets/fonts/inter-latin-700-normal.woff2") format("woff2"); font-weight: 700; font-display: block; }
+      @font-face { font-family: "Inter"; src: url("assets/fonts/inter-latin-800-normal.woff2") format("woff2"); font-weight: 800; font-display: block; }
+
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { width: 1920px; height: 1080px; overflow: hidden; background: #0f2a30; }
+      body { font-family: "Inter", sans-serif; color: #eefbfd; -webkit-font-smoothing: antialiased; }
+      #root { position: relative; width: 100%; height: 100%; overflow: hidden; }
+      #stage { position: absolute; inset: 0; overflow: hidden; background: #0f2a30; }
+      svg { display: block; }
+      .grainbox { position: absolute; inset: -60px; overflow: hidden; pointer-events: none; }
+      #grain { position: absolute; left: 0; top: 0; width: 2100px; height: 1260px; opacity: 0.09; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' seed='13' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23n)'/%3E%3C/svg%3E"); }
+      .vig { position: absolute; inset: 0; box-shadow: inset 0 0 380px rgba(3, 12, 15, 0.7); pointer-events: none; }
+
+      /* ---------- the map, seen from above ---------- */
+      #world { position: absolute; left: 0; top: 0; width: 3600px; height: 1800px; background: radial-gradient(1600px 1000px at 40% 50%, #18434c 0%, #12333a 55%, #0f2a30 100%); }
+      #world::before { content: ""; position: absolute; inset: 0; background-image: linear-gradient(rgba(143, 216, 230, 0.07) 1px, transparent 1px), linear-gradient(90deg, rgba(143, 216, 230, 0.07) 1px, transparent 1px); background-size: 60px 60px; }
+      .contour { fill: none; stroke: rgba(143, 216, 230, 0.12); stroke-width: 2; }
+      .route { fill: none; stroke: rgba(170, 225, 235, 0.42); stroke-width: 4; stroke-linecap: round; stroke-dasharray: 1 1; }
+      #r3hot { fill: none; stroke: #bff1fa; stroke-width: 8; stroke-linecap: round; stroke-dasharray: 1 1; filter: drop-shadow(0 0 10px rgba(143, 216, 230, 0.95)); }
+      .dashl { fill: none; stroke: rgba(170, 225, 235, 0.6); stroke-width: 3; stroke-dasharray: 8 10; opacity: 0; }
+      .pin { position: absolute; width: 22px; height: 22px; margin: -11px 0 0 -11px; border-radius: 50%; background: #0f2a30; border: 4px solid #8fd8e6; }
+      .plab { position: absolute; font-size: 22px; font-weight: 700; color: #b9dfe6; white-space: nowrap; }
+      .st { position: absolute; display: flex; align-items: center; gap: 12px; padding: 14px 20px; border-radius: 16px; background: #f4fcfd; color: #0b2329; font-size: 24px; font-weight: 700; white-space: nowrap; box-shadow: 0 24px 50px rgba(2, 10, 14, 0.5); }
+      .st i { display: grid; place-items: center; width: 30px; height: 30px; border-radius: 50%; background: #0f2a30; flex: none; }
+      .st svg { width: 18px; height: 18px; }
+      #hub { position: absolute; left: 880px; top: 830px; width: 240px; height: 140px; display: grid; place-items: center; text-align: center; padding: 0 18px; border-radius: 26px; background: #8fd8e6; color: #0b2329; font-size: 28px; font-weight: 800; line-height: 1.1; box-shadow: 0 30px 70px rgba(2, 10, 14, 0.55); }
+      #hub small { display: block; font-size: 20px; color: #1d5a66; margin-top: 6px; }
+
+      /* envelope */
+      #env { position: absolute; left: 320px; top: 780px; width: 360px; height: 240px; }
+      #envShadow { position: absolute; left: 10px; top: 30px; width: 360px; height: 240px; border-radius: 14px; background: rgba(2, 10, 14, 0.45); filter: blur(16px); }
+      .file { position: absolute; left: 40px; top: 20px; width: 280px; height: 200px; padding: 22px; border-radius: 10px; background: #ffffff; color: #0b2329; box-shadow: 0 10px 24px rgba(2, 10, 14, 0.3); }
+      .file p { font-size: 20px; font-weight: 800; }
+      .file i { display: block; height: 10px; border-radius: 5px; background: #dce9ec; margin-top: 12px; }
+      #envBody { position: absolute; inset: 0; border-radius: 14px; background: #eef6f7; }
+      #envBody svg { position: absolute; left: 0; top: 0; }
+      #envLab { position: absolute; left: 24px; bottom: 22px; font-size: 22px; font-weight: 800; color: #0b2329; }
+      #envLab span { display: block; font-size: 17px; font-weight: 600; color: #3f6870; margin-top: 2px; }
+      #flap { position: absolute; left: 0; top: 0; z-index: 4; }
+      .file { z-index: 2; }
+      #envBody { z-index: 3; }
+
+      /* gate and mailbox */
+      #gate { position: absolute; left: 3010px; top: 760px; width: 134px; height: 120px; }
+      #gate .post { position: absolute; bottom: 0; width: 14px; height: 120px; border-radius: 7px; background: #eefbfd; }
+      #barrier { position: absolute; left: 6px; top: 40px; width: 150px; height: 16px; border-radius: 8px; background: repeating-linear-gradient(90deg, #eefbfd 0 22px, #8fd8e6 22px 44px); }
+      #draft { position: absolute; left: 3180px; top: 760px; width: 420px; height: 280px; padding: 26px 30px; border-radius: 22px; background: #ffffff; color: #0b2329; box-shadow: 0 40px 90px rgba(2, 10, 14, 0.55); }
+      #draft .h { font-size: 26px; font-weight: 800; }
+      #draft .s { font-size: 18px; color: #4f6f75; margin-top: 2px; }
+      #draft i { display: block; height: 12px; border-radius: 6px; background: #e1eaec; margin-top: 16px; }
+      #stamp { position: absolute; left: 3215px; top: 900px; padding: 12px 22px; border: 5px solid #0f6b7c; border-radius: 12px; color: #0f6b7c; font-size: 30px; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; white-space: nowrap; background: rgba(255, 255, 255, 0.9); }
+
+      /* ---------- documentary captions ---------- */
+      .cap { position: absolute; left: 110px; top: 84px; display: flex; align-items: baseline; gap: 22px; }
+      .cap b { font-size: 26px; font-weight: 800; letter-spacing: 0.08em; color: #8fd8e6; font-variant-numeric: tabular-nums; }
+      .cap span { font-size: 30px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: #eefbfd; }
+      #end { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
+      #end .k { font-size: 22px; font-weight: 800; letter-spacing: 0.3em; color: #8fd8e6; }
+      #end .a { margin-top: 30px; font-size: 64px; font-weight: 800; letter-spacing: -0.02em; line-height: 1.15; color: #f3fdff; }
+      #end .b { margin-top: 26px; font-size: 34px; font-weight: 600; color: #c6e6ec; }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="12" data-width="1920" data-height="1080">
+      <div id="stage">
+        <div id="world">
+          <svg width="3600" height="1800" viewBox="0 0 3600 1800" style="position: absolute; left: 0; top: 0">
+            <path class="contour" d="M300 600 C600 380 1100 420 1300 620 C1500 820 1300 1180 900 1220 C500 1260 120 980 300 600 Z" />
+            <path class="contour" d="M420 680 C660 520 1000 560 1150 700 C1300 840 1150 1100 880 1120 C600 1140 300 900 420 680 Z" />
+            <path class="contour" d="M2000 300 C2500 200 3100 300 3300 520 C3500 740 3200 1100 2700 1150 C2200 1200 1800 1000 1850 700 C1880 500 1900 330 2000 300 Z" />
+            <path class="contour" d="M2150 420 C2550 340 3000 420 3150 580 C3300 740 3080 1000 2700 1030 C2320 1060 2000 920 2020 700 C2030 560 2060 450 2150 420 Z" />
+            <path class="contour" d="M1700 1400 C2100 1300 2700 1350 3000 1500 C3200 1600 2900 1760 2400 1760 C1900 1760 1500 1600 1700 1400 Z" />
+            <path class="route" id="rIn" pathLength="1" d="M690 900 H880" />
+            <path class="route rt" pathLength="1" d="M1120 900 C1300 900 1330 330 1480 330" />
+            <path class="route rt" pathLength="1" d="M1120 900 C1300 900 1360 480 1560 480" />
+            <path class="route rt" pathLength="1" d="M1120 900 C1300 900 1330 650 1500 650 C1700 650 1750 600 1900 600 C2050 600 2150 720 2300 720 C2450 720 2550 760 2700 760 C2850 760 2930 820 3060 820 C3150 820 3180 860 3220 880" />
+            <path class="route rt" pathLength="1" d="M1120 900 C1300 900 1380 820 1580 820" />
+            <path class="route rt" pathLength="1" d="M1120 900 C1300 900 1380 980 1600 980" />
+            <path class="route rt" pathLength="1" d="M1120 900 C1300 900 1360 1140 1560 1140" />
+            <path class="route rt" pathLength="1" d="M1120 900 C1300 900 1330 1300 1500 1300" />
+            <path class="route rt" pathLength="1" d="M1120 900 C1300 900 1290 1450 1420 1450" />
+            <path id="r3hot" pathLength="1" d="M1120 900 C1300 900 1330 650 1500 650 C1700 650 1750 600 1900 600 C2050 600 2150 720 2300 720 C2450 720 2550 760 2700 760 C2850 760 2930 820 3060 820 C3150 820 3180 860 3220 880" />
+            <path class="dashl" id="dl1" d="M2500 1080 C2420 950 2340 860 2300 760" />
+            <path class="dashl" id="dl2" d="M2560 1080 C2640 950 2690 860 2700 800" />
+          </svg>
+
+          <!-- the other seven path ends -->
+          <i class="pin" style="left: 1480px; top: 330px"></i><p class="plab" style="left: 1505px; top: 315px">Path 1</p>
+          <i class="pin" style="left: 1560px; top: 480px"></i><p class="plab" style="left: 1585px; top: 465px">Path 2</p>
+          <i class="pin" style="left: 1580px; top: 820px"></i><p class="plab" style="left: 1605px; top: 805px">Path 4</p>
+          <i class="pin" style="left: 1600px; top: 980px"></i><p class="plab" style="left: 1625px; top: 965px">Path 5</p>
+          <i class="pin" style="left: 1560px; top: 1140px"></i><p class="plab" style="left: 1585px; top: 1125px">Path 6</p>
+          <i class="pin" style="left: 1500px; top: 1300px"></i><p class="plab" style="left: 1525px; top: 1285px">Path 7</p>
+          <i class="pin" style="left: 1420px; top: 1450px"></i><p class="plab" style="left: 1445px; top: 1435px">Path 8</p>
+
+          <!-- the stations along path 3 -->
+          <p class="st" id="s1" style="left: 1420px; top: 540px"><i><svg viewBox="0 0 24 24" fill="none" stroke="#8fd8e6" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5" /></svg></i>Path 3 · attachments filed to OneDrive</p>
+          <p class="st" id="s2" style="left: 1800px; top: 470px"><i><svg viewBox="0 0 24 24" fill="none" stroke="#8fd8e6" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5" /></svg></i>CRM ledger updated, thread matched</p>
+          <p class="st" id="s3" style="left: 2200px; top: 600px"><i><svg viewBox="0 0 24 24" fill="none" stroke="#8fd8e6" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5" /></svg></i>Draft writer</p>
+          <p class="st" id="s4" style="left: 2600px; top: 640px"><i><svg viewBox="0 0 24 24" fill="none" stroke="#8fd8e6" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5" /></svg></i>AI compliance pass</p>
+          <p class="st" id="sRules" style="left: 2400px; top: 1080px; background: #133b44; color: #e6f8fb; border: 2px dashed rgba(143, 216, 230, 0.6)">Living rules doc</p>
+          <p class="plab" id="gLab" style="left: 2960px; top: 905px; color: #eefbfd">Deterministic gate</p>
+
+          <div id="hub"><div>AI classify and route<small>8 paths</small></div></div>
+
+          <div id="env">
+            <div id="envShadow"></div>
+            <div class="file" id="f1"><p>File 1</p><i style="width: 90%"></i><i style="width: 70%"></i><i style="width: 80%"></i></div>
+            <div class="file" id="f2"><p>File 2</p><i style="width: 84%"></i><i style="width: 76%"></i><i style="width: 60%"></i></div>
+            <div id="envBody">
+              <svg width="360" height="240" viewBox="0 0 360 240"><path d="M0 240 L180 120 L360 240" fill="none" stroke="#c7dde1" stroke-width="3" /></svg>
+              <p id="envLab">Document request<span>New client · 2 files</span></p>
+            </div>
+            <svg id="flap" width="360" height="150" viewBox="0 0 360 150"><path d="M0 0 H360 L180 140 Z" fill="#dfeef1" stroke="#c7dde1" stroke-width="3" /></svg>
+          </div>
+
+          <div id="gate"><i class="post" style="left: 0"></i><i class="post" style="left: 120px"></i><i id="barrier"></i></div>
+          <div id="draft"><p class="h">Draft reply</p><p class="s">To: New client · Re: Document request</p><i style="width: 92%"></i><i style="width: 84%"></i><i style="width: 88%"></i><i style="width: 50%"></i></div>
+          <p id="stamp">Ready for human review</p>
+        </div>
+
+        <p class="cap" id="k1"><b>09:14:02</b><span>Enquiry received</span></p>
+        <p class="cap" id="k2"><b>09:14:03</b><span>Routed: path 3 of 8</span></p>
+        <p class="cap" id="k3"><b>09:14:05</b><span>Filed, logged, matched</span></p>
+        <p class="cap" id="k4"><b>09:14:09</b><span>Drafted and checked</span></p>
+        <p class="cap" id="k5"><b>09:14:11</b><span>Cleared the gate</span></p>
+
+        <div id="end">
+          <p class="k">FROM THE BUILD</p>
+          <p class="a">A 224-node email pipeline and a 38-node web intake.</p>
+          <p class="b">Live in production on a real client inbox.</p>
+        </div>
+
+        <div class="grainbox"><div id="grain"></div></div>
+        <div class="vig"></div>
+      </div>
+    </div>
+
+    <script>
+      const tl = gsap.timeline({ paused: true, defaults: { ease: "power3.out" } });
+      const D = 12;
+      tl.fromTo("#grain", { x: 0, y: 0 }, { x: -120, y: -80, duration: D, ease: "steps(96)" }, 0);
+
+      // ---------- the overhead camera: a slow documentary drift along the route ----------
+      const cam = (cx, cy, s, r) => ({ x: 960 - cx * s, y: 540 - cy * s, scale: s, rotation: r });
+      tl.set("#world", { ...cam(500, 900, 1.65, -3), transformOrigin: "0px 0px" }, 0);
+      tl.fromTo("#world", { opacity: 0 }, { opacity: 1, duration: 0.45, ease: "none" }, 0);
+      tl.to("#world", { keyframes: [
+        { ...cam(520, 890, 1.5, -2.5), duration: 2.4, ease: "none" },
+        { ...cam(1080, 900, 0.72, -1.5), duration: 1.6, ease: "power2.inOut" },
+        { ...cam(1520, 640, 1.15, -1), duration: 0.9, ease: "power2.inOut" },
+        { ...cam(1920, 600, 1.15, -0.5), duration: 0.8, ease: "sine.inOut" },
+        { ...cam(2350, 760, 1.15, 0), duration: 0.8, ease: "sine.inOut" },
+        { ...cam(2720, 790, 1.15, 0.5), duration: 0.8, ease: "sine.inOut" },
+        // speed ramp: the camera eases almost to a stop at the gate
+        { ...cam(3050, 840, 1.3, 1), duration: 1.1, ease: "power3.out" },
+        { ...cam(3380, 900, 1.35, 1.2), duration: 0.8, ease: "power2.inOut" },
+      ] }, 0);
+
+      // the envelope lands, opens, and the files slide out
+      tl.fromTo("#env", { scale: 1.45, opacity: 0, rotation: 6 }, { scale: 1, opacity: 1, rotation: 0, duration: 0.55, ease: "power3.in" }, 0.05);
+      tl.fromTo("#envShadow", { opacity: 0, scale: 1.25 }, { opacity: 1, scale: 1, duration: 0.55, ease: "power3.in" }, 0.05);
+      tl.fromTo("#flap", { scaleY: 1, transformOrigin: "50% 0%" }, { scaleY: -1, duration: 0.45, ease: "power2.inOut" }, 1.0);
+      tl.set("#flap", { zIndex: 1 }, 1.23);
+      tl.fromTo("#f1", { y: 0, rotation: 0, opacity: 0 }, { y: -170, rotation: -8, opacity: 1, duration: 0.6, ease: "power3.out" }, 1.35);
+      tl.fromTo("#f2", { y: 0, x: 0, rotation: 0, opacity: 0 }, { y: -120, x: 110, rotation: 7, opacity: 1, duration: 0.6, ease: "power3.out" }, 1.5);
+
+      // the eight routes draw out of the classifier
+      tl.fromTo("#rIn", { attr: { "stroke-dashoffset": 1 } }, { attr: { "stroke-dashoffset": 0 }, duration: 0.4, ease: "power2.inOut" }, 2.4);
+      tl.fromTo("#hub", { opacity: 0, scale: 0.8 }, { opacity: 1, scale: 1, duration: 0.5, ease: "back.out(1.7)" }, 2.6);
+      tl.fromTo(".rt", { attr: { "stroke-dashoffset": 1 } }, { attr: { "stroke-dashoffset": 0 }, duration: 0.7, ease: "power2.out", stagger: 0.06 }, 2.9);
+      tl.fromTo(".pin", { opacity: 0 }, { opacity: 1, duration: 0.3, stagger: 0.03 }, 3.3);
+      tl.fromTo(".plab:not(#gLab)", { opacity: 0 }, { opacity: 1, duration: 0.3, stagger: 0.03 }, 3.35);
+      // path 3 lights and the camera follows it
+      tl.fromTo("#r3hot", { attr: { "stroke-dashoffset": 1 } }, { attr: { "stroke-dashoffset": 0 }, duration: 4.1, ease: "none" }, 3.9);
+      const station = (sel, t) => tl.fromTo(sel, { opacity: 0, y: 16, scale: 0.92 }, { opacity: 1, y: 0, scale: 1, duration: 0.45, ease: "back.out(1.7)" }, t);
+      station("#s1", 4.55);
+      station("#s2", 5.35);
+      station("#sRules", 5.8);
+      tl.fromTo("#dl1", { opacity: 0 }, { opacity: 1, duration: 0.3, ease: "none" }, 5.95);
+      station("#s3", 6.1);
+      tl.fromTo("#dl2", { opacity: 0 }, { opacity: 1, duration: 0.3, ease: "none" }, 6.75);
+      station("#s4", 6.85);
+      tl.fromTo("#gate", { opacity: 0 }, { opacity: 1, duration: 0.3, ease: "none" }, 7.3);
+      tl.fromTo("#gLab", { opacity: 0 }, { opacity: 1, duration: 0.3, ease: "none" }, 7.4);
+      tl.fromTo("#barrier", { rotation: 0, transformOrigin: "8px 8px" }, { rotation: -78, duration: 0.6, ease: "back.out(1.4)" }, 8.15);
+      tl.fromTo("#draft", { opacity: 0, x: 60 }, { opacity: 1, x: 0, duration: 0.6, ease: "expo.out" }, 8.45);
+      tl.fromTo("#stamp", { opacity: 0, scale: 1.8, rotation: -14 }, { opacity: 1, scale: 1, rotation: -8, duration: 0.3, ease: "power4.in" }, 9.05);
+
+      // documentary captions
+      const cap = (sel, a, b) => {
+        tl.fromTo(sel, { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.4 }, a);
+        tl.to(sel, { opacity: 0, duration: 0.25, ease: "power1.in" }, b);
+      };
+      cap("#k1", 0.6, 2.3);
+      cap("#k2", 2.55, 4.3);
+      cap("#k3", 4.5, 6.0);
+      cap("#k4", 6.2, 7.85);
+      cap("#k5", 8.1, 9.5);
+
+      // end card over the darkened map
+      tl.to("#world", { opacity: 0, filter: "blur(6px)", duration: 0.7, ease: "power2.inOut" }, 9.6);
+      tl.fromTo("#end .k", { opacity: 0, scale: 1.15 }, { opacity: 1, scale: 1, duration: 0.8, ease: "power2.out" }, 9.85);
+      tl.fromTo("#end .a", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.7 }, 10.0);
+      tl.fromTo("#end .b", { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.6 }, 10.4);
+      tl.to("#end", { opacity: 0, duration: 0.4, ease: "power1.in" }, 11.6);
+      
+      window.__timelines["main"] = tl;
+    </script>
+  </body>
+</html>

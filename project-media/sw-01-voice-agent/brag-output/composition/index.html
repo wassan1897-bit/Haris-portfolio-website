@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=1080, height=1350" />
+		<title>Enterprise voice AI agent</title>
+		<script src="assets/gsap.min.js"></script>
+		<style>
+			@font-face { font-family: "Bodoni Moda"; src: url("assets/fonts/bodoni-moda-latin-500-normal.woff2") format("woff2"); font-weight: 500; font-style: normal; font-display: block; }
+			@font-face { font-family: "Bodoni Moda"; src: url("assets/fonts/bodoni-moda-latin-400-italic.woff2") format("woff2"); font-weight: 400; font-style: italic; font-display: block; }
+			@font-face { font-family: "Manrope"; src: url("assets/fonts/manrope-latin-500-normal.woff2") format("woff2"); font-weight: 500; font-display: block; }
+			@font-face { font-family: "Manrope"; src: url("assets/fonts/manrope-latin-700-normal.woff2") format("woff2"); font-weight: 700; font-display: block; }
+			@font-face { font-family: "JetBrains Mono"; src: url("assets/fonts/jetbrains-mono-latin-500-normal.woff2") format("woff2"); font-weight: 500; font-display: block; }
+
+			* { margin: 0; padding: 0; box-sizing: border-box; }
+			html, body { width: 1080px; height: 1350px; overflow: hidden; background: #0d0c10; }
+			#root { position: relative; width: 100%; height: 100%; overflow: hidden; background: radial-gradient(900px 900px at 50% 40%, #1d1912, #0d0c10 70%); color: #f2efe8; font-family: "Manrope", sans-serif; -webkit-font-smoothing: antialiased; }
+			.scene { position: absolute; left: 0; top: 0; width: 100%; height: 100%; overflow: hidden; }
+			.mono { font: 500 22px "JetBrains Mono", monospace; letter-spacing: 0.2em; text-transform: uppercase; color: #f2b84b; }
+			.cap { position: absolute; left: 80px; right: 80px; bottom: 120px; font: 500 40px/1.25 "Manrope", sans-serif; letter-spacing: -0.01em; color: #f2efe8; }
+			.cap b { display: block; margin-bottom: 18px; font: 500 20px "JetBrains Mono", monospace; letter-spacing: 0.2em; color: #f2b84b; }
+			.serif { font-family: "Bodoni Moda", serif; font-weight: 500; letter-spacing: -0.03em; }
+			.serif em { font-style: italic; font-weight: 400; color: #f2b84b; }
+
+			/* 1. hook */
+			#wave { position: absolute; left: 50%; top: 420px; width: 760px; height: 220px; margin-left: -380px; display: flex; align-items: center; justify-content: space-between; }
+			#wave i { display: block; width: 14px; height: 40px; border-radius: 7px; background: #f2b84b; }
+			#h-mono { position: absolute; left: 0; right: 0; top: 330px; text-align: center; }
+			#h-line { position: absolute; left: 60px; right: 60px; top: 760px; text-align: center; font-size: 104px; line-height: 1.02; }
+
+			/* 2 to 4: the real canvases on a dark board */
+			.board { position: absolute; left: 60px; right: 60px; top: 150px; height: 860px; border-radius: 28px; overflow: hidden; background: #f3f3f6; box-shadow: 0 60px 140px -50px rgb(0 0 0 / 0.9), 0 0 0 1px rgb(255 255 255 / 0.08); }
+			.board img { position: absolute; left: 0; top: 0; transform-origin: 0 0; }
+			.board--dark { top: 250px; height: 560px; background: #2b2b2b; }
+			.vign { position: absolute; left: 0; top: 0; width: 100%; height: 100%; box-shadow: inset 0 0 120px rgb(0 0 0 / 0.18); pointer-events: none; }
+
+			/* 5. routed */
+			#chips { position: absolute; left: 80px; right: 80px; top: 300px; display: flex; flex-wrap: wrap; gap: 18px; }
+			#chips span { display: inline-flex; align-items: center; gap: 14px; height: 76px; padding: 0 30px; border-radius: 999px; background: rgb(242 239 232 / 0.08); box-shadow: inset 0 0 0 1px rgb(242 239 232 / 0.16); font: 700 30px "Manrope", sans-serif; color: #f2efe8; }
+			#chips span i { width: 14px; height: 14px; border-radius: 50%; background: #f2b84b; }
+			#r-line { position: absolute; left: 80px; right: 80px; top: 820px; font-size: 120px; line-height: 0.98; }
+			#r-mono { position: absolute; left: 80px; top: 220px; }
+			#fade { position: absolute; left: 0; top: 0; width: 100%; height: 100%; background: #0d0c10; }
+		</style>
+	</head>
+	<body>
+		<div id="root" data-composition-id="main" data-start="0" data-duration="12" data-width="1080" data-height="1350">
+			<div class="scene" id="s1">
+				<p class="mono" id="h-mono">Incoming call · 02:14</p>
+				<div id="wave"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+				<p class="serif" id="h-line">Answered in <em>zero seconds.</em></p>
+			</div>
+			<div class="scene" id="s2">
+				<div class="board"><img id="img2" src="assets/retell-overview.png" width="1165" height="680" alt="" /><div class="vign"></div></div>
+				<p class="cap"><b>Retell AI</b>One conversation flow runs the whole call.</p>
+			</div>
+			<div class="scene" id="s3">
+				<div class="board"><img id="img3" src="assets/retell-flow.png" width="1152" height="672" alt="" /><div class="vign"></div></div>
+				<p class="cap"><b>Triage</b>Who is calling, where from, and is the area covered.</p>
+			</div>
+			<div class="scene" id="s4">
+				<div class="board board--dark"><img id="img4" src="assets/n8n-outage.png" width="1530" height="511" alt="" /><div class="vign"></div></div>
+				<p class="cap"><b>n8n</b>Live outage check before any escalation.</p>
+			</div>
+			<div class="scene" id="s5">
+				<p class="mono" id="r-mono">Handed off, context kept</p>
+				<div id="chips"><span><i></i>Technical support</span><span><i></i>Billing</span><span><i></i>Sales</span><span><i></i>Renewals</span><span><i></i>Retention</span><span><i></i>Complaints</span><span><i></i>Customer service</span></div>
+				<p class="serif" id="r-line">Every call, <em>routed.</em></p>
+			</div>
+			<div id="fade"></div>
+		</div>
+		<script>
+			const tl = gsap.timeline({ paused: true, defaults: { ease: "power3.out" } })
+			const show = (id, a, b) => {
+				tl.fromTo(id, { opacity: 0 }, { opacity: 1, duration: 0.35, ease: "power1.out" }, a)
+				tl.to(id, { opacity: 0, duration: 0.35, ease: "power1.in" }, b - 0.35)
+			}
+			tl.fromTo("#fade", { opacity: 1 }, { opacity: 0, duration: 0.4, ease: "power1.out" }, 0)
+			tl.to("#fade", { opacity: 1, duration: 0.4, ease: "power1.in" }, 11.6)
+
+			// 1. hook: a live call, answered
+			tl.set(["#s2", "#s3", "#s4", "#s5"], { opacity: 0 }, 0)
+			tl.to("#s1", { opacity: 0, duration: 0.35, ease: "power1.in" }, 1.95)
+			tl.fromTo("#h-mono", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.5 }, 0.15)
+			const bars = gsap.utils.toArray("#wave i")
+			bars.forEach((b, i) => {
+				const hs = [60, 150, 90, 190, 70, 130, 210, 80, 160, 100]
+				tl.fromTo(b, { height: 24 }, { keyframes: [{ height: hs[i % 10], duration: 0.3 }, { height: hs[(i + 3) % 10] * 0.6, duration: 0.3 }, { height: hs[(i + 6) % 10], duration: 0.3 }, { height: 40, duration: 0.4 }], ease: "sine.inOut" }, 0.2 + i * 0.02)
+			})
+			tl.fromTo("#h-line", { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.7 }, 0.55)
+
+			// 2. the whole flow drifts and pushes in (board 960 x 860)
+			show("#s2", 2.3, 5.4)
+			tl.fromTo("#img2", { x: -40, y: -20, scale: 1.3 }, { x: -170, y: -60, scale: 1.75, duration: 3.1, ease: "power1.inOut" }, 2.3)
+			tl.fromTo("#s2 .cap", { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.6 }, 2.6)
+
+			// 3. into the triage: welcome, address, service checker
+			show("#s3", 5.4, 8.3)
+			tl.fromTo("#img3", { x: -40, y: -40, scale: 1.5 }, { x: -720, y: -60, scale: 1.75, duration: 2.9, ease: "power1.inOut" }, 5.4)
+			tl.fromTo("#s3 .cap", { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.6 }, 5.7)
+
+			// 4. the n8n outage check, panned right to left
+			show("#s4", 8.3, 10.5)
+			tl.fromTo("#img4", { x: 0, y: -8, scale: 1.11 }, { x: -735, y: -8, scale: 1.11, duration: 2.2, ease: "power1.inOut" }, 8.3)
+			tl.fromTo("#s4 .cap", { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.6 }, 8.55)
+
+			// 5. where every call ends up
+			tl.fromTo("#s5", { opacity: 0 }, { opacity: 1, duration: 0.3, ease: "power1.out", immediateRender: false }, 10.5)
+			tl.fromTo("#r-mono", { opacity: 0 }, { opacity: 1, duration: 0.4 }, 10.55)
+			tl.fromTo("#chips span", { opacity: 0, y: 30, scale: 0.94 }, { opacity: 1, y: 0, scale: 1, duration: 0.45, stagger: 0.06 }, 10.55)
+			tl.fromTo("#r-line", { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.6 }, 10.8)
+
+			window.__timelines["main"] = tl
+		</script>
+	</body>
+</html>

@@ -8,7 +8,10 @@
 	--ph-rail: 96px;
 	--ph-panel-left: 62%;
 	--ph-panel-bottom: 52px;
-	--ph-title-size: clamp(96px, 10.6vw, 176px);
+	/* "AUTOMATE" fills the white side and ends right at the photo's edge (the panel starts at 62% of the
+	   screen; the title starts 130px past the rail), so only the small vertical "the" sits on the backdrop and
+	   nothing covers his face; 6.26 is the word's width in ems at the title's letter spacing */
+	--ph-title-size: clamp(64px, (62vw - var(--ph-rail) - 136px) / 6.26, 176px);
 
 	position: relative;
 	height: 100vh;
@@ -237,7 +240,7 @@
 	font-weight: 800;
 	font-size: var(--ph-title-size);
 	line-height: 0.84;
-	letter-spacing: -0.03em;
+	letter-spacing: 0.02em;
 	text-transform: uppercase;
 	white-space: nowrap;
 	/* split letters lose kerning, so both copies drop it to stay aligned */
@@ -296,13 +299,24 @@
 }
 .ph-pitch {
 	margin-top: 6px !important;
+	/* stays clear of the photo panel */
+	max-width: min(44em, 52vw);
 }
 
 /* ---- stat ledger: the PDF's three headline numbers ---- */
 .ph-ledger {
 	display: grid;
-	grid-template-columns: repeat(3, auto);
+	grid-template-columns: repeat(4, auto);
 	margin: 26px 0 4px;
+}
+/* the fourth number only where it clears the photo panel */
+@media (max-width: 1699px) {
+	.ph-ledger {
+		grid-template-columns: repeat(3, auto);
+	}
+	.ph-stat--extra {
+		display: none;
+	}
 }
 .ph-stat {
 	position: relative;

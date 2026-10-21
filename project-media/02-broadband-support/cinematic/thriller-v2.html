@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1920, height=1080" />
+    <title>AI customer support, night-shift clip</title>
+    <script src="assets/gsap.min.js"></script>
+    <style>
+      @font-face { font-family: "Inter"; src: url("assets/fonts/inter-latin-400-normal.woff2") format("woff2"); font-weight: 400; font-display: block; }
+      @font-face { font-family: "Inter"; src: url("assets/fonts/inter-latin-600-normal.woff2") format("woff2"); font-weight: 600; font-display: block; }
+      @font-face { font-family: "Inter"; src: url("assets/fonts/inter-latin-700-normal.woff2") format("woff2"); font-weight: 700; font-display: block; }
+      @font-face { font-family: "Inter"; src: url("assets/fonts/inter-latin-800-normal.woff2") format("woff2"); font-weight: 800; font-display: block; }
+
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { width: 1920px; height: 1080px; overflow: hidden; background: #0c0c0d; }
+      body { font-family: "Inter", sans-serif; color: #f6f1e7; -webkit-font-smoothing: antialiased; }
+      #root { position: relative; width: 100%; height: 100%; overflow: hidden; }
+      #stage { position: absolute; inset: 0; overflow: hidden; background: #0c0c0d; }
+      svg { display: block; }
+      .sc { position: absolute; inset: 0; }
+      .grainbox { position: absolute; inset: -60px; overflow: hidden; pointer-events: none; }
+      #grain { position: absolute; left: 0; top: 0; width: 2100px; height: 1260px; opacity: 0.12; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' seed='9' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23n)'/%3E%3C/svg%3E"); }
+      .bar { position: absolute; left: 0; right: 0; height: 92px; background: #000; }
+      #leak { position: absolute; inset: 0; background: radial-gradient(900px 700px at 20% 30%, rgba(242, 184, 75, 0.55), rgba(242, 184, 75, 0) 70%); opacity: 0; mix-blend-mode: screen; }
+      .vig { position: absolute; inset: 0; box-shadow: inset 0 0 320px rgba(0, 0, 0, 0.65); pointer-events: none; }
+      .amber { color: #f2b84b; }
+
+      /* ---------- cold open ---------- */
+      #open { display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
+      #clock { font-size: 34px; font-weight: 800; letter-spacing: 0.3em; color: #f2b84b; }
+      #typed { margin-top: 26px; min-height: 120px; font-size: 76px; font-weight: 800; letter-spacing: -0.02em; color: #fbf7ef; }
+      .caret { display: inline-block; width: 6px; height: 70px; margin-left: 8px; vertical-align: -8px; background: #f2b84b; }
+
+      /* ---------- split screen ---------- */
+      #split { padding: 120px 70px; display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 34px; }
+      .pn { position: relative; overflow: hidden; border-radius: 18px; background: #141413; border: 1.5px solid rgba(246, 241, 231, 0.14); padding: 30px 30px; }
+      .pn__h { display: flex; justify-content: space-between; align-items: center; font-size: 22px; font-weight: 800; letter-spacing: 0.22em; color: #c9b48a; }
+      .pn__t { font-variant-numeric: tabular-nums; color: #f2b84b; letter-spacing: 0.08em; }
+      .rec { display: inline-block; width: 11px; height: 11px; border-radius: 50%; background: #ef4444; margin-right: 10px; vertical-align: 1px; }
+      .m { max-width: 470px; margin-top: 30px; padding: 20px 24px; border-radius: 22px; font-size: 30px; line-height: 1.35; }
+      .m--me { margin-left: auto; background: #f6f1e7; color: #1b1712; border-bottom-right-radius: 6px; }
+      .m--ai { background: #2a2722; color: #f6f1e7; border-bottom-left-radius: 6px; border: 1.5px solid rgba(242, 184, 75, 0.45); }
+      .log { margin-top: 34px; display: flex; flex-direction: column; gap: 30px; }
+      .lg { font-size: 25px; font-weight: 600; line-height: 1.3; color: #ece4d4; white-space: nowrap; }
+      .lg b { color: #f2b84b; font-weight: 700; }
+      .lg i { font-style: normal; color: #8f8778; margin-right: 10px; }
+      .g6 { margin-top: 34px; display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+      .wf { position: relative; height: 196px; display: grid; place-items: center; text-align: center; padding: 0 14px; border-radius: 16px; background: #1d1c1a; border: 1.5px solid rgba(246, 241, 231, 0.18); font-size: 27px; font-weight: 700; color: #d9d1c1; }
+      .wf__fx { position: absolute; inset: -3px; border-radius: 18px; border: 3px solid #f2b84b; background: rgba(242, 184, 75, 0.14); box-shadow: 0 0 34px rgba(242, 184, 75, 0.45); opacity: 0; }
+      .fibre { position: absolute; top: 0; left: 0; width: 220px; height: 4px; border-radius: 2px; background: linear-gradient(90deg, rgba(242, 184, 75, 0), #ffd88f 70%, #fff3d6); box-shadow: 0 0 16px rgba(242, 184, 75, 0.9); opacity: 0; }
+
+      /* ---------- full-frame cuts ---------- */
+      .full { display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
+      .sq { display: flex; gap: 22px; }
+      .sq i { display: block; width: 96px; height: 96px; border-radius: 18px; background: #1f1e1c; border: 2px solid rgba(246, 241, 231, 0.16); }
+      .sq i.on { background: #f2b84b; border-color: #f2b84b; box-shadow: 0 0 70px rgba(242, 184, 75, 0.6); }
+      .big { margin-top: 50px; font-size: 92px; font-weight: 800; letter-spacing: -0.03em; color: #fbf7ef; min-height: 110px; }
+      .sub { margin-top: 12px; font-size: 32px; font-weight: 600; color: #c9b48a; letter-spacing: 0.12em; text-transform: uppercase; }
+      .env { width: 230px; height: 160px; border-radius: 18px; border: 4px solid #f2b84b; position: relative; overflow: hidden; }
+      .env::before { content: ""; position: absolute; left: -20px; right: -20px; top: -98px; height: 180px; border-bottom: 4px solid #f2b84b; transform: rotate(0deg); border-radius: 0 0 50% 50%; }
+      .num { font-size: 300px; font-weight: 800; letter-spacing: -0.05em; line-height: 0.9; color: #fbf7ef; font-variant-numeric: tabular-nums; }
+      .num--a { color: #f2b84b; }
+      .lab { margin-top: 30px; font-size: 40px; font-weight: 600; color: #ece4d4; }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="12" data-width="1920" data-height="1080">
+      <div id="stage">
+        <!-- cold open -->
+        <div class="sc" id="open">
+          <p id="clock">21:47 · OUT OF HOURS</p>
+          <p id="typed"><span id="typedT"></span><span class="caret" id="caret1"></span></p>
+        </div>
+
+        <!-- split screen -->
+        <div class="sc" id="split">
+          <div class="pn">
+            <p class="pn__h"><span><span class="rec"></span>CUSTOMER</span><span class="pn__t" id="ts1">21:47:03</span></p>
+            <p class="m m--me" id="c1">My broadband has been down since this morning.</p>
+            <p class="m m--ai" id="a1">No outage near you, so I've raised a ticket with the right team.</p>
+            <p class="m m--ai" id="a2">You'll get an email with your ticket number.</p>
+          </div>
+          <div class="pn" id="pB">
+            <p class="pn__h"><span>AI AGENT</span><span class="pn__t" id="ts2">21:47:03</span></p>
+            <div class="log">
+              <p class="lg" id="g1"><i>01</i>Intent: <b>no connection</b></p>
+              <p class="lg" id="g2"><i>02</i>Account lookup → <b>existing customer</b></p>
+              <p class="lg" id="g3"><i>03</i>Outage check → <b>none in area</b></p>
+              <p class="lg" id="g4"><i>04</i>Ticketing → <b>1 of 7 departments</b></p>
+              <p class="lg" id="g5"><i>05</i>Customer email → <b>sent</b></p>
+              <p class="lg" id="g6"><i>06</i>Metrics → <b>logged</b></p>
+            </div>
+          </div>
+          <div class="pn">
+            <p class="pn__h"><span>BACKEND</span><span class="pn__t">6 WORKFLOWS</span></p>
+            <div class="g6">
+              <div class="wf"><i class="wf__fx" id="w1"></i>Account lookup</div>
+              <div class="wf">Coverage check</div>
+              <div class="wf"><i class="wf__fx" id="w3"></i>Outage check</div>
+              <div class="wf">Prospect creation</div>
+              <div class="wf"><i class="wf__fx" id="w5"></i>Ticketing and routing</div>
+              <div class="wf"><i class="wf__fx" id="w6"></i>Metrics</div>
+            </div>
+          </div>
+          <i class="fibre" id="fb"></i>
+        </div>
+
+        <!-- full-frame cuts -->
+        <div class="sc full" id="cutDept">
+          <div class="sq"><i></i><i></i><i></i><i class="on" id="sqOn"></i><i></i><i></i><i></i></div>
+          <p class="big" id="dT"></p>
+          <p class="sub">1 of 7 departments</p>
+        </div>
+        <div class="sc full" id="cutMail">
+          <div class="env" id="env"></div>
+          <p class="big" id="mT"></p>
+          <p class="sub">Ticket confirmation, same conversation</p>
+        </div>
+        <div class="sc full" id="cutN1"><p class="num" id="n1">6,700+</p><p class="lab">customer conversations automated</p></div>
+        <div class="sc full" id="cutN2"><p class="num num--a" id="n2">2,400+</p><p class="lab">support tickets, across 7 departments</p></div>
+        <div class="sc full" id="cutN3"><p class="num" id="n3">21,000+</p><p class="lab">agent minutes saved, estimated</p></div>
+        <div class="sc full" id="cutEnd">
+          <p class="big" id="eT" style="font-size: 72px"></p>
+          <p class="sub" id="eS">Same six workflows. No rewrite.</p>
+        </div>
+
+        <div id="leak"></div>
+        <div class="bar" style="top: 0"></div>
+        <div class="bar" style="bottom: 0"></div>
+        <div class="grainbox"><div id="grain"></div></div>
+        <div class="vig"></div>
+      </div>
+    </div>
+
+    <script>
+      const tl = gsap.timeline({ paused: true, defaults: { ease: "power3.out" } });
+      const D = 12;
+      tl.fromTo("#grain", { x: 0, y: 0 }, { x: -120, y: -80, duration: D, ease: "steps(120)" }, 0);
+
+      const SC = ["#open", "#split", "#cutDept", "#cutMail", "#cutN1", "#cutN2", "#cutN3", "#cutEnd"];
+      // hard cuts: exactly one scene is visible at a time
+      const cut = (sel, t) => {
+        SC.forEach((s) => tl.set(s, { autoAlpha: s === sel ? 1 : 0 }, t));
+        tl.fromTo("#leak", { opacity: 0.55 }, { opacity: 0, duration: 0.4, ease: "power2.out", immediateRender: false }, t);
+      };
+      SC.forEach((s) => tl.set(s, { autoAlpha: 0 }, 0));
+      const type = (sel, text, t, d) => {
+        const el = document.querySelector(sel);
+        const o = { n: 0 };
+        tl.fromTo(o, { n: 0 }, { n: text.length, duration: d, ease: "none", onUpdate: () => (el.textContent = text.slice(0, Math.round(o.n))) }, t);
+      };
+      const tick = (sel, from, to, t, d) => {
+        const el = document.querySelector(sel);
+        const o = { s: from };
+        tl.fromTo(o, { s: from }, { s: to, duration: d, ease: "none", onUpdate: () => (el.textContent = "21:47:" + String(Math.floor(o.s)).padStart(2, "0")) }, t);
+      };
+
+      // ---------- cold open (0 - 1.75) ----------
+      tl.set("#open", { autoAlpha: 1 }, 0.15);
+      tl.fromTo("#clock", { opacity: 0 }, { opacity: 1, duration: 0.3, ease: "none" }, 0.2);
+      type("#typedT", "A customer can't get online.", 0.35, 0.8);
+      tl.fromTo("#caret1", { opacity: 1 }, { opacity: 0, duration: 0.12, ease: "steps(1)", yoyo: true, repeat: 5 }, 0.2);
+
+      // ---------- split screen (1.75 - 5.6) ----------
+      cut("#split", 1.75);
+      tick("#ts1", 3, 31, 1.75, 3.85);
+      tick("#ts2", 3, 31, 1.75, 3.85);
+      tl.fromTo("#c1", { opacity: 0, y: 18 }, { opacity: 1, y: 0, duration: 0.35 }, 1.85);
+      const logT = [2.2, 2.75, 3.3, 3.85, 4.4, 4.9];
+      logT.forEach((t, i) => tl.fromTo("#g" + (i + 1), { opacity: 0, x: -14 }, { opacity: 1, x: 0, duration: 0.25, ease: "power2.out" }, t));
+      // a strand of light crosses the gutter into the backend for each call
+      const fibre = (t, y) => {
+        tl.set("#fb", { x: 600, y }, t);
+        tl.to("#fb", { keyframes: [ { opacity: 1, duration: 0.04, ease: "none" }, { x: 1300, duration: 0.3, ease: "power2.in" }, { opacity: 0, duration: 0.06, ease: "none" } ] }, t);
+      };
+      tl.set("#fb", { x: 600, y: 400 }, 0);
+      fibre(2.75, 330); fibre(3.3, 545); fibre(3.85, 760); fibre(4.9, 760);
+      tl.fromTo("#w1", { opacity: 0 }, { opacity: 1, duration: 0.15, ease: "none" }, 3.05);
+      tl.fromTo("#w3", { opacity: 0 }, { opacity: 1, duration: 0.15, ease: "none" }, 3.6);
+      tl.fromTo("#w5", { opacity: 0 }, { opacity: 1, duration: 0.15, ease: "none" }, 4.15);
+      tl.fromTo("#w6", { opacity: 0 }, { opacity: 1, duration: 0.15, ease: "none" }, 5.2);
+      tl.fromTo("#a1", { opacity: 0, y: 18 }, { opacity: 1, y: 0, duration: 0.35 }, 4.2);
+      tl.fromTo("#a2", { opacity: 0, y: 18 }, { opacity: 1, y: 0, duration: 0.35 }, 4.75);
+
+      // ---------- hard cuts (5.6 - 12) ----------
+      cut("#cutDept", 5.6);
+      tl.fromTo("#cutDept .sq i", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.3, stagger: 0.04 }, 5.6);
+      tl.fromTo("#sqOn", { scale: 0.6 }, { scale: 1.12, duration: 0.4, ease: "back.out(2.6)" }, 5.95);
+      type("#dT", "Routed to the right team.", 5.9, 0.4);
+
+      cut("#cutMail", 6.75);
+      tl.fromTo("#env", { scale: 1.3, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.35, ease: "power3.out" }, 6.75);
+      type("#mT", "Customer email sent.", 6.85, 0.3);
+
+      const slam = (scene, num, t) => {
+        cut(scene, t);
+        tl.fromTo(num, { scale: 1.22, filter: "blur(10px)" }, { scale: 1, filter: "blur(0px)", duration: 0.32, ease: "power4.out" }, t);
+        tl.fromTo(scene + " .lab", { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.3 }, t + 0.15);
+      };
+      slam("#cutN1", "#n1", 7.75);
+      slam("#cutN2", "#n2", 8.65);
+      slam("#cutN3", "#n3", 9.55);
+
+      cut("#cutEnd", 10.45);
+      type("#eT", "Later, the same backend answered the phone.", 10.5, 0.75);
+      tl.fromTo("#eS", { opacity: 0 }, { opacity: 1, duration: 0.4, ease: "none" }, 11.0);
+      tl.to("#cutEnd", { opacity: 0, duration: 0.3, ease: "power1.in" }, 11.65);
+
+      window.__timelines["main"] = tl;
+    </script>
+  </body>
+</html>
