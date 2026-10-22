@@ -1,8 +1,10 @@
 /* Page 3, the showreel (see about-reel.css). On desktop it slides in sideways from About on the same cream
-   (the screen before it lands, in step with about-h.js moving About out) with "Built by Haris." around the small
-   card. Then the lights go down: the card grows to about three quarters of the screen, the page dims to a dark
+   (the screen before it lands, in step with about-h.js moving About out). Once it has landed it runs on its own,
+   in about four seconds: the lights go down: the card grows to about three quarters of the screen, the page dims to a dark
    room lit in the colour of the project playing, and a control bar comes up under it (chapters, play and pause,
-   time). Last, black bars close in from top and bottom, crop it to a thin strip and leave the page black.
+   time), it holds big for a moment, then black bars close in and the page carries on by itself into
+   "Entering the portfolio". Any wheel, touch or key during that takes the scroll back.
+   Every visual still follows the scroll position; the autoplay just moves the scroll.
    Positions are read on resize only; every scroll frame is arithmetic plus a handful of style writes. */
 ;(function () {
 	const flow = document.getElementById('site-flow')
@@ -21,8 +23,6 @@
 	let vh = 1
 	let cine = false
 
-	const sm = rl.querySelector('.rl__built--sm')
-	const lg = rl.querySelector('.rl__built--lg')
 	const card = rl.querySelector('.rl__card')
 	const video = rl.querySelector('.rl__video')
 	const barTop = rl.querySelector('.rl__bar--top')
@@ -67,7 +67,7 @@
 		// small card: about 30% of the screen width, like the reference
 		s0 = Math.min(1, (W * 0.3) / (card.offsetWidth || 1440))
 		if (!cine) {
-			;[pin, card, sm, lg, video, barTop, barBot, room, ctrl].forEach((el) => el.removeAttribute('style'))
+			;[pin, card, video, barTop, barBot, room, ctrl].forEach((el) => el.removeAttribute('style'))
 			rl.classList.remove('is-room')
 		}
 		update()
@@ -85,10 +85,9 @@
 			pin.style.transform = eB < 1 ? `translate3d(${Math.round(W * (1 - eB) * dpr) / dpr}px, 0, 0)` : ''
 			pin.style.visibility = b > 0 ? '' : 'hidden'
 
-			// then the lights go down: "Built by Haris." leaves as the card grows, the page dims to a dark room and the
-			// controls come up under the screen; it plays big; the controls go and the bars close
+			// then the lights go down: the card grows, the page dims to a dark room and the controls come up under the
+			// screen; it plays big; the controls go and the bars close
 			const p = clamp((st - rlTop - vh) / run)
-			const built = 1 - inOut(clamp((p - 0.04) / 0.1))
 			const grow = inOut(clamp((p - 0.06) / 0.2))
 			const dim = inOut(clamp((p - 0.08) / 0.2))
 			const ui = clamp((p - 0.22) / 0.06) * (1 - clamp((p - 0.76) / 0.04))
@@ -97,11 +96,6 @@
 			ctrl.style.transform = `translate3d(0, ${((1 - ui) * 12).toFixed(1)}px, 0)`
 			rl.classList.toggle('is-room', ui > 0.5)
 			const q = inOut(clamp((p - 0.8) / 0.16)) // the bars close
-
-			sm.style.opacity = built.toFixed(3)
-			sm.style.transform = `translate3d(0, ${((1 - built) * -18).toFixed(1)}px, 0)`
-			lg.style.opacity = built.toFixed(3)
-			lg.style.transform = `translate3d(0, ${((1 - built) * 26).toFixed(1)}px, 0)`
 
 			// the bars: each covers up to half the screen; halfway in, their edges bow into the card, then flatten
 			barTop.style.transform = `translate3d(0, ${((q - 1) * 100).toFixed(2)}%, 0)`
@@ -113,11 +107,80 @@
 			// header text turns light once the room is dark
 			dark = (dim > 0.5 || q > 0.12) && st < rlTop + vh + run + vh
 			playing(b > 0 && q < 0.999)
+			armAuto(st)
 		} else {
 			playing(st + vh > rlTop && st < rlTop + rl.offsetHeight)
 		}
 		if (header) header.classList.toggle('site-header--on-dark3', dark)
 	}
+
+	// ---------------- autoplay: once it starts growing, it finishes quickly and moves on by itself ----------------
+	// The scroll is driven in two quick legs with a short beat between them: the card grows to full size (p 0.3),
+	// holds for a moment while it plays big, then one glide carries the page through the bars closing and on into
+	// "Entering the portfolio" until PORTFOLIO has risen. Every visual still follows the scroll position, so all of
+	// it stays transform, opacity and clip-path. It starts as soon as the visitor lands on the reel or stops
+	// anywhere in it on the way down; any wheel, touch, click or key hands the scroll straight back.
+	const ent = document.getElementById('panel-enter')
+	const GROW = 0.3
+	const T_GROW = 1000
+	const T_BEAT = 700
+	const T_GO = 2400
+	let auto = null // { from, to, t0, dur, next }
+	let waitTimer = 0
+	let beatTimer = 0
+	let lastSt = 0
+	let dir = 1
+	function endTarget() {
+		if (!ent) return rlTop + rl.offsetHeight
+		const top = pageTop(ent)
+		const works = document.getElementById('panel-works')
+		const land = works ? pageTop(works) : top + ent.offsetHeight - vh
+		// where enter.js has drawn the line, raised PORTFOLIO and shown the caption
+		return Math.round(top + Math.max(1, land - vh - top) * 0.8)
+	}
+	function armAuto(st) {
+		if (st !== lastSt) dir = st > lastSt ? 1 : -1
+		lastSt = st
+		if (auto) return
+		clearTimeout(waitTimer)
+		const start = rlTop + vh - 6
+		const stop = endTarget() - 4
+		// only on the way down, and only from the landing onwards
+		if (dir < 0 || st < start || st > stop) return
+		waitTimer = setTimeout(() => {
+			const now = flow.scrollTop
+			if (!cine || auto || now !== lastSt || document.visibilityState === 'hidden') return
+			if (now < rlTop + vh + run * GROW - 4) leg(rlTop + vh + run * GROW, T_GROW, true)
+			else leg(endTarget(), T_GO, false)
+		}, 140)
+	}
+	function leg(to, dur, thenGo) {
+		window.__autoRun = true
+		auto = { from: flow.scrollTop, to: Math.round(to), t0: performance.now(), dur, thenGo }
+		requestAnimationFrame(stepAuto)
+	}
+	function stepAuto(now) {
+		if (!auto) return
+		const k = Math.min(1, (now - auto.t0) / auto.dur)
+		flow.scrollTop = Math.round(auto.from + (auto.to - auto.from) * inOut(k))
+		if (k < 1) return requestAnimationFrame(stepAuto)
+		const go = auto.thenGo
+		auto = { beat: true }
+		// a short beat with the reel playing full size, then on to the next page
+		if (go) beatTimer = setTimeout(() => auto && auto.beat && leg(endTarget(), T_GO, false), T_BEAT)
+		else stopAuto()
+	}
+	function stopAuto() {
+		clearTimeout(beatTimer)
+		auto = null
+		window.__autoRun = false
+		lastSt = flow.scrollTop
+	}
+	// the visitor takes over at any time
+	const takeOver = () => auto && stopAuto()
+	;['wheel', 'touchstart', 'pointerdown'].forEach((e) => flow.addEventListener(e, takeOver, { passive: true, capture: true }))
+	document.addEventListener('keydown', takeOver, true)
+	document.addEventListener('visibilitychange', () => document.visibilityState === 'hidden' && takeOver())
 
 	// ---------------- the reel video ----------------
 	let loaded = false

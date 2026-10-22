@@ -994,3 +994,10 @@
 	clip: rect(0 0 0 0);
 	white-space: nowrap;
 }
+
+/* the grain and the recording dot only move while the reel is playing on screen; off screen they would make the
+   browser redraw every frame on every other page of the site */
+.rr:not(.is-running) .rr__grain,
+.rr:not(.is-running) .rr__rec i {
+	animation-play-state: paused;
+}

@@ -5,8 +5,8 @@
      exactly the same place, takes over: it grows to the full height and widens to the left over two thirds of the
      screen, his studio backdrop carried across while he settles at a natural size on the right. The dark column
      drops in like a curtain; the monogram draws in, and every line of copy rises out of its own mask in turn.
-   - About to the showreel (second screen): the page carries on sideways in layers, the column's text a little
-     faster and his photo a little slower than the page; about-reel.js slides the reel in from the right on the same curve.
+   - About to the portfolio intro (second screen): the page carries on sideways in layers, the column's text a little
+     faster and his photo a little slower than the page, onto the dark of enter/enter.js.
    Positions and line breaks are read on resize only. */
 ;(function () {
 	const flow = document.getElementById('site-flow')
@@ -31,11 +31,12 @@
 	const heroTitle = hero.querySelector('.ph-titles--white .ph-title')
 	const heroSub = hero.querySelector('.ph-sub')
 	const track = hx.querySelector('.hx__track')
+	const pin = hx.querySelector('.hx__pin')
 	const frame = hx.querySelector('.hx__photo')
 	const img = frame.querySelector('img')
 	const side = hx.querySelector('.hx__side')
 	const panel = hx.querySelector('.hx__panel')
-	const mark = hx.querySelector('.hx__mark')
+	const facts = [...hx.querySelectorAll('.hx__facts > div')]
 	const who = hx.querySelector('.hx__who')
 	const links = [...hx.querySelectorAll('.hx__links a')]
 	const foot = hx.querySelector('.hx__foot')
@@ -149,7 +150,7 @@
 		hx.classList.toggle('is-cine', cine)
 		if (!cine) {
 			blocks.forEach(inline)
-			;[frame, img, track, side, panel, mark, who, foot, ...links].forEach((el) => el.removeAttribute('style'))
+			;[pin, frame, img, track, side, panel, who, foot, ...facts, ...links].forEach((el) => el.removeAttribute('style'))
 			hx.classList.remove('is-on', 'is-landed')
 			clearHero()
 			clearHeader()
@@ -259,6 +260,10 @@
 		img.style.transform = `translate3d(${px(lerp(from[0], to[0], e1) + W * 0.1 * eB)}px, ${lerp(from[1], to[1], e1).toFixed(1)}px, 0) scale(${s.toFixed(4)})`
 		img.style.setProperty('--hx-m', (1 - e1).toFixed(3))
 		track.style.transform = eB > 0 ? `translate3d(${px(-W * eB)}px, 0, 0)` : ''
+		// About leaves sideways onto the dark of the portfolio intro, not onto the white page behind it: the pin goes
+		// dark, and the page itself carries its own white so the column it slides away keeps its colour
+		pin.style.backgroundColor = b > 0 ? '#0a0a0a' : ''
+		track.style.backgroundColor = b > 0 ? '#fff' : ''
 
 		// ---- the dark column drops in like a curtain, only where the photo panel has opened ----
 		const w = inOut(clamp((e - 0.3) / 0.4))
@@ -266,15 +271,17 @@
 		// on the way to the reel its text runs ahead of the page and slides out under the column's edge
 		panel.style.setProperty('--hx-px', eB > 0 ? px(-W * 0.12 * eB) + 'px' : '0px')
 
-		// ---- the copy: the monogram draws in, then every line rises out of its own mask ----
-		const m = out(clamp((e - 0.42) / 0.3))
-		mark.style.clipPath = `inset(0 ${((1 - m) * 100).toFixed(2)}% 0 0)`
+		// ---- the copy: every line rises out of its own mask, then the facts and the links ----
 		rise(linesOf('who'), e, 0.48, 0.05, 0.26)
-		who.style.setProperty('--rule', out(clamp((e - 0.58) / 0.22)).toFixed(3))
 		rise(linesOf('h'), e, 0.54, 0.05, 0.3)
 		rise(linesOf('plab'), e, 0.56, 0, 0.24)
 		const pl = linesOf('p')
 		rise(pl, e, 0.6, Math.min(0.025, 0.22 / Math.max(1, pl.length - 1)), 0.18)
+		facts.forEach((f, i) => {
+			const t = out(clamp((e - 0.66 - i * 0.04) / 0.2))
+			f.style.opacity = t.toFixed(3)
+			f.style.transform = t < 1 ? `translate3d(0, ${px((1 - t) * 14)}px, 0)` : ''
+		})
 		links.forEach((a, i) => {
 			const t = out(clamp((e - 0.72 - i * 0.04) / 0.2))
 			a.style.opacity = t.toFixed(3)

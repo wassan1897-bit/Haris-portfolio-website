@@ -84,6 +84,8 @@
 .ct__sub,
 .ct__btns,
 .ct__status {
+	/* they rise with a transform as the section arrives; on their own layer that move never counts as a layout shift */
+	will-change: transform, opacity;
 	position: absolute;
 	left: 50%;
 	width: min(760px, 88vw);
@@ -224,17 +226,17 @@
 		display: none;
 	}
 	.ct__foot {
-		height: 170px;
+		height: 200px;
 	}
 	.ct__name {
 		left: 16px;
-		bottom: 92px;
+		bottom: 126px;
 		font-size: 7vw;
 	}
 	.ct__links {
 		left: 16px;
 		right: auto;
-		bottom: 56px;
+		bottom: 88px;
 		gap: 22px;
 		font-size: 15px;
 	}

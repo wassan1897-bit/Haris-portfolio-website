@@ -1,17 +1,18 @@
-/* Hero: "Automate the busywork". Giant headline filled with a black-and-white still on white,
+/* Hero: "Automate your operations". Giant headline filled with a black-and-white still on white,
    turning solid white where it crosses the portrait panel. Both photos are fixed images, no video. */
 
 .site-panel--hero {
 	--ph-ink: #1a1d1c;
 	--ph-muted: #8a8f8d;
 	--ph-line: #ececec;
-	--ph-rail: 96px;
+	/* where the headline, the copy under it and the bar's logo start */
+	--ph-left: clamp(40px, 6vw, 120px);
 	--ph-panel-left: 62%;
 	--ph-panel-bottom: 52px;
 	/* "AUTOMATE" fills the white side and ends right at the photo's edge (the panel starts at 62% of the
-	   screen; the title starts 130px past the rail), so only the small vertical "the" sits on the backdrop and
-	   nothing covers his face; 6.26 is the word's width in ems at the title's letter spacing */
-	--ph-title-size: clamp(64px, (62vw - var(--ph-rail) - 136px) / 6.26, 176px);
+	   screen), so the small vertical word sits on the photo's edge and the end of "OPERATIONS" runs onto the
+	   photo in white; 6.26 is the word's width in ems at the title's letter spacing */
+	--ph-title-size: clamp(56px, (62vw - var(--ph-left) - 6px) / 6.26, 176px);
 
 	position: relative;
 	height: 100vh;
@@ -23,18 +24,16 @@
 	font-family: "Montserrat", "Manrope", Helvetica, Arial, sans-serif;
 }
 
-/* ---- left rail ---- */
+/* ---- top bar: logo and section links on the white side, the menu icon over the photo ---- */
 .ph-rail {
 	position: absolute;
-	inset: 0 auto 0 0;
+	inset: 0 0 auto 0;
 	z-index: 4;
-	width: var(--ph-rail);
-	border-right: 1px solid var(--ph-line);
+	height: 96px;
 	display: flex;
-	flex-direction: column;
 	align-items: center;
-	justify-content: space-between;
-	padding: 34px 0 40px;
+	gap: 56px;
+	padding: 0 56px 0 var(--ph-left);
 }
 .ph-mark {
 	width: 36px;
@@ -50,12 +49,11 @@
 }
 .ph-rail__links {
 	display: flex;
-	flex-direction: column-reverse;
-	gap: 38px;
+	gap: 34px;
 }
 .ph-rail__links a {
-	writing-mode: vertical-rl;
-	transform: rotate(180deg);
+	position: relative;
+	white-space: nowrap;
 	font-size: 11px;
 	font-weight: 600;
 	letter-spacing: 0.08em;
@@ -65,16 +63,67 @@
 .ph-rail__links a:hover {
 	opacity: 0.55;
 }
+.ph-rail__links a[aria-current="true"]::after {
+	content: "";
+	position: absolute;
+	left: 0;
+	right: 0;
+	bottom: -8px;
+	height: 1.5px;
+	background: var(--ph-ink);
+}
+.ph-rail__links sup {
+	position: relative;
+	top: -0.7em;
+	margin-left: 4px;
+	font: 500 9px/0 "JetBrains Mono", ui-monospace, monospace;
+	color: var(--ph-muted);
+	vertical-align: baseline;
+}
+/* availability, at the right end of the white side */
+.ph-status {
+	margin: 0 0 0 auto;
+	/* its right edge sits 32px short of the photo panel, which starts at --ph-panel-left */
+	/* (100% is the bar's content box, so the full width is 100% plus its side padding; 0.38 matches --ph-panel-left) */
+	margin-right: calc((100% + var(--ph-left) + 56px) * 0.38 - 56px + 32px);
+	white-space: nowrap;
+	font: 500 10.5px/1 "JetBrains Mono", ui-monospace, monospace;
+	letter-spacing: 0.12em;
+	text-transform: uppercase;
+	color: #6d726f;
+}
+@media (max-width: 1279px) {
+	.ph-status {
+		display: none;
+	}
+}
+/* the menu button, over the photo */
 .ph-burger {
+	position: absolute;
+	right: 56px;
+	top: 0;
+	bottom: 0;
+	display: flex;
+	align-items: center;
+	gap: 12px;
+	padding: 0;
+	border: 0;
+	background: none;
+	color: #fff;
+	font: 700 11px/1 "Montserrat", sans-serif;
+	letter-spacing: 0.14em;
+	text-transform: uppercase;
+	cursor: pointer;
+}
+.ph-burger__icon {
 	display: grid;
 	gap: 6px;
 	width: 22px;
-	padding: 6px 0;
 }
 .ph-burger i {
 	display: block;
 	height: 1.5px;
-	background: var(--ph-ink);
+	background: #fff;
 }
 .ph-burger i:nth-child(2) {
 	width: 60%;
@@ -103,8 +152,9 @@
 	object-position: 50% 30%;
 }
 /* Desktop: give the photo its full, uncropped size and position it the way object-fit: cover
-   at 50% 30% would. The entrance then frames the face with a transform alone.
-   62cqw and 38cqw match --ph-panel-left; 941 x 1672 is the photo's size. */
+   at 50% 30% would. The entrance then frames the face with a transform alone. The photo is the wide
+   3:4 studio frame, so covering the panel shows him from the hair to the chest instead of a close-up.
+   62cqw and 38cqw match --ph-panel-left; 1536 x 2048 is the photo's size. */
 @supports (width: 1cqw) {
 	@media (min-width: 768px) {
 		.ph-panel {
@@ -112,11 +162,11 @@
 		}
 		.ph-panel img {
 			right: auto;
-			width: max(38cqw, (100cqh - var(--ph-panel-bottom)) * 941 / 1672);
+			width: max(38cqw, (100cqh - var(--ph-panel-bottom)) * 1536 / 2048);
 			height: auto;
-			aspect-ratio: 941 / 1672;
-			left: calc(62cqw + (38cqw - max(38cqw, (100cqh - var(--ph-panel-bottom)) * 941 / 1672)) / 2);
-			top: calc((100cqh - var(--ph-panel-bottom) - max(38cqw, (100cqh - var(--ph-panel-bottom)) * 941 / 1672) * 1672 / 941) * 0.3);
+			aspect-ratio: 1536 / 2048;
+			left: calc(62cqw + (38cqw - max(38cqw, (100cqh - var(--ph-panel-bottom)) * 1536 / 2048)) / 2);
+			top: calc((100cqh - var(--ph-panel-bottom) - max(38cqw, (100cqh - var(--ph-panel-bottom)) * 1536 / 2048) * 2048 / 1536) * 0.3);
 		}
 	}
 }
@@ -163,20 +213,6 @@
 	transform-origin: bottom;
 }
 
-.ph-top {
-	position: absolute;
-	top: 30px;
-	right: 56px;
-	z-index: 5;
-	display: flex;
-	align-items: center;
-	gap: 36px;
-	color: #fff;
-	font-size: 12px;
-	font-weight: 700;
-	letter-spacing: 0.06em;
-	text-transform: uppercase;
-}
 .ph-pill {
 	height: 46px;
 	padding: 0 34px;
@@ -235,7 +271,7 @@
 .ph-title {
 	position: absolute;
 	top: 25%;
-	left: calc(var(--ph-rail) + 130px);
+	left: var(--ph-left);
 	margin: 0;
 	font-weight: 800;
 	font-size: var(--ph-title-size);
@@ -251,7 +287,8 @@
 	vertical-align: top;
 	margin: 0.08em 0 0 0.12em;
 	writing-mode: vertical-rl;
-	font-size: 0.3em;
+	/* four letters: kept within the height of the line beside it */
+	font-size: 0.25em;
 	line-height: 1;
 	letter-spacing: 0.04em;
 	font-weight: 700;
@@ -276,7 +313,7 @@
 .ph-sub {
 	position: absolute;
 	z-index: 4;
-	left: calc(var(--ph-rail) + 134px);
+	left: calc(var(--ph-left) + 4px);
 	top: calc(25% + var(--ph-title-size) * 1.68 + 40px);
 	display: grid;
 	justify-items: start;
@@ -357,7 +394,7 @@
 
 /* ---- tools: named logos scrolling on a loop ---- */
 .ph-logos {
-	width: calc(62vw - var(--ph-rail) - 190px);
+	width: calc(62vw - var(--ph-left) - 60px);
 	margin-top: 46px;
 	overflow: hidden;
 	-webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
@@ -475,7 +512,6 @@
 .site-panel--hero[data-enter="pending"] .ph-panel,
 .site-panel--hero[data-enter="pending"] .ph-titles,
 .site-panel--hero[data-enter="pending"] .ph-rail > *,
-.site-panel--hero[data-enter="pending"] .ph-top,
 .site-panel--hero[data-enter="pending"] .ph-slide,
 .site-panel--hero[data-enter="pending"] .ph-sub > * {
 	visibility: hidden;
@@ -499,25 +535,24 @@ body[data-page="about"] {
 
 @media (max-width: 767px) {
 	.site-panel--hero {
-		--ph-rail: 0px;
+		--ph-left: 16px;
 		--ph-panel-left: 0%;
 		--ph-panel-bottom: 0px;
-		--ph-title-size: 13.5vw;
+		/* the longer line, OPERATIONS, spans the screen inside the 16px gutters */
+		--ph-title-size: calc((100vw - 32px) / 7.3);
 		height: auto;
 		min-height: 100svh;
 		display: flex;
 		flex-direction: column;
 	}
 	.ph-rail {
-		inset: 0 0 auto 0;
-		width: auto;
 		height: 64px;
-		flex-direction: row;
 		padding: 0 16px;
-		border: 0;
+	}
+	.ph-burger {
+		right: 16px;
 	}
 	.ph-rail__links,
-	.ph-top,
 	.ph-slide,
 	.ph-titles--white {
 		display: none;

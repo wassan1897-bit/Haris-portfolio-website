@@ -1,3 +1,10 @@
+/* The menu (#js-menu): a dark index of the page's sections. The header's MENU button and the hero's menu
+   icon open it. Hovering or focusing a section plays that section's clip in the frame on the right; with
+   nothing hovered, the frame shows the section you are on. Choosing a section jumps the page there behind
+   the menu, then the menu lifts away. Motion is clip-path, transform and opacity only.
+
+   window.siteJump(selector) is shared with the hero's top bar: it lands a section without scrolling
+   through everything in between (behind the site's letterbox cut when that style is on). */
 window.__navBarCleanup = null
 
 window.initNavBar = function initNavBar() {
@@ -6,34 +13,90 @@ window.initNavBar = function initNavBar() {
 		window.__navBarCleanup = null
 	}
 
+	const menu = document.getElementById('js-menu')
 	const toggle = document.getElementById('js-menu-btn')
-	const burger = document.getElementById('js-burger')
-	const labelMenu = document.getElementById('js-label-menu')
-	const labelClose = document.getElementById('js-label-close')
-	const actions = document.getElementById('js-header-actions')
-	const nav = document.getElementById('js-nav')
-	const navBody = document.getElementById('js-nav-body')
-	const navLinks = Array.from(document.querySelectorAll('.site-nav__link'))
-	const navImage = document.getElementById('js-nav-image')
-	const navImageEl = document.getElementById('js-nav-image-el')
-	const highlight = document.getElementById('js-nav-highlight')
-	const line1 = document.getElementById('js-nav-line1')
-	const line2 = document.getElementById('js-nav-line2')
-	const footerItems = Array.from(document.querySelectorAll('.site-nav__footer li'))
-	const background = document.getElementById('js-background')
-	const header = document.getElementById('js-site-header')
+	const flow = document.getElementById('site-flow')
+	if (!menu || !flow) return
 
-	if (!toggle || !burger || !nav || !navBody || !navLinks.length || !background) return
-	if (typeof gsap === 'undefined') return
+	const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+	const small = window.matchMedia('(max-width: 899px)')
+	const links = [...menu.querySelectorAll('.mn__list a')]
+	const names = links.map((a) => a.querySelector('span > span'))
+	const side = menu.querySelector('.mn__side')
+	const top = menu.querySelector('.mn__top')
+	const foot = menu.querySelector('.mn__foot')
+	const close = menu.querySelector('.mn__close')
+	const frame = menu.querySelector('.mn__frame')
+	const video = menu.querySelector('.mn__video')
+	const img = menu.querySelector('.mn__img')
+	const card = menu.querySelector('.mn__card')
+	const capN = menu.querySelector('.mn__cap-n')
+	const capT = menu.querySelector('.mn__cap-t')
+	const hasGsap = typeof gsap !== 'undefined'
 
-	const ease = 'power3.inOut'
+	// ---------- landing a section ----------
+	// where each section counts as landed (About lands after its slide-in, so on its marker)
+	const LAND = { '#panel-about': '#about-land' }
+	const pageTop = (el) => el.getBoundingClientRect().top - flow.getBoundingClientRect().top + flow.scrollTop
+	function landAt(sel) {
+		const el = document.querySelector(LAND[sel] || sel)
+		return el ? Math.round(pageTop(el)) : null
+	}
+	function jumpNow(sel) {
+		const y = landAt(sel)
+		if (y == null) return
+		flow.scrollTo({ top: y, behavior: 'instant' })
+	}
+	window.siteJump = function (sel, label) {
+		const y = landAt(sel)
+		if (y == null || Math.abs(flow.scrollTop - y) < 2) return
+		if (window.SiteScroll && window.SiteScroll.cut) window.SiteScroll.cut(() => jumpNow(sel), label || '')
+		else jumpNow(sel)
+	}
+
+	// ---------- the section you are on ----------
+	function current() {
+		const mid = flow.scrollTop + flow.clientHeight / 2
+		let at = 0
+		links.forEach((a, i) => {
+			const el = document.querySelector(a.dataset.mnGo)
+			if (el && pageTop(el) <= mid) at = i
+		})
+		return at
+	}
+
+	// ---------- the frame ----------
+	let shown = -1
+	function show(i) {
+		if (i === shown) return
+		shown = i
+		links.forEach((a, j) => a.classList.toggle('is-on', j === i))
+		const a = links[i]
+		capN.textContent = `(${a.querySelector('b').textContent})`
+		capT.textContent = a.querySelector('em').textContent
+		if (small.matches) return // no frame on small screens
+		const kind = a.dataset.video ? 'video' : a.dataset.img ? 'img' : 'card'
+		frame.classList.toggle('is-video', kind === 'video')
+		frame.classList.toggle('is-img', kind === 'img')
+		frame.classList.toggle('is-card', kind === 'card')
+		if (kind === 'video') {
+			if (video.getAttribute('src') !== a.dataset.video) {
+				video.src = a.dataset.video
+				video.currentTime = 0
+			}
+			if (!reduce) video.play().catch(() => {})
+		} else {
+			video.pause()
+			if (kind === 'img' && img.getAttribute('src') !== a.dataset.img) img.src = a.dataset.img
+			if (kind === 'card') card.textContent = a.dataset.card || ''
+		}
+	}
+
+	// ---------- open and close ----------
 	let isOpen = false
-	let splitDone = false
-	let activeIndex = null
-
-	function setFlowLock(lock) {
-		const flow = document.getElementById('site-flow')
-		if (!flow) return
+	let opener = null
+	let tl = null
+	function lockFlow(lock) {
 		if (lock) {
 			flow.dataset.navLock = '1'
 			flow.style.overflow = 'hidden'
@@ -42,245 +105,121 @@ window.initNavBar = function initNavBar() {
 			flow.style.overflow = ''
 		}
 	}
-
-	function setOpenState(open) {
-		isOpen = open
-		burger.classList.toggle('site-header__burger--active', open)
-		toggle.setAttribute('aria-expanded', open ? 'true' : 'false')
-		toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu')
-		nav.setAttribute('aria-hidden', open ? 'false' : 'true')
-		if (header) header.classList.toggle('site-header--open', open)
-		if (open) nav.removeAttribute('inert')
-		else nav.setAttribute('inert', '')
+	function setExpanded(v) {
+		if (toggle) toggle.setAttribute('aria-expanded', String(v))
+		document.querySelectorAll('.ph-burger').forEach((b) => b.setAttribute('aria-expanded', String(v)))
 	}
-
-	function splitLinks() {
-		if (splitDone) return
-		navLinks.forEach((link) => {
-			if (link.dataset.split === '1') return
-			const text = link.textContent
-			const dotIndex = Number.parseInt(link.dataset.dot ?? '-1', 10)
-			link.textContent = ''
-			text.split('').forEach((char, i) => {
-				const span = document.createElement('span')
-				span.textContent = char === ' ' ? '\u00A0' : char
-				if (i === dotIndex) span.classList.add('site-nav__char--dot')
-				link.appendChild(span)
-			})
-			link.dataset.split = '1'
-		})
-		splitDone = true
-	}
-
-	splitLinks()
-
-	const allChars = Array.from(document.querySelectorAll('.site-nav__link span'))
-	gsap.set(allChars, { y: '100%', opacity: 0 })
-	if (footerItems.length) gsap.set(footerItems, { y: '100%', opacity: 0 })
-	if (labelClose) gsap.set(labelClose, { opacity: 0 })
-	if (navImage) gsap.set(navImage, { opacity: 0 })
-	if (highlight) gsap.set(highlight, { autoAlpha: 0, y: 10 })
-	nav.setAttribute('inert', '')
-
-	navLinks.forEach((link) => {
-		const src = link.dataset.src
-		if (!src) return
-		const img = new Image()
-		img.src = src
-	})
-
-	const tl = gsap.timeline({
-		paused: true,
-		onReverseComplete() {
-			setOpenState(false)
-			setFlowLock(false)
-			clearHover()
-		},
-	})
-
-	tl.to(nav, { height: 'auto', duration: 1, ease }, 0)
-		.to(background, { height: '100vh', duration: 1, ease }, 0)
-
-	if (labelMenu) tl.to(labelMenu, { opacity: 0, duration: 0.35 }, 0)
-	if (labelClose) tl.to(labelClose, { opacity: 1, duration: 0.35 }, 0)
-	if (actions) tl.to(actions, { opacity: 0, duration: 0.35 }, 0)
-
-	tl.to(
-		allChars,
-		{ y: '0%', opacity: 1, duration: 1, ease, stagger: 0.02 },
-		0.2,
-	)
-
-	if (footerItems.length) {
-		tl.to(
-			footerItems,
-			{ y: '0%', opacity: 1, duration: 1, ease, stagger: 0.05 },
-			0.4,
-		)
-	}
-
-	function showHighlight(link) {
-		if (!highlight || !line1 || !line2) return
-		const next1 = link.dataset.line1 || ''
-		const next2 = link.dataset.line2 || ''
-
-		const apply = () => {
-			line1.textContent = next1
-			line2.textContent = next2
-			highlight.classList.add('is-visible')
-			gsap.to(highlight, {
-				autoAlpha: 1,
-				y: 0,
-				duration: 0.35,
-				ease: 'power2.out',
-				overwrite: true,
-			})
+	function open(from) {
+		if (isOpen) return
+		isOpen = true
+		opener = from || document.activeElement
+		menu.hidden = false
+		menu.scrollTop = 0
+		shown = -1
+		show(current())
+		lockFlow(true)
+		setExpanded(true)
+		if (tl) tl.kill()
+		if (hasGsap && !reduce) {
+			tl = gsap.timeline()
+			tl.fromTo(menu, { clipPath: 'inset(0% 0% 100% 0%)' }, { clipPath: 'inset(0% 0% 0% 0%)', duration: 0.75, ease: 'expo.inOut' }, 0)
+			tl.fromTo(names, { yPercent: 105 }, { yPercent: 0, duration: 0.8, ease: 'power4.out', stagger: 0.05 }, 0.3)
+			tl.fromTo([top, side, foot], { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.7, ease: 'power3.out', stagger: 0.06 }, 0.45)
+			tl.eventCallback('onComplete', () => gsap.set([menu, ...names, top, side, foot], { clearProps: 'clipPath,transform,opacity' }))
 		}
-
-		if (highlight.classList.contains('is-visible') && gsap.getProperty(highlight, 'opacity') > 0.2) {
-			gsap.to(highlight, {
-				autoAlpha: 0,
-				y: 6,
-				duration: 0.15,
-				ease: 'power2.in',
-				overwrite: true,
-				onComplete: apply,
-			})
-		} else {
-			apply()
-		}
+		setTimeout(() => close.focus({ preventScroll: true }), reduce ? 0 : 400)
 	}
-
-	function hideHighlight() {
-		if (!highlight) return
-		highlight.classList.remove('is-visible')
-		gsap.to(highlight, {
-			autoAlpha: 0,
-			y: 10,
-			duration: 0.28,
-			ease: 'power2.inOut',
-			overwrite: true,
-		})
-	}
-
-	function clearHover() {
-		activeIndex = null
-		navLinks.forEach((link) => link.classList.remove('is-active'))
-		gsap.to(navLinks, {
-			filter: 'blur(0px)',
-			opacity: 1,
-			duration: 0.3,
-			overwrite: true,
-		})
-		if (navImage) gsap.set(navImage, { opacity: 0 })
-		hideHighlight()
-	}
-
-	function openMenu() {
-		setOpenState(true)
-		setFlowLock(true)
-		tl.play()
-	}
-
-	function closeMenu() {
-		if (tl.progress() === 0) return
-		burger.classList.remove('site-header__burger--active')
-		toggle.setAttribute('aria-expanded', 'false')
-		toggle.setAttribute('aria-label', 'Open menu')
+	function shut(then) {
+		if (!isOpen) return
 		isOpen = false
-		clearHover()
-		tl.reverse()
-	}
-
-	function toggleMenu() {
-		if (tl.reversed() || tl.progress() === 0) openMenu()
-		else closeMenu()
-	}
-
-	const onKeyDown = (e) => {
-		if (e.key === 'Escape' && (isOpen || tl.progress() > 0)) {
-			e.preventDefault()
-			closeMenu()
+		setExpanded(false)
+		const finish = () => {
+			menu.hidden = true
+			video.pause()
+			lockFlow(false)
+			if (then) then()
+			else if (opener && opener.focus) opener.focus({ preventScroll: true })
 		}
-	}
-
-	const onNavOver = (e) => {
-		const link = e.target.closest('.site-nav__link')
-		if (!link) return
-
-		const hoveredIndex = link.dataset.index
-		if (activeIndex === hoveredIndex) return
-		activeIndex = hoveredIndex
-
-		navLinks.forEach((other) => {
-			const isHovered = other.dataset.index === hoveredIndex
-			other.classList.toggle('is-active', isHovered)
-			gsap.to(other, {
-				filter: isHovered ? 'blur(0px)' : 'blur(5px)',
-				opacity: isHovered ? 1 : 0.45,
-				duration: 0.35,
-				overwrite: true,
+		if (tl) tl.kill()
+		if (hasGsap && !reduce) {
+			tl = gsap.timeline({ onComplete: finish })
+			tl.to([top, side, foot, ...names], { opacity: 0, duration: 0.25, ease: 'power2.in' }, 0)
+			tl.to(menu, { clipPath: 'inset(100% 0% 0% 0%)', duration: 0.6, ease: 'expo.inOut' }, 0.1)
+			tl.eventCallback('onComplete', () => {
+				gsap.set([menu, ...names, top, side, foot], { clearProps: 'clipPath,transform,opacity' })
+				finish()
 			})
-		})
-
-		showHighlight(link)
-
-		const src = link.dataset.src
-		if (navImageEl && src) {
-			if (navImageEl.getAttribute('src') !== src) {
-				navImageEl.src = src
-			}
-			navImageEl.alt = link.dataset.label || 'Preview'
-		}
-		if (navImage) gsap.to(navImage, { opacity: 1, duration: 0.35, overwrite: true })
+		} else finish()
 	}
 
-	const onNavLeave = () => {
-		clearHover()
-	}
-
-	const linkCleanups = []
-	navLinks.forEach((link) => {
-		const onClick = (e) => {
-			const href = link.getAttribute('href')
-			if (!href || href === '#') {
-				e.preventDefault()
-				return
-			}
-
-			if (href.startsWith('http') || href.startsWith('mailto:')) {
-				closeMenu()
-				return
-			}
-
-			e.preventDefault()
-			closeMenu()
-			window.setTimeout(() => {
-				if (typeof goToPage === 'function') goToPage(href)
-				else location.href = href
-			}, 420)
-		}
-		link.addEventListener('click', onClick)
-		linkCleanups.push(() => link.removeEventListener('click', onClick))
+	// ---------- wiring ----------
+	const onToggle = (e) => (isOpen ? shut() : open(e.currentTarget))
+	const openers = [toggle, ...document.querySelectorAll('.ph-burger')].filter(Boolean)
+	openers.forEach((b) => {
+		b.setAttribute('aria-controls', 'js-menu')
+		b.setAttribute('aria-expanded', 'false')
+		b.addEventListener('click', onToggle)
 	})
+	const onClose = () => shut()
+	close.addEventListener('click', onClose)
 
-	toggle.addEventListener('click', toggleMenu)
-	navBody.addEventListener('mouseover', onNavOver)
-	navBody.addEventListener('mouseleave', onNavLeave)
-	document.addEventListener('keydown', onKeyDown)
+	const onOver = (e) => {
+		const a = e.target.closest('.mn__list a')
+		if (a) show(links.indexOf(a))
+	}
+	const onLeave = () => isOpen && show(current())
+	const list = menu.querySelector('.mn__list')
+	list.addEventListener('pointerover', onOver)
+	list.addEventListener('focusin', onOver)
+	list.addEventListener('pointerleave', onLeave)
+
+	// a section link: land it behind the menu, then lift the menu away to reveal it
+	const onGo = (e) => {
+		const a = e.target.closest('[data-mn-go]')
+		if (!a) return
+		e.preventDefault()
+		jumpNow(a.dataset.mnGo)
+		shut(() => {})
+	}
+	menu.addEventListener('click', onGo)
+
+	// while open, keys belong to the menu: Escape closes, Tab stays inside, and the page's own key handlers
+	// (paging, the projects' arrows) do not run underneath it
+	const onKey = (e) => {
+		if (!isOpen) return
+		e.stopPropagation()
+		if (e.key === 'Escape') {
+			e.preventDefault()
+			shut()
+		} else if (e.key === 'Tab') {
+			const f = [...menu.querySelectorAll('a[href], button')]
+			const first = f[0]
+			const last = f[f.length - 1]
+			if (e.shiftKey && document.activeElement === first) {
+				e.preventDefault()
+				last.focus()
+			} else if (!e.shiftKey && document.activeElement === last) {
+				e.preventDefault()
+				first.focus()
+			}
+		}
+	}
+	window.addEventListener('keydown', onKey, true)
+	// wheel and touch on the menu never reach the page's scroll engines
+	const swallow = (e) => isOpen && e.stopPropagation()
+	menu.addEventListener('wheel', swallow, { passive: true })
+	menu.addEventListener('touchmove', swallow, { passive: true })
 
 	window.__navBarCleanup = () => {
-		toggle.removeEventListener('click', toggleMenu)
-		navBody.removeEventListener('mouseover', onNavOver)
-		navBody.removeEventListener('mouseleave', onNavLeave)
-		document.removeEventListener('keydown', onKeyDown)
-		linkCleanups.forEach((fn) => fn())
-		tl.kill()
-		setFlowLock(false)
-		setOpenState(false)
-		gsap.set(nav, { clearProps: 'height' })
-		gsap.set(background, { clearProps: 'height' })
-		if (actions) gsap.set(actions, { clearProps: 'opacity' })
-		if (highlight) gsap.set(highlight, { clearProps: 'all' })
+		openers.forEach((b) => b.removeEventListener('click', onToggle))
+		close.removeEventListener('click', onClose)
+		list.removeEventListener('pointerover', onOver)
+		list.removeEventListener('focusin', onOver)
+		list.removeEventListener('pointerleave', onLeave)
+		menu.removeEventListener('click', onGo)
+		window.removeEventListener('keydown', onKey, true)
+		if (tl) tl.kill()
+		menu.hidden = true
+		lockFlow(false)
 	}
 }

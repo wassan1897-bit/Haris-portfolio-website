@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1920, height=1080" />
+    <title>Lead enrichment cascade, two fields in, twenty-nine out</title>
+    <script src="assets/gsap.min.js"></script>
+    <style>
+      @font-face { font-family: "Inter"; src: url("assets/fonts/inter-latin-400-normal.woff2") format("woff2"); font-weight: 400; font-display: block; }
+      @font-face { font-family: "Inter"; src: url("assets/fonts/inter-latin-500-normal.woff2") format("woff2"); font-weight: 500; font-display: block; }
+      @font-face { font-family: "Inter"; src: url("assets/fonts/inter-latin-600-normal.woff2") format("woff2"); font-weight: 600; font-display: block; }
+      @font-face { font-family: "Inter"; src: url("assets/fonts/inter-latin-700-normal.woff2") format("woff2"); font-weight: 700; font-display: block; }
+      @font-face { font-family: "Inter"; src: url("assets/fonts/inter-latin-800-normal.woff2") format("woff2"); font-weight: 800; font-display: block; }
+
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { width: 1920px; height: 1080px; overflow: hidden; background: #12140a; }
+      body { font-family: "Inter", sans-serif; color: #f6f8e8; -webkit-font-smoothing: antialiased; }
+      #root { position: relative; width: 100%; height: 100%; overflow: hidden; background: radial-gradient(1500px 1000px at 40% 45%, #262b12 0%, #1a1e0d 55%, #12140a 100%); }
+      .k { font-size: 22px; font-weight: 800; letter-spacing: 0.24em; color: #e2f05a; }
+
+      /* the lead card on the left: 2 known fields, 29 to resolve */
+      #card { position: absolute; left: 120px; top: 150px; width: 640px; padding: 34px 36px; border-radius: 26px; background: #f7f9ea; color: #1b1f0a; box-shadow: 0 40px 100px rgba(4, 6, 0, 0.6); }
+      #card .k { color: #6a7a12; }
+      #known { margin-top: 18px; display: grid; gap: 10px; }
+      #known p { display: flex; justify-content: space-between; padding: 14px 18px; border-radius: 12px; background: #1b1f0a; color: #f6f8e8; font-size: 23px; font-weight: 700; }
+      #known p span { color: #b6c46a; font-weight: 600; }
+      #fields { margin-top: 22px; display: grid; grid-template-columns: repeat(6, 1fr); gap: 9px; }
+      #fields i { height: 30px; border-radius: 7px; background: #e1e5c8; position: relative; overflow: hidden; }
+      #fields i b { position: absolute; inset: 0; border-radius: 7px; background: var(--c); transform: scaleX(0); transform-origin: 0 50%; }
+      #count { margin-top: 22px; display: flex; align-items: baseline; gap: 14px; }
+      #count p { font-size: 92px; font-weight: 800; letter-spacing: -0.04em; line-height: 1; font-variant-numeric: tabular-nums; }
+      #count span { font-size: 24px; font-weight: 700; color: #5c6a1a; }
+
+      /* the cascade on the right: four tiers, each only for the gaps */
+      #tiers { position: absolute; left: 900px; top: 150px; width: 900px; }
+      .tier { position: relative; display: grid; grid-template-columns: 96px 1fr auto; align-items: center; gap: 24px; padding: 26px 30px; border-radius: 22px; background: #1d2210; box-shadow: inset 0 0 0 2px #333b1a; margin-bottom: 22px; }
+      .tier b { display: grid; place-items: center; width: 96px; height: 96px; border-radius: 20px; background: #2a3115; font-size: 30px; font-weight: 800; color: #e2f05a; }
+      .tier h4 { font-size: 30px; font-weight: 800; letter-spacing: -0.01em; color: #f6f8e8; }
+      .tier small { display: block; margin-top: 6px; font-size: 20px; font-weight: 600; color: #a7b07a; }
+      .tier em { font-style: normal; padding: 10px 16px; border-radius: 99px; background: rgba(226, 240, 90, 0.12); font-size: 19px; font-weight: 800; color: #e2f05a; white-space: nowrap; }
+      .tier .glow { position: absolute; inset: -3px; border-radius: 24px; box-shadow: 0 0 0 3px #e2f05a, 0 0 40px rgba(226, 240, 90, 0.4); opacity: 0; }
+      .tier .cost { position: absolute; right: 30px; top: -16px; padding: 4px 12px; border-radius: 99px; background: #12140a; box-shadow: inset 0 0 0 2px #333b1a; font-size: 16px; font-weight: 700; color: #a7b07a; }
+
+      /* the loop */
+      #loop { position: absolute; left: 140px; top: 240px; width: 1640px; text-align: center; }
+      #loop h3 { margin-top: 16px; font-size: 70px; font-weight: 800; letter-spacing: -0.035em; line-height: 1.02; }
+      #loop h3 em { font-style: normal; color: #e2f05a; }
+      .flow { margin-top: 56px; display: flex; justify-content: center; align-items: center; gap: 22px; }
+      .flow p { padding: 22px 30px; border-radius: 18px; background: #1d2210; box-shadow: inset 0 0 0 2px #333b1a; font-size: 26px; font-weight: 700; }
+      .flow i { font-style: normal; font-size: 30px; color: #e2f05a; }
+      #acc { margin-top: 60px; display: inline-flex; align-items: baseline; gap: 18px; }
+      #acc p { font-size: 130px; font-weight: 800; letter-spacing: -0.05em; line-height: 1; color: #e2f05a; }
+      #acc span { font-size: 28px; font-weight: 700; color: #cfd6a4; text-align: left; }
+      #end { position: absolute; left: 0; right: 0; top: 950px; text-align: center; font-size: 20px; font-weight: 700; letter-spacing: 0.2em; color: #8f9866; }
+
+      .grainbox { position: absolute; inset: -60px; overflow: hidden; pointer-events: none; }
+      #grain { position: absolute; left: 0; top: 0; width: 2100px; height: 1260px; opacity: 0.08; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' seed='61' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23n)'/%3E%3C/svg%3E"); }
+      .vig { position: absolute; inset: 0; box-shadow: inset 0 0 380px rgba(4, 6, 0, 0.75); pointer-events: none; }
+      #fade { position: absolute; inset: 0; background: #12140a; }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="12" data-width="1920" data-height="1080">
+      <div id="card">
+        <p class="k">ONE LEAD, AT INTAKE</p>
+        <div id="known"><p>Name<span>known</span></p><p>Website<span>known</span></p></div>
+        <div id="fields"></div>
+        <div id="count"><p id="cnt">0</p><span>of 29 fields resolved</span></div>
+      </div>
+
+      <div id="tiers">
+        <div class="tier" id="t1"><i class="glow"></i><b>1</b><div><h4>Structured data API</h4><small>The cheapest source, first</small></div><em id="e1">+ fields</em></div>
+        <div class="tier" id="t2"><i class="glow"></i><b>2</b><div><h4>Provider waterfall</h4><small>Only for the gaps tier 1 left</small></div><em id="e2">+ fields</em></div>
+        <div class="tier" id="t3"><i class="glow"></i><b>3</b><div><h4>Agentic crawl</h4><small>Reads the lead's own website</small></div><em id="e3">+ fields</em></div>
+        <div class="tier" id="t4"><i class="glow"></i><b>4</b><div><h4>AI + search fallback</h4><small>Null-safe: blank beats invented</small></div><em id="e4">+ fields</em></div>
+      </div>
+
+      <div id="loop">
+        <p class="k">CHEAPEST SUFFICIENT SOURCE WINS</p>
+        <h3>Tens of thousands of leads a campaign, <em>and the loop closes.</em></h3>
+        <div class="flow"><p>Weighted merge</p><i>→</i><p>CRM sheet</p><i>→</i><p>Sequencer</p><i>→</i><p>Reply and bounce events</p><i>→</i><p>Auto-suppress</p></div>
+        <div id="acc"><p id="pct">~96%</p><span>field-level accuracy,<br />29 fields per lead</span></div>
+      </div>
+      <p id="end">N8N · STRUCTURED-DATA APIS · AGENTIC CRAWLING · AI FALLBACK · OUTBOUND SEQUENCER</p>
+
+      <div class="grainbox"><div id="grain"></div></div>
+      <div class="vig"></div>
+      <div id="fade"></div>
+    </div>
+
+    <script>
+      // 29 field slots; which tier fills each one (tiers 1 to 4 in order, the cheaper ones taking most)
+      const TIER = [1,1,1,1,1,1,1,1,1,1,1,2,2,2,2,2,2,2,3,3,3,3,3,3,4,4,4,4,4];
+      const COL = { 1: "#e2f05a", 2: "#c3d64a", 3: "#a6bb3c", 4: "#879c2f" };
+      const fields = document.getElementById("fields");
+      fields.innerHTML = TIER.map((t) => `<i><b style="--c:${COL[t]}"></b></i>`).join("") + "<i></i>";
+      const slots = [...fields.querySelectorAll("b")];
+
+      const tl = gsap.timeline({ paused: true, defaults: { ease: "power3.out" } });
+      tl.fromTo("#grain", { x: 0, y: 0 }, { x: -120, y: -80, duration: 12, ease: "steps(96)" }, 0);
+      tl.fromTo("#fade", { opacity: 1 }, { opacity: 0, duration: 0.4, ease: "none" }, 0);
+      tl.to("#fade", { opacity: 1, duration: 0.4, ease: "none" }, 11.6);
+
+      tl.fromTo("#card", { opacity: 0, x: -60, rotation: -2 }, { opacity: 1, x: 0, rotation: 0, duration: 0.8, ease: "expo.out" }, 0.2);
+      tl.fromTo("#known p", { opacity: 0, x: -20 }, { opacity: 1, x: 0, duration: 0.4, stagger: 0.15 }, 0.6);
+      tl.fromTo("#fields i", { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 0.25, stagger: 0.015 }, 0.9);
+      tl.fromTo(".tier", { opacity: 0, x: 60 }, { opacity: 0.45, x: 0, duration: 0.5, stagger: 0.12 }, 1.0);
+
+      // each tier lights, fills its share of the slots, then dims; the counter follows
+      const cnt = document.getElementById("cnt"), c = { v: 0 };
+      const T0 = [2.0, 3.4, 4.8, 6.2];
+      let done = 0;
+      [1, 2, 3, 4].forEach((t, i) => {
+        const mine = slots.filter((_, j) => TIER[j] === t);
+        const at = T0[i];
+        tl.to("#t" + t, { opacity: 1, duration: 0.25, ease: "none" }, at);
+        tl.fromTo(`#t${t} .glow`, { opacity: 0 }, { opacity: 1, duration: 0.25, ease: "none" }, at);
+        tl.fromTo(mine, { scaleX: 0 }, { scaleX: 1, duration: 0.3, stagger: 0.07 }, at + 0.25);
+        const from = done, to = done + mine.length;
+        tl.fromTo(c, { v: from }, { v: to, immediateRender: false, duration: 0.3 + mine.length * 0.07, ease: "none", onUpdate: () => (cnt.textContent = Math.round(c.v)) }, at + 0.25);
+        done = to;
+        tl.to(`#t${t} .glow`, { opacity: 0, duration: 0.3, ease: "none" }, at + 1.25);
+        tl.to("#t" + t, { opacity: 0.6, duration: 0.3, ease: "none" }, at + 1.25);
+      });
+
+      // the cascade steps back; the loop and the accuracy come forward
+      tl.to(["#card", "#tiers"], { opacity: 0, y: -40, duration: 0.5, ease: "power2.in" }, 7.8);
+      tl.fromTo("#loop .k", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.5 }, 8.2);
+      tl.fromTo("#loop h3", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.6 }, 8.3);
+      tl.fromTo(".flow p, .flow i", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.35, stagger: 0.08 }, 8.8);
+      tl.fromTo("#acc", { opacity: 0, scale: 0.9 }, { opacity: 1, scale: 1, duration: 0.6, ease: "back.out(1.8)" }, 9.7);
+      tl.fromTo("#end", { opacity: 0 }, { opacity: 1, duration: 0.5, ease: "none" }, 10.2);
+
+      window.__timelines["main"] = tl;
+    </script>
+  </body>
+</html>

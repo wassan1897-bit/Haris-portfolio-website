@@ -13,30 +13,32 @@
 
 	const wait = (ms) => new Promise((r) => setTimeout(r, ms))
 
-	// Opening-shot framing for haris-hero-studio.webp (941x1672). Landmarks are source pixels:
-	// hair top 150, brow 514, glasses start x 340, face centre (576, 702), chin 931. The opening shot
-	// frames the band from 300 (above the hair) to 960 (below the chin).
+	// Opening-shot framing for haris-about-studio.webp (1536x2048). Landmarks are source pixels:
+	// hair top 186, brow 630, glasses start x 481, face centre (769, 859), chin 1139. The opening shot
+	// frames the band from 369 (above the hair) to 1174 (below the chin), and its right edge sits on
+	// x 1214, so the screen edge crops the photo where the old close-up portrait ended.
 	// The shot sits between letterbox bars, so it aims at the band from 13% to 86% of the screen.
-	const IMG_W = 941
-	const IMG_H = 1672
+	const IMG_W = 1536
+	const IMG_H = 2048
+	const SHOT_R = 1214
 
 	// Desktop: photo sized so the face fits between the bars and the eyes clear the title,
 	// anchored to the right edge, its left edge fading into the dark behind the title
 	function desktopFrame(w, h, titleRight) {
-		const fitBand = (0.73 * h) / (960 - 300)
-		const eyesClear = (w - titleRight - 20) / (IMG_W - 340)
+		const fitBand = (0.73 * h) / (1174 - 369)
+		const eyesClear = (w - titleRight - 20) / (SHOT_R - 481)
 		const coverH = (h / IMG_H) * 1.02
 		const fs = Math.max(Math.min(fitBand, eyesClear), fitBand * 0.6, coverH)
 		const width = IMG_W * fs
 		const height = IMG_H * fs
-		// Centre the hair-to-chin band (300 to 960) between the bars
-		const top = Math.min(Math.max(0.495 * h - 630 * fs, h - height), 0)
+		// Centre the hair-to-chin band (369 to 1174) between the bars
+		const top = Math.min(Math.max(0.495 * h - 772 * fs, h - height), 0)
 		return {
 			top,
-			left: w - width,
+			left: w - SHOT_R * fs,
 			width,
 			height,
-			transformOrigin: `${(576 / IMG_W) * 100}% ${(702 / IMG_H) * 100}%`,
+			transformOrigin: `${(769 / IMG_W) * 100}% ${(859 / IMG_H) * 100}%`,
 		}
 	}
 
@@ -45,11 +47,11 @@
 		const s = Math.max(w / IMG_W, h / IMG_H)
 		const visW = w / s
 		const spareX = IMG_W * s - w
-		const left = spareX > 0 ? Math.min(Math.max(576 - visW / 2, 0), IMG_W - visW) : 0
+		const left = spareX > 0 ? Math.min(Math.max(769 - visW / 2, 0), IMG_W - visW) : 0
 		const posX = spareX > 0 ? ((left * s) / spareX) * 100 : 50
 		return {
 			objectPosition: `${posX}% 50%`,
-			transformOrigin: `${((576 - left) / visW) * 100}% ${(690 / IMG_H) * 100}%`,
+			transformOrigin: `${((769 - left) / visW) * 100}% ${(845 / IMG_H) * 100}%`,
 		}
 	}
 
@@ -82,12 +84,14 @@
 		const statNums = qa('.ph-stat b')
 		const statLabels = qa('.ph-stat small')
 		const logos = q('.ph-logos')
-		const top = q('.ph-top')
 		const slideLine = q('.ph-slide i')
 		const slideNum = q('.ph-slide span')
 
 		// The opening shot needs the real font and the decoded photo, otherwise frame one is wrong
-		await Promise.race([Promise.all([document.fonts.ready, panelImg.decode().catch(() => {})]), wait(1500)])
+		// (the headline's own weight is asked for by name: until it is in, the word widths are wrong and the
+		// vertical THE would jump when it arrives)
+		const titleFont = document.fonts && document.fonts.load ? document.fonts.load('800 100px Montserrat').catch(() => {}) : null
+		await Promise.race([Promise.all([document.fonts.ready, titleFont, panelImg.decode().catch(() => {})]), wait(3000)])
 		if (hero.getAttribute('data-enter') === 'done') return // safety reveal already fired
 
 		const tl = gsap.timeline({ delay: fromIntro ? 0.5 : 0.2, defaults: { ease: 'power3.out' } })
@@ -101,9 +105,8 @@
 		gsap.set(bars, { scaleY: 1 })
 		gsap.set(shade, { opacity: 1 })
 		gsap.set(rail, { borderRightColor: 'rgba(236, 236, 236, 0)' })
-		gsap.set(railParts, { opacity: 0, x: -14 })
+		gsap.set(railParts, { opacity: 0, y: -12 })
 		gsap.set(subParts, { opacity: 0, y: 18 })
-		gsap.set(top, { opacity: 0, y: -14 })
 		gsap.set(slideNum, { opacity: 0 })
 		gsap.set(slideLine, { scaleY: 0 })
 		gsap.set(statNums, { opacity: 0, y: 16 })
@@ -121,6 +124,9 @@
 				if (!target) return
 				const suffix = el.dataset.suffix || ''
 				const counter = { v: 0 }
+				// hold the final number's width while it counts, so the columns beside it do not move
+				el.textContent = format(target, suffix)
+				el.style.minWidth = el.offsetWidth + 'px'
 				el.textContent = format(0, suffix)
 				tl.to(
 					counter,
@@ -158,15 +164,15 @@
 			// move in step with the push amount m.
 			const rest = { left: panelImg.offsetLeft, top: panelImg.offsetTop, width: panelImg.offsetWidth }
 			const fit = frame.width / rest.width
-			const faceX = frame.left + (700 / IMG_W) * frame.width
-			const faceY = frame.top + (560 / IMG_W) * frame.width
+			const faceX = frame.left + (920 / IMG_W) * frame.width
+			const faceY = frame.top + (686 / IMG_W) * frame.width
 			const framed = (m) => ({
 				x: faceX + m * (frame.left - faceX) - rest.left,
 				y: faceY + m * (frame.top - faceY) - rest.top,
 				scale: m * fit,
 			})
 			panelImg.classList.add('is-fit')
-			gsap.set(panelImg, { '--ph-fade': '42%', transformOrigin: '0px 0px', ...framed(1.06) })
+			gsap.set(panelImg, { '--ph-fade': '36%', transformOrigin: '0px 0px', ...framed(1.06) })
 			gsap.set(whiteLayer, { clipPath: 'inset(0% 0% 0px 0% round 0px 0px 0px 0px)' })
 			gsap.set(photoLayer, { autoAlpha: 0 })
 
@@ -174,13 +180,37 @@
 			const split = typeof SplitType !== 'undefined' ? new SplitType(whiteTitle, { types: 'chars' }) : null
 			const chars = split ? split.chars : [whiteTitle]
 			gsap.set(chars, { opacity: 0, y: 34, filter: blur(14) })
-			// it tightens to the tracking set in hero.css, so the swap to the photo-filled copy below is invisible
-			const restSpacing = getComputedStyle(whiteTitle).letterSpacing
-			gsap.set(whiteTitle, { letterSpacing: '0.09em' })
+			// it tightens to the tracking set in hero.css, so the swap to the photo-filled copy below is invisible.
+			// The tracking itself never changes (that would be a layout shift): each letter starts pushed out by the
+			// extra spacing it would have had at 0.09em, and slides home with a transform.
+			const em = parseFloat(getComputedStyle(whiteTitle).fontSize) || 0
+			const extra = Math.max(0, em * 0.09 - (parseFloat(getComputedStyle(whiteTitle).letterSpacing) || 0))
+			const spread = []
+			if (split) {
+				let k = 0
+				let theAt = -1
+				let newLine = false
+				chars.forEach((c) => {
+					if (c.closest('.ph-the')) {
+						// the vertical THE moves as one, by the spacing of the word before it
+						if (theAt < 0) theAt = k
+						spread.push(theAt * extra)
+						newLine = true
+						return
+					}
+					if (newLine) {
+						k = 0
+						newLine = false
+					}
+					spread.push(k * extra)
+					k++
+				})
+				gsap.set(chars, { x: (i) => spread[i] })
+			}
 			reveal()
 
 			tl.to(panelImg, { ...framed(1.02), duration: 2.0, ease: 'power2.out' }, 0)
-			tl.to(whiteTitle, { letterSpacing: restSpacing, duration: 1.9, ease: 'power2.out' }, 0.1)
+			if (split) tl.to(chars, { x: 0, duration: 1.9, ease: 'power2.out' }, 0.1)
 			tl.to(chars, { opacity: 1, y: 0, filter: blur(0), duration: 1.0, stagger: 0.04 }, 0.2)
 
 			// Swap the split letters back for plain text and bring in the photo-filled copy underneath.
@@ -188,7 +218,6 @@
 			tl.call(
 				() => {
 					if (split) split.revert()
-					gsap.set(whiteTitle, { clearProps: 'letterSpacing' })
 					gsap.set(photoLayer, { autoAlpha: 1 })
 				},
 				null,
@@ -200,15 +229,14 @@
 			const move = { duration: 1.3, ease: 'expo.inOut' }
 			tl.to(panel, { clipPath: panelClip(52, 62, 10), ...move }, 2.0)
 			tl.to(whiteLayer, { clipPath: 'inset(0% 0% 52px 62% round 0px 0px 0px 10px)', ...move }, 2.0)
-			// Settle from the face-sized photo into the final panel; its right edge stays on the screen edge
+			// Settle from the face-sized photo into the final panel
 			tl.to(panelImg, { x: 0, y: 0, scale: 1, '--ph-fade': '0%', ...move }, 2.0)
 			tl.to(shade, { opacity: 0, duration: 1.2, ease: 'power2.inOut' }, 2.0)
 			tl.to(bars, { scaleY: 0, duration: 1.1, ease: 'power3.inOut' }, 2.05)
 
 			// Shot 4: the interface settles in
 			tl.to(rail, { borderRightColor: 'rgba(236, 236, 236, 1)', duration: 0.8, ease: 'power2.out' }, 2.7)
-			tl.to(railParts, { opacity: 1, x: 0, duration: 0.9, stagger: 0.08 }, 2.75)
-			tl.to(top, { opacity: 1, y: 0, duration: 0.8 }, 2.85)
+			tl.to(railParts, { opacity: 1, y: 0, duration: 0.9, stagger: 0.08 }, 2.75)
 			tl.to(subParts, { opacity: 1, y: 0, duration: 0.9, stagger: 0.1 }, 2.9)
 			settleLedger(3.05)
 			tl.to(slideLine, { scaleY: 1, duration: 0.8, ease: 'power3.inOut' }, 3.0)
@@ -221,7 +249,7 @@
 				gsap.set(photoLayer, { clearProps: 'opacity,visibility' })
 				panelImg.classList.remove('is-fit')
 				gsap.set(panelImg, { clearProps: 'transform,transformOrigin,--ph-fade' })
-				gsap.set([...railParts, ...subParts, top, slideLine], { clearProps: 'transform' })
+				gsap.set([...railParts, ...subParts, slideLine], { clearProps: 'transform' })
 				gsap.set(rail, { clearProps: 'borderRightColor' })
 				gsap.set([shade, ...bars], { clearProps: 'all' })
 				clearLedger()
@@ -243,7 +271,7 @@
 			tl.to(shade, { opacity: 0, duration: 1.0, ease: 'power2.inOut' }, 0.9)
 			tl.to(bars, { scaleY: 0, duration: 1.0, ease: 'power3.inOut' }, 0.95)
 			tl.to(photoTitle, { clipPath: 'inset(0% 0% 0% 0%)', y: 0, duration: 1.1, ease: 'power4.out' }, 1.5)
-			tl.to(railParts, { opacity: 1, x: 0, duration: 0.8, stagger: 0.08 }, 1.6)
+			tl.to(railParts, { opacity: 1, y: 0, duration: 0.8, stagger: 0.08 }, 1.6)
 			tl.to(subParts, { opacity: 1, y: 0, duration: 0.9, stagger: 0.1 }, 1.8)
 			settleLedger(1.95)
 
@@ -289,20 +317,18 @@
 			header.classList.remove('site-header--over-hero')
 		}
 
-		// In-page links scroll the flow container
+		// In-page links land their section (nav-bar.js's siteJump: behind the letterbox cut, without scrolling
+		// through every page in between); the menu icon is wired by nav-bar.js
 		hero.querySelectorAll('[data-hero-scroll]').forEach((link) => {
 			link.addEventListener('click', (e) => {
-				const target = document.querySelector(link.getAttribute('data-hero-scroll'))
+				const sel = link.getAttribute('data-hero-scroll')
+				const target = document.querySelector(sel)
 				if (!target) return
 				e.preventDefault()
-				target.scrollIntoView({ behavior: 'smooth', block: 'start' })
+				if (window.siteJump) window.siteJump(sel, link.textContent.replace(/\d+$/, '').trim())
+				else target.scrollIntoView({ behavior: 'smooth', block: 'start' })
 			})
 		})
-
-		// The rail's menu icon opens the site menu (the open header shows itself over the hero)
-		const burger = hero.querySelector('.ph-burger')
-		const menuBtn = document.getElementById('js-menu-btn')
-		if (burger && menuBtn) burger.addEventListener('click', () => menuBtn.click())
 	}
 
 	if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', initHero)

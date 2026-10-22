@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1920, height=1080" />
+    <title>Retention engine, the save in a chat</title>
+    <script src="assets/gsap.min.js"></script>
+    <style>
+      @font-face { font-family: "Inter"; src: url("assets/fonts/inter-latin-400-normal.woff2") format("woff2"); font-weight: 400; font-display: block; }
+      @font-face { font-family: "Inter"; src: url("assets/fonts/inter-latin-500-normal.woff2") format("woff2"); font-weight: 500; font-display: block; }
+      @font-face { font-family: "Inter"; src: url("assets/fonts/inter-latin-600-normal.woff2") format("woff2"); font-weight: 600; font-display: block; }
+      @font-face { font-family: "Inter"; src: url("assets/fonts/inter-latin-700-normal.woff2") format("woff2"); font-weight: 700; font-display: block; }
+      @font-face { font-family: "Inter"; src: url("assets/fonts/inter-latin-800-normal.woff2") format("woff2"); font-weight: 800; font-display: block; }
+
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { width: 1920px; height: 1080px; overflow: hidden; background: #1c0b13; }
+      body { font-family: "Inter", sans-serif; color: #fbeef3; -webkit-font-smoothing: antialiased; }
+      #root { position: relative; width: 100%; height: 100%; overflow: hidden; background: radial-gradient(1400px 1000px at 62% 46%, #3a1626 0%, #26101a 55%, #1c0b13 100%); }
+      .k { font-size: 22px; font-weight: 800; letter-spacing: 0.24em; color: #ff6f9b; }
+
+      /* the trigger: a switch-away event on the left */
+      #event { position: absolute; left: 140px; top: 300px; width: 560px; }
+      #event .t { margin-top: 16px; font-size: 64px; font-weight: 800; line-height: 1.02; letter-spacing: -0.03em; color: #fff5f8; }
+      #event .t em { font-style: normal; color: #ff6f9b; }
+      #clock { margin-top: 30px; display: inline-flex; align-items: center; gap: 14px; padding: 14px 22px; border-radius: 99px; background: rgba(255, 111, 155, 0.12); box-shadow: inset 0 0 0 2px rgba(255, 111, 155, 0.45); font-size: 26px; font-weight: 700; color: #ffd3e1; font-variant-numeric: tabular-nums; }
+      #clock i { width: 12px; height: 12px; border-radius: 50%; background: #ff6f9b; }
+      .gate { margin-top: 26px; display: flex; flex-direction: column; gap: 12px; }
+      .gate p { display: flex; align-items: center; gap: 14px; font-size: 26px; font-weight: 600; color: #f1d6df; }
+      .gate p b { display: grid; place-items: center; width: 34px; height: 34px; border-radius: 50%; background: #ff6f9b; color: #2a0b16; font-size: 20px; }
+
+      /* the phone and the chat */
+      #phone { position: absolute; left: 980px; top: 70px; width: 470px; height: 940px; border-radius: 64px; background: #0e0a0c; box-shadow: 0 0 0 10px #241a1e, 0 60px 120px rgba(8, 0, 4, 0.7); overflow: hidden; }
+      #bar { position: absolute; left: 0; right: 0; top: 0; height: 130px; padding: 62px 28px 0; background: #1f2c33; display: flex; align-items: center; gap: 16px; }
+      #bar .av { width: 50px; height: 50px; border-radius: 50%; background: linear-gradient(135deg, #ff9ab9, #ff6f9b); display: grid; place-items: center; font-size: 22px; font-weight: 800; color: #2a0b16; }
+      #bar b { font-size: 24px; font-weight: 700; color: #f2f2f2; }
+      #bar small { display: block; font-size: 17px; color: #9fb1b9; margin-top: 2px; }
+      #chat { position: absolute; left: 0; right: 0; top: 130px; bottom: 0; padding: 26px 20px; background: #0b141a; }
+      .msg { position: absolute; max-width: 360px; padding: 16px 20px; border-radius: 18px; font-size: 21px; line-height: 1.38; color: #e9edef; }
+      .msg.in { left: 20px; background: #202c33; border-top-left-radius: 6px; }
+      .msg.out { right: 20px; background: #005c4b; border-top-right-radius: 6px; }
+      .msg small { display: block; margin-top: 6px; font-size: 14px; color: rgba(233, 237, 239, 0.6); text-align: right; }
+      .msg .offer { display: block; margin-top: 10px; padding: 12px 14px; border-radius: 12px; background: rgba(255, 255, 255, 0.08); font-weight: 700; }
+      #typing { left: 20px; top: 640px; padding: 18px 22px; background: #202c33; border-radius: 18px; border-top-left-radius: 6px; display: flex; gap: 8px; }
+      #typing i { width: 11px; height: 11px; border-radius: 50%; background: #8696a0; }
+
+      /* labels pointing at the chat from the right */
+      .tag { position: absolute; left: 1510px; padding: 14px 20px; border-radius: 14px; background: rgba(255, 111, 155, 0.12); box-shadow: inset 0 0 0 2px rgba(255, 111, 155, 0.5); font-size: 22px; font-weight: 700; color: #ffd3e1; white-space: nowrap; }
+      .tag::before { content: ""; position: absolute; right: 100%; top: 50%; width: 46px; height: 2px; background: rgba(255, 111, 155, 0.6); }
+
+      /* the handover card */
+      #hand { position: absolute; left: 560px; top: 250px; width: 800px; padding: 44px 50px; border-radius: 30px; background: #fff3f7; color: #2a0b16; box-shadow: 0 50px 120px rgba(8, 0, 4, 0.6); }
+      #hand .k { color: #c2245a; }
+      #hand h3 { margin-top: 16px; font-size: 58px; font-weight: 800; letter-spacing: -0.03em; line-height: 1.02; }
+      #hand .rows { margin-top: 28px; display: grid; gap: 14px; }
+      #hand .rows p { display: flex; justify-content: space-between; gap: 20px; padding: 16px 20px; border-radius: 14px; background: #fde3ec; font-size: 24px; font-weight: 600; }
+      #hand .rows p b { color: #c2245a; }
+      #reason { margin-top: 20px; padding: 18px 22px; border-radius: 14px; background: #2a0b16; color: #ffd3e1; font-size: 24px; font-weight: 700; }
+      #end { position: absolute; left: 0; right: 0; top: 860px; text-align: center; }
+      #end p { font-size: 46px; font-weight: 800; letter-spacing: -0.02em; color: #fff5f8; }
+      #end p em { font-style: normal; color: #ff6f9b; }
+      #end small { display: block; margin-top: 14px; font-size: 20px; font-weight: 700; letter-spacing: 0.2em; color: #c99aab; }
+
+      .grainbox { position: absolute; inset: -60px; overflow: hidden; pointer-events: none; }
+      #grain { position: absolute; left: 0; top: 0; width: 2100px; height: 1260px; opacity: 0.08; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' seed='29' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23n)'/%3E%3C/svg%3E"); }
+      .vig { position: absolute; inset: 0; box-shadow: inset 0 0 380px rgba(10, 2, 6, 0.75); pointer-events: none; }
+      #fade { position: absolute; inset: 0; background: #1c0b13; }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="12" data-width="1920" data-height="1080">
+      <div id="event">
+        <p class="k">SWITCH-AWAY EVENT</p>
+        <p class="t">A customer starts leaving. <em>The reply is already on its way.</em></p>
+        <p id="clock"><i></i>Reached inside minutes of the trigger</p>
+        <div class="gate">
+          <p id="g1"><b>✓</b>Opt-out gate passed</p>
+          <p id="g2"><b>✓</b>Offer built from their own account</p>
+          <p id="g3"><b>✓</b>State saved, no duplicate sends</p>
+        </div>
+      </div>
+
+      <div id="phone">
+        <div id="bar"><span class="av">F</span><span><b>Your broadband</b><small>Example conversation</small></span></div>
+        <div id="chat">
+          <p class="msg out" id="m1" style="top: 26px">Hi Sam, we saw you're thinking of switching. Before you go, here's what we can do on your current plan:<span class="offer">Your plan, for less: an offer built from your account</span><small>✓✓</small></p>
+          <p class="msg in" id="m2" style="top: 330px">It's mostly the price to be honest. And the speed in the evenings.<small></small></p>
+          <p class="msg out" id="m3" style="top: 470px">Thanks for telling us. I'll pass this to someone from our retentions team now, with everything we've offered.<small>✓✓</small></p>
+          <p class="msg" id="typing"><i></i><i></i><i></i></p>
+        </div>
+      </div>
+
+      <p class="tag" id="t1" style="top: 230px">WhatsApp first, SMS fallback</p>
+      <p class="tag" id="t2" style="top: 470px">AI agent takes the reply</p>
+      <p class="tag" id="t3" style="top: 620px">Human handover, with context</p>
+
+      <div id="hand">
+        <p class="k">HUMAN HANDOVER</p>
+        <h3>The agent gets the whole story, not a cold call.</h3>
+        <div class="rows">
+          <p><span>Offer made</span><b>From their own account data</b></p>
+          <p><span>Their reply</span><b>Engaged, wants to talk</b></p>
+        </div>
+        <p id="reason">Reason captured, e.g. price and evening speeds</p>
+      </div>
+      <div id="end"><p>The real win is <em>why they were leaving.</em></p><small>N8N · WHATSAPP BUSINESS · AI AGENT · POSTGRES STATE</small></div>
+
+      <div class="grainbox"><div id="grain"></div></div>
+      <div class="vig"></div>
+      <div id="fade"></div>
+    </div>
+
+    <script>
+      const tl = gsap.timeline({ paused: true, defaults: { ease: "power3.out" } });
+      tl.fromTo("#grain", { x: 0, y: 0 }, { x: -120, y: -80, duration: 12, ease: "steps(96)" }, 0);
+      tl.fromTo("#fade", { opacity: 1 }, { opacity: 0, duration: 0.4, ease: "none" }, 0);
+      tl.to("#fade", { opacity: 1, duration: 0.4, ease: "none" }, 11.6);
+
+      // the trigger, the clock and the gates
+      tl.fromTo("#event .k", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.5 }, 0.2);
+      tl.fromTo("#event .t", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.7 }, 0.35);
+      tl.fromTo("#clock", { opacity: 0, scale: 0.9 }, { opacity: 1, scale: 1, duration: 0.5, ease: "back.out(2)" }, 0.9);
+      ["#g1", "#g2", "#g3"].forEach((g, i) => tl.fromTo(g, { opacity: 0, x: -24 }, { opacity: 1, x: 0, duration: 0.45 }, 1.3 + i * 0.3));
+
+      // the phone slides in; the offer goes out, the reply comes back, the agent answers
+      tl.fromTo("#phone", { opacity: 0, y: 120, rotation: 4 }, { opacity: 1, y: 0, rotation: 0, duration: 0.9, ease: "expo.out" }, 0.6);
+      tl.fromTo("#m1", { opacity: 0, y: 30, scale: 0.94 }, { opacity: 1, y: 0, scale: 1, duration: 0.5, ease: "back.out(1.6)" }, 1.9);
+      tl.fromTo("#t1", { opacity: 0, x: 30 }, { opacity: 1, x: 0, duration: 0.5 }, 2.2);
+      tl.fromTo("#typing", { opacity: 0 }, { opacity: 1, duration: 0.2, ease: "none" }, 3.0);
+      tl.fromTo("#typing i", { y: 0 }, { y: -8, duration: 0.25, ease: "sine.inOut", yoyo: true, repeat: 3, stagger: 0.08 }, 3.0);
+      tl.to("#typing", { opacity: 0, duration: 0.15, ease: "none" }, 3.9);
+      tl.fromTo("#m2", { opacity: 0, y: 30, scale: 0.94 }, { opacity: 1, y: 0, scale: 1, duration: 0.5, ease: "back.out(1.6)" }, 4.0);
+      tl.fromTo("#t2", { opacity: 0, x: 30 }, { opacity: 1, x: 0, duration: 0.5 }, 4.3);
+      tl.fromTo("#m3", { opacity: 0, y: 30, scale: 0.94 }, { opacity: 1, y: 0, scale: 1, duration: 0.5, ease: "back.out(1.6)" }, 5.0);
+      tl.fromTo("#t3", { opacity: 0, x: 30 }, { opacity: 1, x: 0, duration: 0.5 }, 5.3);
+
+      // everything steps back; the handover card comes forward with the reason
+      tl.to(["#event", "#phone", ".tag"], { opacity: 0.08, duration: 0.6, ease: "power1.inOut" }, 6.9);
+      tl.fromTo("#hand", { opacity: 0, y: 80, scale: 0.94 }, { opacity: 1, y: 0, scale: 1, duration: 0.8, ease: "expo.out" }, 7.1);
+      tl.fromTo("#hand .rows p", { opacity: 0, x: -30 }, { opacity: 1, x: 0, duration: 0.45, stagger: 0.18 }, 7.7);
+      tl.fromTo("#reason", { opacity: 0, scale: 0.9 }, { opacity: 1, scale: 1, duration: 0.5, ease: "back.out(2)" }, 8.4);
+      tl.fromTo("#end", { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.6 }, 9.3);
+
+      window.__timelines["main"] = tl;
+    </script>
+  </body>
+</html>

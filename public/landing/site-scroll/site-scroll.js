@@ -1,6 +1,6 @@
 /* Site-wide scroll: one engine for every page boundary, and a switchable transition style on top of it.
 
-   Boundaries are the scroll positions where a page lands (About, the reel, the projects, Selected work,
+   Boundaries are the scroll positions where a page lands (About, the portfolio intro, the projects, Selected work,
    the reviews). The screen of scrolling just before each one is its transition window.
    - The page never rests inside a window: a mouse-wheel notch or a paging key glides the whole step,
      and any other scroll that stops inside one is carried on in the direction it was going.
@@ -15,18 +15,22 @@
 	const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches
 	const clamp = (v) => Math.min(1, Math.max(0, v))
 	const inOut = (t) => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2)
+	const sine = (t) => -(Math.cos(Math.PI * t) - 1) / 2
 	const pageTop = (el) => el.getBoundingClientRect().top - flow.getBoundingClientRect().top + flow.scrollTop
 
 	const PAGES = [
 		// hero to About is one longer, softer glide (the text leaving and the slide in one move)
 		['#about-land', '02 · About Haris', false, 1700],
-		// About on to the reel is the same sideways glide
-		['#reel-land', '03 · Showreel', false, 1700],
-		['#panel-works', '04 · The projects', false],
+		// About straight into "Entering the portfolio": one glide lands on PORTFOLIO risen, holds it for a beat
+		// (the last number, ms) and then carries on by itself through the O into project 01, whose film plays
+		['#ent-land', '03 · The portfolio', false, 1800, '#about-land', 600, 'sine'],
+		['#panel-works', '04 · The projects', false, 1500, '#ent-land', 0, 'sine'],
 		// free scroll through Selected work, then one glide into Client reviews (reviews/reel.js draws the transition)
 		['#panel-scaling', '05 · Client reviews', false, 1500],
 	]
-		.map(([sel, label, bars = true, dur = 0]) => ({ el: document.querySelector(sel), label, bars, dur }))
+		// a window starts a screen before its page, or at another page's landing (`from`)
+		// `ease`: 'sine' is a gentler start and stop than the default cubic, for the long glides
+		.map(([sel, label, bars = true, dur = 0, from = null, next = 0, ease = 'cubic']) => ({ el: document.querySelector(sel), label, bars, dur, next, ease, from: from && document.querySelector(from) }))
 		.filter((p) => p.el)
 
 	// ---------------- styles ----------------
@@ -77,7 +81,8 @@
 		vh = flow.clientHeight || window.innerHeight
 		wins = PAGES.map((p) => {
 			const to = Math.round(pageTop(p.el))
-			return { from: Math.max(0, to - vh), to, label: p.label, bars: p.bars, dur: p.dur }
+			const from = p.from ? Math.round(pageTop(p.from)) : to - vh
+			return { from: Math.max(0, from), to, label: p.label, bars: p.bars, dur: p.dur, next: p.next, ease: p.ease }
 		})
 		draw()
 	}
@@ -177,7 +182,22 @@
 	let pointerDown = false
 
 	// dur: how long a full window takes (default 1100ms); a part of a window takes a part of it
-	function glide(to, full = 0) {
+	// a window with `next`: having glided down onto it, wait that long, then glide the following window by itself
+	let nextTimer = 0
+	function enter(w, down) {
+		clearTimeout(nextTimer)
+		glide(down ? w.to : w.from, w.dur, w.ease === 'sine' ? sine : inOut, () => {
+			if (!down || !w.next) return
+			const i = wins.indexOf(w)
+			const nx = wins[i + 1]
+			if (!nx) return
+			nextTimer = setTimeout(() => {
+				if (gliding || Math.abs(flow.scrollTop - w.to) > 2 || document.visibilityState === 'hidden') return
+				enter(nx, true)
+			}, w.next)
+		})
+	}
+	function glide(to, full = 0, ease = inOut, done = null) {
 		const from = flow.scrollTop
 		const dist = to - from
 		cancelAnimationFrame(glideRaf)
@@ -187,9 +207,12 @@
 		gliding = true
 		const step = (now) => {
 			const k = dur ? Math.min(1, (now - t0) / dur) : 1
-			flow.scrollTop = Math.round(from + dist * inOut(k))
+			flow.scrollTop = Math.round(from + dist * ease(k))
 			if (k < 1) glideRaf = requestAnimationFrame(step)
-			else release()
+			else {
+				release()
+				if (done) done()
+			}
 		}
 		glideRaf = requestAnimationFrame(step)
 	}
@@ -227,7 +250,7 @@
 			if (!w) return
 			lastWheel = performance.now()
 			e.preventDefault()
-			glide(down ? w.to : w.from, w.dur)
+			enter(w, down)
 		},
 		{ passive: false },
 	)
@@ -244,9 +267,13 @@
 		const w = stepWindow(flow.scrollTop, down, k === 'PageDown' || k === 'PageUp' || k === ' ' ? vh * 0.8 : 40)
 		if (!w) return
 		e.preventDefault()
-		glide(down ? w.to : w.from, w.dur)
+		enter(w, down)
 	})
 
+	// going back up, a touch or a key cancels a pending carry-on (a downward wheel, or a trackpad's leftover
+	// momentum, only agrees with it)
+	window.addEventListener('wheel', (e) => e.deltaY < 0 && clearTimeout(nextTimer), { capture: true, passive: true })
+	;['touchstart', 'keydown'].forEach((t) => window.addEventListener(t, () => clearTimeout(nextTimer), { capture: true, passive: true }))
 	flow.addEventListener('pointerdown', () => (pointerDown = true))
 	window.addEventListener('pointerup', () => {
 		pointerDown = false
@@ -258,7 +285,7 @@
 			if (!on.matches || gliding || pointerDown) return
 			const st = flow.scrollTop
 			const w = wins.find((w) => st > w.from + 2 && st < w.to - 2)
-			if (w) glide(dir > 0 ? w.to : w.from, w.dur)
+			if (w) enter(w, dir > 0)
 		}, 160)
 	}
 

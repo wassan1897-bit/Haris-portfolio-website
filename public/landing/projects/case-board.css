@@ -220,12 +220,12 @@
 	width: 100%;
 	height: 100%;
 	border-radius: 0;
+	/* it flies to the tile with a transform and a clip only (case-board.js), so nothing in the layout moves */
+	transform-origin: 0 0;
+	will-change: transform, clip-path;
 	transition:
-		left 1.3s var(--pjb-ease, cubic-bezier(0.7, 0, 0.2, 1)),
-		top 1.3s var(--pjb-ease, cubic-bezier(0.7, 0, 0.2, 1)),
-		width 1.3s var(--pjb-ease, cubic-bezier(0.7, 0, 0.2, 1)),
-		height 1.3s var(--pjb-ease, cubic-bezier(0.7, 0, 0.2, 1)),
-		border-radius 1.3s var(--pjb-ease, cubic-bezier(0.7, 0, 0.2, 1));
+		transform 1.3s var(--pjb-ease, cubic-bezier(0.7, 0, 0.2, 1)),
+		clip-path 1.3s var(--pjb-ease, cubic-bezier(0.7, 0, 0.2, 1));
 }
 .pj-detail > .pjb__film video {
 	filter: brightness(0.55);

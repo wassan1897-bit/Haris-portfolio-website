@@ -49,20 +49,13 @@
 	transform: scale(1.04);
 	transition:
 		transform 6s linear,
-		filter 1s ease,
-		top 1.3s cubic-bezier(0.7, 0, 0.2, 1),
-		height 1.3s cubic-bezier(0.7, 0, 0.2, 1),
-		object-position 1.3s cubic-bezier(0.7, 0, 0.2, 1);
+		filter 1s ease;
 }
 .pj-detail--sw.pjb-go > .pjb__film video {
 	filter: none;
 	transform: none;
 }
-.pj-detail--sw.pjb-landing > .pjb__film video {
-	top: 0;
-	height: 100%;
-	object-position: 50% 50%;
-}
+/* while it flies to its tile the clip keeps its place in the film; case-board.js scales the whole film onto the tile */
 @media (min-width: 768px) {
 	.pj-detail--sw.pjb-intro > .pjb__titles {
 		place-items: center start;

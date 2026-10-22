@@ -60,6 +60,7 @@
 	indexBtns.forEach((b) => b.setAttribute('aria-current', String(Number(b.dataset.go) === 0)))
 
 	let ticking = false
+	let hold = false // set while the page is carried out of or back into the section (below)
 	function update() {
 		ticking = false
 		// a page opened in a hidden or background tab has no size yet; wait for a real one
@@ -78,7 +79,8 @@
 		pin.style.transform = lift ? `translate3d(0, ${w.toFixed(1)}px, 0)` : ''
 		// a screen takes over once you are 40% of the way into its step
 		const i = Math.min(N - 1, Math.max(0, Math.floor(w / vh + 0.6)))
-		go(i)
+		// while the page is carried out of (or back into) the section, the screen on show stays as it is
+		if (!hold) go(i)
 		if (was !== inView) syncVideos()
 	}
 	flow.addEventListener(
@@ -95,10 +97,46 @@
 		go(i)
 	}
 
-	// ---------- one wheel notch, one project ----------
-	// While the stage is pinned, a wheel step moves to the next screen and further wheel input is held
-	// until it settles (and a trackpad's momentum has died down). Past the first or last screen the
-	// page scrolls on as normal, so the hero and the reviews are reached the usual way.
+	// ---------- scrolling down leaves the projects; the tabs open the others ----------
+	// Scrolling down from any project carries the page straight on to Selected work, instead of stepping
+	// through every project: the scroll position jumps to the stage's last step (the stage is pinned, so
+	// nothing moves and the project on show stays), then glides one screen on, which slides the stage up
+	// and away. Scrolling back up from Selected work does the reverse and lands on the project that was
+	// on show. Scrolling up inside the section still steps back one project.
+	const easeSine = (t) => -(Math.cos(Math.PI * t) - 1) / 2
+	function glideTo(to, dur, done) {
+		const from = flow.scrollTop
+		const t0 = performance.now()
+		const step = (now) => {
+			const k = reduceMotion ? 1 : Math.min(1, (now - t0) / dur)
+			flow.scrollTop = Math.round(from + (to - from) * easeSine(k))
+			if (k < 1) requestAnimationFrame(step)
+			else done && done()
+		}
+		requestAnimationFrame(step)
+	}
+	function leaveDown() {
+		locked = true
+		hold = true
+		flow.scrollTo({ top: top + (N - 1) * vh, behavior: 'instant' })
+		glideTo(top + N * vh, 1100, () => {
+			hold = false
+			setTimeout(release, 120)
+		})
+	}
+	function comeBack() {
+		locked = true
+		hold = true
+		glideTo(top + (N - 1) * vh, 1000, () => {
+			flow.scrollTo({ top: top + active * vh, behavior: 'instant' })
+			hold = false
+			setTimeout(release, 120)
+		})
+	}
+
+	// ---------- one wheel notch, one project (upwards) ----------
+	// While the stage is pinned, further wheel input is held until a move settles (and a trackpad's momentum
+	// has died down). Past the first screen, upwards, the page scrolls on as normal to the intro above.
 	let locked = false
 	let lastWheel = 0
 	function release() {
@@ -110,10 +148,22 @@
 		(e) => {
 			if (detail || e.ctrlKey || !e.deltaY) return
 			const w = flow.scrollTop - top
+			// just below the section, at the top of Selected work: up brings the projects back
+			if (e.deltaY < 0 && w > (N - 1) * vh + 2 && w <= N * vh + 4) {
+				lastWheel = performance.now()
+				e.preventDefault()
+				if (!locked) comeBack()
+				return
+			}
 			if (w < -2 || w > (N - 1) * vh + 2) return
 			lastWheel = performance.now()
 			if (locked) {
 				e.preventDefault()
+				return
+			}
+			if (e.deltaY > 0) {
+				e.preventDefault()
+				leaveDown()
 				return
 			}
 			const target = active + Math.sign(e.deltaY)
@@ -133,7 +183,13 @@
 		if (e.target.closest && e.target.closest('input, textarea, select, button, a, [contenteditable]')) return
 		const w = flow.scrollTop - top
 		if (w < -2 || w > (N - 1) * vh + 2) return
-		const target = active + (e.key === ' ' && e.shiftKey ? -1 : KEYS[e.key])
+		const dirn = e.key === ' ' && e.shiftKey ? -1 : KEYS[e.key]
+		if (dirn > 0) {
+			e.preventDefault()
+			if (!locked) leaveDown()
+			return
+		}
+		const target = active + dirn
 		if (target < 0 || target > N - 1) return
 		e.preventDefault()
 		scrollToStep(target)

@@ -148,6 +148,10 @@
 			chipsBox.innerHTML = c.tags.map((tag) => `<span>${esc(tag)}</span>`).join('')
 			el.chips = [...chipsBox.children]
 			layout(c)
+			// the price counts up inside the width of its final value, from a fixed left edge, so nothing shifts
+			el.price.textContent = c.price
+			el.price.style.width = el.price.offsetWidth + 'px'
+			el.price.style.textAlign = 'left'
 			const nx = chapters[(i + 1) % chapters.length]
 			if (nx.img) new Image().src = nx.img
 		} else {
@@ -158,7 +162,11 @@
 			const clock = scene.querySelector('.rr-clock')
 			if (clock) clock.textContent = karachi()
 			// numbers that count up
-			el.counts = [...scene.querySelectorAll('[data-count]')].map((b) => ({ b, to: +b.dataset.count, fmt: b.dataset.fmt || '' }))
+			el.counts = [...scene.querySelectorAll('[data-count]')].map((b) => {
+				// same for the record's numbers: they count inside their final width
+				b.style.minWidth = b.offsetWidth + 'px'
+				return { b, to: +b.dataset.count, fmt: b.dataset.fmt || '' }
+			})
 		}
 		if (!reduce) cut.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 420, easing: 'ease-out' })
 		render()

@@ -69,13 +69,15 @@ function initializeAnimations() {
 		receiveWipe.remove()
 	}
 
-	gsap.to('.link a', {
-		y: 0,
-		duration: fromIntro ? 0.7 : 1,
-		stagger: 0.08,
-		ease: 'power4.out',
-		delay: navDelay,
-	})
+	if (document.querySelector('.link a')) {
+		gsap.to('.link a', {
+			y: 0,
+			duration: fromIntro ? 0.7 : 1,
+			stagger: 0.08,
+			ease: 'power4.out',
+			delay: navDelay,
+		})
+	}
 
 	if (typeof window.initNavBar === 'function') {
 		window.initNavBar()

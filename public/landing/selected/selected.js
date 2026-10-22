@@ -25,6 +25,19 @@
 		const cursor = sw.querySelector('.sw-cursor')
 		const pause = sw.querySelector('.sw__pause')
 
+		// hover-card state (used by the scroll handler too)
+		let tx = 0,
+			ty = 0,
+			x = 0,
+			y = 0,
+			cx = 0,
+			cy = 0,
+			raf = 0,
+			hover = -1,
+			scrolled = false,
+			sx = -1,
+			sy = -1,
+			under = -1
 		let mids = []
 		let active = -1
 		// a shot can hold a clip: it plays only while its row is the active one and the section is on screen
@@ -60,6 +73,10 @@
 		let pinned = -1
 		let pinnedAt = 0
 		function onScroll() {
+			// the card is placed inside the section, so a scroll would carry it off with the page: it steps aside
+			// until the pointer itself moves again
+			scrolled = true
+			if (hover >= 0) endHover()
 			if (pinned >= 0) {
 				if (Math.abs(flow.scrollTop - pinnedAt) < 160) return
 				pinned = -1
@@ -87,15 +104,7 @@
 		window.addEventListener('load', measure)
 		measure()
 
-		// the picture card and the VIEW circle trail the cursor; the card leans into the movement
-		let tx = 0,
-			ty = 0,
-			x = 0,
-			y = 0,
-			cx = 0,
-			cy = 0,
-			raf = 0,
-			hover = -1
+		// the picture card and the VIEW circle trail the cursor (state declared above); the card leans into the movement
 		function loop() {
 			x += (tx - x) * 0.14
 			y += (ty - y) * 0.14
@@ -111,27 +120,45 @@
 			tx = e.clientX - r.left
 			ty = e.clientY - r.top
 		}
+		function startHover(i, e) {
+			aim(e)
+			if (hover < 0) {
+				x = cx = tx
+				y = cy = ty
+			}
+			if (hover >= 0 && hover !== i) items[hover].classList.remove('is-hover')
+			hover = i
+			items[i].classList.add('is-hover')
+			sw.classList.add('is-hovering')
+			floats.forEach((f, j) => f.classList.toggle('is-on', j === i))
+			big.textContent = pad(i)
+			cursor.textContent = shots[i] && shots[i].querySelector('video') ? 'PLAY' : 'VIEW'
+			if (!raf) raf = requestAnimationFrame(loop)
+		}
+		function endHover() {
+			if (hover >= 0) items[hover].classList.remove('is-hover')
+			hover = -1
+			sw.classList.remove('is-hovering')
+		}
+		// after a scroll the browser reports the row that slid under a still pointer as entered; that is not a
+		// hover, so the card waits for the pointer to really move
+		const moved = (e) => {
+			const m = !scrolled || e.screenX !== sx || e.screenY !== sy
+			sx = e.screenX
+			sy = e.screenY
+			if (m) scrolled = false
+			return m
+		}
 		items.forEach((it, i) => {
 			const a = it.querySelector('a')
 			a.addEventListener('pointerenter', (e) => {
-				if (!fine.matches || reduce) return
-				aim(e)
-				if (hover < 0) {
-					x = cx = tx
-					y = cy = ty
-				}
-				hover = i
-				it.classList.add('is-hover')
-				sw.classList.add('is-hovering')
-				floats.forEach((f, j) => f.classList.toggle('is-on', j === i))
-				big.textContent = pad(i)
-				cursor.textContent = shots[i] && shots[i].querySelector('video') ? 'PLAY' : 'VIEW'
-				if (!raf) raf = requestAnimationFrame(loop)
+				under = i
+				if (!fine.matches || reduce || !moved(e)) return
+				startHover(i, e)
 			})
 			a.addEventListener('pointerleave', () => {
-				it.classList.remove('is-hover')
-				hover = -1
-				sw.classList.remove('is-hovering')
+				if (under === i) under = -1
+				if (hover === i) endHover()
 			})
 			// a click on the row plays its clip in the frame on the right, from the start; "View project" still goes
 			// to the project
@@ -152,7 +179,9 @@
 			})
 		})
 		sw.addEventListener('pointermove', (e) => {
+			if (!moved(e)) return
 			if (hover >= 0) aim(e)
+			else if (under >= 0 && fine.matches && !reduce) startHover(under, e)
 		})
 		pause.addEventListener('click', () => {
 			const paused = !sw.classList.contains('is-paused')

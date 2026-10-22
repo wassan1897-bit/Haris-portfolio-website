@@ -106,9 +106,11 @@
 	position: absolute;
 	left: 0;
 	right: 0;
-	bottom: 7svh;
+	bottom: 0;
 	margin: 0;
 	opacity: 0;
+	/* lifted with a transform, so the sub-pixel settle at the end of the pin is not a layout shift */
+	transform: translateY(-7svh);
 }
 
 /* the projects' stage is lifted into view behind the O while the camera flies through it */
@@ -125,4 +127,16 @@
 .site-header.site-header--on-ent:not(.site-header--open) .site-header__burger::before,
 .site-header.site-header--on-ent:not(.site-header--open) .site-header__burger::after {
 	background-color: #f2efe8;
+}
+
+/* where the page lands on "PORTFOLIO" (site-scroll.js): 80% through the rise. The pin's rise runs over the
+   section's height less two screens (it overlaps a screen at each end), 120 screen-percent */
+.ent__stop {
+	position: absolute;
+	left: 0;
+	top: 96vh;
+	top: 96svh;
+	width: 1px;
+	height: 1px;
+	pointer-events: none;
 }

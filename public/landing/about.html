@@ -4,7 +4,7 @@
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<link rel="shortcut icon" href="./assets/img/favicon.ico" />
-		<title>Muhammad Haris, AI Automation Engineer</title>
+		<title>Muhammad Haris, Forward Deployed Engineer &amp; AI Consultant</title>
 		<meta
 			name="description"
 			content="Muhammad Haris designs and builds production AI and automation systems for operations-heavy businesses: workflow platforms, voice and chat agents, and full-stack AI products."
@@ -25,7 +25,7 @@
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 		<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..700;1,6..96,400..700&family=Manrope:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&family=Archivo:wdth,wght@62..125,700..900&family=Inter+Tight:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Montserrat:wght@200;300;500;600;700;800&family=Mrs+Saint+Delafield&family=Urbanist:wght@300;400;500;600&display=swap" rel="stylesheet" />
-		<link rel="preload" as="image" href="./assets/img/haris-hero-studio.webp" />
+		<link rel="preload" as="image" href="./assets/img/haris-about-studio.webp" />
 		<link rel="preload" as="image" href="./assets/img/haris-hero-type-profile-color.jpg" />
 		<link rel="stylesheet" href="style.css" />
 		<link rel="stylesheet" href="./crossroads/css/base.css" />
@@ -39,7 +39,6 @@
 		<link rel="stylesheet" href="./projects/case-board.css" />
 		<link rel="stylesheet" href="./selected/selected.css" />
 		<link rel="stylesheet" href="./selected/selected-detail.css" />
-		<link rel="stylesheet" href="./about-reel/about-reel.css" />
 		<link rel="stylesheet" href="./enter/enter.css" />
 		<link rel="stylesheet" href="./about-h/about-h.css" />
 		<link rel="stylesheet" href="./site-scroll/site-scroll.css" />
@@ -67,7 +66,7 @@
 					type="button"
 					aria-label="Open menu"
 					aria-expanded="false"
-					aria-controls="js-nav"
+					aria-controls="js-menu"
 					data-magnetic
 				>
 					<div class="site-header__burger" id="js-burger" aria-hidden="true"></div>
@@ -93,145 +92,46 @@
 				</div>
 			</div>
 
-			<nav class="site-nav" id="js-nav" aria-hidden="true" inert aria-label="Primary">
-				<div class="site-nav__wrapper">
-					<div class="site-nav__container">
-						<div class="site-nav__body" id="js-nav-body">
-							<a
-								href="about.html"
-								class="site-nav__link"
-								data-index="0"
-								data-src="./assets/img/nav-about-preview.png"
-								data-label="About"
-								data-dot="2"
-								data-line1="Diagnose first. Then build."
-								data-line2="Production AI across the full stack."
-								>About</a
-							>
-							<a
-								href="work.html"
-								class="site-nav__link"
-								data-index="1"
-								data-src="./assets/img/nav-work-preview.png"
-								data-label="Work"
-								data-dot="1"
-								data-line1="Real automations. Real impact."
-								data-line2="From AI workflows to business systems."
-								>Work</a
-							>
-							<a
-								href="scaling.html"
-								class="site-nav__link"
-								data-index="2"
-								data-src="./assets/img/nav-connect-preview.png"
-								data-label="Connect"
-								data-dot="1"
-								data-line1="Let’s build what compounds."
-								data-line2="Briefs, calls, and next steps."
-								>Connect</a
-							>
-						</div>
-
-						<div class="site-nav__highlight" id="js-nav-highlight" aria-hidden="true">
-							<p class="site-nav__highlight-line" id="js-nav-line1"></p>
-							<p class="site-nav__highlight-line site-nav__highlight-line--soft" id="js-nav-line2"></p>
-						</div>
-
-						<div class="site-nav__footer">
-							<ul>
-								<li><span>Built by:</span> Muhammad Haris</li>
-							</ul>
-							<ul>
-								<li><span>Focus:</span> Production AI systems</li>
-							</ul>
-							<ul>
-								<li><span>Stack:</span> n8n · Claude · Voice AI</li>
-							</ul>
-							<ul class="site-nav__socials" aria-label="Connect">
-								<li>
-									<a
-										class="site-nav__icon about-magnetic__item"
-										href="https://www.upwork.com/freelancers/hariswassan"
-										target="_blank"
-										rel="noopener noreferrer"
-										aria-label="Upwork"
-										data-popup="upwork"
-									>
-										<span class="site-nav__icon-ring" aria-hidden="true">
-											<img src="./assets/img/nav-icons/upwork.svg" alt="" width="24" height="24" />
-										</span>
-										<span class="about-magnetic__popup" aria-hidden="true">
-											<img
-												src="./assets/img/connect/upwork-profile.png"
-												alt="Upwork profile — Muhammad H."
-												width="1024"
-												height="296"
-											/>
-										</span>
-									</a>
-								</li>
-								<li>
-									<a
-										class="site-nav__icon about-magnetic__item"
-										href="https://www.linkedin.com/"
-										target="_blank"
-										rel="noopener noreferrer"
-										aria-label="LinkedIn"
-										data-popup="linkedin"
-									>
-										<span class="site-nav__icon-ring" aria-hidden="true">
-											<img src="./assets/img/nav-icons/linkedin.svg" alt="" width="24" height="24" />
-										</span>
-										<span class="about-magnetic__popup" aria-hidden="true">
-											<img
-												src="./assets/img/connect/linkedin-profile.png"
-												alt="LinkedIn profile — Muhammad Haris"
-												width="799"
-												height="499"
-											/>
-										</span>
-									</a>
-								</li>
-								<li>
-									<a
-										class="site-nav__icon about-magnetic__item"
-										href="mailto:hello@autoany.io"
-										aria-label="Email"
-									>
-										<span class="site-nav__icon-ring" aria-hidden="true">
-											<img src="./assets/img/nav-icons/mail.svg" alt="" width="24" height="24" />
-										</span>
-									</a>
-								</li>
-								<li>
-									<a
-										class="site-nav__icon about-magnetic__item"
-										href="mailto:hello@autoany.io?subject=Project%20brief"
-										aria-label="Contact"
-									>
-										<span class="site-nav__icon-ring" aria-hidden="true">
-											<img src="./assets/img/nav-icons/call.svg" alt="" width="24" height="24" />
-										</span>
-									</a>
-								</li>
-							</ul>
-						</div>
-					</div>
-
-					<div class="site-nav__image" id="js-nav-image">
-						<img
-							src="./assets/img/nav-about-preview.png"
-							alt="Preview"
-							id="js-nav-image-el"
-							width="500"
-							height="450"
-						/>
-					</div>
-				</div>
-			</nav>
-
-			<div class="site-header__background" id="js-background" aria-hidden="true"></div>
 		</header>
+
+		<!-- The menu: a dark index of the page's sections. The section under the pointer (or the one you are on)
+		     plays its clip in the frame on the right. nav-bar/nav-bar.js opens it. -->
+		<div class="mn" id="js-menu" role="dialog" aria-modal="true" aria-label="Site menu" hidden>
+			<div class="mn__top">
+				<a class="mn__mark" href="#panel-hero" data-mn-go="#panel-hero" aria-label="Muhammad Haris, home">MH</a>
+				<button type="button" class="mn__close">Close <i aria-hidden="true"></i></button>
+			</div>
+			<ol class="mn__list">
+				<li><a href="#panel-hero" data-mn-go="#panel-hero" data-img="./assets/img/haris-about-studio.webp" data-tag="Home"><b>01</b><span><span>Home</span></span><em>Intro</em></a></li>
+				<li><a href="#panel-about" data-mn-go="#panel-about" data-video="./about-reel/media/reel-720.mp4" data-tag="About"><b>02</b><span><span>About</span></span><em>Who I am</em></a></li>
+				<li><a href="#panel-works" data-mn-go="#panel-works" data-video="./projects/media/02-broadband-support/clip-720.mp4" data-tag="Projects"><b>03</b><span><span>Projects</span></span><em>8 builds</em></a></li>
+				<li><a href="#panel-selected" data-mn-go="#panel-selected" data-video="./selected/media/01-voice-agent/clip-720.mp4" data-tag="Selected work"><b>04</b><span><span>Selected work</span></span><em>4 case studies</em></a></li>
+				<li><a href="#panel-scaling" data-mn-go="#panel-scaling" data-img="./assets/img/connect/upwork-profile.png" data-tag="Reviews"><b>05</b><span><span>Reviews</span></span><em>&#9733; 5.0 on Upwork</em></a></li>
+				<li><a href="#panel-contact" data-mn-go="#panel-contact" data-card="Let&#8217;s talk." data-tag="Contact"><b>06</b><span><span>Contact</span></span><em>Email &middot; Upwork</em></a></li>
+			</ol>
+			<aside class="mn__side">
+				<figure class="mn__frame" aria-hidden="true">
+					<video class="mn__video" muted loop playsinline preload="none"></video>
+					<img class="mn__img" alt="" decoding="async" />
+					<p class="mn__card"></p>
+				</figure>
+				<p class="mn__cap" aria-hidden="true"><span class="mn__cap-n"></span><span class="mn__cap-t"></span></p>
+				<p class="mn__status"><i aria-hidden="true"></i>Taking new projects</p>
+				<p class="mn__proof">Top Rated Plus.<br />100% Job Success.</p>
+				<dl class="mn__stats">
+					<div><dt>33</dt><dd>jobs</dd></div>
+					<div><dt>728</dt><dd>hours</dd></div>
+					<div><dt>$30K+</dt><dd>earned</dd></div>
+				</dl>
+				<a class="mn__btn" href="mailto:hello@autoany.io?subject=Project%20brief">Let&#8217;s talk &rarr;</a>
+				<p class="mn__links">
+					<a href="https://www.upwork.com/freelancers/hariswassan" target="_blank" rel="noopener noreferrer">Upwork &#8599;</a>
+					<a href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer">LinkedIn &#8599;</a>
+					<a href="mailto:hello@autoany.io">hello@autoany.io</a>
+				</p>
+			</aside>
+			<p class="mn__foot">Muhammad Haris &middot; &copy; 2026</p>
+		</div>
 
 		<div class="site-flow" id="site-flow" data-transition="wrapper">
 			<section class="site-panel site-panel--hero" id="panel-hero" data-enter="pending" aria-label="Introduction">
@@ -239,20 +139,23 @@
 				<aside class="ph-rail">
 					<a href="about.html" class="ph-mark" aria-label="Muhammad Haris, home">MH</a>
 					<div class="ph-rail__links" role="navigation" aria-label="Sections">
-						<a href="#panel-hero" data-hero-scroll="#panel-hero">Home</a>
-						<a href="#panel-works" data-hero-scroll="#panel-works">Work</a>
-						<a href="#panel-scaling" data-hero-scroll="#panel-scaling">Contact</a>
+						<a href="#panel-hero" data-hero-scroll="#panel-hero" aria-current="true">Home</a>
+						<a href="#panel-works" data-hero-scroll="#panel-works">Work<sup>08</sup></a>
+						<a href="#panel-selected" data-hero-scroll="#panel-selected">Selected<sup>04</sup></a>
+						<a href="#panel-scaling" data-hero-scroll="#panel-scaling">Reviews</a>
+						<a href="#panel-contact" data-hero-scroll="#panel-contact">Contact</a>
 					</div>
-					<button type="button" class="ph-burger" aria-label="Open menu"><i></i><i></i></button>
+					<p class="ph-status"><i aria-hidden="true"></i>Taking new projects</p>
+					<button type="button" class="ph-burger" aria-label="Open menu"><span class="ph-burger__label">Menu</span><span class="ph-burger__icon" aria-hidden="true"><i></i><i></i></span></button>
 				</aside>
 				</div>
 
 				<figure class="ph-panel">
 					<img
-						src="./assets/img/haris-hero-studio.webp"
-						width="941"
-						height="1672"
-						alt="Muhammad Haris, AI automation engineer, in a navy blazer"
+						src="./assets/img/haris-about-studio.webp"
+						width="1536"
+						height="2048"
+						alt="Muhammad Haris, forward deployed engineer and AI consultant, in a navy blazer"
 						fetchpriority="high"
 						decoding="async"
 					/>
@@ -260,19 +163,15 @@
 				</figure>
 
 				<div class="ph-exit ph-exit--top">
-				<div class="ph-top">
-					<a href="https://github.com/Haris001-bit" target="_blank" rel="noopener noreferrer">GitHub</a>
-					<a class="ph-pill" href="mailto:hello@autoany.io?subject=Project%20brief">Start a project</a>
-				</div>
 				<div class="ph-slide" aria-hidden="true"><span>01</span><i></i></div>
 				</div>
 
 				<div class="ph-exit ph-exit--title">
 				<div class="ph-titles ph-titles--photo" aria-hidden="true">
-					<p class="ph-title">Automate<span class="ph-the">the</span><br />busywork</p>
+					<p class="ph-title">Automate<span class="ph-the">your</span><br />operations</p>
 				</div>
 				<div class="ph-titles ph-titles--white">
-					<h1 class="ph-title">Automate<span class="ph-the">the</span><br />busywork</h1>
+					<h1 class="ph-title">Automate<span class="ph-the">your</span><br />operations</h1>
 				</div>
 				</div>
 
@@ -281,8 +180,7 @@
 
 				<div class="ph-exit ph-exit--sub">
 				<div class="ph-sub">
-					<p class="ph-lead">Muhammad Haris, AI automation engineer</p>
-					<p class="ph-pitch">Workflow platforms, voice and chat agents, and full-stack AI products for operations-heavy businesses in the US, UK and Middle East</p>
+					<p class="ph-lead">Muhammad Haris, Forward Deployed Engineer &amp; AI Consultant</p>
 					<div class="ph-ledger">
 						<div class="ph-stat"><b data-count="6700" data-suffix="+">6,700+</b><small>support conversations automated</small></div>
 						<div class="ph-stat"><b data-count="21000" data-suffix="+">21,000+</b><small>agent minutes saved</small></div>
@@ -342,79 +240,43 @@
 							<img src="./assets/img/haris-about-studio.webp" width="1536" height="2048" alt="Muhammad Haris" decoding="async" />
 						</figure>
 						<div class="hx__side">
-							<p class="hx__row hx__mark" aria-hidden="true">MH</p>
-							<p class="hx__row hx__who"><b>Muhammad Haris</b><i>AI automation engineer, based in Pakistan</i></p>
-							<h2 class="hx__row hx__h" id="hx-title">Who am I? An engineer who <em>ships</em> AI.</h2>
-							<p class="hx__row hx__links">
-								<a class="hx__go" href="mailto:hello@autoany.io?subject=Project%20brief">Start a project <i aria-hidden="true">↗</i></a>
-								<a href="https://www.upwork.com/freelancers/hariswassan" target="_blank" rel="noopener noreferrer">Upwork profile <i aria-hidden="true">↗</i></a>
-								<a href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer">LinkedIn <i aria-hidden="true">↗</i></a>
-							</p>
+							<p class="hx__row hx__who"><b>Muhammad Haris</b><i>Forward deployed engineer &amp; AI consultant</i></p>
+							<div class="hx__body">
+								<h2 class="hx__row hx__h" id="hx-title">Production AI systems. <em>Built around your business.</em></h2>
+								<dl class="hx__facts">
+									<div><dt>Top Rated Plus</dt><dd>Upwork, 100% Job Success</dd></div>
+									<div><dt>LUMS</dt><dd>BSc (Hons)</dd></div>
+									<div><dt>AutoAny</dt><dd>Co-founder</dd></div>
+								</dl>
+								<p class="hx__row hx__links">
+									<a class="hx__go" href="mailto:hello@autoany.io?subject=Project%20brief">Start a project <i aria-hidden="true">↗</i></a>
+									<a href="https://www.upwork.com/freelancers/hariswassan" target="_blank" rel="noopener noreferrer">Upwork profile <i aria-hidden="true">↗</i></a>
+									<a href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer">LinkedIn <i aria-hidden="true">↗</i></a>
+								</p>
+							</div>
 							<p class="hx__row hx__foot"><a href="mailto:hello@autoany.io">hello@autoany.io</a><span>About / 02</span></p>
 						</div>
 						<div class="hx__panel">
 							<p class="hx__row hx__plab">How I work</p>
-							<p class="hx__row">I start with the process, not the model. I map how the work moves today, find the steps that eat the most hours and automate those first. Everything ships to production with logs and evaluation, so you can always see what an agent did and why.</p>
-							<p class="hx__row">The agents I've built have handled 6,700+ support conversations and saved 21,000+ agent minutes. One product I built runs for seven paying businesses, and I've shipped two app store releases on my own. Claude Code is my main engineering workflow.</p>
+							<p class="hx__row">I'm a forward deployed AI engineer. I work inside a client's team, find the work that should be running on AI, and build it through to production. The person who scopes the problem is the person who ships it.</p>
+							<p class="hx__row">I diagnose before I build, and if the honest answer is don't, I say so before either of us spends money finding out. Everything ships in small reviewed pull requests, with tests and CI on every change.</p>
 							<p class="hx__row hx__plab hx__plab--gap">What I build</p>
 							<ul class="hx__row hx__build">
-								<li><b>Workflow platforms</b> running thousands of events a week, on n8n, Make, Zapier and Power Automate</li>
-								<li><b>Voice and chat agents</b> that talk to real customers, with Retell, Voiceflow, ElevenLabs, Twilio and WhatsApp</li>
-								<li><b>RAG and agent systems</b> on Claude and OpenAI: hybrid retrieval, reranking, tool use, MCP and evals</li>
-								<li><b>Full-stack and mobile apps</b> with Next.js, Supabase and Postgres, and Capacitor for iOS and Android</li>
+								<li><b>AI agents and RAG systems</b> on Claude and OpenAI, with MCP, pgvector, reranking and evals</li>
+								<li><b>Full-stack AI products</b> with Next.js, TypeScript, Python, FastAPI, Supabase and Postgres</li>
+								<li><b>Workflow automation</b> on n8n, Make and Power Automate, where they're the right tool</li>
+								<li><b>Mobile apps</b> for iOS and Android, approved by Apple on the first submission</li>
 							</ul>
-							<p class="hx__row hx__creds">Make.com Advanced Certified · Top Rated Plus on Upwork, 100% Job Success · Architecture write-ups on <a href="https://github.com/Haris001-bit" target="_blank" rel="noopener noreferrer">GitHub</a></p>
+							<p class="hx__row hx__creds">Sanitized architecture write-ups for five of these production systems are on <a href="https://github.com/Haris001-bit" target="_blank" rel="noopener noreferrer">GitHub</a></p>
 						</div>
 					</div>
 				</div>
 			</section>
 
-			<!-- Page 3, the showreel: it slides in sideways from About on the same cream, driven by about-reel/about-reel.js -->
-			<section class="site-panel rl" id="panel-reel" aria-label="Showreel">
-				<span class="rl__stop" id="reel-land" aria-hidden="true"></span>
-				<div class="rl__pin">
-					<div class="rl__cream" aria-hidden="true"></div>
-					<!-- lights down: the page dims to a dark room as the reel grows, lit softly in the colour of the project playing -->
-					<div class="rl__room" aria-hidden="true"><span class="rl__amb"></span></div>
-					<p class="rl__built rl__built--sm"><b>Built by</b> <i>Haris.</i></p>
-					<div class="rl__card">
-						<video
-							class="rl__video"
-							muted
-							playsinline
-							loop
-							preload="none"
-							width="1920"
-							height="1080"
-							poster="./about-reel/media/poster.webp"
-							data-mp4-large="./about-reel/media/reel-1440.mp4"
-							data-mp4="./about-reel/media/reel-1080.mp4"
-							data-mp4-small="./about-reel/media/reel-720.mp4"
-							aria-label="Showreel: Haris introduces himself, then all five projects play one after another in their own colours, ending on his name"
-						></video>
-						<div class="rl__glitch" aria-hidden="true"></div>
-					</div>
-					<div class="rl__bar rl__bar--top" aria-hidden="true"></div>
-					<div class="rl__bar rl__bar--bot" aria-hidden="true"></div>
-					<div class="rl__ctrl">
-						<p class="rl__ctrl-lab">Showreel · 2024 to 2026</p>
-						<nav class="rl__chaps" aria-label="Showreel chapters">
-							<button type="button" data-t="0"><i aria-hidden="true"></i><span>Haris</span><b>Haris</b></button>
-							<button type="button" data-t="3.1"><i aria-hidden="true"></i><span>01</span><b>Marketplace app</b></button>
-							<button type="button" data-t="5.5"><i aria-hidden="true"></i><span>02</span><b>AI support</b></button>
-							<button type="button" data-t="10.5"><i aria-hidden="true"></i><span>03</span><b>Email automation</b></button>
-							<button type="button" data-t="12.9"><i aria-hidden="true"></i><span>04</span><b>Compliance platform</b></button>
-							<button type="button" data-t="15.3"><i aria-hidden="true"></i><span>05</span><b>AI agent</b></button>
-						</nav>
-						<button type="button" class="rl__play" aria-label="Pause the showreel"><i aria-hidden="true"></i><span class="rl__time">0:00 / 0:25</span></button>
-					</div>
-					<p class="rl__built rl__built--lg" aria-hidden="true"><b>Built by</b> <i>Haris.</i></p>
-				</div>
-			</section>
-
-			<!-- Between the reel and the projects: a horizon line, "PORTFOLIO" rising from behind it, then the
+			<!-- Between About and the projects: a horizon line, "PORTFOLIO" rising from behind it, then the
 				camera flies through the O into project 01. Driven by enter/enter.js. -->
 			<section class="ent" id="panel-enter" aria-labelledby="ent-title">
+				<span class="ent__stop" id="ent-land" aria-hidden="true"></span>
 				<div class="ent__pin">
 					<svg class="ent__svg" aria-hidden="true" focusable="false"></svg>
 					<span class="ent__line" aria-hidden="true"></span>
@@ -607,12 +469,121 @@
 						</div>
 					</article>
 
+					<article class="pj-screen pj-case" id="project-06" style="--pj-bg: #1c0b13; --pj-accent: #ff6f9b" aria-labelledby="pj-06-title">
+						<div class="pj-screen__in">
+							<p class="pj-case__meta"><b>06</b> / Client project</p>
+							<p class="pj-case__cat">Retention</p>
+							<div class="pj-case__text">
+								<h3 class="pj-case__title pj-anim" id="pj-06-title" style="--d: 0.3s">Customers leaving get a reply <span>in minutes.</span></h3>
+								<p class="pj-case__desc pj-anim" style="--d: 0.4s">When a broadband customer starts switching away, an AI agent reaches them on WhatsApp within minutes with an offer built from their own account, then hands them to a person with the full context.</p>
+								<button type="button" class="pj-case__view pj-anim" style="--d: 0.48s" aria-controls="pj-detail-06" aria-expanded="false">
+									<span>View the project</span>
+									<i aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 8h10M9 4l4 4-4 4" /></svg></i>
+								</button>
+							</div>
+							<figure class="pj-case__media pj-anim" style="--d: 0.2s">
+								<div class="pj-case__frame">
+									<video
+										class="pj-case__video"
+										muted
+										playsinline
+										loop
+										preload="none"
+										width="1920"
+										height="1080"
+										poster="./projects/media/06-retention-engine/poster.webp"
+										data-webm="./projects/media/06-retention-engine/clip-1080.webm"
+										data-mp4="./projects/media/06-retention-engine/clip-1080.mp4"
+										data-mp4-small="./projects/media/06-retention-engine/clip-720.mp4"
+										aria-label="Clip of the retention engine: a switch-away event, the gates it passes, an example WhatsApp conversation with the offer, the AI agent and the handover to a person, then the reason the customer was leaving"
+									></video>
+								</div>
+							</figure>
+							<div class="pj-case__stats pj-anim" style="--d: 0.56s"><p><b>Minutes</b><span>from the switch event to WhatsApp</span></p><p><b>Live</b><span>on real switch events</span></p><p><b>Why</b><span>they leave, captured for the business</span></p><p class="pj-case__tools" aria-label="Built with"><span><img src="./assets/img/tools/n8n.png" alt="" height="14" loading="lazy" /></span><span>WhatsApp Business</span><span>AI agent</span><span><img src="./assets/img/tools/postgresql.svg" alt="" height="14" loading="lazy" />Postgres</span></p></div>
+							<span class="pj-case__num" aria-hidden="true">06</span>
+						</div>
+					</article>
+
+					<article class="pj-screen pj-case" id="project-07" style="--pj-bg: #0a1120; --pj-accent: #7fa6ff" aria-labelledby="pj-07-title">
+						<div class="pj-screen__in">
+							<p class="pj-case__meta"><b>07</b> / Client project</p>
+							<p class="pj-case__cat">Ops tooling</p>
+							<div class="pj-case__text">
+								<h3 class="pj-case__title pj-anim" id="pj-07-title" style="--d: 0.3s">A locked editor, <span>turned into reviewed code.</span></h3>
+								<p class="pj-case__desc pj-anim" style="--d: 0.4s">For a regulated youth-services organisation: a command-line tool that takes their automations out of a GUI-only platform for review in git, plus a full-stack compliance app.</p>
+								<button type="button" class="pj-case__view pj-anim" style="--d: 0.48s" aria-controls="pj-detail-07" aria-expanded="false">
+									<span>View the project</span>
+									<i aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 8h10M9 4l4 4-4 4" /></svg></i>
+								</button>
+							</div>
+							<figure class="pj-case__media pj-anim" style="--d: 0.2s">
+								<div class="pj-case__frame">
+									<video
+										class="pj-case__video"
+										muted
+										playsinline
+										loop
+										preload="none"
+										width="1920"
+										height="1080"
+										poster="./projects/media/07-compliance-tooling/poster.webp"
+										data-webm="./projects/media/07-compliance-tooling/clip-1080.webm"
+										data-mp4="./projects/media/07-compliance-tooling/clip-1080.mp4"
+										data-mp4-small="./projects/media/07-compliance-tooling/clip-720.mp4"
+										aria-label="Clip of the compliance tooling: the vendor’s web designer with no version control, review or diff, then a command-line tool signing in, pulling a flow as JSON, a reviewed diff and the push back live, then seven staff roles and an absence escalation"
+									></video>
+								</div>
+							</figure>
+							<div class="pj-case__stats pj-anim" style="--d: 0.56s"><p><b>7</b><span>staff roles, each with its own access</span></p><p><b>Git</b><span>review on every automation change</span></p><p><b>PKCE</b><span>OAuth2 sign-in to the management API</span></p><p class="pj-case__tools" aria-label="Built with"><span>PowerShell</span><span>Azure AD</span><span><img src="./assets/img/tools/nextjs.svg" alt="" height="14" loading="lazy" />Next.js</span></p></div>
+							<span class="pj-case__num" aria-hidden="true">07</span>
+						</div>
+					</article>
+
+					<article class="pj-screen pj-case" id="project-08" style="--pj-bg: #12140a; --pj-accent: #e2f05a" aria-labelledby="pj-08-title">
+						<div class="pj-screen__in">
+							<p class="pj-case__meta"><b>08</b> / Client project</p>
+							<p class="pj-case__cat">Data pipeline</p>
+							<div class="pj-case__text">
+								<h3 class="pj-case__title pj-anim" id="pj-08-title" style="--d: 0.3s">Two fields in, <span>twenty-nine out.</span></h3>
+								<p class="pj-case__desc pj-anim" style="--d: 0.4s">An n8n pipeline for a nonprofit that turns a name and a website into 29 structured fields, cascading through four sources so the expensive ones only touch the gaps.</p>
+								<button type="button" class="pj-case__view pj-anim" style="--d: 0.48s" aria-controls="pj-detail-08" aria-expanded="false">
+									<span>View the project</span>
+									<i aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 8h10M9 4l4 4-4 4" /></svg></i>
+								</button>
+							</div>
+							<figure class="pj-case__media pj-anim" style="--d: 0.2s">
+								<div class="pj-case__frame">
+									<video
+										class="pj-case__video"
+										muted
+										playsinline
+										loop
+										preload="none"
+										width="1920"
+										height="1080"
+										poster="./projects/media/08-lead-enrichment/poster.webp"
+										data-webm="./projects/media/08-lead-enrichment/clip-1080.webm"
+										data-mp4="./projects/media/08-lead-enrichment/clip-1080.mp4"
+										data-mp4-small="./projects/media/08-lead-enrichment/clip-720.mp4"
+										aria-label="Clip of the lead enrichment cascade: a lead with only a name and website, four source tiers lighting in turn as its 29 fields fill, then the closed outbound loop and roughly 96% field-level accuracy"
+									></video>
+								</div>
+							</figure>
+							<div class="pj-case__stats pj-anim" style="--d: 0.56s"><p><b>29</b><span>fields resolved per lead</span></p><p><b>~96%</b><span>field-level accuracy</span></p><p><b>4</b><span>source tiers, cheapest first</span></p><p class="pj-case__tools" aria-label="Built with"><span><img src="./assets/img/tools/n8n.png" alt="" height="14" loading="lazy" /></span><span>Data APIs</span><span>Agentic crawling</span><span>AI fallback</span></p></div>
+							<span class="pj-case__num" aria-hidden="true">08</span>
+						</div>
+					</article>
+
+					<!-- every project and its number, always on show: a click goes to it (projects.js) -->
 					<nav class="pj-index" aria-label="Projects">
-						<button type="button" data-go="0" aria-label="Project 01">01</button>
-						<button type="button" data-go="1" aria-label="Project 02">02</button>
-						<button type="button" data-go="2" aria-label="Project 03">03</button>
-						<button type="button" data-go="3" aria-label="Project 04">04</button>
-						<button type="button" data-go="4" aria-label="Project 05">05</button>
+						<button type="button" data-go="0" style="--c: #8fd46f"><b>01</b><span>Marketplace app</span></button>
+						<button type="button" data-go="1" style="--c: #f2b84b"><b>02</b><span>AI customer support</span></button>
+						<button type="button" data-go="2" style="--c: #8fd8e6"><b>03</b><span>Email automation</span></button>
+						<button type="button" data-go="3" style="--c: #b9a4ff"><b>04</b><span>Compliance platform</span></button>
+						<button type="button" data-go="4" style="--c: #ff7a59"><b>05</b><span>Level 1 support agent</span></button>
+						<button type="button" data-go="5" style="--c: #ff6f9b"><b>06</b><span>Retention engine</span></button>
+						<button type="button" data-go="6" style="--c: #7fa6ff"><b>07</b><span>Compliance tooling</span></button>
+						<button type="button" data-go="7" style="--c: #e2f05a"><b>08</b><span>Lead enrichment</span></button>
 					</nav>
 
 					<aside class="pj-detail" id="pj-detail-01" style="--pj-bg: #12261f" role="dialog" aria-modal="true" aria-labelledby="pj-d01-title" hidden>
@@ -875,6 +846,144 @@
 							</div>
 						</div>
 					</aside>
+
+					<aside class="pj-detail" id="pj-detail-06" style="--pj-bg: #1c0b13; --pj-accent: #ff6f9b" role="dialog" aria-modal="true" aria-labelledby="pj-d06-title" hidden>
+						<div class="pj-detail__scroll" tabindex="-1">
+							<div class="pj-detail__body">
+								<div class="pj-detail__top">
+									<p class="pj-case__meta"><b>06</b> / Client project</p>
+									<button type="button" class="pj-detail__close" aria-label="Close project">
+										<span aria-hidden="true">Close</span>
+										<i aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 4l8 8M12 4l-8 8" /></svg></i>
+									</button>
+								</div>
+								<div class="pj-detail__head">
+									<p class="pj-case__tags"><b>Retention</b>n8n · WhatsApp Business Platform · Conversational AI agent · Postgres state store · Live</p>
+									<h3 class="pj-detail__title" id="pj-d06-title">Retention Automation Engine <span>for a Fibre Broadband Provider</span></h3>
+									<p class="pj-detail__lede">When a customer begins switching to a competitor, this system reaches them over WhatsApp within minutes with a retention offer built from their own account data, handles the conversation, and hands engaged customers to a human retentions agent with full context of exactly what was offered. Built deliberately as instance one of a reusable outbound engine rather than as a one-off campaign.</p>
+								</div>
+								<figure class="pj-detail__fig pj-detail__pipe">
+									<h4>Event to offer to human handover</h4>
+									<img src="./projects/media/06-retention-engine/architecture.webp" width="2000" height="418" alt="Architecture: a switch-away webhook passes an opt-out gate; customers who opted out get no contact, the rest get an offer built from their account data over WhatsApp with an SMS fallback, with state and a duplicate guard; an AI agent handles the reply and routes to a human handover, a captured reason, or suppression" loading="lazy" decoding="async" />
+									<figcaption>Phase one deliberately stops at human handover. The most valuable output is not the save, it is the captured reason a customer is leaving, which the business had no other way to collect.</figcaption>
+								</figure>
+								<div class="pj-detail__cols">
+									<section>
+										<h4>Engineering highlights</h4>
+										<ul>
+											<li>An opt-out gate before anything is sent, so customers who asked not to be contacted never are.</li>
+											<li>The offer is built from the customer’s own account data, sent on WhatsApp with an SMS fallback.</li>
+											<li>A state store with a duplicate guard, so nobody gets the same message twice.</li>
+											<li>An AI agent handles the reply, then hands engaged customers to a person with everything that was offered.</li>
+										</ul>
+									</section>
+									<section>
+										<h4>Result</h4>
+										<p class="pj-detail__result">Live in production on real switch events, replacing a manual and delayed retentions process with an automated response inside minutes of the trigger, and designed from day one to be reconfigured for renewals, payment recovery and onboarding.</p>
+									</section>
+								</div>
+								<div class="pj-detail__foot">
+									<a class="pj-detail__cta" href="mailto:hello@autoany.io?subject=Project%20brief"
+										>Start a similar project
+										<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" /></svg
+									></a>
+									<button type="button" class="pj-detail__back">Back to the projects</button>
+								</div>
+							</div>
+						</div>
+					</aside>
+
+					<aside class="pj-detail" id="pj-detail-07" style="--pj-bg: #0a1120; --pj-accent: #7fa6ff" role="dialog" aria-modal="true" aria-labelledby="pj-d07-title" hidden>
+						<div class="pj-detail__scroll" tabindex="-1">
+							<div class="pj-detail__body">
+								<div class="pj-detail__top">
+									<p class="pj-case__meta"><b>07</b> / Client project</p>
+									<button type="button" class="pj-detail__close" aria-label="Close project">
+										<span aria-hidden="true">Close</span>
+										<i aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 4l8 8M12 4l-8 8" /></svg></i>
+									</button>
+								</div>
+								<div class="pj-detail__head">
+									<p class="pj-case__tags"><b>Ops tooling</b>PowerShell CLI · Azure AD OAuth2 with PKCE · Next.js full-stack app · Regulated nonprofit</p>
+									<h3 class="pj-detail__title" id="pj-d07-title">Compliance Operations Tooling <span>and Full-Stack Platform</span></h3>
+									<p class="pj-detail__lede">For a regulated youth-services organisation, I built both the automation and the tooling needed to manage it safely. The platform they were on could only be edited through a limited web designer, which meant no version control, no review and no diffing. So I built a command-line tool that talks to its management API directly.</p>
+								</div>
+								<figure class="pj-detail__fig pj-detail__pipe">
+									<h4>Turning a GUI-only platform into reviewable code</h4>
+									<img src="./projects/media/07-compliance-tooling/architecture.webp" width="2000" height="349" alt="Operations tooling: a purpose-built CLI signs in with an OAuth2 PKCE flow, calls the management API, pulls a flow as JSON for editing and review in git, then pushes it back to the live automation" loading="lazy" decoding="async" />
+									<figcaption>The point of the tool is the review step in the middle, which the vendor’s own interface made impossible.</figcaption>
+								</figure>
+								<div class="pj-detail__cols">
+									<section>
+										<h4>Engineering highlights</h4>
+										<ul>
+											<li>A purpose-built CLI that signs in with Azure AD OAuth2 and PKCE and talks to the platform’s management API directly.</li>
+											<li>Flows are pulled as JSON, edited and reviewed in git, then pushed back live.</li>
+											<li>A separate full-stack compliance web application with role-based access control across seven distinct staff roles, built to meet the organisation’s regulatory data-handling obligations.</li>
+											<li>Automated absence detection and multi-channel escalation, layered on top of their existing case-management workflow.</li>
+										</ul>
+									</section>
+									<section>
+										<h4>Result</h4>
+										<p class="pj-detail__result">Automations that used to be edited blind in a web designer now go through version control and review, alongside a compliance app built around seven staff roles.</p>
+									</section>
+								</div>
+								<div class="pj-detail__foot">
+									<a class="pj-detail__cta" href="mailto:hello@autoany.io?subject=Project%20brief"
+										>Start a similar project
+										<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" /></svg
+									></a>
+									<button type="button" class="pj-detail__back">Back to the projects</button>
+								</div>
+							</div>
+						</div>
+					</aside>
+
+					<aside class="pj-detail" id="pj-detail-08" style="--pj-bg: #12140a; --pj-accent: #e2f05a" role="dialog" aria-modal="true" aria-labelledby="pj-d08-title" hidden>
+						<div class="pj-detail__scroll" tabindex="-1">
+							<div class="pj-detail__body">
+								<div class="pj-detail__top">
+									<p class="pj-case__meta"><b>08</b> / Client project</p>
+									<button type="button" class="pj-detail__close" aria-label="Close project">
+										<span aria-hidden="true">Close</span>
+										<i aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 4l8 8M12 4l-8 8" /></svg></i>
+									</button>
+								</div>
+								<div class="pj-detail__head">
+									<p class="pj-case__tags"><b>Data pipeline</b>n8n · Structured-data APIs · Provider waterfall · Agentic crawling · AI fallback · Outbound sequencer</p>
+									<h3 class="pj-detail__title" id="pj-d08-title">Four-Tier Lead Enrichment <span>Cascade</span></h3>
+									<p class="pj-detail__lede">A production enrichment pipeline processing tens of thousands of leads per campaign for a nonprofit client. Two fields are known at intake, a name and a website, and 29 have to be resolved. No single vendor covers that schema, so the pipeline cascades through four sources, each one firing only when the cheaper source ahead of it failed.</p>
+								</div>
+								<figure class="pj-detail__fig pj-detail__pipe">
+									<h4>Cheapest sufficient source wins, and the loop closes</h4>
+									<img src="./projects/media/08-lead-enrichment/architecture.webp" width="2000" height="969" alt="Architecture: a lead with a name and site passes through tier 1 data API, tier 2 waterfall, tier 3 agentic crawl and tier 4 AI and search, each only for the gaps, into a weighted merge of 29 fields, then a closed outbound loop of CRM sheet, sequencer, reply and bounce events and auto-suppress" loading="lazy" decoding="async" />
+									<figcaption>Every tier is cost-gated, so the expensive sources only ever touch the records that actually need them. The null-safe fallback is what keeps fabricated data out of a nonprofit’s outbound.</figcaption>
+								</figure>
+								<div class="pj-detail__cols">
+									<section>
+										<h4>Engineering highlights</h4>
+										<ul>
+											<li>Four source tiers, each firing only for the fields the cheaper tier before it could not resolve.</li>
+											<li>A weighted merge into 29 structured fields per lead.</li>
+											<li>A null-safe AI fallback: a blank field is preferred to an invented one.</li>
+											<li>A closed loop: the sequencer’s reply and bounce events feed auto-suppression back into the CRM sheet.</li>
+										</ul>
+									</section>
+									<section>
+										<h4>Result</h4>
+										<p class="pj-detail__result">A live, cost-optimised pipeline resolving 29 structured fields per lead at roughly 96% field-level accuracy, feeding directly into automated outbound sequencing with a closed engagement loop.</p>
+									</section>
+								</div>
+								<div class="pj-detail__foot">
+									<a class="pj-detail__cta" href="mailto:hello@autoany.io?subject=Project%20brief"
+										>Start a similar project
+										<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" /></svg
+									></a>
+									<button type="button" class="pj-detail__back">Back to the projects</button>
+								</div>
+							</div>
+						</div>
+					</aside>
 				</div>
 			</section>
 
@@ -1062,7 +1171,7 @@
 							<a href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>
 							<a href="#" data-ct-top>Back to top ↑</a>
 						</p>
-						<p class="ct__row"><span>Muhammad Haris · AI automation engineer · Karachi</span><span>© 2026</span></p>
+						<p class="ct__row"><span>Muhammad Haris · Forward Deployed Engineer &amp; AI Consultant · Karachi</span><span>© 2026</span></p>
 					</footer>
 				</div>
 			</section>
@@ -1267,7 +1376,7 @@
 		</div>
 
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-		<script src="https://unpkg.com/split-type"></script>
+		<script src="https://unpkg.com/split-type@0.3.4/umd/index.min.js"></script>
 		<script src="./nav-bar/nav-bar.js"></script>
 		<script src="./magnetic-button/magnetic-button.js"></script>
 		<script src="./reviews/reel.js"></script>
@@ -1275,7 +1384,6 @@
 		<script src="./page-flow.js"></script>
 		<script src="./hero/hero.js"></script>
 		<script src="./about-h/about-h.js"></script>
-		<script src="./about-reel/about-reel.js"></script>
 		<script src="./enter/enter.js"></script>
 		<script src="./projects/projects.js"></script>
 		<script src="./projects/projects-cinema.js"></script>

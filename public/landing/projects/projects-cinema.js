@@ -18,6 +18,9 @@
 		'project-03': 'Multi-inbox email automation',
 		'project-04': 'Multi-tenant AI compliance platform',
 		'project-05': 'Autonomous Level 1 support agent',
+		'project-06': 'Retention engine for a broadband provider',
+		'project-07': 'Compliance operations tooling',
+		'project-08': 'Four-tier lead enrichment cascade',
 	}
 
 	screens.forEach((s, i) => {
@@ -28,7 +31,10 @@
 		const tag = document.createElement('div')
 		tag.className = 'pj-case__intro'
 		tag.setAttribute('aria-hidden', 'true')
-		tag.innerHTML = `<p><b>0${i + 1} / 0${screens.length}</b> Client project</p><p class="pj-case__intro-name">${NAMES[s.id] || ''}</p><span class="pj-case__intro-bar"><i></i></span>`
+		// the opening's title card: what the project is, on its own dark glass so it reads over any frame of the clip
+		const desc = s.querySelector('.pj-case__desc')
+		tag.innerHTML = `<p><b>0${i + 1} / 0${screens.length}</b> Client project</p><p class="pj-case__intro-name">${NAMES[s.id] || ''}</p>${desc ? `<p class="pj-case__intro-desc"></p>` : ''}<span class="pj-case__intro-bar"><i></i></span>`
+		if (desc) tag.querySelector('.pj-case__intro-desc').textContent = desc.textContent.trim()
 		s.querySelector('.pj-screen__in').appendChild(tag)
 	})
 
@@ -97,9 +103,11 @@
 		(e) => {
 			const s = opening()
 			if (!s || e.ctrlKey || !e.deltaY) return
+			settle(s)
+			// scrolling down moves on to Selected work (projects.js), so only an upward notch is spent here
+			if (e.deltaY > 0) return
 			e.preventDefault()
 			e.stopPropagation()
-			settle(s)
 		},
 		{ capture: true, passive: false },
 	)

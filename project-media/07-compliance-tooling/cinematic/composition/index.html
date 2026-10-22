@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1920, height=1080" />
+    <title>Compliance tooling, from a locked editor to reviewed code</title>
+    <script src="assets/gsap.min.js"></script>
+    <style>
+      @font-face { font-family: "Inter"; src: url("assets/fonts/inter-latin-400-normal.woff2") format("woff2"); font-weight: 400; font-display: block; }
+      @font-face { font-family: "Inter"; src: url("assets/fonts/inter-latin-500-normal.woff2") format("woff2"); font-weight: 500; font-display: block; }
+      @font-face { font-family: "Inter"; src: url("assets/fonts/inter-latin-600-normal.woff2") format("woff2"); font-weight: 600; font-display: block; }
+      @font-face { font-family: "Inter"; src: url("assets/fonts/inter-latin-700-normal.woff2") format("woff2"); font-weight: 700; font-display: block; }
+      @font-face { font-family: "Inter"; src: url("assets/fonts/inter-latin-800-normal.woff2") format("woff2"); font-weight: 800; font-display: block; }
+
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { width: 1920px; height: 1080px; overflow: hidden; background: #0a1120; }
+      body { font-family: "Inter", sans-serif; color: #eaf0ff; -webkit-font-smoothing: antialiased; }
+      #root { position: relative; width: 100%; height: 100%; overflow: hidden; background: radial-gradient(1500px 1000px at 50% 40%, #16223b 0%, #0e172a 55%, #0a1120 100%); }
+      #grid { position: absolute; inset: 0; background-image: linear-gradient(rgba(127, 166, 255, 0.06) 1px, transparent 1px), linear-gradient(90deg, rgba(127, 166, 255, 0.06) 1px, transparent 1px); background-size: 60px 60px; }
+      .k { font-size: 22px; font-weight: 800; letter-spacing: 0.24em; color: #7fa6ff; }
+      @font-face { font-family: "Code"; src: local("Consolas"), local("Courier New"); }
+      .mono { font-family: "Code", monospace; }
+
+      /* act one: the vendor's locked web designer */
+      #locked { position: absolute; left: 260px; top: 170px; width: 1400px; height: 700px; border-radius: 22px; background: #e9edf5; box-shadow: 0 50px 120px rgba(0, 4, 14, 0.6); overflow: hidden; }
+      #locked .top { height: 64px; background: #cdd5e3; display: flex; align-items: center; gap: 10px; padding: 0 24px; }
+      #locked .top i { width: 14px; height: 14px; border-radius: 50%; background: #a7b2c6; }
+      #locked .top span { margin-left: 18px; font-size: 20px; font-weight: 600; color: #4a5670; }
+      .blk { position: absolute; width: 300px; height: 90px; border-radius: 14px; background: #fff; box-shadow: 0 6px 18px rgba(20, 30, 60, 0.12); display: flex; align-items: center; padding: 0 22px; font-size: 21px; font-weight: 700; color: #33415e; }
+      #nope { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); display: flex; gap: 22px; }
+      #nope p { padding: 16px 24px; border-radius: 12px; background: #2a1420; color: #ffb1c4; font-size: 24px; font-weight: 800; white-space: nowrap; box-shadow: 0 16px 40px rgba(40, 0, 10, 0.4); }
+      #cap1 { position: absolute; left: 260px; top: 905px; }
+      #cap1 .t, .cap .t { margin-top: 10px; font-size: 40px; font-weight: 800; letter-spacing: -0.02em; color: #f2f6ff; }
+
+      /* act two: the terminal and the diff */
+      #term { position: absolute; left: 140px; top: 150px; width: 760px; height: 640px; border-radius: 20px; background: #070b14; box-shadow: inset 0 0 0 2px #22304d, 0 40px 100px rgba(0, 4, 14, 0.6); padding: 30px 34px; }
+      #term p { font-size: 23px; line-height: 1.75; color: #b9c8e8; white-space: pre; }
+      #term p .p { color: #7fa6ff; }
+      #term p .ok { color: #6fe3a5; }
+      #term p .dim { color: #5d6c8c; }
+      #diff { position: absolute; left: 960px; top: 150px; width: 820px; height: 640px; border-radius: 20px; background: #0d1424; box-shadow: inset 0 0 0 2px #22304d, 0 40px 100px rgba(0, 4, 14, 0.6); overflow: hidden; }
+      #diff .hd { padding: 22px 28px; border-bottom: 2px solid #1d2943; display: flex; justify-content: space-between; font-size: 21px; font-weight: 700; color: #c9d6f5; }
+      #diff .hd b { color: #7fa6ff; }
+      .ln { display: flex; font-size: 21px; line-height: 2; padding: 0 28px; white-space: pre; color: #b9c8e8; }
+      .ln i { width: 44px; font-style: normal; color: #4d5b7a; }
+      .ln.del { background: rgba(255, 92, 120, 0.14); color: #ffb1c4; }
+      .ln.add { background: rgba(111, 227, 165, 0.14); color: #b6f5d3; }
+      #approve { position: absolute; right: 28px; bottom: 26px; padding: 16px 26px; border-radius: 12px; background: #2f7d57; color: #fff; font-size: 22px; font-weight: 800; }
+      .cap { position: absolute; left: 140px; top: 860px; }
+
+      /* act three: roles and escalation */
+      #roles { position: absolute; left: 160px; top: 210px; width: 1600px; }
+      #roles h3 { margin-top: 14px; font-size: 64px; font-weight: 800; letter-spacing: -0.03em; line-height: 1.02; color: #f2f6ff; }
+      #roles h3 em { font-style: normal; color: #7fa6ff; }
+      .rg { margin-top: 44px; display: grid; grid-template-columns: repeat(7, 1fr); gap: 16px; }
+      .rg p { padding: 24px 18px; border-radius: 16px; background: #121c33; box-shadow: inset 0 0 0 2px #24345a; font-size: 21px; font-weight: 700; color: #dbe5ff; text-align: center; }
+      .rg p b { display: block; font-size: 40px; color: #7fa6ff; margin-bottom: 8px; }
+      #alert { margin-top: 36px; display: inline-flex; align-items: center; gap: 16px; padding: 18px 26px; border-radius: 14px; background: #2a1a0a; box-shadow: inset 0 0 0 2px #a8722a; font-size: 25px; font-weight: 700; color: #ffd9a6; }
+      #alert i { width: 14px; height: 14px; border-radius: 50%; background: #ffad4a; }
+      #end { position: absolute; left: 160px; top: 860px; }
+      #end p { font-size: 26px; font-weight: 700; letter-spacing: 0.18em; color: #8ea3cc; }
+
+      .grainbox { position: absolute; inset: -60px; overflow: hidden; pointer-events: none; }
+      #grain { position: absolute; left: 0; top: 0; width: 2100px; height: 1260px; opacity: 0.07; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' seed='41' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23n)'/%3E%3C/svg%3E"); }
+      .vig { position: absolute; inset: 0; box-shadow: inset 0 0 380px rgba(2, 4, 12, 0.75); pointer-events: none; }
+      #fade { position: absolute; inset: 0; background: #0a1120; }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="12" data-width="1920" data-height="1080">
+      <div id="grid"></div>
+
+      <div id="locked">
+        <div class="top"><i></i><i></i><i></i><span>Vendor automation designer</span></div>
+        <p class="blk" style="left: 120px; top: 170px">When a form is submitted</p>
+        <p class="blk" style="left: 540px; top: 300px">Check absence record</p>
+        <p class="blk" style="left: 960px; top: 170px">Notify case worker</p>
+        <p class="blk" style="left: 540px; top: 480px">Escalate</p>
+        <div id="nope"><p>✕ No version control</p><p>✕ No review</p><p>✕ No diff</p></div>
+      </div>
+      <div id="cap1"><p class="k">A REGULATED YOUTH-SERVICES ORGANISATION</p><p class="t">Their automations could only be edited in a web designer.</p></div>
+
+      <div id="term" class="mono">
+        <p id="l1"><span class="p">❯</span> flowctl login</p>
+        <p id="l2"><span class="dim">  Azure AD · OAuth2 with PKCE</span>  <span class="ok">✓ signed in</span></p>
+        <p id="l3"><span class="p">❯</span> flowctl pull absence-escalation</p>
+        <p id="l4"><span class="ok">✓</span> saved flows/absence-escalation.json</p>
+        <p id="l5"><span class="p">❯</span> git diff</p>
+        <p id="l6"><span class="dim">  reviewed and approved</span></p>
+        <p id="l7"><span class="p">❯</span> flowctl push absence-escalation</p>
+        <p id="l8"><span class="ok">✓ live</span></p>
+      </div>
+      <div id="diff" class="mono">
+        <p class="hd"><span>flows/<b>absence-escalation.json</b></span><span>1 change</span></p>
+        <p class="ln"><i>12</i>  "trigger": "absence.recorded",</p>
+        <p class="ln"><i>13</i>  "notify": ["case_worker"],</p>
+        <p class="ln del" id="d1"><i>14</i>- "escalation": "single",</p>
+        <p class="ln add" id="d2"><i>14</i>+ "escalation": "multi_channel",</p>
+        <p class="ln add" id="d3"><i>15</i>+ "reviewed_in": "git",</p>
+        <p class="ln"><i>16</i>  "audit": true</p>
+        <p id="approve">✓ Approved</p>
+      </div>
+      <div class="cap" id="cap2"><p class="k">A PURPOSE-BUILT CLI</p><p class="t">Pull the flow as JSON, review it in git, push it back live.</p></div>
+
+      <div id="roles">
+        <p class="k">THE FULL-STACK COMPLIANCE APP</p>
+        <h3>Seven staff roles, <em>each seeing only what it should.</em></h3>
+        <div class="rg">
+          <p><b>1</b>Staff role</p><p><b>2</b>Staff role</p><p><b>3</b>Staff role</p><p><b>4</b>Staff role</p><p><b>5</b>Staff role</p><p><b>6</b>Staff role</p><p><b>7</b>Staff role</p>
+        </div>
+        <p id="alert"><i></i>Absence detected · escalated across channels</p>
+      </div>
+      <div id="end"><p>POWERSHELL CLI · AZURE AD OAUTH2 + PKCE · NEXT.JS</p></div>
+
+      <div class="grainbox"><div id="grain"></div></div>
+      <div class="vig"></div>
+      <div id="fade"></div>
+    </div>
+
+    <script>
+      const tl = gsap.timeline({ paused: true, defaults: { ease: "power3.out" } });
+      tl.fromTo("#grain", { x: 0, y: 0 }, { x: -120, y: -80, duration: 12, ease: "steps(96)" }, 0);
+      tl.fromTo("#fade", { opacity: 1 }, { opacity: 0, duration: 0.4, ease: "none" }, 0);
+      tl.to("#fade", { opacity: 1, duration: 0.4, ease: "none" }, 11.6);
+      const cap = (sel, a, b) => { tl.fromTo(sel, { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.5 }, a); if (b) tl.to(sel, { opacity: 0, duration: 0.3, ease: "power1.in" }, b); };
+
+      // act one: the locked editor, then the three things it could not do
+      tl.fromTo("#locked", { opacity: 0, scale: 0.94, rotationX: 14 }, { opacity: 1, scale: 1, rotationX: 0, duration: 0.9, ease: "expo.out" }, 0.2);
+      tl.fromTo("#locked .blk", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.4, stagger: 0.1 }, 0.6);
+      tl.fromTo("#nope p", { opacity: 0, scale: 1.4 }, { opacity: 1, scale: 1, duration: 0.35, ease: "back.out(2.4)", stagger: 0.22 }, 1.5);
+      cap("#cap1", 0.5, 3.0);
+      tl.to("#locked", { opacity: 0, scale: 0.9, y: -40, duration: 0.5, ease: "power2.in" }, 3.0);
+
+      // act two: the terminal types, the diff appears, it is approved, it goes live
+      const lines = ["#l1", "#l2", "#l3", "#l4", "#l5", "#l6", "#l7", "#l8"];
+      tl.fromTo("#term", { opacity: 0, x: -60 }, { opacity: 1, x: 0, duration: 0.6 }, 3.3);
+      lines.forEach((l, i) => tl.fromTo(l, { opacity: 0, x: -10 }, { opacity: 1, x: 0, duration: 0.2, ease: "none" }, 3.6 + i * 0.42));
+      tl.fromTo("#diff", { opacity: 0, x: 60 }, { opacity: 1, x: 0, duration: 0.6 }, 5.2);
+      tl.fromTo(["#d1", "#d2", "#d3"], { opacity: 0, x: 20 }, { opacity: 1, x: 0, duration: 0.3, stagger: 0.25 }, 5.6);
+      tl.fromTo("#approve", { opacity: 0, scale: 1.5 }, { opacity: 1, scale: 1, duration: 0.35, ease: "back.out(2.2)" }, 6.3);
+      cap("#cap2", 3.6, 7.3);
+      tl.to(["#term", "#diff"], { opacity: 0, y: -30, duration: 0.5, ease: "power2.in" }, 7.3);
+
+      // act three: seven roles light up, then an absence is escalated
+      tl.fromTo("#roles .k", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.5 }, 7.7);
+      tl.fromTo("#roles h3", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.6 }, 7.8);
+      tl.fromTo(".rg p", { opacity: 0, y: 30, scale: 0.9 }, { opacity: 1, y: 0, scale: 1, duration: 0.45, ease: "back.out(1.8)", stagger: 0.09 }, 8.3);
+      tl.fromTo("#alert", { opacity: 0, x: -30 }, { opacity: 1, x: 0, duration: 0.5 }, 9.4);
+      tl.fromTo("#alert i", { opacity: 1 }, { opacity: 0.25, duration: 0.3, ease: "steps(1)", yoyo: true, repeat: 5 }, 9.8);
+      tl.fromTo("#end", { opacity: 0 }, { opacity: 1, duration: 0.5, ease: "none" }, 10.0);
+
+      window.__timelines["main"] = tl;
+    </script>
+  </body>
+</html>

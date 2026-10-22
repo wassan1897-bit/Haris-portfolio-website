@@ -49,6 +49,30 @@
 			steps: ['Triage: customer or prospect', 'Live outage check', 'Ticket to the right team'],
 			film: 'A flight through the outage check and the five routing lanes.',
 		},
+		'06': {
+			kick: ["Retention", "Live on real switch events"],
+			title: "A reply within minutes, <em>a reason every time.</em>",
+			desc: "When a customer starts switching away, an AI agent reaches them on WhatsApp with an offer from their own account, then hands them to a person.",
+			stats: [["Minutes", "To first message", "from the switch-away event"], ["Live", "In production", "on real switch events"], ["Why", "Reason captured", "the insight the business never had"]],
+			steps: ["Switch-away event passes the opt-out gate", "Offer from their account, on WhatsApp", "AI agent replies, a person takes over"],
+			film: "From the switch event to the handover.",
+		},
+		'07': {
+			kick: ["Ops tooling", "Regulated nonprofit"],
+			title: "No version control? <em>Now there is.</em>",
+			desc: "A CLI that pulls automations out of a GUI-only platform for review in git, and a compliance app with seven role-based access levels.",
+			stats: [["7", "Staff roles", "each with its own access"], ["Git", "Reviewed changes", "on every automation"], ["PKCE", "Secure sign-in", "Azure AD OAuth2 to the API"]],
+			steps: ["Sign in with OAuth2 and PKCE", "Pull the flow as JSON, review in git", "Push it back to the live automation"],
+			film: "From a locked editor to a reviewed push.",
+		},
+		'08': {
+			kick: ["Data pipeline", "Live, per campaign"],
+			title: "Two fields in, <em>twenty-nine out.</em>",
+			desc: "A name and a website become 29 structured fields, through four sources that each fire only for the gaps the cheaper one left.",
+			stats: [["29", "Fields per lead", "from just a name and a website"], ["~96%", "Accuracy", "field level, null-safe"], ["4", "Source tiers", "cheapest sufficient source wins"]],
+			steps: ["Tier 1 and 2: data APIs, then a waterfall", "Tier 3 and 4: agentic crawl, then AI", "Weighted merge into the outbound loop"],
+			film: "Four tiers, filling 29 fields.",
+		},
 		// Selected work (selected/selected-detail.js opens these; their clips are portrait, 4:5)
 		sw01: {
 			kick: ['Voice AI', 'Live phone agent'],
@@ -180,7 +204,31 @@
 				scroll.style.overflowY = ''
 			}
 			if (instant) return done()
-			Object.assign(film.style, { left: r.left - p.left + 'px', top: r.top - p.top + 'px', width: r.width + 'px', height: r.height + 'px', borderRadius: '20px' })
+			// The film never changes its box (that would move the layout): it is scaled and clipped onto the tile.
+			// Where its picture sits now (C, in the film's own pixels) is mapped onto where the picture sits once it
+			// is in the tile (D, contained), and the clip trims the film to the tile's rounded rectangle.
+			const W = film.offsetWidth || p.width
+			const H = film.offsetHeight || p.height
+			const nw = v.videoWidth || 16
+			const nh = v.videoHeight || 9
+			const cs = getComputedStyle(v)
+			const bw = v.offsetWidth || W
+			const bh = v.offsetHeight || H
+			const fit = cs.objectFit === 'contain' ? Math.min(bw / nw, bh / nh) : Math.max(bw / nw, bh / nh)
+			const pos = cs.objectPosition.split(' ').map((x) => (parseFloat(x) || 50) / 100)
+			const C = { x: v.offsetLeft + (bw - nw * fit) * pos[0], y: v.offsetTop + (bh - nh * fit) * (pos[1] ?? 0.5), w: nw * fit }
+			const S = { x: r.left - p.left, y: r.top - p.top, w: r.width, h: r.height }
+			const kt = Math.min(S.w / nw, S.h / nh)
+			const D = { x: S.x + (S.w - nw * kt) / 2, y: S.y + (S.h - nh * kt) / 2, w: nw * kt }
+			const sc = D.w / C.w
+			const tx = D.x - C.x * sc
+			const ty = D.y - C.y * sc
+			const L = (S.x - tx) / sc
+			const T = (S.y - ty) / sc
+			const R = W - (S.x + S.w - tx) / sc
+			const B = H - (S.y + S.h - ty) / sc
+			film.style.transform = `translate3d(${tx.toFixed(2)}px, ${ty.toFixed(2)}px, 0) scale(${sc.toFixed(5)})`
+			film.style.clipPath = `inset(${T.toFixed(2)}px ${R.toFixed(2)}px ${B.toFixed(2)}px ${L.toFixed(2)}px round ${(20 / sc).toFixed(2)}px)`
 			setTimeout(done, 1350)
 		}
 		function start() {
@@ -196,6 +244,8 @@
 				return
 			}
 			film.removeAttribute('style')
+			film.style.transform = 'translate3d(0px, 0px, 0) scale(1)'
+			film.style.clipPath = 'inset(0px 0px 0px 0px round 0px)'
 			panel.appendChild(film)
 			panel.appendChild(titles)
 			panel.insertAdjacentHTML('beforeend', bars)
