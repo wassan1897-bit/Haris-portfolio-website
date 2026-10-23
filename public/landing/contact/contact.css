@@ -203,6 +203,27 @@
 	text-transform: uppercase;
 }
 
+/* tablets and small laptops: the links no longer fit beside the name, so they sit under it, as on phones */
+@media (min-width: 768px) and (max-width: 1279px) {
+	.ct__name {
+		bottom: 92px;
+	}
+	.ct__links {
+		left: 3vw;
+		right: auto;
+		bottom: 56px;
+	}
+}
+/* the bottom line wraps to two lines here, so the name and links sit a line higher */
+@media (min-width: 768px) and (max-width: 899px) {
+	.ct__name {
+		bottom: 108px;
+	}
+	.ct__links {
+		bottom: 72px;
+	}
+}
+
 /* ---------- tablets and phones ---------- */
 @media (max-width: 767px) {
 	.ct__title {
@@ -237,8 +258,10 @@
 		left: 16px;
 		right: auto;
 		bottom: 88px;
-		gap: 22px;
-		font-size: 15px;
+		/* four links on one line down to a 320px phone */
+		gap: clamp(10px, (100vw - 320px) / 3, 22px);
+		font-size: min(15px, 4.1vw);
+		white-space: nowrap;
 	}
 	.ct__row {
 		left: 16px;
