@@ -1,0 +1,84 @@
+I'm Muhammad Haris, an AI GTM engineer. I build the AI systems that find your buyers, research them, reach them at the right moment and keep them.
+I build revenue systems that run without me.
+Two roles where I built AI products under the hardest constraints there are: money, regulation and multiple tenants. They are why companies trust me with agents near their revenue.
+I work with companies in the US, UK and Middle East.
+Working with Muhammad was a great experience. He takes the time to thoroughly understand the project before diving in, communicates clearly, and consistently shows strong attention to detail.
+If you're serious about building a revenue engine, let's talk.
+Management Sciences
+Lahore University of Management Sciences (LUMS)
+AI GTM Engineer
+Working directly with companies in the US, UK and Middle East
+Signal engines, research agents, inbound conversion and retention agents, built directly with founders and revenue leaders.
+Founding AI Engineer
+RevAll AI (Pyle Ventures)
+Founding AI engineer on an early-stage fintech building a read-only investing platform.
+Read-only by design. It never moves money.
+AI Automation Lead
+Solidrange
+Led AI on a multi-tenant compliance platform for a Riyadh-based company, in English and Arabic.
+annual pipeline created
+UK broadband provider
+new prospects captured
+UK broadband provider
+qualified leads in the first four days
+Lead-generation company
+agent minutes saved (estimated)
+UK broadband provider
+leads per campaign
+Outbound campaign
+potential acquirers mapped
+Investment bank, sell-side M&A
+I speak revenue and code.
+I can sit in a pipeline review in the morning and ship the fix in the afternoon. Nobody has to translate between the business and the build.
+I learn the job before I automate it.
+I sit with the people doing the manual work and map how a lead really moves, not how the playbook says it does.
+I build the whole system.
+Signal, research, outreach, conversion, retention and the data underneath, wired together so every stage hands clean data to the next.
+Agents where judgment helps. Plain code where mistakes cost money.
+AI reads, researches and decides what deserves attention. Deterministic logic handles prices, sends and customer records.
+Production or nothing.
+Real data from the first week, evaluations, guardrails, monitoring, and a person in the loop wherever a mistake would reach a customer.
+AI and agents
+Signal, research and outbound
+Product and platform engineering
+Revenue systems and data
+Voice and messaging
+Orchestration
+Engineering practice
+Claude and OpenAI APIs
+Gemini
+DeepSeek
+Perplexity
+Apollo
+Clay
+Firecrawl
+Apify
+Browserless
+Serper
+NeverBounce
+Instantly
+Python and FastAPI
+TypeScript, Next.js and React
+.NET
+Supabase and Postgres with row-level security
+HubSpot
+Jobber
+GoHighLevel
+Airtable
+ClickUp
+Webflow CMS
+Google Sheets and Apps Script
+Retell
+Vapi
+ElevenLabs
+Voiceflow
+WhatsApp Cloud API
+Twilio
+n8n
+Zapier
+Make
+Power Automate
+Claude Code
+GitHub Actions and CI security gates
+Sentry monitoring
+secret scanning

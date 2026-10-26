@@ -1,0 +1,229 @@
+Signal intelligence
+Lead-generation company
+Business listings monitored
+38,548 businesses watched.
+spots the trigger
+holds the lead
+checks again independently
+hands it to sales
+Nothing reaches a rep that hasn't been confirmed twice.
+qualified leads in the first four days
+higher trigger rate in the highest-risk tenth
+the whole system runs unattended.
+demand signals extracted
+I read 4.7 million community comments
+and pulled out 27,651 demand signals
+launch positioning
+what it built first
+that shaped a fintech's launch positioning and what it built first.
+Research and enrichment agents
+Outbound campaign
+Name
+Website
+known
+The cheapest source
+a waterfall of data providers
+an agent that reads the organization's own website
+a research agent with live web search
+leave a field blank
+The cheapest source that can answer always goes first.
+built to leave a field blank rather than invent an answer.
+leads per campaign
+data points researched per lead
+tiers, each used only when needed
+Calendar marketing SaaS
+finds brands that run events
+reads their websites
+and social pages
+builds each brand a ready-made
+public calendar
+a person approves each event
+Brands found my client in their own analytics, then reached out.
+every new signup
+sets personal email
+addresses aside
+the company's industry
+the role and company size
+evidence and a
+confidence score
+The second engine reads every new signup the moment it lands.
+production pipelines, one connected system
+industry groups classified on every signup
+verified fields written back per signup
+started working a ranked pipeline.
+Signal-triggered outbound
+Investment bank, sell-side M&A
+potential acquirers mapped
+buyer categories
+prioritized outreach waves
+A 530-acquirer universe, delivered the day of the brief.
+across 16 categories, ranked into three outreach waves
+with the exact roles to contact at each one
+Event venue client
+Venue inquiries
+booked events behind the ICP
+I rebuilt an event venue's ideal customer profile
+Its most lucrative format
+less than 1 in 5
+happy hours
+33 to 44%
+so outreach now leads with the easy yes.
+Profile research
+engagement scoring
+drafted outreach
+Profile research, engagement scoring and drafted outreach on LinkedIn
+a person approves it
+with nothing sent until a person approves it.
+Inbound conversion
+Home-service brands
+a branded quote
+email
+text
+A homeowner uploads a picture on the website
+and gets a branded quote by email and text in about 45 seconds
+from photo to priced quote
+brands on one estimator
+channels: web and phone
+The first company to give a price usually wins the job.
+Email or
+web form
+AI classify
+and route
+8 paths
+Draft
+writer
+AI compliance
+pass
+Deterministic
+gate
+Draft in
+mailbox
+clears
+Human
+escalation
+held
+Living
+rules doc
+every email and web form is classified
+and turned into a drafted quote
+Human escalation
+a hard check that stops a wrong number before it ever reaches a customer.
+Multiple independent client deployments
+Inbound
+call
+Voice agent
+classifies need
+Qualification
+checks
+Politely
+closed
+no fit
+Warm
+transfer
+human
+SMS asks
+for a photo
+pricable
+Vision pricing
+engine
+Estimate
+by text
+they answer, classify the caller's need, qualify it,
+and either transfer to the right human or close the loop by text.
+a caller receives a ballpark estimate by SMS minutes after hanging up.
+Retention and expansion
+UK broadband provider
+The AI agent
+the customer's account
+any live outages
+routes the issue to the right one of seven departments
+a customer asks
+to switch away
+checks consent
+a personalized offer
+reaches the customer
+on WhatsApp
+the retention team
+the company knows why its customers leave.
+tickets handled by AI
+agent minutes saved (estimated)
+new prospects captured
+annual pipeline created
+Product and platform engineering
+Founding engineer
+Monorepo
+blocked by lint rule
+CI gates
+on every
+change
+Investing
+app
+Content
+PRIVATE DB
+money + auth
+PUBLIC DB
+no PII
+Tool-using
+AI agent
+Ask, with
+evidence
+a confidentiality boundary enforced by the build itself.
+so a privacy mistake fails the build instead of reaching production
+Ask, with evidence
+A live tool-using agent that answers questions against a customer's real financial data
+Live on both stores
+Windows box, no Mac
+Compliance
+Web
+codebase
+Native
+shell
+Signed
+bundle
+Google Play
+Cloud macOS
+CI build
+Auto signing
++ upload
+App Store
+1st-pass pass
+working solo from a Windows machine with no Mac hardware anywhere in the pipeline.
+published it to both app stores
+Approved by Apple on the first submission
+Bilingual EN/AR
+Question
+Query
+planner
+Dense
+vector
+Lexical
+keyword
+Chunked
+corpus
+Tenant and
+role filter
+Cross-encoder
+rerank
+Grounded answer
+with citations
+Filtering by permission before reranking rather than after
+where a wrong answer is not an inconvenience but a compliance exposure.
+the most dangerous on hallucination
+Benchmarked 16 candidate local models
+Regulated nonprofit
+Purpose-built
+CLI
+OAuth2
+PKCE flow
+Management
+API
+Pull flow
+as JSON
+Edit and
+review in git
+Push back
+Live
+automation
+turning a GUI-only platform into reviewable code
+The point of the tool is the review step in the middle
+role-based access control across seven distinct staff roles

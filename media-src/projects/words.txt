@@ -1,0 +1,168 @@
+Signal intelligence
+Research and enrichment agents
+Signal-triggered outbound
+Inbound conversion
+Retention and expansion
+Product and platform engineering
+Know who is in market before your competitors do.
+Every account researched to the field, verified at the source, never guessed.
+Outreach that starts because something happened, not because a list was due.
+Speed to lead and speed to quote.
+Agents that catch customers on the way out, make the right offer and hand warm conversations to the team.
+AI platforms with hybrid retrieval, evaluation pipelines and bank-grade security, not just connected SaaS tools.
+Finding buyers at the exact moment they need help
+38,548 businesses watched. 51 qualified leads in the first four days.
+Lead-generation company
+qualified leads in the first four days
+Listening at scale
+I read 4.7 million community comments and pulled out 27,651 demand signals that shaped a fintech's launch positioning and what it built first.
+demand signals extracted
+Researching 80,000 leads without paying for 80,000 deep dives
+The cheapest source that can answer always goes first.
+Outbound campaign
+leads per campaign
+Turning a product into its own growth engine
+Brands found my client in their own analytics, then reached out.
+Calendar marketing SaaS
+verified fields written back per signup
+Finding every credible buyer for a sell-side deal
+A 530-acquirer universe, delivered the day of the brief.
+Investment bank, sell-side M&A
+potential acquirers mapped
+Who actually buys
+I rebuilt an event venue's ideal customer profile from 344 inquiries and 106 booked events. Its most lucrative format closed less than 1 in 5, while happy hours closed 33 to 44%, so outreach now leads with the easy yes.
+Event venue client
+Venue inquiries
+Social selling with guardrails
+Profile research, engagement scoring and drafted outreach on LinkedIn for multiple teams, with nothing sent until a person approves it.
+A priced quote in 45 seconds, for eight brands
+The first company to give a price usually wins the job.
+Home-service brands
+from photo to priced quote
+Speed to quote
+For a translation firm, every email and web form is classified, matched to the client record and turned into a drafted quote, with a hard check that stops a wrong number before it ever reaches a customer.
+Voice AI Agents for Service Businesses
+Inbound voice agents for small trades and home-services businesses: they answer, classify the caller's need, qualify it, and either transfer to the right human or close the loop by text.
+Multiple independent client deployments
+Revenue agents for a UK broadband provider
+731 new prospects captured, roughly £110k a year in pipeline.
+UK broadband provider
+new prospects captured
+Financial Operating System for Household Investing
+Co-founding engineer on a consumer fintech product: portfolio tracking, investment research, retirement projection, rebalancing and a natural-language interface backed by a tool-using AI agent that reasons over a household's real financial position.
+Founding engineer
+Two-Sided Marketplace App, Shipped to Both Stores
+Took an existing web marketplace app connecting homeowners with contractors to native mobile and published it to both app stores, working solo from a Windows machine with no Mac hardware anywhere in the pipeline.
+Live on both stores
+Enterprise GRC and Compliance AI Platform
+Core AI engineering on a governance, risk and compliance platform for an enterprise client.
+Bilingual EN/AR
+Compliance Operations Tooling and Full-Stack Platform
+For a regulated youth-services organisation, I built both the automation and the tooling needed to manage it safely.
+Regulated nonprofit
+Co-founding engineer on a consumer fintech product: portfolio tracking, investment research, retirement projection, rebalancing and a natural-language interface backed by a tool-using AI agent that reasons over a household's real financial position. Built as a monorepo of independently deployed apps sharing one design system and one typed database layer, with a confidentiality boundary enforced by the build itself.
+Founding engineer
+Architecture: trust boundary and agent layer
+The two databases are separate projects, and a lint rule makes it structurally impossible for the public app to import the private data client.
+Engineering highlights
+Hard confidentiality boundary enforced at the dependency-graph level rather than by convention, so a privacy mistake fails the build instead of reaching production
+A live tool-using agent that answers questions against a customer's real financial data and shows the evidence behind each answer
+Automated safety tooling in CI, including a pre-commit scanner that blocks confidential figures from ever reaching public-facing code
+Security and compliance groundwork ahead of a regulated open-banking data integration: consent architecture, access-control hardening, runtime monitoring
+How it is built
+Engineered almost entirely through AI-native development workflows: every change reviewed by a fresh-context AI pass before merge, shipped through a sequential rebase-per-PR merge queue, and verified against a real running build rather than tests alone
+Two AI development agents now contribute to the same production codebase in parallel, which required explicit ownership and coordination protocols
+Hundreds of pull requests and database migrations shipped to a live system over several months of continuous iteration
+Status
+Live in production and onboarding its first outside beta customers, with real legal, security and compliance groundwork underway for regulated financial-data access.
+Next.js / React monorepo
+Postgres
+Vercel
+Took an existing web marketplace app connecting homeowners with contractors to native mobile and published it to both app stores, working solo from a Windows machine with no Mac hardware anywhere in the pipeline.
+Live on both stores
+Build and release pipeline
+The compliance pass is drawn as a gate because it is what actually decides whether a build ships. Most rejections happen there, not in the code.
+Shipped build: the contractor home screen, a live session with photo exchange, and the ported AI feature turning a finished job into a written, SEO-tagged page.
+Engineering highlights
+Ported an AI content-generation feature from a sister product, where a voice note and job photos become a written write-up, social posts and a review request, and fixed real defects in its outbound integration contract along the way
+Diagnosed platform-specific failure modes invisible from the web codebase: a browser API call that works fine in a browser can silently terminate the native iOS process unless the native permission manifest is updated in parallel
+Built and owned the entire signed release pipeline, build signing, versioning, store metadata and review submission, with no local Apple hardware
+Result
+Approved by Apple on the first submission, in a case where an earlier app from the same publisher had been rejected three times. Live on both stores, with the first real business customer onboarded to the AI content feature and verified end to end after launch.
+React / TypeScript
+Capacitor native shell
+Postgres backend
+Cloud macOS CI
+Core AI engineering on a governance, risk and compliance platform for an enterprise client. I built the retrieval and reasoning layer behind a multi-persona AI consultant system used for regulatory guidance, where a wrong answer is not an inconvenience but a compliance exposure.
+Bilingual EN/AR
+Architecture: hybrid retrieval with permissions enforced at the retrieval layer
+Filtering by permission before reranking rather than after means a user can never influence, or infer the existence of, a document they are not entitled to see.
+Engineering highlights
+Hybrid retrieval combining dense vector search with lexical search plus a cross-encoder reranking stage, rather than vector similarity alone
+Three-tier multi-tenant permission model enforced inside the retrieval path
+Structure-aware chunking with precedence and freshness rules for weighting conflicting source documents
+Evaluation work
+Benchmarked 16 candidate local models across persona adherence, retrieval quality and hallucination risk before selecting a production model, which surfaced one high-scoring model that was also the most dangerous on hallucination
+Result
+Core retrieval architecture shipped into a production compliance platform, with a sanitized write-up published publicly under written client authorization.
+.NET backend
+Angular frontend
+Hybrid retrieval with reranking
+For a regulated youth-services organisation, I built both the automation and the tooling needed to manage it safely. The platform they were on could only be edited through a limited web designer, which meant no version control, no review and no diffing. So I built a command-line tool that talks to its management API directly.
+Regulated nonprofit
+Operations tooling: turning a GUI-only platform into reviewable code
+The point of the tool is the review step in the middle, which the vendor's own interface made impossible.
+What I built
+A separate full-stack compliance web application with role-based access control across seven distinct staff roles, built to meet the organisation's regulatory data-handling obligations
+Automated absence detection and multi-channel escalation layered on top of their existing case-management workflow
+PowerShell CLI
+Azure AD OAuth2 with PKCE
+Next.js full-stack app
+Inbound voice agents for small trades and home-services businesses: they answer, classify the caller's need, qualify it, and either transfer to the right human or close the loop by text. One deployment layers voice onto an existing vision-based pricing engine, so a caller receives a ballpark estimate by SMS minutes after hanging up.
+Multiple independent client deployments
+Architecture: qualify on the call, price after it
+Inbound call
+Voice agent classifies need
+Qualification checks
+no fit
+human
+pricable
+Politely closed
+Warm transfer
+SMS asks for a photo
+Vision pricing engine
+Estimate by text
+What I built
+A reusable split between generic agent rules and business-specific rules, which let a proven agent design be cloned into a new vertical by editing only seven items, adding a fifth agent to an existing four-agent deployment with no redesign
+Deliberate guard rails on what the agent will not price, so ambiguous jobs route to a human instead of producing a number the business cannot honour
+Voice AI platform
+Telephony
+n8n
+I rebuilt an event venue's ideal customer profile from 344 inquiries and 106 booked events. Its most lucrative format closed less than 1 in 5, while happy hours closed 33 to 44%, so outreach now leads with the easy yes.
+Event venue client
+Venue inquiries
+booked events behind the ICP
+Close rate of the most lucrative format
+What I built
+Built a data-driven ideal-customer-profile model for an event venue by analysing 344 historical booking enquiries against 106 confirmed events, then translated it into concrete prospecting filters and lookalike seeds to produce ready-to-use outbound lists.
+Found that the lower-value event format closes at two to three times the rate of the highest-revenue format, and rebuilt outbound targeting priority around close rate rather than headline deal size
+Prospecting platform
+CRM booking-data analysis
+For a translation firm, every email and web form is classified, matched to the client record and turned into a drafted quote, with a hard check that stops a wrong number before it ever reaches a customer.
+What I built
+A production system that handles the full first-response lifecycle for a company receiving a high volume of client document requests: it classifies inbound email and web-form enquiries, files attachments, updates a live CRM ledger, and writes ready-to-send replies for human review. Built as two coordinated workflows, a 224-node email pipeline and a 38-node web-intake pipeline, sharing one CRM, one document store and one set of business-rule documents.
+Architecture: eight reasoning paths behind a three-layer safety net
+Each AI call is narrowly scoped and schema-constrained. The final gate is deliberately not a model, so a bad draft can be stopped by logic rather than by judgment.
+The live email workflow, zoomed out: 224 nodes across eight reasoning paths, fanning out from a single intake and converging on one drafting and compliance path. Node labels are illegible at this scale by design, the point is the shape.
+Design decisions
+Eight separate reasoning paths, each with its own tightly scoped model call, instead of one large catch-all prompt
+Business rules live in an editable reference document the AI layers read at runtime, so staff can change behaviour without a deployment
+Thread-aware state matching across mailbox and CRM, so a reply three weeks later still lands on the right record
+Production engineering
+Root-caused and fixed an infinite-retry loop, a JSON-injection bug from unescaped input, and a lifecycle gap that could have billed a client twice
+Direct API-level integration work to guarantee correct message threading in cases the standard connector could not handle
+Result
+Live in production on a real client inbox, with a phased rollout planned across the company's remaining mailboxes.
+n8n
+Microsoft Graph, Outlook and OneDrive
+GPT-5-class models

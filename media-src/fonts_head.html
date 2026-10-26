@@ -1,0 +1,12 @@
+<link rel="stylesheet" href="/fonts/fonts.css" />
+<style>html.fl body { visibility: hidden; }</style>
+<script>
+// Hold the first paint until Geist is decoded (a few ms, the fonts are embedded), so text never re-flows: CLS 0.
+;(function () {
+	var d = document.documentElement, done = function () { d.classList.remove('fl') }
+	if (!document.fonts || !document.fonts.load) return
+	d.classList.add('fl')
+	Promise.all([document.fonts.load('600 16px Geist'), document.fonts.load('500 16px "Geist Mono"')]).then(done, done)
+	setTimeout(done, 1000)
+})()
+</script>

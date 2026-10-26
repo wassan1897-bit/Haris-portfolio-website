@@ -37,3 +37,9 @@ backups
 tmp
 qa-screenshots
 localhost_*.html
+
+# HyperFrames working files (snapshots, checks) and review sheets
+media-src/project-videos/*/.hyperframes
+media-src/project-videos/*/check.json
+media-src/project-videos/review
+media-src/project-videos/stills

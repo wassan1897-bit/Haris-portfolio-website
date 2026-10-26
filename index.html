@@ -5,9 +5,18 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Muhammad Haris, AI GTM Engineer</title>
 <meta name="description" content="I build the AI systems behind every stage of the revenue engine, from signal to retention." />
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="/fonts/fonts.css" />
+<style>html.fl body { visibility: hidden; }</style>
+<script>
+// Hold the first paint until Geist is decoded (a few ms, the fonts are embedded), so text never re-flows: CLS 0.
+;(function () {
+	var d = document.documentElement, done = function () { d.classList.remove('fl') }
+	if (!document.fonts || !document.fonts.load) return
+	d.classList.add('fl')
+	Promise.all([document.fonts.load('600 16px Geist'), document.fonts.load('500 16px "Geist Mono"')]).then(done, done)
+	setTimeout(done, 1000)
+})()
+</script>
 <link rel="preload" as="image" href="/images/haris.webp" />
 <style>
 /* Home page. Built one section at a time; the hero is the first approved section.
@@ -37,14 +46,32 @@ a:focus-visible { outline: 2px solid var(--acc); outline-offset: 3px; border-rad
 .btn--ghost:hover i { transform: translateY(2px); }
 
 /* header */
-nav.top { height: 78px; display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+/* top bar: white, links in the middle with dropdowns, green line under the open item */
+.topbar { position: relative; z-index: 30; background: var(--surface); box-shadow: 0 1px 0 var(--line); }
+nav.top { height: 80px; display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 20px; }
 .logo { line-height: 1.15; }
 .logo b { display: block; font-size: 18px; font-weight: 700; letter-spacing: -.02em; }
 .logo span { font-size: 13px; color: var(--mute); }
-.links { display: flex; gap: 34px; font-size: 15px; color: var(--mute); }
-.links a { transition: color .2s ease; }
-.links a:hover { color: var(--ink); }
-nav .btn { height: 44px; font-size: 15px; padding: 0 20px; }
+.links { display: flex; align-items: stretch; height: 100%; gap: 6px; margin: 0; padding: 0; list-style: none; }
+.links > li { position: relative; display: flex; }
+.links > li > a, .links > li > button { position: relative; display: flex; align-items: center; gap: 10px; padding: 0 16px; border: 0; background: none; font: 500 16.5px "Geist", sans-serif; color: var(--ink); cursor: pointer; transition: color .15s ease; }
+.links svg { width: 10px; height: 6px; transition: transform .2s ease; }
+.links > li > a::after, .links > li > button::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 3px; background: #38c97a; transform: scaleX(0); transition: transform .2s ease; }
+.links > li:hover > a, .links > li:hover > button, .links > li.open > button { color: var(--acc); }
+.links > li:hover > a::after, .links > li:hover > button::after, .links > li.open > button::after { transform: scaleX(1); }
+.links > li.open svg { transform: rotate(180deg); }
+.links :focus-visible { outline: 2px solid var(--acc); outline-offset: -4px; border-radius: 6px; }
+.drop { position: absolute; top: 100%; left: 0; min-width: 100%; width: max-content; padding: 10px 0; background: #f3f7f5; box-shadow: 0 18px 30px -18px rgb(17 26 23 / .3); opacity: 0; visibility: hidden; transform: translateY(-4px); transition: opacity .16s ease, transform .16s ease, visibility 0s .16s; }
+.links > li:hover .drop, .links > li.open .drop { opacity: 1; visibility: visible; transform: none; transition: opacity .16s ease, transform .16s ease; }
+.drop a { display: block; padding: 11px 22px; font-size: 16px; font-weight: 500; color: var(--ink); transition: color .15s ease, background-color .15s ease; }
+.drop a:hover, .drop a:focus-visible { color: var(--acc); background: #e3f1ea; outline: none; }
+.top-right { display: flex; justify-content: flex-end; align-items: center; gap: 12px; }
+.icon-btn { width: 44px; height: 44px; border-radius: 10px; display: grid; place-items: center; background: #f3f7f5; color: var(--ink); transition: background-color .15s ease, color .15s ease; }
+.icon-btn:hover { background: #e3f1ea; color: var(--acc); }
+.book { display: inline-flex; align-items: center; height: 44px; padding: 0 22px; border-radius: 10px; background: var(--acc); color: #fff; font-size: 15.5px; font-weight: 600; white-space: nowrap; box-shadow: inset 0 -2px 0 rgb(0 0 0 / .12); transition: transform .16s ease-out, background-color .15s ease; }
+.book:hover { background: #0b6a49; }
+.book:active { transform: scale(.97); }
+.top-right a:focus-visible { outline: 2px solid var(--acc); outline-offset: 3px; }
 
 /* hero */
 /* hero: a charcoal band, headline left, intro and buttons right, pipeline signals behind */
@@ -80,6 +107,7 @@ nav .btn { height: 44px; font-size: 15px; padding: 0 20px; }
 
 @media (max-width: 1000px) {
 	.links { display: none; }
+	nav.top { grid-template-columns: 1fr auto; height: 72px; }
 	.hero { padding: 64px 0 70px; }
 	.hero-in { grid-template-columns: 1fr; }
 	.hero .eyebrow, .hero h1, .hero .lede, .hero .ctas, .hero .where { grid-column: 1; grid-row: auto; }
@@ -88,17 +116,20 @@ nav .btn { height: 44px; font-size: 15px; padding: 0 20px; }
 }
 @media (max-width: 600px) {
 	.logo span { display: none; }
+	.logo b { white-space: nowrap; }
+	.top-right .icon-btn { display: none; }
 	.photo { height: 460px; }
 	.hero { padding: 52px 0 60px; }
 	.hero h1 { font-size: 46px; }
 	.hero .lede { font-size: 17.5px; }
 }
 
-/* toolkit logos: original colours, scrolling on their own; the list is repeated once so the loop is seamless */
+/* toolkit logos: each tool once, brand icon in its own colour plus its name; the list is repeated once so the loop is seamless */
 .logos { border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); padding: 30px 0; overflow: hidden; -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); }
-.logos .track { display: flex; width: max-content; animation: logos 40s linear infinite; }
-.logos ul { display: flex; align-items: center; gap: 72px; padding: 0 36px; margin: 0; list-style: none; }
-.logos img { display: block; height: 28px; width: auto; }
+.logos .track { display: flex; width: max-content; animation: logos 150s linear infinite; }
+.logos ul { display: flex; align-items: center; gap: 56px; padding: 0 28px; margin: 0; list-style: none; }
+.logos li { display: flex; align-items: center; gap: 10px; font-size: 19px; font-weight: 600; letter-spacing: -.01em; color: var(--ink); white-space: nowrap; }
+.logos img { display: block; width: 26px; height: 26px; }
 .logos:hover .track { animation-play-state: paused; }
 @keyframes logos { to { transform: translateX(-50%); } }
 @media (prefers-reduced-motion: reduce) { .logos .track { animation: none; } }
@@ -116,10 +147,10 @@ nav .btn { height: 44px; font-size: 15px; padding: 0 20px; }
 @media (max-width: 1000px) { .intro { grid-template-columns: 1fr; gap: 40px; padding: 80px 0; } .intro .pic { max-width: 440px; } }
 
 /* quote band */
-.quote { background: var(--acc); color: #f2fbf6; padding: 100px 0; }
+.quote { background: var(--acc-soft); color: var(--ink); padding: 100px 0; }
 .quote blockquote { width: min(1080px, 100% - 48px); margin: 0 auto; text-align: center; font-size: clamp(20px, 2.1vw, 29px); line-height: 1.4; letter-spacing: -.015em; font-weight: 500; text-wrap: balance; }
-.quote blockquote::before { content: "“"; display: block; height: 52px; font: 600 96px/1 "Geist", sans-serif; color: rgb(255 255 255 / .35); }
-.quote cite { display: block; margin-top: 28px; font: 500 13px "Geist Mono", monospace; font-style: normal; letter-spacing: .12em; text-transform: uppercase; color: #e2f4ea; }
+.quote blockquote::before { content: "“"; display: block; height: 52px; font: 600 96px/1 "Geist", sans-serif; color: #38c97a; }
+.quote cite { display: block; margin-top: 28px; font: 500 13px "Geist Mono", monospace; font-style: normal; letter-spacing: .12em; text-transform: uppercase; color: var(--acc); }
 @media (max-width: 600px) { .quote { padding: 80px 0; } }
 
 /* section headings */
@@ -133,6 +164,22 @@ nav .btn { height: 44px; font-size: 15px; padding: 0 20px; }
 .why h3 { font-size: 24px; line-height: 1.3; letter-spacing: -.015em; font-weight: 700; color: #fff; }
 .why dt { width: fit-content; margin-top: 24px; font-size: 20px; line-height: 1.3; letter-spacing: -.015em; font-weight: 600; color: #38c97a; background: linear-gradient(90deg, #12b26c, #8be36f); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
 .why dd { margin: 6px 0 0; font-size: 16px; line-height: 1.55; color: #cdd6d2; max-width: 44em; }
+.why-left { display: flex; flex-direction: column; gap: 34px; }
+.pboard { margin: 0; padding: 22px; border-radius: 20px; background: rgb(255 255 255 / .05); box-shadow: inset 0 0 0 1px rgb(255 255 255 / .1); }
+.pb-stage { position: relative; height: 250px; }
+.pb-cols { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; height: 100%; }
+.pb-cols > div { border-radius: 12px; background: rgb(255 255 255 / .04); padding: 10px; }
+.pb-cols span { display: block; height: 8px; width: 50%; border-radius: 4px; background: rgb(255 255 255 / .2); }
+.pb-cols .win { background: rgb(56 201 122 / .12); box-shadow: inset 0 0 0 1.5px rgb(56 201 122 / .5); }
+.pb-cols .win span { background: #4fd68c; }
+.pb-cards { position: absolute; inset: 0; }
+.pb-cards i { position: absolute; left: 0; top: calc(var(--r) * 50px); width: calc((100% - 20px) / 3 - 20px); height: 40px; margin: 34px 10px 0; border-radius: 9px; background: #eef3f1; animation: deal 6s cubic-bezier(.65, 0, .35, 1) infinite; animation-delay: calc(var(--d) * -1s); animation-play-state: paused; }
+.pboard.run .pb-cards i { animation-play-state: running; }
+@keyframes deal { 0%, 18% { transform: translateX(0); background: #eef3f1; } 38%, 56% { transform: translateX(calc(100% + 30px)); background: #eef3f1; } 76%, 100% { transform: translateX(calc(200% + 60px)); background: #4fd68c; } }
+@media (prefers-reduced-motion: reduce) { .pb-cards i { animation: none; } }
+.pb-ft { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 22px; padding-top: 20px; border-top: 1px solid rgb(255 255 255 / .1); }
+.pb-ft b { display: block; width: fit-content; font-size: 32px; line-height: 1; letter-spacing: -.04em; font-weight: 700; font-variant-numeric: tabular-nums; background: linear-gradient(90deg, #12b26c, #8be36f); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+.pb-ft span { display: block; margin-top: 8px; font-size: 14px; color: #c9d6d0; }
 @media (max-width: 1000px) { .why .in { grid-template-columns: 1fr; gap: 36px; } .why h2 { font-size: 32px; max-width: 16em; } }
 @media (max-width: 600px) { .why { padding: 72px 0 80px; } .why h2 { font-size: 28px; } .why h3 { font-size: 21px; } .why dt { font-size: 19px; margin-top: 26px; } .why dd { font-size: 16px; } }
 
@@ -193,7 +240,7 @@ nav .btn { height: 44px; font-size: 15px; padding: 0 20px; }
 .cal .cal-go[aria-disabled="true"] { opacity: .35; pointer-events: none; }
 .cal :focus-visible { outline: 2px solid var(--acc); outline-offset: 2px; }
 .end { position: relative; border-top: 0; background: #111a17; color: #eef3f1; padding: 72px 0 36px; }
-.end .end-cols { display: grid; grid-template-columns: 380px 1fr 1.4fr .8fr; gap: 46px; align-items: start; }
+.end .end-cols { display: grid; grid-template-columns: 380px 1fr .8fr; gap: 46px 60px; align-items: start; }
 .end .end-card { padding: 26px; border-radius: 20px; background: rgb(255 255 255 / .05); box-shadow: inset 0 0 0 1px rgb(255 255 255 / .1); }
 .end .end-card .who { display: flex; gap: 14px; align-items: center; }
 .end .end-card .who img { width: 56px; height: 56px; border-radius: 50%; object-fit: cover; object-position: 50% 18%; }
@@ -210,13 +257,14 @@ nav .btn { height: 44px; font-size: 15px; padding: 0 20px; }
 .end li { margin: 0; font-size: 15.5px; font-weight: 500; }
 .end li a { transition: color .15s ease; overflow-wrap: anywhere; }
 .end li a:hover { color: #8fd4b1; }
+.end li a.all { color: #4fd68c; }
 .end .social { margin-top: 26px; display: flex; gap: 10px; }
 .end .social a { width: 38px; height: 38px; border-radius: 9px; display: grid; place-items: center; box-shadow: inset 0 0 0 1.5px rgb(255 255 255 / .55); transition: background-color .15s ease, color .15s ease; }
 .end .social a:hover { background: #fff; color: #111a17; }
 .end .social svg { width: 17px; height: 17px; }
 .end a:focus-visible { outline: 2px solid #8fd4b1; outline-offset: 3px; }
 .end .end-legal { margin-top: 56px; padding-top: 22px; border-top: 1px solid rgb(255 255 255 / .1); display: flex; justify-content: space-between; gap: 20px; font-size: 13.5px; color: #9fb3aa; }
-@media (max-width: 1000px) { .close .wrap { grid-template-columns: 1fr; gap: 48px; } .close .cal { max-width: 560px; } .end .end-cols { grid-template-columns: 1fr 1fr; } .end .end-cols > div:first-child, .end .end-cols > div:nth-child(3) { grid-column: 1 / -1; } .end .end-card { max-width: 440px; } }
+@media (max-width: 1000px) { .close .wrap { grid-template-columns: 1fr; gap: 48px; } .close .cal { max-width: 560px; } .end .end-cols { grid-template-columns: 1fr 1fr; } .end .end-cols > div:first-child { grid-column: 1 / -1; } .end .end-card { max-width: 440px; } }
 @media (max-width: 600px) {
 	.close { padding: 72px 0; }
 	.close h2 { font-size: 34px; }
@@ -336,8 +384,11 @@ footer .legal { margin-top: 50px; font-size: 13px; color: var(--mute); }
 .wk .view:active { transform: scale(.97); }
 
 /* green bands (quote and How I work): the same green with a faint pipeline-network texture */
-.quote, .process { position: relative; isolation: isolate; background: var(--acc); }
-.quote::before, .process::before { content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none; background: url("/images/pipeline-texture.svg") 0 0 / 360px 240px; -webkit-mask-image: linear-gradient(115deg, rgb(0 0 0 / .55), #000 70%); mask-image: linear-gradient(115deg, rgb(0 0 0 / .55), #000 70%); }
+.process { position: relative; isolation: isolate; background: var(--acc); }
+/* review band: mint, with the same pipeline lines drawn in green */
+.quote { position: relative; isolation: isolate; }
+.quote::before { content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none; background: url("/images/pipeline-texture-green.svg") 0 0 / 360px 240px; -webkit-mask-image: linear-gradient(115deg, rgb(0 0 0 / .55), #000 70%); mask-image: linear-gradient(115deg, rgb(0 0 0 / .55), #000 70%); }
+.process::before { content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none; background: url("/images/pipeline-texture.svg") 0 0 / 360px 240px; -webkit-mask-image: linear-gradient(115deg, rgb(0 0 0 / .55), #000 70%); mask-image: linear-gradient(115deg, rgb(0 0 0 / .55), #000 70%); }
 .process { color: #f2fbf6; }
 .process .h2, .process .steps h3 { color: #fff; }
 .process .steps::before { background: rgb(255 255 255 / .25); }
@@ -350,13 +401,41 @@ footer .legal { margin-top: 50px; font-size: 13px; color: var(--mute); }
 </style>
 </head>
 <body>
-<div class="wrap">
-	<nav class="top" aria-label="Main">
+<header class="topbar">
+	<nav class="wrap top" aria-label="Main">
 		<a class="logo" href="/"><b>Muhammad Haris</b><span>AI GTM Engineer</span></a>
-		<div class="links"><a href="#selected-work">Selected work</a><a href="#what-i-build">What I build</a><a href="#how-i-work">How I work</a><a href="#who-i-am">Who I am</a></div>
-		<a class="btn" href="mailto:hariswassan001@gmail.com?subject=Book%20a%20call">Book a call</a>
+		<ul class="links">
+			<li class="has-drop">
+				<button type="button" aria-expanded="false" aria-controls="drop-work">Selected work <svg viewBox="0 0 10 6" aria-hidden="true"><path d="M0 0h10L5 6z" fill="currentColor"/></svg></button>
+				<div class="drop" id="drop-work">
+					<a href="/projects/signal-intelligence.html">Signal intelligence</a>
+					<a href="/projects/research-and-enrichment-agents.html">Research and enrichment agents</a>
+					<a href="/projects/signal-triggered-outbound.html">Signal-triggered outbound</a>
+					<a href="/projects/inbound-conversion.html">Inbound conversion</a>
+					<a href="/projects/retention-and-expansion.html">Retention and expansion</a>
+					<a href="/projects/product-and-platform-engineering.html">Product and platform engineering</a>
+					<a href="/projects/all.html">All projects</a>
+				</div>
+			</li>
+			<li class="has-drop">
+				<button type="button" aria-expanded="false" aria-controls="drop-build">What I build <svg viewBox="0 0 10 6" aria-hidden="true"><path d="M0 0h10L5 6z" fill="currentColor"/></svg></button>
+				<div class="drop" id="drop-build">
+					<a href="#what-i-build">Signal intelligence</a>
+					<a href="#what-i-build">Research and enrichment agents</a>
+					<a href="#what-i-build">Signal-triggered outbound</a>
+					<a href="#what-i-build">Inbound conversion</a>
+					<a href="#what-i-build">Retention and expansion</a>
+				</div>
+			</li>
+			<li><a href="#how-i-work">How I work</a></li>
+			<li><a href="#who-i-am">Who I am</a></li>
+		</ul>
+		<div class="top-right">
+			<a class="icon-btn" href="https://linkedin.com/in/muhammad-haris-wassan" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><svg viewBox="0 0 24 24" width="19" height="19" aria-hidden="true"><path fill="currentColor" d="M4.98 3.5a2.5 2.5 0 11-.02 5 2.5 2.5 0 01.02-5zM3 9.75h4v11H3v-11zm6.5 0h3.8v1.6h.06c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.77 2.6 4.77 6v5.45h-4v-4.83c0-1.15-.02-2.64-1.6-2.64-1.62 0-1.86 1.26-1.86 2.55v4.92h-4v-11z"/></svg></a>
+			<a class="book" href="#book">Book a call</a>
+		</div>
 	</nav>
-</div>
+</header>
 
 <main>
 	<section class="hero" aria-labelledby="hero-title">
@@ -367,7 +446,7 @@ footer .legal { margin-top: 50px; font-size: 13px; color: var(--mute); }
 				<p class="lede rise" style="--i:2">I'm the engineer revenue leaders bring in when they want AI that produces pipeline, not a demo, built well enough to keep running after I've left.</p>
 				<div class="ctas rise" style="--i:3">
 					<a class="btn" href="mailto:hariswassan001@gmail.com?subject=Book%20a%20call">Book a call <i aria-hidden="true">&rarr;</i></a>
-					<a class="btn btn--ghost" href="#selected-work">Selected work <i aria-hidden="true">&darr;</i></a>
+					<a class="btn btn--ghost" href="/projects/all.html">Selected work <i aria-hidden="true">&rarr;</i></a>
 				</div>
 				<p class="where rise" style="--i:4">I work with companies in the US, UK and Middle East.</p>
 			</div>
@@ -381,7 +460,9 @@ footer .legal { margin-top: 50px; font-size: 13px; color: var(--mute); }
 </main>
 
 <section class="logos" aria-label="Toolkit">
-	<div class="track"><ul><li><img src="/logos/n8n.png" alt="n8n" /></li><li><img src="/logos/make.png" alt="Make" /></li><li><img src="/logos/zapier.png" alt="Zapier" /></li><li><img src="/logos/claude.png" alt="Claude" /></li><li><img src="/logos/openai.svg" alt="OpenAI" /></li><li><img src="/logos/airtable.svg" alt="Airtable" /></li><li><img src="/logos/retell.png" alt="Retell" /></li><li><img src="/logos/twilio.svg" alt="Twilio" /></li><li><img src="/logos/webflow.svg" alt="Webflow" /></li><li><img src="/logos/python.svg" alt="Python" /></li></ul><ul aria-hidden="true"><li><img src="/logos/n8n.png" alt="" /></li><li><img src="/logos/make.png" alt="" /></li><li><img src="/logos/zapier.png" alt="" /></li><li><img src="/logos/claude.png" alt="" /></li><li><img src="/logos/openai.svg" alt="" /></li><li><img src="/logos/airtable.svg" alt="" /></li><li><img src="/logos/retell.png" alt="" /></li><li><img src="/logos/twilio.svg" alt="" /></li><li><img src="/logos/webflow.svg" alt="" /></li><li><img src="/logos/python.svg" alt="" /></li></ul></div>
+	<!-- logos -->
+	<div class="track"><ul><li><img src="/logos/si/n8n.svg" alt="" width="26" height="26" /><span>n8n</span></li><li><img src="/logos/si/claude.svg" alt="" width="26" height="26" /><span>Claude</span></li><li><img src="/logos/si/openai.svg" alt="" width="26" height="26" /><span>OpenAI</span></li><li><img src="/logos/si/gemini.svg" alt="" width="26" height="26" /><span>Gemini</span></li><li><img src="/logos/si/perplexity.svg" alt="" width="26" height="26" /><span>Perplexity</span></li><li><img src="/logos/si/deepseek.svg" alt="" width="26" height="26" /><span>DeepSeek</span></li><li><img src="/logos/si/zapier.svg" alt="" width="26" height="26" /><span>Zapier</span></li><li><img src="/logos/si/make.svg" alt="" width="26" height="26" /><span>Make</span></li><li><img src="/logos/si/retell.webp" alt="" width="26" height="26" /><span>Retell</span></li><li><img src="/logos/si/elevenlabs.svg" alt="" width="26" height="26" /><span>ElevenLabs</span></li><li><img src="/logos/si/twilio.svg" alt="" width="26" height="26" /><span>Twilio</span></li><li><img src="/logos/si/whatsapp.svg" alt="" width="26" height="26" /><span>WhatsApp</span></li><li><img src="/logos/si/hubspot.svg" alt="" width="26" height="26" /><span>HubSpot</span></li><li><img src="/logos/si/airtable.svg" alt="" width="26" height="26" /><span>Airtable</span></li><li><img src="/logos/si/clickup.svg" alt="" width="26" height="26" /><span>ClickUp</span></li><li><img src="/logos/si/webflow.svg" alt="" width="26" height="26" /><span>Webflow</span></li><li><img src="/logos/si/googlesheets.svg" alt="" width="26" height="26" /><span>Google Sheets</span></li><li><img src="/logos/si/appsscript.svg" alt="" width="26" height="26" /><span>Apps Script</span></li><li><img src="/logos/si/supabase.svg" alt="" width="26" height="26" /><span>Supabase</span></li><li><img src="/logos/si/postgres.svg" alt="" width="26" height="26" /><span>Postgres</span></li><li><img src="/logos/si/python.svg" alt="" width="26" height="26" /><span>Python</span></li><li><img src="/logos/si/fastapi.svg" alt="" width="26" height="26" /><span>FastAPI</span></li><li><img src="/logos/si/typescript.svg" alt="" width="26" height="26" /><span>TypeScript</span></li><li><img src="/logos/si/nextjs.svg" alt="" width="26" height="26" /><span>Next.js</span></li><li><img src="/logos/si/react.svg" alt="" width="26" height="26" /><span>React</span></li><li><img src="/logos/si/dotnet.svg" alt="" width="26" height="26" /><span>.NET</span></li><li><img src="/logos/si/vercel.svg" alt="" width="26" height="26" /><span>Vercel</span></li><li><img src="/logos/si/docker.svg" alt="" width="26" height="26" /><span>Docker</span></li><li><img src="/logos/si/githubactions.svg" alt="" width="26" height="26" /><span>GitHub Actions</span></li><li><img src="/logos/si/sentry.svg" alt="" width="26" height="26" /><span>Sentry</span></li></ul><ul aria-hidden="true"><li><img src="/logos/si/n8n.svg" alt="" width="26" height="26" /><span>n8n</span></li><li><img src="/logos/si/claude.svg" alt="" width="26" height="26" /><span>Claude</span></li><li><img src="/logos/si/openai.svg" alt="" width="26" height="26" /><span>OpenAI</span></li><li><img src="/logos/si/gemini.svg" alt="" width="26" height="26" /><span>Gemini</span></li><li><img src="/logos/si/perplexity.svg" alt="" width="26" height="26" /><span>Perplexity</span></li><li><img src="/logos/si/deepseek.svg" alt="" width="26" height="26" /><span>DeepSeek</span></li><li><img src="/logos/si/zapier.svg" alt="" width="26" height="26" /><span>Zapier</span></li><li><img src="/logos/si/make.svg" alt="" width="26" height="26" /><span>Make</span></li><li><img src="/logos/si/retell.webp" alt="" width="26" height="26" /><span>Retell</span></li><li><img src="/logos/si/elevenlabs.svg" alt="" width="26" height="26" /><span>ElevenLabs</span></li><li><img src="/logos/si/twilio.svg" alt="" width="26" height="26" /><span>Twilio</span></li><li><img src="/logos/si/whatsapp.svg" alt="" width="26" height="26" /><span>WhatsApp</span></li><li><img src="/logos/si/hubspot.svg" alt="" width="26" height="26" /><span>HubSpot</span></li><li><img src="/logos/si/airtable.svg" alt="" width="26" height="26" /><span>Airtable</span></li><li><img src="/logos/si/clickup.svg" alt="" width="26" height="26" /><span>ClickUp</span></li><li><img src="/logos/si/webflow.svg" alt="" width="26" height="26" /><span>Webflow</span></li><li><img src="/logos/si/googlesheets.svg" alt="" width="26" height="26" /><span>Google Sheets</span></li><li><img src="/logos/si/appsscript.svg" alt="" width="26" height="26" /><span>Apps Script</span></li><li><img src="/logos/si/supabase.svg" alt="" width="26" height="26" /><span>Supabase</span></li><li><img src="/logos/si/postgres.svg" alt="" width="26" height="26" /><span>Postgres</span></li><li><img src="/logos/si/python.svg" alt="" width="26" height="26" /><span>Python</span></li><li><img src="/logos/si/fastapi.svg" alt="" width="26" height="26" /><span>FastAPI</span></li><li><img src="/logos/si/typescript.svg" alt="" width="26" height="26" /><span>TypeScript</span></li><li><img src="/logos/si/nextjs.svg" alt="" width="26" height="26" /><span>Next.js</span></li><li><img src="/logos/si/react.svg" alt="" width="26" height="26" /><span>React</span></li><li><img src="/logos/si/dotnet.svg" alt="" width="26" height="26" /><span>.NET</span></li><li><img src="/logos/si/vercel.svg" alt="" width="26" height="26" /><span>Vercel</span></li><li><img src="/logos/si/docker.svg" alt="" width="26" height="26" /><span>Docker</span></li><li><img src="/logos/si/githubactions.svg" alt="" width="26" height="26" /><span>GitHub Actions</span></li><li><img src="/logos/si/sentry.svg" alt="" width="26" height="26" /><span>Sentry</span></li></ul></div>
+	<!-- /logos -->
 </section>
 
 <div class="wrap">
@@ -409,7 +490,14 @@ footer .legal { margin-top: 50px; font-size: 13px; color: var(--mute); }
 
 <section class="why" aria-labelledby="why-title">
 	<div class="in">
-		<h2 id="why-title">I don't sell AI. I sell pipeline that happens to run on AI.</h2>
+		<div class="why-left">
+			<h2 id="why-title">I don't sell AI. I sell pipeline that happens to run on AI.</h2>
+			<!-- Pipeline board: deal cards move across the board and turn green as they land in the pipeline column -->
+			<figure class="pboard" aria-label="~£110k annual pipeline created, 731 new prospects captured">
+				<div class="pb-stage" aria-hidden="true"><div class="pb-cols"><div><span></span></div><div><span></span></div><div class="win"><span></span></div></div><div class="pb-cards"><i style="--r:0;--d:0"></i><i style="--r:1;--d:1"></i><i style="--r:2;--d:2"></i><i style="--r:0;--d:3"></i><i style="--r:1;--d:4"></i><i style="--r:2;--d:5"></i></div></div>
+				<div class="pb-ft"><div><b>~&pound;110k</b><span>annual pipeline created</span></div><div><b>731</b><span>new prospects captured</span></div></div>
+			</figure>
+		</div>
 		<div>
 			<h3>What makes me different</h3>
 			<dl>
@@ -537,8 +625,7 @@ footer .legal { margin-top: 50px; font-size: 13px; color: var(--mute); }
 			<p>Muhammad Haris is the engineer you bring in when you want AI in your revenue engine to produce pipeline, not a demo.</p>
 			<div class="ctas">
 				<a class="btn" id="close-book" href="mailto:hariswassan001@gmail.com?subject=Book%20a%20call">Book a call <i aria-hidden="true">&rarr;</i></a>
-				<!-- Resume: points at email until the resume PDF is added -->
-				<a class="btn btn--line" href="mailto:hariswassan001@gmail.com?subject=Resume">Resume <i aria-hidden="true">&darr;</i></a>
+				<a class="btn btn--line" href="/resume.html">Resume <i aria-hidden="true">&rarr;</i></a>
 			</div>
 		</div>
 		<!-- Booking calendar: works through email until a Cal.com / Calendly link replaces it -->
@@ -567,24 +654,15 @@ footer .legal { margin-top: 50px; font-size: 13px; color: var(--mute); }
 				</div>
 			</div>
 			<div>
-				<h3>What I build</h3>
-				<ul>
-					<li><a href="#what-i-build">Signal intelligence</a></li>
-					<li><a href="#what-i-build">Research and enrichment agents</a></li>
-					<li><a href="#what-i-build">Signal-triggered outbound</a></li>
-					<li><a href="#what-i-build">Inbound conversion</a></li>
-					<li><a href="#what-i-build">Retention and expansion</a></li>
-				</ul>
-			</div>
-			<div>
 				<h3>Selected work</h3>
 				<ul>
-					<li><a href="/work/signal-engine.html">Finding buyers at the exact moment they need help</a></li>
-					<li><a href="/work/research-cascade.html">Researching 80,000 leads without paying for 80,000 deep dives</a></li>
-					<li><a href="/work/uk-broadband.html">Revenue agents for a UK broadband provider</a></li>
-					<li><a href="/work/instant-quotes.html">A priced quote in 45 seconds, for eight brands</a></li>
-					<li><a href="/work/sell-side-buyers.html">Finding every credible buyer for a sell-side deal</a></li>
-					<li><a href="/work/growth-engine.html">Turning a product into its own growth engine</a></li>
+					<li><a href="/projects/signal-intelligence.html">Signal intelligence</a></li>
+					<li><a href="/projects/research-and-enrichment-agents.html">Research and enrichment agents</a></li>
+					<li><a href="/projects/signal-triggered-outbound.html">Signal-triggered outbound</a></li>
+					<li><a href="/projects/inbound-conversion.html">Inbound conversion</a></li>
+					<li><a href="/projects/retention-and-expansion.html">Retention and expansion</a></li>
+					<li><a href="/projects/product-and-platform-engineering.html">Product and platform engineering</a></li>
+					<li><a class="all" href="/projects/all.html">All projects</a></li>
 				</ul>
 			</div>
 			<div>
@@ -593,7 +671,7 @@ footer .legal { margin-top: 50px; font-size: 13px; color: var(--mute); }
 					<li><a href="#who-i-am">Who I am</a></li>
 					<li><a href="#how-i-work">How I work</a></li>
 					<li><a href="#book">Book a call</a></li>
-					<li><a href="mailto:hariswassan001@gmail.com?subject=Resume">Resume</a></li>
+					<li><a href="/resume.html">Resume</a></li>
 				</ul>
 				
 			</div>
@@ -603,6 +681,31 @@ footer .legal { margin-top: 50px; font-size: 13px; color: var(--mute); }
 </footer>
 
 <script>
+// Top bar dropdowns: open on hover (CSS) and on click or keyboard; Escape or a click outside closes them
+;(function () {
+	const items = [...document.querySelectorAll('.links .has-drop')]
+	const close = (except) => items.forEach((li) => { if (li !== except) { li.classList.remove('open'); li.querySelector('button').setAttribute('aria-expanded', 'false') } })
+	items.forEach((li) => {
+		const btn = li.querySelector('button')
+		btn.addEventListener('click', () => {
+			const open = !li.classList.contains('open')
+			close(li)
+			li.classList.toggle('open', open)
+			btn.setAttribute('aria-expanded', String(open))
+			if (open) li.querySelector('.drop a').focus({ preventScroll: true })
+		})
+		li.addEventListener('mouseleave', () => { if (!li.contains(document.activeElement)) close() })
+		li.addEventListener('focusout', (e) => { if (!li.contains(e.relatedTarget)) close() })
+	})
+	document.addEventListener('click', (e) => { if (!e.target.closest('.has-drop')) close() })
+	document.addEventListener('keydown', (e) => {
+		if (e.key !== 'Escape') return
+		const li = items.find((x) => x.classList.contains('open'))
+		close()
+		if (li) li.querySelector('button').focus()
+	})
+})()
+
 // Selected work pages: page numbers swap the cards in place and keep the heading in view
 ;(function () {
 	const sec = document.getElementById('selected-work')
@@ -708,6 +811,13 @@ footer .legal { margin-top: 50px; font-size: 13px; color: var(--mute); }
 	drawMonth()
 	drawTimes()
 	pickTime()
+})()
+
+// Pipeline board (why band): the cards only move while the board is on screen
+;(function () {
+	const board = document.querySelector('.pboard')
+	if (!board) return
+	new IntersectionObserver(([e]) => board.classList.toggle('run', e.isIntersecting)).observe(board)
 })()
 
 // Band backgrounds (the hero, the why band and the last page): light pulses travel along the same network lines
