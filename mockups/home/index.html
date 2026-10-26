@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Muhammad Haris, AI GTM Engineer</title>
+<meta name="description" content="I build the AI systems behind every stage of the revenue engine, from signal to retention." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<link rel="preload" as="image" href="/images/haris.webp" />
+<style>
+/* Home page. Built one section at a time; the hero is the first approved section.
+   Every word on the page comes from the AI GTM Engineer brief. */
+:root {
+	--bg: #f5f7f6;
+	--surface: #ffffff;
+	--ink: #111a17;
+	--mute: #56625d;
+	--line: rgb(17 26 23 / .09);
+	--acc: #0e7a55;
+	--acc-soft: #e3f1ea;
+}
+* { box-sizing: border-box; margin: 0; }
+html { scroll-behavior: smooth; }
+body { background: var(--bg); color: var(--ink); font: 400 17px/1.6 "Geist", system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+a { color: inherit; text-decoration: none; }
+a:focus-visible { outline: 2px solid var(--acc); outline-offset: 3px; border-radius: 6px; }
+.wrap { width: min(1240px, 100% - 48px); margin: 0 auto; }
+
+.btn { display: inline-flex; align-items: center; gap: 10px; height: 52px; padding: 0 24px; border-radius: 999px; background: var(--ink); color: #fff; font-weight: 600; font-size: 16px; white-space: nowrap; transition: transform .16s ease-out; }
+.btn:active { transform: scale(.97); }
+.btn i { width: 26px; height: 26px; border-radius: 50%; background: var(--acc); display: grid; place-items: center; font-style: normal; font-size: 14px; transition: transform .2s ease-out; }
+.btn:hover i { transform: translateX(2px); }
+.btn--ghost { background: transparent; color: var(--ink); box-shadow: inset 0 0 0 1.5px var(--line); }
+.btn--ghost i { background: var(--acc-soft); color: var(--acc); }
+.btn--ghost:hover i { transform: translateY(2px); }
+
+/* header */
+nav.top { height: 78px; display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+.logo { line-height: 1.15; }
+.logo b { display: block; font-size: 18px; font-weight: 700; letter-spacing: -.02em; }
+.logo span { font-size: 13px; color: var(--mute); }
+.links { display: flex; gap: 34px; font-size: 15px; color: var(--mute); }
+.links a { transition: color .2s ease; }
+.links a:hover { color: var(--ink); }
+nav .btn { height: 44px; font-size: 15px; padding: 0 20px; }
+
+/* hero */
+.hero { display: grid; grid-template-columns: 1.1fr .9fr; gap: 64px; align-items: center; padding: 40px 0 80px; }
+.eyebrow { display: block; margin-bottom: 22px; font: 500 12px "Geist Mono", monospace; letter-spacing: .08em; text-transform: uppercase; color: var(--acc); }
+.hero h1 { font-size: clamp(54px, 6.4vw, 92px); line-height: .98; letter-spacing: -.05em; font-weight: 600; }
+.hero h1 em { font-style: normal; color: var(--acc); display: block; }
+.hero .lede { margin-top: 28px; max-width: 30em; font-size: 21px; line-height: 1.5; color: var(--mute); }
+.ctas { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 36px; }
+.where { margin-top: 30px; font-size: 15px; color: var(--mute); }
+.figure { position: relative; }
+.bezel { padding: 8px; border-radius: 30px; background: rgb(17 26 23 / .04); box-shadow: inset 0 0 0 1px rgb(17 26 23 / .06); }
+.photo { display: block; width: 100%; height: 600px; object-fit: cover; object-position: 50% 22%; border-radius: 22px; background: #3a3f42; }
+.badge { position: absolute; left: -36px; bottom: 44px; max-width: 290px; padding: 16px 20px; border-radius: 14px; background: var(--surface); box-shadow: 0 18px 40px rgb(17 26 23 / .14); }
+.badge b { display: block; font-size: 15px; font-weight: 600; }
+.badge span { display: block; margin-top: 2px; font-size: 13.5px; line-height: 1.4; color: var(--mute); }
+
+/* entrance: a short rise, transform and opacity only */
+@media (prefers-reduced-motion: no-preference) {
+	.rise { animation: rise .7s cubic-bezier(.23, 1, .32, 1) both; animation-delay: calc(var(--i, 0) * 70ms); }
+	@keyframes rise { from { opacity: 0; transform: translateY(14px); } }
+}
+
+@media (max-width: 1000px) {
+	.links { display: none; }
+	.hero { grid-template-columns: 1fr; gap: 44px; padding-top: 20px; }
+	.badge { left: 16px; }
+}
+@media (max-width: 600px) {
+	.logo span { display: none; }
+	.photo { height: 460px; }
+	.hero .lede { font-size: 18px; }
+}
+
+/* logos strip (layout from the approved Clarity formation) */
+.logos { border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); padding: 30px 0; }
+.logos .row { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 22px 28px; }
+.logos img { height: 26px; width: auto; opacity: .72; filter: grayscale(1) brightness(.4); }
+
+/* intro */
+.intro { display: grid; grid-template-columns: 380px 1fr; gap: 80px; padding: 120px 0; align-items: start; }
+.intro .pic { width: 100%; height: 460px; object-fit: cover; object-position: 60% 25%; border-radius: 14px; display: block; }
+.intro h2 { font-size: clamp(32px, 3.4vw, 44px); line-height: 1.1; letter-spacing: -.03em; font-weight: 600; max-width: 15em; }
+.intro p { margin-top: 22px; max-width: 36em; color: var(--mute); font-size: 18px; }
+.intro .facts { display: flex; flex-wrap: wrap; gap: 20px 44px; margin-top: 40px; padding-top: 28px; border-top: 1px solid var(--line); }
+.intro .facts b { display: block; font-size: 15px; }
+.intro .facts span { font-size: 14px; color: var(--mute); }
+@media (max-width: 1000px) { .intro { grid-template-columns: 1fr; gap: 40px; } .intro .pic { height: 420px; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+	<nav class="top" aria-label="Main">
+		<a class="logo" href="/"><b>Muhammad Haris</b><span>AI GTM Engineer</span></a>
+		<div class="links"><a href="#selected-work">Selected work</a><a href="#what-i-build">What I build</a><a href="#how-i-work">How I work</a><a href="#who-i-am">Who I am</a></div>
+		<a class="btn" href="mailto:hariswassan001@gmail.com?subject=Book%20a%20call">Book a call</a>
+	</nav>
+
+	<main>
+		<section class="hero" aria-labelledby="hero-title">
+			<div>
+				<span class="eyebrow rise">AI GTM Engineer</span>
+				<h1 id="hero-title" class="rise" style="--i:1">Signals in. <em>Pipeline out.</em></h1>
+				<p class="lede rise" style="--i:2">I'm the engineer revenue leaders bring in when they want AI that produces pipeline, not a demo, built well enough to keep running after I've left.</p>
+				<div class="ctas rise" style="--i:3">
+					<a class="btn" href="mailto:hariswassan001@gmail.com?subject=Book%20a%20call">Book a call <i aria-hidden="true">&rarr;</i></a>
+					<a class="btn btn--ghost" href="#selected-work">Selected work <i aria-hidden="true">&darr;</i></a>
+				</div>
+				<p class="where rise" style="--i:4">I work with companies in the US, UK and Middle East.</p>
+			</div>
+			<div class="figure rise" style="--i:2">
+				<div class="bezel"><img class="photo" src="/images/haris.webp" alt="Muhammad Haris" width="1536" height="2048" fetchpriority="high" /></div>
+				<div class="badge"><b>Production or nothing.</b><span>Real data from the first week, evaluations, guardrails, monitoring, and a person in the loop wherever a mistake would reach a customer.</span></div>
+			</div>
+		</section>
+	</main>
+</div>
+
+<section class="logos" aria-label="Toolkit"><div class="wrap row">
+	<img src="logos/n8n.png" alt="n8n" /><img src="logos/make.png" alt="Make" /><img src="logos/zapier.png" alt="Zapier" /><img src="logos/claude.png" alt="Claude" /><img src="logos/openai.svg" alt="OpenAI" /><img src="logos/airtable.svg" alt="Airtable" /><img src="logos/retell.png" alt="Retell" /><img src="logos/twilio.svg" alt="Twilio" /><img src="logos/webflow.svg" alt="Webflow" /><img src="logos/python.svg" alt="Python" />
+</div></section>
+
+<div class="wrap">
+	<section class="intro" id="who-i-am">
+		<img class="pic" src="haris-2.webp" alt="Muhammad Haris" />
+		<div>
+			<h2>I build revenue systems that run without me.</h2>
+			<p>I'm Muhammad Haris, an AI GTM engineer. I build the AI systems that find your buyers, research them, reach them at the right moment and keep them.</p>
+			<p>I've built where the stakes are highest. As founding AI engineer at RevAll AI, a fintech, I built the AI layer and the security programme that protects customers' bank data. As AI automation lead at Solidrange, I built a multi-tenant compliance platform with retrieval, evaluation and tenant isolation designed in from the first commit. When you've put AI in front of money and regulators, putting it in front of a prospect is the easy part.</p>
+			<div class="facts"><div><b>Founding AI Engineer</b><span>RevAll AI (Pyle Ventures)</span></div><div><b>AI Automation Lead</b><span>Solidrange</span></div><div><b>Management Sciences</b><span>LUMS</span></div></div>
+		</div>
+	</section>
+</div>
+</body>
+</html>

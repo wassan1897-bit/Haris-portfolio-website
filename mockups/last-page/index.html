@@ -1,0 +1,534 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Last page ideas</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@500&display=swap" rel="stylesheet" />
+<style>
+:root { --bg: #f5f7f6; --surface: #fff; --ink: #111a17; --mute: #56625d; --line: rgb(17 26 23 / .09); --acc: #0e7a55; --ok: #38c97a; --acc-soft: #e3f1ea; }
+* { box-sizing: border-box; margin: 0; }
+body { background: var(--bg); color: var(--ink); font: 400 17px/1.6 "Geist", system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+a { color: inherit; text-decoration: none; }
+.opt { position: relative; }
+.wrap { width: min(1240px, 100% - 48px); margin: 0 auto; }
+.logo b { display: block; font-size: 18px; font-weight: 700; letter-spacing: -.02em; line-height: 1.15; }
+.logo span { font-size: 13px; color: var(--mute); }
+.btn { display: inline-flex; align-items: center; gap: 10px; height: 52px; padding: 0 24px; border-radius: 999px; background: var(--ink); color: #fff; font-weight: 600; font-size: 16px; white-space: nowrap; }
+.btn i { width: 26px; height: 26px; border-radius: 50%; background: var(--acc); display: grid; place-items: center; font-style: normal; font-size: 14px; }
+.btn.ghost { background: transparent; color: inherit; box-shadow: inset 0 0 0 1.5px currentColor; }
+.btn.ghost i { background: transparent; box-shadow: inset 0 0 0 1.5px currentColor; }
+.tex::before { content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none; background: url("/images/pixel-texture.svg") 0 0 / 768px 768px; -webkit-mask-image: linear-gradient(90deg, #000, rgb(0 0 0 / .45) 35%, rgb(0 0 0 / .45) 65%, #000); mask-image: linear-gradient(90deg, #000, rgb(0 0 0 / .45) 35%, rgb(0 0 0 / .45) 65%, #000); }
+
+/* the booking calendar (stands in for the Cal.com / Calendly embed) */
+.cal { background: #fff; color: var(--ink); border-radius: 18px; padding: 24px; box-shadow: 0 30px 60px -30px rgb(17 26 23 / .35), 0 0 0 1px var(--line); display: grid; grid-template-columns: 1fr 150px; gap: 22px; }
+.cal h4 { grid-column: 1 / -1; display: flex; align-items: center; gap: 12px; font-size: 18px; font-weight: 600; }
+.cal h4 img { width: 38px; height: 38px; border-radius: 50%; object-fit: cover; object-position: 50% 18%; }
+.cal h4 small { display: block; font-size: 13px; font-weight: 400; color: var(--mute); }
+.cal .mon { display: flex; justify-content: space-between; align-items: center; font-weight: 600; font-size: 15px; margin-bottom: 10px; }
+.cal .mon span { color: var(--mute); font-weight: 400; letter-spacing: .3em; }
+.cal .grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; text-align: center; font-size: 13.5px; }
+.cal .grid b { font-weight: 500; color: var(--mute); font-size: 11.5px; padding-bottom: 4px; }
+.cal .grid i { font-style: normal; aspect-ratio: 1; display: grid; place-items: center; border-radius: 10px; color: #a3aea9; }
+.cal .grid i.av { color: var(--ink); background: var(--acc-soft); font-weight: 600; }
+.cal .grid i.on { background: var(--acc); color: #fff; font-weight: 600; }
+.cal .slots { display: grid; gap: 8px; align-content: start; }
+.cal .slots small { font-size: 13px; color: var(--mute); margin-bottom: 2px; }
+.cal .slots i { font-style: normal; height: 40px; border-radius: 10px; display: grid; place-items: center; font-size: 14px; font-weight: 600; color: var(--acc); box-shadow: inset 0 0 0 1.5px rgb(14 122 85 / .35); }
+.cal .slots i.on { background: var(--ink); color: #fff; box-shadow: none; }
+.cal.dark { background: #1a2420; color: #eef3f1; box-shadow: 0 0 0 1px rgb(255 255 255 / .1); }
+.cal.dark h4 small, .cal.dark .mon span, .cal.dark .grid b, .cal.dark .slots small { color: #9fb3aa; }
+.cal.dark .grid i { color: #56645e; }
+.cal.dark .grid i.av { background: rgb(56 201 122 / .14); color: #eef3f1; }
+.cal.dark .grid i.on { background: var(--ok); color: #0b1d16; }
+.cal.dark .slots i { color: #8be36f; box-shadow: inset 0 0 0 1.5px rgb(139 227 111 / .35); }
+.cal.dark .slots i.on { background: #8be36f; color: #0b1d16; }
+
+/* ===== A: green close + calendar, charcoal footer with the projects ===== */
+.a-band { position: relative; isolation: isolate; background: linear-gradient(110deg, #0e7a55, #1f9d64 55%, #43c17a); color: #fff; padding: 96px 0; }
+.a-band .wrap { display: grid; grid-template-columns: 1fr 520px; gap: 80px; align-items: center; }
+.a-band h2 { font-size: 48px; line-height: 1.08; letter-spacing: -.035em; font-weight: 700; }
+.a-band p { margin-top: 20px; font-size: 19px; color: #e4f6ec; max-width: 30em; }
+.a-band .ctas { margin-top: 32px; display: flex; gap: 12px; }
+.a-band .btn i { background: #fff; color: var(--acc); }
+.a-foot { position: relative; isolation: isolate; background: #111a17; color: #eef3f1; padding: 72px 0 36px; }
+.a-foot .cols { display: grid; grid-template-columns: 1.1fr 1.6fr 1fr; gap: 50px; }
+.a-foot .logo span { color: #9fb3aa; }
+.a-foot .where { margin-top: 18px; color: #9fb3aa; font-size: 15px; max-width: 16em; }
+.a-foot h5 { font: 600 17px "Geist", sans-serif; color: var(--ok); margin-bottom: 16px; }
+.a-foot ul { list-style: none; padding: 0; display: grid; gap: 11px; font-size: 15.5px; font-weight: 500; }
+.a-foot ul small { display: block; color: #9fb3aa; font-weight: 400; font-size: 13px; }
+.a-foot .legal { margin-top: 56px; padding-top: 22px; border-top: 1px solid rgb(255 255 255 / .1); display: flex; justify-content: space-between; font-size: 13.5px; color: #9fb3aa; }
+
+/* ===== B: project index left, calendar right, light ===== */
+.b { padding: 100px 0 0; }
+.b h2 { font-size: 64px; line-height: 1.02; letter-spacing: -.045em; font-weight: 700; max-width: 15em; }
+.b h2 em { font-style: normal; color: var(--acc); }
+.b .body { margin-top: 60px; display: grid; grid-template-columns: 1fr 500px; gap: 70px; align-items: start; }
+.b .eb { font: 500 12px "Geist Mono", monospace; letter-spacing: .12em; text-transform: uppercase; color: var(--acc); }
+.b ol { list-style: none; padding: 0; margin-top: 14px; border-top: 1px solid var(--line); }
+.b li a { display: grid; grid-template-columns: 54px 1fr auto 40px; gap: 16px; align-items: center; padding: 20px 0; border-bottom: 1px solid var(--line); }
+.b li .n { font: 500 13px "Geist Mono", monospace; color: var(--mute); }
+.b li b { font-size: 20px; font-weight: 600; letter-spacing: -.015em; line-height: 1.3; }
+.b li small { font-size: 13.5px; color: var(--mute); text-align: right; }
+.b li i { width: 34px; height: 34px; border-radius: 50%; background: var(--acc-soft); color: var(--acc); display: grid; place-items: center; font-style: normal; }
+.b li:first-child a { background: linear-gradient(90deg, var(--acc-soft), transparent); }
+.b .side .ctas { margin-top: 18px; display: flex; gap: 10px; }
+.b-foot { margin-top: 100px; border-top: 1px solid var(--line); padding: 30px 0 34px; }
+.b-foot .wrap { display: flex; align-items: center; justify-content: space-between; gap: 30px; }
+.b-foot .links { display: flex; gap: 26px; font-size: 15px; color: var(--mute); }
+
+/* ===== C: dark finale, projects as a card rail ===== */
+.c { position: relative; isolation: isolate; background: #111a17; color: #eef3f1; padding: 96px 0 34px; }
+.c::after { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 6px; background: linear-gradient(90deg, #00a86b, #74dc6e); }
+.c .eb { font: 500 12px "Geist Mono", monospace; letter-spacing: .12em; text-transform: uppercase; color: #8be36f; }
+.c .rail { margin-top: 18px; display: grid; grid-template-columns: repeat(6, 1fr); gap: 14px; }
+.c .rail a { display: flex; flex-direction: column; min-height: 230px; padding: 20px; border-radius: 16px; background: rgb(255 255 255 / .05); box-shadow: inset 0 0 0 1px rgb(255 255 255 / .09); }
+.c .rail b { font-size: 36px; line-height: 1; letter-spacing: -.04em; font-weight: 700; background: linear-gradient(90deg, #12b26c, #8be36f); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; width: fit-content; }
+.c .rail span { margin-top: 8px; font-size: 13px; color: #9fb3aa; line-height: 1.4; }
+.c .rail strong { margin-top: auto; font-size: 15.5px; font-weight: 600; line-height: 1.3; }
+.c .main { margin-top: 70px; display: grid; grid-template-columns: 1fr 520px; gap: 80px; align-items: center; }
+.c h2 { font-size: 46px; line-height: 1.1; letter-spacing: -.035em; font-weight: 700; }
+.c p { margin-top: 18px; font-size: 18px; color: #c9d6d0; max-width: 30em; }
+.c .ctas { margin-top: 30px; display: flex; gap: 12px; }
+.c .btn { background: var(--ok); color: #0b1d16; }
+.c .btn i { background: #0b1d16; color: var(--ok); }
+.c .btn.ghost { background: transparent; color: #eef3f1; }
+.c .btn.ghost i { background: transparent; color: #eef3f1; }
+.c .legal { margin-top: 80px; padding-top: 22px; border-top: 1px solid rgb(255 255 255 / .1); display: flex; justify-content: space-between; align-items: center; font-size: 14px; color: #9fb3aa; }
+.c .legal .links { display: flex; gap: 24px; }
+
+/* ===== D: three doors, resume / calendar / projects ===== */
+.d { padding: 100px 0 0; }
+.d .head { display: flex; justify-content: space-between; align-items: end; gap: 40px; }
+.d h2 { font-size: 52px; line-height: 1.06; letter-spacing: -.04em; font-weight: 700; max-width: 13em; }
+.d .head p { max-width: 24em; color: var(--mute); font-size: 17px; }
+.d .doors { margin-top: 50px; display: grid; grid-template-columns: 330px 1fr; gap: 20px; }
+.d .cv { position: relative; border-radius: 20px; background: var(--ink); color: #eef3f1; padding: 30px; display: flex; flex-direction: column; overflow: hidden; }
+.d .paper { background: #fff; color: var(--ink); border-radius: 10px; padding: 22px 20px; transform: rotate(-3deg); box-shadow: 0 20px 40px -20px rgb(0 0 0 / .6); margin: 6px 4px 26px; }
+.d .paper b { display: block; font-size: 17px; letter-spacing: -.02em; }
+.d .paper small { display: block; color: var(--acc); font-weight: 600; font-size: 12.5px; }
+.d .paper hr { border: 0; border-top: 1px solid var(--line); margin: 14px 0; }
+.d .paper p { font-size: 12px; line-height: 1.5; color: var(--ink); font-weight: 600; }
+.d .paper p + p { margin-top: 8px; }
+.d .paper p span { display: block; font-weight: 400; color: var(--mute); }
+.d .paper i { display: block; height: 7px; border-radius: 4px; background: #e6ece9; margin-top: 7px; }
+.d .cv .btn { margin-top: auto; background: var(--ok); color: #0b1d16; justify-content: center; }
+.d .cv .btn i { background: #0b1d16; color: var(--ok); }
+.d .cal { box-shadow: 0 0 0 1px var(--line); grid-template-columns: 1fr 220px; align-content: start; }
+.d .cal .grid i { aspect-ratio: auto; height: 54px; }
+.d .proj { margin-top: 20px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+.d .proj a { display: grid; grid-template-columns: auto 1fr; gap: 6px 14px; align-items: center; padding: 18px 20px; border-radius: 16px; background: #fff; box-shadow: 0 0 0 1px var(--line); }
+.d .proj b { grid-row: span 2; font-size: 26px; letter-spacing: -.04em; color: var(--acc); font-weight: 700; min-width: 92px; }
+.d .proj strong { font-size: 14.5px; font-weight: 600; line-height: 1.3; }
+.d .proj small { font-size: 12.5px; color: var(--mute); }
+.d-foot { margin-top: 90px; background: #111a17; color: #9fb3aa; padding: 26px 0; font-size: 14px; }
+.d-foot .wrap { display: flex; justify-content: space-between; align-items: center; }
+.d-foot .logo b { color: #fff; } .d-foot .logo span { color: #9fb3aa; }
+.d-foot .links { display: flex; gap: 24px; }
+
+/* ===== A variants: same layout and words, our own grounds ===== */
+.av .a-band.tex::before, .av .a-foot.tex::before { display: none; }
+.av .a-band::after, .av .a-foot::after { content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none; }
+/* 1 graph paper: white, fine grid fading from behind the calendar */
+.v1 .a-band { background: #fff; color: var(--ink); }
+.v1 .a-band::after { background: linear-gradient(rgb(14 122 85 / .13) 1px, transparent 1px) 0 0 / 44px 44px, linear-gradient(90deg, rgb(14 122 85 / .13) 1px, transparent 1px) 0 0 / 44px 44px; -webkit-mask-image: radial-gradient(ellipse 60% 80% at 74% 50%, #000 30%, transparent 80%); mask-image: radial-gradient(ellipse 60% 80% at 74% 50%, #000 30%, transparent 80%); }
+.v1 .a-band h2 em { font-style: normal; color: var(--acc); }
+.v1 .a-band p { color: var(--mute); }
+.v1 .a-band .btn i { background: var(--acc); color: #fff; }
+.v1 .a-band .btn.ghost { color: var(--ink); }
+.v1 .a-band .btn.ghost i { background: transparent; color: var(--ink); }
+.v1 .cal { box-shadow: 0 40px 70px -34px rgb(17 26 23 / .4), 0 0 0 1px var(--line); }
+.v1 .a-foot { background: #111a17; }
+/* 2 the site's own green: solid accent with the pipeline-network texture from the review band */
+.v2 .a-band { background: var(--acc); }
+.v2 .a-band::after { background: url("/images/pipeline-texture.svg") 0 0 / 360px 240px; -webkit-mask-image: linear-gradient(115deg, rgb(0 0 0 / .55), #000 70%); mask-image: linear-gradient(115deg, rgb(0 0 0 / .55), #000 70%); }
+.v2 .a-foot { background: #111a17; box-shadow: inset 0 1px 0 rgb(255 255 255 / .06); }
+/* 3 signal rings: deep forest, rings going out from the calendar, one dark ground to the end */
+.v3 .a-band, .v3 .a-foot { background: #0c2a20; }
+.v3 .a-band::after { background: repeating-radial-gradient(circle at 77% 50%, rgb(143 212 177 / .16) 0 2px, transparent 2px 58px); -webkit-mask-image: radial-gradient(circle at 77% 50%, #000 15%, transparent 62%); mask-image: radial-gradient(circle at 77% 50%, #000 15%, transparent 62%); }
+.v3 .a-band p { color: #cfe1d8; }
+.v3 .a-band .btn { background: var(--ok); color: #0b1d16; }
+.v3 .a-band .btn i { background: #0b1d16; color: var(--ok); }
+.v3 .a-band .btn.ghost { background: transparent; color: #fff; }
+.v3 .a-band .btn.ghost i { background: transparent; color: #fff; }
+.v3 .a-foot { box-shadow: inset 0 1px 0 rgb(255 255 255 / .1); }
+.v3 .a-foot h5 { color: #8fd4b1; }
+/* 4 two tone: charcoal for the words, soft green under the calendar, light footer */
+.v4 .a-band { background: linear-gradient(90deg, #111a17 0 57%, #e3f1ea 57% 100%); }
+.v4 .a-band p { color: #c9d6d0; }
+.v4 .a-band .btn { background: var(--ok); color: #0b1d16; }
+.v4 .a-band .btn i { background: #0b1d16; color: var(--ok); }
+.v4 .a-band .btn.ghost { background: transparent; color: #fff; }
+.v4 .a-band .btn.ghost i { background: transparent; color: #fff; }
+.v4 .cal { box-shadow: 0 40px 70px -30px rgb(17 26 23 / .45); }
+.v4 .a-foot { background: #f5f7f6; color: var(--ink); }
+.v4 .a-foot .logo span, .v4 .a-foot .where, .v4 .a-foot .legal { color: var(--mute); }
+.v4 .a-foot h5 { color: var(--acc); }
+.v4 .a-foot .legal { border-top-color: var(--line); }
+
+/* moving signals over the green band (version 2) */
+.flow { position: absolute; inset: 0; z-index: -1; pointer-events: none; -webkit-mask-image: linear-gradient(115deg, rgb(0 0 0 / .45), #000 70%); mask-image: linear-gradient(115deg, rgb(0 0 0 / .45), #000 70%); }
+</style>
+</head>
+<body>
+
+<!-- A -->
+<section class="opt" id="opt-a">
+	<div class="a-band tex">
+		<div class="wrap">
+			<div>
+				<h2>If you're serious about building a revenue engine, let's talk.</h2>
+				<p>Muhammad Haris is the engineer you bring in when you want AI in your revenue engine to produce pipeline, not a demo.</p>
+				<div class="ctas"><a class="btn" href="#">Book a call <i>&rarr;</i></a><a class="btn ghost" href="#">Resume <i>&darr;</i></a></div>
+			</div>
+			<div data-cal="light"></div>
+		</div>
+	</div>
+	<footer class="a-foot tex">
+		<div class="wrap">
+			<div class="cols">
+				<div><div class="logo"><b>Muhammad Haris</b><span>AI GTM Engineer</span></div><p class="where">I work with companies in the US, UK and Middle East.</p></div>
+				<div><h5>Selected work</h5><ul data-proj="titles"></ul></div>
+				<div><h5>Contact</h5><ul><li>hariswassan001@gmail.com</li><li>linkedin.com/in/muhammad-haris-wassan</li><li>github.com/Haris001-bit</li><li>Resume</li></ul></div>
+			</div>
+			<div class="legal"><span>&copy; Muhammad Haris</span><span>AI GTM Engineer</span></div>
+		</div>
+	</footer>
+</section>
+
+<section class="opt av v1" id="opt-a1">
+	<div class="a-band tex">
+		<div class="wrap">
+			<div>
+				<h2>If you're serious about building a revenue engine, <em>let's talk.</em></h2>
+				<p>Muhammad Haris is the engineer you bring in when you want AI in your revenue engine to produce pipeline, not a demo.</p>
+				<div class="ctas"><a class="btn" href="#">Book a call <i>&rarr;</i></a><a class="btn ghost" href="#">Resume <i>&darr;</i></a></div>
+			</div>
+			<div data-cal="light"></div>
+		</div>
+	</div>
+	<footer class="a-foot tex">
+		<div class="wrap">
+			<div class="cols">
+				<div><div class="logo"><b>Muhammad Haris</b><span>AI GTM Engineer</span></div><p class="where">I work with companies in the US, UK and Middle East.</p></div>
+				<div><h5>Selected work</h5><ul data-proj="titles"></ul></div>
+				<div><h5>Contact</h5><ul><li>hariswassan001@gmail.com</li><li>linkedin.com/in/muhammad-haris-wassan</li><li>github.com/Haris001-bit</li><li>Resume</li></ul></div>
+			</div>
+			<div class="legal"><span>&copy; Muhammad Haris</span><span>AI GTM Engineer</span></div>
+		</div>
+	</footer>
+</section>
+
+<section class="opt av v2" id="opt-a2">
+	<div class="a-band tex">
+		<div class="wrap">
+			<div>
+				<h2>If you're serious about building a revenue engine, let's talk.</h2>
+				<p>Muhammad Haris is the engineer you bring in when you want AI in your revenue engine to produce pipeline, not a demo.</p>
+				<div class="ctas"><a class="btn" href="#">Book a call <i>&rarr;</i></a><a class="btn ghost" href="#">Resume <i>&darr;</i></a></div>
+			</div>
+			<div data-cal="light"></div>
+		</div>
+	</div>
+	<footer class="a-foot tex">
+		<div class="wrap">
+			<div class="cols">
+				<div><div class="logo"><b>Muhammad Haris</b><span>AI GTM Engineer</span></div><p class="where">I work with companies in the US, UK and Middle East.</p></div>
+				<div><h5>Selected work</h5><ul data-proj="titles"></ul></div>
+				<div><h5>Contact</h5><ul><li>hariswassan001@gmail.com</li><li>linkedin.com/in/muhammad-haris-wassan</li><li>github.com/Haris001-bit</li><li>Resume</li></ul></div>
+			</div>
+			<div class="legal"><span>&copy; Muhammad Haris</span><span>AI GTM Engineer</span></div>
+		</div>
+	</footer>
+</section>
+
+<section class="opt av v3" id="opt-a3">
+	<div class="a-band tex">
+		<div class="wrap">
+			<div>
+				<h2>If you're serious about building a revenue engine, let's talk.</h2>
+				<p>Muhammad Haris is the engineer you bring in when you want AI in your revenue engine to produce pipeline, not a demo.</p>
+				<div class="ctas"><a class="btn" href="#">Book a call <i>&rarr;</i></a><a class="btn ghost" href="#">Resume <i>&darr;</i></a></div>
+			</div>
+			<div data-cal="light"></div>
+		</div>
+	</div>
+	<footer class="a-foot tex">
+		<div class="wrap">
+			<div class="cols">
+				<div><div class="logo"><b>Muhammad Haris</b><span>AI GTM Engineer</span></div><p class="where">I work with companies in the US, UK and Middle East.</p></div>
+				<div><h5>Selected work</h5><ul data-proj="titles"></ul></div>
+				<div><h5>Contact</h5><ul><li>hariswassan001@gmail.com</li><li>linkedin.com/in/muhammad-haris-wassan</li><li>github.com/Haris001-bit</li><li>Resume</li></ul></div>
+			</div>
+			<div class="legal"><span>&copy; Muhammad Haris</span><span>AI GTM Engineer</span></div>
+		</div>
+	</footer>
+</section>
+
+<section class="opt av v4" id="opt-a4">
+	<div class="a-band tex">
+		<div class="wrap">
+			<div>
+				<h2>If you're serious about building a revenue engine, let's talk.</h2>
+				<p>Muhammad Haris is the engineer you bring in when you want AI in your revenue engine to produce pipeline, not a demo.</p>
+				<div class="ctas"><a class="btn" href="#">Book a call <i>&rarr;</i></a><a class="btn ghost" href="#">Resume <i>&darr;</i></a></div>
+			</div>
+			<div data-cal="light"></div>
+		</div>
+	</div>
+	<footer class="a-foot tex">
+		<div class="wrap">
+			<div class="cols">
+				<div><div class="logo"><b>Muhammad Haris</b><span>AI GTM Engineer</span></div><p class="where">I work with companies in the US, UK and Middle East.</p></div>
+				<div><h5>Selected work</h5><ul data-proj="titles"></ul></div>
+				<div><h5>Contact</h5><ul><li>hariswassan001@gmail.com</li><li>linkedin.com/in/muhammad-haris-wassan</li><li>github.com/Haris001-bit</li><li>Resume</li></ul></div>
+			</div>
+			<div class="legal"><span>&copy; Muhammad Haris</span><span>AI GTM Engineer</span></div>
+		</div>
+	</footer>
+</section>
+
+<!-- B -->
+<section class="opt" id="opt-b">
+	<div class="b">
+		<div class="wrap">
+			<h2>If you're serious about building a revenue engine, <em>let's talk.</em></h2>
+			<div class="body">
+				<div><span class="eb">Selected work</span><ol data-proj="index"></ol></div>
+				<div class="side"><div data-cal="light"></div><div class="ctas"><a class="btn" href="#">Book a call <i>&rarr;</i></a><a class="btn ghost" href="#">Resume <i>&darr;</i></a></div></div>
+			</div>
+		</div>
+		<footer class="b-foot"><div class="wrap"><div class="logo"><b>Muhammad Haris</b><span>AI GTM Engineer</span></div><div class="links"><span>hariswassan001@gmail.com</span><span>LinkedIn</span><span>GitHub</span><span>Resume</span></div><span style="color:var(--mute);font-size:14px">&copy; Muhammad Haris</span></div></footer>
+	</div>
+</section>
+
+<!-- C -->
+<section class="opt" id="opt-c">
+	<div class="c tex">
+		<div class="wrap">
+			<span class="eb">Selected work</span>
+			<div class="rail" data-proj="rail"></div>
+			<div class="main">
+				<div>
+					<h2>If you're serious about building a revenue engine, let's talk.</h2>
+					<p>Muhammad Haris is the engineer you bring in when you want AI in your revenue engine to produce pipeline, not a demo.</p>
+					<div class="ctas"><a class="btn" href="#">Book a call <i>&rarr;</i></a><a class="btn ghost" href="#">Resume <i>&darr;</i></a></div>
+				</div>
+				<div data-cal="dark"></div>
+			</div>
+			<div class="legal"><div class="logo"><b style="color:#fff">Muhammad Haris</b><span style="color:#9fb3aa">AI GTM Engineer</span></div><div class="links"><span>hariswassan001@gmail.com</span><span>LinkedIn</span><span>GitHub</span></div><span>&copy; Muhammad Haris</span></div>
+		</div>
+	</div>
+</section>
+
+<!-- D -->
+<section class="opt" id="opt-d">
+	<div class="d">
+		<div class="wrap">
+			<div class="head"><h2>If you're serious about building a revenue engine, let's talk.</h2><p>I work with companies in the US, UK and Middle East.</p></div>
+			<div class="doors">
+				<div class="cv">
+					<div class="paper">
+						<b>Muhammad Haris</b><small>AI GTM Engineer</small><hr />
+						<p>Founding AI Engineer<span>RevAll AI (Pyle Ventures)</span></p>
+						<p>AI Automation Lead<span>Solidrange</span></p>
+						<i></i><i style="width:80%"></i><i style="width:60%"></i>
+					</div>
+					<a class="btn" href="#">Resume <i>&darr;</i></a>
+				</div>
+				<div data-cal="light"></div>
+			</div>
+			<div class="proj" data-proj="tiles"></div>
+		</div>
+		<footer class="d-foot"><div class="wrap"><div class="logo"><b>Muhammad Haris</b><span>AI GTM Engineer</span></div><div class="links"><span>hariswassan001@gmail.com</span><span>LinkedIn</span><span>GitHub</span></div><span>&copy; Muhammad Haris</span></div></footer>
+	</div>
+</section>
+
+<script>
+// the six projects, word for word from the Selected work cards
+const P = [
+	['Finding buyers at the exact moment they need help', 'Signal intelligence', '51', 'qualified leads in the first four days'],
+	['Researching 80,000 leads without paying for 80,000 deep dives', 'Research and enrichment, outbound', '80,000+', 'leads per campaign'],
+	['Revenue agents for a UK broadband provider', 'Inbound capture, retention', '731', 'new prospects captured'],
+	['A priced quote in 45 seconds, for eight brands', 'Inbound conversion', '~45 sec', 'from photo to priced quote'],
+	['Finding every credible buyer for a sell-side deal', 'Account intelligence, M&A outreach', '530', 'potential acquirers mapped'],
+	['Turning a product into its own growth engine', 'Demand generation, signup qualification', '20+', 'verified fields written back per signup'],
+];
+const esc = (s) => s.replace(/&/g, '&amp;');
+document.querySelectorAll('[data-proj]').forEach((el) => {
+	const k = el.dataset.proj;
+	el.innerHTML = P.map(([t, stage, n, l], i) =>
+		k === 'titles' ? `<li>${esc(t)}</li>` :
+		k === 'index' ? `<li><a href="#"><span class="n">0${i + 1}</span><b>${esc(t)}</b><small>${esc(stage)}</small><i>&rarr;</i></a></li>` :
+		k === 'rail' ? `<a href="#"><b>${n}</b><span>${l}</span><strong>${esc(t)}</strong></a>` :
+		`<a href="#"><b>${n}</b><strong>${esc(t)}</strong><small>${esc(stage)}</small></a>`).join('');
+});
+// calendar embed stand-in
+const days = Array.from({ length: 36 }, (_, i) => i - 5); // 1 Nov 2026 is a Sunday
+const av = [3, 4, 5, 6, 10, 11, 12, 13, 17, 18, 19, 20, 24, 25, 26, 27];
+document.querySelectorAll('[data-cal]').forEach((el) => {
+	el.outerHTML = `<div class="cal ${el.dataset.cal === 'dark' ? 'dark' : ''}">
+		<h4><img src="/images/haris.webp" alt="" />Book a call<small>Muhammad Haris</small></h4>
+		<div><div class="mon">November 2026<span>&lsaquo; &rsaquo;</span></div><div class="grid">${['Mo','Tu','We','Th','Fr','Sa','Su'].map((d) => `<b>${d}</b>`).join('')}${days.map((d) => `<i class="${d === 12 ? 'on' : av.includes(d) ? 'av' : ''}">${d > 0 && d <= 30 ? d : ''}</i>`).join('')}</div></div>
+		<div class="slots"><small>Thu 12</small><i>10:00</i><i class="on">11:30</i><i>14:00</i><i>15:30</i><i>17:00</i></div>
+	</div>`;
+});
+</script>
+
+<script>
+// Version 2: light pulses travel along the same network lines as the band's texture,
+// branch at the joints, and leave a soft ring on the node where they stop.
+;(function () {
+	const band = document.querySelector('#opt-a2 .a-band')
+	if (!band || matchMedia('(prefers-reduced-motion: reduce)').matches) return
+	const cv = document.createElement('canvas')
+	cv.className = 'flow'
+	band.appendChild(cv)
+	const ctx = cv.getContext('2d')
+	// the 15 line paths of public/images/pipeline-texture.svg, one 360 x 240 tile
+	const SEG = [
+		[[30, 30], [105, 30]], [[30, 150], [105, 150]], [[30, 210], [105, 210]], [[105, 90], [180, 90]],
+		[[105, 90], [105, 120], [142, 120], [142, 150]], [[105, 150], [180, 150]], [[180, 150], [255, 150]],
+		[[180, 150], [180, 180], [217, 180], [217, 210]], [[180, 210], [255, 210]], [[255, 30], [330, 30]],
+		[[255, 30], [255, 60], [292, 60], [292, 90]], [[255, 90], [330, 90]], [[255, 150], [330, 150]],
+		[[255, 210], [330, 210]], [[330, 90], [330, 120], [367, 120], [367, 150]],
+	]
+	const TRAIL = 54
+	let W = 0, H = 0, routes = [], byStart = new Map(), pulses = [], rings = [], running = false, last = 0
+
+	function build() {
+		const dpr = Math.min(window.devicePixelRatio || 1, 2)
+		W = band.clientWidth
+		H = band.clientHeight
+		cv.width = W * dpr
+		cv.height = H * dpr
+		ctx.setTransform(dpr, 0, 0, dpr, 0, 0)
+		routes = []
+		byStart = new Map()
+		for (let tx = 0; tx * 360 < W + 360; tx++) {
+			for (let ty = 0; ty * 240 < H; ty++) {
+				for (const s of SEG) {
+					const pts = s.map(([x, y]) => [x + tx * 360, y + ty * 240])
+					const cum = [0]
+					for (let i = 1; i < pts.length; i++) cum.push(cum[i - 1] + Math.hypot(pts[i][0] - pts[i - 1][0], pts[i][1] - pts[i - 1][1]))
+					const r = { pts, cum, len: cum[cum.length - 1] }
+					routes.push(r)
+					const k = pts[0].join()
+					if (!byStart.has(k)) byStart.set(k, [])
+					byStart.get(k).push(r)
+				}
+			}
+		}
+		pulses = []
+	}
+
+	// a point on a pulse's chain of routes, d pixels from its start
+	function at(chain, d) {
+		for (const r of chain) {
+			if (d <= r.len) {
+				let i = 1
+				while (i < r.cum.length - 1 && r.cum[i] < d) i++
+				const t = (d - r.cum[i - 1]) / (r.cum[i] - r.cum[i - 1] || 1)
+				return [r.pts[i - 1][0] + (r.pts[i][0] - r.pts[i - 1][0]) * t, r.pts[i - 1][1] + (r.pts[i][1] - r.pts[i - 1][1]) * t]
+			}
+			d -= r.len
+		}
+		const r = chain[chain.length - 1]
+		return r.pts[r.pts.length - 1]
+	}
+	// every corner of the chain between two distances, so the trail bends with the line
+	function corners(chain, a, b) {
+		const out = []
+		let base = 0
+		for (const r of chain) {
+			for (let i = 0; i < r.pts.length; i++) {
+				const d = base + r.cum[i]
+				if (d > a && d < b) out.push(r.pts[i])
+			}
+			base += r.len
+		}
+		return out
+	}
+	const total = (chain) => chain.reduce((s, r) => s + r.len, 0)
+
+	function spawn() {
+		const r = routes[(Math.random() * routes.length) | 0]
+		pulses.push({ chain: [r], d: 0, v: 70 + Math.random() * 60, done: false })
+	}
+
+	function frame(now) {
+		if (!running) return
+		const dt = Math.min((now - last) / 1000, 0.05)
+		last = now
+		ctx.clearRect(0, 0, W, H)
+		const want = Math.round((W * H) / 52000)
+		if (pulses.length < want && Math.random() < 0.08) spawn()
+
+		for (const p of pulses) {
+			p.d += p.v * dt
+			const len = total(p.chain)
+			if (!p.done && p.d >= len) {
+				const end = p.chain[p.chain.length - 1].pts.at(-1)
+				const next = byStart.get(end.join())
+				if (next && p.chain.length < 6) p.chain.push(next[(Math.random() * next.length) | 0])
+				else {
+					p.done = true
+					rings.push({ x: end[0], y: end[1], t: 0 })
+				}
+			}
+			const L = total(p.chain)
+			const head = Math.min(p.d, L)
+			const tail = Math.max(0, Math.min(p.d - TRAIL, L))
+			if (tail >= L) { p.dead = true; continue }
+			const h = at(p.chain, head), t = at(p.chain, tail)
+			const g = ctx.createLinearGradient(t[0], t[1], h[0], h[1])
+			g.addColorStop(0, 'rgba(159, 240, 196, 0)')
+			g.addColorStop(1, 'rgba(190, 255, 220, .9)')
+			ctx.strokeStyle = g
+			ctx.lineWidth = 1.8
+			ctx.lineCap = 'round'
+			ctx.beginPath()
+			ctx.moveTo(t[0], t[1])
+			for (const c of corners(p.chain, tail, head)) ctx.lineTo(c[0], c[1])
+			ctx.lineTo(h[0], h[1])
+			ctx.stroke()
+			if (!p.done) {
+				ctx.fillStyle = '#d9ffea'
+				ctx.beginPath()
+				ctx.arc(h[0], h[1], 2.4, 0, Math.PI * 2)
+				ctx.fill()
+			}
+		}
+		pulses = pulses.filter((p) => !p.dead)
+
+		for (const r of rings) {
+			r.t += dt
+			const k = r.t / 0.9
+			ctx.strokeStyle = `rgba(159, 240, 196, ${0.7 * (1 - k)})`
+			ctx.lineWidth = 1.4
+			ctx.beginPath()
+			ctx.arc(r.x, r.y, 3 + 13 * k, 0, Math.PI * 2)
+			ctx.stroke()
+			ctx.fillStyle = `rgba(217, 255, 234, ${1 - k})`
+			ctx.beginPath()
+			ctx.arc(r.x, r.y, 3, 0, Math.PI * 2)
+			ctx.fill()
+		}
+		rings = rings.filter((r) => r.t < 0.9)
+		requestAnimationFrame(frame)
+	}
+
+	build()
+	new ResizeObserver(build).observe(band)
+	new IntersectionObserver(([e]) => {
+		const on = e.isIntersecting && !document.hidden
+		if (on && !running) { running = true; last = performance.now(); requestAnimationFrame(frame) }
+		if (!on) running = false
+	}).observe(band)
+})()
+</script>
+</body>
+</html>

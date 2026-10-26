@@ -1,9 +1,0 @@
-{
-	"$schema": "https://openapi.vercel.sh/vercel.json",
-	"routes": [
-		{ "src": "^/landing/about(?:\\.html)?$", "status": 308, "headers": { "Location": "/" } },
-		{ "src": "^/$", "dest": "/landing/about.html" },
-		{ "handle": "filesystem" },
-		{ "src": "^/(.*)$", "dest": "/landing/$1" }
-	]
-}

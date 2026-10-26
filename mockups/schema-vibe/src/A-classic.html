@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Schema vibe A - Classic</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+<style>
+/* Idea A, "Classic": the closest to schemasauce.com in rhythm. Navy gradient bands and a fresh green gradient on
+   white, Manrope throughout, a slim hero band with no button, a rounded portrait card and personal intro, a green
+   quote band, a navy "what I bring" band with a pixel-staircase texture, a plain-spoken section with a duotone photo,
+   a green call to action and a navy footer with green column headings. */
+:root {
+	--green-ink: #007a4d;
+	--navy: #002336;
+	--navy2: #0f3c53;
+	--green: #00a86b;
+	--green2: #78e06f;
+	--text: #222222;
+	--mute: #5a6670;
+	--px: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%22280%22%20height%3D%22280%22%3E%3Crect%20x%3D%228%22%20y%3D%2288%22%20width%3D%2214%22%20height%3D%2214%22%20fill%3D%22%23ffffff%22%20fill-opacity%3D%220.09%22/%3E%3Crect%20x%3D%2224%22%20y%3D%2288%22%20width%3D%2214%22%20height%3D%2214%22%20fill%3D%22%23ffffff%22%20fill-opacity%3D%220.063%22/%3E%3Crect%20x%3D%2224%22%20y%3D%2272%22%20width%3D%2214%22%20height%3D%2214%22%20fill%3D%22%2378e06f%22%20fill-opacity%3D%220.08000000000000002%22/%3E%3Crect%20x%3D%2240%22%20y%3D%2256%22%20width%3D%2214%22%20height%3D%2214%22%20fill%3D%22%23ffffff%22%20fill-opacity%3D%220.09%22/%3E%3Crect%20x%3D%2256%22%20y%3D%2240%22%20width%3D%2214%22%20height%3D%2214%22%20fill%3D%22%2378e06f%22%20fill-opacity%3D%220.11200000000000002%22/%3E%3Crect%20x%3D%2272%22%20y%3D%2240%22%20width%3D%2214%22%20height%3D%2214%22%20fill%3D%22%23ffffff%22%20fill-opacity%3D%220.049%22/%3E%3Crect%20x%3D%2272%22%20y%3D%2224%22%20width%3D%2214%22%20height%3D%2214%22%20fill%3D%22%23ffffff%22%20fill-opacity%3D%220.05%22/%3E%3Crect%20x%3D%2288%22%20y%3D%228%22%20width%3D%2214%22%20height%3D%2214%22%20fill%3D%22%23ffffff%22%20fill-opacity%3D%220.05%22/%3E%3Crect%20x%3D%22104%22%20y%3D%228%22%20width%3D%2214%22%20height%3D%2214%22%20fill%3D%22%23ffffff%22%20fill-opacity%3D%220.034999999999999996%22/%3E%3Crect%20x%3D%228%22%20y%3D%22200%22%20width%3D%2214%22%20height%3D%2214%22%20fill%3D%22%23ffffff%22%20fill-opacity%3D%220.07%22/%3E%3Crect%20x%3D%2224%22%20y%3D%22184%22%20width%3D%2214%22%20height%3D%2214%22%20fill%3D%22%23ffffff%22%20fill-opacity%3D%220.05%22/%3E%3Crect%20x%3D%2240%22%20y%3D%22184%22%20width%3D%2214%22%20height%3D%2214%22%20fill%3D%22%23ffffff%22%20fill-opacity%3D%220.034999999999999996%22/%3E%3Crect%20x%3D%2240%22%20y%3D%22168%22%20width%3D%2214%22%20height%3D%2214%22%20fill%3D%22%2378e06f%22%20fill-opacity%3D%220.11200000000000002%22/%3E%3Crect%20x%3D%2256%22%20y%3D%22152%22%20width%3D%2214%22%20height%3D%2214%22%20fill%3D%22%23ffffff%22%20fill-opacity%3D%220.09%22/%3E%3Crect%20x%3D%2272%22%20y%3D%22136%22%20width%3D%2214%22%20height%3D%2214%22%20fill%3D%22%23ffffff%22%20fill-opacity%3D%220.09%22/%3E%3Crect%20x%3D%2288%22%20y%3D%22120%22%20width%3D%2214%22%20height%3D%2214%22%20fill%3D%22%23ffffff%22%20fill-opacity%3D%220.05%22/%3E%3Crect%20x%3D%22104%22%20y%3D%22104%22%20width%3D%2214%22%20height%3D%2214%22%20fill%3D%22%23ffffff%22%20fill-opacity%3D%220.09%22/%3E%3Crect%20x%3D%22120%22%20y%3D%2288%22%20width%3D%2214%22%20height%3D%2214%22%20fill%3D%22%23ffffff%22%20fill-opacity%3D%220.05%22/%3E%3Crect%20x%3D%22136%22%20y%3D%2288%22%20width%3D%2214%22%20height%3D%2214%22%20fill%3D%22%23ffffff%22%20fill-opacity%3D%220.034999999999999996%22/%3E%3Crect%20x%3D%22136%22%20y%3D%2272%22%20width%3D%2214%22%20height%3D%2214%22%20fill%3D%22%23ffffff%22%20fill-opacity%3D%220.04%22/%3E%3Crect%20x%3D%22152%22%20y%3D%2272%22%20width%3D%2214%22%20height%3D%2214%22%20fill%3D%22%23ffffff%22%20fill-opacity%3D%220.027999999999999997%22/%3E%3Crect%20x%3D%22152%22%20y%3D%2256%22%20width%3D%2214%22%20height%3D%2214%22%20fill%3D%22%23ffffff%22%20fill-opacity%3D%220.04%22/%3E%3Crect%20x%3D%22168%22%20y%3D%2256%22%20width%3D%2214%22%20height%3D%2214%22%20fill%3D%22%23ffffff%22%20fill-opacity%3D%220.027999999999999997%22/%3E%3Crect%20x%3D%22168%22%20y%3D%2240%22%20width%3D%2214%22%20height%3D%2214%22%20fill%3D%22%23ffffff%22%20fill-opacity%3D%220.07%22/%3E%3Crect%20x%3D%22184%22%20y%3D%2240%22%20width%3D%2214%22%20height%3D%2214%22%20fill%3D%22%23ffffff%22%20fill-opacity%3D%220.049%22/%3E%3Crect%20x%3D%22184%22%20y%3D%2224%22%20width%3D%2214%22%20height%3D%2214%22%20fill%3D%22%23ffffff%22%20fill-opacity%3D%220.09%22/%3E%3Crect%20x%3D%22200%22%20y%3D%228%22%20width%3D%2214%22%20height%3D%2214%22%20fill%3D%22%23ffffff%22%20fill-opacity%3D%220.04%22/%3E%3Crect%20x%3D%2256%22%20y%3D%22264%22%20width%3D%2214%22%20height%3D%2214%22%20fill%3D%22%23ffffff%22%20fill-opacity%3D%220.05%22/%3E%3Crect%20x%3D%2272%22%20y%3D%22264%22%20width%3D%2214%22%20height%3D%2214%22%20fill%3D%22%23ffffff%22%20fill-opacity%3D%220.034999999999999996%22/%3E%3Crect%20x%3D%2272%22%20y%3D%22248%22%20width%3D%2214%22%20height%3D%2214%22%20fill%3D%22%23ffffff%22%20fill-opacity%3D%220.09%22/%3E%3Crect%20x%3D%2288%22%20y%3D%22248%22%20width%3D%2214%22%20height%3D%2214%22%20fill%3D%22%23ffffff%22%20fill-opacity%3D%220.063%22/%3E%3Crect%20x%3D%2288%22%20y%3D%22232%22%20width%3D%2214%22%20height%3D%2214%22%20fill%3D%22%23ffffff%22%20fill-opacity%3D%220.05%22/%3E%3Crect%20x%3D%22104%22%20y%3D%22232%22%20width%3D%2214%22%20height%3D%2214%22%20fill%3D%22%23ffffff%22%20fill-opacity%3D%220.034999999999999996%22/%3E%3Crect%20x%3D%22104%22%20y%3D%22216%22%20width%3D%2214%22%20height%3D%2214%22%20fill%3D%22%23ffffff%22%20fill-opacity%3D%220.09%22/%3E%3Crect%20x%3D%22120%22%20y%3D%22216%22%20width%3D%2214%22%20height%3D%2214%22%20fill%3D%22%23ffffff%22%20fill-opacity%3D%220.063%22/%3E%3Crect%20x%3D%22120%22%20y%3D%22200%22%20width%3D%2214%22%20height%3D%2214%22%20fill%3D%22%23ffffff%22%20fill-opacity%3D%220.04%22/%3E%3Crect%20x%3D%22136%22%20y%3D%22200%22%20width%3D%2214%22%20height%3D%2214%22%20fill%3D%22%23ffffff%22%20fill-opacity%3D%220.027999999999999997%22/%3E%3Crect%20x%3D%22136%22%20y%3D%22184%22%20width%3D%2214%22%20height%3D%2214%22%20fill%3D%22%23ffffff%22%20fill-opacity%3D%220.05%22/%3E%3Crect%20x%3D%22152%22%20y%3D%22184%22%20width%3D%2214%22%20height%3D%2214%22%20fill%3D%22%23ffffff%22%20fill-opacity%3D%220.034999999999999996%22/%3E%3Crect%20x%3D%22152%22%20y%3D%22168%22%20width%3D%2214%22%20height%3D%2214%22%20fill%3D%22%2378e06f%22%20fill-opacity%3D%220.08000000000000002%22/%3E%3Crect%20x%3D%22168%22%20y%3D%22152%22%20width%3D%2214%22%20height%3D%2214%22%20fill%3D%22%23ffffff%22%20fill-opacity%3D%220.04%22/%3E%3Crect%20x%3D%22184%22%20y%3D%22152%22%20width%3D%2214%22%20height%3D%2214%22%20fill%3D%22%23ffffff%22%20fill-opacity%3D%220.027999999999999997%22/%3E%3Crect%20x%3D%22184%22%20y%3D%22136%22%20width%3D%2214%22%20height%3D%2214%22%20fill%3D%22%2378e06f%22%20fill-opacity%3D%220.144%22/%3E%3Crect%20x%3D%22200%22%20y%3D%22136%22%20width%3D%2214%22%20height%3D%2214%22%20fill%3D%22%23ffffff%22%20fill-opacity%3D%220.063%22/%3E%3Crect%20x%3D%22200%22%20y%3D%22120%22%20width%3D%2214%22%20height%3D%2214%22%20fill%3D%22%23ffffff%22%20fill-opacity%3D%220.07%22/%3E%3Crect%20x%3D%22216%22%20y%3D%22120%22%20width%3D%2214%22%20height%3D%2214%22%20fill%3D%22%23ffffff%22%20fill-opacity%3D%220.049%22/%3E%3Crect%20x%3D%22216%22%20y%3D%22104%22%20width%3D%2214%22%20height%3D%2214%22%20fill%3D%22%23ffffff%22%20fill-opacity%3D%220.07%22/%3E%3Crect%20x%3D%22232%22%20y%3D%22104%22%20width%3D%2214%22%20height%3D%2214%22%20fill%3D%22%23ffffff%22%20fill-opacity%3D%220.049%22/%3E%3Crect%20x%3D%22232%22%20y%3D%2288%22%20width%3D%2214%22%20height%3D%2214%22%20fill%3D%22%23ffffff%22%20fill-opacity%3D%220.07%22/%3E%3Crect%20x%3D%22248%22%20y%3D%2272%22%20width%3D%2214%22%20height%3D%2214%22%20fill%3D%22%23ffffff%22%20fill-opacity%3D%220.04%22/%3E%3Crect%20x%3D%22264%22%20y%3D%2272%22%20width%3D%2214%22%20height%3D%2214%22%20fill%3D%22%23ffffff%22%20fill-opacity%3D%220.027999999999999997%22/%3E%3Crect%20x%3D%22264%22%20y%3D%2256%22%20width%3D%2214%22%20height%3D%2214%22%20fill%3D%22%23ffffff%22%20fill-opacity%3D%220.09%22/%3E%3Crect%20x%3D%22168%22%20y%3D%22264%22%20width%3D%2214%22%20height%3D%2214%22%20fill%3D%22%23ffffff%22%20fill-opacity%3D%220.09%22/%3E%3Crect%20x%3D%22184%22%20y%3D%22248%22%20width%3D%2214%22%20height%3D%2214%22%20fill%3D%22%23ffffff%22%20fill-opacity%3D%220.04%22/%3E%3Crect%20x%3D%22200%22%20y%3D%22248%22%20width%3D%2214%22%20height%3D%2214%22%20fill%3D%22%23ffffff%22%20fill-opacity%3D%220.027999999999999997%22/%3E%3Crect%20x%3D%22200%22%20y%3D%22232%22%20width%3D%2214%22%20height%3D%2214%22%20fill%3D%22%23ffffff%22%20fill-opacity%3D%220.07%22/%3E%3Crect%20x%3D%22216%22%20y%3D%22216%22%20width%3D%2214%22%20height%3D%2214%22%20fill%3D%22%23ffffff%22%20fill-opacity%3D%220.05%22/%3E%3Crect%20x%3D%22232%22%20y%3D%22200%22%20width%3D%2214%22%20height%3D%2214%22%20fill%3D%22%23ffffff%22%20fill-opacity%3D%220.09%22/%3E%3Crect%20x%3D%22248%22%20y%3D%22200%22%20width%3D%2214%22%20height%3D%2214%22%20fill%3D%22%23ffffff%22%20fill-opacity%3D%220.063%22/%3E%3Crect%20x%3D%22248%22%20y%3D%22184%22%20width%3D%2214%22%20height%3D%2214%22%20fill%3D%22%23ffffff%22%20fill-opacity%3D%220.09%22/%3E%3Crect%20x%3D%22264%22%20y%3D%22184%22%20width%3D%2214%22%20height%3D%2214%22%20fill%3D%22%23ffffff%22%20fill-opacity%3D%220.063%22/%3E%3Crect%20x%3D%22264%22%20y%3D%22168%22%20width%3D%2214%22%20height%3D%2214%22%20fill%3D%22%23ffffff%22%20fill-opacity%3D%220.07%22/%3E%3C/svg%3E");
+}
+* { box-sizing: border-box; margin: 0; }
+html { overflow-x: hidden; }
+body { width: 1440px; background: #fff; color: var(--text); font: 300 19px/1.7 "Manrope", sans-serif; -webkit-font-smoothing: antialiased; }
+a { color: inherit; text-decoration: none; }
+.navy { background: linear-gradient(115deg, var(--navy) 35%, var(--navy2) 85%); color: #fff; }
+.greenband { background: linear-gradient(115deg, #009a62 40%, #24a95f 100%); color: #fff; }
+.wrap { width: 1120px; margin: 0 auto; }
+.dash { width: 84px; height: 2px; margin: 26px 0 30px; background: repeating-linear-gradient(90deg, var(--green2) 0 6px, transparent 6px 10px); }
+h2 { font: 700 34px/1.3 "Manrope"; color: var(--navy); letter-spacing: -.01em; }
+.ph { position: relative; overflow: hidden; background: linear-gradient(160deg, #c9ced2, #a3abb1); }
+.ph span { position: absolute; left: 14px; bottom: 12px; font: 600 12px "Manrope"; color: #2e3a42; background: rgb(255 255 255 / .75); padding: 4px 10px; border-radius: 999px; }
+.btn { display: inline-block; padding: 14px 26px; border-radius: 5px; font: 800 15px "Manrope"; color: #fff; background: linear-gradient(115deg, #007a4d 30%, #008a57 100%); }
+.btn--navy { background: var(--navy); }
+
+/* header */
+header { height: 80px; display: flex; align-items: center; justify-content: space-between; padding: 0 26px; }
+.logo { display: flex; align-items: center; gap: 10px; }
+.mark { width: 40px; height: 40px; border-radius: 10px; background: linear-gradient(135deg, var(--green), var(--green2)); display: grid; place-items: center; color: var(--navy); font: 800 15px "Manrope"; position: relative; }
+.mark::after { content: ""; position: absolute; right: -3px; bottom: -3px; width: 14px; height: 14px; border-radius: 4px; background: var(--navy); }
+.logo b { display: block; font: 800 19px/1 "Manrope"; color: var(--navy); letter-spacing: -.01em; }
+.logo small { display: block; font: 600 12.5px/1.3 "Manrope"; color: var(--mute); }
+nav { display: flex; gap: 38px; font: 500 16px "Manrope"; color: var(--navy); }
+nav span::after { content: " \25BE"; font-size: 12px; }
+.hright { display: flex; gap: 14px; align-items: center; }
+.hright .sq { width: 42px; height: 42px; border-radius: 6px; background: #f0f3f5; display: grid; place-items: center; font: 700 14px "Manrope"; color: var(--navy); }
+
+/* hero band */
+.hero { height: 300px; display: grid; place-items: center; text-align: center; }
+.hero h1 { font: 700 42px/1.25 "Manrope"; letter-spacing: -.01em; }
+.hero p { margin-top: 12px; font: 400 20px "Manrope"; color: #e7eef2; }
+
+/* intro */
+.intro { display: grid; grid-template-columns: 360px 1fr; gap: 84px; padding: 64px 0 90px; }
+.intro .ph { height: 360px; border-radius: 22px; }
+.intro p + p { margin-top: 22px; }
+
+/* quote */
+.quote { padding: 100px 0; text-align: center; }
+.quote blockquote { width: 860px; margin: 0 auto; font: 400 30px/1.25 "Manrope"; letter-spacing: -.01em; }
+.quote .who { margin-top: 26px; font: 700 19px "Manrope"; color: #fff; }
+.quote .role { font: 700 19px "Manrope"; margin-top: 4px; color: #e9fff1; }
+
+/* bring */
+.bring { position: relative; padding: 80px 0 90px; }
+.bring::before { content: ""; position: absolute; inset: 0; background-image: var(--px); background-size: 280px 280px; pointer-events: none; }
+.bring .wrap { position: relative; display: grid; grid-template-columns: 1fr 1fr; gap: 90px; }
+.bring h3 { font: 700 34px/1.3 "Manrope"; letter-spacing: -.01em; }
+.bring h4 { font: 700 22px/1.3 "Manrope"; }
+.bring dl dt { font: 700 20px "Manrope"; color: var(--green2); margin-top: 30px; }
+.bring dl dd { margin: 6px 0 0; font: 400 16.5px/1.6 "Manrope"; color: #e2eaef; }
+
+/* no side quests */
+.plain { display: grid; grid-template-columns: 530px 1fr; gap: 64px; padding: 64px 0 90px; align-items: start; }
+.plain .ph { height: 300px; border-radius: 6px; background: linear-gradient(160deg, #6f8996, #3f5866); }
+.plain .ph span { color: #213440; }
+.plain p + p { margin-top: 22px; }
+.plain ul { margin-top: 18px; padding-left: 40px; }
+.plain li { margin-top: 6px; }
+
+/* cta + footer */
+.cta { padding: 110px 0; text-align: center; }
+.cta h2 { color: #fff; font-size: 34px; }
+.cta .btn { margin-top: 30px; }
+footer { padding: 50px 26px 0; }
+.fgrid { display: grid; grid-template-columns: 1fr 250px 250px 200px; gap: 0; padding-bottom: 50px; }
+.fgrid h5 { font: 600 20px "Manrope"; color: var(--green2); margin-bottom: 18px; }
+.fgrid li { list-style: none; font: 600 16px "Manrope"; margin-bottom: 13px; }
+.fgrid ul { padding: 0; }
+.socials { display: flex; gap: 10px; margin-top: 26px; }
+.socials span { width: 36px; height: 36px; border: 1.5px solid #fff; border-radius: 4px; display: grid; place-items: center; font: 700 12px "Manrope"; }
+.legal { display: flex; justify-content: space-between; padding: 16px 0 22px; font: 500 13px "Manrope"; border-top: 1px solid rgb(255 255 255 / .08); }
+.logo.w b { color: #fff; } .logo.w small { color: #a9bcc7; }
+</style>
+</head>
+<body>
+<header>
+	<a class="logo"><span class="mark">MH</span><span><b>Muhammad Haris</b><small>AI consultant</small></span></a>
+	<nav><span>Services</span><span>Work</span><a>Write-ups</a><a>About</a><a>Contact</a></nav>
+	<div class="hright"><span class="sq">&#8981;</span><a class="btn">Book a call</a></div>
+</header>
+
+<section class="hero navy">
+	<div><h1>Skip the AI hype. Ship what actually works.</h1><p>Hands-on AI engineering for teams who want working systems, not slide decks.</p></div>
+</section>
+
+<div class="wrap">
+	<section class="intro">
+		<div class="ph"><span>Portrait, studio</span></div>
+		<div>
+			<h2>You know AI could save your team hours.</h2>
+			<div class="dash"></div>
+			<p>But you need someone who will actually build it, and make it work with the tools you already run.</p>
+			<p>That's where I come in. I'm Muhammad Haris, a forward deployed engineer and AI consultant. I work inside your team, find the work that should run on AI, and build it through to production.</p>
+			<p>I diagnose before I build. If the honest answer is "don't", I say so before either of us spends money finding out.</p>
+		</div>
+	</section>
+</div>
+
+<section class="quote greenband">
+	<blockquote>&ldquo;After going through two other automation experts, I finally met Haris. It became apparent very quickly what a high level of aptitude he had for understanding my goals. World-class communication, and he got my problem solved fast.&rdquo;</blockquote>
+	<p class="who">Upwork client, United States</p>
+	<p class="role">Make.com and OpenAI project, rated 5.0</p>
+</section>
+
+<section class="bring navy">
+	<div class="wrap">
+		<div><h3>I help teams hand the repetitive work to AI, and keep people on the work that needs them.</h3></div>
+		<div>
+			<h4>Here's what I bring to every project:</h4>
+			<dl>
+				<dt>I scope it and I ship it</dt><dd>The person who scopes the problem is the person who ships it. No handoffs, nothing lost in translation.</dd>
+				<dt>Production, not prototypes</dt><dd>Everything ships in small reviewed pull requests, with tests and CI on every change.</dd>
+				<dt>The right tool for the job</dt><dd>n8n, Make and Power Automate where they fit. Next.js, Python and FastAPI when they don't.</dd>
+				<dt>Agents you can trust</dt><dd>AI agents and RAG systems on Claude and OpenAI, with retrieval, reranking and evals behind the answers.</dd>
+				<dt>Work you can check</dt><dd>Architecture write-ups for five of my production systems are on GitHub.</dd>
+			</dl>
+		</div>
+	</div>
+</section>
+
+<div class="wrap">
+	<section class="plain">
+		<div class="ph"><span>Photo: working session, duotone</span></div>
+		<div>
+			<h2>No hype. No black boxes. Just systems that run.</h2>
+			<div class="dash"></div>
+			<p>I'm not here to sell you a platform. I build the agent or automation your team needs, inside the tools you already pay for, and I stay until it runs in production.</p>
+			<p>It has worked for a UK broadband provider, where an AI support agent has handled 6,700+ customer conversations, and for a white-label pricing tool now live with seven paying businesses.</p>
+			<p>What you'll get from me:</p>
+			<ul><li>An honest read before anything is built</li><li>A clear timeline and a fixed price</li><li>Small, reviewed changes with tests</li><li>A system your team can run</li></ul>
+		</div>
+	</section>
+</div>
+
+<section class="cta greenband">
+	<h2>If your team is doing work a system should do,<br />I can help.</h2>
+	<a class="btn btn--navy">Book a call</a>
+</section>
+
+<footer class="navy">
+	<div class="fgrid">
+		<a class="logo w"><span class="mark">MH</span><span><b>Muhammad Haris</b><small>Forward deployed engineer and AI consultant</small></span></a>
+		<div><h5>Work</h5><ul><li>Voice AI agent</li><li>AI customer support</li><li>Estimation product</li><li>Investing platform</li></ul></div>
+		<div><h5>Services</h5><ul><li>AI agents and RAG</li><li>Workflow automation</li><li>Full-stack AI products</li><li>Mobile apps</li></ul></div>
+		<div><h5>Connect</h5><ul><li>About</li><li>Contact</li><li>Write-ups</li><li>Upwork</li></ul><div class="socials"><span>in</span><span>Up</span><span>GH</span></div></div>
+	</div>
+	<div class="legal"><span>&copy; 2026 Muhammad Haris. All rights reserved.</span><span>Privacy policy</span></div>
+</footer>
+</body>
+</html>

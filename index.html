@@ -1,30 +1,865 @@
 <!doctype html>
 <html lang="en">
-
 <head>
-  <meta charset="UTF-8" />
-  <link rel="icon" type="image/png" href="/favico.png" />
-  <link rel="apple-touch-icon" href="/favico.png" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="theme-color" content="#0a0a0a" />
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Muhammad Haris, AI GTM Engineer</title>
+<meta name="description" content="I build the AI systems behind every stage of the revenue engine, from signal to retention." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<link rel="preload" as="image" href="/images/haris.webp" />
+<style>
+/* Home page. Built one section at a time; the hero is the first approved section.
+   Every word on the page comes from the AI GTM Engineer brief. */
+:root {
+	--bg: #f5f7f6;
+	--surface: #ffffff;
+	--ink: #111a17;
+	--mute: #56625d;
+	--line: rgb(17 26 23 / .09);
+	--acc: #0e7a55;
+	--acc-soft: #e3f1ea;
+}
+* { box-sizing: border-box; margin: 0; }
+html { scroll-behavior: smooth; }
+body { background: var(--bg); color: var(--ink); font: 400 17px/1.6 "Geist", system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+a { color: inherit; text-decoration: none; }
+a:focus-visible { outline: 2px solid var(--acc); outline-offset: 3px; border-radius: 6px; }
+.wrap { width: min(1240px, 100% - 48px); margin: 0 auto; }
 
-  <title>Haris Wassan - AI Consultant | AutoAny</title>
-  <meta name="description"
-    content="Haris Wassan - AI Consultant and Co-Founder at AutoAny. Production AI systems for operations-heavy businesses." />
-  <meta name="author" content="Haris Wassan" />
+.btn { display: inline-flex; align-items: center; gap: 10px; height: 52px; padding: 0 24px; border-radius: 999px; background: var(--ink); color: #fff; font-weight: 600; font-size: 16px; white-space: nowrap; transition: transform .16s ease-out; }
+.btn:active { transform: scale(.97); }
+.btn i { width: 26px; height: 26px; border-radius: 50%; background: var(--acc); display: grid; place-items: center; font-style: normal; font-size: 14px; transition: transform .2s ease-out; }
+.btn:hover i { transform: translateX(2px); }
+.btn--ghost { background: transparent; color: var(--ink); box-shadow: inset 0 0 0 1.5px var(--line); }
+.btn--ghost i { background: var(--acc-soft); color: var(--acc); }
+.btn--ghost:hover i { transform: translateY(2px); }
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap" rel="stylesheet">
+/* header */
+nav.top { height: 78px; display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+.logo { line-height: 1.15; }
+.logo b { display: block; font-size: 18px; font-weight: 700; letter-spacing: -.02em; }
+.logo span { font-size: 13px; color: var(--mute); }
+.links { display: flex; gap: 34px; font-size: 15px; color: var(--mute); }
+.links a { transition: color .2s ease; }
+.links a:hover { color: var(--ink); }
+nav .btn { height: 44px; font-size: 15px; padding: 0 20px; }
 
-  <style>
-    html, body, #root { height: 100%; margin: 0; background: #0a0a0a; }
-  </style>
+/* hero */
+/* hero: a charcoal band, headline left, intro and buttons right, pipeline signals behind */
+.hero { position: relative; isolation: isolate; overflow: hidden; background: #111a17; color: #fff; padding: 84px 0 88px; }
+.hero::before { content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none; background: url("/images/pipeline-texture.svg") 0 0 / 360px 240px; -webkit-mask-image: linear-gradient(90deg, rgb(0 0 0 / .3), rgb(0 0 0 / .55) 60%, #000); mask-image: linear-gradient(90deg, rgb(0 0 0 / .3), rgb(0 0 0 / .55) 60%, #000); }
+.hero-in { display: grid; grid-template-columns: 1.05fr 1fr; column-gap: 90px; align-items: end; }
+.eyebrow { display: block; margin-bottom: 22px; font: 500 12px "Geist Mono", monospace; letter-spacing: .08em; text-transform: uppercase; color: var(--acc); }
+.hero .eyebrow { grid-column: 1; grid-row: 1; color: #8fd4b1; }
+.hero h1 { grid-column: 1; grid-row: 2 / span 3; font-size: clamp(52px, 5.2vw, 82px); line-height: .98; letter-spacing: -.05em; font-weight: 600; }
+.hero h1 em { font-style: normal; color: #4fd68c; display: block; }
+.hero .lede { grid-column: 2; grid-row: 2; margin: 0; max-width: 30em; font-size: 18.5px; line-height: 1.5; color: #c9d6d0; }
+.ctas { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 36px; }
+.hero .ctas { grid-column: 2; grid-row: 3; margin-top: 26px; }
+.hero .btn { background: #38c97a; color: #0b1d16; }
+.hero .btn i { background: #0b1d16; color: #38c97a; }
+.hero .btn--ghost { background: transparent; color: #fff; box-shadow: inset 0 0 0 1.5px rgb(255 255 255 / .55); }
+.hero .btn--ghost i { background: transparent; color: #fff; box-shadow: inset 0 0 0 1.5px #fff; }
+.hero a:focus-visible { outline: 2px solid #fff; outline-offset: 3px; }
+.where { margin-top: 30px; font-size: 15px; color: var(--mute); }
+.hero .where { grid-column: 2; grid-row: 4; margin-top: 20px; color: #9fb3aa; }
+.figure { position: relative; }
+.bezel { padding: 8px; border-radius: 30px; background: rgb(17 26 23 / .04); box-shadow: inset 0 0 0 1px rgb(17 26 23 / .06); }
+.photo { display: block; width: 100%; height: 600px; object-fit: cover; object-position: 50% 22%; border-radius: 22px; background: #3a3f42; }
+.badge { position: absolute; left: -36px; bottom: 44px; max-width: 290px; padding: 16px 20px; border-radius: 14px; background: var(--surface); box-shadow: 0 18px 40px rgb(17 26 23 / .14); }
+.badge b { display: block; font-size: 15px; font-weight: 600; }
+.badge span { display: block; margin-top: 2px; font-size: 13.5px; line-height: 1.4; color: var(--mute); }
+
+/* entrance: a short rise, transform and opacity only */
+@media (prefers-reduced-motion: no-preference) {
+	.rise { animation: rise .7s cubic-bezier(.23, 1, .32, 1) both; animation-delay: calc(var(--i, 0) * 70ms); }
+	@keyframes rise { from { opacity: 0; transform: translateY(14px); } }
+}
+
+@media (max-width: 1000px) {
+	.links { display: none; }
+	.hero { padding: 64px 0 70px; }
+	.hero-in { grid-template-columns: 1fr; }
+	.hero .eyebrow, .hero h1, .hero .lede, .hero .ctas, .hero .where { grid-column: 1; grid-row: auto; }
+	.hero .lede { margin-top: 24px; }
+	.badge { left: 16px; }
+}
+@media (max-width: 600px) {
+	.logo span { display: none; }
+	.photo { height: 460px; }
+	.hero { padding: 52px 0 60px; }
+	.hero h1 { font-size: 46px; }
+	.hero .lede { font-size: 17.5px; }
+}
+
+/* toolkit logos: original colours, scrolling on their own; the list is repeated once so the loop is seamless */
+.logos { border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); padding: 30px 0; overflow: hidden; -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); }
+.logos .track { display: flex; width: max-content; animation: logos 40s linear infinite; }
+.logos ul { display: flex; align-items: center; gap: 72px; padding: 0 36px; margin: 0; list-style: none; }
+.logos img { display: block; height: 28px; width: auto; }
+.logos:hover .track { animation-play-state: paused; }
+@keyframes logos { to { transform: translateX(-50%); } }
+@media (prefers-reduced-motion: reduce) { .logos .track { animation: none; } }
+
+/* intro */
+.intro { display: grid; grid-template-columns: 400px 1fr; gap: 84px; padding: 110px 0; align-items: start; }
+/* the photo runs the full height of the text beside it */
+.intro .pic { display: block; width: 100%; height: auto; aspect-ratio: 1 / 1.1; object-fit: cover; object-position: 50% 18%; border-radius: 26px; background: #3a3f42; box-shadow: 0 30px 60px -36px rgb(17 26 23 / .45); }
+.intro h2 { font-size: clamp(32px, 3.4vw, 44px); line-height: 1.1; letter-spacing: -.03em; font-weight: 600; max-width: 15em; color: var(--acc); }
+.intro .dash { display: block; width: 84px; margin: 26px 0 6px; border-top: 2px dashed #38c97a; }
+.intro p { margin-top: 22px; max-width: 36em; color: var(--mute); font-size: 18px; }
+.intro .facts { display: flex; flex-wrap: wrap; gap: 20px 44px; margin-top: 40px; padding-top: 28px; border-top: 1px solid var(--line); }
+.intro .facts b { display: block; font-size: 15px; }
+.intro .facts span { font-size: 14px; color: var(--mute); }
+@media (max-width: 1000px) { .intro { grid-template-columns: 1fr; gap: 40px; padding: 80px 0; } .intro .pic { max-width: 440px; } }
+
+/* quote band */
+.quote { background: var(--acc); color: #f2fbf6; padding: 100px 0; }
+.quote blockquote { width: min(1080px, 100% - 48px); margin: 0 auto; text-align: center; font-size: clamp(20px, 2.1vw, 29px); line-height: 1.4; letter-spacing: -.015em; font-weight: 500; text-wrap: balance; }
+.quote blockquote::before { content: "“"; display: block; height: 52px; font: 600 96px/1 "Geist", sans-serif; color: rgb(255 255 255 / .35); }
+.quote cite { display: block; margin-top: 28px; font: 500 13px "Geist Mono", monospace; font-style: normal; letter-spacing: .12em; text-transform: uppercase; color: #e2f4ea; }
+@media (max-width: 600px) { .quote { padding: 80px 0; } }
+
+/* section headings */
+.h2 { font-size: clamp(32px, 3.4vw, 44px); line-height: 1.1; letter-spacing: -.03em; font-weight: 600; }
+
+/* why me band: charcoal with the same pipeline-network texture as the green bands, subheadings in a green gradient */
+.why { position: relative; isolation: isolate; background: #111a17; padding: 84px 0 90px; }
+.why::before { content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none; background: url("/images/pipeline-texture.svg") 0 0 / 360px 240px; -webkit-mask-image: linear-gradient(115deg, rgb(0 0 0 / .55), #000 70%); mask-image: linear-gradient(115deg, rgb(0 0 0 / .55), #000 70%); }
+.why .in { width: min(1200px, 100% - 48px); margin: 0 auto; display: grid; grid-template-columns: 420px 1fr; gap: 80px; align-items: start; }
+.why h2 { font-size: 36px; line-height: 1.2; letter-spacing: -.025em; font-weight: 700; color: #fff; }
+.why h3 { font-size: 24px; line-height: 1.3; letter-spacing: -.015em; font-weight: 700; color: #fff; }
+.why dt { width: fit-content; margin-top: 24px; font-size: 20px; line-height: 1.3; letter-spacing: -.015em; font-weight: 600; color: #38c97a; background: linear-gradient(90deg, #12b26c, #8be36f); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+.why dd { margin: 6px 0 0; font-size: 16px; line-height: 1.55; color: #cdd6d2; max-width: 44em; }
+@media (max-width: 1000px) { .why .in { grid-template-columns: 1fr; gap: 36px; } .why h2 { font-size: 32px; max-width: 16em; } }
+@media (max-width: 600px) { .why { padding: 72px 0 80px; } .why h2 { font-size: 28px; } .why h3 { font-size: 21px; } .why dt { font-size: 19px; margin-top: 26px; } .why dd { font-size: 16px; } }
+
+/* signal engine: the project video on the left, point of view on the right */
+.engine { padding: 100px 0 110px; }
+.engine .in { width: min(1120px, 100% - 48px); margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
+.engine .slot { position: relative; aspect-ratio: 1 / 1; border-radius: 14px; overflow: hidden; background: #f3f6f4; box-shadow: 0 0 0 1px var(--line), 0 24px 50px -30px rgb(17 26 23 / .35); }
+.engine video { display: block; width: 100%; height: 100%; object-fit: cover; }
+.engine h2 { font-size: 36px; line-height: 1.2; letter-spacing: -.025em; font-weight: 700; }
+.engine .dash { display: block; width: 84px; margin: 26px 0 24px; border-top: 2px dashed #38c97a; }
+.engine p { font-size: 18px; line-height: 1.65; color: #2b3631; }
+.engine p + p { margin-top: 16px; }
+.engine h3 { margin-top: 28px; font-size: 18px; font-weight: 600; letter-spacing: -.01em; }
+.engine ul { margin-top: 10px; padding: 0; list-style: none; }
+.engine li { position: relative; margin-top: 10px; padding-left: 22px; font-size: 17px; line-height: 1.5; color: #2b3631; }
+.engine li::before { content: ""; position: absolute; left: 0; top: .5em; width: 8px; height: 8px; background: #38c97a; }
+@media (max-width: 1000px) { .engine .in { grid-template-columns: 1fr; gap: 40px; } .engine .slot { width: min(100%, 560px); } }
+@media (max-width: 600px) { .engine { padding: 72px 0 80px; } .engine h2 { font-size: 28px; } .engine p { font-size: 17px; } }
+
+/* last page: green band with moving signals, booking calendar, then the footer with the projects */
+.close { position: relative; isolation: isolate; background: var(--acc); color: #fff; padding: 96px 0; }
+.close::after { content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none; background: url("/images/pipeline-texture.svg") 0 0 / 360px 240px; -webkit-mask-image: linear-gradient(115deg, rgb(0 0 0 / .55), #000 70%); mask-image: linear-gradient(115deg, rgb(0 0 0 / .55), #000 70%); }
+.hero .flow { position: absolute; inset: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none; -webkit-mask-image: linear-gradient(90deg, transparent 15%, rgb(0 0 0 / .5) 50%, rgb(0 0 0 / .6) 75%, #000); mask-image: linear-gradient(90deg, transparent 15%, rgb(0 0 0 / .5) 50%, rgb(0 0 0 / .6) 75%, #000); }
+.close .flow, .why .flow { position: absolute; inset: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none; -webkit-mask-image: linear-gradient(115deg, rgb(0 0 0 / .45), #000 70%); mask-image: linear-gradient(115deg, rgb(0 0 0 / .45), #000 70%); }
+.close .wrap { display: grid; grid-template-columns: 1fr 520px; gap: 80px; align-items: center; }
+.close h2 { font-size: 48px; line-height: 1.08; letter-spacing: -.035em; font-weight: 700; }
+.close p { margin-top: 20px; font-size: 19px; color: #e4f6ec; max-width: 30em; }
+.close .ctas { margin-top: 32px; display: flex; flex-wrap: wrap; gap: 12px; }
+.close .btn i { background: #fff; color: var(--acc); }
+.close .btn--line { background: transparent; color: #fff; box-shadow: inset 0 0 0 1.5px rgb(255 255 255 / .85); }
+.close .btn--line i { background: transparent; color: #fff; box-shadow: inset 0 0 0 1.5px #fff; }
+.close .btn--line:hover i { transform: translateY(2px); }
+.close a:focus-visible, .close button:focus-visible { outline: 2px solid #fff; outline-offset: 3px; }
+.cal { background: #fff; color: var(--ink); border-radius: 18px; padding: 24px; box-shadow: 0 30px 60px -30px rgb(17 26 23 / .45); display: grid; grid-template-columns: 1fr 150px; gap: 22px; }
+.cal button { font: inherit; border: 0; background: none; color: inherit; cursor: pointer; }
+.cal .cal-head { grid-column: 1 / -1; display: flex; align-items: center; gap: 12px; }
+.cal .cal-head img { width: 40px; height: 40px; border-radius: 50%; object-fit: cover; object-position: 50% 18%; }
+.cal .cal-head b { font-size: 18px; font-weight: 600; }
+.cal .cal-head small { font-size: 13px; color: var(--mute); }
+.cal .cal-bar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; font-size: 15px; }
+.cal .cal-bar b { font-weight: 600; }
+.cal .cal-bar button { width: 30px; height: 30px; border-radius: 50%; font-size: 18px; line-height: 1; color: var(--mute); transition: background-color .15s ease; }
+.cal .cal-bar button:hover:not(:disabled) { background: var(--acc-soft); color: var(--acc); }
+.cal .cal-bar button:disabled { opacity: .3; cursor: default; }
+.cal .cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; text-align: center; font-size: 13.5px; }
+.cal .cal-grid span { font-size: 11.5px; font-weight: 500; color: var(--mute); padding-bottom: 4px; }
+.cal .cal-grid button, .cal .cal-grid i { aspect-ratio: 1; display: grid; place-items: center; border-radius: 10px; font-style: normal; color: #a3aea9; }
+.cal .cal-grid button { color: var(--ink); background: var(--acc-soft); font-weight: 600; transition: background-color .15s ease, color .15s ease; }
+.cal .cal-grid button:hover { background: #cfe8da; }
+.cal .cal-grid button[aria-pressed="true"] { background: var(--acc); color: #fff; }
+.cal .cal-slots { display: grid; gap: 8px; align-content: start; }
+.cal .cal-slots small { font-size: 13px; color: var(--mute); min-height: 20px; }
+.cal #cal-times { display: grid; gap: 8px; }
+.cal #cal-times button { height: 40px; border-radius: 10px; font-size: 14px; font-weight: 600; color: var(--acc); box-shadow: inset 0 0 0 1.5px rgb(14 122 85 / .35); transition: background-color .15s ease, color .15s ease; }
+.cal #cal-times button:hover { background: var(--acc-soft); }
+.cal #cal-times button[aria-pressed="true"] { background: var(--ink); color: #fff; box-shadow: none; }
+.cal .cal-go { margin-top: 4px; height: 42px; border-radius: 10px; display: grid; place-items: center; font-size: 14px; font-weight: 600; background: var(--acc); color: #fff; transition: opacity .15s ease; }
+.cal .cal-go[aria-disabled="true"] { opacity: .35; pointer-events: none; }
+.cal :focus-visible { outline: 2px solid var(--acc); outline-offset: 2px; }
+.end { position: relative; border-top: 0; background: #111a17; color: #eef3f1; padding: 72px 0 36px; }
+.end .end-cols { display: grid; grid-template-columns: 380px 1fr 1.4fr .8fr; gap: 46px; align-items: start; }
+.end .end-card { padding: 26px; border-radius: 20px; background: rgb(255 255 255 / .05); box-shadow: inset 0 0 0 1px rgb(255 255 255 / .1); }
+.end .end-card .who { display: flex; gap: 14px; align-items: center; }
+.end .end-card .who img { width: 56px; height: 56px; border-radius: 50%; object-fit: cover; object-position: 50% 18%; }
+.end .end-card .where { margin-top: 16px; }
+.end .end-card .btn { margin-top: 22px; height: 48px; background: #38c97a; color: #0b1d16; }
+.end .end-card .btn i { background: #0b1d16; color: #38c97a; }
+.end .end-card .mail { display: block; margin-top: 16px; font-size: 14.5px; overflow-wrap: anywhere; }
+.end .end-card .mail:hover { color: #8fd4b1; }
+.end .end-card .social { margin-top: 20px; }
+.end .logo span { color: #9fb3aa; }
+.end .where { margin-top: 18px; color: #9fb3aa; font-size: 15px; max-width: 16em; }
+.end h3 { font-size: 17px; font-weight: 600; color: var(--ok, #38c97a); margin-bottom: 16px; }
+.end ul { list-style: none; padding: 0; display: grid; gap: 11px; }
+.end li { margin: 0; font-size: 15.5px; font-weight: 500; }
+.end li a { transition: color .15s ease; overflow-wrap: anywhere; }
+.end li a:hover { color: #8fd4b1; }
+.end .social { margin-top: 26px; display: flex; gap: 10px; }
+.end .social a { width: 38px; height: 38px; border-radius: 9px; display: grid; place-items: center; box-shadow: inset 0 0 0 1.5px rgb(255 255 255 / .55); transition: background-color .15s ease, color .15s ease; }
+.end .social a:hover { background: #fff; color: #111a17; }
+.end .social svg { width: 17px; height: 17px; }
+.end a:focus-visible { outline: 2px solid #8fd4b1; outline-offset: 3px; }
+.end .end-legal { margin-top: 56px; padding-top: 22px; border-top: 1px solid rgb(255 255 255 / .1); display: flex; justify-content: space-between; gap: 20px; font-size: 13.5px; color: #9fb3aa; }
+@media (max-width: 1000px) { .close .wrap { grid-template-columns: 1fr; gap: 48px; } .close .cal { max-width: 560px; } .end .end-cols { grid-template-columns: 1fr 1fr; } .end .end-cols > div:first-child, .end .end-cols > div:nth-child(3) { grid-column: 1 / -1; } .end .end-card { max-width: 440px; } }
+@media (max-width: 600px) {
+	.close { padding: 72px 0; }
+	.close h2 { font-size: 34px; }
+	.close p { font-size: 17px; }
+	.cal { grid-template-columns: 1fr; padding: 20px; }
+	.cal #cal-times { grid-template-columns: repeat(3, 1fr); }
+	.end .end-cols { grid-template-columns: 1fr; gap: 36px; }
+	.end .end-legal { flex-direction: column; }
+}
+
+/* what I build */
+.build { padding: 80px 0 120px; }
+.card { background: var(--surface); border-radius: 14px; padding: 34px; box-shadow: 0 1px 2px rgb(17 26 23 / .04), 0 18px 40px -24px rgb(17 26 23 / .18); }
+.card .n { font: 600 13px "Geist Mono", monospace; color: var(--acc); }
+.card h3 { margin-top: 10px; font-size: 24px; letter-spacing: -.02em; font-weight: 600; line-height: 1.2; }
+.card p { margin-top: 10px; color: var(--mute); font-size: 16px; }
+.card.tint { background: var(--acc-soft); box-shadow: none; }
+
+/* selected work */
+.work { padding: 40px 0 120px; }
+
+/* how I work */
+.process { padding: 110px 0; }
+.steps { display: grid; grid-template-columns: repeat(5, 1fr); margin-top: 54px; position: relative; }
+.steps::before { content: ""; position: absolute; left: 0; right: 0; top: 11px; height: 2px; background: var(--line); }
+.steps div { position: relative; padding-right: 30px; }
+.steps i { display: block; width: 24px; height: 24px; border-radius: 50%; background: var(--surface); box-shadow: inset 0 0 0 2px var(--acc); }
+.steps div:first-child i { background: var(--acc); }
+.steps h3 { margin-top: 26px; font-size: 19px; font-weight: 600; letter-spacing: -.02em; line-height: 1.3; }
+.steps p { margin-top: 8px; color: var(--mute); font-size: 15px; }
+
+/* what clients say */
+.reviews { padding: 120px 0; display: grid; grid-template-columns: 380px 1fr; gap: 80px; }
+.reviews .sub { margin-top: 18px; color: var(--mute); font-size: 18px; }
+.rv { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+.rv .card p { color: var(--ink); font-size: 18px; margin: 0; line-height: 1.5; }
+.rv .card small { display: block; margin-top: 22px; font: 500 12px "Geist Mono", monospace; letter-spacing: .12em; text-transform: uppercase; color: var(--mute); }
+
+/* closing panel */
+.cta { margin: 0 auto 100px; width: min(1240px, 100% - 48px); background: var(--ink); border-radius: 24px; padding: clamp(40px, 6vw, 90px); display: grid; grid-template-columns: 1fr auto; gap: 40px; align-items: end; color: #eef3f1; }
+.cta h2 { font-size: clamp(34px, 4.2vw, 56px); line-height: 1.05; letter-spacing: -.04em; font-weight: 600; max-width: 13em; }
+.cta p { margin-top: 18px; color: #a9b6b0; font-size: 18px; max-width: 34em; }
+.cta .btn { background: var(--acc); }
+.cta .btn i { background: #fff; color: var(--acc); }
+
+/* footer */
+footer { border-top: 1px solid var(--line); padding: 60px 0 50px; }
+footer .cols { display: grid; grid-template-columns: 1.4fr 1fr 1.4fr; gap: 40px; }
+footer h4 { font-size: 14px; color: var(--mute); font-weight: 500; margin-bottom: 14px; }
+footer ul { padding: 0; list-style: none; }
+footer li { font-size: 15px; margin-bottom: 8px; }
+footer li a:hover { color: var(--acc); }
+footer .legal { margin-top: 50px; font-size: 13px; color: var(--mute); }
+
+@media (max-width: 1000px) {
+	.reviews { grid-template-columns: 1fr; gap: 40px; }
+	.steps { grid-template-columns: 1fr 1fr; gap: 36px 0; }
+	.steps::before { display: none; }
+			}
+@media (max-width: 680px) {
+	.rv, .steps { grid-template-columns: 1fr; }
+				.build, .reviews { padding: 80px 0; }
+	.process { padding: 80px 0; }
+	.cta { grid-template-columns: 1fr; align-items: start; }
+	footer .cols { grid-template-columns: 1fr; }
+}
+
+.build .eyebrow { margin-bottom: 14px; }
+.build-lede { margin-top: 18px; max-width: 40em; color: var(--mute); font-size: 19px; }
+.card.tint 
+.intro .eyebrow { margin-bottom: 14px; }
+.intro p.one { color: var(--ink); font-size: 20px; }
+
+/* About: "what I bring" as short titled points */
+.intro .bring-h { margin-top: 44px; font-size: 22px; letter-spacing: -.02em; font-weight: 600; }
+.intro .bring { margin-top: 6px; }
+.intro .bring dt { margin-top: 22px; font-weight: 600; font-size: 17px; color: var(--acc); }
+.intro .bring dd { margin: 4px 0 0; max-width: 36em; color: var(--mute); font-size: 16px; }
+
+/* What I build: six compact stage cards */
+.stages { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 40px; }
+.stage { display: flex; flex-direction: column; padding: 26px; border-radius: 14px; background: var(--surface); box-shadow: 0 1px 2px rgb(17 26 23 / .04), 0 18px 40px -26px rgb(17 26 23 / .18); }
+.stage .n { font: 600 13px "Geist Mono", monospace; color: var(--acc); }
+.stage h3 { margin-top: 10px; font-size: 20px; line-height: 1.25; letter-spacing: -.02em; font-weight: 600; }
+.stage p { margin-top: 8px; color: var(--mute); font-size: 15px; }
+.stage b { margin-top: auto; padding-top: 18px; font-size: 13.5px; font-weight: 600; color: var(--acc); }
+.stage.tint { background: var(--acc-soft); box-shadow: none; }
+.stage.dark { background: var(--ink); color: #eef3f1; }
+.stage.dark .n, .stage.dark b { color: #8fd4b1; }
+.stage.dark p { color: #a9b6b0; }
+
+/* Selected work: six cards a page, with page numbers under them */
+.wgrid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 40px; }
+.wk { display: flex; flex-direction: column; padding: 28px; border-radius: 14px; background: var(--surface); box-shadow: 0 1px 2px rgb(17 26 23 / .04), 0 18px 40px -26px rgb(17 26 23 / .18); }
+.wk .tag { align-self: flex-start; padding: 5px 10px; border-radius: 999px; background: var(--acc-soft); font: 500 11.5px "Geist Mono", monospace; letter-spacing: .04em; color: var(--acc); }
+.wk small { margin-top: 16px; font-size: 13px; color: var(--mute); }
+.wk h3 { margin-top: 6px; font-size: 21px; line-height: 1.25; letter-spacing: -.02em; font-weight: 600; }
+.wk:not(:has(.tag)) h3 { margin-top: 0; }
+.wk p { margin-top: 10px; color: var(--mute); font-size: 15.5px; }
+.wk .k { margin-top: auto; padding-top: 22px; }
+.wk .k b { display: block; font-size: 34px; line-height: 1; letter-spacing: -.04em; font-weight: 600; color: var(--acc); }
+.wk .k span { display: block; margin-top: 6px; font-size: 13.5px; color: var(--mute); }
+#work-page-2 .wgrid { grid-template-columns: repeat(2, 1fr); }
+.pager { display: flex; justify-content: center; gap: 10px; margin-top: 40px; }
+.pager button { width: 46px; height: 46px; border: 0; border-radius: 50%; background: transparent; box-shadow: inset 0 0 0 1.5px var(--line); font: 600 15px "Geist", sans-serif; color: var(--ink); cursor: pointer; transition: background-color .2s ease, color .2s ease, transform .16s ease-out; }
+.pager button:hover { box-shadow: inset 0 0 0 1.5px var(--acc); }
+.pager button:active { transform: scale(.95); }
+.pager button[aria-current="true"] { background: var(--ink); color: #fff; box-shadow: none; }
+.pager button:focus-visible { outline: 2px solid var(--acc); outline-offset: 3px; }
+@media (prefers-reduced-motion: no-preference) { .wpage:not([hidden]) .wk { animation: rise .5s cubic-bezier(.23, 1, .32, 1) both; } .wpage .wk:nth-child(2) { animation-delay: 50ms; } .wpage .wk:nth-child(3) { animation-delay: 100ms; } .wpage .wk:nth-child(4) { animation-delay: 150ms; } .wpage .wk:nth-child(5) { animation-delay: 200ms; } .wpage .wk:nth-child(6) { animation-delay: 250ms; } }
+@media (max-width: 1000px) { .stages, .wgrid { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 680px) { .stages, .wgrid, #work-page-2 .wgrid { grid-template-columns: 1fr; } }
+
+.wk .view { display: inline-flex; align-items: center; gap: 10px; align-self: flex-start; margin-top: 22px; height: 44px; padding: 0 8px 0 18px; border-radius: 999px; background: var(--ink); color: #fff; font-size: 14.5px; font-weight: 600; transition: transform .16s ease-out; }
+.wk .view i { width: 28px; height: 28px; border-radius: 50%; background: var(--acc); display: grid; place-items: center; font-style: normal; font-size: 13px; transition: transform .2s ease-out; }
+.wk .view:hover i { transform: translateX(2px); }
+.wk .view:active { transform: scale(.97); }
+
+/* green bands (quote and How I work): the same green with a faint pipeline-network texture */
+.quote, .process { position: relative; isolation: isolate; background: var(--acc); }
+.quote::before, .process::before { content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none; background: url("/images/pipeline-texture.svg") 0 0 / 360px 240px; -webkit-mask-image: linear-gradient(115deg, rgb(0 0 0 / .55), #000 70%); mask-image: linear-gradient(115deg, rgb(0 0 0 / .55), #000 70%); }
+.process { color: #f2fbf6; }
+.process .h2, .process .steps h3 { color: #fff; }
+.process .steps::before { background: rgb(255 255 255 / .25); }
+.process .steps i { background: var(--acc); box-shadow: inset 0 0 0 2px #fff; }
+.process .steps div:first-child i { background: #fff; }
+.process .steps p { color: #d5efe1; }
+
+/* sections hidden while we rebuild the page step by step */
+.parked { display: none !important; }
+</style>
 </head>
-
 <body>
-  <div id="root"></div>
-  <script type="module" src="/src/main.jsx"></script>
-</body>
+<div class="wrap">
+	<nav class="top" aria-label="Main">
+		<a class="logo" href="/"><b>Muhammad Haris</b><span>AI GTM Engineer</span></a>
+		<div class="links"><a href="#selected-work">Selected work</a><a href="#what-i-build">What I build</a><a href="#how-i-work">How I work</a><a href="#who-i-am">Who I am</a></div>
+		<a class="btn" href="mailto:hariswassan001@gmail.com?subject=Book%20a%20call">Book a call</a>
+	</nav>
+</div>
 
+<main>
+	<section class="hero" aria-labelledby="hero-title">
+		<div class="wrap">
+			<div class="hero-in">
+				<span class="eyebrow rise">AI GTM Engineer</span>
+				<h1 id="hero-title" class="rise" style="--i:1">Signals in. <em>Pipeline out.</em></h1>
+				<p class="lede rise" style="--i:2">I'm the engineer revenue leaders bring in when they want AI that produces pipeline, not a demo, built well enough to keep running after I've left.</p>
+				<div class="ctas rise" style="--i:3">
+					<a class="btn" href="mailto:hariswassan001@gmail.com?subject=Book%20a%20call">Book a call <i aria-hidden="true">&rarr;</i></a>
+					<a class="btn btn--ghost" href="#selected-work">Selected work <i aria-hidden="true">&darr;</i></a>
+				</div>
+				<p class="where rise" style="--i:4">I work with companies in the US, UK and Middle East.</p>
+			</div>
+			<!-- old hero photo: the photo now lives only in Who I am; kept hidden, not deleted -->
+			<div class="figure parked">
+				<div class="bezel"><img class="photo" src="/images/haris.webp" alt="Muhammad Haris" width="1536" height="2048" fetchpriority="high" /></div>
+				<div class="badge"><b>Production or nothing.</b><span>Real data from the first week, evaluations, guardrails, monitoring, and a person in the loop wherever a mistake would reach a customer.</span></div>
+			</div>
+		</div>
+	</section>
+</main>
+
+<section class="logos" aria-label="Toolkit">
+	<div class="track"><ul><li><img src="/logos/n8n.png" alt="n8n" /></li><li><img src="/logos/make.png" alt="Make" /></li><li><img src="/logos/zapier.png" alt="Zapier" /></li><li><img src="/logos/claude.png" alt="Claude" /></li><li><img src="/logos/openai.svg" alt="OpenAI" /></li><li><img src="/logos/airtable.svg" alt="Airtable" /></li><li><img src="/logos/retell.png" alt="Retell" /></li><li><img src="/logos/twilio.svg" alt="Twilio" /></li><li><img src="/logos/webflow.svg" alt="Webflow" /></li><li><img src="/logos/python.svg" alt="Python" /></li></ul><ul aria-hidden="true"><li><img src="/logos/n8n.png" alt="" /></li><li><img src="/logos/make.png" alt="" /></li><li><img src="/logos/zapier.png" alt="" /></li><li><img src="/logos/claude.png" alt="" /></li><li><img src="/logos/openai.svg" alt="" /></li><li><img src="/logos/airtable.svg" alt="" /></li><li><img src="/logos/retell.png" alt="" /></li><li><img src="/logos/twilio.svg" alt="" /></li><li><img src="/logos/webflow.svg" alt="" /></li><li><img src="/logos/python.svg" alt="" /></li></ul></div>
+</section>
+
+<div class="wrap">
+	<section class="intro" id="who-i-am">
+		<img class="pic" src="/images/haris.webp" alt="Muhammad Haris" width="1536" height="2048" loading="lazy" />
+		<div>
+			<span class="eyebrow">Who I am</span>
+			<h2>I build revenue systems that run without me.</h2>
+			<i class="dash" aria-hidden="true"></i>
+			<p class="one">I'm Muhammad Haris, an AI GTM engineer. I build the AI systems that find your buyers, research them, reach them at the right moment and keep them.</p>
+			<p>What makes me useful to a revenue leader isn't a tool list. It's that I understand what the number has to do, and I can build the machine that does it, to a standard where you can let it run.</p>
+			<h3 class="bring-h">What I bring to every engagement</h3>
+			<dl class="bring">
+				<dt>I speak revenue and code.</dt><dd>I can sit in a pipeline review in the morning and ship the fix in the afternoon.</dd>
+				<dt>I build the whole system.</dt><dd>Signal, research, outreach, conversion, retention and the data underneath, wired together so every stage hands clean data to the next.</dd>
+				<dt>Production or nothing.</dt><dd>Real data from the first week, evaluations, guardrails, monitoring, and a person in the loop wherever a mistake would reach a customer.</dd>
+			</dl>
+		</div>
+	</section>
+</div>
+
+<section class="quote" aria-label="What clients say">
+	<blockquote>Haris is one of the best developers [I] have worked with, incredibly responsive and managed to help guide me to the most efficient workflows and techniques to deliver my project. I would recommend him to any other <span style="white-space:nowrap">mid-market</span> or enterprise companies as he has been very reliable and effective.<cite>Client</cite></blockquote>
+</section>
+
+<section class="why" aria-labelledby="why-title">
+	<div class="in">
+		<h2 id="why-title">I don't sell AI. I sell pipeline that happens to run on AI.</h2>
+		<div>
+			<h3>What makes me different</h3>
+			<dl>
+				<dt>Systems, not workflows.</dt><dd>Every engagement is end to end: the data, the agents, the CRM and the reporting. Nothing is handed over half-connected.</dd>
+				<dt>Agents where judgment helps. Plain code where mistakes cost money.</dt><dd>AI reads, researches and decides what deserves attention. Deterministic logic handles anything that touches a price, a send or a customer record.</dd>
+				<dt>A production standard most GTM work never reaches.</dt><dd>Evaluations, guardrails, strict output formats on every AI step, human approval before anything sensitive reaches a customer, and monitoring once it's live.</dd>
+				<dt>Revenue first, tools last.</dt><dd>I start from where pipeline leaks and work back to the build. The stack is chosen to fit the problem, never the other way round.</dd>
+				<dt>I build real software.</dt><dd>AI platforms with hybrid retrieval, evaluation pipelines and bank-grade security, not just connected SaaS tools.</dd>
+				<dt>I've built where the stakes are highest.</dt><dd>Bank data, regulated compliance and multi-tenant platforms. If a system can be trusted with a customer's money, it can be trusted with your pipeline.</dd>
+			</dl>
+		</div>
+	</div>
+</section>
+
+<section class="engine" aria-labelledby="engine-title">
+	<div class="in">
+		<div class="slot">
+			<video id="engine-video" muted loop playsinline preload="metadata" poster="/media/signal-engine/poster.webp" width="1080" height="1080" aria-label="Finding buyers at the exact moment they need help">
+				<source src="/media/signal-engine/clip.webm" type="video/webm" />
+				<source src="/media/signal-engine/clip.mp4" type="video/mp4" />
+			</video>
+		</div>
+		<div>
+			<h2 id="engine-title">If it can't run unattended, it isn't finished.</h2>
+			<i class="dash" aria-hidden="true"></i>
+			<p>I'm not an automation person who picked up some AI, and I'm not an AI researcher who has never sat in a pipeline review. I'm not an agency, and I don't hand work to juniors.</p>
+			<p>The person you talk to is the person who builds it, and the person who answers when it needs attention.</p>
+			<h3>Point of view, in my own words</h3>
+			<ul>
+				<li>Cheap sources first. Expensive ones only when they earn it.</li>
+				<li>No agent talks to a prospect without a guardrail.</li>
+				<li>The best outbound looks like value arriving before the pitch.</li>
+				<li>Pipeline is pipeline. Revenue is revenue. I never confuse the two in a report.</li>
+			</ul>
+		</div>
+	</div>
+</section>
+
+<!-- Parked sections: everything below is hidden for now, not deleted. Remove "parked" from a section to bring it back. -->
+<div class="wrap parked">
+	<section class="build" id="what-i-build">
+		<span class="eyebrow">AI GTM Engineer</span>
+		<h2 class="h2">Five stages of the revenue engine.</h2>
+		<p class="build-lede">Most GTM help covers one piece. I build across all five, and I connect them so data flows from the first signal to the renewal.</p>
+		<div class="stages">
+			<div class="stage dark"><span class="n">01</span><h3>Signal intelligence</h3><p>Know who is in market before your competitors do.</p><b>51 qualified leads in the first four days</b></div>
+			<div class="stage tint"><span class="n">02</span><h3>Research and enrichment agents</h3><p>Every account researched to the field, verified at the source, never guessed.</p><b>29 data points researched per lead</b></div>
+			<div class="stage "><span class="n">03</span><h3>Signal-triggered outbound</h3><p>Outreach that starts because something happened, not because a list was due.</p><b>530 potential acquirers mapped</b></div>
+			<div class="stage "><span class="n">04</span><h3>Inbound conversion</h3><p>Speed to lead and speed to quote.</p><b>~45 sec from photo to priced quote</b></div>
+			<div class="stage tint"><span class="n">05</span><h3>Retention and expansion</h3><p>Agents that catch customers on the way out, make the right offer and hand warm conversations to the team.</p><b>731 new prospects captured</b></div>
+			<div class="stage "><span class="n">+</span><h3>The infrastructure underneath</h3><p>CRM, enrichment, sequencing and reporting wired together as one system.</p><b>9 production pipelines, one connected system</b></div>
+		</div>
+	</section>
+
+	<section class="work" id="selected-work">
+		<span class="eyebrow">Selected work</span>
+		<h2 class="h2" id="work-title">Six systems, six revenue problems.</h2>
+		<div class="wpage" id="work-page-1" data-title="Six systems, six revenue problems.">
+			<div class="wgrid">
+				<article class="wk"><span class="tag">Signal intelligence</span><small>Lead-generation company</small><h3>Finding buyers at the exact moment they need help</h3><p>38,548 businesses watched. 51 qualified leads in the first four days.</p><div class="k"><b>51</b><span>qualified leads in the first four days</span></div><a class="view" href="/work/signal-engine.html">View project <i aria-hidden="true">&rarr;</i></a></article>
+				<article class="wk"><span class="tag">Research and enrichment, outbound</span><small>Outbound campaign</small><h3>Researching 80,000 leads without paying for 80,000 deep dives</h3><p>The cheapest source that can answer always goes first.</p><div class="k"><b>80,000+</b><span>leads per campaign</span></div><a class="view" href="/work/research-cascade.html">View project <i aria-hidden="true">&rarr;</i></a></article>
+				<article class="wk"><span class="tag">Inbound capture, retention</span><small>UK broadband provider</small><h3>Revenue agents for a UK broadband provider</h3><p>731 new prospects captured, roughly £110k a year in pipeline.</p><div class="k"><b>731</b><span>new prospects captured</span></div><a class="view" href="/work/uk-broadband.html">View project <i aria-hidden="true">&rarr;</i></a></article>
+				<article class="wk"><span class="tag">Inbound conversion</span><small>Home-service brands</small><h3>A priced quote in 45 seconds, for eight brands</h3><p>The first company to give a price usually wins the job.</p><div class="k"><b>~45 sec</b><span>from photo to priced quote</span></div><a class="view" href="/work/instant-quotes.html">View project <i aria-hidden="true">&rarr;</i></a></article>
+				<article class="wk"><span class="tag">Account intelligence, M&amp;A outreach</span><small>Investment bank, sell-side M&amp;A</small><h3>Finding every credible buyer for a sell-side deal</h3><p>A 530-acquirer universe, delivered the day of the brief.</p><div class="k"><b>530</b><span>potential acquirers mapped</span></div><a class="view" href="/work/sell-side-buyers.html">View project <i aria-hidden="true">&rarr;</i></a></article>
+				<article class="wk"><span class="tag">Demand generation, signup qualification</span><small>Calendar marketing SaaS</small><h3>Turning a product into its own growth engine</h3><p>Brands found my client in their own analytics, then reached out.</p><div class="k"><b>20+</b><span>verified fields written back per signup</span></div><a class="view" href="/work/growth-engine.html">View project <i aria-hidden="true">&rarr;</i></a></article>
+			</div>
+		</div>
+		<div class="wpage" id="work-page-2" data-title="Four more, in a sentence each." hidden>
+			<div class="wgrid">
+				<article class="wk"><h3>Who actually buys</h3><p>I rebuilt an event venue's ideal customer profile from 344 inquiries and 106 booked events. Its most lucrative format closed less than 1 in 5, while happy hours closed 33 to 44%, so outreach now leads with the easy yes.</p><div class="k"><b>344</b><span>Venue inquiries</span></div></article>
+				<article class="wk"><h3>Listening at scale</h3><p>I read 4.7 million community comments and pulled out 27,651 demand signals that shaped a fintech's launch positioning and what it built first.</p><div class="k"><b>27,651</b><span>demand signals extracted</span></div></article>
+				<article class="wk"><h3>Speed to quote</h3><p>For a translation firm, every email and web form is classified, matched to the client record and turned into a drafted quote, with a hard check that stops a wrong number before it ever reaches a customer.</p></article>
+				<article class="wk"><h3>Social selling with guardrails</h3><p>Profile research, engagement scoring and drafted outreach on LinkedIn for multiple teams, with nothing sent until a person approves it.</p></article>
+			</div>
+		</div>
+		<nav class="pager" aria-label="Selected work pages">
+			<button type="button" data-page="1" aria-current="true" aria-label="Page 1">1</button>
+			<button type="button" data-page="2" aria-label="Page 2">2</button>
+			<button type="button" class="next" data-step="1" aria-label="Next page">&rarr;</button>
+		</nav>
+	</section>
+</div>
+
+<section class="process parked" id="how-i-work"><div class="wrap">
+	<h2 class="h2">I get inside the revenue team, then I build.</h2>
+	<div class="steps">
+		<div><i aria-hidden="true"></i><h3>I sit with the people doing the work.</h3><p>Sales, marketing, support, ops. I watch how a lead really moves through the company, not how the playbook says it does, and I learn the manual steps nobody has written down.</p></div>
+		<div><i aria-hidden="true"></i><h3>I find where revenue leaks.</h3><p>The handoff that drops leads. The research nobody has time for. The quote that takes a day. The customer who leaves without anyone asking why. That is where the build starts.</p></div>
+		<div><i aria-hidden="true"></i><h3>I rebuild the process as a system.</h3><p>Agents for the judgment, plain code for the money, and a person in the loop wherever a mistake would reach a customer. I design it so it keeps running when I'm not in the room.</p></div>
+		<div><i aria-hidden="true"></i><h3>I ship into production, not a demo.</h3><p>Real data, real customers, from the first week. Then I watch it: monitoring, evaluation, and fixes before anyone has to report a problem.</p></div>
+		<div><i aria-hidden="true"></i><h3>I hand it over so your team owns it.</h3><p>Documented, explained and understood by the people who will live with it. I stay close until it runs without me, and I'm a message away when it matters.</p></div>
+	</div>
+</div></section>
+
+<div class="wrap parked">
+	<section class="reviews" id="what-clients-say">
+		<div><h2 class="h2">What clients say</h2><p class="sub">In their words.</p></div>
+		<div class="rv">
+			<div class="card"><p>&ldquo;Muhammad was a pleasure to work with. He communicates clearly, works efficiently, and consistently delivers high-quality results. He is responsive, proactive, and easy to collaborate with... I appreciated his professionalism, technical ability, and willingness to solve problems without unnecessary back-and-forth.&rdquo;</p><small>Client</small></div>
+			<div class="card"><p>&ldquo;Working with Muhammad was a great experience. He takes the time to thoroughly understand the project before diving in, communicates clearly, and consistently shows strong attention to detail.&rdquo;</p><small>Client</small></div>
+		</div>
+	</section>
+</div>
+
+<!-- Replaced by the last page below (.close + .end); kept hidden, not deleted -->
+<section class="cta parked">
+	<div><h2>If you're serious about building a revenue engine, let's talk.</h2><p>Muhammad Haris is the engineer you bring in when you want AI in your revenue engine to produce pipeline, not a demo.</p></div>
+	<a class="btn" href="mailto:hariswassan001@gmail.com?subject=Book%20a%20call">Book a call <i aria-hidden="true">&rarr;</i></a>
+</section>
+
+<footer class="parked"><div class="wrap">
+	<div class="cols">
+		<div><a class="logo" href="/"><b>Muhammad Haris</b><span>AI GTM Engineer</span></a></div>
+		<div><ul><li><a href="#selected-work">Selected work</a></li><li><a href="#what-i-build">What I build</a></li><li><a href="#how-i-work">How I work</a></li><li><a href="#who-i-am">Who I am</a></li></ul></div>
+		<div><h4>Contact</h4><ul><li><a href="mailto:hariswassan001@gmail.com">hariswassan001@gmail.com</a></li><li><a href="https://linkedin.com/in/muhammad-haris-wassan" target="_blank" rel="noopener noreferrer">linkedin.com/in/muhammad-haris-wassan</a></li><li><a href="https://github.com/Haris001-bit" target="_blank" rel="noopener noreferrer">github.com/Haris001-bit</a></li></ul></div>
+	</div>
+	<p class="legal">&copy; Muhammad Haris</p>
+</div></footer>
+
+<!-- Last page: book a call, resume, the six projects, contact -->
+<section class="close" id="book" aria-labelledby="close-title">
+	<div class="wrap">
+		<div>
+			<h2 id="close-title">If you're serious about building a revenue engine, let's talk.</h2>
+			<p>Muhammad Haris is the engineer you bring in when you want AI in your revenue engine to produce pipeline, not a demo.</p>
+			<div class="ctas">
+				<a class="btn" id="close-book" href="mailto:hariswassan001@gmail.com?subject=Book%20a%20call">Book a call <i aria-hidden="true">&rarr;</i></a>
+				<!-- Resume: points at email until the resume PDF is added -->
+				<a class="btn btn--line" href="mailto:hariswassan001@gmail.com?subject=Resume">Resume <i aria-hidden="true">&darr;</i></a>
+			</div>
+		</div>
+		<!-- Booking calendar: works through email until a Cal.com / Calendly link replaces it -->
+		<div class="cal" role="group" aria-label="Book a call">
+			<div class="cal-head"><img src="/images/haris.webp" alt="" width="40" height="40" loading="lazy" /><b>Book a call</b><small>Muhammad Haris</small></div>
+			<div>
+				<div class="cal-bar"><b id="cal-title" aria-live="polite"></b><span><button type="button" id="cal-prev" aria-label="Previous month">&lsaquo;</button><button type="button" id="cal-next" aria-label="Next month">&rsaquo;</button></span></div>
+				<div class="cal-grid" id="cal-grid"></div>
+			</div>
+			<div class="cal-slots"><small id="cal-day"></small><div id="cal-times"></div><a class="cal-go" id="cal-go" href="mailto:hariswassan001@gmail.com?subject=Book%20a%20call" aria-disabled="true">Book a call</a></div>
+		</div>
+	</div>
+</section>
+<footer class="end">
+	<div class="wrap">
+		<div class="end-cols">
+			<div class="end-card">
+				<div class="who"><img src="/images/haris.webp" alt="" width="56" height="56" loading="lazy" /><a class="logo" href="/"><b>Muhammad Haris</b><span>AI GTM Engineer</span></a></div>
+				<p class="where">I work with companies in the US, UK and Middle East.</p>
+				<a class="btn" href="#book">Book a call <i aria-hidden="true">&rarr;</i></a>
+				<a class="mail" href="mailto:hariswassan001@gmail.com">hariswassan001@gmail.com</a>
+				<div class="social">
+					<a href="https://linkedin.com/in/muhammad-haris-wassan" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M4.98 3.5a2.5 2.5 0 11-.02 5 2.5 2.5 0 01.02-5zM3 9.75h4v11H3v-11zm6.5 0h3.8v1.6h.06c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.77 2.6 4.77 6v5.45h-4v-4.83c0-1.15-.02-2.64-1.6-2.64-1.62 0-1.86 1.26-1.86 2.55v4.92h-4v-11z"/></svg></a>
+					<a href="https://github.com/Haris001-bit" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 00-3.16 19.49c.5.09.68-.22.68-.48v-1.7c-2.78.6-3.37-1.18-3.37-1.18-.45-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.9 1.52 2.34 1.08 2.91.83.09-.65.35-1.08.63-1.33-2.22-.25-4.55-1.11-4.55-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.65 0 0 .84-.27 2.75 1.02a9.5 9.5 0 015 0c1.91-1.29 2.75-1.02 2.75-1.02.55 1.38.2 2.4.1 2.65.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.68-4.57 4.93.36.31.68.92.68 1.85v2.74c0 .27.18.58.69.48A10 10 0 0012 2z"/></svg></a>
+					<a href="mailto:hariswassan001@gmail.com" aria-label="Email"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" d="M3.5 6.5h17v11h-17zM3.8 7l8.2 6.2L20.2 7"/></svg></a>
+				</div>
+			</div>
+			<div>
+				<h3>What I build</h3>
+				<ul>
+					<li><a href="#what-i-build">Signal intelligence</a></li>
+					<li><a href="#what-i-build">Research and enrichment agents</a></li>
+					<li><a href="#what-i-build">Signal-triggered outbound</a></li>
+					<li><a href="#what-i-build">Inbound conversion</a></li>
+					<li><a href="#what-i-build">Retention and expansion</a></li>
+				</ul>
+			</div>
+			<div>
+				<h3>Selected work</h3>
+				<ul>
+					<li><a href="/work/signal-engine.html">Finding buyers at the exact moment they need help</a></li>
+					<li><a href="/work/research-cascade.html">Researching 80,000 leads without paying for 80,000 deep dives</a></li>
+					<li><a href="/work/uk-broadband.html">Revenue agents for a UK broadband provider</a></li>
+					<li><a href="/work/instant-quotes.html">A priced quote in 45 seconds, for eight brands</a></li>
+					<li><a href="/work/sell-side-buyers.html">Finding every credible buyer for a sell-side deal</a></li>
+					<li><a href="/work/growth-engine.html">Turning a product into its own growth engine</a></li>
+				</ul>
+			</div>
+			<div>
+				<h3>Contact</h3>
+				<ul>
+					<li><a href="#who-i-am">Who I am</a></li>
+					<li><a href="#how-i-work">How I work</a></li>
+					<li><a href="#book">Book a call</a></li>
+					<li><a href="mailto:hariswassan001@gmail.com?subject=Resume">Resume</a></li>
+				</ul>
+				
+			</div>
+		</div>
+		<div class="end-legal"><span>&copy; Muhammad Haris</span><span>AI GTM Engineer</span></div>
+	</div>
+</footer>
+
+<script>
+// Selected work pages: page numbers swap the cards in place and keep the heading in view
+;(function () {
+	const sec = document.getElementById('selected-work')
+	const pages = [...sec.querySelectorAll('.wpage')]
+	const title = document.getElementById('work-title')
+	const btns = [...sec.querySelectorAll('.pager [data-page]')]
+	const next = sec.querySelector('.pager .next')
+	let cur = 1
+	function go(n) {
+		cur = n
+		pages.forEach((p, i) => (p.hidden = i + 1 !== n))
+		title.textContent = pages[n - 1].dataset.title
+		btns.forEach((b) => b.setAttribute('aria-current', String(Number(b.dataset.page) === n)))
+		next.innerHTML = n === pages.length ? '&larr;' : '&rarr;'
+		next.setAttribute('aria-label', n === pages.length ? 'Previous page' : 'Next page')
+		if (sec.getBoundingClientRect().top < 0) sec.scrollIntoView({ behavior: 'smooth', block: 'start' })
+	}
+	btns.forEach((b) => b.addEventListener('click', () => go(Number(b.dataset.page))))
+	next.addEventListener('click', () => go(cur === pages.length ? cur - 1 : cur + 1))
+})()
+
+// Signal engine video: plays only while it is on screen; with reduced motion it stays on the poster
+;(function () {
+	const v = document.getElementById('engine-video')
+	if (!v || matchMedia('(prefers-reduced-motion: reduce)').matches) return
+	new IntersectionObserver(([e]) => (e.isIntersecting ? v.play().catch(() => {}) : v.pause()), { threshold: 0.35 }).observe(v)
+})()
+
+// Booking calendar: weekdays from tomorrow, a few times a day; the pick goes into the "Book a call" email.
+// Swap this for the Cal.com / Calendly embed once the booking link is in.
+;(function () {
+	const grid = document.getElementById('cal-grid')
+	if (!grid) return
+	const TIMES = ['10:00', '11:30', '14:00', '15:30', '17:00']
+	const title = document.getElementById('cal-title')
+	const prev = document.getElementById('cal-prev')
+	const next = document.getElementById('cal-next')
+	const dayLabel = document.getElementById('cal-day')
+	const times = document.getElementById('cal-times')
+	const go = document.getElementById('cal-go')
+	const book = document.getElementById('close-book')
+	const today = new Date()
+	today.setHours(0, 0, 0, 0)
+	const first = new Date(today.getFullYear(), today.getMonth(), 1)
+	const last = new Date(today.getTime() + 60 * 864e5)
+	const open = (d) => d > today && d <= last && d.getDay() > 0 && d.getDay() < 6
+	let view = new Date(first)
+	let day = null, time = null
+	// near the end of a month, open on the next one so the calendar isn't nearly empty
+	let left = 0
+	for (let d = new Date(today); d.getMonth() === today.getMonth(); d.setDate(d.getDate() + 1)) if (open(d)) left++
+	if (left < 5) view = new Date(today.getFullYear(), today.getMonth() + 1, 1)
+	for (let d = new Date(Math.max(today, view)); !day; d.setDate(d.getDate() + 1)) if (open(d)) day = new Date(d)
+
+	const mail = (body) => 'mailto:hariswassan001@gmail.com?subject=Book%20a%20call' + (body ? '&body=' + encodeURIComponent(body) : '')
+	function pickTime() {
+		const on = !!time
+		go.setAttribute('aria-disabled', String(!on))
+		const tz = Intl.DateTimeFormat().resolvedOptions().timeZone
+		const when = on ? day.toLocaleDateString('en-GB', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' }) + ', ' + time + ' (' + tz + ')' : ''
+		go.href = mail(when)
+		book.href = mail(when)
+	}
+	function drawTimes() {
+		dayLabel.textContent = day.toLocaleDateString('en-GB', { weekday: 'short', day: 'numeric' })
+		times.innerHTML = ''
+		for (const t of TIMES) {
+			const b = document.createElement('button')
+			b.type = 'button'
+			b.textContent = t
+			b.setAttribute('aria-pressed', String(t === time))
+			b.addEventListener('click', () => { time = t; drawTimes(); pickTime() })
+			times.appendChild(b)
+		}
+	}
+	function drawMonth() {
+		title.textContent = view.toLocaleDateString('en-GB', { month: 'long', year: 'numeric' })
+		prev.disabled = view <= first
+		next.disabled = new Date(view.getFullYear(), view.getMonth() + 1, 1) > last
+		grid.innerHTML = ['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'].map((w) => `<span>${w}</span>`).join('')
+		const lead = (view.getDay() + 6) % 7
+		for (let i = 0; i < lead; i++) grid.appendChild(document.createElement('i'))
+		const n = new Date(view.getFullYear(), view.getMonth() + 1, 0).getDate()
+		for (let k = 1; k <= n; k++) {
+			const d = new Date(view.getFullYear(), view.getMonth(), k)
+			if (!open(d)) {
+				const i = document.createElement('i')
+				i.textContent = k
+				grid.appendChild(i)
+				continue
+			}
+			const b = document.createElement('button')
+			b.type = 'button'
+			b.textContent = k
+			b.setAttribute('aria-label', d.toLocaleDateString('en-GB', { weekday: 'long', day: 'numeric', month: 'long' }))
+			b.setAttribute('aria-pressed', String(d.getTime() === day.getTime()))
+			b.addEventListener('click', () => { day = d; time = null; drawMonth(); drawTimes(); pickTime() })
+			grid.appendChild(b)
+		}
+	}
+	prev.addEventListener('click', () => { view = new Date(view.getFullYear(), view.getMonth() - 1, 1); drawMonth() })
+	next.addEventListener('click', () => { view = new Date(view.getFullYear(), view.getMonth() + 1, 1); drawMonth() })
+	drawMonth()
+	drawTimes()
+	pickTime()
+})()
+
+// Band backgrounds (the hero, the why band and the last page): light pulses travel along the same network lines
+// as the band's texture, branch at the joints, and leave a soft ring on the node where they stop.
+// Still with reduced motion.
+document.querySelectorAll('.hero, .why, .close').forEach(function (band) {
+	if (matchMedia('(prefers-reduced-motion: reduce)').matches) return
+	const cv = document.createElement('canvas')
+	cv.className = 'flow'
+	cv.setAttribute('aria-hidden', 'true')
+	band.appendChild(cv)
+	const ctx = cv.getContext('2d')
+	// the 15 line paths of /images/pipeline-texture.svg, one 360 x 240 tile
+	const SEG = [
+		[[30, 30], [105, 30]], [[30, 150], [105, 150]], [[30, 210], [105, 210]], [[105, 90], [180, 90]],
+		[[105, 90], [105, 120], [142, 120], [142, 150]], [[105, 150], [180, 150]], [[180, 150], [255, 150]],
+		[[180, 150], [180, 180], [217, 180], [217, 210]], [[180, 210], [255, 210]], [[255, 30], [330, 30]],
+		[[255, 30], [255, 60], [292, 60], [292, 90]], [[255, 90], [330, 90]], [[255, 150], [330, 150]],
+		[[255, 210], [330, 210]], [[330, 90], [330, 120], [367, 120], [367, 150]],
+	]
+	const TRAIL = 54
+	let W = 0, H = 0, routes = [], byStart = new Map(), pulses = [], rings = [], running = false, last = 0
+
+	function build() {
+		const dpr = Math.min(window.devicePixelRatio || 1, 2)
+		W = band.clientWidth
+		H = band.clientHeight
+		cv.width = W * dpr
+		cv.height = H * dpr
+		ctx.setTransform(dpr, 0, 0, dpr, 0, 0)
+		routes = []
+		byStart = new Map()
+		for (let tx = 0; tx * 360 < W + 360; tx++) {
+			for (let ty = 0; ty * 240 < H; ty++) {
+				for (const s of SEG) {
+					const pts = s.map(([x, y]) => [x + tx * 360, y + ty * 240])
+					const cum = [0]
+					for (let i = 1; i < pts.length; i++) cum.push(cum[i - 1] + Math.hypot(pts[i][0] - pts[i - 1][0], pts[i][1] - pts[i - 1][1]))
+					const r = { pts, cum, len: cum[cum.length - 1] }
+					routes.push(r)
+					const k = pts[0].join()
+					if (!byStart.has(k)) byStart.set(k, [])
+					byStart.get(k).push(r)
+				}
+			}
+		}
+		// start with some pulses already on their way, so the band is alive the moment it shows
+		pulses = Array.from({ length: Math.round((W * H) / 104000) }, () => {
+			const r = routes[(Math.random() * routes.length) | 0]
+			return { chain: [r], d: Math.random() * r.len, v: 70 + Math.random() * 60, done: false }
+		})
+	}
+	// a point on a pulse's chain of routes, d pixels from its start
+	function at(chain, d) {
+		for (const r of chain) {
+			if (d <= r.len) {
+				let i = 1
+				while (i < r.cum.length - 1 && r.cum[i] < d) i++
+				const t = (d - r.cum[i - 1]) / (r.cum[i] - r.cum[i - 1] || 1)
+				return [r.pts[i - 1][0] + (r.pts[i][0] - r.pts[i - 1][0]) * t, r.pts[i - 1][1] + (r.pts[i][1] - r.pts[i - 1][1]) * t]
+			}
+			d -= r.len
+		}
+		const r = chain[chain.length - 1]
+		return r.pts[r.pts.length - 1]
+	}
+	// every corner of the chain between two distances, so the trail bends with the line
+	function corners(chain, a, b) {
+		const out = []
+		let base = 0
+		for (const r of chain) {
+			for (let i = 0; i < r.pts.length; i++) {
+				const d = base + r.cum[i]
+				if (d > a && d < b) out.push(r.pts[i])
+			}
+			base += r.len
+		}
+		return out
+	}
+	const total = (chain) => chain.reduce((s, r) => s + r.len, 0)
+
+	function frame(now) {
+		if (!running) return
+		const dt = Math.min((now - last) / 1000, 0.05)
+		last = now
+		ctx.clearRect(0, 0, W, H)
+		if (pulses.length < Math.round((W * H) / 52000) && Math.random() < 0.08) {
+			pulses.push({ chain: [routes[(Math.random() * routes.length) | 0]], d: 0, v: 70 + Math.random() * 60, done: false })
+		}
+		for (const p of pulses) {
+			p.d += p.v * dt
+			if (!p.done && p.d >= total(p.chain)) {
+				const end = p.chain[p.chain.length - 1].pts.at(-1)
+				const next = byStart.get(end.join())
+				if (next && p.chain.length < 6) p.chain.push(next[(Math.random() * next.length) | 0])
+				else {
+					p.done = true
+					rings.push({ x: end[0], y: end[1], t: 0 })
+				}
+			}
+			const L = total(p.chain)
+			const head = Math.min(p.d, L)
+			const tail = Math.max(0, Math.min(p.d - TRAIL, L))
+			if (tail >= L) { p.dead = true; continue }
+			const h = at(p.chain, head), t = at(p.chain, tail)
+			const g = ctx.createLinearGradient(t[0], t[1], h[0], h[1])
+			g.addColorStop(0, 'rgba(159, 240, 196, 0)')
+			g.addColorStop(1, 'rgba(190, 255, 220, .9)')
+			ctx.strokeStyle = g
+			ctx.lineWidth = 1.8
+			ctx.lineCap = 'round'
+			ctx.beginPath()
+			ctx.moveTo(t[0], t[1])
+			for (const c of corners(p.chain, tail, head)) ctx.lineTo(c[0], c[1])
+			ctx.lineTo(h[0], h[1])
+			ctx.stroke()
+			if (!p.done) {
+				ctx.fillStyle = '#d9ffea'
+				ctx.beginPath()
+				ctx.arc(h[0], h[1], 2.4, 0, Math.PI * 2)
+				ctx.fill()
+			}
+		}
+		pulses = pulses.filter((p) => !p.dead)
+		for (const r of rings) {
+			r.t += dt
+			const k = r.t / 0.9
+			ctx.strokeStyle = `rgba(159, 240, 196, ${0.7 * (1 - k)})`
+			ctx.lineWidth = 1.4
+			ctx.beginPath()
+			ctx.arc(r.x, r.y, 3 + 13 * k, 0, Math.PI * 2)
+			ctx.stroke()
+			ctx.fillStyle = `rgba(217, 255, 234, ${1 - k})`
+			ctx.beginPath()
+			ctx.arc(r.x, r.y, 3, 0, Math.PI * 2)
+			ctx.fill()
+		}
+		rings = rings.filter((r) => r.t < 0.9)
+		requestAnimationFrame(frame)
+	}
+
+	build()
+	new ResizeObserver(build).observe(band)
+	let seen = false
+	const toggle = () => {
+		const on = seen && !document.hidden
+		if (on && !running) { running = true; last = performance.now(); requestAnimationFrame(frame) }
+		if (!on) running = false
+	}
+	new IntersectionObserver(([e]) => { seen = e.isIntersecting; toggle() }).observe(band)
+	document.addEventListener('visibilitychange', toggle)
+})
+</script>
+</body>
 </html>

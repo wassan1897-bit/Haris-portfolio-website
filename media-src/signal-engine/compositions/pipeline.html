@@ -1,0 +1,160 @@
+<template>
+  <style>
+    @font-face {
+      font-family: "Geist";
+      src: url("assets/fonts/Geist-700.woff2") format("woff2");
+      font-weight: 700;
+    }
+    #root {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+    }
+    /* the confirmed card arriving from the rep (centre 746,600 at 1.3x) */
+    #pl-card {
+      position: absolute;
+      left: 447px;
+      top: 530px;
+      width: 186px;
+      height: 140px;
+      background: #fff;
+      border: 2px solid #38c97a;
+      border-radius: 16px;
+      box-shadow: 0 10px 24px -14px rgba(17, 26, 23, 0.22);
+      transform-origin: 50% 50%;
+    }
+    #pl-card i { position: absolute; display: block; }
+    #pl-card .th { left: 16px; top: 16px; width: 40px; height: 40px; border-radius: 10px; background: #dfeee6; }
+    #pl-card .nm { left: 66px; top: 20px; width: 92px; height: 12px; border-radius: 6px; background: #c7d1cc; }
+    #pl-card .sb { left: 66px; top: 40px; width: 64px; height: 10px; border-radius: 5px; background: #e3e9e6; }
+    #pl-card .ad { left: 36px; top: 108px; width: 84px; height: 10px; border-radius: 5px; background: #e3e9e6; }
+    #pl-card .st { position: absolute; left: 16px; top: 72px; display: flex; gap: 4px; }
+    #pl-card .st svg { width: 18px; height: 18px; fill: #d9dfdc; }
+    #pl-card .st svg:first-child { fill: #e8b23a; }
+    #pl-card .pn { position: absolute; left: 16px; top: 104px; width: 12px; height: 17px; }
+    #pl-card .bd { right: -14px; top: -14px; width: 42px; height: 42px; border-radius: 50%; background: #38c97a; }
+    #pl-card .bd svg { position: absolute; inset: 0; width: 42px; height: 42px; }
+
+    /* the pipeline: confirmed leads as rows */
+    #pl-col {
+      position: absolute;
+      left: 90px;
+      top: 330px;
+      width: 620px;
+      height: 588px;
+    }
+    .pl-row {
+      position: absolute;
+      left: 0;
+      width: 620px;
+      height: 88px;
+      background: #fff;
+      border: 2px solid #dbe3df;
+      border-radius: 16px;
+      box-shadow: 0 10px 24px -16px rgba(17, 26, 23, 0.2);
+    }
+    .pl-row i { position: absolute; display: block; }
+    .pl-row .rk { position: absolute; left: 16px; top: 16px; width: 50px; font: 700 42px/56px "Geist", sans-serif; color: var(--color-accent); text-align: center; font-variant-numeric: tabular-nums; }
+    .pl-row .th { left: 78px; top: 16px; width: 56px; height: 56px; border-radius: 12px; background: #dfeee6; }
+    .pl-row .nm { left: 150px; top: 24px; width: 150px; height: 15px; border-radius: 8px; background: #c7d1cc; }
+    .pl-row .sb { left: 150px; top: 50px; width: 100px; height: 12px; border-radius: 6px; background: #e3e9e6; }
+    .pl-row .tr { left: 330px; top: 37px; width: 196px; height: 14px; border-radius: 7px; background: #e8eeeb; }
+    .pl-row .fl { left: 330px; top: 37px; width: 196px; height: 14px; border-radius: 7px; background: var(--color-accent); transform-origin: 0 50%; }
+    .pl-row .ck { right: 18px; top: 20px; width: 44px; height: 44px; border-radius: 50%; background: #38c97a; }
+    .pl-row .ck svg { position: absolute; inset: 0; width: 44px; height: 44px; }
+    #pl-num {
+      position: absolute;
+      left: 744px;
+      top: 440px;
+      width: 300px;
+      font: 700 240px/1 "Geist", sans-serif;
+      letter-spacing: -0.05em;
+      color: var(--color-accent);
+      font-variant-numeric: tabular-nums;
+    }
+    #pl-scan {
+      position: absolute;
+      left: 0;
+      top: 316px;
+      width: 4px;
+      height: 620px;
+    }
+    #pl-scan b { position: absolute; inset: 0; border-radius: 2px; background: var(--color-accent); }
+    #pl-scan s { position: absolute; right: 4px; top: 0; width: 170px; height: 620px; background: linear-gradient(90deg, rgba(14, 122, 85, 0), rgba(14, 122, 85, 0.12)); }
+  </style>
+  <div data-hf-id="hf-dk3p" id="root" data-composition-id="pipeline" data-width="1080" data-height="1080">
+    <div data-hf-id="hf-smqw" id="pl-col"></div>
+    <div data-hf-id="hf-uvxe" id="pl-num">0</div>
+    <div data-hf-id="hf-720t" id="pl-scan"><s data-hf-id="hf-dljm"></s><b data-hf-id="hf-xujp"></b></div>
+    <div data-hf-id="hf-65fs" id="pl-card">
+      <i data-hf-id="hf-ou8w" class="th"></i><i data-hf-id="hf-gu9n" class="nm"></i><i data-hf-id="hf-t6k7" class="sb"></i>
+      <div data-hf-id="hf-fs85" class="st">
+        <svg data-hf-id="hf-ulu9" viewBox="0 0 24 24"><path data-hf-id="hf-glnx" d="M12 2l2.9 6.6 7.1.6-5.4 4.7 1.6 7L12 17.3 5.8 20.9l1.6-7L2 9.2l7.1-.6z" /></svg>
+        <svg data-hf-id="hf-1tol" viewBox="0 0 24 24"><path data-hf-id="hf-t1sx" d="M12 2l2.9 6.6 7.1.6-5.4 4.7 1.6 7L12 17.3 5.8 20.9l1.6-7L2 9.2l7.1-.6z" /></svg>
+        <svg data-hf-id="hf-30lo" viewBox="0 0 24 24"><path data-hf-id="hf-u8q0" d="M12 2l2.9 6.6 7.1.6-5.4 4.7 1.6 7L12 17.3 5.8 20.9l1.6-7L2 9.2l7.1-.6z" /></svg>
+        <svg data-hf-id="hf-2man" viewBox="0 0 24 24"><path data-hf-id="hf-tuez" d="M12 2l2.9 6.6 7.1.6-5.4 4.7 1.6 7L12 17.3 5.8 20.9l1.6-7L2 9.2l7.1-.6z" /></svg>
+        <svg data-hf-id="hf-3t7q" viewBox="0 0 24 24"><path data-hf-id="hf-ruvu" d="M12 2l2.9 6.6 7.1.6-5.4 4.7 1.6 7L12 17.3 5.8 20.9l1.6-7L2 9.2l7.1-.6z" /></svg>
+      </div>
+      <svg data-hf-id="hf-o8zt" class="pn" viewBox="0 0 12 17"><path data-hf-id="hf-g7bt" fill="#9aa6a0" d="M6 0C2.7 0 0 2.6 0 5.9 0 10.3 6 17 6 17s6-6.7 6-11.1C12 2.6 9.3 0 6 0zm0 8.2a2.3 2.3 0 110-4.6 2.3 2.3 0 010 4.6z" /></svg>
+      <i data-hf-id="hf-m1pn" class="ad"></i>
+      <i data-hf-id="hf-cosu" class="bd"><svg data-hf-id="hf-ieox" viewBox="0 0 42 42"><polyline data-hf-id="hf-usm2" points="12,22 18.5,28.5 30.5,14" fill="none" stroke="#fff" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round" /></svg></i>
+    </div>
+  </div>
+  <script>
+    (() => {
+      const TICK = '<svg viewBox="0 0 36 36"><polyline points="10,18.5 15.5,24 26,12.5" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+      // score per row, and where each row lands once sorted (rank 1 = highest score)
+      const SCORE = [0.55, 0.92, 0.38, 0.81, 0.67, 0.99];
+      const order = SCORE.map((s, i) => i).sort((a, b) => SCORE[b] - SCORE[a]);
+      const RANK = SCORE.map((s, i) => order.indexOf(i) + 1);
+      const col = document.getElementById("pl-col");
+      const rows = SCORE.map((s, i) => {
+        const el = document.createElement("div");
+        el.className = "pl-row";
+        el.style.top = i * 100 + "px";
+        el.innerHTML = '<span class="rk">' + RANK[i] + '</span><i class="th"></i><i class="nm"></i><i class="sb"></i><i class="tr"></i><i class="fl"></i><i class="ck">' + TICK + "</i>";
+        col.appendChild(el);
+        return el;
+      });
+      const fills = rows.map((r) => r.querySelector(".fl"));
+      const ranks = rows.map((r) => r.querySelector(".rk"));
+
+      const tl = gsap.timeline({ paused: true });
+
+      // 0-0.6 carry across: the confirmed card shrinks into the first row of the pipeline
+      tl.fromTo("#pl-card", { x: 206, y: 0, scale: 1.3, opacity: 1, filter: "blur(0px)" }, { x: -140, y: -226, scale: 0.5, opacity: 0, filter: "blur(6px)", duration: 0.6, ease: "power3.inOut" }, 0);
+      tl.fromTo(rows[0], { opacity: 0, scale: 0.96 }, { opacity: 1, scale: 1, duration: 0.3, ease: "expo.out" }, 0.4);
+
+      // 0.6-1.25 the rest of the pipeline fills
+      tl.fromTo(rows.slice(1), { y: -30, opacity: 0 }, { y: 0, opacity: 1, duration: 0.35, ease: "expo.out", stagger: 0.09 }, 0.6);
+
+      // 0.5-2.0 the count lands, then holds
+      const num = document.getElementById("pl-num");
+      const n = { v: 0 };
+      tl.fromTo("#pl-num", { opacity: 0, filter: "blur(8px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.2, ease: "power4.out" }, 0.5);
+      tl.fromTo(n, { v: 0 }, { v: 51, duration: 1.4, ease: "power2.out", onUpdate: () => (num.textContent = Math.round(n.v)) }, 0.6);
+
+      // 3.8 the count leaves; the list moves to the centre and gets its scores
+      tl.fromTo(fills, { scaleX: 0 }, { scaleX: 0, duration: 0.01 }, 0);
+      tl.fromTo(ranks, { opacity: 0 }, { opacity: 0, duration: 0.01 }, 0);
+      tl.fromTo("#pl-num", { opacity: 1, filter: "blur(0px)" }, { opacity: 0, filter: "blur(8px)", duration: 0.25, ease: "power3.in", immediateRender: false }, 3.8);
+      tl.fromTo("#pl-col", { x: 0 }, { x: 140, duration: 0.6, ease: "power3.inOut" }, 3.9);
+      fills.forEach((f, i) => tl.fromTo(f, { scaleX: 0 }, { scaleX: SCORE[i], duration: 0.6, ease: "expo.out", immediateRender: false }, 4.5 + i * 0.05));
+
+      // 5.3-5.9 the rows sort by score, then the ranks land
+      rows.forEach((r, i) => tl.fromTo(r, { y: 0 }, { y: (RANK[i] - 1 - i) * 100, duration: 0.6, ease: "power3.inOut", immediateRender: false }, 5.3));
+      order.forEach((i, k) => tl.fromTo(ranks[i], { opacity: 0, filter: "blur(6px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.15, ease: "power4.out", immediateRender: false }, 6.0 + k * 0.06));
+
+      // 7.3-9.0 nobody touches it: the scanner runs over the ranked list on its own
+      tl.fromTo("#pl-scan", { x: 220, opacity: 0 }, { x: 220, opacity: 0, duration: 0.01 }, 0);
+      tl.fromTo("#pl-scan", { opacity: 0 }, { opacity: 1, duration: 0.15, ease: "power2.out", immediateRender: false }, 7.25);
+      tl.fromTo("#pl-scan", { x: 220 }, { x: 860, duration: 1.7, ease: "none", immediateRender: false }, 7.3);
+      tl.fromTo("#pl-scan", { opacity: 1 }, { opacity: 0, duration: 0.15, ease: "power3.in", immediateRender: false }, 9.0);
+
+      // 9.4 the list blurs out and the wall comes back for the loop
+      tl.fromTo("#pl-col", { opacity: 1, filter: "blur(0px)" }, { opacity: 0, filter: "blur(8px)", duration: 0.25, ease: "power3.in", immediateRender: false }, 9.4);
+
+      window.__timelines["pipeline"] = tl;
+    })();
+  </script>
+</template>

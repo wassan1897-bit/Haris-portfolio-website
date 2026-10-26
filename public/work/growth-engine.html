@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Turning a product into its own growth engine | Muhammad Haris, AI GTM Engineer</title>
+<meta name="description" content="Brands found my client in their own analytics, then reached out." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+:root { --bg: #f5f7f6; --surface: #fff; --ink: #111a17; --mute: #56625d; --line: rgb(17 26 23 / .09); --acc: #0e7a55; --acc-soft: #e3f1ea; }
+* { box-sizing: border-box; margin: 0; }
+body { background: var(--bg); color: var(--ink); font: 400 17px/1.6 "Geist", system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+a { color: inherit; text-decoration: none; }
+a:focus-visible { outline: 2px solid var(--acc); outline-offset: 3px; border-radius: 6px; }
+.wrap { width: min(1240px, 100% - 48px); margin: 0 auto; }
+.btn { display: inline-flex; align-items: center; gap: 10px; height: 52px; padding: 0 24px; border-radius: 999px; background: var(--ink); color: #fff; font-weight: 600; font-size: 16px; white-space: nowrap; transition: transform .16s ease-out; }
+.btn:active { transform: scale(.97); }
+.btn i { width: 26px; height: 26px; border-radius: 50%; background: var(--acc); display: grid; place-items: center; font-style: normal; font-size: 14px; }
+nav.top { height: 78px; display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+.logo { line-height: 1.15; } .logo b { display: block; font-size: 18px; font-weight: 700; letter-spacing: -.02em; } .logo span { font-size: 13px; color: var(--mute); }
+.links { display: flex; gap: 34px; font-size: 15px; color: var(--mute); } .links a:hover { color: var(--ink); }
+nav .btn { height: 44px; font-size: 15px; padding: 0 20px; }
+.back { display: inline-flex; gap: 8px; margin-top: 30px; font-size: 15px; font-weight: 600; color: var(--acc); }
+.head { padding: 40px 0 56px; max-width: 900px; }
+.tag { display: inline-block; padding: 5px 10px; border-radius: 999px; background: var(--acc-soft); font: 500 12px "Geist Mono", monospace; letter-spacing: .04em; color: var(--acc); }
+.client { display: block; margin-top: 18px; font-size: 15px; color: var(--mute); }
+h1 { margin-top: 8px; font-size: clamp(38px, 4.6vw, 64px); line-height: 1.04; letter-spacing: -.04em; font-weight: 600; }
+.sub { margin-top: 18px; font-size: 21px; color: var(--mute); max-width: 34em; }
+.stats { display: grid; grid-template-columns: repeat(var(--n), 1fr); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.stats div { padding: 34px 26px 34px 0; } .stats div + div { padding-left: 26px; border-left: 1px solid var(--line); }
+.stats b { display: block; font-size: clamp(34px, 3.6vw, 52px); letter-spacing: -.045em; font-weight: 600; line-height: 1; color: var(--acc); }
+.stats span { display: block; margin-top: 10px; font-size: 15px; color: var(--mute); }
+.body { display: grid; grid-template-columns: 260px 1fr; gap: 20px 70px; padding: 80px 0 40px; }
+.body h2 { font: 500 12px "Geist Mono", monospace; letter-spacing: .12em; text-transform: uppercase; color: var(--acc); padding-top: 6px; }
+.body .txt { max-width: 44em; padding-bottom: 50px; }
+.body .txt p { font-size: 18.5px; line-height: 1.7; color: #2b3631; }
+.body .txt p + p { margin-top: 18px; }
+.under { background: var(--surface); border-radius: 14px; padding: 26px 30px; font-size: 16px; color: var(--mute); }
+.under b { color: var(--ink); font-weight: 600; }
+.cta { margin: 80px auto 100px; width: min(1240px, 100% - 48px); background: var(--ink); border-radius: 24px; padding: clamp(40px, 6vw, 80px); display: grid; grid-template-columns: 1fr auto; gap: 40px; align-items: end; color: #eef3f1; }
+.cta h2 { font-size: clamp(30px, 3.6vw, 48px); line-height: 1.05; letter-spacing: -.04em; font-weight: 600; max-width: 14em; }
+.cta .btn { background: var(--acc); } .cta .btn i { background: #fff; color: var(--acc); }
+.more { display: flex; justify-content: space-between; gap: 20px; padding: 0 0 20px; }
+.more a { flex: 1; padding: 22px 24px; border-radius: 14px; background: var(--surface); }
+.more a small { display: block; font-size: 13px; color: var(--mute); } .more a b { display: block; margin-top: 4px; font-size: 17px; font-weight: 600; line-height: 1.3; }
+.more a:last-child { text-align: right; }
+footer { border-top: 1px solid var(--line); padding: 40px 0; }
+footer .wrap { display: flex; justify-content: space-between; align-items: center; gap: 20px; flex-wrap: wrap; font-size: 15px; }
+footer .c { display: flex; gap: 26px; flex-wrap: wrap; color: var(--mute); }
+@media (max-width: 1000px) { .links { display: none; } .body { grid-template-columns: 1fr; gap: 10px; } }
+@media (max-width: 680px) { .stats { grid-template-columns: 1fr 1fr; } .stats div:nth-child(3) { border-left: 0; padding-left: 0; } .stats div { padding-right: 12px; } .stats div + div { padding-left: 12px; } .cta { grid-template-columns: 1fr; } .more { flex-direction: column; } .more a:last-child { text-align: left; } .logo span { display: none; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+	<nav class="top" aria-label="Main">
+		<a class="logo" href="/"><b>Muhammad Haris</b><span>AI GTM Engineer</span></a>
+		<div class="links"><a href="/#selected-work">Selected work</a><a href="/#what-i-build">What I build</a><a href="/#how-i-work">How I work</a><a href="/#who-i-am">Who I am</a></div>
+		<a class="btn" href="mailto:hariswassan001@gmail.com?subject=Book%20a%20call">Book a call</a>
+	</nav>
+	<a class="back" href="/#selected-work">&larr; Selected work</a>
+	<header class="head">
+		<span class="tag">Demand generation, signup qualification</span>
+		<span class="client">Calendar marketing SaaS</span>
+		<h1>Turning a product into its own growth engine</h1>
+		<p class="sub">Brands found my client in their own analytics, then reached out.</p>
+	</header>
+	<section class="stats" style="--n:3" aria-label="Results"><div><b>9</b><span>production pipelines, one connected system</span></div><div><b>14</b><span>industry groups classified on every signup</span></div><div><b>20+</b><span>verified fields written back per signup</span></div></section>
+	<section class="body">
+		<h2>The situation</h2><div class="txt"><p>A calendar marketing platform wanted more of the right companies using it, without building an outbound team to chase them. It had a second problem too: new signups arrived every day, and sales had no way of telling which ones were worth a call.</p></div>
+		<h2>What I built</h2><div class="txt"><p>Two engines. The first finds brands that run events, reads their websites and social pages, and builds each brand a ready-made public calendar on the platform. AI writes every event description so it ranks in search and gets cited in AI answers, and every event links back to the brand&#x27;s own site, tagged so the visit is traced to my client. The engine re-checks every brand on a schedule, and a person approves each event before it goes live.</p><p>The second engine reads every new signup the moment it lands. It sets personal email addresses aside, then research agents establish the company&#x27;s industry, which of the platform&#x27;s three products it would realistically use, and the role and company size of the person who signed up. Every answer comes with evidence and a confidence score, so sales can act on it without checking.</p></div>
+		<h2>What changed</h2><div class="txt"><p>Brands started seeing traffic from my client in their own analytics, and some came to them asking about the product. That&#x27;s outbound in reverse: the value arrives first and the conversation starts on the buyer&#x27;s side. Meanwhile, sales stopped working a raw list of signups and started working a ranked pipeline.</p></div>
+		<h2>Under the hood</h2><div class="txt"><p class="under">AI research agents, GPT-4o, Firecrawl, Webflow CMS, attribution tagging, Zapier and Apps Script orchestration.</p></div>
+	</section>
+	<div class="more">
+		<a href="/work/sell-side-buyers.html"><small>&larr; Selected work</small><b>Finding every credible buyer for a sell-side deal</b></a>
+		<a href="/work/signal-engine.html"><small>Selected work &rarr;</small><b>Finding buyers at the exact moment they need help</b></a>
+	</div>
+</div>
+<section class="cta">
+	<h2>If you're serious about building a revenue engine, let's talk.</h2>
+	<a class="btn" href="mailto:hariswassan001@gmail.com?subject=Book%20a%20call">Book a call <i aria-hidden="true">&rarr;</i></a>
+</section>
+<footer><div class="wrap">
+	<a class="logo" href="/"><b>Muhammad Haris</b><span>AI GTM Engineer</span></a>
+	<div class="c"><a href="mailto:hariswassan001@gmail.com">hariswassan001@gmail.com</a><a href="https://linkedin.com/in/muhammad-haris-wassan" target="_blank" rel="noopener noreferrer">LinkedIn</a><a href="https://github.com/Haris001-bit" target="_blank" rel="noopener noreferrer">GitHub</a></div>
+</div></footer>
+</body>
+</html>

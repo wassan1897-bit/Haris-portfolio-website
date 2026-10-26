@@ -1,0 +1,228 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Idea 03 - Hello</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Gabarito:wght@500;600;700;800&family=Onest:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+/* Idea 03, "Hello" (ui-ux-pro-max AI-Native pattern, emil-design-eng polish, Galen's on-page booking):
+   the site behaves like a conversation. The hero is a chat that shows what an agent does, reviews arrive as
+   speech bubbles, and booking happens inside a chat card. Bright white, soft pastel tiles, one coral for actions,
+   rounded Gabarito headings. Voice: casual, plain, friendly. */
+:root {
+	--bg: #ffffff;
+	--ink: #1f2125;
+	--mute: #5f646d;
+	--line: #ecedf0;
+	--coral: #ff6a3d;
+	--coral-ink: #2a1006;
+	--peach: #ffe9df;
+	--mint: #def5e7;
+	--sky: #e3eeff;
+	--butter: #fff3c6;
+	--r: 26px;
+}
+* { box-sizing: border-box; margin: 0; }
+html { overflow-x: hidden; }
+body { width: 1440px; background: var(--bg); color: var(--ink); font: 400 17px/1.6 "Onest", sans-serif; -webkit-font-smoothing: antialiased; }
+h1, h2, h3, .g { font-family: "Gabarito", sans-serif; }
+a { color: inherit; text-decoration: none; }
+.wrap { width: 1240px; margin: 0 auto; }
+.btn { display: inline-flex; align-items: center; gap: 10px; height: 54px; padding: 0 26px; border-radius: 999px; background: var(--coral); color: var(--coral-ink); font: 700 17px "Gabarito"; box-shadow: 0 6px 0 #e04e22; }
+.ph { position: relative; overflow: hidden; background: linear-gradient(160deg, #f1f2f4, #dadde2); }
+.ph span { position: absolute; left: 14px; bottom: 12px; font: 500 12px "Onest"; color: #4c515a; background: rgb(255 255 255 / .8); padding: 5px 10px; border-radius: 999px; }
+
+/* nav */
+nav.top { height: 84px; display: flex; align-items: center; justify-content: space-between; }
+.logo { display: flex; align-items: center; gap: 10px; font: 800 26px "Gabarito"; letter-spacing: -.02em; }
+.logo i { width: 34px; height: 34px; border-radius: 12px 12px 12px 3px; background: var(--coral); display: block; position: relative; }
+.logo i::after { content: ""; position: absolute; left: 9px; top: 14px; width: 16px; height: 5px; border-radius: 3px; background: #fff; box-shadow: 0 0 0 0 transparent; }
+nav .links { display: flex; gap: 30px; font-weight: 500; color: var(--mute); }
+nav .btn { height: 44px; font-size: 15px; padding: 0 18px; box-shadow: 0 4px 0 #e04e22; }
+
+/* hero */
+.hero { display: grid; grid-template-columns: 1fr 560px; gap: 60px; align-items: center; padding: 40px 0 100px; }
+.hero h1 { font-size: 80px; line-height: 1; letter-spacing: -.035em; font-weight: 800; }
+.hero h1 u { text-decoration: none; background: linear-gradient(transparent 62%, var(--butter) 62%); }
+.hero p { margin-top: 24px; font-size: 21px; color: var(--mute); max-width: 26em; }
+.hero .who { display: flex; align-items: center; gap: 14px; margin-top: 34px; }
+.hero .who .ph { width: 58px; height: 58px; border-radius: 50%; }
+.hero .who b { display: block; font: 700 17px "Gabarito"; }
+.hero .who small { color: var(--mute); font-size: 14px; }
+.sticker { display: inline-block; padding: 8px 14px; border-radius: 999px; font: 700 14px "Gabarito"; }
+
+/* chat */
+.chat { background: #f7f7f9; border-radius: 30px; padding: 22px; box-shadow: 0 30px 60px -30px rgb(31 33 37 / .25), inset 0 0 0 1px var(--line); }
+.chat .head { display: flex; align-items: center; justify-content: space-between; padding: 4px 6px 16px; }
+.chat .head b { font: 700 16px "Gabarito"; }
+.chat .head small { font-size: 13px; color: var(--mute); }
+.msg { max-width: 82%; padding: 14px 18px; border-radius: 22px; font-size: 16px; line-height: 1.45; margin-top: 10px; }
+.msg.you { margin-left: auto; background: var(--ink); color: #fff; border-bottom-right-radius: 6px; }
+.msg.me { background: #fff; border-bottom-left-radius: 6px; box-shadow: 0 1px 2px rgb(31 33 37 / .06); }
+.msg.me b { color: #c4441b; }
+.typing { display: inline-flex; gap: 5px; padding: 16px 18px; border-radius: 22px; border-bottom-left-radius: 6px; background: #fff; margin-top: 10px; }
+.typing i { width: 8px; height: 8px; border-radius: 50%; background: #c7cad0; }
+.typing i:nth-child(2) { background: #a9adb5; }
+.input { display: flex; align-items: center; gap: 10px; margin-top: 18px; background: #fff; border-radius: 999px; padding: 8px 8px 8px 22px; box-shadow: inset 0 0 0 1.5px var(--line); }
+.input span { flex: 1; color: #6b707a; }
+.input b { height: 42px; padding: 0 18px; border-radius: 999px; background: var(--coral); color: var(--coral-ink); display: grid; place-items: center; font: 700 15px "Gabarito"; }
+.chat .note { text-align: center; font-size: 12.5px; color: var(--mute); margin-top: 12px; }
+
+/* plate: pastel bento */
+section.s { padding: 120px 0 0; }
+h2 { font-size: 58px; line-height: 1.02; letter-spacing: -.035em; font-weight: 800; }
+.plate { display: grid; grid-template-columns: 1.3fr 1fr 1fr; grid-template-rows: 250px 250px; gap: 16px; margin-top: 44px; }
+.tile { border-radius: var(--r); padding: 30px; display: flex; flex-direction: column; justify-content: space-between; position: relative; overflow: hidden; }
+.tile h3 { font-size: 27px; line-height: 1.08; letter-spacing: -.02em; font-weight: 700; max-width: calc(100% - 96px); }
+.tile p { max-width: calc(100% - 40px); }
+.tile p { margin-top: 8px; color: #3d4148; font-size: 15.5px; }
+.tile .shape { position: absolute; right: 24px; top: 24px; width: 70px; height: 70px; }
+.t1 { grid-row: span 2; background: var(--peach); }
+.t1 .shape { width: 76px; height: 76px; border-radius: 50%; background: #ffc9b3; }
+.t2 { background: var(--mint); } .t2 .shape { border-radius: 20px; background: #b9e9cc; transform: rotate(12deg); }
+.t3 { background: var(--sky); } .t3 .shape { border-radius: 50% 50% 0 50%; background: #c3d8ff; }
+.t4 { grid-column: span 2; background: var(--butter); } .t4 .shape { width: 80px; height: 44px; border-radius: 999px; background: #ffe58a; }
+.t1 .ex { background: #fff; border-radius: 18px; padding: 16px 18px; font-size: 15px; }
+.t1 .ex b { font: 800 34px/1 "Gabarito"; letter-spacing: -.03em; color: #c4441b; display: block; }
+
+/* proof */
+.proof { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-top: 44px; }
+.pf { border-radius: var(--r); padding: 28px; box-shadow: inset 0 0 0 1.5px var(--line); position: relative; }
+.pf b { display: block; font: 800 54px/1 "Gabarito"; letter-spacing: -.04em; }
+.pf span { display: block; margin-top: 10px; color: var(--mute); font-size: 15px; }
+.pf .sticker { position: absolute; right: -10px; top: -14px; transform: rotate(6deg); }
+
+/* builds */
+.builds { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; margin-top: 44px; }
+.bd { border-radius: var(--r); box-shadow: inset 0 0 0 1.5px var(--line); overflow: hidden; display: grid; grid-template-columns: 1fr 200px; }
+.bd .in { padding: 28px; }
+.bd small { font: 700 13px "Gabarito"; padding: 5px 11px; border-radius: 999px; }
+.bd h3 { margin-top: 14px; font-size: 26px; line-height: 1.1; letter-spacing: -.02em; }
+.bd p { margin-top: 8px; color: var(--mute); font-size: 15.5px; }
+.bd .ph { border-radius: 0; }
+.bd .k { margin-top: 18px; font: 800 30px "Gabarito"; letter-spacing: -.03em; }
+.bd .k span { font: 400 14px "Onest"; color: var(--mute); margin-left: 6px; letter-spacing: 0; }
+
+/* how we'd work: a short thread */
+.thread { max-width: 760px; margin: 44px auto 0; }
+.thread .msg { max-width: 70%; font-size: 17px; }
+.thread .msg h3 { font-size: 20px; margin-bottom: 4px; }
+
+/* reviews as bubbles */
+.bubbles { columns: 3; column-gap: 18px; margin-top: 44px; }
+.bb { break-inside: avoid; margin-bottom: 18px; }
+.bb .q { border-radius: 24px 24px 24px 6px; padding: 22px 24px; font-size: 18px; line-height: 1.45; }
+.bb:nth-child(4n+1) .q { background: var(--peach); } .bb:nth-child(4n+2) .q { background: var(--sky); } .bb:nth-child(4n+3) .q { background: var(--mint); } .bb:nth-child(4n) .q { background: var(--butter); }
+.bb .by { display: flex; align-items: center; gap: 10px; margin-top: 10px; font-size: 14px; color: var(--mute); }
+.bb .by i { width: 34px; height: 34px; border-radius: 50%; background: #eceef2; display: grid; place-items: center; font: 700 13px "Gabarito"; font-style: normal; color: var(--ink); }
+
+/* booking */
+.book { margin-top: 120px; background: var(--peach); border-radius: 36px; padding: 70px; display: grid; grid-template-columns: 1fr 520px; gap: 60px; align-items: center; }
+.book h2 { font-size: 64px; }
+.book p { margin-top: 18px; font-size: 19px; color: #4a3a33; }
+.bk { background: #fff; border-radius: 28px; padding: 24px; box-shadow: 0 30px 50px -30px rgb(120 50 20 / .3); }
+.bk .msg.me { background: #f7f7f9; box-shadow: none; }
+.slots { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+.slots span { padding: 10px 16px; border-radius: 999px; box-shadow: inset 0 0 0 1.5px var(--line); font: 600 15px "Gabarito"; }
+.slots span.on { background: var(--coral); color: var(--coral-ink); box-shadow: none; }
+.bk .btn { margin-top: 20px; width: 100%; justify-content: center; }
+
+footer.site { display: flex; justify-content: space-between; align-items: center; padding: 50px 0 50px; color: var(--mute); font-size: 15px; }
+footer.site div { display: flex; gap: 26px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+	<nav class="top">
+		<a class="logo"><i></i>haris</a>
+		<div class="links"><a>What I build</a><a>Recent work</a><a>Kind words</a></div>
+		<a class="btn">Book a call</a>
+	</nav>
+
+	<section class="hero">
+		<div>
+			<h1>Tell me what's slowing <u>your team</u> down.</h1>
+			<p>I'm Haris. I build AI agents and automations that take the repetitive work off your people, then I stay until they run.</p>
+			<div class="who"><div class="ph"></div><div><b>Muhammad Haris</b><small>Forward deployed engineer and AI consultant</small></div><span class="sticker" style="background:var(--mint);margin-left:10px">Top Rated Plus</span></div>
+		</div>
+		<div class="chat">
+			<div class="head"><b>Haris</b><small>Example conversation</small></div>
+			<div class="msg you">Our support team answers the same questions all day.</div>
+			<div class="msg me">That's work an agent can take. For a UK broadband provider, one I built has handled <b>6,700+ conversations</b>.</div>
+			<div class="msg you">And when it gets stuck?</div>
+			<div class="msg me">It hands over to a person with the context kept, routed to one of <b>7 departments</b>.</div>
+			<div class="typing"><i></i><i></i><i></i></div>
+			<div class="input"><span>Describe what eats your week...</span><b>Send</b></div>
+			<p class="note">I reply within a day, with a plan and a fixed price.</p>
+		</div>
+	</section>
+</div>
+
+<div class="wrap">
+	<section class="s">
+		<h2>Things I can take off your plate</h2>
+		<div class="plate">
+			<div class="tile t1"><div class="shape"></div><div><h3>Customer support and phone calls</h3><p>AI agents that answer, triage and hand over to a person when it matters.</p></div><div class="ex"><b>21,000+</b>agent minutes saved, estimated, for one client</div></div>
+			<div class="tile t2"><div class="shape"></div><h3>Inboxes and forms</h3><p>Enquiries sorted, attachments filed, replies drafted for a person to approve.</p></div>
+			<div class="tile t3"><div class="shape"></div><h3>Quotes and pricing</h3><p>A photo in, a price range out, by SMS and email.</p></div>
+			<div class="tile t4"><div class="shape"></div><h3>Your own AI product or app</h3><p>Full-stack builds in Next.js, Python and FastAPI, and iOS and Android apps approved by Apple on the first submission.</p></div>
+		</div>
+	</section>
+
+	<section class="s">
+		<h2>A few numbers I'm proud of</h2>
+		<div class="proof">
+			<div class="pf"><b>6,700+</b><span>support conversations automated</span></div>
+			<div class="pf"><b>7</b><span>businesses running one product I built</span><span class="sticker" style="background:var(--butter)">live</span></div>
+			<div class="pf"><b>33</b><span>Upwork jobs, 728 hours</span></div>
+			<div class="pf"><b>100%</b><span>Job Success on Upwork</span><span class="sticker" style="background:var(--mint)">Top Rated Plus</span></div>
+		</div>
+	</section>
+
+	<section class="s">
+		<h2>Recent work</h2>
+		<div class="builds">
+			<div class="bd"><div class="in"><small style="background:var(--peach)">Voice AI</small><h3>Every call answered, every caller routed</h3><p>A Retell AI phone agent that checks live outages before passing a call on.</p><div class="k">0<span>wait time</span></div></div><div class="ph"><span>Clip</span></div></div>
+			<div class="bd"><div class="in"><small style="background:var(--butter)">Product</small><h3>Photo in, price out</h3><p>A white-label estimation tool with a fixed pricing rubric.</p><div class="k">7<span>paying tenants</span></div></div><div class="ph"><span>Clip</span></div></div>
+			<div class="bd"><div class="in"><small style="background:var(--sky)">Fintech</small><h3>Your money, answered with evidence</h3><p>An AI agent that answers from your real accounts and shows its sources.</p><div class="k">100s<span>pull requests shipped</span></div></div><div class="ph"><span>Clip</span></div></div>
+			<div class="bd"><div class="in"><small style="background:var(--mint)">Risk</small><h3>Every flag rechecked</h3><p>A weekly sweep where a change only becomes a lead after a recheck.</p><div class="k">42k<span>checks a week</span></div></div><div class="ph"><span>Clip</span></div></div>
+		</div>
+	</section>
+
+	<section class="s">
+		<h2 style="text-align:center">How we'd work together</h2>
+		<div class="thread">
+			<div class="msg me"><h3>First, I look</h3>At the work, the data and the tools you already pay for. If the honest answer is "don't", you'll hear it first.</div>
+			<div class="msg you" style="background:var(--sky);color:var(--ink)">Sounds good. Then?</div>
+			<div class="msg me"><h3>Then I build, in small steps</h3>Small reviewed changes with tests, so nothing breaks quietly.</div>
+			<div class="msg me"><h3>And I hand it over properly</h3>Docs and a walkthrough, so your team can run it without me.</div>
+		</div>
+	</section>
+
+	<section class="s">
+		<h2>Kind words</h2>
+		<div class="bubbles">
+			<div class="bb"><div class="q">&ldquo;World-class communication, and he got my problem solved fast.&rdquo;</div><div class="by"><i>US</i>Upwork client, United States</div></div>
+			<div class="bb"><div class="q">&ldquo;He takes the time to thoroughly understand the project before diving in.&rdquo;</div><div class="by"><i>MR</i>Marcos R., United States</div></div>
+			<div class="bb"><div class="q">&ldquo;Very knowledgeable on the advanced applications of AI and automation systems like n8n. We were able to solve our business challenge with his guidance.&rdquo;</div><div class="by"><i>UC</i>Upwork client, AI business intelligence</div></div>
+			<div class="bb"><div class="q">&ldquo;He always completed work before any deadlines, and went the extra mile.&rdquo;</div><div class="by"><i>UC</i>Upwork client, AI phone system</div></div>
+			<div class="bb"><div class="q">&ldquo;He communicates clearly, works efficiently, and consistently delivers high-quality results.&rdquo;</div><div class="by"><i>JT</i>Jeff T., United States</div></div>
+			<div class="bb"><div class="q">&ldquo;Thank you for all your hard work and will be working with you again in the future.&rdquo;</div><div class="by"><i>D</i>David, Upwork client</div></div>
+		</div>
+	</section>
+
+	<section class="book">
+		<div><h2>Want to talk it through?</h2><p>A 30-minute call. Bring the process that eats your week, and leave with an honest read on what AI should do with it.</p></div>
+		<div class="bk">
+			<div class="msg me">Pick a time that works for you.</div>
+			<div class="slots"><span>Tue 10:00</span><span class="on">Wed 14:30</span><span>Thu 11:00</span><span>Fri 16:00</span></div>
+			<div class="msg you" style="margin-top:16px">Wednesday works.</div>
+			<a class="btn">Book a call</a>
+		</div>
+	</section>
+
+	<footer class="site"><a class="logo" style="font-size:20px"><i style="width:26px;height:26px"></i>haris</a><span>hello@autoany.io</span><div><a>Upwork</a><a>LinkedIn</a><a>GitHub</a></div></footer>
+</div>
+</body>
+</html>

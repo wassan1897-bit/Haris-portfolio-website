@@ -1,0 +1,237 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Idea 01 - Spec Sheet</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;800;900&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+/* Idea 01, "Spec Sheet" (industrial-brutalist-ui, Swiss Industrial Print). The site reads like the technical
+   datasheet of a machine: matte paper, carbon ink, one hazard red, a visible grid, square corners, heavy uppercase
+   grotesk for structure and mono for every label and figure. Voice: terse, exact, unbothered. */
+:root {
+	--paper: #f2f2ee;
+	--ink: #111111;
+	--grey: #5f5f5a;
+	--red: #e61919;
+	--line: #111111;
+}
+* { box-sizing: border-box; margin: 0; }
+html { overflow-x: hidden; }
+body { width: 1440px; background: var(--paper); color: var(--ink); font: 400 16px/1.5 "Archivo", sans-serif; -webkit-font-smoothing: antialiased; }
+body::after { content: ""; position: fixed; inset: 0; pointer-events: none; opacity: .05; background-image: radial-gradient(#000 0.6px, transparent 0.6px); background-size: 3px 3px; }
+a { color: inherit; text-decoration: none; }
+.m { font: 500 12px/1.35 "IBM Plex Mono", monospace; letter-spacing: .08em; text-transform: uppercase; }
+.red { color: var(--red); }
+.m.red { color: #c41212; } /* small labels need 4.5:1 on the paper */
+.frame { margin: 0 40px; border-left: 2px solid var(--line); border-right: 2px solid var(--line); }
+.rule { border-top: 2px solid var(--line); }
+.hair { border-top: 1px solid var(--line); }
+.cell { padding: 18px 20px; }
+.btn { display: inline-flex; align-items: center; gap: 16px; height: 56px; padding: 0 22px; background: var(--red); color: #fff; font: 600 13px "IBM Plex Mono"; letter-spacing: .1em; text-transform: uppercase; }
+.btn b { font-weight: 600; }
+
+/* top strip */
+.strip { display: grid; grid-template-columns: 260px 1fr 1fr 1fr 220px; }
+.strip > div { padding: 14px 20px; border-right: 1px solid var(--line); }
+.strip > div:last-child { border-right: 0; background: var(--ink); color: var(--paper); display: flex; justify-content: space-between; }
+.strip .logo { font: 900 18px "Archivo"; letter-spacing: -.02em; text-transform: uppercase; }
+
+/* hero */
+.hero { display: grid; grid-template-columns: 1fr 340px; }
+.hero .t { padding: 54px 40px 40px; border-right: 2px solid var(--line); position: relative; }
+.hero h1 { font: 900 112px/.88 "Archivo"; letter-spacing: -.055em; text-transform: uppercase; }
+.hero h1 .l { display: block; white-space: nowrap; }
+.hero .sub { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-top: 46px; align-items: end; }
+.hero .sub p { font-size: 20px; line-height: 1.4; max-width: 24em; }
+.hero .reg { position: absolute; right: 30px; top: 40px; font: 900 26px "Archivo"; }
+.portrait { position: relative; background: #cfcfca; overflow: hidden; }
+.portrait::before { content: ""; position: absolute; inset: 0; background: linear-gradient(170deg, #b9b9b4, #7d7d78); }
+.portrait::after { content: ""; position: absolute; inset: 0; background-image: radial-gradient(var(--paper) 1.3px, transparent 1.4px); background-size: 6px 6px; mix-blend-mode: screen; opacity: .8; }
+.portrait .m { position: absolute; left: 0; right: 0; bottom: 0; padding: 12px 16px; background: var(--ink); color: var(--paper); z-index: 2; display: flex; justify-content: space-between; }
+
+/* datum row */
+.datum { display: grid; grid-template-columns: repeat(4, 1fr); }
+.datum > div { padding: 22px 20px 26px; border-right: 1px solid var(--line); }
+.datum > div:last-child { border-right: 0; }
+.datum b { display: block; font: 800 64px/.9 "Archivo"; letter-spacing: -.05em; }
+.datum > div:first-child b { color: var(--red); }
+.datum .m { margin-top: 12px; color: var(--grey); }
+
+/* big numeral + capabilities */
+.caps { display: grid; grid-template-columns: 420px 1fr; }
+.caps .left { padding: 30px 30px 40px; border-right: 2px solid var(--line); position: relative; overflow: hidden; }
+.caps .left h2 { font: 900 46px/.95 "Archivo"; letter-spacing: -.04em; text-transform: uppercase; }
+.caps .left .num { position: absolute; left: -10px; bottom: -70px; font: 900 330px/1 "Archivo"; letter-spacing: -.08em; color: transparent; -webkit-text-stroke: 2px var(--ink); }
+table { width: 100%; border-collapse: collapse; }
+th, td { text-align: left; vertical-align: top; padding: 20px; border-bottom: 1px solid var(--line); }
+th { font: 500 11.5px "IBM Plex Mono"; letter-spacing: .08em; text-transform: uppercase; color: var(--grey); padding-top: 14px; padding-bottom: 14px; }
+td h3 { font: 800 24px/1.05 "Archivo"; letter-spacing: -.02em; text-transform: uppercase; }
+td p { color: #2c2c2a; font-size: 15px; max-width: 30em; }
+td .m { color: var(--grey); }
+tr:last-child td { border-bottom: 0; }
+
+/* records */
+.recs-h { display: flex; justify-content: space-between; align-items: end; padding: 28px 30px 22px; }
+.recs-h h2 { font: 900 72px/.9 "Archivo"; letter-spacing: -.05em; text-transform: uppercase; }
+.recs { display: grid; grid-template-columns: 1fr 1fr; gap: 0; }
+.rec { border-top: 1px solid var(--line); padding: 26px 30px 30px; display: grid; grid-template-columns: 1fr 150px; gap: 20px; }
+.rec:nth-child(odd) { border-right: 1px solid var(--line); }
+.rec .hd { grid-column: 1 / -1; display: flex; justify-content: space-between; }
+.rec h3 { font: 800 30px/1.02 "Archivo"; letter-spacing: -.03em; text-transform: uppercase; }
+.rec dl { display: grid; grid-template-columns: 110px 1fr; gap: 6px 14px; margin-top: 16px; font-size: 14.5px; }
+.rec dt { font: 500 11px "IBM Plex Mono"; letter-spacing: .08em; text-transform: uppercase; color: var(--grey); padding-top: 3px; }
+.rec dd { margin: 0; }
+.rec .val { text-align: right; align-self: end; }
+.rec .val b { display: block; font: 900 64px/.85 "Archivo"; letter-spacing: -.06em; }
+.rec .val .m { color: var(--grey); margin-top: 8px; }
+.status { display: inline-flex; gap: 8px; align-items: center; }
+.status i { width: 9px; height: 9px; background: var(--red); display: inline-block; }
+
+/* stripes */
+.stripes { height: 26px; background: repeating-linear-gradient(-45deg, var(--ink) 0 12px, var(--paper) 12px 24px); }
+
+/* principles */
+.prin { display: grid; grid-template-columns: repeat(4, 1fr); }
+.prin > div { padding: 26px 22px 34px; border-right: 1px solid var(--line); }
+.prin > div:last-child { border-right: 0; }
+.prin .k { font: 900 54px/1 "Archivo"; color: var(--red); letter-spacing: -.04em; }
+.prin h3 { margin-top: 18px; font: 800 21px/1.1 "Archivo"; text-transform: uppercase; letter-spacing: -.01em; }
+.prin p { margin-top: 10px; font-size: 15px; color: #2c2c2a; }
+
+/* field reports */
+.reports { display: grid; grid-template-columns: 320px 1fr 1fr; }
+.reports > div { padding: 28px 26px 34px; border-right: 1px solid var(--line); }
+.reports > div:last-child { border-right: 0; }
+.reports h2 { font: 900 52px/.92 "Archivo"; letter-spacing: -.045em; text-transform: uppercase; }
+.reports blockquote { font: 500 22px/1.35 "Archivo"; letter-spacing: -.01em; }
+.reports blockquote::before { content: "\201C"; display: block; font: 900 70px/0.6 "Archivo"; color: var(--red); margin-bottom: 16px; }
+.reports footer { margin-top: 18px; }
+
+/* request */
+.req { display: grid; grid-template-columns: 1.1fr 1fr; }
+.req .l { padding: 40px; border-right: 2px solid var(--line); }
+.req h2 { font: 900 96px/.86 "Archivo"; letter-spacing: -.06em; text-transform: uppercase; }
+.req .l p { margin-top: 26px; font-size: 19px; max-width: 26em; }
+.form { display: grid; grid-template-columns: 1fr 1fr; }
+.f { padding: 16px 20px 18px; border-bottom: 1px solid var(--line); border-right: 1px solid var(--line); }
+.f:nth-child(2n) { border-right: 0; }
+.f label { display: block; font: 500 11px "IBM Plex Mono"; letter-spacing: .08em; text-transform: uppercase; color: var(--grey); }
+.f span { display: block; margin-top: 10px; font-size: 17px; color: #4a4a46; }
+.f.wide { grid-column: 1 / -1; border-right: 0; height: 150px; }
+.form .go { grid-column: 1 / -1; padding: 22px 20px; display: flex; justify-content: space-between; align-items: center; }
+.barcode { height: 40px; width: 210px; background: repeating-linear-gradient(90deg, var(--ink) 0 2px, transparent 2px 4px, var(--ink) 4px 5px, transparent 5px 9px, var(--ink) 9px 12px, transparent 12px 14px); }
+
+footer.site { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; }
+footer.site > div { padding: 18px 20px 26px; border-right: 1px solid var(--line); }
+footer.site > div:last-child { border-right: 0; }
+footer.site .big { font: 900 34px "Archivo"; letter-spacing: -.04em; text-transform: uppercase; }
+.end { height: 40px; }
+</style>
+</head>
+<body>
+<div class="frame rule" style="margin-top:28px">
+	<div class="strip m">
+		<div class="logo">Haris&reg;</div>
+		<div>[ Work ]</div><div>[ Capabilities ]</div><div>[ Field reports ]</div>
+		<div><span>Scoping call</span><span>&rarr;</span></div>
+	</div>
+</div>
+
+<div class="frame rule">
+	<section class="hero">
+		<div class="t">
+			<span class="reg">&copy;</span>
+			<p class="m red" style="margin-bottom:22px">[ Forward deployed engineer / AI consultant ]</p>
+			<h1><span class="l">Production AI.</span><span class="l red">Specified,</span><span class="l">built, shipped.</span></h1>
+			<div class="sub">
+				<p>I find the work in your business that should run on AI, then I build it and stay until it runs in production.</p>
+				<div><a class="btn">Request a scoping call <b>&gt;&gt;&gt;</b></a></div>
+			</div>
+		</div>
+		<div class="portrait"><div class="m"><span>Muhammad Haris</span><span>Portrait, halftone</span></div></div>
+	</section>
+</div>
+
+<div class="frame rule">
+	<div class="datum">
+		<div><b>6,700+</b><p class="m">Support conversations automated</p></div>
+		<div><b>21,000+</b><p class="m">Agent minutes saved (est.)</p></div>
+		<div><b>07</b><p class="m">Live client deployments, one product</p></div>
+		<div><b>100%</b><p class="m">Job Success / Top Rated Plus</p></div>
+	</div>
+</div>
+
+<div class="frame rule">
+	<section class="caps">
+		<div class="left"><p class="m red">[ Capabilities ]</p><h2 style="margin-top:14px">Four things I build.</h2><span class="num">04</span></div>
+		<table>
+			<tr><th style="width:90px">Ref.</th><th>Module</th><th>Spec</th><th style="width:240px">Stack</th></tr>
+			<tr><td class="m">C-01</td><td><h3>AI agents + RAG</h3></td><td><p>Agents that answer, triage and act, with retrieval, reranking and evals behind every answer.</p></td><td class="m">Claude / OpenAI / MCP / pgvector</td></tr>
+			<tr><td class="m">C-02</td><td><h3>Workflow automation</h3></td><td><p>Where an automation tool is the right answer, built so your team can read it.</p></td><td class="m">n8n / Make / Power Automate</td></tr>
+			<tr><td class="m">C-03</td><td><h3>Full-stack AI products</h3></td><td><p>Production apps with tests and CI on every change.</p></td><td class="m">Next.js / TypeScript / Python / FastAPI / Supabase</td></tr>
+			<tr><td class="m">C-04</td><td><h3>Mobile apps</h3></td><td><p>iOS and Android. Approved by Apple on the first submission.</p></td><td class="m">iOS / Android</td></tr>
+		</table>
+	</section>
+</div>
+
+<div class="frame rule">
+	<div class="recs-h"><h2>Deployment records</h2><p class="m">Client names withheld / Figures verified</p></div>
+	<div class="recs">
+		<div class="rec"><div class="hd m"><span>Record R-01</span><span class="status"><i></i>Live</span></div><div><h3>Voice AI support agent</h3>
+			<dl><dt>Client</dt><dd>UK broadband provider</dd><dt>System</dt><dd>Retell AI phone agent, outage checks through n8n</dd><dt>Handover</dt><dd>To the right team, context kept</dd></dl></div>
+			<div class="val"><b>07</b><p class="m">Departments routed</p></div></div>
+		<div class="rec"><div class="hd m"><span>Record R-02</span><span class="status"><i></i>Live</span></div><div><h3>Estimation product</h3>
+			<dl><dt>Client</dt><dd>White-label, sold to trades</dd><dt>System</dt><dd>Vision model plus a fixed pricing rubric</dd><dt>Output</dt><dd>Price range by SMS and email</dd></dl></div>
+			<div class="val"><b>07</b><p class="m">Paying tenants</p></div></div>
+		<div class="rec"><div class="hd m"><span>Record R-03</span><span class="status"><i></i>Live</span></div><div><h3>Investing platform</h3>
+			<dl><dt>Client</dt><dd>Household fintech</dd><dt>System</dt><dd>Tool-using agent that cites its sources</dd><dt>Data</dt><dd>Two separate databases</dd></dl></div>
+			<div class="val"><b>100s</b><p class="m">Pull requests shipped</p></div></div>
+		<div class="rec"><div class="hd m"><span>Record R-04</span><span class="status"><i></i>Live</span></div><div><h3>Change detection</h3>
+			<dl><dt>Client</dt><dd>Risk intelligence</dd><dt>System</dt><dd>Weekly sweep of public listings</dd><dt>Rule</dt><dd>A first flag never triggers outreach</dd></dl></div>
+			<div class="val"><b>42k</b><p class="m">Checks a week</p></div></div>
+	</div>
+</div>
+
+<div class="frame rule"><div class="stripes"></div></div>
+
+<div class="frame rule">
+	<div class="prin">
+		<div><span class="k">/01</span><h3>Diagnose before building</h3><p>If the honest answer is "don't", you hear it before either of us spends money.</p></div>
+		<div><span class="k">/02</span><h3>Small reviewed changes</h3><p>Every change ships as a small pull request with tests and CI.</p></div>
+		<div><span class="k">/03</span><h3>Scope it, ship it</h3><p>The person who scopes the problem is the person who ships it.</p></div>
+		<div><span class="k">/04</span><h3>Write it down</h3><p>Architecture write-ups for five production systems are on GitHub.</p></div>
+	</div>
+</div>
+
+<div class="frame rule">
+	<section class="reports">
+		<div><p class="m red">[ Field reports ]</p><h2 style="margin-top:14px">Rated 5.0 by clients.</h2><p class="m" style="margin-top:24px;color:var(--grey)">33 jobs / 728 hours / $30K+ on Upwork</p></div>
+		<div><blockquote>World-class communication, and he got my problem solved fast.</blockquote><footer class="m">Upwork client / United States / Make.com + OpenAI</footer></div>
+		<div><blockquote>He takes the time to thoroughly understand the project before diving in.</blockquote><footer class="m">Marcos R. / United States / AI automation</footer></div>
+	</section>
+</div>
+
+<div class="frame rule">
+	<section class="req">
+		<div class="l"><p class="m red">[ Request ]</p><h2 style="margin-top:16px">What still eats your week?</h2><p>I reply within a day with how I would automate it, how long it takes and a fixed price.</p></div>
+		<div class="form">
+			<div class="f"><label>01 / Name</label><span>Full name</span></div>
+			<div class="f"><label>02 / Work email</label><span>you@company.com</span></div>
+			<div class="f wide"><label>03 / The process to automate</label><span>Two or three sentences is plenty</span></div>
+			<div class="go"><span class="barcode"></span><a class="btn">Request a scoping call <b>&gt;&gt;&gt;</b></a></div>
+		</div>
+	</section>
+</div>
+
+<div class="frame rule" style="border-bottom:2px solid var(--line)">
+	<footer class="site">
+		<div><span class="big">Haris&reg;</span></div>
+		<div class="m">hello@autoany.io</div>
+		<div class="m">Upwork / LinkedIn / GitHub</div>
+		<div class="m">&copy; 2026 / Muhammad Haris</div>
+	</footer>
+</div>
+<div class="end"></div>
+</body>
+</html>

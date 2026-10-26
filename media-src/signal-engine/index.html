@@ -1,0 +1,113 @@
+<!doctype html>
+<html
+  lang="en"
+  data-resolution="square"
+  data-composition-variables='[
+    {"id":"color-ground","type":"color","label":"Background","default":"#f3f6f4"},
+    {"id":"color-ink","type":"color","label":"Text","default":"#111a17"},
+    {"id":"color-accent","type":"color","label":"Accent","default":"#0e7a55"},
+    {"id":"color-ok","type":"color","label":"Confirmed","default":"#38c97a"},
+    {"id":"color-alert","type":"color","label":"Trigger","default":"#d4542f"}
+  ]'
+>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1080" />
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <style>
+      :root {
+        --color-ground: #f3f6f4;
+        --color-ink: #111a17;
+        --color-accent: #0e7a55;
+        --color-ok: #38c97a;
+        --color-alert: #d4542f;
+      }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        width: 1080px;
+        height: 1080px;
+        overflow: hidden;
+        background: var(--color-ground);
+      }
+      #root {
+        width: 100%;
+        height: 100%;
+        position: relative;
+      }
+      #ground {
+        position: absolute;
+        inset: 0;
+        background: var(--color-ground);
+      }
+    </style>
+  </head>
+  <body>
+    <div data-hf-id="hf-gq0c"
+      id="root"
+      data-composition-id="main"
+      data-start="0"
+      data-duration="20.6"
+      data-width="1080"
+      data-height="1080"
+    >
+      <div data-hf-id="hf-7hg0" id="ground"></div>
+      <div data-hf-id="hf-l21r"
+        id="wall"
+        style="z-index: 1"
+        data-composition-id="wall"
+        data-composition-src="compositions/wall.html"
+        data-start="0"
+        data-duration="20.6"
+        data-track-index="1"
+        data-track-kind="graphics"
+        data-width="1080"
+        data-height="1080"
+      ></div>
+      <div data-hf-id="hf-4m3d"
+        id="confirm"
+        style="z-index: 2"
+        data-composition-id="confirm"
+        data-composition-src="compositions/confirm.html"
+        data-start="7.4"
+        data-duration="3.4"
+        data-track-index="2"
+        data-track-kind="graphics"
+        data-width="1080"
+        data-height="1080"
+      ></div>
+      <div data-hf-id="hf-wu37"
+        id="pipeline"
+        style="z-index: 3"
+        data-composition-id="pipeline"
+        data-composition-src="compositions/pipeline.html"
+        data-start="10.8"
+        data-duration="9.8"
+        data-track-index="3"
+        data-track-kind="graphics"
+        data-width="1080"
+        data-height="1080"
+      ></div>
+      <div data-hf-id="hf-v1ra"
+        id="titles"
+        style="z-index: 4"
+        data-composition-id="titles"
+        data-composition-src="compositions/titles.html"
+        data-start="0"
+        data-duration="20.6"
+        data-track-index="4"
+        data-track-kind="graphics"
+        data-width="1080"
+        data-height="1080"
+      ></div>
+    </div>
+    <script>
+      window.__timelines["main"] = gsap.timeline({ paused: true });
+    </script>
+  </body>
+</html>
