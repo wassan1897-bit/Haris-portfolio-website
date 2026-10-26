@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Clarity Soft</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+/* Clarity Soft (apple-design, high-end-visual-design): restraint over decoration. Silver-white canvas, one emerald,
+   size-specific tracking, translucent chrome, the portrait set in a machined tray, soft diffused depth.
+   Every surface is light. */
+:root {
+	--bg: #f2f4f3;
+	--card: #ffffff;
+	--ink: #17201c;
+	--mute: #637069;
+	--line: rgb(23 32 28 / .08);
+	--acc: #0e7a55;
+	--acc-soft: #e2f1e9;
+	--r: 28px;
+}
+* { box-sizing: border-box; margin: 0; }
+html { overflow-x: hidden; }
+body { width: 1440px; background: var(--bg); color: var(--ink); font: 400 17px/1.55 "Plus Jakarta Sans", sans-serif; -webkit-font-smoothing: antialiased; }
+a { color: inherit; text-decoration: none; }
+.wrap { width: 1200px; margin: 0 auto; }
+.btn { display: inline-flex; align-items: center; gap: 12px; height: 54px; padding: 0 7px 0 24px; border-radius: 999px; background: var(--acc); color: #fff; font-weight: 600; font-size: 16px; }
+.btn i { width: 40px; height: 40px; border-radius: 50%; background: rgb(255 255 255 / .2); display: grid; place-items: center; font-style: normal; }
+.btn--soft { background: rgb(23 32 28 / .05); color: var(--ink); }
+.btn--soft i { background: #fff; }
+.ph { position: relative; overflow: hidden; background: radial-gradient(120% 90% at 30% 10%, #e4ebe6, #bfcbc4 60%, #a9b8af); }
+.ph span { position: absolute; left: 18px; bottom: 16px; font: 500 12px "Geist Mono"; color: #2e3b34; background: rgb(255 255 255 / .7); padding: 6px 11px; border-radius: 999px; }
+/* the machined tray: outer shell, inner core */
+.tray { padding: 10px; border-radius: 40px; background: rgb(255 255 255 / .55); box-shadow: inset 0 0 0 1px rgb(255 255 255 / .9), 0 1px 2px rgb(23 32 28 / .04), 0 40px 80px -40px rgb(23 32 28 / .22); }
+.tray > * { border-radius: 30px; }
+
+/* translucent bar */
+.bar { position: relative; z-index: 2; background: rgb(242 244 243 / .72); box-shadow: 0 10px 20px -18px rgb(23 32 28 / .3); }
+.bar .wrap { height: 64px; display: flex; align-items: center; justify-content: space-between; }
+.bar .name { font-weight: 700; font-size: 16px; letter-spacing: -.01em; }
+.bar .links { display: flex; gap: 32px; font-size: 14px; color: var(--mute); }
+.bar .btn { height: 38px; font-size: 14px; padding: 0 16px; }
+
+/* hero: centred, the message is the design */
+.hero { text-align: center; padding: 110px 0 70px; }
+.hero h1 { font-size: 88px; line-height: 1.02; letter-spacing: -.05em; font-weight: 700; max-width: 11.5em; margin: 0 auto; }
+.hero h1 span { color: var(--acc); }
+.hero p { margin: 26px auto 0; font-size: 21px; line-height: 1.5; letter-spacing: -.005em; color: var(--mute); max-width: 30em; }
+.hero .ctas { display: flex; gap: 12px; justify-content: center; margin-top: 36px; }
+.stage { width: 1200px; margin: 0 auto; }
+.stage .ph { height: 600px; }
+
+/* proof row */
+.proof { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-top: 16px; }
+.proof div { background: var(--card); border-radius: 22px; padding: 28px 30px; box-shadow: 0 1px 2px rgb(23 32 28 / .04); }
+.proof b { display: block; font-size: 42px; letter-spacing: -.045em; font-weight: 700; line-height: 1; }
+.proof span { display: block; margin-top: 10px; color: var(--mute); font-size: 14.5px; }
+
+/* services with a segmented control */
+section.s { padding: 140px 0 0; }
+.s h2 { font-size: 58px; line-height: 1.04; letter-spacing: -.045em; font-weight: 700; text-align: center; max-width: 15em; margin: 0 auto; }
+.s .lede { text-align: center; color: var(--mute); font-size: 19px; margin-top: 16px; }
+.seg { display: flex; width: max-content; margin: 36px auto 0; padding: 5px; border-radius: 999px; background: rgb(23 32 28 / .06); }
+.seg span { padding: 11px 22px; border-radius: 999px; font-weight: 600; font-size: 15px; color: var(--mute); }
+.seg span.on { background: #fff; color: var(--ink); box-shadow: 0 2px 8px rgb(23 32 28 / .08); }
+.panel { margin-top: 26px; display: grid; grid-template-columns: 1fr 1fr; gap: 0; background: var(--card); border-radius: var(--r); overflow: hidden; box-shadow: 0 1px 2px rgb(23 32 28 / .04), 0 30px 60px -40px rgb(23 32 28 / .2); }
+.panel .txt { padding: 60px; }
+.panel h3 { font-size: 38px; line-height: 1.08; letter-spacing: -.04em; font-weight: 700; }
+.panel p { margin-top: 18px; color: var(--mute); font-size: 18px; }
+.panel ul { list-style: none; padding: 0; margin-top: 30px; }
+.panel li { padding: 14px 0; border-top: 1px solid var(--line); display: flex; justify-content: space-between; }
+.panel li span { color: var(--mute); }
+.panel .ph { min-height: 480px; border-radius: 0; background: radial-gradient(100% 100% at 70% 20%, #e7f3ec, #cfe3d8 60%, #bad6c8); }
+
+/* case cards in a horizontal row, the last one cut by the edge */
+.cards { display: flex; gap: 18px; margin-top: 50px; }
+.cc { flex: 0 0 440px; background: var(--card); border-radius: var(--r); overflow: hidden; box-shadow: 0 1px 2px rgb(23 32 28 / .04); }
+.cc .ph { height: 250px; border-radius: 0; }
+.cc .cin { padding: 30px; }
+.cc small { font-size: 13px; color: var(--acc); font-weight: 600; }
+.cc h3 { margin-top: 8px; font-size: 25px; line-height: 1.15; letter-spacing: -.03em; font-weight: 700; }
+.cc p { margin-top: 10px; color: var(--mute); font-size: 15.5px; }
+.cc .k { display: flex; align-items: baseline; gap: 10px; margin-top: 22px; padding-top: 18px; border-top: 1px solid var(--line); }
+.cc .k b { font-size: 34px; letter-spacing: -.045em; font-weight: 700; }
+.cc .k span { color: var(--mute); font-size: 14px; }
+.ctrl { display: flex; justify-content: center; gap: 10px; margin-top: 30px; }
+.ctrl span { width: 46px; height: 46px; border-radius: 50%; background: var(--card); display: grid; place-items: center; box-shadow: 0 1px 2px rgb(23 32 28 / .06); }
+
+/* reviews */
+.revs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 50px; }
+.rv { background: var(--card); border-radius: 24px; padding: 34px; }
+.rv:nth-child(2) { background: var(--acc-soft); transform: translateY(26px); }
+.rv p { font-size: 19px; line-height: 1.5; letter-spacing: -.01em; }
+.rv footer { margin-top: 22px; color: var(--mute); font-size: 14px; }
+.rv .st { color: var(--acc); letter-spacing: 3px; font-size: 13px; margin-bottom: 14px; }
+
+/* contact card with real form states */
+.contact { display: grid; grid-template-columns: 1fr 1fr; gap: 70px; align-items: start; }
+.contact h2 { text-align: left; margin: 0; font-size: 58px; }
+.contact .lede { text-align: left; }
+.contact ul { list-style: none; padding: 0; margin-top: 34px; }
+.contact li { padding: 14px 0; border-top: 1px solid var(--line); font-weight: 500; }
+.form { background: var(--card); border-radius: var(--r); padding: 44px; display: grid; gap: 20px; box-shadow: 0 30px 60px -40px rgb(23 32 28 / .22); }
+.form label { display: grid; gap: 8px; font-size: 14px; font-weight: 600; }
+.in { height: 54px; border-radius: 14px; background: #f6f8f7; box-shadow: inset 0 0 0 1px rgb(23 32 28 / .14); padding: 0 16px; display: flex; align-items: center; color: #5c6862; font-weight: 400; font-size: 16px; }
+.in.focus { box-shadow: inset 0 0 0 2px var(--acc), 0 0 0 4px rgb(14 122 85 / .14); color: var(--ink); background: #fff; }
+.in.tall { height: 120px; align-items: flex-start; padding-top: 15px; }
+.form .hint { font-weight: 400; color: var(--mute); font-size: 13px; }
+.form .btn { justify-self: start; }
+
+footer.site { margin-top: 150px; border-top: 1px solid var(--line); }
+footer.site .wrap { display: flex; justify-content: space-between; padding: 28px 0 44px; color: var(--mute); font-size: 14px; }
+footer.site .wrap div { display: flex; gap: 26px; }
+</style>
+</head>
+<body>
+<div class="bar"><div class="wrap">
+	<a class="name">Muhammad Haris</a>
+	<div class="links"><a>Services</a><a>Work</a><a>Reviews</a><a>Contact</a></div>
+	<a class="btn">Book a call</a>
+</div></div>
+
+<div class="wrap">
+	<section class="hero">
+		<h1>AI that works inside <span>the business you already run.</span></h1>
+		<p>I find the work that should run on AI, build it with your team and stay until it runs in production.</p>
+		<div class="ctas"><a class="btn">Book a call <i>&rarr;</i></a><a class="btn btn--soft">See the work <i>&darr;</i></a></div>
+	</section>
+</div>
+
+<div class="stage">
+	<div class="tray"><div class="ph"><span>Portrait, wide, in context with a client team</span></div></div>
+	<div class="proof">
+		<div><b>6,700+</b><span>support conversations automated</span></div>
+		<div><b>21,000+</b><span>agent minutes saved</span></div>
+		<div><b>7</b><span>live client deployments of one product</span></div>
+		<div><b>100%</b><span>Job Success, Top Rated Plus</span></div>
+	</div>
+</div>
+
+<div class="wrap">
+	<section class="s">
+		<h2>Built around how your team actually works.</h2>
+		<p class="lede">Pick the kind of work. The method stays the same.</p>
+		<div class="seg"><span class="on">AI agents</span><span>Automation</span><span>Products</span><span>Mobile apps</span></div>
+		<div class="panel">
+			<div class="txt">
+				<h3>Agents that answer, triage and act.</h3>
+				<p>Agents and RAG systems on Claude and OpenAI, with evals behind every answer so you can trust what they say.</p>
+				<ul><li>Retrieval<span>pgvector, reranking</span></li><li>Tools<span>MCP, your APIs</span></li><li>Quality<span>Evals and tests in CI</span></li></ul>
+			</div>
+			<div class="ph"><span>Screenshot: an agent answering with its sources</span></div>
+		</div>
+	</section>
+
+	<section class="s">
+		<h2>Running in production today.</h2>
+	</section>
+</div>
+<div style="margin-left:120px;overflow:hidden">
+	<div class="cards">
+		<div class="cc"><div class="ph"><span>Case visual</span></div><div class="cin"><small>Voice AI</small><h3>Every call answered, every caller routed.</h3><p>A Retell AI phone agent for a UK broadband provider.</p><div class="k"><b>7</b><span>departments routed</span></div></div></div>
+		<div class="cc"><div class="ph"><span>Case visual</span></div><div class="cin"><small>Product</small><h3>Photo in, price out.</h3><p>A white-label estimation tool with a fixed pricing rubric.</p><div class="k"><b>7</b><span>paying tenants</span></div></div></div>
+		<div class="cc"><div class="ph"><span>Case visual</span></div><div class="cin"><small>Fintech</small><h3>Your money, answered with evidence.</h3><p>An AI agent that answers from your real accounts.</p><div class="k"><b>100s</b><span>pull requests shipped</span></div></div></div>
+	</div>
+</div>
+<div class="wrap">
+	<div class="ctrl"><span>&larr;</span><span>&rarr;</span></div>
+
+	<section class="s">
+		<h2>What clients say.</h2>
+		<div class="revs">
+			<div class="rv"><div class="st">&#9733;&#9733;&#9733;&#9733;&#9733;</div><p>&ldquo;He takes the time to thoroughly understand the project before diving in.&rdquo;</p><footer>Marcos R., United States</footer></div>
+			<div class="rv"><div class="st">&#9733;&#9733;&#9733;&#9733;&#9733;</div><p>&ldquo;World-class communication, and he got my problem solved fast.&rdquo;</p><footer>Upwork client, United States</footer></div>
+			<div class="rv"><div class="st">&#9733;&#9733;&#9733;&#9733;&#9733;</div><p>&ldquo;He always completed work before any deadlines, and went the extra mile.&rdquo;</p><footer>Upwork client. AI phone system</footer></div>
+		</div>
+	</section>
+
+	<section class="s contact">
+		<div>
+			<h2>Tell me what still eats your team's week.</h2>
+			<p class="lede">I reply within a day with how I would automate it, how long it takes and a fixed price.</p>
+			<ul><li>hello@autoany.io</li><li>Upwork profile</li><li>LinkedIn</li></ul>
+		</div>
+		<div class="form">
+			<label>Your name<span class="in">Full name</span></label>
+			<label>Work email<span class="in focus">you@company.com</span></label>
+			<label>What should AI take off your plate?<span class="in tall">A sentence or two is plenty</span><span class="hint">No sales pitch. You get a straight answer.</span></label>
+			<a class="btn">Send message <i>&rarr;</i></a>
+		</div>
+	</section>
+</div>
+
+<footer class="site"><div class="wrap"><span>&copy; 2026 Muhammad Haris</span><div><a>Upwork</a><a>LinkedIn</a><a>GitHub</a></div></div></footer>
+</body>
+</html>

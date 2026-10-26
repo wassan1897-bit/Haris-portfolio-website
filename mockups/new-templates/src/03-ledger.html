@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Template 03 - Ledger</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700&family=Hanken+Grotesk:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+/* Template 03, "Ledger": editorial and type-led. Near-white, near-black, one cobalt accent used sparingly.
+   The work is an index you read like a ledger; the page leans on type, not decoration. */
+:root {
+	--bg: #f4f4f1;
+	--ink: #121212;
+	--mute: #62625e;
+	--line: #d6d6d0;
+	--acc: #2443e6;
+	--card: #ebebe6;
+}
+* { box-sizing: border-box; margin: 0; }
+html { overflow-x: hidden; }
+body { width: 1440px; background: var(--bg); color: var(--ink); font: 400 17px/1.6 "Hanken Grotesk", sans-serif; -webkit-font-smoothing: antialiased; }
+h1, h2, h3, .d { font-family: "Bricolage Grotesque", sans-serif; }
+a { color: inherit; text-decoration: none; }
+.wrap { padding: 0 72px; }
+.mono { font: 500 13px "IBM Plex Mono"; color: var(--mute); }
+
+nav.top { height: 72px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--line); }
+nav .name { font: 600 18px "Bricolage Grotesque"; letter-spacing: -.02em; }
+nav .links { display: flex; gap: 36px; font-size: 15px; }
+nav .links { align-items: center; }
+nav .navbtn { height: 40px; padding: 0 16px; display: inline-flex; align-items: center; background: var(--ink); color: var(--bg); font-weight: 600; font-size: 14px; }
+
+/* hero */
+.hero { padding: 72px 0 0; }
+.hero h1 { font-size: 104px; line-height: .98; letter-spacing: -.05em; font-weight: 600; max-width: 12.5em; }
+.hero h1 em { font-style: normal; color: var(--acc); }
+.hero .under { display: grid; grid-template-columns: 300px 1fr 1fr; gap: 56px; margin-top: 64px; align-items: end; padding-bottom: 72px; border-bottom: 1px solid var(--line); }
+.ph { position: relative; background: linear-gradient(160deg, #cfcfc8, #a5a59e); overflow: hidden; }
+.ph span { position: absolute; left: 14px; bottom: 12px; font: 500 12px "IBM Plex Mono"; color: #2a2a28; }
+.hero .ph { height: 380px; }
+.hero .under p { font-size: 21px; line-height: 1.5; max-width: 22em; }
+.hero .side { display: grid; gap: 20px; justify-items: start; }
+.btn { display: inline-flex; align-items: center; gap: 14px; height: 56px; padding: 0 28px; background: var(--ink); color: var(--bg); font-weight: 600; font-size: 16px; }
+.btn { padding-right: 8px; }
+.btn i { font-style: normal; width: 40px; height: 40px; display: grid; place-items: center; background: var(--acc); color: #fff; }
+.hero .side small { color: var(--mute); font-size: 15px; }
+
+/* index */
+.index { padding: 110px 0 60px; }
+.index header { display: flex; justify-content: space-between; align-items: baseline; }
+.index h2 { font-size: 60px; letter-spacing: -.045em; font-weight: 600; }
+.index header span { color: var(--mute); font-size: 16px; }
+.cols, .it { display: grid; grid-template-columns: 70px 1.2fr 1.6fr 1fr 150px; gap: 30px; align-items: baseline; }
+.cols { margin-top: 44px; padding-bottom: 14px; border-bottom: 1px solid var(--ink); }
+.it { padding: 30px 0; border-bottom: 1px solid var(--line); }
+.it h3 { font-size: 30px; letter-spacing: -.03em; font-weight: 600; line-height: 1.1; }
+.it p { color: var(--mute); font-size: 16px; }
+.it .r { font: 600 30px "Bricolage Grotesque"; letter-spacing: -.03em; text-align: right; line-height: 1; }
+.it .r small { display: block; font: 400 13px "Hanken Grotesk"; color: var(--mute); letter-spacing: 0; margin-top: 6px; }
+.it.open { background: var(--ink); color: var(--bg); margin: 0 -72px; padding: 36px 72px 44px; border-bottom: 0; }
+.it.open p, .it.open .mono, .it.open .r small { color: #a6a6a0; }
+.it.open .r { color: #9fb0ff; }
+.it.open .pv { grid-column: 2 / -1; display: grid; grid-template-columns: 1.6fr 1fr; gap: 20px; margin-top: 26px; }
+.it.open .pv .ph { height: 300px; background: linear-gradient(160deg, #2c2c2a, #1b1b1a); }
+.it.open .pv .ph span { color: #a6a6a0; }
+.it.open .pv ul { list-style: none; padding: 0; align-self: end; }
+.it.open .pv li { padding: 12px 0; border-top: 1px solid #333330; font-size: 15px; }
+
+/* numbers */
+.numbers { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; border-bottom: 1px solid var(--ink); }
+.numbers div { padding: 46px 30px 40px 0; }
+.numbers div + div { padding-left: 30px; border-left: 1px solid var(--line); }
+.numbers b { display: block; font: 600 76px "Bricolage Grotesque"; letter-spacing: -.055em; line-height: .9; }
+.numbers div:first-child b { color: var(--acc); }
+.numbers span { display: block; margin-top: 16px; color: var(--mute); font-size: 15px; max-width: 14em; }
+
+/* approach */
+.approach { display: grid; grid-template-columns: 1fr 1.25fr; gap: 100px; padding: 130px 0; }
+.approach h2 { font-size: 60px; letter-spacing: -.045em; font-weight: 600; line-height: 1; }
+.approach .txt p { font-size: 22px; line-height: 1.5; letter-spacing: -.01em; }
+.approach .txt p + p { margin-top: 22px; color: var(--mute); font-size: 19px; }
+.rules { display: grid; grid-template-columns: 1fr 1fr; gap: 0 40px; margin-top: 46px; }
+.rules div { padding: 20px 0; border-top: 1px solid var(--line); }
+.rules b { display: block; font: 600 19px "Bricolage Grotesque"; letter-spacing: -.01em; }
+.rules span { color: var(--mute); font-size: 15px; }
+
+/* quotes */
+.quotes { background: var(--card); padding: 120px 72px; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; }
+.q { position: relative; padding-top: 70px; }
+.q::before { content: "\201C"; position: absolute; left: -6px; top: -36px; font: 600 150px/1 "Bricolage Grotesque"; color: var(--acc); }
+.q p { font: 500 31px/1.28 "Bricolage Grotesque"; letter-spacing: -.025em; }
+.q footer { margin-top: 26px; color: var(--mute); font-size: 15px; }
+.q footer b { color: var(--ink); font-weight: 600; }
+.quotes .tally { grid-column: 1 / -1; display: flex; gap: 60px; padding-top: 40px; border-top: 1px solid var(--line); color: var(--mute); }
+.quotes .tally b { color: var(--ink); }
+
+/* contact */
+.contact { padding: 130px 0 90px; display: grid; grid-template-columns: 1.2fr 1fr; gap: 90px; }
+.contact h2 { font-size: 60px; letter-spacing: -.045em; font-weight: 600; line-height: 1; }
+.contact .mail { display: inline-block; margin-top: 40px; font: 600 54px "Bricolage Grotesque"; letter-spacing: -.04em; border-bottom: 4px solid var(--acc); line-height: 1.15; }
+.contact .note { margin-top: 26px; color: var(--mute); max-width: 26em; font-size: 18px; }
+form { display: grid; gap: 22px; }
+label { display: grid; gap: 8px; font-size: 14px; font-weight: 600; }
+.in { height: 54px; border: 1.5px solid #b9b9b2; background: #fafaf8; padding: 0 16px; display: flex; align-items: center; color: #6e6e69; font-weight: 400; font-size: 16px; }
+.in.tall { height: 130px; align-items: flex-start; padding-top: 14px; }
+form .btn { justify-self: start; }
+
+footer.site { border-top: 1px solid var(--ink); padding: 30px 0 40px; display: flex; justify-content: space-between; color: var(--mute); font-size: 14px; }
+footer.site div { display: flex; gap: 30px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+	<nav class="top">
+		<a class="name">Muhammad Haris</a>
+		<div class="links"><a>Work</a><a>Approach</a><a>Reviews</a><a class="navbtn">Start a project</a></div>
+	</nav>
+
+	<section class="hero">
+		<h1>I find the work that should run on AI. <em>Then I build it.</em></h1>
+		<div class="under">
+			<div class="ph"><span>Portrait, black and white</span></div>
+			<p>Forward deployed engineer and AI consultant. The person who scopes your problem is the person who ships it.</p>
+			<div class="side"><a class="btn">Start a project <i>&rarr;</i></a><small>Top Rated Plus on Upwork, 100% Job Success</small></div>
+		</div>
+	</section>
+
+	<section class="numbers">
+		<div><b>6,700+</b><span>support conversations automated</span></div>
+		<div><b>21,000+</b><span>agent minutes saved</span></div>
+		<div><b>33</b><span>Upwork jobs, 728 hours</span></div>
+		<div><b>$30K+</b><span>earned on Upwork</span></div>
+	</section>
+	<section class="index">
+		<header><h2>Index of work</h2><span>Six of the systems I have built</span></header>
+		<div class="cols mono"><span>No.</span><span>Project</span><span>What it does</span><span>Built with</span><span style="text-align:right">Result</span></div>
+		<div class="it"><span class="mono">01</span><h3>Voice AI support agent</h3><p>Triages callers for a UK broadband provider, checks live outages and hands over with the context kept.</p><span class="mono">Retell AI, n8n</span><div class="r">7<small>departments routed</small></div></div>
+		<div class="it open"><span class="mono">02</span><h3>AI customer support</h3><p>End-to-end support for a UK fibre provider. The agent talks to customers; six single-purpose workflows do the work.</p><span class="mono">Conversational AI, Airtable</span><div class="r">6,700+<small>conversations automated</small></div>
+			<div class="pv"><div class="ph"><span>Case visual: architecture diagram</span></div><ul><li>2,400+ tickets routed across 7 departments</li><li>21,000+ agent minutes saved, estimated</li><li>Same backend later reused for a phone channel</li></ul></div></div>
+		<div class="it"><span class="mono">03</span><h3>Household investing platform</h3><p>A tool-using AI agent that answers from your real accounts and shows where each number comes from.</p><span class="mono">Tool-using agent</span><div class="r">100s<small>pull requests shipped</small></div></div>
+		<div class="it"><span class="mono">04</span><h3>White-label estimation tool</h3><p>A vision model reads the photo, a fixed rubric sets the price, and the range goes back by SMS and email.</p><span class="mono">n8n, vision model</span><div class="r">7<small>paying tenants</small></div></div>
+		<div class="it"><span class="mono">05</span><h3>Multi-tenant compliance platform</h3><p>Sixteen AI consultant personas advise many organisations without ever mixing their data.</p><span class="mono">Bilingual, multi-tenant</span><div class="r">16<small>AI personas</small></div></div>
+		<div class="it"><span class="mono">06</span><h3>Lead enrichment cascade</h3><p>Turns a name and a website into structured fields, so the expensive sources only touch the gaps.</p><span class="mono">n8n, four sources</span><div class="r">29<small>fields per lead</small></div></div>
+	</section>
+
+
+	<section class="approach">
+		<h2>How I work</h2>
+		<div class="txt">
+			<p>I work inside a client's team, find the work that should be running on AI, and build it through to production.</p>
+			<p>I diagnose before I build. If the honest answer is "don't", I say so before either of us spends money finding out.</p>
+			<div class="rules">
+				<div><b>Small reviewed pull requests</b><span>Every change is easy to read and easy to undo.</span></div>
+				<div><b>Tests and CI on every change</b><span>So the system keeps working after I leave.</span></div>
+				<div><b>The right tool, not my favourite</b><span>n8n, Make or code, whichever fits your team.</span></div>
+				<div><b>Handover you can run</b><span>Docs and a walkthrough for your people.</span></div>
+			</div>
+		</div>
+	</section>
+</div>
+
+<section class="quotes">
+	<div class="q"><p>He takes the time to thoroughly understand the project before diving in, and shows strong attention to detail.</p><footer><b>Marcos R.</b>, United States. AI automation build</footer></div>
+	<div class="q"><p>After two other automation experts, I finally met Haris. World-class communication, and he got my problem solved fast.</p><footer><b>Upwork client</b>, United States. Make.com and OpenAI</footer></div>
+	<div class="tally"><span><b>Top Rated Plus</b> on Upwork</span><span><b>100%</b> Job Success</span><span><b>5.0</b> on every review shown</span></div>
+</section>
+
+<div class="wrap">
+	<section class="contact">
+		<div>
+			<h2>Tell me what still eats your team's week.</h2>
+			<a class="mail">hello@autoany.io</a>
+			<p class="note">I reply within a day with how I would automate it, how long it takes and a fixed price.</p>
+		</div>
+		<form>
+			<label>Your name<span class="in">Full name</span></label>
+			<label>Work email<span class="in">you@company.com</span></label>
+			<label>What should AI take off your plate?<span class="in tall">A sentence or two is plenty</span></label>
+			<a class="btn">Start a project <i>&rarr;</i></a>
+		</form>
+	</section>
+
+	<footer class="site"><span>&copy; 2026 Muhammad Haris</span><div><a>Upwork</a><a>LinkedIn</a><a>GitHub</a></div></footer>
+</div>
+</body>
+</html>

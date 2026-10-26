@@ -1,0 +1,70 @@
+<template>
+  <style>
+    @font-face {
+      font-family: "Geist";
+      src: url("assets/fonts/Geist-700.woff2") format("woff2");
+      font-weight: 700;
+    }
+    #root {
+      position: absolute;
+      inset: 0;
+    }
+    .tl {
+      position: absolute;
+      left: 108px;
+      top: 96px;
+      width: 864px;
+      font: 700 54px/1.12 "Geist", sans-serif;
+      letter-spacing: -0.025em;
+      color: var(--color-ink);
+    }
+    .tl .w {
+      display: inline-block;
+    }
+    .tl[data-hl="accent"] { --hl: #0e7a55; }
+    .tl[data-hl="alert"] { --hl: #d4542f; }
+    .tl .hl,
+    .tl .w.hl {
+      color: var(--hl);
+    }
+  </style>
+  <div id="root" data-composition-id="titles" data-width="1080" data-height="1080">
+    <p id="t1" class="clip tl" data-start="0.25" data-duration="3.5" data-track-index="0" data-hl="accent"><span class="w">A</span> <span class="w">monitor</span> <span class="w">that</span> <span class="w">watches</span> <span class="w hl">38,548</span> <span class="w">business</span> <span class="w">listings</span> <span class="w">around</span> <span class="w">the</span> <span class="w">clock.</span></p>
+    <p id="t2" class="clip tl" data-start="3.8" data-duration="3.5" data-track-index="0" data-hl="alert"><span class="w">When</span> <span class="w">it</span> <span class="w">spots</span> <span class="w">the</span> <span class="w"><span class="hl">trigger</span>,</span> <span class="w">it</span> <span class="w">doesn't</span> <span class="w">raise</span> <span class="w">the</span> <span class="w">alarm.</span></p>
+    <p id="t3" class="clip tl" data-start="7.4" data-duration="3.2" data-track-index="0" data-hl="accent"><span class="w">Nothing</span> <span class="w">reaches</span> <span class="w">a</span> <span class="w">rep</span> <span class="w">that</span> <span class="w">hasn't</span> <span class="w">been</span> <span class="w hl">confirmed</span> <span class="w hl">twice.</span></p>
+    <p id="t4" class="clip tl" data-start="10.7" data-duration="3.8" data-track-index="0" data-hl="accent"><span class="w">The</span> <span class="w">engine</span> <span class="w">produced</span> <span class="w">a</span> <span class="w hl">51-lead</span> <span class="w hl">pipeline</span> <span class="w">in</span> <span class="w">its</span> <span class="w">first</span> <span class="w">four</span> <span class="w">days</span></p>
+    <p id="t5" class="clip tl" data-start="14.6" data-duration="3.2" data-track-index="0" data-hl="accent"><span class="w">Sales</span> <span class="w">now</span> <span class="w">works</span> <span class="w">a</span> <span class="w hl">ranked</span> <span class="w hl">list</span> <span class="w">of</span> <span class="w">real</span> <span class="w">opportunities,</span></p>
+    <p id="t6" class="clip tl" data-start="17.9" data-duration="2.3" data-track-index="0" data-hl="accent"><span class="w">and</span> <span class="w">the</span> <span class="w">whole</span> <span class="w">system</span> <span class="w hl">runs</span> <span class="w hl">unattended.</span></p>
+  </div>
+  <script>
+    (() => {
+      const tl = gsap.timeline({ paused: true });
+      tl.fromTo("#t1 .w", { opacity: 0, filter: "blur(6px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.13, ease: "power4.out", stagger: 0.067 }, 0.25);
+      tl.fromTo("#t1 .w", { opacity: 1, filter: "blur(0px)" }, { opacity: 0, filter: "blur(6px)", duration: 0.18, ease: "power3.in", immediateRender: false }, 3.55);
+      tl.fromTo("#t2 .w", { opacity: 0, filter: "blur(8px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.2, ease: "power4.out" }, 3.8);
+      tl.fromTo("#t2 .w", { opacity: 1, filter: "blur(0px)" }, { opacity: 0, filter: "blur(6px)", duration: 0.18, ease: "power3.in", immediateRender: false }, 7.1);
+      tl.fromTo("#t3 .w:nth-child(1)", { color: "#c3ccc8" }, { color: "#111a17", duration: 0.12, ease: "power2.out" }, 7.4);
+      tl.fromTo("#t3 .w:nth-child(2)", { color: "#c3ccc8" }, { color: "#111a17", duration: 0.12, ease: "power2.out" }, 7.48);
+      tl.fromTo("#t3 .w:nth-child(3)", { color: "#c3ccc8" }, { color: "#111a17", duration: 0.12, ease: "power2.out" }, 7.56);
+      tl.fromTo("#t3 .w:nth-child(4)", { color: "#c3ccc8" }, { color: "#111a17", duration: 0.12, ease: "power2.out" }, 7.64);
+      tl.fromTo("#t3 .w:nth-child(5)", { color: "#c3ccc8" }, { color: "#111a17", duration: 0.12, ease: "power2.out" }, 7.72);
+      tl.fromTo("#t3 .w:nth-child(6)", { color: "#c3ccc8" }, { color: "#111a17", duration: 0.12, ease: "power2.out" }, 7.8);
+      tl.fromTo("#t3 .w:nth-child(7)", { color: "#c3ccc8" }, { color: "#111a17", duration: 0.12, ease: "power2.out" }, 7.88);
+      tl.fromTo("#t3 .w:nth-child(8)", { color: "#c3ccc8" }, { color: "#0e7a55", duration: 0.12, ease: "power2.out" }, 7.96);
+      tl.fromTo("#t3 .w:nth-child(9)", { color: "#c3ccc8" }, { color: "#0e7a55", duration: 0.12, ease: "power2.out" }, 8.04);
+      tl.fromTo("#t3 .w", { opacity: 1, filter: "blur(0px)" }, { opacity: 0, filter: "blur(6px)", duration: 0.18, ease: "power3.in", immediateRender: false }, 10.4);
+      tl.fromTo("#t4 .w", { opacity: 0, filter: "blur(6px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.13, ease: "power4.out", stagger: 0.067 }, 10.7);
+      tl.fromTo("#t4 .w", { opacity: 1, filter: "blur(0px)" }, { opacity: 0, filter: "blur(6px)", duration: 0.18, ease: "power3.in", immediateRender: false }, 14.3);
+      tl.fromTo("#t5 .w", { opacity: 0, filter: "blur(8px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.2, ease: "power4.out" }, 14.6);
+      tl.fromTo("#t5 .w", { opacity: 1, filter: "blur(0px)" }, { opacity: 0, filter: "blur(6px)", duration: 0.18, ease: "power3.in", immediateRender: false }, 17.6);
+      tl.fromTo("#t6 .w:nth-child(1)", { color: "#c3ccc8" }, { color: "#111a17", duration: 0.12, ease: "power2.out" }, 17.9);
+      tl.fromTo("#t6 .w:nth-child(2)", { color: "#c3ccc8" }, { color: "#111a17", duration: 0.12, ease: "power2.out" }, 17.98);
+      tl.fromTo("#t6 .w:nth-child(3)", { color: "#c3ccc8" }, { color: "#111a17", duration: 0.12, ease: "power2.out" }, 18.06);
+      tl.fromTo("#t6 .w:nth-child(4)", { color: "#c3ccc8" }, { color: "#111a17", duration: 0.12, ease: "power2.out" }, 18.14);
+      tl.fromTo("#t6 .w:nth-child(5)", { color: "#c3ccc8" }, { color: "#0e7a55", duration: 0.12, ease: "power2.out" }, 18.22);
+      tl.fromTo("#t6 .w:nth-child(6)", { color: "#c3ccc8" }, { color: "#0e7a55", duration: 0.12, ease: "power2.out" }, 18.3);
+      tl.fromTo("#t6 .w", { opacity: 1, filter: "blur(0px)" }, { opacity: 0, filter: "blur(6px)", duration: 0.18, ease: "power3.in", immediateRender: false }, 20);
+      window.__timelines["titles"] = tl;
+    })();
+  </script>
+</template>

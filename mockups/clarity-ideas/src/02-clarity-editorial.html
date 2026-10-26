@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Clarity Editorial</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&display=swap" rel="stylesheet" />
+<style>
+/* Clarity Editorial (minimalist-ui): a calm, document-style page. White canvas, 1px hairlines, crisp 10px radii,
+   pastel tags for the kinds of work, an editorial serif for headings and quotes, Geist for everything else.
+   Emerald stays the one action colour, carried over from Clarity. */
+:root {
+	--bg: #fbfbfa;
+	--card: #ffffff;
+	--ink: #1d2320;
+	--mute: #6b716d;
+	--line: #eaeaea;
+	--acc: #0e7a55;
+	--g-bg: #edf3ec; --g-tx: #346538;
+	--b-bg: #e1f3fe; --b-tx: #1f6c9f;
+	--y-bg: #fbf3db; --y-tx: #956400;
+	--r-bg: #fdebec; --r-tx: #9f2f2d;
+}
+* { box-sizing: border-box; margin: 0; }
+html { overflow-x: hidden; }
+body { width: 1440px; background: var(--bg); color: var(--ink); font: 400 17px/1.65 "Geist", sans-serif; -webkit-font-smoothing: antialiased; }
+.serif { font-family: "Newsreader", serif; }
+a { color: inherit; text-decoration: none; }
+.col { width: 1040px; margin: 0 auto; }
+.btn { display: inline-flex; align-items: center; gap: 10px; height: 48px; padding: 0 20px; border-radius: 6px; background: var(--acc); color: #fff; font-weight: 500; font-size: 15px; }
+.btn--plain { background: var(--card); color: var(--ink); box-shadow: inset 0 0 0 1px var(--line); }
+.tag { width: max-content; align-self: flex-start; justify-self: start; display: inline-block; padding: 4px 10px; border-radius: 999px; font: 500 11px "Geist"; letter-spacing: .05em; text-transform: uppercase; }
+.t-g { background: var(--g-bg); color: var(--g-tx); } .t-b { background: var(--b-bg); color: var(--b-tx); } .t-y { background: var(--y-bg); color: var(--y-tx); } .t-r { background: var(--r-bg); color: var(--r-tx); }
+.ph { position: relative; overflow: hidden; background: linear-gradient(160deg, #e9ece9, #d5dbd7); }
+.ph span { position: absolute; left: 14px; bottom: 12px; font: 500 12px "Geist Mono"; color: #4d5550; }
+
+/* nav: translucent bar with a soft edge, no hard divider */
+nav.top { position: relative; height: 68px; display: flex; align-items: center; justify-content: space-between; }
+nav .name { display: flex; align-items: center; gap: 12px; font-weight: 600; font-size: 16px; }
+nav .name i { width: 30px; height: 30px; border-radius: 50%; overflow: hidden; display: block; background: linear-gradient(160deg, #d9dfdb, #b9c3bd); }
+nav .links { display: flex; gap: 30px; font-size: 15px; color: var(--mute); }
+nav .btn { height: 38px; font-size: 14px; padding: 0 14px; }
+.topbar { border-bottom: 1px solid var(--line); background: rgb(251 251 250 / .85); }
+
+/* hero */
+.hero { text-align: center; padding: 104px 0 64px; position: relative; }
+.hero::before { content: ""; position: absolute; inset: 0 -200px auto; height: 520px; background: radial-gradient(50% 60% at 50% 0%, rgb(14 122 85 / .06), transparent 70%); pointer-events: none; }
+.hero h1 { font: 400 76px/1.04 "Newsreader", serif; letter-spacing: -.035em; max-width: 13em; margin: 0 auto; }
+.hero h1 em { font-style: italic; color: var(--acc); }
+.hero p { max-width: 34em; margin: 26px auto 0; font-size: 19px; color: var(--mute); }
+.hero .ctas { display: flex; gap: 10px; justify-content: center; margin-top: 34px; }
+.hero .proof { display: flex; gap: 28px; justify-content: center; margin-top: 30px; font-size: 14px; color: var(--mute); }
+.hero .proof b { color: var(--ink); font-weight: 600; }
+
+/* window chrome around a real screenshot slot */
+.window { width: 1160px; margin: 0 auto; border: 1px solid var(--line); border-radius: 12px; background: var(--card); overflow: hidden; box-shadow: 0 30px 60px -40px rgb(29 35 32 / .25); }
+.window .bar { height: 40px; display: flex; align-items: center; gap: 7px; padding: 0 16px; border-bottom: 1px solid var(--line); }
+.window .bar i { width: 11px; height: 11px; border-radius: 50%; background: #e3e3e1; }
+.window .bar span { margin-left: 14px; font: 500 12px "Geist Mono"; color: var(--mute); }
+.window .ph { height: 560px; }
+
+/* sections */
+section.s { padding: 130px 0 0; }
+h2 { font: 400 50px/1.08 "Newsreader", serif; letter-spacing: -.03em; }
+.lede { margin-top: 16px; color: var(--mute); font-size: 18px; max-width: 34em; }
+
+/* about: two columns of plain text */
+.about { display: grid; grid-template-columns: 300px 1fr; gap: 70px; }
+.about .ph { height: 380px; border-radius: 10px; }
+.about p { font-size: 19px; line-height: 1.65; }
+.about p + p { margin-top: 18px; color: var(--mute); }
+.about dl { display: grid; grid-template-columns: repeat(3, 1fr); margin-top: 36px; border-top: 1px solid var(--line); }
+.about dl div { padding-top: 18px; }
+.about dt { font-weight: 600; } .about dd { margin: 0; color: var(--mute); font-size: 15px; }
+
+/* bento with hairlines */
+.bento { display: grid; grid-template-columns: repeat(6, 1fr); grid-auto-rows: 210px; grid-auto-flow: dense; gap: 14px; margin-top: 44px; }
+.cell { border: 1px solid var(--line); border-radius: 12px; background: var(--card); padding: 30px; display: flex; flex-direction: column; justify-content: space-between; }
+.cell h3 { font-size: 21px; font-weight: 600; letter-spacing: -.02em; }
+.cell p { margin-top: 8px; color: var(--mute); font-size: 15.5px; }
+.c1 { grid-column: span 4; grid-row: span 2; background: linear-gradient(180deg, #fff, #f6faf7); }
+.c1 .stack { display: flex; flex-wrap: wrap; gap: 8px; }
+.c1 .stack span { font: 500 12px "Geist Mono"; padding: 6px 10px; border: 1px solid var(--line); border-radius: 6px; background: #fff; }
+.c2 { grid-column: span 2; grid-row: span 2; background: var(--g-bg); border-color: #dbe7da; }
+.c2 b { font: 400 64px/1 "Newsreader", serif; letter-spacing: -.04em; color: var(--g-tx); }
+.c3 { grid-column: span 3; } .c4 { grid-column: span 3; }
+
+/* work: document rows with pastel tags */
+.rows { margin-top: 40px; border-top: 1px solid var(--line); }
+.rw { display: grid; grid-template-columns: 170px 1fr 170px; gap: 34px; align-items: start; padding: 30px 0; border-bottom: 1px solid var(--line); }
+.rw h3 { font: 400 28px/1.15 "Newsreader", serif; letter-spacing: -.02em; }
+.rw p { margin-top: 8px; color: var(--mute); font-size: 16px; max-width: 40em; }
+.rw .n { text-align: right; }
+.rw .n b { display: block; font: 400 38px/1 "Newsreader", serif; letter-spacing: -.03em; }
+.rw .n small { color: var(--mute); font-size: 13px; }
+
+/* quote */
+.quote { margin-top: 130px; text-align: center; padding: 90px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.quote p { font: italic 400 38px/1.3 "Newsreader", serif; letter-spacing: -.02em; max-width: 24em; margin: 0 auto; }
+.quote footer { margin-top: 24px; color: var(--mute); font-size: 15px; }
+.quote .more { display: flex; gap: 14px; justify-content: center; margin-top: 30px; }
+.quote .more span { width: 8px; height: 8px; border-radius: 50%; background: #d6d6d3; }
+.quote .more span:first-child { background: var(--acc); }
+
+/* faq, stripped accordion */
+.faq { display: grid; grid-template-columns: 320px 1fr; gap: 70px; }
+.qa { border-bottom: 1px solid var(--line); padding: 22px 0; display: grid; grid-template-columns: 1fr 20px; gap: 10px; }
+.qa:first-child { border-top: 1px solid var(--line); }
+.qa b { font-weight: 600; font-size: 18px; } .qa i { font-style: normal; color: var(--mute); }
+.qa p { grid-column: 1 / -1; color: var(--mute); }
+
+/* close */
+.close { text-align: center; padding: 150px 0 120px; }
+.close h2 { font-size: 62px; max-width: 13em; margin: 0 auto; }
+.close p { color: var(--mute); margin-top: 18px; font-size: 18px; }
+.close .ctas { display: flex; gap: 14px; justify-content: center; align-items: center; margin-top: 32px; color: var(--mute); font-size: 15px; }
+kbd { display: inline-grid; place-items: center; min-width: 28px; height: 28px; padding: 0 7px; border: 1px solid var(--line); border-bottom-width: 2px; border-radius: 5px; background: #f7f6f3; font: 500 13px "Geist Mono"; color: var(--ink); }
+footer.site { border-top: 1px solid var(--line); }
+footer.site .col { display: flex; justify-content: space-between; padding: 28px 0 40px; color: var(--mute); font-size: 14px; }
+footer.site div div { display: flex; gap: 26px; }
+</style>
+</head>
+<body>
+<div class="topbar"><div class="col"><nav class="top">
+	<a class="name"><i></i>Muhammad Haris</a>
+	<div class="links"><a>Work</a><a>Services</a><a>Reviews</a><a>Questions</a></div>
+	<a class="btn">Book a call</a>
+</nav></div></div>
+
+<div class="col">
+	<section class="hero">
+		<h1>I build the AI your team keeps <em>meaning to get to.</em></h1>
+		<p>Forward deployed engineer and AI consultant. I scope the problem, build the system and stay until it runs in production.</p>
+		<div class="ctas"><a class="btn">Book a call &rarr;</a><a class="btn btn--plain">See the work</a></div>
+		<div class="proof"><span><b>Top Rated Plus</b> on Upwork</span><span><b>100%</b> Job Success</span><span><b>33</b> jobs, 728 hours</span></div>
+	</section>
+</div>
+
+<div class="window">
+	<div class="bar"><i></i><i></i><i></i><span>estimation-pipeline / n8n</span></div>
+	<div class="ph"><span>Screenshot: the photo-to-price workflow, seven live tenants</span></div>
+</div>
+
+<div class="col">
+	<section class="s about">
+		<div class="ph"><span>Portrait, new shoot</span></div>
+		<div>
+			<h2>The person who scopes it is the person who ships it.</h2>
+			<p style="margin-top:24px">I work inside a client's team, find the work that should be running on AI, and build it through to production.</p>
+			<p>I diagnose before I build. If the honest answer is "don't", I say so before either of us spends money finding out. Everything ships in small reviewed pull requests, with tests and CI on every change.</p>
+			<dl><div><dt>LUMS</dt><dd>BSc (Hons)</dd></div><div><dt>AutoAny</dt><dd>Co-founder</dd></div><div><dt>$30K+</dt><dd>earned on Upwork</dd></div></dl>
+		</div>
+	</section>
+
+	<section class="s">
+		<h2>What I build</h2>
+		<p class="lede">Four kinds of work, chosen by what your team can run after I leave.</p>
+		<div class="bento">
+			<div class="cell c1"><div><span class="tag t-g">Agents</span><h3 style="margin-top:16px">AI agents and RAG systems</h3><p>Agents on Claude and OpenAI that answer, triage and act, with MCP, pgvector, reranking and evals behind every answer.</p></div><div class="stack"><span>Claude</span><span>OpenAI</span><span>MCP</span><span>pgvector</span><span>Reranking</span><span>Evals</span></div></div>
+			<div class="cell c2"><span class="tag t-g">Support</span><div><b>6,700+</b><p style="color:var(--g-tx)">support conversations automated for one UK broadband provider</p></div></div>
+			<div class="cell c3"><div><h3>Workflow automation</h3><p>n8n, Make and Power Automate, where they are the right tool.</p></div><span class="tag t-y">n8n, Make</span></div>
+			<div class="cell c4"><div><h3>Full-stack products and mobile apps</h3><p>Next.js, Python, FastAPI and Supabase. iOS and Android apps approved by Apple on the first submission.</p></div><span class="tag t-b">Product</span></div>
+		</div>
+	</section>
+
+	<section class="s">
+		<h2>Selected work</h2>
+		<div class="rows">
+			<div class="rw"><span class="tag t-g">Voice AI</span><div><h3>Every call answered, every caller routed</h3><p>A Retell AI phone agent for a UK broadband provider. It triages the caller, checks live outages and hands over with the context kept.</p></div><div class="n"><b>7</b><small>departments routed</small></div></div>
+			<div class="rw"><span class="tag t-b">Fintech</span><div><h3>Your money, answered with evidence</h3><p>A household investing platform where a tool-using AI agent answers from your real accounts and shows where each number comes from.</p></div><div class="n"><b>100s</b><small>pull requests shipped</small></div></div>
+			<div class="rw"><span class="tag t-y">Product</span><div><h3>Photo in, price out</h3><p>A white-label estimation tool. A vision model reads the photo, a fixed rubric sets the price, and the range goes back by SMS and email.</p></div><div class="n"><b>7</b><small>paying tenants</small></div></div>
+			<div class="rw"><span class="tag t-r">Risk</span><div><h3>Every flag rechecked before it is a lead</h3><p>A weekly sweep of public listings where a change only becomes a lead after an independent recheck.</p></div><div class="n"><b>42k</b><small>checks a week</small></div></div>
+		</div>
+	</section>
+</div>
+
+<section class="quote">
+	<p>&ldquo;After two other automation experts, I finally met Haris. World-class communication, and he got my problem solved fast.&rdquo;</p>
+	<footer>Upwork client, United States. Make.com and OpenAI debugging, rated 5.0</footer>
+	<div class="more"><span></span><span></span><span></span><span></span></div>
+</section>
+
+<div class="col">
+	<section class="s faq">
+		<div><h2>Questions</h2><p class="lede">What clients usually ask on the first call.</p></div>
+		<div>
+			<div class="qa"><b>No-code tools or real code?</b><i>&minus;</i><p>Both. n8n, Make and Power Automate where they fit; Next.js, Python and FastAPI when they don't. You get whichever your team can maintain.</p></div>
+			<div class="qa"><b>Can my team run it after you leave?</b><i>+</i></div>
+			<div class="qa"><b>How does a project start?</b><i>+</i></div>
+			<div class="qa"><b>Do you work inside our tools and accounts?</b><i>+</i></div>
+		</div>
+	</section>
+
+	<section class="close">
+		<h2>Tell me what still eats your team's week.</h2>
+		<p>I reply within a day with how I would automate it, how long it takes and a fixed price.</p>
+		<div class="ctas"><a class="btn">Book a call &rarr;</a><span>or press <kbd>B</kbd></span></div>
+	</section>
+</div>
+
+<footer class="site"><div class="col"><span>&copy; 2026 Muhammad Haris. hello@autoany.io</span><div><a>Upwork</a><a>LinkedIn</a><a>GitHub</a></div></div></footer>
+</body>
+</html>

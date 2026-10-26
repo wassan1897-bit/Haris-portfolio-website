@@ -1,0 +1,14 @@
+I don't sell AI. I sell pipeline that happens to run on AI.
+What makes me different
+Systems, not workflows.
+Every engagement is end to end: the data, the agents, the CRM and the reporting. Nothing is handed over half-connected.
+Agents where judgment helps. Plain code where mistakes cost money.
+AI reads, researches and decides what deserves attention. Deterministic logic handles anything that touches a price, a send or a customer record.
+A production standard most GTM work never reaches.
+Evaluations, guardrails, strict output formats on every AI step, human approval before anything sensitive reaches a customer, and monitoring once it's live.
+Revenue first, tools last.
+I start from where pipeline leaks and work back to the build. The stack is chosen to fit the problem, never the other way round.
+I build real software.
+AI platforms with hybrid retrieval, evaluation pipelines and bank-grade security, not just connected SaaS tools.
+I've built where the stakes are highest.
+Bank data, regulated compliance and multi-tenant platforms. If a system can be trusted with a customer's money, it can be trusted with your pipeline.

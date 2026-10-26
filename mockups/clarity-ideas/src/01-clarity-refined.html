@@ -1,0 +1,265 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Clarity, refined</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+/* Clarity, refined: the original Clarity with every dark block made light. Template 01, "Clarity": light, trust-first consultant site. Cool off-white, ink, one emerald accent.
+   Structure borrowed in spirit from schemasauce.com: positioning hero, intro with portrait, a quote band,
+   what I bring, work, process, one call to action. */
+:root {
+	--bg: #f5f7f6;
+	--surface: #ffffff;
+	--ink: #111a17;
+	--mute: #56625d;
+	--line: rgb(17 26 23 / .09);
+	--acc: #0e7a55;
+	--acc-soft: #e3f1ea;
+	--r: 14px;
+}
+* { box-sizing: border-box; margin: 0; }
+body { width: 1440px; background: var(--bg); color: var(--ink); font: 400 17px/1.6 "Geist", sans-serif; -webkit-font-smoothing: antialiased; }
+a { color: inherit; text-decoration: none; }
+.wrap { width: 1240px; margin: 0 auto; }
+.btn { display: inline-flex; align-items: center; gap: 10px; height: 52px; padding: 0 8px 0 24px; border-radius: 999px; background: var(--acc); color: #fff; font-weight: 600; font-size: 16px; }
+.btn i { width: 36px; height: 36px; border-radius: 50%; background: rgb(255 255 255 / .18); display: grid; place-items: center; font-style: normal; font-size: 15px; }
+.btn--ghost { background: transparent; color: var(--ink); box-shadow: inset 0 0 0 1.5px var(--line); }
+.ph { position: relative; overflow: hidden; border-radius: var(--r); background:
+	radial-gradient(120% 80% at 70% 20%, #cfd8d4, #a9b6b0 55%, #8e9c96); }
+.ph span { position: absolute; left: 18px; bottom: 16px; font: 500 12px "Geist Mono"; letter-spacing: .04em; color: #24302b; background: rgb(255 255 255 / .7); padding: 6px 10px; border-radius: 999px; }
+
+/* nav */
+nav.top { height: 76px; display: flex; align-items: center; justify-content: space-between; }
+.logo { font-weight: 700; font-size: 19px; letter-spacing: -.02em; }
+.logo b { color: var(--acc); }
+.links { display: flex; gap: 34px; font-size: 15px; color: var(--mute); }
+.links a:first-child { color: var(--ink); }
+nav .btn { height: 44px; font-size: 15px; padding: 0 20px; }
+.btn--ghost { padding-right: 8px; }
+
+/* hero */
+.hero { display: grid; grid-template-columns: 1.15fr .85fr; gap: 64px; align-items: center; padding: 56px 0 88px; }
+.hero h1 { font-size: 68px; line-height: 1.02; letter-spacing: -.04em; font-weight: 600; }
+.hero h1 em { font-style: normal; color: var(--acc); }
+.hero p { margin-top: 26px; max-width: 30em; font-size: 20px; color: var(--mute); }
+.hero .ctas { display: flex; gap: 14px; margin-top: 38px; }
+.hero .ph { height: 544px; border-radius: 22px; }
+.bezel { padding: 8px; border-radius: 30px; background: rgb(17 26 23 / .04); box-shadow: inset 0 0 0 1px rgb(17 26 23 / .06); }
+.hero .badge { position: absolute; right: -18px; top: 40px; background: var(--surface); border-radius: 12px; padding: 14px 18px; box-shadow: 0 18px 40px rgb(17 26 23 / .12); font-size: 14px; }
+.hero .badge b { display: block; font-size: 22px; letter-spacing: -.02em; }
+.hero .figure { position: relative; }
+
+/* logos */
+.logos { border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); padding: 30px 0; }
+.logos .row { display: flex; justify-content: space-between; align-items: center; }
+.logos img { height: 26px; opacity: .72; filter: grayscale(1) brightness(.4); }
+
+/* intro */
+.intro { display: grid; grid-template-columns: 380px 1fr; gap: 80px; padding: 120px 0; align-items: start; }
+.intro .ph { height: 460px; }
+.intro h2 { font-size: 44px; line-height: 1.1; letter-spacing: -.03em; font-weight: 600; max-width: 15em; }
+.intro p { margin-top: 22px; max-width: 36em; color: var(--mute); font-size: 18px; }
+.intro .facts { display: flex; gap: 44px; margin-top: 40px; padding-top: 28px; border-top: 1px solid var(--line); }
+.intro .facts b { display: block; font-size: 15px; }
+.intro .facts span { font-size: 14px; color: var(--mute); }
+
+/* quote band */
+.quote { background: var(--acc); color: #f2fbf6; padding: 110px 0; }
+.quote blockquote { width: 900px; margin: 0 auto; text-align: center; font-size: 34px; line-height: 1.3; letter-spacing: -.02em; font-weight: 500; }
+.quote cite { display: block; margin-top: 28px; font: 400 15px "Geist"; font-style: normal; color: #e2f4ea; }
+
+/* numbers */
+.nums { display: grid; grid-template-columns: repeat(4, 1fr); padding: 72px 0 0; }
+.nums div { padding-right: 30px; }
+.nums div + div { padding-left: 30px; border-left: 1px solid var(--line); }
+.nums b { display: block; font-size: 56px; letter-spacing: -.04em; font-weight: 600; line-height: 1; }
+.nums span { display: block; margin-top: 12px; color: var(--mute); font-size: 15px; }
+
+/* build */
+.build { padding: 80px 0 120px; }
+.build h2 { font-size: 44px; letter-spacing: -.03em; font-weight: 600; }
+.build .grid { display: grid; grid-template-columns: 1.3fr 1fr; grid-template-rows: auto auto; gap: 18px; margin-top: 44px; }
+.card { background: var(--surface); border-radius: var(--r); padding: 34px; box-shadow: 0 1px 2px rgb(17 26 23 / .04), 0 18px 40px -24px rgb(17 26 23 / .18); }
+.card.big { grid-row: span 2; background: var(--surface); color: var(--ink); box-shadow: inset 0 0 0 1px rgb(14 122 85 / .18), 0 18px 40px -24px rgb(17 26 23 / .18); display: flex; flex-direction: column; justify-content: space-between; }
+.card h3 { font-size: 24px; letter-spacing: -.02em; font-weight: 600; }
+.card p { margin-top: 10px; color: var(--mute); font-size: 16px; }
+.card.big p { color: var(--mute); font-size: 18px; max-width: 26em; }
+.card .chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 30px; }
+.card .chips span { padding: 8px 14px; border-radius: 999px; background: var(--acc-soft); font: 500 13px "Geist Mono"; color: #0b5c40; }
+.card.tint { background: var(--acc-soft); }
+.split2 { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+
+/* work */
+.work { padding: 40px 0 120px; }
+.work h2 { font-size: 44px; letter-spacing: -.03em; font-weight: 600; }
+.case { display: grid; grid-template-columns: 1fr 1.5fr 220px 40px; gap: 40px; align-items: center; padding: 34px 0; border-bottom: 1px solid var(--line); }
+.case:first-of-type { margin-top: 36px; border-top: 1px solid var(--line); }
+.case h3 { font-size: 26px; letter-spacing: -.02em; font-weight: 600; }
+.case p { color: var(--mute); font-size: 16px; }
+.case b { font-size: 30px; letter-spacing: -.03em; display: block; line-height: 1; }
+.case small { font-size: 13px; color: var(--mute); }
+.case .go { width: 40px; height: 40px; border-radius: 50%; box-shadow: inset 0 0 0 1.5px var(--line); display: grid; place-items: center; }
+.case.on { background: var(--surface); margin: 0 -28px; padding: 34px 28px; border-radius: var(--r); border-bottom-color: transparent; }
+.case.on .go { background: var(--acc); color: #fff; box-shadow: none; }
+
+/* process */
+.process { background: var(--surface); padding: 110px 0; }
+.process h2 { font-size: 44px; letter-spacing: -.03em; font-weight: 600; }
+.steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; margin-top: 54px; position: relative; }
+.steps::before { content: ""; position: absolute; left: 0; right: 0; top: 11px; height: 2px; background: var(--line); }
+.steps div { position: relative; padding-right: 36px; }
+.steps i { display: block; width: 24px; height: 24px; border-radius: 50%; background: var(--surface); box-shadow: inset 0 0 0 2px var(--acc); }
+.steps div:first-child i { background: var(--acc); }
+.steps h3 { margin-top: 26px; font-size: 22px; font-weight: 600; letter-spacing: -.02em; }
+.steps p { margin-top: 8px; color: var(--mute); font-size: 16px; }
+
+/* reviews */
+.reviews { padding: 120px 0; display: grid; grid-template-columns: 380px 1fr; gap: 80px; }
+.reviews h2 { font-size: 44px; letter-spacing: -.03em; font-weight: 600; line-height: 1.1; }
+.reviews .up { margin-top: 28px; display: grid; gap: 10px; color: var(--mute); font-size: 16px; }
+.reviews .up b { color: var(--ink); }
+.rv { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+.rv .card p { color: var(--ink); font-size: 18px; margin: 0; line-height: 1.5; }
+.rv .card small { display: block; margin-top: 18px; color: var(--mute); font-size: 14px; }
+.stars { color: var(--acc); letter-spacing: 3px; font-size: 14px; margin-bottom: 14px; }
+
+/* cta */
+.cta { margin: 0 auto 100px; width: 1240px; background: var(--acc-soft); border-radius: 24px; padding: 90px; display: grid; grid-template-columns: 1fr auto; gap: 40px; align-items: end; color: var(--ink); }
+.cta h2 { font-size: 56px; line-height: 1.05; letter-spacing: -.04em; font-weight: 600; max-width: 13em; }
+.cta p { margin-top: 18px; color: #3f5a4e; font-size: 18px; max-width: 34em; }
+.cta .btn { background: var(--acc); }
+.cta .btn i { background: rgb(255 255 255 / .18); color: #fff; }
+
+footer { border-top: 1px solid var(--line); padding: 60px 0 50px; }
+footer .wrap { display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: 40px; }
+footer h4 { font-size: 14px; color: var(--mute); font-weight: 500; margin-bottom: 14px; }
+footer li { list-style: none; font-size: 15px; margin-bottom: 8px; }
+footer ul { padding: 0; }
+footer .legal { margin-top: 50px; font-size: 13px; color: var(--mute); }
+</style>
+</head>
+<body>
+<div class="wrap">
+	<nav class="top">
+		<a class="logo">Muhammad Haris<b>.</b></a>
+		<div class="links"><a>Home</a><a>Work</a><a>Services</a><a>Reviews</a><a>About</a></div>
+		<a class="btn">Book a call</a>
+	</nav>
+
+	<section class="hero">
+		<div>
+			<h1>AI that runs in your business, <em>not in a slide deck.</em></h1>
+			<p>Forward deployed engineer and AI consultant. I scope the problem, build the system and stay until it runs in production.</p>
+			<div class="ctas"><a class="btn">Book a call <i>&rarr;</i></a><a class="btn btn--ghost">See the work <i style="background:var(--acc-soft);color:var(--acc)">&darr;</i></a></div>
+		</div>
+		<div class="figure">
+			<div class="bezel"><div class="ph"><span>Portrait, new shoot</span></div></div>
+			<div class="badge"><b>Top Rated Plus</b>100% Job Success on Upwork</div>
+		</div>
+	</section>
+</div>
+
+<section class="logos"><div class="wrap row">
+	<img src="https://cdn.simpleicons.org/n8n/111a17" alt="n8n" />
+	<img src="https://cdn.simpleicons.org/make/111a17" alt="Make" />
+	<img src="https://cdn.simpleicons.org/zapier/111a17" alt="Zapier" />
+	<img src="https://cdn.simpleicons.org/anthropic/111a17" alt="Anthropic" />
+	<img src="file:///E:/Haris%20portfolio%20website/public/landing/assets/img/tools/openai.svg" alt="OpenAI" />
+	<img src="https://cdn.simpleicons.org/airtable/111a17" alt="Airtable" />
+	<img src="https://cdn.simpleicons.org/supabase/111a17" alt="Supabase" />
+	<img src="https://cdn.simpleicons.org/nextdotjs/111a17" alt="Next.js" />
+	<img src="https://cdn.simpleicons.org/python/111a17" alt="Python" />
+	<img src="https://cdn.simpleicons.org/postgresql/111a17" alt="PostgreSQL" />
+</div></section>
+
+<div class="wrap">
+	<section class="nums">
+		<div><b>6,700+</b><span>support conversations automated</span></div>
+		<div><b>21,000+</b><span>agent minutes saved</span></div>
+		<div><b>7</b><span>live client deployments of one product</span></div>
+		<div><b>38,500</b><span>entities monitored around the clock</span></div>
+	</section>
+</div>
+
+<div class="wrap">
+	<section class="intro">
+		<div class="ph"><span>Working photo</span></div>
+		<div>
+			<h2>You know where AI could help. You need someone to build it properly.</h2>
+			<p>I work inside a client's team, find the work that should be running on AI, and build it through to production. The person who scopes the problem is the person who ships it.</p>
+			<p>I diagnose before I build. If the honest answer is "don't", I say so before either of us spends money finding out.</p>
+			<div class="facts"><div><b>LUMS</b><span>BSc (Hons)</span></div><div><b>AutoAny</b><span>Co-founder</span></div><div><b>33 jobs, 728 hours</b><span>on Upwork</span></div></div>
+		</div>
+	</section>
+</div>
+
+<section class="quote">
+	<blockquote>&ldquo;It became apparent very quickly what a high level of aptitude he had, not only for Make automations but for understanding my goals. He got my problem solved fast.&rdquo;<cite>Upwork client, United States. Make.com and OpenAI debugging</cite></blockquote>
+</section>
+
+<div class="wrap">
+
+	<section class="build">
+		<h2>What I build</h2>
+		<div class="grid">
+			<div class="card big">
+				<div><h3>AI agents and RAG systems</h3><p>Agents on Claude and OpenAI that answer, triage and act, with retrieval, reranking and evals so you can trust what they say.</p></div>
+				<div class="chips"><span>Claude</span><span>OpenAI</span><span>MCP</span><span>pgvector</span><span>Evals</span></div>
+			</div>
+			<div class="card tint"><h3>Workflow automation</h3><p>n8n, Make and Power Automate, where they are the right tool. Built to be read and maintained by your team.</p></div>
+			<div class="split2">
+				<div class="card"><h3>Full-stack AI products</h3><p>Next.js, TypeScript, Python, FastAPI, Supabase, Postgres.</p></div>
+				<div class="card"><h3>iOS and Android apps</h3><p>Approved by Apple on the first submission.</p></div>
+			</div>
+		</div>
+	</section>
+
+	<section class="work">
+		<h2>Selected work</h2>
+		<div class="case on"><h3>Voice AI support agent</h3><p>A Retell AI phone agent for a UK broadband provider. It triages the caller, checks live outages and hands over with context kept.</p><div><b>7</b><small>departments it routes to</small></div><span class="go">&rarr;</span></div>
+		<div class="case"><h3>Household investing platform</h3><p>A tool-using AI agent that answers from your real accounts and shows where each number comes from.</p><div><b>100s</b><small>pull requests shipped live</small></div><span class="go">&rarr;</span></div>
+		<div class="case"><h3>White-label estimation product</h3><p>A vision model reads the photo, a fixed rubric sets the price, and the range goes back by SMS and email.</p><div><b>7</b><small>paying tenants</small></div><span class="go">&rarr;</span></div>
+		<div class="case"><h3>Change detection platform</h3><p>A weekly sweep of public listings where a change only becomes a lead after an independent recheck.</p><div><b>42k</b><small>checks a week</small></div><span class="go">&rarr;</span></div>
+	</section>
+</div>
+
+<section class="process"><div class="wrap">
+	<h2>How a project runs</h2>
+	<div class="steps">
+		<div><i></i><h3>Diagnose</h3><p>I look at the work, the data and the tools you already pay for, and say what is worth building.</p></div>
+		<div><i></i><h3>Build</h3><p>Small reviewed pull requests, with tests and CI on every change.</p></div>
+		<div><i></i><h3>Ship</h3><p>Into production with monitoring, so you see what the system is doing.</p></div>
+		<div><i></i><h3>Hand over</h3><p>Docs and a walkthrough, so your team can run it without me.</p></div>
+	</div>
+</div></section>
+
+<div class="wrap">
+	<section class="reviews">
+		<div>
+			<h2>What clients say</h2>
+			<div class="up"><span><b>Top Rated Plus</b> on Upwork</span><span><b>100%</b> Job Success</span><span><b>$30K+</b> earned across 33 jobs</span></div>
+		</div>
+		<div class="rv">
+			<div class="card"><div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div><p>&ldquo;He communicates clearly, works efficiently, and consistently delivers high-quality results.&rdquo;</p><small>Jeff T., United States. CRM automation</small></div>
+			<div class="card"><div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div><p>&ldquo;He takes the time to thoroughly understand the project before diving in.&rdquo;</p><small>Marcos R., United States. AI automation build</small></div>
+			<div class="card"><div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div><p>&ldquo;Exceptional with n8n automations and API integrations. We are already discussing our next project.&rdquo;</p><small>Upwork client. n8n business operating system</small></div>
+			<div class="card"><div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div><p>&ldquo;He always completed work before any deadlines, and went the extra mile.&rdquo;</p><small>Upwork client. AI phone system</small></div>
+		</div>
+	</section>
+</div>
+
+<section class="cta">
+	<div><h2>Tell me what still eats your team's week.</h2><p>I reply within a day with how I would automate it, how long it takes and a fixed price.</p></div>
+	<a class="btn">Book a call <i>&rarr;</i></a>
+</section>
+
+<footer><div class="wrap">
+	<div><a class="logo">Muhammad Haris<b>.</b></a><p style="margin-top:12px;color:var(--mute);font-size:15px;max-width:22em">Forward deployed engineer and AI consultant.</p></div>
+	<div><h4>Site</h4><ul><li>Work</li><li>Services</li><li>Reviews</li><li>About</li></ul></div>
+	<div><h4>Elsewhere</h4><ul><li>Upwork</li><li>LinkedIn</li><li>GitHub</li></ul></div>
+	<div><h4>Contact</h4><ul><li>hello@autoany.io</li><li>Book a call</li></ul></div>
+</div><div class="wrap legal">&copy; 2026 Muhammad Haris</div></footer>
+</body>
+</html>

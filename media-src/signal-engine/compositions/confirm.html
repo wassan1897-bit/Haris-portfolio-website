@@ -1,0 +1,136 @@
+<template>
+  <style>
+    #root {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+    }
+    /* the held listing, same card and state the wall hands over (pushed in 3.2x, centred at 540,600) */
+    #cf-card {
+      position: absolute;
+      left: 447px;
+      top: 530px;
+      width: 186px;
+      height: 140px;
+      background: #fff;
+      border: 2px solid #d4542f;
+      border-radius: 16px;
+      box-shadow: 0 10px 24px -14px rgba(17, 26, 23, 0.22);
+      transform-origin: 50% 50%;
+    }
+    #cf-card i {
+      position: absolute;
+      display: block;
+    }
+    #cf-card .th { left: 16px; top: 16px; width: 40px; height: 40px; border-radius: 10px; background: #dfeee6; }
+    #cf-card .nm { left: 66px; top: 20px; width: 92px; height: 12px; border-radius: 6px; background: #c7d1cc; }
+    #cf-card .sb { left: 66px; top: 40px; width: 64px; height: 10px; border-radius: 5px; background: #e3e9e6; }
+    #cf-card .ad { left: 36px; top: 108px; width: 84px; height: 10px; border-radius: 5px; background: #e3e9e6; }
+    #cf-card .st { position: absolute; left: 16px; top: 72px; display: flex; gap: 4px; }
+    #cf-card .st svg { width: 18px; height: 18px; fill: #d9dfdc; }
+    #cf-card .st svg:first-child { fill: #e8b23a; }
+    #cf-card .pn { position: absolute; left: 16px; top: 104px; width: 12px; height: 17px; }
+    #cf-card .bd { right: -14px; top: -14px; width: 42px; height: 42px; border-radius: 50%; background: #d4542f; }
+    #cf-card .bd svg { position: absolute; inset: 0; width: 42px; height: 42px; }
+    #cf-track {
+      position: absolute;
+      left: 120px;
+      top: 788px;
+      width: 740px;
+      height: 4px;
+      border-radius: 2px;
+      background: #dbe3df;
+      transform-origin: 0 50%;
+    }
+    .cf-gate {
+      position: absolute;
+      top: 746px;
+      width: 88px;
+      height: 88px;
+      border-radius: 50%;
+      background: #fff;
+      border: 4px solid #c9d3ce;
+    }
+    .cf-gate svg {
+      position: absolute;
+      left: 14px;
+      top: 14px;
+      width: 52px;
+      height: 52px;
+    }
+    #cf-g1 { left: 326px; }
+    #cf-g2 { left: 536px; }
+    #cf-rep {
+      position: absolute;
+      left: 875px;
+      top: 545px;
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      background: #e3f1ea;
+      border: 4px solid #c9d3ce;
+      overflow: hidden;
+    }
+    #cf-rep svg {
+      position: absolute;
+      inset: 0;
+      width: 142px;
+      height: 142px;
+    }
+  </style>
+  <div data-hf-id="hf-25xl" id="root" data-composition-id="confirm" data-width="1080" data-height="1080">
+    <div data-hf-id="hf-xcg8" id="cf-track"></div>
+    <div data-hf-id="hf-1j25" id="cf-g1" class="cf-gate">
+      <svg data-hf-id="hf-flyh" viewBox="0 0 40 40"><polyline data-hf-id="hf-lpar" class="tick" points="9,21 17,29 31,12" fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" opacity="0" /></svg>
+    </div>
+    <div data-hf-id="hf-5h66" id="cf-g2" class="cf-gate">
+      <svg data-hf-id="hf-6wgt" viewBox="0 0 40 40"><polyline data-hf-id="hf-vlir" class="tick" points="9,21 17,29 31,12" fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" opacity="0" /></svg>
+    </div>
+    <div data-hf-id="hf-ly6k" id="cf-rep">
+      <svg data-hf-id="hf-aqh1" viewBox="0 0 160 160"><circle data-hf-id="hf-qa3c" cx="80" cy="62" r="27" fill="#3b4a44" /><path data-hf-id="hf-ezew" d="M28 160c0-34 23-56 52-56s52 22 52 56z" fill="#3b4a44" /></svg>
+    </div>
+    <div data-hf-id="hf-lhwh" id="cf-card">
+      <i data-hf-id="hf-ou8w" class="th"></i><i data-hf-id="hf-gu9n" class="nm"></i><i data-hf-id="hf-t6k7" class="sb"></i>
+      <div data-hf-id="hf-fs85" class="st">
+        <svg data-hf-id="hf-ulu9" viewBox="0 0 24 24"><path data-hf-id="hf-glnx" d="M12 2l2.9 6.6 7.1.6-5.4 4.7 1.6 7L12 17.3 5.8 20.9l1.6-7L2 9.2l7.1-.6z" /></svg>
+        <svg data-hf-id="hf-1tol" viewBox="0 0 24 24"><path data-hf-id="hf-t1sx" d="M12 2l2.9 6.6 7.1.6-5.4 4.7 1.6 7L12 17.3 5.8 20.9l1.6-7L2 9.2l7.1-.6z" /></svg>
+        <svg data-hf-id="hf-30lo" viewBox="0 0 24 24"><path data-hf-id="hf-u8q0" d="M12 2l2.9 6.6 7.1.6-5.4 4.7 1.6 7L12 17.3 5.8 20.9l1.6-7L2 9.2l7.1-.6z" /></svg>
+        <svg data-hf-id="hf-2man" viewBox="0 0 24 24"><path data-hf-id="hf-tuez" d="M12 2l2.9 6.6 7.1.6-5.4 4.7 1.6 7L12 17.3 5.8 20.9l1.6-7L2 9.2l7.1-.6z" /></svg>
+        <svg data-hf-id="hf-3t7q" viewBox="0 0 24 24"><path data-hf-id="hf-ruvu" d="M12 2l2.9 6.6 7.1.6-5.4 4.7 1.6 7L12 17.3 5.8 20.9l1.6-7L2 9.2l7.1-.6z" /></svg>
+      </div>
+      <svg data-hf-id="hf-o8zt" class="pn" viewBox="0 0 12 17"><path data-hf-id="hf-g7bt" fill="#9aa6a0" d="M6 0C2.7 0 0 2.6 0 5.9 0 10.3 6 17 6 17s6-6.7 6-11.1C12 2.6 9.3 0 6 0zm0 8.2a2.3 2.3 0 110-4.6 2.3 2.3 0 010 4.6z" /></svg>
+      <i data-hf-id="hf-m1pn" class="ad"></i>
+      <i data-hf-id="hf-cosu" class="bd"><svg data-hf-id="hf-ieox" viewBox="0 0 42 42"><g data-hf-id="hf-5tew" id="cf-pause" fill="#fff"><rect data-hf-id="hf-wxf0" x="14.5" y="12" width="5" height="18" rx="1.5" /><rect data-hf-id="hf-hja5" x="22.5" y="12" width="5" height="18" rx="1.5" /></g><polyline data-hf-id="hf-n5ci" id="cf-ok" points="12,22 18.5,28.5 30.5,14" fill="none" stroke="#fff" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round" opacity="0" /></svg></i>
+    </div>
+  </div>
+  <script>
+    (() => {
+      const tl = gsap.timeline({ paused: true });
+      const OK = "#38c97a";
+
+      // 0-0.65 the held card leaves the close-up and sets down on the track
+      tl.fromTo("#cf-card", { x: 0, y: 0, scale: 3.2 }, { x: -370, y: 0, scale: 1.3, duration: 0.65, ease: "power3.inOut" }, 0);
+      tl.fromTo("#cf-track", { scaleX: 0 }, { scaleX: 1, duration: 0.5, ease: "power2.inOut" }, 0.3);
+      tl.fromTo(".cf-gate", { scale: 0.6, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.35, ease: "expo.out", stagger: 0.1 }, 0.5);
+      tl.fromTo("#cf-rep", { scale: 0.6, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.4, ease: "expo.out" }, 0.7);
+
+      // check one, check two
+      tl.fromTo("#cf-card", { x: -370 }, { x: -170, duration: 0.5, ease: "power2.inOut", immediateRender: false }, 1.0);
+      tl.fromTo("#cf-g1", { backgroundColor: "#ffffff", borderColor: "#c9d3ce" }, { backgroundColor: OK, borderColor: OK, duration: 0.18, ease: "power2.out" }, 1.45);
+      tl.fromTo("#cf-g1 .tick", { opacity: 0, scale: 0.6, transformOrigin: "50% 50%" }, { opacity: 1, scale: 1, duration: 0.25, ease: "expo.out" }, 1.47);
+      tl.fromTo("#cf-card", { x: -170 }, { x: 40, duration: 0.5, ease: "power2.inOut", immediateRender: false }, 1.7);
+      tl.fromTo("#cf-g2", { backgroundColor: "#ffffff", borderColor: "#c9d3ce" }, { backgroundColor: OK, borderColor: OK, duration: 0.18, ease: "power2.out" }, 2.15);
+      tl.fromTo("#cf-g2 .tick", { opacity: 0, scale: 0.6, transformOrigin: "50% 50%" }, { opacity: 1, scale: 1, duration: 0.25, ease: "expo.out" }, 2.17);
+
+      // 2.4-2.9 only now it reaches the rep, confirmed
+      tl.fromTo("#cf-card", { x: 40 }, { x: 206, duration: 0.5, ease: "power2.inOut", immediateRender: false }, 2.4);
+      tl.fromTo("#cf-card", { borderColor: "#d4542f" }, { borderColor: OK, duration: 0.2, ease: "power2.out" }, 2.88);
+      tl.fromTo("#cf-card .bd", { backgroundColor: "#d4542f" }, { backgroundColor: OK, duration: 0.2, ease: "power2.out" }, 2.88);
+      tl.fromTo("#cf-pause", { opacity: 1 }, { opacity: 0, duration: 0.12, ease: "power3.in" }, 2.88);
+      tl.fromTo("#cf-ok", { opacity: 0 }, { opacity: 1, duration: 0.2, ease: "power2.out" }, 2.94);
+      tl.fromTo("#cf-rep", { borderColor: "#c9d3ce" }, { borderColor: OK, duration: 0.2, ease: "power2.out" }, 2.9);
+
+      window.__timelines["confirm"] = tl;
+    })();
+  </script>
+</template>

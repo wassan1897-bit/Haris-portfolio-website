@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Footer ideas</title>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@500&display=swap" rel="stylesheet" />
+<style>
+:root { --ink: #111a17; --acc: #0e7a55; --ok: #38c97a; --mint: #8fd4b1; --soft: #9fb3aa; }
+* { box-sizing: border-box; margin: 0; }
+body { background: #f5f7f6; font: 400 17px/1.6 "Geist", system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+a { color: inherit; text-decoration: none; }
+.wrap { width: min(1240px, 100% - 48px); margin: 0 auto; }
+footer { position: relative; isolation: isolate; overflow: hidden; background: #111a17; color: #eef3f1; padding: 72px 0 34px; margin-bottom: 40px; }
+.logo b { display: block; font-size: 18px; font-weight: 700; letter-spacing: -.02em; line-height: 1.15; }
+.logo span { font-size: 13px; color: var(--soft); }
+.where { margin-top: 18px; color: var(--soft); font-size: 15px; max-width: 16em; }
+h3 { font-size: 17px; font-weight: 600; color: var(--ok); margin-bottom: 16px; }
+ul { list-style: none; padding: 0; display: grid; gap: 11px; }
+li { font-size: 15.5px; font-weight: 500; }
+.social { display: flex; gap: 10px; }
+.social a { width: 38px; height: 38px; border-radius: 9px; display: grid; place-items: center; box-shadow: inset 0 0 0 1.5px rgb(255 255 255 / .55); }
+.social svg { width: 17px; height: 17px; }
+.legal { margin-top: 50px; padding-top: 22px; border-top: 1px solid rgb(255 255 255 / .1); display: flex; justify-content: space-between; gap: 20px; font-size: 13.5px; color: var(--soft); }
+.btn { display: inline-flex; align-items: center; gap: 10px; height: 48px; padding: 0 22px; border-radius: 999px; background: var(--ok); color: #0b1d16; font-weight: 600; font-size: 15.5px; }
+.btn i { width: 24px; height: 24px; border-radius: 50%; background: #0b1d16; color: var(--ok); display: grid; place-items: center; font-style: normal; font-size: 13px; }
+
+/* 1: giant wordmark under the columns */
+.f1 .cols { display: grid; grid-template-columns: 1.2fr 1fr 1.4fr .8fr; gap: 50px; }
+.f1 .mark { margin-top: 60px; font-size: min(10.6vw, 163px); line-height: .8; letter-spacing: -.06em; font-weight: 700; white-space: nowrap; color: transparent; -webkit-text-stroke: 1.5px rgb(143 212 177 / .45); }
+.f1 .legal { margin-top: 26px; }
+
+/* 2: the five stages as a pipeline strip, then two columns */
+.f2 .top { display: flex; justify-content: space-between; align-items: end; gap: 30px; }
+.f2 .pipe { margin-top: 44px; position: relative; display: grid; grid-template-columns: repeat(5, 1fr); gap: 14px; }
+.f2 .pipe::before { content: ""; position: absolute; left: 4%; right: 4%; top: 15px; height: 2px; background: linear-gradient(90deg, #12b26c, #8be36f); opacity: .6; }
+.f2 .pipe a { position: relative; display: grid; gap: 14px; justify-items: start; font-size: 15.5px; font-weight: 600; }
+.f2 .pipe i { width: 32px; height: 32px; border-radius: 50%; background: #111a17; box-shadow: inset 0 0 0 2px var(--ok); display: grid; place-items: center; font: 500 12px "Geist Mono", monospace; font-style: normal; color: var(--mint); }
+.f2 .pipe a:first-child i { background: var(--ok); color: #0b1d16; }
+.f2 .cols { margin-top: 54px; padding-top: 40px; border-top: 1px solid rgb(255 255 255 / .1); display: grid; grid-template-columns: 2fr 1fr; gap: 60px; }
+.f2 .cols ul.two { grid-template-columns: 1fr 1fr; column-gap: 40px; }
+
+/* 3: projects with their numbers */
+.f3 .cols { display: grid; grid-template-columns: 1fr 2.2fr .9fr; gap: 56px; }
+.f3 .proj { display: grid; grid-template-columns: 1fr 1fr; gap: 0 36px; }
+.f3 .proj a { display: grid; grid-template-columns: 92px 1fr; gap: 14px; align-items: baseline; padding: 14px 0; border-top: 1px solid rgb(255 255 255 / .09); }
+.f3 .proj b { font-size: 22px; letter-spacing: -.03em; font-weight: 700; background: linear-gradient(90deg, #12b26c, #8be36f); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+.f3 .proj span { font-size: 14.5px; font-weight: 500; line-height: 1.35; }
+
+/* 4: a contact card on the left, three columns on the right */
+.f4 .cols { display: grid; grid-template-columns: 380px 1fr 1.4fr .8fr; gap: 46px; align-items: start; }
+.f4 .card { padding: 26px; border-radius: 20px; background: rgb(255 255 255 / .05); box-shadow: inset 0 0 0 1px rgb(255 255 255 / .1); }
+.f4 .who { display: flex; gap: 14px; align-items: center; }
+.f4 .who img { width: 56px; height: 56px; border-radius: 50%; object-fit: cover; object-position: 50% 18%; }
+.f4 .card .where { margin-top: 16px; }
+.f4 .card .btn { margin-top: 22px; }
+.f4 .card .social { margin-top: 20px; }
+.f4 .card .mail { display: block; margin-top: 16px; font-size: 14.5px; color: #eef3f1; }
+</style>
+</head>
+<body>
+
+<footer class="f1" id="f1"><div class="wrap">
+	<div class="cols">
+		<div><div class="logo"><b>Muhammad Haris</b><span>AI GTM Engineer</span></div><p class="where">I work with companies in the US, UK and Middle East.</p></div>
+		<div><h3>What I build</h3><ul data-stages></ul></div>
+		<div><h3>Selected work</h3><ul data-work></ul></div>
+		<div><h3>Contact</h3><ul data-contact></ul><div class="social" data-social style="margin-top:26px"></div></div>
+	</div>
+	<div class="mark" aria-hidden="true">Muhammad Haris</div>
+	<div class="legal"><span>&copy; Muhammad Haris</span><span>AI GTM Engineer</span></div>
+</div></footer>
+
+<footer class="f2" id="f2"><div class="wrap">
+	<div class="top"><div class="logo"><b>Muhammad Haris</b><span>AI GTM Engineer</span></div><div class="social" data-social></div></div>
+	<div class="pipe" data-pipe></div>
+	<div class="cols">
+		<div><h3>Selected work</h3><ul class="two" data-work></ul></div>
+		<div><h3>Contact</h3><ul data-contact></ul></div>
+	</div>
+	<div class="legal"><span>&copy; Muhammad Haris</span><span>I work with companies in the US, UK and Middle East.</span></div>
+</div></footer>
+
+<footer class="f3" id="f3"><div class="wrap">
+	<div class="cols">
+		<div><div class="logo"><b>Muhammad Haris</b><span>AI GTM Engineer</span></div><p class="where">I work with companies in the US, UK and Middle East.</p><div class="social" data-social style="margin-top:24px"></div></div>
+		<div><h3>Selected work</h3><div class="proj" data-figs></div></div>
+		<div><h3>Contact</h3><ul data-contact></ul></div>
+	</div>
+	<div class="legal"><span>&copy; Muhammad Haris</span><span>AI GTM Engineer</span></div>
+</div></footer>
+
+<footer class="f4" id="f4"><div class="wrap">
+	<div class="cols">
+		<div class="card">
+			<div class="who"><img src="/images/haris.webp" alt="" /><div class="logo"><b>Muhammad Haris</b><span>AI GTM Engineer</span></div></div>
+			<p class="where">I work with companies in the US, UK and Middle East.</p>
+			<a class="btn" href="#">Book a call <i>&rarr;</i></a>
+			<a class="mail" href="#">hariswassan001@gmail.com</a>
+			<div class="social" data-social></div>
+		</div>
+		<div><h3>What I build</h3><ul data-stages></ul></div>
+		<div><h3>Selected work</h3><ul data-work></ul></div>
+		<div><h3>Contact</h3><ul data-contact></ul></div>
+	</div>
+	<div class="legal"><span>&copy; Muhammad Haris</span><span>AI GTM Engineer</span></div>
+</div></footer>
+
+<script>
+const STAGES = ['Signal intelligence', 'Research and enrichment agents', 'Signal-triggered outbound', 'Inbound conversion', 'Retention and expansion'];
+const WORK = [
+	['Finding buyers at the exact moment they need help', '51'],
+	['Researching 80,000 leads without paying for 80,000 deep dives', '80,000+'],
+	['Revenue agents for a UK broadband provider', '731'],
+	['A priced quote in 45 seconds, for eight brands', '~45 sec'],
+	['Finding every credible buyer for a sell-side deal', '530'],
+	['Turning a product into its own growth engine', '20+'],
+];
+const CONTACT = ['Who I am', 'How I work', 'Book a call', 'Resume'];
+const SOCIAL = `<a href="#" aria-label="LinkedIn"><svg viewBox="0 0 24 24"><path fill="currentColor" d="M4.98 3.5a2.5 2.5 0 11-.02 5 2.5 2.5 0 01.02-5zM3 9.75h4v11H3v-11zm6.5 0h3.8v1.6h.06c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.77 2.6 4.77 6v5.45h-4v-4.83c0-1.15-.02-2.64-1.6-2.64-1.62 0-1.86 1.26-1.86 2.55v4.92h-4v-11z"/></svg></a><a href="#" aria-label="GitHub"><svg viewBox="0 0 24 24"><path fill="currentColor" d="M12 2a10 10 0 00-3.16 19.49c.5.09.68-.22.68-.48v-1.7c-2.78.6-3.37-1.18-3.37-1.18-.45-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.9 1.52 2.34 1.08 2.91.83.09-.65.35-1.08.63-1.33-2.22-.25-4.55-1.11-4.55-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.65 0 0 .84-.27 2.75 1.02a9.5 9.5 0 015 0c1.91-1.29 2.75-1.02 2.75-1.02.55 1.38.2 2.4.1 2.65.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.68-4.57 4.93.36.31.68.92.68 1.85v2.74c0 .27.18.58.69.48A10 10 0 0012 2z"/></svg></a><a href="#" aria-label="Email"><svg viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" d="M3.5 6.5h17v11h-17zM3.8 7l8.2 6.2L20.2 7"/></svg></a>`;
+document.querySelectorAll('[data-stages]').forEach((e) => (e.innerHTML = STAGES.map((s) => `<li><a href="#">${s}</a></li>`).join('')));
+document.querySelectorAll('[data-work]').forEach((e) => (e.innerHTML = WORK.map(([t]) => `<li><a href="#">${t}</a></li>`).join('')));
+document.querySelectorAll('[data-contact]').forEach((e) => (e.innerHTML = CONTACT.map((c) => `<li><a href="#">${c}</a></li>`).join('')));
+document.querySelectorAll('[data-social]').forEach((e) => (e.innerHTML = SOCIAL));
+document.querySelectorAll('[data-pipe]').forEach((e) => (e.innerHTML = STAGES.map((s, i) => `<a href="#"><i>0${i + 1}</i>${s}</a>`).join('')));
+document.querySelectorAll('[data-figs]').forEach((e) => (e.innerHTML = WORK.map(([t, n]) => `<a href="#"><b>${n}</b><span>${t}</span></a>`).join('')));
+</script>
+</body>
+</html>

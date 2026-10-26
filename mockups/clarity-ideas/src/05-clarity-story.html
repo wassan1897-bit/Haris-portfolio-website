@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Clarity Story</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+/* Clarity Story (ui-ux-pro-max "Scroll-Triggered Storytelling" + "Trust & Authority"): the page reads as a short
+   story. Hook, the problem, the approach, the proof, then the ask. A chapter bar in the nav shows where you are,
+   each chapter ends with a small next step, and the light tint deepens a little chapter by chapter. Clarity's
+   Geist and emerald, all light. */
+:root {
+	--ink: #111a17;
+	--mute: #56625d;
+	--line: rgb(17 26 23 / .09);
+	--acc: #0e7a55;
+	--t0: #f5f7f6;
+	--t1: #eef3f6;
+	--t2: #ecf4ef;
+	--t3: #ffffff;
+	--t4: #dff0e6;
+	--r: 18px;
+}
+* { box-sizing: border-box; margin: 0; }
+html { overflow-x: hidden; }
+body { width: 1440px; background: var(--t0); color: var(--ink); font: 400 17px/1.6 "Geist", sans-serif; -webkit-font-smoothing: antialiased; }
+a { color: inherit; text-decoration: none; }
+.wrap { width: 1200px; margin: 0 auto; }
+.btn { display: inline-flex; align-items: center; gap: 12px; height: 52px; padding: 0 7px 0 22px; border-radius: 999px; background: var(--acc); color: #fff; font-weight: 600; font-size: 16px; }
+.btn i { width: 38px; height: 38px; border-radius: 50%; background: rgb(255 255 255 / .2); display: grid; place-items: center; font-style: normal; }
+.link { font-weight: 600; color: var(--acc); display: inline-flex; gap: 8px; align-items: center; }
+.ph { position: relative; overflow: hidden; border-radius: var(--r); background: radial-gradient(120% 80% at 70% 20%, #d6dfda, #aebbb4 60%, #95a49c); }
+.ph span { position: absolute; left: 16px; bottom: 14px; font: 500 12px "Geist Mono"; color: #24302b; background: rgb(255 255 255 / .7); padding: 5px 10px; border-radius: 999px; }
+
+/* nav with the chapter bar */
+nav.top { height: 74px; display: flex; align-items: center; justify-content: space-between; }
+.logo { font-weight: 700; font-size: 18px; letter-spacing: -.02em; }
+.logo b { color: var(--acc); }
+.chap { display: flex; align-items: center; gap: 6px; padding: 5px; border-radius: 999px; background: #fff; box-shadow: inset 0 0 0 1px var(--line); font-size: 14px; }
+.chap span { padding: 8px 16px; border-radius: 999px; color: var(--mute); position: relative; }
+.chap span.done { color: var(--ink); }
+.chap span.on { background: var(--acc); color: #fff; font-weight: 600; }
+nav .btn { height: 42px; font-size: 14px; padding: 0 16px; }
+
+/* hook */
+.hook { display: grid; grid-template-columns: 1.2fr .8fr; gap: 64px; align-items: center; padding: 70px 0 110px; }
+.hook h1 { font-size: 70px; line-height: 1.03; letter-spacing: -.045em; font-weight: 600; }
+.hook h1 em { font-style: normal; color: var(--acc); }
+.hook p { margin-top: 24px; font-size: 20px; color: var(--mute); max-width: 30em; }
+.hook .ctas { display: flex; gap: 22px; align-items: center; margin-top: 36px; }
+.hook .ph { height: 520px; }
+
+/* chapters */
+.ch { padding: 120px 0; }
+.ch1 { background: var(--t1); }
+.ch2 { background: var(--t2); }
+.ch3 { background: var(--t3); }
+.ch h2 { font-size: 56px; line-height: 1.04; letter-spacing: -.045em; font-weight: 600; max-width: 15em; }
+.ch .lede { margin-top: 18px; font-size: 19px; color: var(--mute); max-width: 36em; }
+.next { margin-top: 56px; padding-top: 26px; border-top: 1px solid var(--line); display: flex; justify-content: space-between; align-items: center; color: var(--mute); }
+
+/* chapter 1: where the week goes */
+.week { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-top: 48px; }
+.wk { background: #fff; border-radius: var(--r); padding: 28px; min-height: 230px; display: flex; flex-direction: column; justify-content: space-between; box-shadow: 0 1px 2px rgb(17 26 23 / .04); }
+.wk h3 { font-size: 21px; letter-spacing: -.02em; font-weight: 600; line-height: 1.2; }
+.wk p { color: var(--mute); font-size: 15px; margin-top: 8px; }
+.wk .fix { font: 500 13px "Geist Mono"; color: var(--acc); }
+
+/* chapter 2: the approach, a horizontal path */
+.path { display: grid; grid-template-columns: repeat(4, 1fr); margin-top: 54px; position: relative; }
+.path::before { content: ""; position: absolute; left: 24px; right: 24px; top: 23px; height: 2px; background: linear-gradient(90deg, var(--acc), rgb(14 122 85 / .2)); }
+.st { position: relative; padding-right: 30px; }
+.st i { width: 48px; height: 48px; border-radius: 50%; background: #fff; display: grid; place-items: center; font: 600 15px "Geist Mono"; font-style: normal; color: var(--acc); box-shadow: inset 0 0 0 2px var(--acc); }
+.st:first-child i { background: var(--acc); color: #fff; }
+.st h3 { margin-top: 24px; font-size: 24px; letter-spacing: -.02em; font-weight: 600; }
+.st p { margin-top: 8px; color: var(--mute); font-size: 16px; }
+.quote2 { margin-top: 60px; background: #fff; border-radius: var(--r); padding: 40px 48px; display: grid; grid-template-columns: 1fr auto; gap: 40px; align-items: center; }
+.quote2 p { font-size: 26px; line-height: 1.35; letter-spacing: -.02em; font-weight: 500; }
+.quote2 small { color: var(--mute); font-size: 14px; white-space: nowrap; }
+
+/* chapter 3: proof */
+.nums { display: grid; grid-template-columns: repeat(4, 1fr); margin-top: 50px; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.nums div { padding: 34px 26px 30px 0; }
+.nums div + div { padding-left: 26px; border-left: 1px solid var(--line); }
+.nums b { display: block; font-size: 52px; letter-spacing: -.05em; font-weight: 600; line-height: 1; }
+.nums span { display: block; margin-top: 10px; color: var(--mute); font-size: 15px; }
+.feature { display: grid; grid-template-columns: 1fr 1.1fr; gap: 50px; margin-top: 60px; align-items: center; }
+.feature h3 { font-size: 40px; line-height: 1.08; letter-spacing: -.04em; font-weight: 600; }
+.feature p { margin-top: 16px; color: var(--mute); font-size: 18px; }
+.feature ul { list-style: none; padding: 0; margin-top: 26px; }
+.feature li { padding: 12px 0; border-top: 1px solid var(--line); display: flex; justify-content: space-between; }
+.feature li b { color: var(--acc); }
+.feature .ph { height: 420px; }
+.more { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 40px; }
+.more div { border-radius: var(--r); padding: 26px; background: var(--t0); }
+.more small { color: var(--acc); font-weight: 600; font-size: 13px; }
+.more h4 { margin-top: 6px; font-size: 19px; letter-spacing: -.02em; }
+.more p { color: var(--mute); font-size: 14.5px; margin-top: 6px; }
+
+/* climax */
+.climax { background: var(--t4); padding: 130px 0 120px; text-align: center; }
+.climax h2 { font-size: 80px; line-height: 1; letter-spacing: -.055em; font-weight: 600; max-width: 12em; margin: 0 auto; }
+.climax p { margin-top: 22px; font-size: 20px; color: #335345; }
+.climax .ctas { display: flex; gap: 22px; justify-content: center; align-items: center; margin-top: 36px; }
+.climax .badges { display: flex; gap: 30px; justify-content: center; margin-top: 46px; color: #335345; font-size: 15px; }
+.climax .badges b { color: var(--ink); }
+footer.site .wrap { display: flex; justify-content: space-between; padding: 30px 0 44px; color: var(--mute); font-size: 14px; }
+footer.site .wrap div { display: flex; gap: 26px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+	<nav class="top">
+		<a class="logo">Muhammad Haris<b>.</b></a>
+		<div class="chap"><span class="on">The problem</span><span>The approach</span><span>The proof</span><span>Let's talk</span></div>
+		<a class="btn">Book a call</a>
+	</nav>
+
+	<section class="hook">
+		<div>
+			<h1>Your team is doing work <em>a system should be doing.</em></h1>
+			<p>I am Muhammad Haris, a forward deployed engineer and AI consultant. I find that work, build the system and stay until it runs.</p>
+			<div class="ctas"><a class="btn">Book a call <i>&rarr;</i></a><a class="link">Read the story &darr;</a></div>
+		</div>
+		<div class="ph"><span>Portrait, new shoot</span></div>
+	</section>
+</div>
+
+<section class="ch ch1"><div class="wrap">
+	<h2>Where the week goes.</h2>
+	<p class="lede">Four places where a team's hours tend to go. None of them need a person for every step.</p>
+	<div class="week">
+		<div class="wk"><div><h3>Support queues</h3><p>The same questions, triaged by hand, all day and out of hours.</p></div><span class="fix">AI support and voice agents</span></div>
+		<div class="wk"><div><h3>Inboxes and forms</h3><p>Enquiries sorted, attachments filed and replies drafted one at a time.</p></div><span class="fix">Classification and drafting</span></div>
+		<div class="wk"><div><h3>Quotes and pricing</h3><p>Someone looks at every photo or brief before a price goes back.</p></div><span class="fix">Vision model and a fixed rubric</span></div>
+		<div class="wk"><div><h3>Research and data entry</h3><p>Copying fields between tools and checking the same sources each week.</p></div><span class="fix">Enrichment and monitoring</span></div>
+	</div>
+	<div class="next"><span>Next: how I take that work off your plate</span><a class="link">The approach &rarr;</a></div>
+</div></section>
+
+<section class="ch ch2"><div class="wrap">
+	<h2>Diagnose first. Then build.</h2>
+	<p class="lede">If the honest answer is "don't", I say so before either of us spends money finding out.</p>
+	<div class="path">
+		<div class="st"><i>1</i><h3>Diagnose</h3><p>I look at the work, the data and the tools you already pay for.</p></div>
+		<div class="st"><i>2</i><h3>Build</h3><p>Small reviewed pull requests, with tests and CI on every change.</p></div>
+		<div class="st"><i>3</i><h3>Ship</h3><p>Into production, inside the tools your team already uses.</p></div>
+		<div class="st"><i>4</i><h3>Hand over</h3><p>Docs and a walkthrough, so your team can run it without me.</p></div>
+	</div>
+	<div class="quote2"><p>&ldquo;He takes the time to thoroughly understand the project before diving in.&rdquo;</p><small>Marcos R., United States, rated 5.0</small></div>
+	<div class="next"><span>Next: what this looks like in production</span><a class="link">The proof &rarr;</a></div>
+</div></section>
+
+<section class="ch ch3"><div class="wrap">
+	<h2>Systems running today.</h2>
+	<div class="nums">
+		<div><b>6,700+</b><span>support conversations automated</span></div>
+		<div><b>21,000+</b><span>agent minutes saved</span></div>
+		<div><b>7</b><span>live client deployments of one product</span></div>
+		<div><b>$30K+</b><span>earned on Upwork, 100% Job Success</span></div>
+	</div>
+	<div class="feature">
+		<div>
+			<h3>Every call answered, every caller routed.</h3>
+			<p>A Retell AI phone agent for a UK broadband provider. It triages the caller, checks live outages through n8n and hands over to the right team with the context kept.</p>
+			<ul><li>Wait time<b>0</b></li><li>Departments routed<b>7</b></li><li>Outage check<b>Live</b></li></ul>
+		</div>
+		<div class="ph"><span>Case film or screenshot</span></div>
+	</div>
+	<div class="more">
+		<div><small>Fintech</small><h4>Your money, answered with evidence</h4><p>An AI agent that answers from your real accounts and shows its sources.</p></div>
+		<div><small>Product</small><h4>Photo in, price out</h4><p>A white-label estimation tool, live with seven paying tenants.</p></div>
+		<div><small>Risk</small><h4>Every flag rechecked</h4><p>42k checks a week, and a change only becomes a lead after a recheck.</p></div>
+	</div>
+	<div class="next"><span>Next: your turn</span><a class="link">Let's talk &rarr;</a></div>
+</div></section>
+
+<section class="climax"><div class="wrap">
+	<h2>Tell me what still eats your team's week.</h2>
+	<p>I reply within a day with how I would automate it, how long it takes and a fixed price.</p>
+	<div class="ctas"><a class="btn">Book a call <i>&rarr;</i></a><a class="link" style="color:var(--ink)">hello@autoany.io</a></div>
+	<div class="badges"><span><b>Top Rated Plus</b> on Upwork</span><span><b>33</b> jobs, <b>728</b> hours</span><span><b>LUMS</b> BSc (Hons)</span></div>
+</div></section>
+
+<footer class="site"><div class="wrap"><span>&copy; 2026 Muhammad Haris</span><div><a>Upwork</a><a>LinkedIn</a><a>GitHub</a></div></div></footer>
+</body>
+</html>

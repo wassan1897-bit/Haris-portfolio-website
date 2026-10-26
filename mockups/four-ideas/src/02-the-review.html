@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Idea 02 - The Review</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Display&family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&family=Libre+Franklin:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+/* Idea 02, "The Review" (minimalist-ui editorial, brand voice framework): the homepage is laid out as the cover and
+   first pages of a small magazine about one engineer's work. White paper, black ink, one ultramarine for links and
+   the masthead rule. Caslon for headlines and reading text, Franklin for small labels. Voice: warm, narrative,
+   specific; it tells stories instead of listing services. */
+:root {
+	--paper: #ffffff;
+	--ink: #161616;
+	--grey: #6a6a66;
+	--line: #d9d9d4;
+	--blue: #2337c6;
+}
+* { box-sizing: border-box; margin: 0; }
+html { overflow-x: hidden; }
+body { width: 1440px; background: var(--paper); color: var(--ink); font: 400 18px/1.62 "Libre Caslon Text", serif; -webkit-font-smoothing: antialiased; }
+a { color: inherit; text-decoration: none; }
+.sans { font-family: "Libre Franklin", sans-serif; }
+.lab { font: 600 12px/1.3 "Libre Franklin", sans-serif; letter-spacing: .14em; text-transform: uppercase; }
+.wrap { width: 1240px; margin: 0 auto; }
+.ph { position: relative; overflow: hidden; background: linear-gradient(170deg, #e8e8e4, #c9c9c3); }
+.ph span { position: absolute; left: 14px; bottom: 12px; font: 500 12px "Libre Franklin"; color: #44443f; }
+
+/* masthead */
+.top { display: flex; justify-content: space-between; align-items: center; height: 54px; font: 500 14px "Libre Franklin"; }
+.top nav { display: flex; gap: 28px; }
+.top .cta { color: var(--blue); font-weight: 600; }
+.mast { text-align: center; border-top: 4px solid var(--ink); border-bottom: 1px solid var(--ink); padding: 18px 0 14px; }
+.mast h1 { font: 400 132px/0.95 "Libre Caslon Display", serif; letter-spacing: -.02em; }
+.mast .line { display: flex; justify-content: space-between; margin-top: 12px; padding-top: 10px; border-top: 1px solid var(--line); }
+
+/* cover */
+.cover { display: grid; grid-template-columns: 300px 1fr 300px; gap: 40px; padding: 40px 0 60px; border-bottom: 1px solid var(--ink); }
+.cover .ph { height: 760px; }
+.cover .lines .item { padding: 0 0 22px; margin-bottom: 22px; border-bottom: 1px solid var(--line); }
+.cover .lines .item:last-child { border-bottom: 0; }
+.cover .lines h3 { font: 400 26px/1.15 "Libre Caslon Display", serif; margin-top: 8px; }
+.cover .lines p { font-size: 15.5px; color: var(--grey); margin-top: 6px; line-height: 1.5; }
+.cover .lines .n { font: 400 54px/1 "Libre Caslon Display", serif; color: var(--blue); }
+.cover .mid h2 { font: 400 66px/1.02 "Libre Caslon Display", serif; letter-spacing: -.015em; }
+.cover .mid h2 i { color: var(--blue); }
+.cover .mid .dek { margin-top: 18px; font: italic 400 22px/1.45 "Libre Caslon Text", serif; color: #3c3c38; }
+.cover .mid .by { margin-top: 16px; }
+.cover .mid .ph { height: 420px; margin-top: 28px; }
+.cover .mid .cap { margin-top: 10px; font: 400 13px "Libre Franklin"; color: var(--grey); }
+
+/* contents */
+.contents { display: grid; grid-template-columns: 240px repeat(4, 1fr); gap: 0; border-bottom: 1px solid var(--ink); }
+.contents > div { padding: 26px 24px 30px; border-left: 1px solid var(--line); }
+.contents > div:first-child { border-left: 0; padding-left: 0; }
+.contents h2 { font: 400 40px/1 "Libre Caslon Display", serif; }
+.contents b { font: 400 40px/1 "Libre Caslon Display", serif; color: var(--blue); }
+.contents h4 { font: 700 17px/1.3 "Libre Caslon Text", serif; margin-top: 10px; }
+.contents p { font-size: 15px; color: var(--grey); line-height: 1.5; margin-top: 6px; }
+
+/* feature: three columns of reading text */
+.feature { padding: 70px 0; border-bottom: 1px solid var(--ink); }
+.feature header { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: end; }
+.feature h2 { font: 400 76px/1 "Libre Caslon Display", serif; letter-spacing: -.02em; }
+.feature header p { font: italic 400 22px/1.45 "Libre Caslon Text", serif; color: #3c3c38; }
+.cols { column-count: 3; column-gap: 46px; column-rule: 1px solid var(--line); margin-top: 46px; }
+.cols p { margin-bottom: 14px; text-align: justify; hyphens: auto; }
+.cols p:first-child::first-letter { float: left; font: 400 92px/0.78 "Libre Caslon Display", serif; padding: 8px 10px 0 0; color: var(--blue); }
+.pull { break-inside: avoid; margin: 14px 0 20px; padding: 18px 0; border-top: 3px solid var(--ink); border-bottom: 1px solid var(--ink); font: italic 400 26px/1.3 "Libre Caslon Text", serif; }
+.figs { display: grid; grid-template-columns: repeat(3, 1fr); margin-top: 40px; border-top: 1px solid var(--ink); }
+.figs div { padding: 20px 20px 0 0; }
+.figs div + div { padding-left: 20px; border-left: 1px solid var(--line); }
+.figs b { display: block; font: 400 58px/1 "Libre Caslon Display", serif; }
+.figs span { font: 400 14px "Libre Franklin"; color: var(--grey); }
+
+/* interview */
+.qa { display: grid; grid-template-columns: 1fr 2fr; gap: 70px; padding: 70px 0; border-bottom: 1px solid var(--ink); }
+.qa h2 { font: 400 60px/1.02 "Libre Caslon Display", serif; }
+.qa .ph { height: 360px; margin-top: 30px; }
+.qa dl dt { font: 700 20px/1.4 "Libre Caslon Text", serif; margin-top: 26px; }
+.qa dl dt:first-child { margin-top: 0; }
+.qa dl dd { margin: 8px 0 0; font-size: 18px; color: #2c2c29; }
+.qa dl dt::before { content: "Q. "; color: var(--blue); }
+
+/* letters */
+.letters { padding: 70px 0; border-bottom: 1px solid var(--ink); }
+.letters .head { display: flex; justify-content: space-between; align-items: baseline; }
+.letters h2 { font: 400 60px/1 "Libre Caslon Display", serif; }
+.lgrid { display: grid; grid-template-columns: 1.3fr 1fr 1fr; gap: 40px; margin-top: 36px; }
+.letter p { font-size: 19px; line-height: 1.55; }
+.letter.big p { font: 400 34px/1.25 "Libre Caslon Display", serif; }
+.letter footer { margin-top: 14px; font: 500 14px "Libre Franklin"; color: var(--grey); }
+.letter footer b { color: var(--ink); }
+
+/* subscribe-style booking, the last page */
+.last { display: grid; grid-template-columns: 1.2fr 1fr; gap: 70px; padding: 70px 0 60px; }
+.last h2 { font: 400 84px/.98 "Libre Caslon Display", serif; letter-spacing: -.02em; }
+.last h2 i { color: var(--blue); }
+.last p { margin-top: 20px; font-size: 20px; color: #3c3c38; }
+.box { border: 1px solid var(--ink); padding: 32px; }
+.box .lab { color: var(--blue); }
+.box h3 { font: 400 32px/1.1 "Libre Caslon Display", serif; margin-top: 10px; }
+.field { margin-top: 18px; }
+.field label { font: 600 13px "Libre Franklin"; display: block; }
+.field span { display: block; margin-top: 6px; border-bottom: 1.5px solid var(--ink); padding: 8px 0; color: #5d5d59; font: 400 17px "Libre Franklin"; }
+.btn { display: inline-block; margin-top: 26px; padding: 15px 26px; background: var(--blue); color: #fff; font: 600 15px "Libre Franklin"; }
+.colophon { border-top: 4px solid var(--ink); display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 30px; padding: 20px 0 40px; font: 400 14px/1.6 "Libre Franklin"; color: var(--grey); }
+.colophon b { color: var(--ink); font-weight: 600; }
+</style>
+</head>
+<body>
+<div class="wrap">
+	<div class="top"><span class="lab">Notes on production AI</span><nav><a>Stories</a><a>Interview</a><a>Letters</a><a>Write-ups</a><a class="cta">Book a call</a></nav></div>
+	<header class="mast">
+		<h1>Haris</h1>
+		<div class="line lab"><span>Muhammad Haris, forward deployed engineer and AI consultant</span><span>Issue 2026</span><span>Top Rated Plus on Upwork</span></div>
+	</header>
+
+	<section class="cover">
+		<div class="lines">
+			<div class="item"><span class="lab" style="color:var(--blue)">Inside</span><h3>One agent, six workflows, seven departments</h3><p>How a chat agent and six small workflows took on a broadband provider's enquiries.</p></div>
+			<div class="item"><span class="n">6,700+</span><p>customer conversations automated on one project</p></div>
+			<div class="item"><h3>Photo in, price out</h3><p>A pricing tool now live for seven paying businesses.</p></div>
+			<div class="item"><h3>Why the honest answer is sometimes "don't"</h3><p>An interview on scoping AI work.</p></div>
+		</div>
+		<div class="mid">
+			<h2>The engineer who stays <i>until it ships.</i></h2>
+			<p class="dek">Most AI projects stall between the demo and production. Haris works inside the client's team and builds through that gap.</p>
+			<p class="by lab">Cover story</p>
+			<div class="ph"><span>Photo: Haris at work with a client team, wide</span></div>
+			<p class="cap">The person who scopes the problem is the person who ships it.</p>
+		</div>
+		<div class="ph"><span>Cover portrait, tall</span></div>
+	</section>
+
+	<section class="contents">
+		<div><h2>In this issue</h2></div>
+		<div><b>01</b><h4>Every call answered</h4><p>A Retell AI phone agent that routes callers to seven departments.</p></div>
+		<div><b>02</b><h4>Answered with evidence</h4><p>A household investing agent that shows where each number comes from.</p></div>
+		<div><b>03</b><h4>Photo in, price out</h4><p>A vision model, a fixed rubric and seven paying tenants.</p></div>
+		<div><b>04</b><h4>Every flag rechecked</h4><p>42k checks a week, and nothing becomes a lead on a first flag.</p></div>
+	</section>
+
+	<section class="feature">
+		<header><h2>One agent. Six workflows. Seven departments.</h2><p>For a UK fibre broadband provider, the agent talks to customers and six single-purpose workflows do the work.</p></header>
+		<div class="cols">
+			<p>A UK fibre broadband provider wanted its customers answered at any hour. Every enquiry needed someone to read it, look up the account, check the network and route it to the right team.</p>
+			<p>Haris built a chat agent that drives the conversation and calls six stateless backend workflows as internal APIs. Each one does a single job: looking up the account, checking for an outage, routing a ticket to one of seven departments, emailing the customer.</p>
+			<div class="pull">The conversation layer stays replaceable. The backend stays testable.</div>
+			<p>Keeping the workflows stateless and single-purpose is what later let a second channel, a phone voice agent, reuse the same backend without a rewrite.</p>
+			<p>The system also reports on itself. A live dashboard, built as part of the same engagement, tracks conversation volume, the split between existing and new customers, and how often the AI needed a human, by department and by whether it happened inside opening hours.</p>
+		</div>
+		<div class="figs"><div><b>6,700+</b><span>customer conversations automated</span></div><div><b>2,400+</b><span>tickets routed across 7 departments</span></div><div><b>21,000+</b><span>agent minutes saved, estimated</span></div></div>
+	</section>
+
+	<section class="qa">
+		<div><h2>Five questions for Haris</h2><div class="ph"><span>Portrait, seated</span></div></div>
+		<dl>
+			<dt>What does a forward deployed engineer actually do?</dt>
+			<dd>I work inside a client's team, find the work that should be running on AI, and build it through to production.</dd>
+			<dt>When do you tell a client not to build something?</dt>
+			<dd>When the honest answer is "don't". I would rather say so before either of us spends money finding out.</dd>
+			<dt>How do you keep a system safe to change?</dt>
+			<dd>Everything ships in small reviewed pull requests, with tests and CI on every change.</dd>
+			<dt>No-code tools or real code?</dt>
+			<dd>Both. n8n, Make and Power Automate where they are the right tool, and Next.js, Python and FastAPI when they are not.</dd>
+			<dt>Where can people read more?</dt>
+			<dd>Sanitized architecture write-ups for five of these production systems are on GitHub.</dd>
+		</dl>
+	</section>
+
+	<section class="letters">
+		<div class="head"><h2>Letters</h2><span class="lab">Upwork reviews, all rated 5.0</span></div>
+		<div class="lgrid">
+			<div class="letter big"><p>&ldquo;After going through two other automation experts, I finally met Haris. World-class communication, and he got my problem solved fast.&rdquo;</p><footer><b>Upwork client</b>, United States</footer></div>
+			<div class="letter"><p>&ldquo;He takes the time to thoroughly understand the project before diving in, communicates clearly, and consistently shows strong attention to detail.&rdquo;</p><footer><b>Marcos R.</b>, United States</footer></div>
+			<div class="letter"><p>&ldquo;He always completed work before any deadlines. He also went the extra mile to make sure everything was working as it should.&rdquo;</p><footer><b>Upwork client</b>, AI phone system</footer></div>
+		</div>
+	</section>
+
+	<section class="last">
+		<div><h2>Have a story like these? <i>Tell me yours.</i></h2><p>Write a few lines about the work that still eats your team's week. I reply within a day with how I would automate it, how long it takes and a fixed price.</p></div>
+		<div class="box">
+			<span class="lab">Next issue could be yours</span><h3>Book a call</h3>
+			<div class="field"><label>Name</label><span>Full name</span></div>
+			<div class="field"><label>Work email</label><span>you@company.com</span></div>
+			<div class="field"><label>The work to automate</label><span>A sentence or two is plenty</span></div>
+			<a class="btn">Book a call</a>
+		</div>
+	</section>
+
+	<footer class="colophon"><div><b>Haris</b> is the website of Muhammad Haris, forward deployed engineer and AI consultant. LUMS BSc (Hons). Co-founder, AutoAny.</div><div><b>Contact</b><br />hello@autoany.io</div><div><b>Elsewhere</b><br />Upwork, LinkedIn, GitHub</div><div><b>&copy; 2026</b><br />All figures verified</div></footer>
+</div>
+</body>
+</html>
