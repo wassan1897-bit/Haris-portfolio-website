@@ -188,33 +188,33 @@ def listing_pages(sizes):
 .links > li.here > button {{ color: var(--acc); }}
 .links > li.here > button::after {{ transform: scaleX(1); }}
 .drop a.cur {{ color: var(--acc); }}
-.end li a.cur {{ color: #4fd68c; }}
-.ph {{ position: relative; isolation: isolate; overflow: hidden; background: #111a17; color: #fff; padding: 60px 0 66px; }}
+.end li a.cur {{ color: #dcc196; }}
+.ph {{ position: relative; isolation: isolate; overflow: hidden; background: #0e1726; color: #fff; padding: 60px 0 66px; }}
 .ph::before {{ content: ""; position: absolute; inset: 0; z-index: -1; background: {TEX}; -webkit-mask-image: linear-gradient(90deg, rgb(0 0 0 / .25), #000 80%); mask-image: linear-gradient(90deg, rgb(0 0 0 / .25), #000 80%); }}
-.crumb {{ font-size: 14.5px; color: #9fb3aa; }} .crumb a {{ color: #c9d6d0; }} .crumb a:hover {{ color: #fff; }} .crumb b {{ color: #fff; font-weight: 500; }}
+.crumb {{ font-size: 14.5px; color: #9aa5b8; }} .crumb a {{ color: #c3cbd8; }} .crumb a:hover {{ color: #fff; }} .crumb b {{ color: #fff; font-weight: 500; }}
 .ph .row {{ margin-top: 24px; display: grid; grid-template-columns: auto 1fr auto; gap: 26px; align-items: center; }}
-.ph .num {{ width: 76px; height: 76px; border-radius: 50%; display: grid; place-items: center; background: #38c97a; color: #0b1d16; font: 600 22px "Geist Mono", monospace; }}
+.ph .num {{ width: 76px; height: 76px; border-radius: 50%; display: grid; place-items: center; background: #d4b483; color: #0e1726; font: 600 22px "Geist Mono", monospace; }}
 .ph h1 {{ font-size: clamp(40px, 4.4vw, 64px); line-height: 1; letter-spacing: -.045em; font-weight: 700; }}
-.ph p {{ margin-top: 12px; font-size: 19px; color: #c9d6d0; max-width: 34em; }}
-.ph .cnt {{ text-align: right; font-size: 15px; color: #9fb3aa; }} .ph .cnt b {{ display: block; font-size: 44px; line-height: 1; letter-spacing: -.04em; color: #4fd68c; }}
-.chips {{ position: sticky; top: 0; z-index: 20; background: rgb(245 247 246 / .94); box-shadow: 0 1px 0 var(--line); }}
+.ph p {{ margin-top: 12px; font-size: 19px; color: #c3cbd8; max-width: 34em; }}
+.ph .cnt {{ text-align: right; font-size: 15px; color: #9aa5b8; }} .ph .cnt b {{ display: block; font-size: 44px; line-height: 1; letter-spacing: -.04em; color: #dcc196; }}
+.chips {{ position: sticky; top: 0; z-index: 20; background: rgb(250 248 244 / .94); box-shadow: 0 1px 0 var(--line); }}
 .chips .wrap {{ display: flex; gap: 8px; overflow-x: auto; padding: 14px 0; scrollbar-width: none; }}
 .chips .wrap::-webkit-scrollbar {{ display: none; }}
 .chips a {{ flex: none; display: inline-flex; align-items: center; gap: 8px; height: 40px; padding: 0 16px; border-radius: 999px; font-size: 14.5px; font-weight: 500; background: #fff; box-shadow: inset 0 0 0 1px var(--line); transition: background-color .15s ease, color .15s ease; }}
 .chips a:hover {{ color: var(--acc); }}
 .chips a i {{ font: 500 12px "Geist Mono", monospace; font-style: normal; color: var(--mute); }}
-.chips a[aria-current] {{ background: #111a17; color: #fff; box-shadow: none; }} .chips a[aria-current] i {{ color: #4fd68c; }}
+.chips a[aria-current] {{ background: #0e1726; color: #fff; box-shadow: none; }} .chips a[aria-current] i {{ color: #dcc196; }}
 .grid {{ display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }}
 .pc {{ display: flex; flex-direction: column; border-radius: 18px; overflow: hidden; background: #fff; box-shadow: 0 0 0 1px var(--line); transition: transform .2s ease, box-shadow .2s ease; }}
-a.pc:hover {{ transform: translateY(-3px); box-shadow: 0 0 0 1px var(--line), 0 24px 40px -24px rgb(17 26 23 / .35); }}
+a.pc:hover {{ transform: translateY(-3px); box-shadow: 0 0 0 1px var(--line), 0 24px 40px -24px rgb(14 23 38 / .35); }}
 a.pc:active {{ transform: scale(.99); }}
-.cov {{ position: relative; aspect-ratio: 16 / 9; overflow: hidden; background: #111a17; }}
+.cov {{ position: relative; aspect-ratio: 16 / 9; overflow: hidden; background: #0e1726; }}
 .cov img {{ position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }}
-.cov .badge {{ position: absolute; z-index: 1; left: 14px; top: 14px; padding: 6px 11px; border-radius: 999px; background: #38c97a; color: #0b1d16; font: 600 11.5px "Geist Mono", monospace; letter-spacing: .04em; text-transform: uppercase; }}
+.cov .badge {{ position: absolute; z-index: 1; left: 14px; top: 14px; padding: 6px 11px; border-radius: 999px; background: #d4b483; color: #0e1726; font: 600 11.5px "Geist Mono", monospace; letter-spacing: .04em; text-transform: uppercase; }}
 .cov.made {{ isolation: isolate; color: #fff; display: flex; flex-direction: column; justify-content: flex-end; padding: 22px; }}
 .cov.made::before {{ content: ""; position: absolute; inset: 0; z-index: -1; background: {TEX}; opacity: .9; }}
-.cov.made b {{ font-size: 52px; line-height: 1; letter-spacing: -.05em; font-weight: 700; color: #4fd68c; }}
-.cov.made span {{ margin-top: 8px; font-size: 15px; color: #c9d6d0; }}
+.cov.made b {{ font-size: 52px; line-height: 1; letter-spacing: -.05em; font-weight: 700; color: #dcc196; }}
+.cov.made span {{ margin-top: 8px; font-size: 15px; color: #c3cbd8; }}
 .cov.made strong {{ font-size: 26px; line-height: 1.12; letter-spacing: -.03em; font-weight: 700; max-width: 12em; }}
 .pc .bd {{ flex: 1; display: flex; flex-direction: column; padding: 20px 22px 18px; }}
 .pc .meta {{ font: 500 12px "Geist Mono", monospace; letter-spacing: .04em; color: var(--acc); text-transform: uppercase; }}
@@ -229,12 +229,12 @@ a.pc:focus-visible {{ outline: 2px solid var(--acc); outline-offset: 3px; }}
 .body {{ padding: 44px 0 20px; }}
 .sec {{ padding-top: 46px; }}
 .sec h2 {{ display: flex; align-items: center; gap: 14px; font-size: 28px; letter-spacing: -.025em; font-weight: 700; margin-bottom: 6px; }}
-.sec h2 i {{ flex: none; width: 38px; height: 38px; border-radius: 50%; display: grid; place-items: center; background: #e3f1ea; color: var(--acc); font: 600 13px "Geist Mono", monospace; font-style: normal; }}
+.sec h2 i {{ flex: none; width: 38px; height: 38px; border-radius: 50%; display: grid; place-items: center; background: #f2ede3; color: var(--acc); font: 600 13px "Geist Mono", monospace; font-style: normal; }}
 .sec h2 a {{ margin-left: auto; font-size: 15px; font-weight: 600; color: var(--acc); white-space: nowrap; }}
 .sec > p {{ margin: 0 0 22px 52px; color: var(--mute); }}
 .next {{ margin: 46px 0 100px; display: flex; justify-content: space-between; gap: 20px; }}
 .next a {{ flex: 1; padding: 22px 26px; border-radius: 16px; background: #fff; box-shadow: 0 0 0 1px var(--line); transition: box-shadow .2s ease; }}
-.next a:hover {{ box-shadow: 0 0 0 1px var(--line), 0 18px 30px -20px rgb(17 26 23 / .3); }}
+.next a:hover {{ box-shadow: 0 0 0 1px var(--line), 0 18px 30px -20px rgb(14 23 38 / .3); }}
 .next a small {{ display: block; font-size: 13px; color: var(--mute); }} .next a b {{ display: block; margin-top: 4px; font-size: 18px; }}
 .next a:last-child {{ text-align: right; }}
 @media (max-width: 1000px) {{
@@ -352,11 +352,11 @@ def detail_pages(sizes):
 	header = between(ref, '<header class="topbar">', '</header>').replace(' class="cur"', '')
 	tail = ref[ref.index('<section class="cta">'):ref.index('</html>')]
 	css += '''
-.shot { margin: 0 0 10px; aspect-ratio: 16 / 9; border-radius: 18px; overflow: hidden; background: #111a17; }
+.shot { margin: 0 0 10px; aspect-ratio: 16 / 9; border-radius: 18px; overflow: hidden; background: #0e1726; }
 .shot img { display: block; width: 100%; height: 100%; object-fit: cover; }
 .body .txt ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 14px; }
-.body .txt ul li { position: relative; padding-left: 22px; font-size: 17.5px; line-height: 1.65; color: #2b3631; }
-.body .txt ul li::before { content: ""; position: absolute; left: 0; top: .62em; width: 8px; height: 8px; background: #38c97a; }
+.body .txt ul li { position: relative; padding-left: 22px; font-size: 17.5px; line-height: 1.65; color: #2a3343; }
+.body .txt ul li::before { content: ""; position: absolute; left: 0; top: .62em; width: 8px; height: 8px; background: #d4b483; }
 .body .txt p + ul, .body .txt ul + p, .body .txt figure + figure { margin-top: 22px; }
 .fig { margin: 0; }
 .fig img { display: block; width: 100%; height: auto; border-radius: 14px; background: #fff; box-shadow: 0 0 0 1px var(--line); }
@@ -366,9 +366,9 @@ def detail_pages(sizes):
 .flow li { display: inline-flex; align-items: center; gap: 10px; font-size: 15px; font-weight: 600; }
 .flow li span { padding: 10px 14px; border-radius: 10px; background: #fff; box-shadow: 0 0 0 1px var(--line); }
 .flow li + li::before { content: "\\2192"; color: var(--acc); font-weight: 600; }
-.flow .br { display: grid; grid-template-columns: 110px 1fr; gap: 12px; align-items: center; padding-left: 18px; border-left: 2px solid #38c97a; }
+.flow .br { display: grid; grid-template-columns: 110px 1fr; gap: 12px; align-items: center; padding-left: 18px; border-left: 2px solid #d4b483; }
 .flow .br b { font: 500 12.5px "Geist Mono", monospace; color: var(--acc); }
-.flow .main li:last-child span { background: #111a17; color: #fff; box-shadow: none; }
+.flow .main li:last-child span { background: #0e1726; color: #fff; box-shadow: none; }
 @media (max-width: 680px) { .flow .br { grid-template-columns: 1fr; } }
 '''
 

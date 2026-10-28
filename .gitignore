@@ -38,7 +38,13 @@ tmp
 qa-screenshots
 localhost_*.html
 
+# Private: the confidential brief and personal files that aren't part of the site
+*Brief.pdf
+upscaled-photos
+
 # HyperFrames working files (snapshots, checks) and review sheets
+media-src/signal-engine/.hyperframes/artifacts
+media-src/signal-engine/.hyperframes/video-state.json
 media-src/project-videos/*/.hyperframes
 media-src/project-videos/*/check.json
 media-src/project-videos/review

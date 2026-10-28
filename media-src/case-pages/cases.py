@@ -53,7 +53,7 @@ def parse(i):
 	return dict(title=title, sub=sub, stats=stats, situation=paras(L[k + 1:b]), built=paras(L[b + 1:c]), changed=paras(L[c + 1:h]), under=under)
 
 CSS = '''
-:root { --bg: #f5f7f6; --surface: #fff; --ink: #111a17; --mute: #56625d; --line: rgb(17 26 23 / .09); --acc: #0e7a55; --acc-soft: #e3f1ea; }
+:root { --bg: #faf8f4; --surface: #fff; --ink: #0e1726; --mute: #5b6475; --line: rgb(14 23 38 / .09); --acc: #1e3a5f; --acc-soft: #f2ede3; }
 * { box-sizing: border-box; margin: 0; }
 body { background: var(--bg); color: var(--ink); font: 400 17px/1.6 "Geist", system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
 a { color: inherit; text-decoration: none; }
@@ -69,21 +69,21 @@ nav.top { height: 80px; display: grid; grid-template-columns: 1fr auto 1fr; alig
 .links > li { position: relative; display: flex; }
 .links > li > a, .links > li > button { position: relative; display: flex; align-items: center; gap: 10px; padding: 0 16px; border: 0; background: none; font: 500 16.5px "Geist", sans-serif; color: var(--ink); cursor: pointer; transition: color .15s ease; }
 .links svg { width: 10px; height: 6px; transition: transform .2s ease; }
-.links > li > a::after, .links > li > button::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 3px; background: #38c97a; transform: scaleX(0); transition: transform .2s ease; }
+.links > li > a::after, .links > li > button::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 3px; background: #d4b483; transform: scaleX(0); transition: transform .2s ease; }
 .links > li:hover > a, .links > li:hover > button, .links > li.open > button, .links > li.here > button { color: var(--acc); }
 .links > li:hover > a::after, .links > li:hover > button::after, .links > li.open > button::after, .links > li.here > button::after { transform: scaleX(1); }
 .links > li.open svg { transform: rotate(180deg); }
 .links :focus-visible { outline: 2px solid var(--acc); outline-offset: -4px; border-radius: 6px; }
-.drop { position: absolute; top: 100%; left: 0; min-width: 100%; width: max-content; padding: 10px 0; background: #f3f7f5; box-shadow: 0 18px 30px -18px rgb(17 26 23 / .3); opacity: 0; visibility: hidden; transform: translateY(-4px); transition: opacity .16s ease, transform .16s ease, visibility 0s .16s; }
+.drop { position: absolute; top: 100%; left: 0; min-width: 100%; width: max-content; padding: 10px 0; background: #f4f1eb; box-shadow: 0 18px 30px -18px rgb(14 23 38 / .3); opacity: 0; visibility: hidden; transform: translateY(-4px); transition: opacity .16s ease, transform .16s ease, visibility 0s .16s; }
 .links > li:hover .drop, .links > li.open .drop { opacity: 1; visibility: visible; transform: none; transition: opacity .16s ease, transform .16s ease; }
 .drop a { display: block; padding: 11px 22px; font-size: 16px; font-weight: 500; color: var(--ink); transition: color .15s ease, background-color .15s ease; }
-.drop a:hover, .drop a:focus-visible { color: var(--acc); background: #e3f1ea; outline: none; }
+.drop a:hover, .drop a:focus-visible { color: var(--acc); background: #f2ede3; outline: none; }
 .drop a.cur { color: var(--acc); }
 .top-right { display: flex; justify-content: flex-end; align-items: center; gap: 12px; }
-.icon-btn { width: 44px; height: 44px; border-radius: 10px; display: grid; place-items: center; background: #f3f7f5; color: var(--ink); transition: background-color .15s ease, color .15s ease; }
-.icon-btn:hover { background: #e3f1ea; color: var(--acc); }
+.icon-btn { width: 44px; height: 44px; border-radius: 10px; display: grid; place-items: center; background: #f4f1eb; color: var(--ink); transition: background-color .15s ease, color .15s ease; }
+.icon-btn:hover { background: #f2ede3; color: var(--acc); }
 .book { display: inline-flex; align-items: center; height: 44px; padding: 0 22px; border-radius: 10px; background: var(--acc); color: #fff; font-size: 15.5px; font-weight: 600; white-space: nowrap; box-shadow: inset 0 -2px 0 rgb(0 0 0 / .12); transition: transform .16s ease-out, background-color .15s ease; }
-.book:hover { background: #0b6a49; }
+.book:hover { background: #172f4e; }
 .book:active { transform: scale(.97); }
 .top-right a:focus-visible { outline: 2px solid var(--acc); outline-offset: 3px; }
 .back { display: inline-flex; gap: 8px; margin-top: 30px; font-size: 15px; font-weight: 600; color: var(--acc); }
@@ -99,13 +99,13 @@ h1 { margin-top: 8px; font-size: clamp(38px, 4.6vw, 64px); line-height: 1.04; le
 .body { display: grid; grid-template-columns: 260px 1fr; gap: 20px 70px; padding: 80px 0 40px; }
 .body h2 { font: 500 12px "Geist Mono", monospace; letter-spacing: .12em; text-transform: uppercase; color: var(--acc); padding-top: 6px; }
 .body .txt { max-width: 44em; padding-bottom: 50px; }
-.body .txt p { font-size: 18.5px; line-height: 1.7; color: #2b3631; }
+.body .txt p { font-size: 18.5px; line-height: 1.7; color: #2a3343; }
 .body .txt p + p { margin-top: 18px; }
 .under { background: var(--surface); border-radius: 14px; padding: 26px 30px; font-size: 16px; color: var(--mute); }
-.shot { margin: 40px 0 0; aspect-ratio: 16 / 9; border-radius: 18px; overflow: hidden; background: #111a17; }
+.shot { margin: 40px 0 0; aspect-ratio: 16 / 9; border-radius: 18px; overflow: hidden; background: #0e1726; }
 .shot img { display: block; width: 100%; height: 100%; object-fit: cover; }
 .under b { color: var(--ink); font-weight: 600; }
-.cta { margin: 80px auto 100px; width: min(1240px, 100% - 48px); background: var(--ink); border-radius: 24px; padding: clamp(40px, 6vw, 80px); display: grid; grid-template-columns: 1fr auto; gap: 40px; align-items: end; color: #eef3f1; }
+.cta { margin: 80px auto 100px; width: min(1240px, 100% - 48px); background: var(--ink); border-radius: 24px; padding: clamp(40px, 6vw, 80px); display: grid; grid-template-columns: 1fr auto; gap: 40px; align-items: end; color: #eef1f6; }
 .cta h2 { font-size: clamp(30px, 3.6vw, 48px); line-height: 1.05; letter-spacing: -.04em; font-weight: 600; max-width: 14em; }
 .cta .btn { background: var(--acc); } .cta .btn i { background: #fff; color: var(--acc); }
 .more { display: flex; justify-content: space-between; gap: 20px; padding: 0 0 20px; }

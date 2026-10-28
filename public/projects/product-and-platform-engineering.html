@@ -5,6 +5,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Product and platform engineering | Muhammad Haris, AI GTM Engineer</title>
 <meta name="description" content="AI platforms with hybrid retrieval, evaluation pipelines and bank-grade security, not just connected SaaS tools." />
+<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+<meta name="theme-color" content="#0e1726" />
+<meta name="referrer" content="strict-origin-when-cross-origin" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Muhammad Haris, AI GTM Engineer" />
+<meta property="og:title" content="Product and platform engineering | Muhammad Haris, AI GTM Engineer" />
+<meta property="og:description" content="AI platforms with hybrid retrieval, evaluation pipelines and bank-grade security, not just connected SaaS tools." />
+<meta name="twitter:card" content="summary" />
 <link rel="stylesheet" href="/fonts/fonts.css" />
 <style>html.fl body { visibility: hidden; }</style>
 <script>
@@ -20,13 +28,13 @@
 <style>
 /* Built by media-src/projects/build.py, do not edit by hand. */
 :root {
-	--bg: #f5f7f6;
+	--bg: #faf8f4;
 	--surface: #ffffff;
-	--ink: #111a17;
-	--mute: #56625d;
-	--line: rgb(17 26 23 / .09);
-	--acc: #0e7a55;
-	--acc-soft: #e3f1ea;
+	--ink: #0e1726;
+	--mute: #5b6475;
+	--line: rgb(14 23 38 / .09);
+	--acc: #1e3a5f;
+	--acc-soft: #f2ede3;
 }
 * { box-sizing: border-box; margin: 0; }
 html { scroll-behavior: smooth; }
@@ -53,78 +61,78 @@ nav.top { height: 80px; display: grid; grid-template-columns: 1fr auto 1fr; alig
 .links > li { position: relative; display: flex; }
 .links > li > a, .links > li > button { position: relative; display: flex; align-items: center; gap: 10px; padding: 0 16px; border: 0; background: none; font: 500 16.5px "Geist", sans-serif; color: var(--ink); cursor: pointer; transition: color .15s ease; }
 .links svg { width: 10px; height: 6px; transition: transform .2s ease; }
-.links > li > a::after, .links > li > button::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 3px; background: #38c97a; transform: scaleX(0); transition: transform .2s ease; }
+.links > li > a::after, .links > li > button::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 3px; background: #d4b483; transform: scaleX(0); transition: transform .2s ease; }
 .links > li:hover > a, .links > li:hover > button, .links > li.open > button { color: var(--acc); }
 .links > li:hover > a::after, .links > li:hover > button::after, .links > li.open > button::after { transform: scaleX(1); }
 .links > li.open svg { transform: rotate(180deg); }
 .links :focus-visible { outline: 2px solid var(--acc); outline-offset: -4px; border-radius: 6px; }
-.drop { position: absolute; top: 100%; left: 0; min-width: 100%; width: max-content; padding: 10px 0; background: #f3f7f5; box-shadow: 0 18px 30px -18px rgb(17 26 23 / .3); opacity: 0; visibility: hidden; transform: translateY(-4px); transition: opacity .16s ease, transform .16s ease, visibility 0s .16s; }
+.drop { position: absolute; top: 100%; left: 0; min-width: 100%; width: max-content; padding: 10px 0; background: #f4f1eb; box-shadow: 0 18px 30px -18px rgb(14 23 38 / .3); opacity: 0; visibility: hidden; transform: translateY(-4px); transition: opacity .16s ease, transform .16s ease, visibility 0s .16s; }
 .links > li:hover .drop, .links > li.open .drop { opacity: 1; visibility: visible; transform: none; transition: opacity .16s ease, transform .16s ease; }
 .drop a { display: block; padding: 11px 22px; font-size: 16px; font-weight: 500; color: var(--ink); transition: color .15s ease, background-color .15s ease; }
-.drop a:hover, .drop a:focus-visible { color: var(--acc); background: #e3f1ea; outline: none; }
+.drop a:hover, .drop a:focus-visible { color: var(--acc); background: #f2ede3; outline: none; }
 .top-right { display: flex; justify-content: flex-end; align-items: center; gap: 12px; }
-.icon-btn { width: 44px; height: 44px; border-radius: 10px; display: grid; place-items: center; background: #f3f7f5; color: var(--ink); transition: background-color .15s ease, color .15s ease; }
-.icon-btn:hover { background: #e3f1ea; color: var(--acc); }
+.icon-btn { width: 44px; height: 44px; border-radius: 10px; display: grid; place-items: center; background: #f4f1eb; color: var(--ink); transition: background-color .15s ease, color .15s ease; }
+.icon-btn:hover { background: #f2ede3; color: var(--acc); }
 .book { display: inline-flex; align-items: center; height: 44px; padding: 0 22px; border-radius: 10px; background: var(--acc); color: #fff; font-size: 15.5px; font-weight: 600; white-space: nowrap; box-shadow: inset 0 -2px 0 rgb(0 0 0 / .12); transition: transform .16s ease-out, background-color .15s ease; }
-.book:hover { background: #0b6a49; }
+.book:hover { background: #172f4e; }
 .book:active { transform: scale(.97); }
 .top-right a:focus-visible { outline: 2px solid var(--acc); outline-offset: 3px; }
 
-.end { position: relative; border-top: 0; background: #111a17; color: #eef3f1; padding: 72px 0 36px; }
+.end { position: relative; border-top: 0; background: #0e1726; color: #eef1f6; padding: 72px 0 36px; }
 .end .end-cols { display: grid; grid-template-columns: 380px 1fr .8fr; gap: 46px 60px; align-items: start; }
 .end .end-card { padding: 26px; border-radius: 20px; background: rgb(255 255 255 / .05); box-shadow: inset 0 0 0 1px rgb(255 255 255 / .1); }
 .end .end-card .who { display: flex; gap: 14px; align-items: center; }
 .end .end-card .who img { width: 56px; height: 56px; border-radius: 50%; object-fit: cover; object-position: 50% 18%; }
 .end .end-card .where { margin-top: 16px; }
-.end .end-card .btn { margin-top: 22px; height: 48px; background: #38c97a; color: #0b1d16; }
-.end .end-card .btn i { background: #0b1d16; color: #38c97a; }
+.end .end-card .btn { margin-top: 22px; height: 48px; background: #d4b483; color: #0e1726; }
+.end .end-card .btn i { background: #0e1726; color: #d4b483; }
 .end .end-card .mail { display: block; margin-top: 16px; font-size: 14.5px; overflow-wrap: anywhere; }
-.end .end-card .mail:hover { color: #8fd4b1; }
+.end .end-card .mail:hover { color: #c8b28b; }
 .end .end-card .social { margin-top: 20px; }
-.end .logo span { color: #9fb3aa; }
-.end .where { margin-top: 18px; color: #9fb3aa; font-size: 15px; max-width: 16em; }
-.end h3 { font-size: 17px; font-weight: 600; color: var(--ok, #38c97a); margin-bottom: 16px; }
+.end .logo span { color: #9aa5b8; }
+.end .where { margin-top: 18px; color: #9aa5b8; font-size: 15px; max-width: 16em; }
+.end h3 { font-size: 17px; font-weight: 600; color: var(--ok, #d4b483); margin-bottom: 16px; }
 .end ul { list-style: none; padding: 0; display: grid; gap: 11px; }
 .end li { margin: 0; font-size: 15.5px; font-weight: 500; }
 .end li a { transition: color .15s ease; overflow-wrap: anywhere; }
-.end li a:hover { color: #8fd4b1; }
-.end li a.all { color: #4fd68c; }
+.end li a:hover { color: #c8b28b; }
+.end li a.all { color: #dcc196; }
 .end .social { margin-top: 26px; display: flex; gap: 10px; }
 .end .social a { width: 38px; height: 38px; border-radius: 9px; display: grid; place-items: center; box-shadow: inset 0 0 0 1.5px rgb(255 255 255 / .55); transition: background-color .15s ease, color .15s ease; }
-.end .social a:hover { background: #fff; color: #111a17; }
+.end .social a:hover { background: #fff; color: #0e1726; }
 .end .social svg { width: 17px; height: 17px; }
-.end a:focus-visible { outline: 2px solid #8fd4b1; outline-offset: 3px; }
-.end .end-legal { margin-top: 56px; padding-top: 22px; border-top: 1px solid rgb(255 255 255 / .1); display: flex; justify-content: space-between; gap: 20px; font-size: 13.5px; color: #9fb3aa; }
+.end a:focus-visible { outline: 2px solid #c8b28b; outline-offset: 3px; }
+.end .end-legal { margin-top: 56px; padding-top: 22px; border-top: 1px solid rgb(255 255 255 / .1); display: flex; justify-content: space-between; gap: 20px; font-size: 13.5px; color: #9aa5b8; }
 .links > li.here > button { color: var(--acc); }
 .links > li.here > button::after { transform: scaleX(1); }
 .drop a.cur { color: var(--acc); }
-.end li a.cur { color: #4fd68c; }
-.ph { position: relative; isolation: isolate; overflow: hidden; background: #111a17; color: #fff; padding: 60px 0 66px; }
+.end li a.cur { color: #dcc196; }
+.ph { position: relative; isolation: isolate; overflow: hidden; background: #0e1726; color: #fff; padding: 60px 0 66px; }
 .ph::before { content: ""; position: absolute; inset: 0; z-index: -1; background: url("/images/pipeline-texture.svg") 0 0 / 360px 240px; -webkit-mask-image: linear-gradient(90deg, rgb(0 0 0 / .25), #000 80%); mask-image: linear-gradient(90deg, rgb(0 0 0 / .25), #000 80%); }
-.crumb { font-size: 14.5px; color: #9fb3aa; } .crumb a { color: #c9d6d0; } .crumb a:hover { color: #fff; } .crumb b { color: #fff; font-weight: 500; }
+.crumb { font-size: 14.5px; color: #9aa5b8; } .crumb a { color: #c3cbd8; } .crumb a:hover { color: #fff; } .crumb b { color: #fff; font-weight: 500; }
 .ph .row { margin-top: 24px; display: grid; grid-template-columns: auto 1fr auto; gap: 26px; align-items: center; }
-.ph .num { width: 76px; height: 76px; border-radius: 50%; display: grid; place-items: center; background: #38c97a; color: #0b1d16; font: 600 22px "Geist Mono", monospace; }
+.ph .num { width: 76px; height: 76px; border-radius: 50%; display: grid; place-items: center; background: #d4b483; color: #0e1726; font: 600 22px "Geist Mono", monospace; }
 .ph h1 { font-size: clamp(40px, 4.4vw, 64px); line-height: 1; letter-spacing: -.045em; font-weight: 700; }
-.ph p { margin-top: 12px; font-size: 19px; color: #c9d6d0; max-width: 34em; }
-.ph .cnt { text-align: right; font-size: 15px; color: #9fb3aa; } .ph .cnt b { display: block; font-size: 44px; line-height: 1; letter-spacing: -.04em; color: #4fd68c; }
-.chips { position: sticky; top: 0; z-index: 20; background: rgb(245 247 246 / .94); box-shadow: 0 1px 0 var(--line); }
+.ph p { margin-top: 12px; font-size: 19px; color: #c3cbd8; max-width: 34em; }
+.ph .cnt { text-align: right; font-size: 15px; color: #9aa5b8; } .ph .cnt b { display: block; font-size: 44px; line-height: 1; letter-spacing: -.04em; color: #dcc196; }
+.chips { position: sticky; top: 0; z-index: 20; background: rgb(250 248 244 / .94); box-shadow: 0 1px 0 var(--line); }
 .chips .wrap { display: flex; gap: 8px; overflow-x: auto; padding: 14px 0; scrollbar-width: none; }
 .chips .wrap::-webkit-scrollbar { display: none; }
 .chips a { flex: none; display: inline-flex; align-items: center; gap: 8px; height: 40px; padding: 0 16px; border-radius: 999px; font-size: 14.5px; font-weight: 500; background: #fff; box-shadow: inset 0 0 0 1px var(--line); transition: background-color .15s ease, color .15s ease; }
 .chips a:hover { color: var(--acc); }
 .chips a i { font: 500 12px "Geist Mono", monospace; font-style: normal; color: var(--mute); }
-.chips a[aria-current] { background: #111a17; color: #fff; box-shadow: none; } .chips a[aria-current] i { color: #4fd68c; }
+.chips a[aria-current] { background: #0e1726; color: #fff; box-shadow: none; } .chips a[aria-current] i { color: #dcc196; }
 .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
 .pc { display: flex; flex-direction: column; border-radius: 18px; overflow: hidden; background: #fff; box-shadow: 0 0 0 1px var(--line); transition: transform .2s ease, box-shadow .2s ease; }
-a.pc:hover { transform: translateY(-3px); box-shadow: 0 0 0 1px var(--line), 0 24px 40px -24px rgb(17 26 23 / .35); }
+a.pc:hover { transform: translateY(-3px); box-shadow: 0 0 0 1px var(--line), 0 24px 40px -24px rgb(14 23 38 / .35); }
 a.pc:active { transform: scale(.99); }
-.cov { position: relative; aspect-ratio: 16 / 9; overflow: hidden; background: #111a17; }
+.cov { position: relative; aspect-ratio: 16 / 9; overflow: hidden; background: #0e1726; }
 .cov img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
-.cov .badge { position: absolute; z-index: 1; left: 14px; top: 14px; padding: 6px 11px; border-radius: 999px; background: #38c97a; color: #0b1d16; font: 600 11.5px "Geist Mono", monospace; letter-spacing: .04em; text-transform: uppercase; }
+.cov .badge { position: absolute; z-index: 1; left: 14px; top: 14px; padding: 6px 11px; border-radius: 999px; background: #d4b483; color: #0e1726; font: 600 11.5px "Geist Mono", monospace; letter-spacing: .04em; text-transform: uppercase; }
 .cov.made { isolation: isolate; color: #fff; display: flex; flex-direction: column; justify-content: flex-end; padding: 22px; }
 .cov.made::before { content: ""; position: absolute; inset: 0; z-index: -1; background: url("/images/pipeline-texture.svg") 0 0 / 360px 240px; opacity: .9; }
-.cov.made b { font-size: 52px; line-height: 1; letter-spacing: -.05em; font-weight: 700; color: #4fd68c; }
-.cov.made span { margin-top: 8px; font-size: 15px; color: #c9d6d0; }
+.cov.made b { font-size: 52px; line-height: 1; letter-spacing: -.05em; font-weight: 700; color: #dcc196; }
+.cov.made span { margin-top: 8px; font-size: 15px; color: #c3cbd8; }
 .cov.made strong { font-size: 26px; line-height: 1.12; letter-spacing: -.03em; font-weight: 700; max-width: 12em; }
 .pc .bd { flex: 1; display: flex; flex-direction: column; padding: 20px 22px 18px; }
 .pc .meta { font: 500 12px "Geist Mono", monospace; letter-spacing: .04em; color: var(--acc); text-transform: uppercase; }
@@ -139,12 +147,12 @@ a.pc:focus-visible { outline: 2px solid var(--acc); outline-offset: 3px; }
 .body { padding: 44px 0 20px; }
 .sec { padding-top: 46px; }
 .sec h2 { display: flex; align-items: center; gap: 14px; font-size: 28px; letter-spacing: -.025em; font-weight: 700; margin-bottom: 6px; }
-.sec h2 i { flex: none; width: 38px; height: 38px; border-radius: 50%; display: grid; place-items: center; background: #e3f1ea; color: var(--acc); font: 600 13px "Geist Mono", monospace; font-style: normal; }
+.sec h2 i { flex: none; width: 38px; height: 38px; border-radius: 50%; display: grid; place-items: center; background: #f2ede3; color: var(--acc); font: 600 13px "Geist Mono", monospace; font-style: normal; }
 .sec h2 a { margin-left: auto; font-size: 15px; font-weight: 600; color: var(--acc); white-space: nowrap; }
 .sec > p { margin: 0 0 22px 52px; color: var(--mute); }
 .next { margin: 46px 0 100px; display: flex; justify-content: space-between; gap: 20px; }
 .next a { flex: 1; padding: 22px 26px; border-radius: 16px; background: #fff; box-shadow: 0 0 0 1px var(--line); transition: box-shadow .2s ease; }
-.next a:hover { box-shadow: 0 0 0 1px var(--line), 0 18px 30px -20px rgb(17 26 23 / .3); }
+.next a:hover { box-shadow: 0 0 0 1px var(--line), 0 18px 30px -20px rgb(14 23 38 / .3); }
 .next a small { display: block; font-size: 13px; color: var(--mute); } .next a b { display: block; margin-top: 4px; font-size: 18px; }
 .next a:last-child { text-align: right; }
 @media (max-width: 1000px) {
@@ -186,19 +194,21 @@ a.pc:focus-visible { outline: 2px solid var(--acc); outline-offset: 3px; }
 			<li class="has-drop">
 				<button type="button" aria-expanded="false" aria-controls="drop-build">What I build <svg viewBox="0 0 10 6" aria-hidden="true"><path d="M0 0h10L5 6z" fill="currentColor"/></svg></button>
 				<div class="drop" id="drop-build">
-					<a href="/#what-i-build">Signal intelligence</a>
-					<a href="/#what-i-build">Research and enrichment agents</a>
-					<a href="/#what-i-build">Signal-triggered outbound</a>
-					<a href="/#what-i-build">Inbound conversion</a>
-					<a href="/#what-i-build">Retention and expansion</a>
+					<a href="/projects/signal-intelligence.html">Signal intelligence</a>
+					<a href="/projects/research-and-enrichment-agents.html">Research and enrichment agents</a>
+					<a href="/projects/signal-triggered-outbound.html">Signal-triggered outbound</a>
+					<a href="/projects/inbound-conversion.html">Inbound conversion</a>
+					<a href="/projects/retention-and-expansion.html">Retention and expansion</a>
 				</div>
 			</li>
 			<li><a href="/#how-i-work">How I work</a></li>
 			<li><a href="/#who-i-am">Who I am</a></li>
+			<li><a href="/reviews.html">Client reviews</a></li>
 		</ul>
 		<div class="top-right">
+			<a class="icon-btn" href="/reviews.html" aria-label="Client reviews" title="Client reviews"><svg viewBox="0 0 24 24" width="19" height="19" aria-hidden="true"><path fill="currentColor" d="M12 3.2l2.6 5.3 5.8.8-4.2 4.1 1 5.8L12 16.5l-5.2 2.7 1-5.8-4.2-4.1 5.8-.8z"/></svg></a>
 			<a class="icon-btn" href="https://linkedin.com/in/muhammad-haris-wassan" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><svg viewBox="0 0 24 24" width="19" height="19" aria-hidden="true"><path fill="currentColor" d="M4.98 3.5a2.5 2.5 0 11-.02 5 2.5 2.5 0 01.02-5zM3 9.75h4v11H3v-11zm6.5 0h3.8v1.6h.06c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.77 2.6 4.77 6v5.45h-4v-4.83c0-1.15-.02-2.64-1.6-2.64-1.62 0-1.86 1.26-1.86 2.55v4.92h-4v-11z"/></svg></a>
-			<a class="book" href="/#book">Book a call</a>
+			<a class="book" href="/#book">Book a meeting</a>
 		</div>
 	</nav>
 </header>
@@ -218,8 +228,7 @@ a.pc:focus-visible { outline: 2px solid var(--acc); outline-offset: 3px; }
 		<div class="end-cols">
 			<div class="end-card">
 				<div class="who"><img src="/images/haris.webp" alt="" width="56" height="56" loading="lazy" /><a class="logo" href="/"><b>Muhammad Haris</b><span>AI GTM Engineer</span></a></div>
-				<p class="where">I work with companies in the US, UK and Middle East.</p>
-				<a class="btn" href="/#book">Book a call <i aria-hidden="true">&rarr;</i></a>
+				<a class="btn" href="/#book">Book a meeting <i aria-hidden="true">&rarr;</i></a>
 				<a class="mail" href="mailto:hariswassan001@gmail.com">hariswassan001@gmail.com</a>
 				<div class="social">
 					<a href="https://linkedin.com/in/muhammad-haris-wassan" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M4.98 3.5a2.5 2.5 0 11-.02 5 2.5 2.5 0 01.02-5zM3 9.75h4v11H3v-11zm6.5 0h3.8v1.6h.06c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.77 2.6 4.77 6v5.45h-4v-4.83c0-1.15-.02-2.64-1.6-2.64-1.62 0-1.86 1.26-1.86 2.55v4.92h-4v-11z"/></svg></a>
@@ -244,13 +253,15 @@ a.pc:focus-visible { outline: 2px solid var(--acc); outline-offset: 3px; }
 				<ul>
 					<li><a href="/#who-i-am">Who I am</a></li>
 					<li><a href="/#how-i-work">How I work</a></li>
-					<li><a href="/#book">Book a call</a></li>
+					<li><a href="/#book">Book a meeting</a></li>
+					<li><a href="/faq.html">FAQ</a></li>
+					<li><a href="/reviews.html">Client reviews</a></li>
 					<li><a href="/resume.html">Resume</a></li>
 				</ul>
 				
 			</div>
 		</div>
-		<div class="end-legal"><span>&copy; Muhammad Haris</span><span>AI GTM Engineer</span></div>
+		<div class="end-legal"><span>&copy; Muhammad Haris · <a href="/privacy.html">Privacy</a></span><span>AI GTM Engineer</span></div>
 	</div>
 </footer>
 <script>
@@ -285,5 +296,6 @@ a.pc:focus-visible { outline: 2px solid var(--acc); outline-offset: 3px; }
 	if (a) a.parentElement.scrollLeft = a.offsetLeft - a.parentElement.offsetLeft
 })()
 </script>
+<script type="module" src="/assistant.js"></script>
 </body>
 </html>

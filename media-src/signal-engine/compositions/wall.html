@@ -23,9 +23,9 @@
       width: 186px;
       height: 140px;
       background: #fff;
-      border: 2px solid #dbe3df;
+      border: 2px solid #dde1e8;
       border-radius: 16px;
-      box-shadow: 0 10px 24px -14px rgba(17, 26, 23, 0.22);
+      box-shadow: 0 10px 24px -14px rgba(14,23,38, 0.22);
       /* drawn at the 186 x 140 design size, shown 1.7x so the confirm scene's card matches exactly */
       transform: scale(1.7);
       transform-origin: 0 0;
@@ -34,10 +34,10 @@
       position: absolute;
       display: block;
     }
-    .lc .th { left: 16px; top: 16px; width: 40px; height: 40px; border-radius: 10px; background: #dfeee6; }
-    .lc .nm { left: 66px; top: 20px; width: 92px; height: 12px; border-radius: 6px; background: #c7d1cc; }
-    .lc .sb { left: 66px; top: 40px; width: 64px; height: 10px; border-radius: 5px; background: #e3e9e6; }
-    .lc .ad { left: 36px; top: 108px; width: 84px; height: 10px; border-radius: 5px; background: #e3e9e6; }
+    .lc .th { left: 16px; top: 16px; width: 40px; height: 40px; border-radius: 10px; background: #ede6d8; }
+    .lc .nm { left: 66px; top: 20px; width: 92px; height: 12px; border-radius: 6px; background: #cbd0d9; }
+    .lc .sb { left: 66px; top: 40px; width: 64px; height: 10px; border-radius: 5px; background: #e4e7ec; }
+    .lc .ad { left: 36px; top: 108px; width: 84px; height: 10px; border-radius: 5px; background: #e4e7ec; }
     .lc .st { position: absolute; left: 16px; top: 72px; display: flex; gap: 4px; }
     .lc .st svg { width: 18px; height: 18px; fill: #e8b23a; }
     .lc .pn { position: absolute; left: 16px; top: 104px; width: 12px; height: 17px; }
@@ -63,7 +63,7 @@
       top: 0;
       width: 170px;
       height: 774px;
-      background: linear-gradient(90deg, rgba(14, 122, 85, 0), rgba(14, 122, 85, 0.14));
+      background: linear-gradient(90deg, rgba(30,58,95, 0), rgba(30,58,95, 0.14));
     }
   </style>
   <div data-hf-id="hf-7lsv" id="root" data-composition-id="wall" data-width="1080" data-height="1080">
@@ -78,7 +78,7 @@
       const STAR =
         '<svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.6 7.1.6-5.4 4.7 1.6 7L12 17.3 5.8 20.9l1.6-7L2 9.2l7.1-.6z"/></svg>';
       const PIN =
-        '<svg class="pn" viewBox="0 0 12 17"><path fill="#9aa6a0" d="M6 0C2.7 0 0 2.6 0 5.9 0 10.3 6 17 6 17s6-6.7 6-11.1C12 2.6 9.3 0 6 0zm0 8.2a2.3 2.3 0 110-4.6 2.3 2.3 0 010 4.6z"/></svg>';
+        '<svg class="pn" viewBox="0 0 12 17"><path fill="#9aa3b0" d="M6 0C2.7 0 0 2.6 0 5.9 0 10.3 6 17 6 17s6-6.7 6-11.1C12 2.6 9.3 0 6 0zm0 8.2a2.3 2.3 0 110-4.6 2.3 2.3 0 010 4.6z"/></svg>';
       const BADGE =
         '<i class="bd"><svg viewBox="0 0 42 42"><g class="bang" fill="#fff"><rect x="19" y="9" width="4" height="16" rx="2"/><circle cx="21" cy="31" r="2.6"/></g><g class="pause" fill="#fff" opacity="0"><rect x="14.5" y="12" width="5" height="18" rx="1.5"/><rect x="22.5" y="12" width="5" height="18" rx="1.5"/></g></svg></i>';
 
@@ -127,8 +127,8 @@
 
       // 3.8 the trigger: rating drops, the card turns alert
       tl.fromTo("#wall-scan", { opacity: 1 }, { opacity: 0, duration: 0.2, ease: "power3.in", immediateRender: false }, 3.8);
-      tl.fromTo(stars, { fill: "#e8b23a" }, { fill: "#d9dfdc", duration: 0.2, stagger: 0.04, ease: "power2.out" }, 3.8);
-      tl.fromTo(tgt, { borderColor: "#dbe3df" }, { borderColor: "#d4542f", duration: 0.2, ease: "power2.out" }, 3.8);
+      tl.fromTo(stars, { fill: "#e8b23a" }, { fill: "#dcdfe5", duration: 0.2, stagger: 0.04, ease: "power2.out" }, 3.8);
+      tl.fromTo(tgt, { borderColor: "#dde1e8" }, { borderColor: "#d4542f", duration: 0.2, ease: "power2.out" }, 3.8);
       tl.fromTo(badge, { scale: 0 }, { scale: 1, duration: 0.35, ease: "expo.out" }, 3.84);
 
       // 4.05-5.05 camera pushes in on it (card at 3.2x its design size = 1.7 x 1.8824, centred at 540,600), the rest blur away
@@ -147,7 +147,7 @@
       tl.set(".lc.other", { opacity: 1, filter: "blur(0px)" }, 20.0);
       tl.set(dots, { scale: 0 }, 20.0);
       tl.set(stars, { fill: "#e8b23a" }, 20.0);
-      tl.set(tgt, { borderColor: "#dbe3df" }, 20.0);
+      tl.set(tgt, { borderColor: "#dde1e8" }, 20.0);
       tl.set(badge, { scale: 0 }, 20.0);
       tl.set(bang, { opacity: 1 }, 20.0);
       tl.set(pause, { opacity: 0 }, 20.0);

@@ -5,6 +5,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Muhammad Haris, AI GTM Engineer</title>
 <meta name="description" content="I build the AI systems behind every stage of the revenue engine, from signal to retention." />
+<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+<meta name="theme-color" content="#0e1726" />
+<meta name="referrer" content="strict-origin-when-cross-origin" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Muhammad Haris, AI GTM Engineer" />
+<meta property="og:title" content="Muhammad Haris, AI GTM Engineer" />
+<meta property="og:description" content="I build the AI systems behind every stage of the revenue engine, from signal to retention." />
+<meta name="twitter:card" content="summary" />
 <link rel="stylesheet" href="/fonts/fonts.css" />
 <style>html.fl body { visibility: hidden; }</style>
 <script>
@@ -22,13 +30,13 @@
 /* Home page. Built one section at a time; the hero is the first approved section.
    Every word on the page comes from the AI GTM Engineer brief. */
 :root {
-	--bg: #f5f7f6;
+	--bg: #faf8f4;
 	--surface: #ffffff;
-	--ink: #111a17;
-	--mute: #56625d;
-	--line: rgb(17 26 23 / .09);
-	--acc: #0e7a55;
-	--acc-soft: #e3f1ea;
+	--ink: #0e1726;
+	--mute: #5b6475;
+	--line: rgb(14 23 38 / .09);
+	--acc: #1e3a5f;
+	--acc-soft: #f2ede3;
 }
 * { box-sizing: border-box; margin: 0; }
 html { scroll-behavior: smooth; }
@@ -56,46 +64,46 @@ nav.top { height: 80px; display: grid; grid-template-columns: 1fr auto 1fr; alig
 .links > li { position: relative; display: flex; }
 .links > li > a, .links > li > button { position: relative; display: flex; align-items: center; gap: 10px; padding: 0 16px; border: 0; background: none; font: 500 16.5px "Geist", sans-serif; color: var(--ink); cursor: pointer; transition: color .15s ease; }
 .links svg { width: 10px; height: 6px; transition: transform .2s ease; }
-.links > li > a::after, .links > li > button::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 3px; background: #38c97a; transform: scaleX(0); transition: transform .2s ease; }
+.links > li > a::after, .links > li > button::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 3px; background: #d4b483; transform: scaleX(0); transition: transform .2s ease; }
 .links > li:hover > a, .links > li:hover > button, .links > li.open > button { color: var(--acc); }
 .links > li:hover > a::after, .links > li:hover > button::after, .links > li.open > button::after { transform: scaleX(1); }
 .links > li.open svg { transform: rotate(180deg); }
 .links :focus-visible { outline: 2px solid var(--acc); outline-offset: -4px; border-radius: 6px; }
-.drop { position: absolute; top: 100%; left: 0; min-width: 100%; width: max-content; padding: 10px 0; background: #f3f7f5; box-shadow: 0 18px 30px -18px rgb(17 26 23 / .3); opacity: 0; visibility: hidden; transform: translateY(-4px); transition: opacity .16s ease, transform .16s ease, visibility 0s .16s; }
+.drop { position: absolute; top: 100%; left: 0; min-width: 100%; width: max-content; padding: 10px 0; background: #f4f1eb; box-shadow: 0 18px 30px -18px rgb(14 23 38 / .3); opacity: 0; visibility: hidden; transform: translateY(-4px); transition: opacity .16s ease, transform .16s ease, visibility 0s .16s; }
 .links > li:hover .drop, .links > li.open .drop { opacity: 1; visibility: visible; transform: none; transition: opacity .16s ease, transform .16s ease; }
 .drop a { display: block; padding: 11px 22px; font-size: 16px; font-weight: 500; color: var(--ink); transition: color .15s ease, background-color .15s ease; }
-.drop a:hover, .drop a:focus-visible { color: var(--acc); background: #e3f1ea; outline: none; }
+.drop a:hover, .drop a:focus-visible { color: var(--acc); background: #f2ede3; outline: none; }
 .top-right { display: flex; justify-content: flex-end; align-items: center; gap: 12px; }
-.icon-btn { width: 44px; height: 44px; border-radius: 10px; display: grid; place-items: center; background: #f3f7f5; color: var(--ink); transition: background-color .15s ease, color .15s ease; }
-.icon-btn:hover { background: #e3f1ea; color: var(--acc); }
+.icon-btn { width: 44px; height: 44px; border-radius: 10px; display: grid; place-items: center; background: #f4f1eb; color: var(--ink); transition: background-color .15s ease, color .15s ease; }
+.icon-btn:hover { background: #f2ede3; color: var(--acc); }
 .book { display: inline-flex; align-items: center; height: 44px; padding: 0 22px; border-radius: 10px; background: var(--acc); color: #fff; font-size: 15.5px; font-weight: 600; white-space: nowrap; box-shadow: inset 0 -2px 0 rgb(0 0 0 / .12); transition: transform .16s ease-out, background-color .15s ease; }
-.book:hover { background: #0b6a49; }
+.book:hover { background: #172f4e; }
 .book:active { transform: scale(.97); }
 .top-right a:focus-visible { outline: 2px solid var(--acc); outline-offset: 3px; }
 
 /* hero */
 /* hero: a charcoal band, headline left, intro and buttons right, pipeline signals behind */
-.hero { position: relative; isolation: isolate; overflow: hidden; background: #111a17; color: #fff; padding: 84px 0 88px; }
+.hero { position: relative; isolation: isolate; overflow: hidden; background: #0e1726; color: #fff; padding: 84px 0 88px; }
 .hero::before { content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none; background: url("/images/pipeline-texture.svg") 0 0 / 360px 240px; -webkit-mask-image: linear-gradient(90deg, rgb(0 0 0 / .3), rgb(0 0 0 / .55) 60%, #000); mask-image: linear-gradient(90deg, rgb(0 0 0 / .3), rgb(0 0 0 / .55) 60%, #000); }
 .hero-in { display: grid; grid-template-columns: 1.05fr 1fr; column-gap: 90px; align-items: end; }
 .eyebrow { display: block; margin-bottom: 22px; font: 500 12px "Geist Mono", monospace; letter-spacing: .08em; text-transform: uppercase; color: var(--acc); }
-.hero .eyebrow { grid-column: 1; grid-row: 1; color: #8fd4b1; }
+.hero .eyebrow { grid-column: 1; grid-row: 1; color: #c8b28b; }
 .hero h1 { grid-column: 1; grid-row: 2 / span 3; font-size: clamp(52px, 5.2vw, 82px); line-height: .98; letter-spacing: -.05em; font-weight: 600; }
-.hero h1 em { font-style: normal; color: #4fd68c; display: block; }
-.hero .lede { grid-column: 2; grid-row: 2; margin: 0; max-width: 30em; font-size: 18.5px; line-height: 1.5; color: #c9d6d0; }
+.hero h1 em { font-style: normal; color: #dcc196; display: block; }
+.hero .lede { grid-column: 2; grid-row: 2; margin: 0; max-width: 30em; font-size: 18.5px; line-height: 1.5; color: #c3cbd8; }
 .ctas { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 36px; }
 .hero .ctas { grid-column: 2; grid-row: 3; margin-top: 26px; }
-.hero .btn { background: #38c97a; color: #0b1d16; }
-.hero .btn i { background: #0b1d16; color: #38c97a; }
+.hero .btn { background: #d4b483; color: #0e1726; }
+.hero .btn i { background: #0e1726; color: #d4b483; }
 .hero .btn--ghost { background: transparent; color: #fff; box-shadow: inset 0 0 0 1.5px rgb(255 255 255 / .55); }
 .hero .btn--ghost i { background: transparent; color: #fff; box-shadow: inset 0 0 0 1.5px #fff; }
 .hero a:focus-visible { outline: 2px solid #fff; outline-offset: 3px; }
 .where { margin-top: 30px; font-size: 15px; color: var(--mute); }
-.hero .where { grid-column: 2; grid-row: 4; margin-top: 20px; color: #9fb3aa; }
+.hero .where { grid-column: 2; grid-row: 4; margin-top: 20px; color: #9aa5b8; }
 .figure { position: relative; }
-.bezel { padding: 8px; border-radius: 30px; background: rgb(17 26 23 / .04); box-shadow: inset 0 0 0 1px rgb(17 26 23 / .06); }
+.bezel { padding: 8px; border-radius: 30px; background: rgb(14 23 38 / .04); box-shadow: inset 0 0 0 1px rgb(14 23 38 / .06); }
 .photo { display: block; width: 100%; height: 600px; object-fit: cover; object-position: 50% 22%; border-radius: 22px; background: #3a3f42; }
-.badge { position: absolute; left: -36px; bottom: 44px; max-width: 290px; padding: 16px 20px; border-radius: 14px; background: var(--surface); box-shadow: 0 18px 40px rgb(17 26 23 / .14); }
+.badge { position: absolute; left: -36px; bottom: 44px; max-width: 290px; padding: 16px 20px; border-radius: 14px; background: var(--surface); box-shadow: 0 18px 40px rgb(14 23 38 / .14); }
 .badge b { display: block; font-size: 15px; font-weight: 600; }
 .badge span { display: block; margin-top: 2px; font-size: 13.5px; line-height: 1.4; color: var(--mute); }
 
@@ -137,9 +145,8 @@ nav.top { height: 80px; display: grid; grid-template-columns: 1fr auto 1fr; alig
 /* intro */
 .intro { display: grid; grid-template-columns: 400px 1fr; gap: 84px; padding: 110px 0; align-items: start; }
 /* the photo runs the full height of the text beside it */
-.intro .pic { display: block; width: 100%; height: auto; aspect-ratio: 1 / 1.1; object-fit: cover; object-position: 50% 18%; border-radius: 26px; background: #3a3f42; box-shadow: 0 30px 60px -36px rgb(17 26 23 / .45); }
+.intro .pic { display: block; width: 100%; height: auto; aspect-ratio: 1 / 1.1; object-fit: cover; object-position: 50% 18%; border-radius: 26px; background: #3a3f42; box-shadow: 0 30px 60px -36px rgb(14 23 38 / .45); }
 .intro h2 { font-size: clamp(32px, 3.4vw, 44px); line-height: 1.1; letter-spacing: -.03em; font-weight: 600; max-width: 15em; color: var(--acc); }
-.intro .dash { display: block; width: 84px; margin: 26px 0 6px; border-top: 2px dashed #38c97a; }
 .intro p { margin-top: 22px; max-width: 36em; color: var(--mute); font-size: 18px; }
 .intro .facts { display: flex; flex-wrap: wrap; gap: 20px 44px; margin-top: 40px; padding-top: 28px; border-top: 1px solid var(--line); }
 .intro .facts b { display: block; font-size: 15px; }
@@ -149,7 +156,7 @@ nav.top { height: 80px; display: grid; grid-template-columns: 1fr auto 1fr; alig
 /* quote band */
 .quote { background: var(--acc-soft); color: var(--ink); padding: 100px 0; }
 .quote blockquote { width: min(1080px, 100% - 48px); margin: 0 auto; text-align: center; font-size: clamp(20px, 2.1vw, 29px); line-height: 1.4; letter-spacing: -.015em; font-weight: 500; text-wrap: balance; }
-.quote blockquote::before { content: "“"; display: block; height: 52px; font: 600 96px/1 "Geist", sans-serif; color: #38c97a; }
+.quote blockquote::before { content: "“"; display: block; height: 52px; font: 600 96px/1 "Geist", sans-serif; color: #d4b483; }
 .quote cite { display: block; margin-top: 28px; font: 500 13px "Geist Mono", monospace; font-style: normal; letter-spacing: .12em; text-transform: uppercase; color: var(--acc); }
 @media (max-width: 600px) { .quote { padding: 80px 0; } }
 
@@ -157,45 +164,45 @@ nav.top { height: 80px; display: grid; grid-template-columns: 1fr auto 1fr; alig
 .h2 { font-size: clamp(32px, 3.4vw, 44px); line-height: 1.1; letter-spacing: -.03em; font-weight: 600; }
 
 /* why me band: charcoal with the same pipeline-network texture as the green bands, subheadings in a green gradient */
-.why { position: relative; isolation: isolate; background: #111a17; padding: 84px 0 90px; }
+.why { position: relative; isolation: isolate; background: #0e1726; padding: 84px 0 90px; }
 .why::before { content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none; background: url("/images/pipeline-texture.svg") 0 0 / 360px 240px; -webkit-mask-image: linear-gradient(115deg, rgb(0 0 0 / .55), #000 70%); mask-image: linear-gradient(115deg, rgb(0 0 0 / .55), #000 70%); }
 .why .in { width: min(1200px, 100% - 48px); margin: 0 auto; display: grid; grid-template-columns: 420px 1fr; gap: 80px; align-items: start; }
 .why h2 { font-size: 36px; line-height: 1.2; letter-spacing: -.025em; font-weight: 700; color: #fff; }
 .why h3 { font-size: 24px; line-height: 1.3; letter-spacing: -.015em; font-weight: 700; color: #fff; }
-.why dt { width: fit-content; margin-top: 24px; font-size: 20px; line-height: 1.3; letter-spacing: -.015em; font-weight: 600; color: #38c97a; background: linear-gradient(90deg, #12b26c, #8be36f); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
-.why dd { margin: 6px 0 0; font-size: 16px; line-height: 1.55; color: #cdd6d2; max-width: 44em; }
+.why dt { width: fit-content; margin-top: 24px; font-size: 20px; line-height: 1.3; letter-spacing: -.015em; font-weight: 600; color: #d4b483; background: linear-gradient(90deg, #b8955e, #ecd9b4); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+.why dd { margin: 6px 0 0; font-size: 16px; line-height: 1.55; color: #c8cfdb; max-width: 44em; }
 .why-left { display: flex; flex-direction: column; gap: 34px; }
 .pboard { margin: 0; padding: 22px; border-radius: 20px; background: rgb(255 255 255 / .05); box-shadow: inset 0 0 0 1px rgb(255 255 255 / .1); }
 .pb-stage { position: relative; height: 250px; }
 .pb-cols { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; height: 100%; }
 .pb-cols > div { border-radius: 12px; background: rgb(255 255 255 / .04); padding: 10px; }
 .pb-cols span { display: block; height: 8px; width: 50%; border-radius: 4px; background: rgb(255 255 255 / .2); }
-.pb-cols .win { background: rgb(56 201 122 / .12); box-shadow: inset 0 0 0 1.5px rgb(56 201 122 / .5); }
-.pb-cols .win span { background: #4fd68c; }
+.pb-cols .win { background: rgb(212 180 131 / .12); box-shadow: inset 0 0 0 1.5px rgb(212 180 131 / .5); }
+.pb-cols .win span { background: #dcc196; }
 .pb-cards { position: absolute; inset: 0; }
-.pb-cards i { position: absolute; left: 0; top: calc(var(--r) * 50px); width: calc((100% - 20px) / 3 - 20px); height: 40px; margin: 34px 10px 0; border-radius: 9px; background: #eef3f1; animation: deal 6s cubic-bezier(.65, 0, .35, 1) infinite; animation-delay: calc(var(--d) * -1s); animation-play-state: paused; }
+.pb-cards i { position: absolute; left: 0; top: calc(var(--r) * 50px); width: calc((100% - 20px) / 3 - 20px); height: 40px; margin: 34px 10px 0; border-radius: 9px; background: #eef1f6; animation: deal 6s cubic-bezier(.65, 0, .35, 1) infinite; animation-delay: calc(var(--d) * -1s); animation-play-state: paused; }
 .pboard.run .pb-cards i { animation-play-state: running; }
-@keyframes deal { 0%, 18% { transform: translateX(0); background: #eef3f1; } 38%, 56% { transform: translateX(calc(100% + 30px)); background: #eef3f1; } 76%, 100% { transform: translateX(calc(200% + 60px)); background: #4fd68c; } }
+@keyframes deal { 0%, 18% { transform: translateX(0); background: #eef1f6; } 38%, 56% { transform: translateX(calc(100% + 30px)); background: #eef1f6; } 76%, 100% { transform: translateX(calc(200% + 60px)); background: #dcc196; } }
 @media (prefers-reduced-motion: reduce) { .pb-cards i { animation: none; } }
 .pb-ft { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 22px; padding-top: 20px; border-top: 1px solid rgb(255 255 255 / .1); }
-.pb-ft b { display: block; width: fit-content; font-size: 32px; line-height: 1; letter-spacing: -.04em; font-weight: 700; font-variant-numeric: tabular-nums; background: linear-gradient(90deg, #12b26c, #8be36f); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
-.pb-ft span { display: block; margin-top: 8px; font-size: 14px; color: #c9d6d0; }
+.pb-ft b { display: block; width: fit-content; font-size: 32px; line-height: 1; letter-spacing: -.04em; font-weight: 700; font-variant-numeric: tabular-nums; background: linear-gradient(90deg, #b8955e, #ecd9b4); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+.pb-ft span { display: block; margin-top: 8px; font-size: 14px; color: #c3cbd8; }
 @media (max-width: 1000px) { .why .in { grid-template-columns: 1fr; gap: 36px; } .why h2 { font-size: 32px; max-width: 16em; } }
 @media (max-width: 600px) { .why { padding: 72px 0 80px; } .why h2 { font-size: 28px; } .why h3 { font-size: 21px; } .why dt { font-size: 19px; margin-top: 26px; } .why dd { font-size: 16px; } }
 
 /* signal engine: the project video on the left, point of view on the right */
 .engine { padding: 100px 0 110px; }
 .engine .in { width: min(1120px, 100% - 48px); margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
-.engine .slot { position: relative; aspect-ratio: 1 / 1; border-radius: 14px; overflow: hidden; background: #f3f6f4; box-shadow: 0 0 0 1px var(--line), 0 24px 50px -30px rgb(17 26 23 / .35); }
+.engine .slot { position: relative; aspect-ratio: 1 / 1; border-radius: 14px; overflow: hidden; background: #f4f1eb; box-shadow: 0 0 0 1px var(--line), 0 24px 50px -30px rgb(14 23 38 / .35); }
 .engine video { display: block; width: 100%; height: 100%; object-fit: cover; }
 .engine h2 { font-size: 36px; line-height: 1.2; letter-spacing: -.025em; font-weight: 700; }
-.engine .dash { display: block; width: 84px; margin: 26px 0 24px; border-top: 2px dashed #38c97a; }
-.engine p { font-size: 18px; line-height: 1.65; color: #2b3631; }
+.engine h2 + p { margin-top: 22px; }
+.engine p { font-size: 18px; line-height: 1.65; color: #2a3343; }
 .engine p + p { margin-top: 16px; }
 .engine h3 { margin-top: 28px; font-size: 18px; font-weight: 600; letter-spacing: -.01em; }
 .engine ul { margin-top: 10px; padding: 0; list-style: none; }
-.engine li { position: relative; margin-top: 10px; padding-left: 22px; font-size: 17px; line-height: 1.5; color: #2b3631; }
-.engine li::before { content: ""; position: absolute; left: 0; top: .5em; width: 8px; height: 8px; background: #38c97a; }
+.engine li { position: relative; margin-top: 10px; padding-left: 22px; font-size: 17px; line-height: 1.5; color: #2a3343; }
+.engine li::before { content: ""; position: absolute; left: 0; top: .5em; width: 8px; height: 8px; background: #d4b483; }
 @media (max-width: 1000px) { .engine .in { grid-template-columns: 1fr; gap: 40px; } .engine .slot { width: min(100%, 560px); } }
 @media (max-width: 600px) { .engine { padding: 72px 0 80px; } .engine h2 { font-size: 28px; } .engine p { font-size: 17px; } }
 
@@ -206,14 +213,14 @@ nav.top { height: 80px; display: grid; grid-template-columns: 1fr auto 1fr; alig
 .close .flow, .why .flow { position: absolute; inset: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none; -webkit-mask-image: linear-gradient(115deg, rgb(0 0 0 / .45), #000 70%); mask-image: linear-gradient(115deg, rgb(0 0 0 / .45), #000 70%); }
 .close .wrap { display: grid; grid-template-columns: 1fr 520px; gap: 80px; align-items: center; }
 .close h2 { font-size: 48px; line-height: 1.08; letter-spacing: -.035em; font-weight: 700; }
-.close p { margin-top: 20px; font-size: 19px; color: #e4f6ec; max-width: 30em; }
+.close p { margin-top: 20px; font-size: 19px; color: #ece6da; max-width: 30em; }
 .close .ctas { margin-top: 32px; display: flex; flex-wrap: wrap; gap: 12px; }
 .close .btn i { background: #fff; color: var(--acc); }
 .close .btn--line { background: transparent; color: #fff; box-shadow: inset 0 0 0 1.5px rgb(255 255 255 / .85); }
 .close .btn--line i { background: transparent; color: #fff; box-shadow: inset 0 0 0 1.5px #fff; }
 .close .btn--line:hover i { transform: translateY(2px); }
 .close a:focus-visible, .close button:focus-visible { outline: 2px solid #fff; outline-offset: 3px; }
-.cal { background: #fff; color: var(--ink); border-radius: 18px; padding: 24px; box-shadow: 0 30px 60px -30px rgb(17 26 23 / .45); display: grid; grid-template-columns: 1fr 150px; gap: 22px; }
+.cal { background: #fff; color: var(--ink); border-radius: 18px; padding: 24px; box-shadow: 0 30px 60px -30px rgb(14 23 38 / .45); display: grid; grid-template-columns: 1fr 150px; gap: 22px; }
 .cal button { font: inherit; border: 0; background: none; color: inherit; cursor: pointer; }
 .cal .cal-head { grid-column: 1 / -1; display: flex; align-items: center; gap: 12px; }
 .cal .cal-head img { width: 40px; height: 40px; border-radius: 50%; object-fit: cover; object-position: 50% 18%; }
@@ -226,44 +233,44 @@ nav.top { height: 80px; display: grid; grid-template-columns: 1fr auto 1fr; alig
 .cal .cal-bar button:disabled { opacity: .3; cursor: default; }
 .cal .cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; text-align: center; font-size: 13.5px; }
 .cal .cal-grid span { font-size: 11.5px; font-weight: 500; color: var(--mute); padding-bottom: 4px; }
-.cal .cal-grid button, .cal .cal-grid i { aspect-ratio: 1; display: grid; place-items: center; border-radius: 10px; font-style: normal; color: #a3aea9; }
+.cal .cal-grid button, .cal .cal-grid i { aspect-ratio: 1; display: grid; place-items: center; border-radius: 10px; font-style: normal; color: #a2a9b6; }
 .cal .cal-grid button { color: var(--ink); background: var(--acc-soft); font-weight: 600; transition: background-color .15s ease, color .15s ease; }
-.cal .cal-grid button:hover { background: #cfe8da; }
+.cal .cal-grid button:hover { background: #e7dece; }
 .cal .cal-grid button[aria-pressed="true"] { background: var(--acc); color: #fff; }
 .cal .cal-slots { display: grid; gap: 8px; align-content: start; }
 .cal .cal-slots small { font-size: 13px; color: var(--mute); min-height: 20px; }
 .cal #cal-times { display: grid; gap: 8px; }
-.cal #cal-times button { height: 40px; border-radius: 10px; font-size: 14px; font-weight: 600; color: var(--acc); box-shadow: inset 0 0 0 1.5px rgb(14 122 85 / .35); transition: background-color .15s ease, color .15s ease; }
+.cal #cal-times button { height: 40px; border-radius: 10px; font-size: 14px; font-weight: 600; color: var(--acc); box-shadow: inset 0 0 0 1.5px rgb(30 58 95 / .35); transition: background-color .15s ease, color .15s ease; }
 .cal #cal-times button:hover { background: var(--acc-soft); }
 .cal #cal-times button[aria-pressed="true"] { background: var(--ink); color: #fff; box-shadow: none; }
 .cal .cal-go { margin-top: 4px; height: 42px; border-radius: 10px; display: grid; place-items: center; font-size: 14px; font-weight: 600; background: var(--acc); color: #fff; transition: opacity .15s ease; }
 .cal .cal-go[aria-disabled="true"] { opacity: .35; pointer-events: none; }
 .cal :focus-visible { outline: 2px solid var(--acc); outline-offset: 2px; }
-.end { position: relative; border-top: 0; background: #111a17; color: #eef3f1; padding: 72px 0 36px; }
+.end { position: relative; border-top: 0; background: #0e1726; color: #eef1f6; padding: 72px 0 36px; }
 .end .end-cols { display: grid; grid-template-columns: 380px 1fr .8fr; gap: 46px 60px; align-items: start; }
 .end .end-card { padding: 26px; border-radius: 20px; background: rgb(255 255 255 / .05); box-shadow: inset 0 0 0 1px rgb(255 255 255 / .1); }
 .end .end-card .who { display: flex; gap: 14px; align-items: center; }
 .end .end-card .who img { width: 56px; height: 56px; border-radius: 50%; object-fit: cover; object-position: 50% 18%; }
 .end .end-card .where { margin-top: 16px; }
-.end .end-card .btn { margin-top: 22px; height: 48px; background: #38c97a; color: #0b1d16; }
-.end .end-card .btn i { background: #0b1d16; color: #38c97a; }
+.end .end-card .btn { margin-top: 22px; height: 48px; background: #d4b483; color: #0e1726; }
+.end .end-card .btn i { background: #0e1726; color: #d4b483; }
 .end .end-card .mail { display: block; margin-top: 16px; font-size: 14.5px; overflow-wrap: anywhere; }
-.end .end-card .mail:hover { color: #8fd4b1; }
+.end .end-card .mail:hover { color: #c8b28b; }
 .end .end-card .social { margin-top: 20px; }
-.end .logo span { color: #9fb3aa; }
-.end .where { margin-top: 18px; color: #9fb3aa; font-size: 15px; max-width: 16em; }
-.end h3 { font-size: 17px; font-weight: 600; color: var(--ok, #38c97a); margin-bottom: 16px; }
+.end .logo span { color: #9aa5b8; }
+.end .where { margin-top: 18px; color: #9aa5b8; font-size: 15px; max-width: 16em; }
+.end h3 { font-size: 17px; font-weight: 600; color: var(--ok, #d4b483); margin-bottom: 16px; }
 .end ul { list-style: none; padding: 0; display: grid; gap: 11px; }
 .end li { margin: 0; font-size: 15.5px; font-weight: 500; }
 .end li a { transition: color .15s ease; overflow-wrap: anywhere; }
-.end li a:hover { color: #8fd4b1; }
-.end li a.all { color: #4fd68c; }
+.end li a:hover { color: #c8b28b; }
+.end li a.all { color: #dcc196; }
 .end .social { margin-top: 26px; display: flex; gap: 10px; }
 .end .social a { width: 38px; height: 38px; border-radius: 9px; display: grid; place-items: center; box-shadow: inset 0 0 0 1.5px rgb(255 255 255 / .55); transition: background-color .15s ease, color .15s ease; }
-.end .social a:hover { background: #fff; color: #111a17; }
+.end .social a:hover { background: #fff; color: #0e1726; }
 .end .social svg { width: 17px; height: 17px; }
-.end a:focus-visible { outline: 2px solid #8fd4b1; outline-offset: 3px; }
-.end .end-legal { margin-top: 56px; padding-top: 22px; border-top: 1px solid rgb(255 255 255 / .1); display: flex; justify-content: space-between; gap: 20px; font-size: 13.5px; color: #9fb3aa; }
+.end a:focus-visible { outline: 2px solid #c8b28b; outline-offset: 3px; }
+.end .end-legal { margin-top: 56px; padding-top: 22px; border-top: 1px solid rgb(255 255 255 / .1); display: flex; justify-content: space-between; gap: 20px; font-size: 13.5px; color: #9aa5b8; }
 @media (max-width: 1000px) { .close .wrap { grid-template-columns: 1fr; gap: 48px; } .close .cal { max-width: 560px; } .end .end-cols { grid-template-columns: 1fr 1fr; } .end .end-cols > div:first-child { grid-column: 1 / -1; } .end .end-card { max-width: 440px; } }
 @media (max-width: 600px) {
 	.close { padding: 72px 0; }
@@ -277,7 +284,7 @@ nav.top { height: 80px; display: grid; grid-template-columns: 1fr auto 1fr; alig
 
 /* what I build */
 .build { padding: 80px 0 120px; }
-.card { background: var(--surface); border-radius: 14px; padding: 34px; box-shadow: 0 1px 2px rgb(17 26 23 / .04), 0 18px 40px -24px rgb(17 26 23 / .18); }
+.card { background: var(--surface); border-radius: 14px; padding: 34px; box-shadow: 0 1px 2px rgb(14 23 38 / .04), 0 18px 40px -24px rgb(14 23 38 / .18); }
 .card .n { font: 600 13px "Geist Mono", monospace; color: var(--acc); }
 .card h3 { margin-top: 10px; font-size: 24px; letter-spacing: -.02em; font-weight: 600; line-height: 1.2; }
 .card p { margin-top: 10px; color: var(--mute); font-size: 16px; }
@@ -304,9 +311,9 @@ nav.top { height: 80px; display: grid; grid-template-columns: 1fr auto 1fr; alig
 .rv .card small { display: block; margin-top: 22px; font: 500 12px "Geist Mono", monospace; letter-spacing: .12em; text-transform: uppercase; color: var(--mute); }
 
 /* closing panel */
-.cta { margin: 0 auto 100px; width: min(1240px, 100% - 48px); background: var(--ink); border-radius: 24px; padding: clamp(40px, 6vw, 90px); display: grid; grid-template-columns: 1fr auto; gap: 40px; align-items: end; color: #eef3f1; }
+.cta { margin: 0 auto 100px; width: min(1240px, 100% - 48px); background: var(--ink); border-radius: 24px; padding: clamp(40px, 6vw, 90px); display: grid; grid-template-columns: 1fr auto; gap: 40px; align-items: end; color: #eef1f6; }
 .cta h2 { font-size: clamp(34px, 4.2vw, 56px); line-height: 1.05; letter-spacing: -.04em; font-weight: 600; max-width: 13em; }
-.cta p { margin-top: 18px; color: #a9b6b0; font-size: 18px; max-width: 34em; }
+.cta p { margin-top: 18px; color: #a5adbb; font-size: 18px; max-width: 34em; }
 .cta .btn { background: var(--acc); }
 .cta .btn i { background: #fff; color: var(--acc); }
 
@@ -346,19 +353,19 @@ footer .legal { margin-top: 50px; font-size: 13px; color: var(--mute); }
 
 /* What I build: six compact stage cards */
 .stages { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 40px; }
-.stage { display: flex; flex-direction: column; padding: 26px; border-radius: 14px; background: var(--surface); box-shadow: 0 1px 2px rgb(17 26 23 / .04), 0 18px 40px -26px rgb(17 26 23 / .18); }
+.stage { display: flex; flex-direction: column; padding: 26px; border-radius: 14px; background: var(--surface); box-shadow: 0 1px 2px rgb(14 23 38 / .04), 0 18px 40px -26px rgb(14 23 38 / .18); }
 .stage .n { font: 600 13px "Geist Mono", monospace; color: var(--acc); }
 .stage h3 { margin-top: 10px; font-size: 20px; line-height: 1.25; letter-spacing: -.02em; font-weight: 600; }
 .stage p { margin-top: 8px; color: var(--mute); font-size: 15px; }
 .stage b { margin-top: auto; padding-top: 18px; font-size: 13.5px; font-weight: 600; color: var(--acc); }
 .stage.tint { background: var(--acc-soft); box-shadow: none; }
-.stage.dark { background: var(--ink); color: #eef3f1; }
-.stage.dark .n, .stage.dark b { color: #8fd4b1; }
-.stage.dark p { color: #a9b6b0; }
+.stage.dark { background: var(--ink); color: #eef1f6; }
+.stage.dark .n, .stage.dark b { color: #c8b28b; }
+.stage.dark p { color: #a5adbb; }
 
 /* Selected work: six cards a page, with page numbers under them */
 .wgrid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 40px; }
-.wk { display: flex; flex-direction: column; padding: 28px; border-radius: 14px; background: var(--surface); box-shadow: 0 1px 2px rgb(17 26 23 / .04), 0 18px 40px -26px rgb(17 26 23 / .18); }
+.wk { display: flex; flex-direction: column; padding: 28px; border-radius: 14px; background: var(--surface); box-shadow: 0 1px 2px rgb(14 23 38 / .04), 0 18px 40px -26px rgb(14 23 38 / .18); }
 .wk .tag { align-self: flex-start; padding: 5px 10px; border-radius: 999px; background: var(--acc-soft); font: 500 11.5px "Geist Mono", monospace; letter-spacing: .04em; color: var(--acc); }
 .wk small { margin-top: 16px; font-size: 13px; color: var(--mute); }
 .wk h3 { margin-top: 6px; font-size: 21px; line-height: 1.25; letter-spacing: -.02em; font-weight: 600; }
@@ -383,18 +390,18 @@ footer .legal { margin-top: 50px; font-size: 13px; color: var(--mute); }
 .wk .view:hover i { transform: translateX(2px); }
 .wk .view:active { transform: scale(.97); }
 
-/* green bands (quote and How I work): the same green with a faint pipeline-network texture */
-.process { position: relative; isolation: isolate; background: var(--acc); }
+/* light bands (quote and How I work): cream with the pipeline lines drawn faintly, so they never sit dark against the dark booking band */
+.process { position: relative; isolation: isolate; background: var(--acc-soft); }
 /* review band: mint, with the same pipeline lines drawn in green */
 .quote { position: relative; isolation: isolate; }
 .quote::before { content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none; background: url("/images/pipeline-texture-green.svg") 0 0 / 360px 240px; -webkit-mask-image: linear-gradient(115deg, rgb(0 0 0 / .55), #000 70%); mask-image: linear-gradient(115deg, rgb(0 0 0 / .55), #000 70%); }
-.process::before { content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none; background: url("/images/pipeline-texture.svg") 0 0 / 360px 240px; -webkit-mask-image: linear-gradient(115deg, rgb(0 0 0 / .55), #000 70%); mask-image: linear-gradient(115deg, rgb(0 0 0 / .55), #000 70%); }
-.process { color: #f2fbf6; }
-.process .h2, .process .steps h3 { color: #fff; }
-.process .steps::before { background: rgb(255 255 255 / .25); }
-.process .steps i { background: var(--acc); box-shadow: inset 0 0 0 2px #fff; }
-.process .steps div:first-child i { background: #fff; }
-.process .steps p { color: #d5efe1; }
+.process::before { content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none; background: url("/images/pipeline-texture-green.svg") 0 0 / 360px 240px; -webkit-mask-image: linear-gradient(115deg, rgb(0 0 0 / .55), #000 70%); mask-image: linear-gradient(115deg, rgb(0 0 0 / .55), #000 70%); }
+.process { color: var(--ink); }
+.process .h2, .process .steps h3 { color: var(--ink); }
+.process .steps::before { background: rgb(14 23 38 / .14); }
+.process .steps i { background: var(--surface); box-shadow: inset 0 0 0 2px var(--acc); }
+.process .steps div:first-child i { background: var(--acc); }
+.process .steps p { color: var(--mute); }
 
 /* sections hidden while we rebuild the page step by step */
 .parked { display: none !important; }
@@ -420,19 +427,21 @@ footer .legal { margin-top: 50px; font-size: 13px; color: var(--mute); }
 			<li class="has-drop">
 				<button type="button" aria-expanded="false" aria-controls="drop-build">What I build <svg viewBox="0 0 10 6" aria-hidden="true"><path d="M0 0h10L5 6z" fill="currentColor"/></svg></button>
 				<div class="drop" id="drop-build">
-					<a href="#what-i-build">Signal intelligence</a>
-					<a href="#what-i-build">Research and enrichment agents</a>
-					<a href="#what-i-build">Signal-triggered outbound</a>
-					<a href="#what-i-build">Inbound conversion</a>
-					<a href="#what-i-build">Retention and expansion</a>
+					<a href="/projects/signal-intelligence.html">Signal intelligence</a>
+					<a href="/projects/research-and-enrichment-agents.html">Research and enrichment agents</a>
+					<a href="/projects/signal-triggered-outbound.html">Signal-triggered outbound</a>
+					<a href="/projects/inbound-conversion.html">Inbound conversion</a>
+					<a href="/projects/retention-and-expansion.html">Retention and expansion</a>
 				</div>
 			</li>
 			<li><a href="#how-i-work">How I work</a></li>
 			<li><a href="#who-i-am">Who I am</a></li>
+			<li><a href="/reviews.html">Client reviews</a></li>
 		</ul>
 		<div class="top-right">
+			<a class="icon-btn" href="/reviews.html" aria-label="Client reviews" title="Client reviews"><svg viewBox="0 0 24 24" width="19" height="19" aria-hidden="true"><path fill="currentColor" d="M12 3.2l2.6 5.3 5.8.8-4.2 4.1 1 5.8L12 16.5l-5.2 2.7 1-5.8-4.2-4.1 5.8-.8z"/></svg></a>
 			<a class="icon-btn" href="https://linkedin.com/in/muhammad-haris-wassan" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><svg viewBox="0 0 24 24" width="19" height="19" aria-hidden="true"><path fill="currentColor" d="M4.98 3.5a2.5 2.5 0 11-.02 5 2.5 2.5 0 01.02-5zM3 9.75h4v11H3v-11zm6.5 0h3.8v1.6h.06c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.77 2.6 4.77 6v5.45h-4v-4.83c0-1.15-.02-2.64-1.6-2.64-1.62 0-1.86 1.26-1.86 2.55v4.92h-4v-11z"/></svg></a>
-			<a class="book" href="#book">Book a call</a>
+			<a class="book" href="#book">Book a meeting</a>
 		</div>
 	</nav>
 </header>
@@ -445,10 +454,9 @@ footer .legal { margin-top: 50px; font-size: 13px; color: var(--mute); }
 				<h1 id="hero-title" class="rise" style="--i:1">Signals in. <em>Pipeline out.</em></h1>
 				<p class="lede rise" style="--i:2">I'm the engineer revenue leaders bring in when they want AI that produces pipeline, not a demo, built well enough to keep running after I've left.</p>
 				<div class="ctas rise" style="--i:3">
-					<a class="btn" href="mailto:hariswassan001@gmail.com?subject=Book%20a%20call">Book a call <i aria-hidden="true">&rarr;</i></a>
+					<a class="btn" href="mailto:hariswassan001@gmail.com?subject=Book%20a%20meeting">Book a meeting <i aria-hidden="true">&rarr;</i></a>
 					<a class="btn btn--ghost" href="/projects/all.html">Selected work <i aria-hidden="true">&rarr;</i></a>
 				</div>
-				<p class="where rise" style="--i:4">I work with companies in the US, UK and Middle East.</p>
 			</div>
 			<!-- old hero photo: the photo now lives only in Who I am; kept hidden, not deleted -->
 			<div class="figure parked">
@@ -461,7 +469,7 @@ footer .legal { margin-top: 50px; font-size: 13px; color: var(--mute); }
 
 <section class="logos" aria-label="Toolkit">
 	<!-- logos -->
-	<div class="track"><ul><li><img src="/logos/si/n8n.svg" alt="" width="26" height="26" /><span>n8n</span></li><li><img src="/logos/si/claude.svg" alt="" width="26" height="26" /><span>Claude</span></li><li><img src="/logos/si/openai.svg" alt="" width="26" height="26" /><span>OpenAI</span></li><li><img src="/logos/si/gemini.svg" alt="" width="26" height="26" /><span>Gemini</span></li><li><img src="/logos/si/perplexity.svg" alt="" width="26" height="26" /><span>Perplexity</span></li><li><img src="/logos/si/deepseek.svg" alt="" width="26" height="26" /><span>DeepSeek</span></li><li><img src="/logos/si/zapier.svg" alt="" width="26" height="26" /><span>Zapier</span></li><li><img src="/logos/si/make.svg" alt="" width="26" height="26" /><span>Make</span></li><li><img src="/logos/si/retell.webp" alt="" width="26" height="26" /><span>Retell</span></li><li><img src="/logos/si/elevenlabs.svg" alt="" width="26" height="26" /><span>ElevenLabs</span></li><li><img src="/logos/si/twilio.svg" alt="" width="26" height="26" /><span>Twilio</span></li><li><img src="/logos/si/whatsapp.svg" alt="" width="26" height="26" /><span>WhatsApp</span></li><li><img src="/logos/si/hubspot.svg" alt="" width="26" height="26" /><span>HubSpot</span></li><li><img src="/logos/si/airtable.svg" alt="" width="26" height="26" /><span>Airtable</span></li><li><img src="/logos/si/clickup.svg" alt="" width="26" height="26" /><span>ClickUp</span></li><li><img src="/logos/si/webflow.svg" alt="" width="26" height="26" /><span>Webflow</span></li><li><img src="/logos/si/googlesheets.svg" alt="" width="26" height="26" /><span>Google Sheets</span></li><li><img src="/logos/si/appsscript.svg" alt="" width="26" height="26" /><span>Apps Script</span></li><li><img src="/logos/si/supabase.svg" alt="" width="26" height="26" /><span>Supabase</span></li><li><img src="/logos/si/postgres.svg" alt="" width="26" height="26" /><span>Postgres</span></li><li><img src="/logos/si/python.svg" alt="" width="26" height="26" /><span>Python</span></li><li><img src="/logos/si/fastapi.svg" alt="" width="26" height="26" /><span>FastAPI</span></li><li><img src="/logos/si/typescript.svg" alt="" width="26" height="26" /><span>TypeScript</span></li><li><img src="/logos/si/nextjs.svg" alt="" width="26" height="26" /><span>Next.js</span></li><li><img src="/logos/si/react.svg" alt="" width="26" height="26" /><span>React</span></li><li><img src="/logos/si/dotnet.svg" alt="" width="26" height="26" /><span>.NET</span></li><li><img src="/logos/si/vercel.svg" alt="" width="26" height="26" /><span>Vercel</span></li><li><img src="/logos/si/docker.svg" alt="" width="26" height="26" /><span>Docker</span></li><li><img src="/logos/si/githubactions.svg" alt="" width="26" height="26" /><span>GitHub Actions</span></li><li><img src="/logos/si/sentry.svg" alt="" width="26" height="26" /><span>Sentry</span></li></ul><ul aria-hidden="true"><li><img src="/logos/si/n8n.svg" alt="" width="26" height="26" /><span>n8n</span></li><li><img src="/logos/si/claude.svg" alt="" width="26" height="26" /><span>Claude</span></li><li><img src="/logos/si/openai.svg" alt="" width="26" height="26" /><span>OpenAI</span></li><li><img src="/logos/si/gemini.svg" alt="" width="26" height="26" /><span>Gemini</span></li><li><img src="/logos/si/perplexity.svg" alt="" width="26" height="26" /><span>Perplexity</span></li><li><img src="/logos/si/deepseek.svg" alt="" width="26" height="26" /><span>DeepSeek</span></li><li><img src="/logos/si/zapier.svg" alt="" width="26" height="26" /><span>Zapier</span></li><li><img src="/logos/si/make.svg" alt="" width="26" height="26" /><span>Make</span></li><li><img src="/logos/si/retell.webp" alt="" width="26" height="26" /><span>Retell</span></li><li><img src="/logos/si/elevenlabs.svg" alt="" width="26" height="26" /><span>ElevenLabs</span></li><li><img src="/logos/si/twilio.svg" alt="" width="26" height="26" /><span>Twilio</span></li><li><img src="/logos/si/whatsapp.svg" alt="" width="26" height="26" /><span>WhatsApp</span></li><li><img src="/logos/si/hubspot.svg" alt="" width="26" height="26" /><span>HubSpot</span></li><li><img src="/logos/si/airtable.svg" alt="" width="26" height="26" /><span>Airtable</span></li><li><img src="/logos/si/clickup.svg" alt="" width="26" height="26" /><span>ClickUp</span></li><li><img src="/logos/si/webflow.svg" alt="" width="26" height="26" /><span>Webflow</span></li><li><img src="/logos/si/googlesheets.svg" alt="" width="26" height="26" /><span>Google Sheets</span></li><li><img src="/logos/si/appsscript.svg" alt="" width="26" height="26" /><span>Apps Script</span></li><li><img src="/logos/si/supabase.svg" alt="" width="26" height="26" /><span>Supabase</span></li><li><img src="/logos/si/postgres.svg" alt="" width="26" height="26" /><span>Postgres</span></li><li><img src="/logos/si/python.svg" alt="" width="26" height="26" /><span>Python</span></li><li><img src="/logos/si/fastapi.svg" alt="" width="26" height="26" /><span>FastAPI</span></li><li><img src="/logos/si/typescript.svg" alt="" width="26" height="26" /><span>TypeScript</span></li><li><img src="/logos/si/nextjs.svg" alt="" width="26" height="26" /><span>Next.js</span></li><li><img src="/logos/si/react.svg" alt="" width="26" height="26" /><span>React</span></li><li><img src="/logos/si/dotnet.svg" alt="" width="26" height="26" /><span>.NET</span></li><li><img src="/logos/si/vercel.svg" alt="" width="26" height="26" /><span>Vercel</span></li><li><img src="/logos/si/docker.svg" alt="" width="26" height="26" /><span>Docker</span></li><li><img src="/logos/si/githubactions.svg" alt="" width="26" height="26" /><span>GitHub Actions</span></li><li><img src="/logos/si/sentry.svg" alt="" width="26" height="26" /><span>Sentry</span></li></ul></div>
+	<div class="track"><ul><li><img src="/logos/si/n8n.svg" alt="" width="26" height="26" /><span>n8n</span></li><li><img src="/logos/si/claude.svg" alt="" width="26" height="26" /><span>Claude</span></li><li><img src="/logos/si/openai.svg" alt="" width="26" height="26" /><span>OpenAI</span></li><li><img src="/logos/si/perplexity.svg" alt="" width="26" height="26" /><span>Perplexity</span></li><li><img src="/logos/si/cursor.svg" alt="" width="26" height="26" /><span>Cursor</span></li><li><img src="/logos/si/antigravity.svg" alt="" width="26" height="26" /><span>Antigravity</span></li><li><img src="/logos/si/clay.png" alt="" width="26" height="26" /><span>Clay</span></li><li><img src="/logos/si/apollo.svg" alt="" width="26" height="26" /><span>Apollo</span></li><li><img src="/logos/si/heyreach.jpg" alt="" width="26" height="26" /><span>HeyReach</span></li><li><img src="/logos/si/salesnavigator.svg" alt="" width="26" height="26" /><span>Sales Navigator</span></li><li><img src="/logos/si/lagrowthmachine.png" alt="" width="26" height="26" /><span>La Growth Machine</span></li><li><img src="/logos/si/gohighlevel.png" alt="" width="26" height="26" /><span>GoHighLevel</span></li><li><img src="/logos/si/zapier.svg" alt="" width="26" height="26" /><span>Zapier</span></li><li><img src="/logos/si/make.svg" alt="" width="26" height="26" /><span>Make</span></li><li><img src="/logos/si/elevenlabs.svg" alt="" width="26" height="26" /><span>ElevenLabs</span></li><li><img src="/logos/si/hubspot.svg" alt="" width="26" height="26" /><span>HubSpot</span></li><li><img src="/logos/si/webflow.svg" alt="" width="26" height="26" /><span>Webflow</span></li><li><img src="/logos/si/supabase.svg" alt="" width="26" height="26" /><span>Supabase</span></li><li><img src="/logos/si/postgres.svg" alt="" width="26" height="26" /><span>Postgres</span></li><li><img src="/logos/si/python.svg" alt="" width="26" height="26" /><span>Python</span></li><li><img src="/logos/si/fastapi.svg" alt="" width="26" height="26" /><span>FastAPI</span></li><li><img src="/logos/si/typescript.svg" alt="" width="26" height="26" /><span>TypeScript</span></li><li><img src="/logos/si/nextjs.svg" alt="" width="26" height="26" /><span>Next.js</span></li><li><img src="/logos/si/react.svg" alt="" width="26" height="26" /><span>React</span></li><li><img src="/logos/si/dotnet.svg" alt="" width="26" height="26" /><span>.NET</span></li><li><img src="/logos/si/docker.svg" alt="" width="26" height="26" /><span>Docker</span></li><li><img src="/logos/si/sentry.svg" alt="" width="26" height="26" /><span>Sentry</span></li></ul><ul aria-hidden="true"><li><img src="/logos/si/n8n.svg" alt="" width="26" height="26" /><span>n8n</span></li><li><img src="/logos/si/claude.svg" alt="" width="26" height="26" /><span>Claude</span></li><li><img src="/logos/si/openai.svg" alt="" width="26" height="26" /><span>OpenAI</span></li><li><img src="/logos/si/perplexity.svg" alt="" width="26" height="26" /><span>Perplexity</span></li><li><img src="/logos/si/cursor.svg" alt="" width="26" height="26" /><span>Cursor</span></li><li><img src="/logos/si/antigravity.svg" alt="" width="26" height="26" /><span>Antigravity</span></li><li><img src="/logos/si/clay.png" alt="" width="26" height="26" /><span>Clay</span></li><li><img src="/logos/si/apollo.svg" alt="" width="26" height="26" /><span>Apollo</span></li><li><img src="/logos/si/heyreach.jpg" alt="" width="26" height="26" /><span>HeyReach</span></li><li><img src="/logos/si/salesnavigator.svg" alt="" width="26" height="26" /><span>Sales Navigator</span></li><li><img src="/logos/si/lagrowthmachine.png" alt="" width="26" height="26" /><span>La Growth Machine</span></li><li><img src="/logos/si/gohighlevel.png" alt="" width="26" height="26" /><span>GoHighLevel</span></li><li><img src="/logos/si/zapier.svg" alt="" width="26" height="26" /><span>Zapier</span></li><li><img src="/logos/si/make.svg" alt="" width="26" height="26" /><span>Make</span></li><li><img src="/logos/si/elevenlabs.svg" alt="" width="26" height="26" /><span>ElevenLabs</span></li><li><img src="/logos/si/hubspot.svg" alt="" width="26" height="26" /><span>HubSpot</span></li><li><img src="/logos/si/webflow.svg" alt="" width="26" height="26" /><span>Webflow</span></li><li><img src="/logos/si/supabase.svg" alt="" width="26" height="26" /><span>Supabase</span></li><li><img src="/logos/si/postgres.svg" alt="" width="26" height="26" /><span>Postgres</span></li><li><img src="/logos/si/python.svg" alt="" width="26" height="26" /><span>Python</span></li><li><img src="/logos/si/fastapi.svg" alt="" width="26" height="26" /><span>FastAPI</span></li><li><img src="/logos/si/typescript.svg" alt="" width="26" height="26" /><span>TypeScript</span></li><li><img src="/logos/si/nextjs.svg" alt="" width="26" height="26" /><span>Next.js</span></li><li><img src="/logos/si/react.svg" alt="" width="26" height="26" /><span>React</span></li><li><img src="/logos/si/dotnet.svg" alt="" width="26" height="26" /><span>.NET</span></li><li><img src="/logos/si/docker.svg" alt="" width="26" height="26" /><span>Docker</span></li><li><img src="/logos/si/sentry.svg" alt="" width="26" height="26" /><span>Sentry</span></li></ul></div>
 	<!-- /logos -->
 </section>
 
@@ -471,7 +479,6 @@ footer .legal { margin-top: 50px; font-size: 13px; color: var(--mute); }
 		<div>
 			<span class="eyebrow">Who I am</span>
 			<h2>I build revenue systems that run without me.</h2>
-			<i class="dash" aria-hidden="true"></i>
 			<p class="one">I'm Muhammad Haris, an AI GTM engineer. I build the AI systems that find your buyers, research them, reach them at the right moment and keep them.</p>
 			<p>What makes me useful to a revenue leader isn't a tool list. It's that I understand what the number has to do, and I can build the machine that does it, to a standard where you can let it run.</p>
 			<h3 class="bring-h">What I bring to every engagement</h3>
@@ -515,14 +522,13 @@ footer .legal { margin-top: 50px; font-size: 13px; color: var(--mute); }
 <section class="engine" aria-labelledby="engine-title">
 	<div class="in">
 		<div class="slot">
-			<video id="engine-video" muted loop playsinline preload="metadata" poster="/media/signal-engine/poster.webp" width="1080" height="1080" aria-label="Finding buyers at the exact moment they need help">
+			<video id="engine-video" muted loop playsinline preload="metadata" poster="/media/signal-engine/poster.webp" width="1080" height="1080" aria-label="Finding buyers at the exact moment they need help: the engine produced a 51-lead pipeline in its first four days">
 				<source src="/media/signal-engine/clip.webm" type="video/webm" />
 				<source src="/media/signal-engine/clip.mp4" type="video/mp4" />
 			</video>
 		</div>
 		<div>
 			<h2 id="engine-title">If it can't run unattended, it isn't finished.</h2>
-			<i class="dash" aria-hidden="true"></i>
 			<p>I'm not an automation person who picked up some AI, and I'm not an AI researcher who has never sat in a pipeline review. I'm not an agency, and I don't hand work to juniors.</p>
 			<p>The person you talk to is the person who builds it, and the person who answers when it needs attention.</p>
 			<h3>Point of view, in my own words</h3>
@@ -581,7 +587,7 @@ footer .legal { margin-top: 50px; font-size: 13px; color: var(--mute); }
 	</section>
 </div>
 
-<section class="process parked" id="how-i-work"><div class="wrap">
+<section class="process" id="how-i-work"><div class="wrap">
 	<h2 class="h2">I get inside the revenue team, then I build.</h2>
 	<div class="steps">
 		<div><i aria-hidden="true"></i><h3>I sit with the people doing the work.</h3><p>Sales, marketing, support, ops. I watch how a lead really moves through the company, not how the playbook says it does, and I learn the manual steps nobody has written down.</p></div>
@@ -605,7 +611,7 @@ footer .legal { margin-top: 50px; font-size: 13px; color: var(--mute); }
 <!-- Replaced by the last page below (.close + .end); kept hidden, not deleted -->
 <section class="cta parked">
 	<div><h2>If you're serious about building a revenue engine, let's talk.</h2><p>Muhammad Haris is the engineer you bring in when you want AI in your revenue engine to produce pipeline, not a demo.</p></div>
-	<a class="btn" href="mailto:hariswassan001@gmail.com?subject=Book%20a%20call">Book a call <i aria-hidden="true">&rarr;</i></a>
+	<a class="btn" href="mailto:hariswassan001@gmail.com?subject=Book%20a%20meeting">Book a meeting <i aria-hidden="true">&rarr;</i></a>
 </section>
 
 <footer class="parked"><div class="wrap">
@@ -617,25 +623,25 @@ footer .legal { margin-top: 50px; font-size: 13px; color: var(--mute); }
 	<p class="legal">&copy; Muhammad Haris</p>
 </div></footer>
 
-<!-- Last page: book a call, resume, the six projects, contact -->
+<!-- Last page: book a meeting, resume, the six projects, contact -->
 <section class="close" id="book" aria-labelledby="close-title">
 	<div class="wrap">
 		<div>
 			<h2 id="close-title">If you're serious about building a revenue engine, let's talk.</h2>
 			<p>Muhammad Haris is the engineer you bring in when you want AI in your revenue engine to produce pipeline, not a demo.</p>
 			<div class="ctas">
-				<a class="btn" id="close-book" href="mailto:hariswassan001@gmail.com?subject=Book%20a%20call">Book a call <i aria-hidden="true">&rarr;</i></a>
+				<a class="btn" id="close-book" href="mailto:hariswassan001@gmail.com?subject=Book%20a%20meeting">Book a meeting <i aria-hidden="true">&rarr;</i></a>
 				<a class="btn btn--line" href="/resume.html">Resume <i aria-hidden="true">&rarr;</i></a>
 			</div>
 		</div>
 		<!-- Booking calendar: works through email until a Cal.com / Calendly link replaces it -->
-		<div class="cal" role="group" aria-label="Book a call">
-			<div class="cal-head"><img src="/images/haris.webp" alt="" width="40" height="40" loading="lazy" /><b>Book a call</b><small>Muhammad Haris</small></div>
+		<div class="cal" role="group" aria-label="Book a meeting">
+			<div class="cal-head"><img src="/images/haris.webp" alt="" width="40" height="40" loading="lazy" /><b>Book a meeting</b><small>Muhammad Haris</small></div>
 			<div>
 				<div class="cal-bar"><b id="cal-title" aria-live="polite"></b><span><button type="button" id="cal-prev" aria-label="Previous month">&lsaquo;</button><button type="button" id="cal-next" aria-label="Next month">&rsaquo;</button></span></div>
 				<div class="cal-grid" id="cal-grid"></div>
 			</div>
-			<div class="cal-slots"><small id="cal-day"></small><div id="cal-times"></div><a class="cal-go" id="cal-go" href="mailto:hariswassan001@gmail.com?subject=Book%20a%20call" aria-disabled="true">Book a call</a></div>
+			<div class="cal-slots"><small id="cal-day"></small><div id="cal-times"></div><a class="cal-go" id="cal-go" href="mailto:hariswassan001@gmail.com?subject=Book%20a%20meeting" aria-disabled="true">Book a meeting</a></div>
 		</div>
 	</div>
 </section>
@@ -644,8 +650,7 @@ footer .legal { margin-top: 50px; font-size: 13px; color: var(--mute); }
 		<div class="end-cols">
 			<div class="end-card">
 				<div class="who"><img src="/images/haris.webp" alt="" width="56" height="56" loading="lazy" /><a class="logo" href="/"><b>Muhammad Haris</b><span>AI GTM Engineer</span></a></div>
-				<p class="where">I work with companies in the US, UK and Middle East.</p>
-				<a class="btn" href="#book">Book a call <i aria-hidden="true">&rarr;</i></a>
+				<a class="btn" href="#book">Book a meeting <i aria-hidden="true">&rarr;</i></a>
 				<a class="mail" href="mailto:hariswassan001@gmail.com">hariswassan001@gmail.com</a>
 				<div class="social">
 					<a href="https://linkedin.com/in/muhammad-haris-wassan" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M4.98 3.5a2.5 2.5 0 11-.02 5 2.5 2.5 0 01.02-5zM3 9.75h4v11H3v-11zm6.5 0h3.8v1.6h.06c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.77 2.6 4.77 6v5.45h-4v-4.83c0-1.15-.02-2.64-1.6-2.64-1.62 0-1.86 1.26-1.86 2.55v4.92h-4v-11z"/></svg></a>
@@ -670,13 +675,15 @@ footer .legal { margin-top: 50px; font-size: 13px; color: var(--mute); }
 				<ul>
 					<li><a href="#who-i-am">Who I am</a></li>
 					<li><a href="#how-i-work">How I work</a></li>
-					<li><a href="#book">Book a call</a></li>
+					<li><a href="#book">Book a meeting</a></li>
+					<li><a href="/faq.html">FAQ</a></li>
+					<li><a href="/reviews.html">Client reviews</a></li>
 					<li><a href="/resume.html">Resume</a></li>
 				</ul>
 				
 			</div>
 		</div>
-		<div class="end-legal"><span>&copy; Muhammad Haris</span><span>AI GTM Engineer</span></div>
+		<div class="end-legal"><span>&copy; Muhammad Haris · <a href="/privacy.html">Privacy</a></span><span>AI GTM Engineer</span></div>
 	</div>
 </footer>
 
@@ -734,7 +741,7 @@ footer .legal { margin-top: 50px; font-size: 13px; color: var(--mute); }
 	new IntersectionObserver(([e]) => (e.isIntersecting ? v.play().catch(() => {}) : v.pause()), { threshold: 0.35 }).observe(v)
 })()
 
-// Booking calendar: weekdays from tomorrow, a few times a day; the pick goes into the "Book a call" email.
+// Booking calendar: weekdays from tomorrow, a few times a day; the pick goes into the "Book a meeting" email.
 // Swap this for the Cal.com / Calendly embed once the booking link is in.
 ;(function () {
 	const grid = document.getElementById('cal-grid')
@@ -760,7 +767,7 @@ footer .legal { margin-top: 50px; font-size: 13px; color: var(--mute); }
 	if (left < 5) view = new Date(today.getFullYear(), today.getMonth() + 1, 1)
 	for (let d = new Date(Math.max(today, view)); !day; d.setDate(d.getDate() + 1)) if (open(d)) day = new Date(d)
 
-	const mail = (body) => 'mailto:hariswassan001@gmail.com?subject=Book%20a%20call' + (body ? '&body=' + encodeURIComponent(body) : '')
+	const mail = (body) => 'mailto:hariswassan001@gmail.com?subject=Book%20a%20meeting' + (body ? '&body=' + encodeURIComponent(body) : '')
 	function pickTime() {
 		const on = !!time
 		go.setAttribute('aria-disabled', String(!on))
@@ -924,8 +931,8 @@ document.querySelectorAll('.hero, .why, .close').forEach(function (band) {
 			if (tail >= L) { p.dead = true; continue }
 			const h = at(p.chain, head), t = at(p.chain, tail)
 			const g = ctx.createLinearGradient(t[0], t[1], h[0], h[1])
-			g.addColorStop(0, 'rgba(159, 240, 196, 0)')
-			g.addColorStop(1, 'rgba(190, 255, 220, .9)')
+			g.addColorStop(0, 'rgba(226, 204, 165, 0)')
+			g.addColorStop(1, 'rgba(236, 218, 186, .9)')
 			ctx.strokeStyle = g
 			ctx.lineWidth = 1.8
 			ctx.lineCap = 'round'
@@ -935,7 +942,7 @@ document.querySelectorAll('.hero, .why, .close').forEach(function (band) {
 			ctx.lineTo(h[0], h[1])
 			ctx.stroke()
 			if (!p.done) {
-				ctx.fillStyle = '#d9ffea'
+				ctx.fillStyle = '#f3e9d6'
 				ctx.beginPath()
 				ctx.arc(h[0], h[1], 2.4, 0, Math.PI * 2)
 				ctx.fill()
@@ -945,12 +952,12 @@ document.querySelectorAll('.hero, .why, .close').forEach(function (band) {
 		for (const r of rings) {
 			r.t += dt
 			const k = r.t / 0.9
-			ctx.strokeStyle = `rgba(159, 240, 196, ${0.7 * (1 - k)})`
+			ctx.strokeStyle = `rgba(226, 204, 165, ${0.7 * (1 - k)})`
 			ctx.lineWidth = 1.4
 			ctx.beginPath()
 			ctx.arc(r.x, r.y, 3 + 13 * k, 0, Math.PI * 2)
 			ctx.stroke()
-			ctx.fillStyle = `rgba(217, 255, 234, ${1 - k})`
+			ctx.fillStyle = `rgba(245, 235, 214, ${1 - k})`
 			ctx.beginPath()
 			ctx.arc(r.x, r.y, 3, 0, Math.PI * 2)
 			ctx.fill()
@@ -971,5 +978,6 @@ document.querySelectorAll('.hero, .why, .close').forEach(function (band) {
 	document.addEventListener('visibilitychange', toggle)
 })
 </script>
+<script type="module" src="/src/assistant.js"></script>
 </body>
 </html>

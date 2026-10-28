@@ -1,5 +1,5 @@
 """Writes one HyperFrames project per portfolio project into media-src/project-videos/<slug>/ (1920x1080, 12 s, silent loop).
-Same family as the site (Geist, ink #111a17, greens #0e7a55 / #38c97a, the pipeline texture), but each project has its own
+Same family as the site (Geist, ink #0e1726, greens #1e3a5f / #d4b483, the pipeline texture), but each project has its own
 ground and its own picture of what it does. Every caption and label is word for word from the AI GTM Engineer brief or,
 for older projects, the AI Automation Portfolio PDF.  Usage: python build.py   (then render.sh)"""
 import json, os, random, re, shutil
@@ -10,9 +10,9 @@ J = json.dumps
 
 THEMES = {
 	# ground, ink, muted ink, node bg, node line, lit bg, lit line, accent number, badge bg, badge ink, edge, edge lit, texture
-	'L': dict(bg='#f3f6f4', ink='#111a17', mute='#56625d', nbg='#ffffff', nline='#d3ddd8', lbg='#e3f1ea', lline='#0e7a55', num='#0e7a55', bbg='#38c97a', bink='#0b1d16', edge='#c9d3ce', elit='#0e7a55', tex='pipeline-green.svg', soft='#e3f1ea', card='#ffffff'),
-	'D': dict(bg='#111a17', ink='#ffffff', mute='#9fb3aa', nbg='rgba(255,255,255,0.05)', nline='rgba(255,255,255,0.16)', lbg='rgba(56,201,122,0.18)', lline='#38c97a', num='#4fd68c', bbg='#38c97a', bink='#0b1d16', edge='rgba(255,255,255,0.18)', elit='#38c97a', tex='pipeline.svg', soft='rgba(255,255,255,0.08)', card='#1a2420'),
-	'G': dict(bg='#0e7a55', ink='#ffffff', mute='#eaf7f0', nbg='rgba(255,255,255,0.08)', nline='rgba(255,255,255,0.28)', lbg='rgba(255,255,255,0.22)', lline='#ffffff', num='#ffffff', bbg='#ffffff', bink='#0e7a55', edge='rgba(255,255,255,0.3)', elit='#ffffff', tex='pipeline.svg', soft='rgba(255,255,255,0.12)', card='rgba(255,255,255,0.1)'),
+	'L': dict(bg='#f4f1eb', ink='#0e1726', mute='#5b6475', nbg='#ffffff', nline='#d8dce4', lbg='#f2ede3', lline='#1e3a5f', num='#1e3a5f', bbg='#d4b483', bink='#0e1726', edge='#cdd2db', elit='#1e3a5f', tex='pipeline-green.svg', soft='#f2ede3', card='#ffffff'),
+	'D': dict(bg='#0e1726', ink='#ffffff', mute='#9aa5b8', nbg='rgba(255,255,255,0.05)', nline='rgba(255,255,255,0.16)', lbg='rgba(212,180,131,0.18)', lline='#d4b483', num='#dcc196', bbg='#d4b483', bink='#0e1726', edge='rgba(255,255,255,0.18)', elit='#d4b483', tex='pipeline.svg', soft='rgba(255,255,255,0.08)', card='#1a2433'),
+	'G': dict(bg='#1e3a5f', ink='#ffffff', mute='#e8edf4', nbg='rgba(255,255,255,0.08)', nline='rgba(255,255,255,0.28)', lbg='rgba(255,255,255,0.22)', lline='#ffffff', num='#ffffff', bbg='#ffffff', bink='#1e3a5f', edge='rgba(255,255,255,0.3)', elit='#ffffff', tex='pipeline.svg', soft='rgba(255,255,255,0.12)', card='rgba(255,255,255,0.1)'),
 }
 ALERT = '#d4542f'
 
@@ -191,7 +191,7 @@ def v_listening():
 			items += f'<div class="bub{" hot" if hot else ""}"><i style="width:{w}%"></i><i style="width:{w - 30}%"></i></div>'
 		cols += f'<div class="col" id="col{c}" style="left:{96 + c * 215}px">{items}{items}</div>'
 		v.js.append(f'tl.fromTo("#col{c}", {{y:0}}, {{y:{-1120 if c % 2 else -980}, duration:8, ease:"none"}}, 0.2);')
-	v.js.append('tl.fromTo(".bub.hot", {backgroundColor:"rgba(255,255,255,0.06)", borderColor:"rgba(255,255,255,0.1)"}, {backgroundColor:"rgba(56,201,122,0.22)", borderColor:"#38c97a", duration:0.6, ease:"power2.out", stagger:0.02}, 4.3);')
+	v.js.append('tl.fromTo(".bub.hot", {backgroundColor:"rgba(255,255,255,0.06)", borderColor:"rgba(255,255,255,0.1)"}, {backgroundColor:"rgba(212,180,131,0.22)", borderColor:"#d4b483", duration:0.6, ease:"power2.out", stagger:0.02}, 4.3);')
 	side = ('<div class="panel" style="left:1440px;top:230px;width:384px;height:520px">'
 		f'<b class="big" id="ds" style="font-size:96px">0</b><span class="pl">{v.label("demand signals extracted")}</span></div>')
 	v.js.append(count_js('ds', '27,651', 4.4, 2.8))
@@ -223,11 +223,11 @@ def v_research():
 	for i in range(4):
 		at = 0.7 + i * 1.75
 		v.js.append(f'tl.fromTo("#tr{i}", {{opacity:0.35, borderColor:"var(--nline)"}}, {{opacity:1, borderColor:"var(--lline)", duration:0.25, ease:"power2.out"}}, {at});')
-		v.js.append(f'tl.fromTo(".slot.t{i}", {{backgroundColor:"rgba(0,0,0,0)", borderColor:"#c9d3ce"}}, {{backgroundColor:"#38c97a", borderColor:"#38c97a", duration:0.2, stagger:0.04, ease:"power2.out"}}, {at + 0.3});')
+		v.js.append(f'tl.fromTo(".slot.t{i}", {{backgroundColor:"rgba(0,0,0,0)", borderColor:"#cdd2db"}}, {{backgroundColor:"#d4b483", borderColor:"#d4b483", duration:0.2, stagger:0.04, ease:"power2.out"}}, {at + 0.3});')
 		if i < 3:
 			v.js.append(f'tl.to("#tr{i}", {{opacity:0.55, duration:0.3}}, {at + 1.5});')
 		v.js.append(f'tl.set("#rc", {{textContent:"{counts[i]} / 29"}}, {at + 0.9});')
-	v.js.append('tl.fromTo(".slot.t4", {borderColor:"#c9d3ce"}, {borderColor:"#d4542f", duration:0.3}, 7.6);')
+	v.js.append('tl.fromTo(".slot.t4", {borderColor:"#cdd2db"}, {borderColor:"#d4542f", duration:0.3}, 7.6);')
 	blank = f'<span class="blank" id="bl" style="left:136px;top:722px">{v.label("leave a field blank")}</span>'
 	v.js.append('tl.fromTo("#bl", {opacity:0, x:-10}, {opacity:1, x:0, duration:0.3, ease:"expo.out"}, 7.6);')
 	v.scene(0.2, 9.0, card + f'<div style="position:absolute;left:820px;top:0;width:1000px;height:1080px">{rows}</div>' + blank,
@@ -273,7 +273,7 @@ def v_sellside():
 	v.js.append('tl.fromTo(".uni", {"--k":1}, {"--k":0, duration:1.6, ease:"power3.inOut"}, 4.4);')
 	v.js.append('tl.fromTo(".uni .cl span", {opacity:0}, {opacity:1, duration:0.3, stagger:0.04}, 5.6);')
 	for w in (1, 2, 3):
-		v.js.append(f'tl.fromTo(".uni .w{w} i", {{backgroundColor:"rgba(255,255,255,0.35)"}}, {{backgroundColor:"{["#4fd68c", "#38c97a", "#8fd4b1"][w - 1]}", duration:0.4, ease:"power2.out"}}, {8.4 + (w - 1) * 0.8});')
+		v.js.append(f'tl.fromTo(".uni .w{w} i", {{backgroundColor:"rgba(255,255,255,0.35)"}}, {{backgroundColor:"{["#dcc196", "#d4b483", "#c8b28b"][w - 1]}", duration:0.4, ease:"power2.out"}}, {8.4 + (w - 1) * 0.8});')
 	stat = lambda i, val, lab, at: (f'<div class="stat" id="st{i}" data-layout-allow-overlap style="top:56px;left:1180px"><b>{val}</b><span>{v.label(lab)}</span></div>',
 		f'tl.fromTo("#st{i}", {{opacity:0, y:14}}, {{opacity:1, y:0, duration:0.35, ease:"expo.out"}}, {at});tl.to("#st{i}", {{opacity:0, duration:0.2}}, {at + 3.6});')
 	stats = [stat(0, '530', 'potential acquirers mapped', 0.6), stat(1, '16', 'buyer categories', 4.6), stat(2, '3', 'prioritized outreach waves', 8.4)]
@@ -290,7 +290,7 @@ def v_who_buys():
 	booked = set(r.sample(range(344), 106))
 	sq = ''.join(f'<i class="{"bk" if k in booked else ""}" style="left:{(k % 29) * 34}px;top:{(k // 29) * 34}px"></i>' for k in range(344))
 	v.js.append('tl.fromTo(".inq i", {opacity:0, scale:0.4}, {opacity:1, scale:1, duration:0.3, stagger:0.004, ease:"expo.out"}, 0.4);')
-	v.js.append('tl.fromTo(".inq i.bk", {backgroundColor:"#d3ddd8"}, {backgroundColor:"#0e7a55", duration:0.3, stagger:0.006, ease:"power2.out"}, 2.4);')
+	v.js.append('tl.fromTo(".inq i.bk", {backgroundColor:"#d8dce4"}, {backgroundColor:"#1e3a5f", duration:0.3, stagger:0.006, ease:"power2.out"}, 2.4);')
 	legend = (f'<div class="leg" style="left:1150px;top:250px"><b id="q1">344</b><span>{v.label("Venue inquiries")}</span></div>'
 		f'<div class="leg g" style="left:1150px;top:470px"><b id="q2">106</b><span>{v.label("booked events behind the ICP")}</span></div>')
 	v.js.append(count_js('q1', '344', 0.5, 1.6))
@@ -360,7 +360,7 @@ def v_speed_quote():
 	v.js.append('tl.fromTo("#amt", {borderColor:"rgba(255,255,255,0.16)"}, {borderColor:"#d4542f", duration:0.3}, 8.2);')
 	v.js.append('tl.fromTo("#flag", {scale:0}, {scale:1, duration:0.35, ease:"expo.out"}, 8.2);')
 	v.js.append('tl.fromTo("#g2", {borderColor:"rgba(255,255,255,0.16)"}, {borderColor:"#d4542f", duration:0.3}, 8.8);')
-	v.js.append('tl.fromTo("#h2", {borderColor:"rgba(255,255,255,0.16)"}, {borderColor:"#38c97a", duration:0.3}, 9.4);')
+	v.js.append('tl.fromTo("#h2", {borderColor:"rgba(255,255,255,0.16)"}, {borderColor:"#d4b483", duration:0.3}, 9.4);')
 	v.scene(7.4, 11.8, card, [('a hard check that stops a wrong number before it ever reaches a customer.', 7.6, 11.6)])
 	return v
 
@@ -391,7 +391,7 @@ def v_broadband():
 		+ ''.join(f'<path d="M900 400 L990 400 L990 {250 + i * 82} L1080 {250 + i * 82}" class="eb"/>' for i in range(7)) + '<path id="hot" d="M900 400 L990 400 L990 496 L1080 496" class="el" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1"/></svg>')
 	v.js.append('tl.fromTo(".agent span", {opacity:0.3}, {opacity:1, duration:0.3, stagger:0.5}, 1.0);')
 	v.js.append('tl.fromTo("#hot", {attr:{"stroke-dashoffset":1}}, {attr:{"stroke-dashoffset":0}, duration:0.5, ease:"power2.inOut"}, 2.4);')
-	v.js.append('tl.fromTo("#ln3", {borderColor:"rgba(255,255,255,0.16)", backgroundColor:"rgba(255,255,255,0.05)"}, {borderColor:"#38c97a", backgroundColor:"rgba(56,201,122,0.2)", duration:0.3}, 2.9);')
+	v.js.append('tl.fromTo("#ln3", {borderColor:"rgba(255,255,255,0.16)", backgroundColor:"rgba(255,255,255,0.05)"}, {borderColor:"#d4b483", backgroundColor:"rgba(212,180,131,0.2)", duration:0.3}, 2.9);')
 	v.scene(0.2, 4.4, router, [('routes the issue to the right one of seven departments', 0.4, 4.2)])
 	n2 = {'a': ('a customer asks|to switch away', 96, 380, 300, 110, 'n'), 'b': ('checks consent', 456, 380, 260, 110, 'n'),
 		'c': ('a personalized offer', 776, 380, 300, 110, 'ai'), 'd': ('reaches the customer|on WhatsApp', 1136, 380, 320, 110, 'n'), 'e': ('the retention team', 1516, 380, 300, 110, 'out')}
@@ -521,30 +521,30 @@ html, body { width: 1920px; height: 1080px; overflow: hidden; background: var(--
 /* listings */
 .lc { position: absolute; width: 270px; height: 160px; border-radius: 16px; background: var(--card); border: 2px solid var(--nline); }
 .lc i { position: absolute; display: block; border-radius: 6px; }
-.lc .th { left: 20px; top: 20px; width: 48px; height: 48px; border-radius: 12px; background: #dfeee6; }
-.lc .nm { left: 82px; top: 24px; width: 140px; height: 14px; background: #c7d1cc; }
-.lc .sb { left: 82px; top: 48px; width: 96px; height: 12px; background: #e3e9e6; }
+.lc .th { left: 20px; top: 20px; width: 48px; height: 48px; border-radius: 12px; background: #ede6d8; }
+.lc .nm { left: 82px; top: 24px; width: 140px; height: 14px; background: #cbd0d9; }
+.lc .sb { left: 82px; top: 48px; width: 96px; height: 12px; background: #e4e7ec; }
 .lc .st { position: absolute; left: 20px; top: 92px; font-size: 24px; color: #e8b23a; letter-spacing: 2px; }
-.lc .dot { right: 16px; top: 16px; width: 18px; height: 18px; border-radius: 50%; background: #38c97a; }
-.scan { position: absolute; left: 80px; top: 200px; width: 4px; height: 600px; background: var(--elit); box-shadow: -60px 0 60px -10px rgba(14,122,85,.18); }
+.lc .dot { right: 16px; top: 16px; width: 18px; height: 18px; border-radius: 50%; background: #d4b483; }
+.scan { position: absolute; left: 80px; top: 200px; width: 4px; height: 600px; background: var(--elit); box-shadow: -60px 0 60px -10px rgba(30,58,95,.18); }
 /* listening */
 .clip-area { position: absolute; overflow: hidden; -webkit-mask-image: linear-gradient(180deg, transparent, #000 12%, #000 88%, transparent); mask-image: linear-gradient(180deg, transparent, #000 12%, #000 88%, transparent); }
 .col { position: absolute; top: 0; width: 195px; }
 .bub { height: 66px; margin-bottom: 14px; padding: 12px 14px; border-radius: 14px; background: rgba(255,255,255,0.06); border: 2px solid rgba(255,255,255,0.1); }
 .bub i { display: block; height: 10px; border-radius: 5px; background: rgba(255,255,255,0.2); } .bub i + i { margin-top: 10px; }
-.bin { position: absolute; width: 760px; height: 420px; padding: 36px; border-radius: 24px; background: rgba(255,255,255,0.05); border: 2px solid rgba(56,201,122,0.5); }
+.bin { position: absolute; width: 760px; height: 420px; padding: 36px; border-radius: 24px; background: rgba(255,255,255,0.05); border: 2px solid rgba(212,180,131,0.5); }
 .bin .pl { margin: 0; font-size: 34px; }
 .chips { margin-top: 30px; display: flex; flex-wrap: wrap; gap: 14px; }
-.chipx { display: block; width: 200px; height: 52px; border-radius: 12px; background: rgba(56,201,122,0.22); border: 2px solid #38c97a; }
+.chipx { display: block; width: 200px; height: 52px; border-radius: 12px; background: rgba(212,180,131,0.22); border: 2px solid #d4b483; }
 /* research */
 .rec { position: absolute; width: 640px; height: 560px; border-radius: 22px; background: #fff; border: 2px solid var(--nline); }
-.rk { position: absolute; left: 40px; top: 40px; width: 560px; height: 44px; display: flex; justify-content: space-between; align-items: center; padding: 0 18px; border-radius: 10px; background: #111a17; color: #fff; font-size: 22px; font-weight: 600; }
-.rk em { font: 500 18px "Geist Mono", monospace; font-style: normal; color: #4fd68c; }
-.slot { position: absolute; width: 80px; height: 48px; border-radius: 9px; border: 2.5px solid #c9d3ce; }
+.rk { position: absolute; left: 40px; top: 40px; width: 560px; height: 44px; display: flex; justify-content: space-between; align-items: center; padding: 0 18px; border-radius: 10px; background: #0e1726; color: #fff; font-size: 22px; font-weight: 600; }
+.rk em { font: 500 18px "Geist Mono", monospace; font-style: normal; color: #dcc196; }
+.slot { position: absolute; width: 80px; height: 48px; border-radius: 9px; border: 2.5px solid #cdd2db; }
 .slot.t4 { border-style: dashed; }
 .rc { position: absolute; right: 40px; bottom: 26px; font: 600 26px "Geist Mono", monospace; color: var(--num); }
 .tier { position: absolute; left: 0; width: 1000px; height: 104px; display: flex; align-items: center; gap: 22px; padding: 0 26px; border-radius: 16px; background: #fff; border: 2.5px solid var(--nline); }
-.tier i { width: 52px; height: 52px; border-radius: 50%; display: grid; place-items: center; background: #e3f1ea; color: #0e7a55; font: 600 22px "Geist Mono", monospace; font-style: normal; flex: none; }
+.tier i { width: 52px; height: 52px; border-radius: 50%; display: grid; place-items: center; background: #f2ede3; color: #1e3a5f; font: 600 22px "Geist Mono", monospace; font-style: normal; flex: none; }
 .tier b { font-size: 27px; font-weight: 600; }
 .blank { position: absolute; font: 600 26px "Geist Mono", monospace; color: #d4542f; }
 /* sell-side */
@@ -557,17 +557,17 @@ html, body { width: 1920px; height: 1080px; overflow: hidden; background: var(--
 .stat span { font-size: 26px; font-weight: 500; }
 /* who buys */
 .inq { position: absolute; width: 990px; height: 420px; }
-.inq i { position: absolute; width: 26px; height: 26px; border-radius: 6px; background: #d3ddd8; }
+.inq i { position: absolute; width: 26px; height: 26px; border-radius: 6px; background: #d8dce4; }
 .leg { position: absolute; }
-.leg b { display: block; font-size: 120px; line-height: 1; letter-spacing: -.05em; color: #56625d; }
-.leg.g b { color: #0e7a55; }
+.leg b { display: block; font-size: 120px; line-height: 1; letter-spacing: -.05em; color: #5b6475; }
+.leg.g b { color: #1e3a5f; }
 .leg span { display: block; margin-top: 10px; font-size: 27px; font-weight: 500; max-width: 15em; }
 .bar { position: absolute; left: 96px; width: 1728px; display: grid; grid-template-columns: 440px 1fr 380px; gap: 30px; align-items: center; }
 .bar .bl { font-size: 32px; font-weight: 600; }
-.bar .tr { position: relative; height: 64px; border-radius: 14px; background: #e3e9e6; overflow: hidden; }
-.bar .tr i { position: absolute; left: 0; top: 0; bottom: 0; background: #0e7a55; border-radius: 14px; }
-.bar .tr i.rg { background: repeating-linear-gradient(135deg, #38c97a 0 12px, #8fd4b1 12px 24px); border-radius: 0 14px 14px 0; }
-.bar b { font-size: 44px; white-space: nowrap; letter-spacing: -.03em; color: #0e7a55; }
+.bar .tr { position: relative; height: 64px; border-radius: 14px; background: #e4e7ec; overflow: hidden; }
+.bar .tr i { position: absolute; left: 0; top: 0; bottom: 0; background: #1e3a5f; border-radius: 14px; }
+.bar .tr i.rg { background: repeating-linear-gradient(135deg, #d4b483 0 12px, #c8b28b 12px 24px); border-radius: 0 14px 14px 0; }
+.bar b { font-size: 44px; white-space: nowrap; letter-spacing: -.03em; color: #1e3a5f; }
 /* social */
 .sc3 { position: absolute; top: 230px; width: 560px; height: 520px; padding: 40px; border-radius: 24px; background: rgba(255,255,255,0.1); border: 2px solid rgba(255,255,255,0.28); }
 .sc3 .ln, .draft .ln, .qcard .ln, .win .ln, .phone .ln { background: rgba(255,255,255,0.3); }
@@ -575,14 +575,14 @@ html, body { width: 1920px; height: 1080px; overflow: hidden; background: var(--
 .meter { margin-top: 34px; height: 40px; border-radius: 20px; background: rgba(255,255,255,0.15); overflow: hidden; }
 .meter i { display: block; height: 100%; background: #fff; border-radius: 20px; }
 .draft { position: absolute; left: 300px; top: 300px; width: 640px; height: 340px; padding: 44px; border-radius: 24px; background: rgba(255,255,255,0.1); border: 3px solid rgba(255,255,255,0.28); }
-.gate { position: absolute; left: 1100px; top: 300px; width: 520px; height: 340px; padding: 40px; border-radius: 24px; background: #111a17; color: #fff; }
+.gate { position: absolute; left: 1100px; top: 300px; width: 520px; height: 340px; padding: 40px; border-radius: 24px; background: #0e1726; color: #fff; }
 .gate .av { margin-top: 0; }
 .gate b { display: block; margin-top: 20px; font-size: 34px; }
-.ok { position: absolute; right: 30px; top: 30px; width: 64px; height: 64px; border-radius: 50%; display: grid; place-items: center; background: #38c97a; color: #0b1d16; font-size: 38px; font-weight: 700; }
+.ok { position: absolute; right: 30px; top: 30px; width: 64px; height: 64px; border-radius: 50%; display: grid; place-items: center; background: #d4b483; color: #0e1726; font-size: 38px; font-weight: 700; }
 /* instant quotes */
-.phone { position: absolute; width: 420px; height: 680px; padding: 16px; border-radius: 52px; background: #111a17; }
-.scr { position: relative; width: 100%; height: 100%; border-radius: 38px; background: #f3f6f4; overflow: hidden; }
-.scr.dark { background: #0b5c40; padding: 60px 26px; }
+.phone { position: absolute; width: 420px; height: 680px; padding: 16px; border-radius: 52px; background: #0e1726; }
+.scr { position: relative; width: 100%; height: 100%; border-radius: 38px; background: #f4f1eb; overflow: hidden; }
+.scr.dark { background: #1a3354; padding: 60px 26px; }
 .pic { position: absolute; left: 24px; right: 24px; top: 70px; height: 380px; border-radius: 22px; background: linear-gradient(#cfe8f5, #eaf5fb); overflow: hidden; }
 .pic i { position: absolute; display: block; }
 .pic .sun { right: 40px; top: 30px; width: 60px; height: 60px; border-radius: 50%; background: #f6d77a; }
@@ -590,54 +590,54 @@ html, body { width: 1920px; height: 1080px; overflow: hidden; background: var(--
 .pic .crown { border-radius: 50%; background: #2f8a55; }
 .pic .c1 { left: 100px; top: 90px; width: 170px; height: 150px; } .pic .c2 { left: 70px; top: 150px; width: 130px; height: 110px; background: #27794a; } .pic .c3 { left: 180px; top: 140px; width: 130px; height: 120px; background: #3a9a62; }
 .pic .ground { left: 0; right: 0; bottom: 0; height: 40px; background: #8cc49a; }
-.up { position: absolute; left: 24px; right: 24px; top: 490px; height: 16px; border-radius: 8px; background: #d3ddd8; overflow: hidden; }
-.up i { display: block; height: 100%; background: #0e7a55; }
-.quote { position: absolute; width: 700px; height: 280px; padding: 40px; border-radius: 24px; background: #fff; border: 2.5px solid #0e7a55; }
-.quote .ln { background: #e3e9e6; }
+.up { position: absolute; left: 24px; right: 24px; top: 490px; height: 16px; border-radius: 8px; background: #d8dce4; overflow: hidden; }
+.up i { display: block; height: 100%; background: #1e3a5f; }
+.quote { position: absolute; width: 700px; height: 280px; padding: 40px; border-radius: 24px; background: #fff; border: 2.5px solid #1e3a5f; }
+.quote .ln { background: #e4e7ec; }
 .via { margin-top: 30px; display: flex; gap: 14px; }
-.via span { padding: 8px 18px; border-radius: 999px; background: #e3f1ea; color: #0e7a55; font: 500 20px "Geist Mono", monospace; }
+.via span { padding: 8px 18px; border-radius: 999px; background: #f2ede3; color: #1e3a5f; font: 500 20px "Geist Mono", monospace; }
 .timer { position: absolute; }
-.timer b { font-size: 120px; letter-spacing: -.05em; color: #0e7a55; font-variant-numeric: tabular-nums; }
+.timer b { font-size: 120px; letter-spacing: -.05em; color: #1e3a5f; font-variant-numeric: tabular-nums; }
 /* speed to quote */
 .qcard { position: absolute; width: 560px; padding: 40px; border-radius: 22px; background: rgba(255,255,255,0.06); border: 2px solid rgba(255,255,255,0.16); color: #fff; }
 .amt { position: relative; margin-top: 28px; padding: 14px 18px; border-radius: 12px; border: 2.5px solid rgba(255,255,255,0.16); }
 .amt .ln { margin: 0; }
 .amt em { position: absolute; right: -18px; top: -18px; width: 40px; height: 40px; border-radius: 50%; display: grid; place-items: center; background: #d4542f; color: #fff; font-style: normal; font-weight: 700; font-size: 24px; }
-.ans { border-color: #38c97a; }
+.ans { border-color: #d4b483; }
 .ev { margin-top: 26px; display: flex; gap: 14px; }
-.ev i { display: block; width: 140px; height: 40px; border-radius: 10px; background: rgba(56,201,122,0.25); border: 2px solid #38c97a; }
+.ev i { display: block; width: 140px; height: 40px; border-radius: 10px; background: rgba(212,180,131,0.25); border: 2px solid #d4b483; }
 /* voice */
-.phone.sm { width: 400px; height: 640px; background: #0b1d16; }
+.phone.sm { width: 400px; height: 640px; background: #0e1726; }
 .bub { position: relative; }
 .scr.dark .bub { width: 82%; height: auto; padding: 18px; margin-bottom: 22px; border-radius: 20px; background: rgba(255,255,255,0.14); border: 0; }
-.scr.dark .bub.out { margin-left: auto; background: #fff; } .scr.dark .bub.out .ln { background: #cfe8da; }
+.scr.dark .bub.out { margin-left: auto; background: #fff; } .scr.dark .bub.out .ln { background: #e7dece; }
 .scr.dark .bub .ln { margin: 8px 0; }
 /* broadband */
 .chat { position: absolute; width: 300px; padding: 26px; border-radius: 20px 20px 20px 4px; background: rgba(255,255,255,0.08); border: 2px solid rgba(255,255,255,0.16); }
 .chat .ln { background: rgba(255,255,255,0.3); margin: 8px 0; }
-.agent { position: absolute; width: 400px; padding: 30px; border-radius: 22px; background: rgba(56,201,122,0.16); border: 2.5px solid #38c97a; }
+.agent { position: absolute; width: 400px; padding: 30px; border-radius: 22px; background: rgba(212,180,131,0.16); border: 2.5px solid #d4b483; }
 .agent b { display: block; font-size: 30px; }
-.agent span { display: block; margin-top: 12px; padding: 8px 14px; border-radius: 10px; background: rgba(255,255,255,0.08); font: 500 19px "Geist Mono", monospace; color: #c9d6d0; }
+.agent span { display: block; margin-top: 12px; padding: 8px 14px; border-radius: 10px; background: rgba(255,255,255,0.08); font: 500 19px "Geist Mono", monospace; color: #c3cbd8; }
 .lane { position: absolute; left: 0; width: 300px; height: 64px; display: flex; align-items: center; padding: 0 20px; border-radius: 12px; background: rgba(255,255,255,0.05); border: 2px solid rgba(255,255,255,0.16); }
 .lane span { font: 500 20px "Geist Mono", monospace; color: var(--mute); }
 /* marketplace */
 .phone.mini { width: 340px; height: 560px; }
-.phone.mini .scr { padding: 40px 26px; } .phone.mini .ln { background: #d3ddd8; }
-.tg { display: block; width: 100%; height: 90px; border-radius: 18px; background: #e3f1ea; border: 2px solid #38c97a; }
+.phone.mini .scr { padding: 40px 26px; } .phone.mini .ln { background: #d8dce4; }
+.tg { display: block; width: 100%; height: 90px; border-radius: 18px; background: #f2ede3; border: 2px solid #d4b483; }
 .phone.mini .ok { right: -22px; top: -22px; width: 72px; height: 72px; font-size: 40px; }
 /* grc */
 .mt { position: absolute; width: 190px; height: 180px; padding: 22px; border-radius: 18px; background: rgba(255,255,255,0.05); border: 2.5px solid rgba(255,255,255,0.16); }
 .mt span { font: 500 20px "Geist Mono", monospace; color: var(--mute); }
 .sbar { margin-top: 70px; height: 16px; border-radius: 8px; background: rgba(255,255,255,0.1); overflow: hidden; }
-.sbar i { display: block; height: 100%; background: #38c97a; }
+.sbar i { display: block; height: 100%; background: #d4b483; }
 .mt.bad .sbar i { background: #d4542f; }
 .badchip { position: absolute; padding: 10px 16px; border-radius: 10px; background: #d4542f; color: #fff; font: 500 20px "Geist Mono", monospace; white-space: nowrap; }
 /* tooling */
-.win { position: absolute; width: 800px; height: 250px; padding: 30px; border-radius: 22px; background: #fff; border: 2.5px solid #0e7a55; }
-.win .ln { background: #e3e9e6; }
-.bar3 { display: block; width: 120px; height: 16px; border-radius: 8px; background: #38c97a; }
+.win { position: absolute; width: 800px; height: 250px; padding: 30px; border-radius: 22px; background: #fff; border: 2.5px solid #1e3a5f; }
+.win .ln { background: #e4e7ec; }
+.bar3 { display: block; width: 120px; height: 16px; border-radius: 8px; background: #d4b483; }
 .role { position: absolute; width: 120px; height: 140px; display: grid; justify-items: center; }
-.role .av { margin: 0; width: 96px; height: 96px; background: #dfeee6; border: 3px solid #0e7a55; }
+.role .av { margin: 0; width: 96px; height: 96px; background: #ede6d8; border: 3px solid #1e3a5f; }
 .role .lk { margin-top: 6px; font-size: 34px; }
 '''
 
@@ -650,7 +650,7 @@ def write(v):
 	shutil.copyfile(os.path.join(ROOT, 'public', 'fonts', 'geist-mono-latin-wght-normal.woff2'), os.path.join(d, 'assets', 'fonts', 'geist-mono.woff2'))
 	svg = open(os.path.join(ROOT, 'public', 'images', 'pipeline-texture.svg'), encoding='utf-8').read()
 	open(os.path.join(d, 'assets', 'pipeline.svg'), 'w', encoding='utf-8').write(svg)
-	open(os.path.join(d, 'assets', 'pipeline-green.svg'), 'w', encoding='utf-8').write(svg.replace('#fff"', '#0e7a55"').replace('#9ff0c4', '#38c97a'))
+	open(os.path.join(d, 'assets', 'pipeline-green.svg'), 'w', encoding='utf-8').write(svg.replace('#fff"', '#1e3a5f"').replace('#e6d3b0', '#d4b483'))
 	for f in ('hyperframes.json',):
 		shutil.copyfile(os.path.join(ROOT, 'media-src', 'signal-engine', f), os.path.join(d, f))
 	json.dump({'id': v.slug, 'name': v.slug}, open(os.path.join(d, 'meta.json'), 'w'))
