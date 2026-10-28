@@ -172,6 +172,16 @@ a.pc:focus-visible { outline: 2px solid var(--acc); outline-offset: 3px; }
 	.end .end-cols { grid-template-columns: 1fr; gap: 36px; } .end .end-legal { flex-direction: column; }
 }
 
+
+/* top menu: one line per label; tighter between 1000 and 1240px so six items fit beside the logo and buttons */
+.logo b, .links > li > a, .links > li > button { white-space: nowrap; }
+@media (min-width: 1001px) and (max-width: 1240px) {
+	.links { gap: 0; }
+	.links > li > a, .links > li > button { padding: 0 10px; font-size: 15px; gap: 7px; }
+	.top-right { gap: 8px; }
+	.top-right .book { padding: 0 16px; font-size: 14.5px; }
+}
+@media (min-width: 1001px) and (max-width: 1100px) { .links > li:has(> a[href="/reviews.html"]) { display: none; } }
 </style>
 </head>
 <body>
