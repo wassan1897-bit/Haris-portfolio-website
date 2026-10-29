@@ -1,0 +1,23 @@
+/* Slim layout (reviews, FAQ, privacy): the logo and the booking button on top, a one-line dark footer. */
+.topbar { background: var(--surface); box-shadow: 0 1px 0 var(--line); }
+.topbar nav { height: 80px; display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+.logo { text-decoration: none; line-height: 1.15; }
+.logo b { display: block; font-size: 18px; font-weight: 700; letter-spacing: -.02em; }
+.logo span { font-size: 13px; color: var(--mute); }
+.top-right { display: flex; align-items: center; gap: 12px; }
+.icon-btn { width: 44px; height: 44px; border-radius: 10px; display: grid; place-items: center; background: #f4f1eb; color: var(--ink); transition: background-color .15s ease, color .15s ease; }
+.icon-btn:hover { background: var(--soft); color: var(--acc); }
+.book { display: inline-flex; align-items: center; height: 44px; padding: 0 22px; border-radius: 10px; background: var(--acc); color: #fff; font-size: 15.5px; font-weight: 600; text-decoration: none; white-space: nowrap; }
+.book:hover { background: #172f4e; }
+
+/* the extra room at the bottom keeps the last links clear of the assistant button in the corner */
+.ft { background: var(--ink); color: #c3cbd8; padding: 36px 0 90px; font-size: 14.5px; }
+.ft .wrap { display: flex; justify-content: space-between; gap: 20px; flex-wrap: wrap; }
+.ft a { color: #fff; text-decoration: none; margin-left: 18px; }
+.ft a:hover { color: var(--hi); }
+
+@media (max-width: 600px) {
+	.logo span { display: none; }
+	.top-right .icon-btn { display: none; }
+	.ft a { margin: 0 18px 0 0; }
+}

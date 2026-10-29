@@ -1,0 +1,6 @@
+.mail-copied { position: fixed; left: 50%; bottom: 24px; z-index: 70; max-width: calc(100vw - 32px); padding: 12px 20px; border-radius: 999px; background: #fff; color: var(--mute); font: 500 14.5px/1.4 "Geist", system-ui, sans-serif; box-shadow: 0 0 0 1px rgb(14 23 38 / .14), 0 14px 30px -12px rgb(14 23 38 / .55); overflow-wrap: anywhere; pointer-events: none; opacity: 0; transform: translate(-50%, 8px); transition: opacity .18s ease, transform .18s ease; }
+.mail-copied b { color: var(--ink); font-weight: 600; }
+.mail-copied[data-shown] { opacity: 1; transform: translate(-50%, 0); }
+.mail-copied:empty { padding: 0; }
+@media (max-width: 520px) { .mail-copied { bottom: 84px; } }
+@media (prefers-reduced-motion: reduce) { .mail-copied { transition: none; } }

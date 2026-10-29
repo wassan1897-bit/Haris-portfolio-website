@@ -1,0 +1,156 @@
+/* Resume page. Every word comes from the AI GTM Engineer brief. */
+html { scroll-behavior: smooth; }
+.eb { display: block; font: 500 12px "Geist Mono", monospace; letter-spacing: .1em; text-transform: uppercase; color: var(--acc); }
+.chip { display: inline-block; padding: 6px 12px; border-radius: 8px; font-size: 14px; font-weight: 500; }
+
+/* hero: who, the one line, and the engine running on the right */
+.rh { position: relative; isolation: isolate; overflow: hidden; background: #0e1726; color: #fff; padding: 76px 0 84px; }
+.rh::before { content: ""; position: absolute; inset: 0; z-index: -1; background: url("/images/pipeline-texture.svg") 0 0 / 360px 240px; -webkit-mask-image: linear-gradient(90deg, rgb(0 0 0 / .25), rgb(0 0 0 / .5) 50%, #000); mask-image: linear-gradient(90deg, rgb(0 0 0 / .25), rgb(0 0 0 / .5) 50%, #000); }
+.rh .wrap { display: grid; grid-template-columns: 1fr 560px; gap: 60px; align-items: center; }
+.rh .who { display: flex; align-items: center; gap: 18px; }
+.rh .who img { width: 64px; height: 64px; border-radius: 50%; object-fit: cover; object-position: 50% 16%; box-shadow: 0 0 0 3px #0e1726, 0 0 0 5px #d4b483; }
+.rh .who b { display: block; font-size: 20px; font-weight: 700; letter-spacing: -.02em; }
+.rh .who span { font-size: 15px; font-weight: 600; color: #dcc196; }
+.rh .eb { color: #c8b28b; margin-top: 40px; }
+.rh h1 { margin-top: 14px; font-size: clamp(48px, 5vw, 76px); line-height: 1; letter-spacing: -.05em; font-weight: 700; max-width: 9.5em; }
+.rh h1 em { font-style: normal; color: #dcc196; }
+.rh .lede { margin-top: 24px; max-width: 34em; color: #c3cbd8; font-size: 18px; line-height: 1.55; }
+.rh .acts { margin-top: 30px; display: flex; gap: 12px; flex-wrap: wrap; }
+.rh .acts a { display: inline-flex; align-items: center; gap: 10px; height: 52px; padding: 0 24px; border-radius: 12px; font-weight: 600; box-shadow: inset 0 0 0 1.5px rgb(255 255 255 / .35); }
+.rh .acts a.pri { background: #d4b483; color: #0e1726; box-shadow: none; }
+.rh .ct { margin-top: 26px; display: flex; flex-wrap: wrap; gap: 8px 22px; font-size: 14.5px; color: #c3cbd8; }
+.rh .ct a { display: inline-flex; gap: 8px; align-items: center; } .rh .ct svg { color: #dcc196; }
+.dia { width: 100%; height: auto; overflow: visible; }
+.dia .rail-bg { fill: none; stroke: rgb(255 255 255 / .1); stroke-width: 3; }
+.dia .rail { fill: none; stroke: url(#g); stroke: #d4b483; stroke-width: 3; stroke-dasharray: 6 10; opacity: .55; animation: flow 1.2s linear infinite; }
+@keyframes flow { to { stroke-dashoffset: -16; } }
+.dia .pulse { fill: #f3e9d6; filter: drop-shadow(0 0 6px #dcc196); }
+.dia .core { fill: #0e1726; stroke: #d4b483; stroke-width: 2.5; }
+.dia .halo { fill: rgb(212 180 131 / .25); transform-box: fill-box; transform-origin: center; animation: ping 3.8s ease-out infinite; animation-delay: var(--d); }
+@keyframes ping { 0% { transform: scale(1); opacity: .9; } 30% { transform: scale(1.9); opacity: 0; } 100% { opacity: 0; } }
+.dia .num { font: 600 11px "Geist Mono", monospace; fill: #c8b28b; text-anchor: middle; }
+.dia .lbl { font: 600 15px "Geist", sans-serif; fill: #eef1f6; }
+.dia .out circle:nth-child(2) { fill: #d4b483; }
+.dia .out .halo2 { fill: rgb(212 180 131 / .3); transform-box: fill-box; transform-origin: center; animation: ping 3.8s ease-out infinite 3.2s; }
+.dia .o1, .dia .o2 { font: 700 12.5px "Geist", sans-serif; fill: #0e1726; text-anchor: middle; }
+@media (prefers-reduced-motion: reduce) { .dia .rail, .dia .halo, .dia .halo2 { animation: none; } .dia .pulse { display: none; } }
+
+/* the engine, stage by stage, each with its proof */
+.eng { padding: 110px 0 40px; }
+.eng .eb { margin-bottom: 14px; }
+.eng h2, .exp h2, .tk h2 { font-size: 44px; line-height: 1.08; letter-spacing: -.04em; font-weight: 700; max-width: 16em; }
+.stg { position: relative; margin-top: 56px; display: grid; grid-template-columns: repeat(5, 1fr); gap: 22px; }
+.stg::before { content: ""; position: absolute; left: 20px; right: 20px; top: 20px; height: 3px; background: var(--line); }
+.stg::after { content: ""; position: absolute; left: 20px; top: 20px; height: 3px; width: calc((100% - 40px) * var(--p, 1)); background: linear-gradient(90deg, #1e3a5f, #d4b483); }
+.stg > div { position: relative; z-index: 1; }
+.stg i { display: grid; place-items: center; width: 42px; height: 42px; border-radius: 50%; background: var(--bg); box-shadow: inset 0 0 0 3px #d4b483; font: 600 13px "Geist Mono", monospace; font-style: normal; color: var(--acc); }
+.stg > div:first-child i { background: #d4b483; color: #0e1726; box-shadow: 0 0 0 7px rgb(212 180 131 / .18); }
+.stg h3 { margin-top: 22px; font-size: 19px; line-height: 1.25; letter-spacing: -.02em; font-weight: 700; min-height: 2.5em; }
+.stg p { margin-top: 8px; font-size: 15px; line-height: 1.5; color: var(--mute); min-height: 10.5em; }
+.stg .pr { margin-top: 18px; padding-top: 16px; border-top: 1px dashed rgb(30 58 95 / .35); }
+.stg .pr b { display: block; font-size: 40px; line-height: 1; letter-spacing: -.05em; font-weight: 700; color: var(--acc); }
+.stg .pr span { display: block; margin-top: 8px; font-size: 14px; font-weight: 500; }
+.infra { margin-top: 34px; display: grid; grid-template-columns: 42px 1fr auto; gap: 18px; align-items: center; padding: 22px 26px; border-radius: 18px; background: #0e1726; color: #eef1f6; }
+.infra i { display: grid; place-items: center; width: 42px; height: 42px; border-radius: 50%; background: #d4b483; color: #0e1726; font-style: normal; font-weight: 700; font-size: 20px; }
+.infra b { display: block; font-size: 18px; font-weight: 700; }
+.infra span { color: #9aa5b8; font-size: 15px; }
+.infra em { font-style: normal; font-weight: 600; color: #dcc196; }
+
+/* experience: big rows, each tagged with the constraint it was built under */
+.exp { padding: 110px 0 60px; display: grid; grid-template-columns: 380px 1fr; gap: 80px; align-items: start; }
+.exp .head p { margin-top: 18px; color: var(--mute); font-size: 17px; }
+.exp .head h4 { margin-top: 40px; padding-top: 28px; border-top: 1px solid var(--line); font-size: 19px; letter-spacing: -.02em; font-weight: 700; }
+.exp .bring dt { margin-top: 18px; font-size: 16px; font-weight: 600; color: var(--acc); }
+.exp .bring dd { margin: 4px 0 0; font-size: 15px; line-height: 1.55; color: var(--mute); }
+.exp .txt h4 { margin-top: 22px; font-size: 16px; font-weight: 700; letter-spacing: -.01em; }
+.exp .txt ul { margin-top: 6px; padding: 0; list-style: none; max-width: 38em; }
+.exp .txt li { position: relative; margin-top: 8px; padding-left: 20px; color: #2a3343; line-height: 1.55; }
+.exp .txt li::before { content: ""; position: absolute; left: 0; top: .6em; width: 7px; height: 7px; background: #d4b483; }
+.exp article { display: grid; grid-template-columns: 1fr auto; gap: 8px 30px; padding: 34px 0; border-top: 1px solid var(--line); }
+.exp article:last-child { border-bottom: 1px solid var(--line); }
+.exp h3 { font-size: 34px; line-height: 1.05; letter-spacing: -.04em; font-weight: 700; }
+.exp .org { grid-column: 1; font-weight: 600; color: var(--acc); font-size: 17px; }
+.exp .txt { grid-column: 1; }
+.exp .txt p { margin-top: 8px; color: #2a3343; max-width: 38em; }
+.exp .tags { grid-column: 2; grid-row: 1 / span 3; display: flex; flex-direction: column; gap: 8px; align-items: flex-end; }
+.exp .tags span { padding: 7px 14px; border-radius: 999px; background: var(--acc-soft); color: #1a3354; font: 500 13px "Geist Mono", monospace; }
+
+/* toolkit as system modules on a charcoal band */
+.tk { position: relative; isolation: isolate; background: #0e1726; color: #eef1f6; padding: 100px 0 110px; margin-top: 50px; }
+.tk::before { content: ""; position: absolute; inset: 0; z-index: -1; background: url("/images/pipeline-texture.svg") 0 0 / 360px 240px; -webkit-mask-image: linear-gradient(180deg, #000, rgb(0 0 0 / .35)); mask-image: linear-gradient(180deg, #000, rgb(0 0 0 / .35)); }
+.tk .eb { color: #c8b28b; margin-bottom: 14px; }
+.mods { margin-top: 44px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+.mods div { padding: 22px; border-radius: 16px; background: rgb(255 255 255 / .045); box-shadow: inset 0 0 0 1px rgb(255 255 255 / .09); }
+.mods h4 { display: flex; align-items: center; gap: 10px; font-size: 16px; font-weight: 600; }
+.mods h4::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: #d4b483; box-shadow: 0 0 0 4px rgb(212 180 131 / .18); }
+.mods ul { margin-top: 14px; list-style: none; padding: 0; display: grid; gap: 7px; font: 400 13.5px "Geist Mono", monospace; color: #c3cbd8; }
+.mods .edu { background: #1e3a5f; box-shadow: none; }
+.mods .edu h4::before { background: #fff; box-shadow: 0 0 0 4px rgb(255 255 255 / .25); }
+.mods .edu b { display: block; margin-top: 14px; font-size: 17px; }
+.mods .edu span { display: block; margin-top: 4px; color: #e9e1d0; font-size: 14.5px; }
+
+/* close: a client's words and the invitation */
+.cl { padding: 100px 0 110px; display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+.cl .q { padding: 40px; border-radius: 22px; background: #fff; box-shadow: 0 0 0 1px var(--line); }
+.cl .q p { font-size: 21px; line-height: 1.5; font-weight: 500; letter-spacing: -.01em; }
+.cl .q p::before { content: "\201C"; display: block; height: 44px; font-size: 72px; line-height: 1; color: #d4b483; font-weight: 700; }
+.cl .q small { display: block; margin-top: 18px; font: 500 12px "Geist Mono", monospace; letter-spacing: .12em; text-transform: uppercase; color: var(--mute); }
+.cl .go { position: relative; isolation: isolate; overflow: hidden; padding: 40px; border-radius: 22px; background: #1e3a5f; color: #fff; display: flex; flex-direction: column; justify-content: space-between; gap: 30px; }
+.cl .go::before { content: ""; position: absolute; inset: 0; z-index: -1; background: url("/images/pipeline-texture.svg") 0 0 / 360px 240px; }
+.cl .go h3 { font-size: 34px; line-height: 1.1; letter-spacing: -.035em; font-weight: 700; max-width: 12em; }
+.cl .go .acts { display: flex; gap: 12px; flex-wrap: wrap; }
+.cl .go a { display: inline-flex; align-items: center; gap: 10px; height: 52px; padding: 0 24px; border-radius: 12px; font-weight: 600; background: #0e1726; color: #fff; }
+.cl .go a + a { background: transparent; box-shadow: inset 0 0 0 1.5px rgb(255 255 255 / .7); }
+
+/* stage line draws in when the stages come into view */
+.stg::after { width: calc(100% - 40px); transform-origin: 0 50%; transition: transform 1.4s cubic-bezier(.23, 1, .32, 1); }
+.stg.pre::after { transform: scaleX(0); }
+.rh a:focus-visible, .cl a:focus-visible { outline: 2px solid #dcc196; outline-offset: 3px; }
+.rh .acts a, .cl .go a { transition: transform .16s ease-out, background-color .15s ease; }
+.rh .acts a:active, .cl .go a:active { transform: scale(.97); }
+.rh .ct a:hover { color: #fff; }
+
+@media (max-width: 1000px) {
+	.rh .wrap { grid-template-columns: 1fr; gap: 50px; }
+	.dia { max-width: 560px; }
+	.eng { padding-top: 80px; }
+	.stg { grid-template-columns: 1fr 1fr; row-gap: 44px; }
+	.stg::before, .stg::after { display: none; }
+	.stg h3, .stg p { min-height: 0; }
+	.infra { grid-template-columns: 42px 1fr; }
+	.infra em { grid-column: 2; }
+	.exp { grid-template-columns: 1fr; gap: 28px; padding-top: 80px; }
+	.exp .head { position: static; }
+	.mods { grid-template-columns: 1fr 1fr; }
+	.cl { grid-template-columns: 1fr; padding: 80px 0; }
+}
+@media (max-width: 600px) {
+	.rh { padding: 48px 0 56px; }
+	.rh h1 { font-size: 42px; }
+	.rh .acts a { flex: 1 1 auto; justify-content: center; }
+	.eng h2, .exp h2, .tk h2 { font-size: 32px; }
+	.stg { grid-template-columns: 1fr; }
+	.stg .pr b { font-size: 34px; }
+	.exp article { grid-template-columns: 1fr; }
+	.exp .tags { grid-column: 1; grid-row: auto; flex-direction: row; flex-wrap: wrap; align-items: center; margin-top: 10px; }
+	.exp h3 { font-size: 28px; }
+	.tk { padding: 72px 0 80px; }
+	.mods { grid-template-columns: 1fr; }
+	.cl .q, .cl .go { padding: 28px; }
+	.cl .go h3 { font-size: 28px; }
+}
+
+/* print and the downloadable PDF (public/Muhammad-Haris-AI-GTM-Engineer-Resume.pdf, printed from this page):
+   A4 proportions at a wide size so it stays compact, site colours kept, no navigation or buttons.
+   Regenerate the PDF after changing this page. */
+@page { size: 1280px 1810px; margin: 0; }
+@media print {
+	html, body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+	.topbar, .rh .acts, .cl .go, .end, .ha, .bk { display: none !important; }
+	.cl { grid-template-columns: 1fr; padding: 60px 0 70px; }
+	.stg.pre::after { transform: none; }
+	.stg > div, .infra, .exp article, .exp .bring, .mods > div, .cl .q { break-inside: avoid; }
+	.eng, .exp, .tk { break-before: auto; }
+	.dia .rail, .dia .halo, .dia .halo2 { animation: none; }
+	.dia .pulse { display: none; }
+}

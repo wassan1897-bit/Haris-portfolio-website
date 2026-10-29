@@ -1,0 +1,17 @@
+/* Every page: the colour tokens, the reset and the type. Each page's own styles load with the page. */
+:root {
+	--bg: #faf8f4;
+	--surface: #ffffff;
+	--ink: #0e1726;
+	--mute: #5b6475;
+	--line: rgb(14 23 38 / .09);
+	--acc: #1e3a5f;
+	--acc-soft: #f2ede3;
+	--soft: #f2ede3;
+	--hi: #d4b483;
+}
+* { box-sizing: border-box; margin: 0; }
+body { background: var(--bg); color: var(--ink); font: 400 17px/1.6 "Geist", system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+a { color: inherit; }
+a:focus-visible { outline: 2px solid var(--acc); outline-offset: 3px; border-radius: 6px; }
+.wrap { width: min(1240px, 100% - 48px); margin: 0 auto; }

@@ -38,6 +38,9 @@ tmp
 qa-screenshots
 localhost_*.html
 
+# Local copy of the static HTML site from before the React move (it lives on in git history)
+legacy-html
+
 # Private: the confidential brief and personal files that aren't part of the site
 *Brief.pdf
 upscaled-photos

@@ -1,29 +1,31 @@
 import { defineConfig } from 'vite'
-import { resolve } from 'node:path'
-import { fileURLToPath } from 'node:url'
+import react from '@vitejs/plugin-react'
+import fs from 'node:fs'
+import path from 'node:path'
 import viteCompression from 'vite-plugin-compression'
 
-const root = fileURLToPath(new URL('.', import.meta.url))
-
-// The site is a single static page: index.html at the root, its logos in public/logos.
-// The pages in public/ are copied as they are, so the AI assistant is also published as /assistant.js
-// for them to load: in dev that path serves src/assistant.js, in the build it is a fixed-name entry.
-const assistant = {
-  name: 'assistant-entry',
-  configureServer(server) {
-    server.middlewares.use((req, _res, next) => {
-      if (req.url === '/assistant.js') req.url = '/src/assistant.js'
-      next()
-    })
-  },
+// Static hosts answer unknown paths with 404.html. Making it a copy of the app lets the router
+// resolve deep links such as /work/signal-engine on a refresh or a shared link.
+function spaFallback() {
+  let outDir
+  return {
+    name: 'spa-fallback-404',
+    apply: 'build',
+    configResolved(config) {
+      outDir = path.resolve(config.root, config.build.outDir)
+    },
+    writeBundle() {
+      fs.copyFileSync(path.join(outDir, 'index.html'), path.join(outDir, '404.html'))
+    },
+  }
 }
 
 export default defineConfig({
-  plugins: [assistant, viteCompression()],
-  build: {
-    rollupOptions: {
-      input: { main: resolve(root, 'index.html'), assistant: resolve(root, 'src/assistant.js') },
-      output: { entryFileNames: (chunk) => (chunk.name === 'assistant' ? 'assistant.js' : 'assets/[name]-[hash].js') },
-    },
+  plugins: [react(), spaFallback(), viteCompression()],
+  // only the app's own entry; the mockups and media sources hold unrelated HTML files
+  optimizeDeps: { entries: ['index.html'] },
+  // a locked file in one of these (not app code) crashes the dev server's watcher on Windows
+  server: {
+    watch: { ignored: ['**/legacy-html/**', '**/mockups/**', '**/media-src/**', '**/project-media/**', '**/upscaled-photos/**', '**/dist/**'] },
   },
 })
