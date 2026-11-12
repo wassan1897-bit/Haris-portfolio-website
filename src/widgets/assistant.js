@@ -1,4 +1,4 @@
-// AI assistant: "Haris, now caffeine-free" opens a window and starts a voice call with the ElevenLabs agent.
+// AI assistant: "Talk to Haris AI" opens a window and starts a voice call with the ElevenLabs agent.
 // Voice and typing share one conversation: the agent's words show as text, and typed messages get a spoken reply.
 // The agent is public (no key needed); which websites may use it is set in the agent's allowlist.
 // It is mounted once for the whole app, so a call keeps going while the visitor moves between pages.
@@ -7,6 +7,7 @@ import './assistant.css'
 const AGENT_ID = 'agent_6301m5ybrrq8e38atjxp2hnt0t6d'
 const EMAIL = 'hariswassan001@gmail.com'
 const CHIPS = ['What do you build?', 'Show me a project', 'Book a meeting']
+const HIRE_CALL = 'https://calendar.app.google/rggLDm7cdPdoeNsC9' // the hiring box's "Book a call", from the client's change list
 
 // the ElevenLabs SDK is large, so it only loads once someone opens the assistant
 const sdk = () => import('@elevenlabs/client').then((m) => m.Conversation)
@@ -24,7 +25,16 @@ function create() {
 	const root = document.createElement('div')
 	root.className = 'ha'
 	root.innerHTML = `
-		<button type="button" class="ha-launch" aria-expanded="false" aria-controls="ha-panel" aria-label="Haris, now caffeine-free: talk to Haris's AI assistant">Haris, now caffeine-free <span>${icon.mic}</span></button>
+		<aside class="ha-hire" aria-labelledby="ha-hire-title">
+			<button type="button" class="ha-hire-x" aria-label="Close">&times;</button>
+			<b id="ha-hire-title">Hiring an AI GTM engineer?</b>
+			<p>I'm open to full-time GTM engineering roles in San Francisco and to selected consulting work. If you're building a revenue engine and want it done properly, let's talk.</p>
+			<div class="ha-hire-acts">
+				<a class="ha-hire-pri" href="${HIRE_CALL}" target="_blank" rel="noopener noreferrer">Book a call</a>
+				<a class="ha-hire-sec" href="mailto:${EMAIL}">Email me</a>
+			</div>
+		</aside>
+		<button type="button" class="ha-launch" aria-expanded="false" aria-controls="ha-panel" aria-label="Talk to Haris AI, the AI assistant">Talk to Haris AI <span>${icon.mic}</span></button>
 		<div class="ha-panel" id="ha-panel" role="dialog" aria-label="Haris's AI assistant">
 			<div class="ha-head">
 				<div class="ha-av" aria-hidden="true">MH</div>
@@ -267,7 +277,7 @@ function create() {
 			onDisconnect: () => {
 				if (!session) return
 				session = null
-				afterCall('Call ended. Type a message or press "Haris, now caffeine-free" to start again.')
+				afterCall('Call ended. Type a message or press "Talk to Haris AI" to start again.')
 			},
 			onError: (message) => {
 				console.warn('[assistant]', message)
@@ -378,6 +388,13 @@ function create() {
 
 	renderMic()
 	launch.addEventListener('click', open)
+	// hiring box: shown until the visitor closes it; the choice is remembered on this device
+	const hire = $('.ha-hire')
+	try { if (localStorage.getItem('ha-hire-closed')) hire.hidden = true } catch {}
+	$('.ha-hire-x').addEventListener('click', () => {
+		hire.hidden = true
+		try { localStorage.setItem('ha-hire-closed', '1') } catch {}
+	})
 	$('.ha-end').addEventListener('click', close)
 	micBtn.addEventListener('click', () => {
 		muted = !muted

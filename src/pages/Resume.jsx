@@ -98,7 +98,7 @@ export default function Resume() {
           <div className="acts"><Download className="pri" /><a href="/#book">Book a meeting</a></div>
           <div className="ct">
             <a href={`mailto:${EMAIL}`}><MailIcon size={17} /> {EMAIL}</a>
-            <a href={LINKEDIN} target="_blank" rel="noopener noreferrer"><LinkedInIcon size={16} /> linkedin.com/in/muhammad-haris-wassan</a>
+            <a href={LINKEDIN} target="_blank" rel="noopener noreferrer"><LinkedInIcon size={16} /> LinkedIn</a>
             <a href={GITHUB} target="_blank" rel="noopener noreferrer"><GitHubIcon size={16} /> github.com/Haris001-bit</a>
           </div>
         </div>
@@ -158,7 +158,7 @@ export default function Resume() {
       </div></section>
 
       <section className="wrap cl">
-        <div className="q"><p>Working with Muhammad was a great experience. He takes the time to thoroughly understand the project before diving in, communicates clearly, and consistently shows strong attention to detail.</p><small>Client</small></div>
+        <div className="q"><p>Working with [Muhammad Haris] was a great experience. He takes the time to thoroughly understand the project before diving in, communicates clearly, and consistently shows strong attention to detail.</p><small>Client</small></div>
         <div className="go"><h3>If you're serious about building a revenue engine, let's talk.</h3><div className="acts"><a href="/#book">Book a meeting &rarr;</a><Download /></div></div>
       </section>
     </main>

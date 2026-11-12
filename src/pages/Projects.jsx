@@ -16,7 +16,7 @@ function ProjectCard({ p }) {
       {cover}
       <div className="bd">
         {head}
-        <div className="ft"><small>{p.figure && <><b>{p.figure}</b> {p.figureLabel}</>}</small><em>View project &rarr;</em></div>
+        <div className="ft"><small>{p.figure && <><b>{p.figure}</b> {p.figureLabel}</>}</small><em className="read">Read the case study <span aria-hidden="true">&rarr;</span></em></div>
       </div>
     </Link>
   )

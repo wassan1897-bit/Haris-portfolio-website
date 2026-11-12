@@ -54,7 +54,7 @@ export default function Privacy() {
           <p>The legal basis is your request (you asked me to reply or to meet) and my legitimate interest in running a secure website and answering enquiries.</p>
 
           <h2 id="assistant">The AI assistant</h2>
-          <p>"Haris, now caffeine-free", the button in the corner, is an AI assistant built on ElevenLabs. It knows about my work and can help you book a meeting. It isn't me, and it can make mistakes.</p>
+          <p>"Talk to Haris AI", the button in the corner, is an AI assistant built on ElevenLabs. It knows about my work and can help you book a meeting. It isn't me, and it can make mistakes.</p>
           <h3>The microphone</h3>
           <ul>
             <li>Opening the assistant starts a call with the microphone off. Your browser asks for permission before anything can be heard.</li>

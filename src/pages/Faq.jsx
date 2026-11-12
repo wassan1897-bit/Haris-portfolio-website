@@ -45,7 +45,7 @@ export default function Faq() {
         <div className="faq-list">
           {FAQ.map(([q, a], i) => <details key={q} open={i === 0}><summary>{q}</summary><p>{a}</p></details>)}
         </div>
-        <div className="more"><div><b>Still have a question?</b><span>Ask Haris, now caffeine-free, in the corner, or put it on the calendar.</span></div><a className="btn" href="/#book">Book a meeting</a></div>
+        <div className="more"><div><b>Still have a question?</b><span>Ask the AI assistant in the corner, or put it on the calendar.</span></div><a className="btn" href="/#book">Book a meeting</a></div>
       </div></main>
 
       <SlimFooter links={[{ to: '/', label: 'Home' }, { to: '/resume', label: 'Resume' }, { to: '/privacy', label: 'Privacy' }]}>&copy; Muhammad Haris</SlimFooter>
