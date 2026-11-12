@@ -2,6 +2,7 @@ import { Link, useLocation } from 'react-router-dom'
 import { CATEGORIES } from '../data/projects.js'
 import { EMAIL, GITHUB, LINKEDIN } from '../lib/site.js'
 import { GitHubIcon, LinkedInIcon, MailIcon } from './Icons.jsx'
+import { CalendarLink, EmailLink } from './BookLinks.jsx'
 
 export default function EndFooter() {
   const { pathname } = useLocation()
@@ -13,7 +14,7 @@ export default function EndFooter() {
         <div className="end-cols">
           <div className="end-card">
             <div className="who"><img src="/images/haris.webp" alt="" width="56" height="56" loading="lazy" /><Link className="logo" to="/"><b>Muhammad Haris</b><span>AI GTM Engineer</span></Link></div>
-            <a className="btn" href="/#book">Book a meeting <i aria-hidden="true">&rarr;</i></a>
+            <div className="end-book"><CalendarLink className="btn" arrow /><EmailLink className="btn btn--line" /></div>
             <a className="mail" href={`mailto:${EMAIL}`}>{EMAIL}</a>
             <div className="social">
               <a href={LINKEDIN} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><LinkedInIcon /></a>
@@ -36,7 +37,8 @@ export default function EndFooter() {
             <ul>
               <li><Link to="/#who-i-am">Who I am</Link></li>
               <li><Link to="/#how-i-work">How I work</Link></li>
-              <li><a href="/#book">Book a meeting</a></li>
+              <li><CalendarLink /></li>
+              <li><EmailLink /></li>
               <li><Link to="/faq">FAQ</Link></li>
               <li><Link to="/reviews">Client reviews</Link></li>
               <li><Link to="/resume">Resume</Link></li>

@@ -182,6 +182,9 @@ html { scroll-behavior: smooth; }
 .cal #cal-times button[aria-pressed="true"] { background: var(--ink); color: #fff; box-shadow: none; }
 .cal .cal-go { margin-top: 4px; height: 42px; border-radius: 10px; display: grid; place-items: center; font-size: 14px; font-weight: 600; background: var(--acc); color: #fff; transition: opacity .15s ease; }
 .cal .cal-go[aria-disabled="true"] { opacity: .35; pointer-events: none; }
+/* second option under "Email me": the booking page, always available */
+.cal .cal-go--line { background: transparent; color: var(--acc); box-shadow: inset 0 0 0 1.5px rgb(30 58 95 / .35); }
+.cal .cal-go--line:hover { background: var(--acc-soft); }
 .cal :focus-visible { outline: 2px solid var(--acc); outline-offset: 2px; }
 @media (max-width: 1000px) { .close .wrap { grid-template-columns: 1fr; gap: 48px; } .close .cal { max-width: 560px; } }
 @media (max-width: 600px) {

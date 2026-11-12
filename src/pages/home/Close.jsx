@@ -3,9 +3,10 @@ import FlowCanvas from '../../components/FlowCanvas.jsx'
 import { MonthGrid, SlotTimes, monthTitle } from '../../components/SlotPicker.jsx'
 import { useSlotPicker } from '../../hooks/useSlotPicker.js'
 import { BOOK_MAIL } from '../../lib/site.js'
+import { CalendarLink, EmailLink } from '../../components/BookLinks.jsx'
 
 // Booking calendar: works through email until a Cal.com / Calendly link replaces it.
-// The pick goes into the "Book a meeting" email; these two buttons skip the popup.
+// Every spot offers both ways: the booking page (new tab) and an email. In the card, the email carries the picked time.
 export default function Close() {
   const picker = useSlotPicker()
   const mail = picker.when ? `${BOOK_MAIL}&body=${encodeURIComponent(picker.when)}` : BOOK_MAIL
@@ -16,7 +17,8 @@ export default function Close() {
           <h2 id="close-title">If you're serious about building a revenue engine, let's talk.</h2>
           <p>Muhammad Haris is the engineer you bring in when you want AI in your revenue engine to produce pipeline, not a demo.</p>
           <div className="ctas">
-            <a className="btn" id="close-book" href={mail}>Book a meeting <i aria-hidden="true">&rarr;</i></a>
+            <CalendarLink className="btn" arrow />
+            <EmailLink className="btn btn--line" />
             <Link className="btn btn--line" to="/resume">Resume <i aria-hidden="true">&rarr;</i></Link>
           </div>
         </div>
@@ -35,7 +37,8 @@ export default function Close() {
           <div className="cal-slots">
             <small id="cal-day">{picker.day.toLocaleDateString('en-GB', { weekday: 'short', day: 'numeric' })}</small>
             <SlotTimes picker={picker} id="cal-times" />
-            <a className="cal-go" id="cal-go" href={mail} aria-disabled={!picker.time}>Book a meeting</a>
+            <a className="cal-go" id="cal-go" href={mail} aria-disabled={!picker.time}>Email me</a>
+            <CalendarLink className="cal-go cal-go--line" />
           </div>
         </div>
       </div>

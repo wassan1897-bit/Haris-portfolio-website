@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import { PersonIcon } from '../components/Icons.jsx'
+import { CalendarLink, EmailLink } from '../components/BookLinks.jsx'
 import SlimFooter from '../components/SlimFooter.jsx'
 import { usePageMeta } from '../hooks/usePageMeta.js'
 import { useStylesheet } from '../hooks/useStylesheet.js'
@@ -57,7 +58,7 @@ export default function Reviews() {
 
         <section className="go">
           <h2>If you're serious about building a revenue engine, let's talk.</h2>
-          <div className="acts"><a className="pri" href="/#book">Book a meeting</a><Link className="sec" to="/projects/all">See the work</Link></div>
+          <div className="acts"><CalendarLink className="pri" /><EmailLink className="sec" /><Link className="sec" to="/projects/all">See the work</Link></div>
         </section>
       </div></main>
 

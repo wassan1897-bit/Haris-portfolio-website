@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom'
 import { CATEGORIES } from '../data/projects.js'
 import { usePageMeta } from '../hooks/usePageMeta.js'
 import { useStylesheet } from '../hooks/useStylesheet.js'
-import { BOOK_MAIL } from '../lib/site.js'
+import { CalendarLink, EmailLink } from '../components/BookLinks.jsx'
 import css from '../styles/pages/work.css?inline'
 
 const Steps = ({ steps }) => <ol>{steps.map((s) => <li key={s}><span>{s}</span></li>)}</ol>
@@ -60,7 +60,7 @@ export default function WorkCase({ work: w }) {
       </div>
       <section className="cta">
         <h2>If you're serious about building a revenue engine, let's talk.</h2>
-        <a className="btn" href={BOOK_MAIL}>Book a meeting <i aria-hidden="true">&rarr;</i></a>
+        <div className="cta-acts"><CalendarLink className="btn" arrow /><EmailLink className="btn btn--line" /></div>
       </section>
     </>
   )

@@ -19,5 +19,8 @@
 @media (max-width: 600px) {
 	.logo span { display: none; }
 	.top-right .icon-btn { display: none; }
+	.top-right { gap: 8px; }
+	.top-right .icon-btn.mail-icon { display: grid; width: 40px; height: 40px; }
+	.top-right .book { height: 40px; padding: 0 14px; font-size: 14px; }
 	.ft a { margin: 0 18px 0 0; }
 }

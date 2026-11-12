@@ -7,7 +7,7 @@ import './assistant.css'
 const AGENT_ID = 'agent_6301m5ybrrq8e38atjxp2hnt0t6d'
 const EMAIL = 'hariswassan001@gmail.com'
 const CHIPS = ['What do you build?', 'Show me a project', 'Book a meeting']
-const HIRE_CALL = 'https://calendar.app.google/rggLDm7cdPdoeNsC9' // the hiring box's "Book a call", from the client's change list
+const HIRE_CALL = 'https://calendar.app.google/rggLDm7cdPdoeNsC9' // Haris's booking page (from the client's change list): the hiring box's "Book a call" and the header's "Book a meeting"
 
 // the ElevenLabs SDK is large, so it only loads once someone opens the assistant
 const sdk = () => import('@elevenlabs/client').then((m) => m.Conversation)
@@ -18,6 +18,7 @@ const icon = {
 	send: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>',
 	sound: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9z"/><path d="M16.5 8.5a5 5 0 010 7M19.5 5.5a9 9 0 010 13"/></svg>',
 	soundOff: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9z"/><path d="M17 9l5 6M22 9l-5 6"/></svg>',
+	mail: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 6.5h17v11h-17zM3.8 7l8.2 6.2L20.2 7"/></svg>',
 	end: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 15.5c5-4.6 13-4.6 18 0l-2.3 2.6-3.4-1.6v-2.3a10 10 0 00-6.6 0v2.3l-3.4 1.6z"/></svg>',
 }
 
@@ -39,8 +40,9 @@ function create() {
 			<div class="ha-head">
 				<div class="ha-av" aria-hidden="true">MH</div>
 				<div class="ha-who"><b>Haris AI</b><small><i aria-hidden="true"></i><span class="ha-status" aria-live="polite">Connecting…</span></small></div>
-				<a class="ha-book" href="/#book">Book a meeting</a>
-				<button type="button" class="ha-end">${icon.end}End call</button>
+				<a class="ha-mailbtn" href="mailto:${EMAIL}?subject=Meeting%20request" aria-label="Email me" title="Email me">${icon.mail}</a>
+				<a class="ha-book" href="${HIRE_CALL}" target="_blank" rel="noopener noreferrer">Book a meeting</a>
+				<button type="button" class="ha-end" aria-label="End call">${icon.end}<span>End call</span></button>
 			</div>
 			<div class="ha-log" aria-live="polite"></div>
 			<form class="ha-input">

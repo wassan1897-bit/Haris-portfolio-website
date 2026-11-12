@@ -4,6 +4,7 @@ import { CATEGORIES } from '../data/projects.js'
 import { WORK } from '../data/work.js'
 import { LINKEDIN } from '../lib/site.js'
 import { Caret, LinkedInIcon } from './Icons.jsx'
+import { CalendarLink, EmailIconLink } from './BookLinks.jsx'
 
 // the five revenue stages; product and platform engineering is work, not a stage
 const STAGES = CATEGORIES.slice(0, 5)
@@ -79,7 +80,8 @@ export default function Topbar() {
         </ul>
         <div className="top-right">
           <a className="icon-btn" href={LINKEDIN} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><LinkedInIcon size={19} /></a>
-          <a className="book" href="/#book">Book a meeting</a>
+          <EmailIconLink />
+          <CalendarLink className="book" />
         </div>
       </nav>
     </header>

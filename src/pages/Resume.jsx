@@ -1,5 +1,6 @@
 import { useLayoutEffect, useRef } from 'react'
 import { DownloadIcon, GitHubIcon, LinkedInIcon, MailIcon } from '../components/Icons.jsx'
+import { CalendarLink, EmailLink } from '../components/BookLinks.jsx'
 import { usePageMeta } from '../hooks/usePageMeta.js'
 import { useStylesheet } from '../hooks/useStylesheet.js'
 import { EMAIL, GITHUB, LINKEDIN, RESUME_PDF } from '../lib/site.js'
@@ -95,7 +96,7 @@ export default function Resume() {
           <span className="eb">Resume</span>
           <h1>I build revenue systems that <em>run without me.</em></h1>
           <p className="lede">I'm Muhammad Haris, an AI GTM engineer. I build the AI systems that find your buyers, research them, reach them at the right moment and keep them.</p>
-          <div className="acts"><Download className="pri" /><a href="/#book">Book a meeting</a></div>
+          <div className="acts"><Download className="pri" /><CalendarLink /><EmailLink /></div>
           <div className="ct">
             <a href={`mailto:${EMAIL}`}><MailIcon size={17} /> {EMAIL}</a>
             <a href={LINKEDIN} target="_blank" rel="noopener noreferrer"><LinkedInIcon size={16} /> LinkedIn</a>
@@ -159,7 +160,7 @@ export default function Resume() {
 
       <section className="wrap cl">
         <div className="q"><p>Working with [Muhammad Haris] was a great experience. He takes the time to thoroughly understand the project before diving in, communicates clearly, and consistently shows strong attention to detail.</p><small>Client</small></div>
-        <div className="go"><h3>If you're serious about building a revenue engine, let's talk.</h3><div className="acts"><a href="/#book">Book a meeting &rarr;</a><Download /></div></div>
+        <div className="go"><h3>If you're serious about building a revenue engine, let's talk.</h3><div className="acts"><CalendarLink>Book a meeting &rarr;</CalendarLink><EmailLink /><Download /></div></div>
       </section>
     </main>
   )
