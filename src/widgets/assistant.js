@@ -29,7 +29,7 @@ function create() {
 		<aside class="ha-hire" aria-labelledby="ha-hire-title">
 			<button type="button" class="ha-hire-x" aria-label="Close">&times;</button>
 			<b id="ha-hire-title">Hiring an AI GTM engineer?</b>
-			<p>I'm open to full-time GTM engineering roles in San Francisco and to selected consulting work. If you're building a revenue engine and want it done properly, let's talk.</p>
+			<p>I'm open to full-time GTM engineering roles and to selected consulting work. If you're building a revenue engine and want it done properly, let's talk.</p>
 			<div class="ha-hire-acts">
 				<a class="ha-hire-pri" href="${HIRE_CALL}" target="_blank" rel="noopener noreferrer">Book a call</a>
 				<a class="ha-hire-sec" href="mailto:${EMAIL}">Email me</a>
