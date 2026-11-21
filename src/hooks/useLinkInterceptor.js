@@ -12,6 +12,8 @@ export function useLinkInterceptor() {
       const a = e.target.closest?.('a[href]')
       if (!a || (a.target && a.target !== '_self') || a.hasAttribute('download')) return
       const url = new URL(a.href, window.location.href)
+      // leave mail, phone and off-site links to the browser
+      if (url.protocol !== 'http:' && url.protocol !== 'https:') return
       if (url.origin !== window.location.origin || /\.(pdf|webp|png|jpe?g|svg|mp4|webm)$/i.test(url.pathname)) return
       e.preventDefault()
       navigate(url.pathname + url.search + url.hash)

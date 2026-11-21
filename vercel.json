@@ -1,3 +1,13 @@
 {
-  "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }]
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "redirects": [
+    {
+      "source": "/:path*",
+      "has": [{ "type": "host", "value": "haris-portfolio-website-pi.vercel.app" }],
+      "destination": "https://www.meetmuhammadharis.com/:path*",
+      "permanent": true
+    },
+    { "source": "/projects", "destination": "/projects/all", "permanent": true }
+  ]
 }

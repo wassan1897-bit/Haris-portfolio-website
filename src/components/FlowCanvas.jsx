@@ -159,12 +159,13 @@ function animate(cv, band) {
 
 const still = () => matchMedia('(prefers-reduced-motion: reduce)').matches
 
-// the last child of a band (.hero, .why, .close); still with reduced motion
+// the last child of a band (.hero, .why, .close); with reduced motion it stays blank (a canvas is transparent until drawn,
+// and the build-time HTML can't know the visitor's setting)
 export default function FlowCanvas() {
   const ref = useRef(null)
   useEffect(() => {
     if (still()) return
     return animate(ref.current, ref.current.parentElement)
   }, [])
-  return still() ? null : <canvas className="flow" aria-hidden="true" ref={ref} />
+  return <canvas className="flow" aria-hidden="true" ref={ref} />
 }

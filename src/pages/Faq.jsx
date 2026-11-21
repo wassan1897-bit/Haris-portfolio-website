@@ -17,18 +17,12 @@ const FAQ = [
   ['Can you work with sensitive data?', "Yes. I've built around bank data and regulated compliance, with row-level security, consent records, monitoring and human approval designed in from the first commit. Your pipeline gets the same standard."],
 ]
 
-// structured data for search engines: six of the questions, with shorter answers
+// structured data for search engines and AI assistants: every question, with the answer as it reads on the page
+const TOOLS_ANSWER = 'Whatever fits the problem. I start from where pipeline leaks and pick the stack after. That usually means Claude and OpenAI, Clay, Apollo, HubSpot, n8n, Python and Postgres. The full list is on my resume.'
 const LD = {
   '@context': 'https://schema.org',
   '@type': 'FAQPage',
-  mainEntity: [
-    ['What does an AI GTM engineer actually do?', 'I build the AI systems behind every stage of the revenue engine: finding accounts that are in market, researching them, reaching them at the right moment, converting inbound demand and keeping customers. Then I wire it all together so every stage hands clean data to the next.'],
-    ['Who do you usually work with?', 'B2B SaaS and technology companies, usually growth stage, that want pipeline without simply hiring more SDRs, plus firms with a high-value sales motion like investment banks, M&A advisors and lead-generation businesses.'],
-    ['Are you an agency?', 'No. The person you talk to is the person who builds it, and the person who answers when it needs attention.'],
-    ['How does a project start?', 'I sit with the people doing the work, find where revenue leaks and start the build there, on real data from the first week.'],
-    ['What happens when the project is finished?', 'Your team owns it. I hand it over documented and explained, and stay close until it runs without me.'],
-    ['How much does it cost?', "It depends on what the system has to do. Tell me where pipeline is leaking and I'll tell you what I'd build and what it would take."],
-  ].map(([name, text]) => ({ '@type': 'Question', name, acceptedAnswer: { '@type': 'Answer', text } })),
+  mainEntity: FAQ.map(([name, a]) => ({ '@type': 'Question', name, acceptedAnswer: { '@type': 'Answer', text: typeof a === 'string' ? a : TOOLS_ANSWER } })),
 }
 
 export default function Faq() {

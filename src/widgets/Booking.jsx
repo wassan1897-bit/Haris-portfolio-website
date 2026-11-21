@@ -54,16 +54,16 @@ function BookingDialog({ dialog, live }) {
       <div className="bk-body" hidden={!!BOOKING_URL}>
         <div>
           <div className="bk-bar">
-            <b className="bk-month" aria-live="polite">{monthTitle(picker.view)}</b>
+            <b className="bk-month" aria-live="polite">{picker.ready && monthTitle(picker.view)}</b>
             <span>
-              <button type="button" className="bk-prev" aria-label="Previous month" disabled={!picker.canPrev} onClick={picker.prev}>&lsaquo;</button>
-              <button type="button" className="bk-next" aria-label="Next month" disabled={!picker.canNext} onClick={picker.next}>&rsaquo;</button>
+              <button type="button" className="bk-prev" aria-label="Previous month" disabled={!picker.ready || !picker.canPrev} onClick={picker.prev}>&lsaquo;</button>
+              <button type="button" className="bk-next" aria-label="Next month" disabled={!picker.ready || !picker.canNext} onClick={picker.next}>&rsaquo;</button>
             </span>
           </div>
           <MonthGrid picker={picker} className="bk-grid" />
         </div>
         <div className="bk-slots">
-          <small className="bk-day">{day.toLocaleDateString('en-GB', { weekday: 'long', day: 'numeric', month: 'short' })}</small>
+          <small className="bk-day">{picker.ready && day.toLocaleDateString('en-GB', { weekday: 'long', day: 'numeric', month: 'short' })}</small>
           <SlotTimes picker={picker} className="bk-times" />
         </div>
       </div>

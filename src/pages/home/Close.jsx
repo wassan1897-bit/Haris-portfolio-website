@@ -26,16 +26,16 @@ export default function Close() {
           <div className="cal-head"><img src="/images/haris.webp" alt="" width="40" height="40" loading="lazy" /><b>Book a meeting</b><small>Muhammad Haris</small></div>
           <div>
             <div className="cal-bar">
-              <b id="cal-title" aria-live="polite">{monthTitle(picker.view)}</b>
+              <b id="cal-title" aria-live="polite">{picker.ready && monthTitle(picker.view)}</b>
               <span>
-                <button type="button" id="cal-prev" aria-label="Previous month" disabled={!picker.canPrev} onClick={picker.prev}>&lsaquo;</button>
-                <button type="button" id="cal-next" aria-label="Next month" disabled={!picker.canNext} onClick={picker.next}>&rsaquo;</button>
+                <button type="button" id="cal-prev" aria-label="Previous month" disabled={!picker.ready || !picker.canPrev} onClick={picker.prev}>&lsaquo;</button>
+                <button type="button" id="cal-next" aria-label="Next month" disabled={!picker.ready || !picker.canNext} onClick={picker.next}>&rsaquo;</button>
               </span>
             </div>
             <MonthGrid picker={picker} className="cal-grid" id="cal-grid" />
           </div>
           <div className="cal-slots">
-            <small id="cal-day">{picker.day.toLocaleDateString('en-GB', { weekday: 'short', day: 'numeric' })}</small>
+            <small id="cal-day">{picker.ready && picker.day.toLocaleDateString('en-GB', { weekday: 'short', day: 'numeric' })}</small>
             <SlotTimes picker={picker} id="cal-times" />
             <a className="cal-go" id="cal-go" href={mail} aria-disabled={!picker.time}>Email me</a>
             <CalendarLink className="cal-go cal-go--line" />

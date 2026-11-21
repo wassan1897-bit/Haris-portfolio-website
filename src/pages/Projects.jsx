@@ -1,15 +1,17 @@
 import { useLayoutEffect, useRef } from 'react'
 import { Link } from 'react-router-dom'
 import { ALL_PROJECTS_LEDE, CATEGORIES } from '../data/projects.js'
+import { CATEGORY_DESCRIPTIONS } from '../data/seo.js'
 import { usePageMeta } from '../hooks/usePageMeta.js'
 import { useStylesheet } from '../hooks/useStylesheet.js'
 import css from '../styles/pages/projects.css?inline'
 
 const TOTAL = CATEGORIES.reduce((n, c) => n + c.projects.length, 0)
 
-function ProjectCard({ p }) {
+// a category page has no section headings, so its card titles are the H2s (same look either way)
+function ProjectCard({ p, H = 'h3' }) {
   const cover = <div className="cov"><img src={`/projects/img/p-${p.cover}.webp`} alt="" width="1600" height="900" loading="lazy" decoding="async" /></div>
-  const head = <>{p.meta && <span className="meta">{p.meta}</span>}<h3>{p.title}</h3><p>{p.text}</p></>
+  const head = <>{p.meta && <span className="meta">{p.meta}</span>}<H>{p.title}</H><p>{p.text}</p></>
   if (!p.slug) return <div className="pc">{cover}<div className="bd">{head}</div></div>
   return (
     <Link className="pc" to={`/work/${p.slug}`}>
@@ -22,7 +24,7 @@ function ProjectCard({ p }) {
   )
 }
 
-const Grid = ({ projects }) => <div className="grid">{projects.map((p) => <ProjectCard key={p.title} p={p} />)}</div>
+const Grid = ({ projects, H }) => <div className="grid">{projects.map((p) => <ProjectCard key={p.title} p={p} H={H} />)}</div>
 
 function Chips({ current }) {
   const chip = (slug, label, n) => (
@@ -73,7 +75,7 @@ function Category({ c }) {
       </div></section>
       <Chips current={c.slug} />
       <div className="wrap body">
-        <Grid projects={c.projects} />
+        <Grid projects={c.projects} H="h2" />
         <nav className="next" aria-label="More categories">
           <Link to={`/projects/${prev.slug}`}><small>&larr; {prev.num}</small><b>{prev.name}</b></Link>
           <Link to={`/projects/${next.slug}`}><small>{next.num} &rarr;</small><b>{next.name}</b></Link>
@@ -85,7 +87,7 @@ function Category({ c }) {
 
 export default function Projects({ category }) {
   const c = CATEGORIES.find((x) => x.slug === category)
-  usePageMeta(c ? c.name : 'Selected work', c ? c.line : ALL_PROJECTS_LEDE)
+  usePageMeta(c ? c.name : 'Selected work', c ? CATEGORY_DESCRIPTIONS[c.slug] ?? c.line : ALL_PROJECTS_LEDE)
   useStylesheet(css, 2)
   const main = useRef(null)
   // Category strip: on narrow screens, start scrolled to the current category. Measured here, after

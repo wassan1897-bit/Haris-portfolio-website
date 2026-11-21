@@ -3,6 +3,7 @@ import { Navigate, Outlet, Route, Routes, useLocation, useParams } from 'react-r
 import ScrollManager from './components/ScrollManager.jsx'
 import { useLinkInterceptor } from './hooks/useLinkInterceptor.js'
 import { BareContext } from './lib/bare.js'
+import { useDropUnclaimedSheets } from './lib/ssr.js'
 import FullLayout from './layouts/FullLayout.jsx'
 import SlimLayout from './layouts/SlimLayout.jsx'
 import Home from './pages/home/Home.jsx'
@@ -17,13 +18,13 @@ import { CATEGORIES } from './data/projects.js'
 import { WORK } from './data/work.js'
 import { BookingProvider } from './widgets/Booking.jsx'
 import AssistantWidget from './widgets/AssistantWidget.jsx'
-import MailCopy from './widgets/MailCopy.jsx'
 
 // Old links end in .html (/resume.html, /work/signal-engine.html, /index.html); send them to the clean route.
 function Root() {
   const { pathname, search, hash } = useLocation()
   const [bare, setBare] = useState(false)
   useLinkInterceptor()
+  useDropUnclaimedSheets()
   if (pathname.endsWith('.html')) return <Navigate replace to={(pathname.replace(/(index)?\.html$/, '') || '/') + search + hash} />
   return (
     <BareContext.Provider value={setBare}>
@@ -31,7 +32,6 @@ function Root() {
         <Outlet />
         <ScrollManager />
         <AssistantWidget hidden={bare} />
-        <MailCopy />
       </BookingProvider>
     </BareContext.Provider>
   )

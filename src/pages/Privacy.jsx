@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import SlimFooter from '../components/SlimFooter.jsx'
 import { usePageMeta } from '../hooks/usePageMeta.js'
+import { PAGE_DESCRIPTIONS } from '../data/seo.js'
 import { useStylesheet } from '../hooks/useStylesheet.js'
 import { EMAIL } from '../lib/site.js'
 import css from '../styles/pages/privacy.css?inline'
@@ -11,7 +12,7 @@ const TOC = [
 ]
 
 export default function Privacy() {
-  usePageMeta('Privacy', 'What this website collects, why, who handles it and how to ask for it to be deleted.')
+  usePageMeta('Privacy', PAGE_DESCRIPTIONS.privacy)
   useStylesheet(css, 2)
   return (
     <>

@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import { CATEGORIES } from '../data/projects.js'
+import { FIGURE_ALT, WORK_SEO } from '../data/seo.js'
 import { usePageMeta } from '../hooks/usePageMeta.js'
 import { useStylesheet } from '../hooks/useStylesheet.js'
 import { CalendarLink, EmailLink } from '../components/BookLinks.jsx'
@@ -13,7 +14,7 @@ function Block({ b }) {
   if (b.type === 'fig') {
     return (
       <figure className="fig">
-        <img src={b.src} alt="" width={b.width} height={b.height} loading="lazy" decoding="async" />
+        <img src={b.src} alt={FIGURE_ALT[b.src] ?? ""} width={b.width} height={b.height} loading="lazy" decoding="async" />
         {b.caption && <figcaption>{b.caption}</figcaption>}
       </figure>
     )
@@ -27,7 +28,8 @@ function Block({ b }) {
 }
 
 export default function WorkCase({ work: w }) {
-  usePageMeta(w.title, w.description)
+  const seo = WORK_SEO[w.slug] ?? {}
+  usePageMeta(seo.title ?? w.title, seo.description ?? w.description)
   useStylesheet(css, 2)
   const category = CATEGORIES.find((c) => c.slug === w.category)
   return (
@@ -45,7 +47,7 @@ export default function WorkCase({ work: w }) {
             {w.stats.map(([v, l]) => <div key={l}><b>{v}</b><span>{l}</span></div>)}
           </section>
         )}
-        {w.shot && <figure className="shot"><img src={w.shot.src} alt="" width={w.shot.width} height={w.shot.height} /></figure>}
+        {w.shot && <figure className="shot"><img src={w.shot.src} alt={seo.alt ?? ""} width={w.shot.width} height={w.shot.height} /></figure>}
         <section className="body">
           {w.sections.map((s) => [
             <h2 key={`h-${s.heading}`}>{s.heading}</h2>,

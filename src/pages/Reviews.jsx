@@ -3,6 +3,7 @@ import { PersonIcon } from '../components/Icons.jsx'
 import { CalendarLink, EmailLink } from '../components/BookLinks.jsx'
 import SlimFooter from '../components/SlimFooter.jsx'
 import { usePageMeta } from '../hooks/usePageMeta.js'
+import { PAGE_DESCRIPTIONS } from '../data/seo.js'
 import { useStylesheet } from '../hooks/useStylesheet.js'
 import css from '../styles/pages/reviews.css?inline'
 
@@ -28,7 +29,7 @@ const WHY = [
 ]
 
 export default function Reviews() {
-  usePageMeta('Client reviews', 'What clients say about working with Muhammad Haris, AI GTM engineer. In their words.')
+  usePageMeta('Client reviews', PAGE_DESCRIPTIONS.reviews)
   useStylesheet(css, 2)
   return (
     <>

@@ -13,7 +13,7 @@ export function CalendarLink({ className, children = 'Book a meeting', arrow = f
 
 export function EmailLink({ className, children = 'Email me', arrow = false }) {
   return (
-    <a className={className} href={CONTACT_MAIL}>
+    <a className={className} href={CONTACT_MAIL} target="_blank" rel="noopener noreferrer">
       {children}{arrow && <> <i aria-hidden="true">&rarr;</i></>}
     </a>
   )
@@ -22,6 +22,6 @@ export function EmailLink({ className, children = 'Email me', arrow = false }) {
 // top bars: the email is an icon button so both fit beside the logo on a phone
 export function EmailIconLink({ size = 19 }) {
   return (
-    <a className="icon-btn mail-icon" href={CONTACT_MAIL} aria-label="Email me" title="Email me"><MailIcon size={size} /></a>
+    <a className="icon-btn mail-icon" href={CONTACT_MAIL} target="_blank" rel="noopener noreferrer" aria-label="Email me" title="Email me"><MailIcon size={size} /></a>
   )
 }

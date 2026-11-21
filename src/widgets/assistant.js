@@ -5,7 +5,8 @@
 import './assistant.css'
 
 const AGENT_ID = 'agent_6301m5ybrrq8e38atjxp2hnt0t6d'
-const EMAIL = 'hariswassan001@gmail.com'
+const EMAIL = 'muhammadharis.builds@gmail.com'
+const EMAIL_ME = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(EMAIL)}&su=${encodeURIComponent('Meeting request')}`
 const CHIPS = ['What do you build?', 'Show me a project', 'Book a meeting']
 const HIRE_CALL = 'https://calendar.app.google/rggLDm7cdPdoeNsC9' // Haris's booking page (from the client's change list): the hiring box's "Book a call" and the header's "Book a meeting"
 
@@ -32,7 +33,7 @@ function create() {
 			<p>I'm open to full-time GTM engineering roles and to selected consulting work. If you're building a revenue engine and want it done properly, let's talk.</p>
 			<div class="ha-hire-acts">
 				<a class="ha-hire-pri" href="${HIRE_CALL}" target="_blank" rel="noopener noreferrer">Book a call</a>
-				<a class="ha-hire-sec" href="mailto:${EMAIL}">Email me</a>
+				<a class="ha-hire-sec" href="${EMAIL_ME}" target="_blank" rel="noopener noreferrer">Email me</a>
 			</div>
 		</aside>
 		<button type="button" class="ha-launch" aria-expanded="false" aria-controls="ha-panel" aria-label="Talk to Haris AI, the AI assistant">Talk to Haris AI <span>${icon.mic}</span></button>
@@ -40,7 +41,7 @@ function create() {
 			<div class="ha-head">
 				<div class="ha-av" aria-hidden="true">MH</div>
 				<div class="ha-who"><b>Haris AI</b><small><i aria-hidden="true"></i><span class="ha-status" aria-live="polite">Connecting…</span></small></div>
-				<a class="ha-mailbtn" href="mailto:${EMAIL}?subject=Meeting%20request" aria-label="Email me" title="Email me">${icon.mail}</a>
+				<a class="ha-mailbtn" href="${EMAIL_ME}" target="_blank" rel="noopener noreferrer" aria-label="Email me" title="Email me">${icon.mail}</a>
 				<a class="ha-book" href="${HIRE_CALL}" target="_blank" rel="noopener noreferrer">Book a meeting</a>
 				<button type="button" class="ha-end" aria-label="End call">${icon.end}<span>End call</span></button>
 			</div>

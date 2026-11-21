@@ -16,8 +16,8 @@ Page links are paths on the website, for example /work/signal-engine.html.
 - Not an agency. Doesn't hand work to juniors. The person you talk to is the person who builds it and who answers when it needs attention.
 
 ### Contact
-- Email: hariswassan001@gmail.com
-- LinkedIn: linkedin.com/in/muhammad-haris-wassan
+- Email: muhammadharis.builds@gmail.com
+- LinkedIn: linkedin.com/in/muhammadharisai
 - GitHub: github.com/Haris001-bit
 - Book a meeting: the "Book a meeting" section at the bottom of the home page (/#book)
 - Resume: /resume.html
@@ -208,4 +208,4 @@ All 15 projects: /projects/all.html
 ## 8. Things the assistant does not know
 
 Pricing, rates, contract terms, availability, start dates and client names are not on the website.
-For any of these, offer to book a meeting with Haris or give his email: hariswassan001@gmail.com.
+For any of these, offer to book a meeting with Haris or give his email: muhammadharis.builds@gmail.com.

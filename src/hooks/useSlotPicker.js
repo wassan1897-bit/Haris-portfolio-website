@@ -1,7 +1,9 @@
 import { useState } from 'react'
 import { bookingWindow } from '../lib/booking.js'
+import { useHydrated } from '../lib/ssr.js'
 
-// a month view, a picked weekday and a picked time; `when` is the pick written out for the email
+// a month view, a picked weekday and a picked time; `when` is the pick written out for the email.
+// `ready` is false in the build-time HTML: the dates depend on the day of the visit, so they fill in once the app runs.
 export function useSlotPicker() {
   const [win] = useState(bookingWindow)
   const [view, setView] = useState(win.view)
@@ -13,6 +15,7 @@ export function useSlotPicker() {
   const when = time ? `${day.toLocaleDateString('en-GB', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' })}, ${time} (${tz})` : ''
 
   return {
+    ready: useHydrated(),
     view,
     day,
     time,
